@@ -173,7 +173,7 @@ function outputCards($pdo) {
 
             'ticks' => array(
               'beginAtZero' => true,
-              'stepSize'   => 0.1,
+              'stepSize'   => 1,
               'max'        => $maxValue
             )
           )
@@ -188,18 +188,48 @@ function outputCards($pdo) {
         'lineTension'      => 0.4,
         'pointRadius'      => 0
       );
-      $attributes = array('height' => 50, 'width' => 200);
+      $attributes = array('height' => 75, 'width' => 200);
       // Set x-axis labels to 7 days
       $trendGraph = new ChartJS('line', [1,2,3,4,5,6,7], $options, $attributes);
       $trendGraph->addDataset($dataset);
-
+      
       /* FINISH TREND GRAPH BS */
+  
+      /* Find out historical rank data for current keyword so we can determine an increase or decrease in rank */
+      $sql = 'SELECT page,rank FROM oldranks WHERE kw_id=' . $kw_id . ' ORDER BY rank_id DESC LIMIT 2';
+      $oldranks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
+      // Turn ranks into integers so we can compare them
+      $oldranks[0]['page'] = intval($oldranks[0]['page']);
+      $oldranks[0]['rank'] = intval($oldranks[0]['rank']);
+      $oldranks[1]['page'] = intval($oldranks[1]['page']);
+      $oldranks[1]['rank'] = intval($oldranks[1]['rank']);
+      
+      if ($oldranks[1]['page'] > $oldranks[0]['page']) {
+        $pageIcon = '<i class="icon-long-arrow-up text-success"></i>';
+      } else if ($oldranks[1]['page'] == $oldranks[0]['page']) {
+        $pageIcon = '<i class="icon-long-arrow-right text-warning"></i>';
+      } else {
+        $pageIcon = '<i class="icon-long-arrow-down text-danger"></i>';
+      }
+      
+      if ($oldranks[1]['rank'] > $oldranks[0]['rank']) {
+        $rankIcon = '<i class="icon-long-arrow-up text-success"></i>';
+      } else if ($oldranks[1]['rank'] == $oldranks[0]['rank']) {
+        $rankIcon = '<i class="icon-long-arrow-right text-warning"></i>';
+      } else {
+        $rankIcon = '<i class="icon-long-arrow-down text-danger"></i>';
+      }
+  
+      /* Finish finding historical rank data */
+      echo $kwToAsinList[$j]['keyword']. ': <pre>';
+      print_r($rankData);
+      echo '</pre>';
       echo('<tr>
         <td>' . $kwToAsinList[$j]['keyword'] . "</td>
         <td> $trendGraph </td>
-        <td>" . $rankOfKw['page'] . '</td>
-        <td>' . $rankOfKw['rank'] . '</td>
+        <td>" . $rankOfKw['page'] . ' ' . $pageIcon .'</td>
+        <td>' . $rankOfKw['rank'] . ' ' . $rankIcon .'</td>
         <td>
           <form method="POST">
             <button type="submit" name="btnDeleteKw" value="'. $kwToAsinList[$j]['keyword'] .'" class="btn btn-danger del-kw"><i class="icon-trash"></i></button>
