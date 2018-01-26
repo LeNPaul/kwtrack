@@ -1,3 +1,7 @@
+<?php if ( !isset($_SESSION) ) { session_start(); } ?>
+<?php include_once './includes/addkw.inc.php'; ?>
+<?php include_once './includes/insertasin.inc.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,92 +15,11 @@
   <link rel="stylesheet" type="text/css" href="./style.css">
   <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
+
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
 
-<!-- <script type="text/javascript">
-  function generateChart(data) {
-        let json = $.parseJSON(data);
-        console.log(json);
-        let ranks = [];
-        for (let i = 0; i < json.length; i++) {
-          let currentRank;
-          if (json[i]['page'] > 1) {
-            currentRank = -1 * 17 * parseInt(json[i]['page']) + parseInt(json[i]['rank']);
-            ranks.push(parseInt(currentRank));
-          } else {
-            currentRank = -1 * parseInt(json[i]['rank']);
-            ranks.push(parseInt(currentRank));          
-          }
-        }
-  
-        let maxValue = ranks.reduce((a, b) => Math.max(a, b));
-        console.log(ranks);
-  
-        $('.chart').each((index, element) => {
-          let chartData = {
-            labels:[1,2,3,4,5,6,7],
-            datasets: [{
-              label: "rank",
-              borderWidth: 1.5,
-              data: ranks,
-              backgroundColor: "red",
-              borderColor: "lightblue",
-              fill: false,
-              lineTension: 0,
-              pointRadius: 0
-            }]
-          };
-    
-          let options = {
-            maintainAspectRatio: false,
-            legend: { display: false },
-            scales: {
-              xAxes: [{
-                display: false,
-                gridLines: { display: false }
-              }],
-              yAxes: [{
-                display: false,
-                gridLines: { display: false },
-                ticks: { 
-                  beginAtZero: true,
-                  stepSize: 1,
-                  max: maxValue
-                }
-              }]
-            }
-          };
-  
-          let ctx = element.getContext('2d');
-          window.myLine = new Chart(ctx, {
-            type: "line",
-            data: chartData,
-            options: options
-          });
-        });
-</script> -->
-
-
-
-<section id="navigation">
-    <nav class="navbar navbar-expand-lg navbar-dark main-color-bg">
-      <a class="navbar-brand" href="#"><h4>AG Dashboard</h4></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="./index.php">Dashboard Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./edittitles.php">Edit Short Titles</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-</section>
+<?php require_once './includes/nav.inc.php'; ?>
 
 <header id="header">
   <div class="container">
@@ -116,9 +39,7 @@
           <div class="card-body">
             <form method="POST" class="card-text">
               <div class="form-group">
-
-                <?php include_once './includes/addkw.inc.php'; ?>
-
+                <?php include_once './includes/flashmsg.inc.php'; ?>
                 <label>Keyword</label>
                 <input type="text" class="form-control" name="keyword">
               </div>
@@ -138,8 +59,17 @@
         <div class="card">
           <p class="card-header main-color-bg" id="main-content-bar"><i class="icon-book"></i> Add New ASIN</p>
           <div class="card-body">
-
-            <?php include_once './includes/insertasin.inc.php'; ?>
+  
+            <?php
+            if (isset($_SESSION['successAsin'])) {
+              echo $_SESSION['successAsin'];
+              unset($_SESSION['successAsin']);
+            }
+            if (isset($_SESSION['errorAsin'])) {
+              echo $_SESSION['errorAsin'];
+              unset($_SESSION['errorAsin']);
+            }
+            ?>
 
             <form method="POST">
               <div class="form-group">
@@ -174,6 +104,16 @@
 
           <div class="card-body">
             <?php include_once './includes/rankfinder.inc.php'; ?>
+            <?php
+            if (isset($_SESSION['successDel'])) {
+              echo $_SESSION['successDel'];
+              unset($_SESSION['successDel']);
+            }
+            if (isset($_SESSION['successDelAsin'])) {
+              echo $_SESSION['successDelAsin'];
+              unset($_SESSION['successDelAsin']);
+            }
+            ?>
             <!-- TABLE OF KWS -->
             <?php include_once '/includes/displaykw.inc.php'; ?>
           </div>

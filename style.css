@@ -3,6 +3,10 @@
   color: #fff !important;
 }
 
+.modal {
+  color: #000000 !important;
+}
+
 .asin-header {
   background-color: rgb(241, 86, 86);
   height: 50px;
@@ -20,10 +24,10 @@ div.asin-header{
 div.asin-header a{
   text-decoration: none;
   color: #ffffff;
-  display: block;
   width: 100%;
   height: 50px;
   line-height: 50px;
+  display: inline-block;
 }
 
 div.asin-header:hover{
@@ -52,4 +56,50 @@ button.del-kw {
   margin: 0;
   padding: 0 5px;
   cursor: pointer;
+}
+
+button.del-asin {
+  background: #cc2020 !important;
+  border-radius: 30px;
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 26%;
+  transform: translate(-50%, -50%);
+}
+
+/* PRODUCT TRACKER SIDEBAR CSS */
+
+.sidebar-sticky {
+  position: sticky;
+  height: calc(100vh - 48px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+header#header.prodtr {
+  margin: 0 auto !important;
+}
+
+li.nav-item.prodtr {
+  padding: 0px;
+  font-size: 1.2em;
+}
+
+a.nav-link.prodtr {
+  color: #ffffff !important;
+  padding: 15px 0 15px 10px;
+  transition: background ease-in 150ms;
+}
+
+a.nav-link.prodtr:hover {
+  background: #363636;
+}
+
+div.sidebar-sticky {
+  background: #6f7277;
+  height: 100%;
 }

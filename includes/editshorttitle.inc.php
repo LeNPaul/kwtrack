@@ -6,11 +6,15 @@ if (!empty($_POST['btnChangeProdName']) && !empty($_POST['newProdName']) && !emp
   $sql = 'UPDATE asins SET prod_short_title = :newProdName WHERE asin = :asin';
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
-    ':newProdName' => $_POST['newProdName'],
+    ':newProdName' => htmlentities($_POST['newProdName']),
     ':asin'        => $_POST['asin']
   ));
   $alertMsg = 'The product short name of <b>'. $_POST['asin'] .'</b> has been successfully updated to <b>'.$_POST['newProdName'].'</b>';
-  $alert = createAlert('success', $alertMsg);
+  $_SESSION['alert'] = createAlert('success', $alertMsg);
+  header("Location: edittitles.php");
+  exit();
 } elseif  (!empty($_POST['btnChangeProdName']) && sizeof($_POST['asin'] != 10)) {
-  $alert = createAlert('danger', 'There was an error in your input.');
+  $_SESSION['error'] = createAlert('danger', 'There was an error in your input.');
+  header("Location: edittitles.php");
+  exit();
 }

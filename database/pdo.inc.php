@@ -50,6 +50,39 @@ function deleteKw($pdo, $kw) {
 }
 
 /*
+ *  deleteAsin(PDO $pdo, String $asin) => void
+ *    --> Deletes asin $asin, and all it's keywords and ranks, from the db
+ *
+ *      --> PDO $pdo     - db connection
+ *      --> String $asin - asin to delete (10 chars)
+ */
+
+function deleteAsin($pdo, $asin) {
+  // Get asin_id from asin and put in $asin_id
+  $asin_id = intval($pdo->query("SELECT asin_id FROM asins WHERE asin='$asin'")->fetch(PDO::FETCH_COLUMN));
+  echo $asin_id;
+
+  // Retrieve list of keywords and place it in $kwList
+  $sql = 'SELECT keyword FROM keywords WHERE asin_id='.$asin_id;
+  $kwList = $pdo->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+  echo '<pre>';
+  print_r($kwList);
+  echo '</pre>';
+
+  // Delete all keywords in $kwList from `oldranks`
+  for ($i = 0; $i < sizeof($kwList); $i++) {
+    deleteKw($pdo, $kwList[$i]);
+  }
+
+  // Finally, delete ASIN itself
+  $sql = 'DELETE FROM asins WHERE asin=:asin';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ':asin' => $asin
+  ));
+}
+
+/*
  *  getProductsOnPage(Int $pageNum, String $kw) => Array $products
  *    --> Outputs an array of SERPs from an AMZ search for $kw to $products
  * 
@@ -161,7 +194,9 @@ function updateRanks($pdo, $kw, $asin) {
     }
   }
 
+  // Change kw back to spaces
   $kwSpaces = str_replace('+', ' ', $kw);
+
   // Figure out what kw_id for current keyword is
   $sql = "SELECT kw_id FROM keywords WHERE keyword='$kwSpaces'";
   $kw_id = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC)['kw_id'];

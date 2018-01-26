@@ -2,6 +2,20 @@
 include_once './database/pdo.inc.php';
 ini_set('max_execution_time', 1000); //set timeout time to 5 mins
 
+/*
+ *  updateListingTitle(PDO $pdo, String $asin) => null
+ *    --> Updates the prod_title for $asin to check if the title was changed recently.
+ */
+function updateListingTitle($pdo, $asin) {
+  $title = getTitleFromASIN($asin);
+  $sql = 'UPDATE asins SET prod_title=:title WHERE asin=:asin';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ':title' => $title,
+    ':asin'  => $asin
+  ));
+}
+
 if (!empty($_POST['btnUpdateRanks'])) {
   // Get all keywords and set it to $kwArr
   $sql = 'SELECT keyword, asin_id FROM keywords';
@@ -15,6 +29,9 @@ if (!empty($_POST['btnUpdateRanks'])) {
     // Get ASIN associated with current $kw and set it to $asin
     $sql = 'SELECT asin FROM asins WHERE asin_id="'.$asin_id.'"';
     $asin = $pdo->query($sql)->fetch(PDO::FETCH_COLUMN);
+    
+    // Change product title of $asin to its most recent version
+    updateListingTitle($pdo, $asin);
 
     // Find out kw_id of $kw
     $sql = 'SELECT kw_id FROM keywords WHERE keyword="'.$kw.'"';

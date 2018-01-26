@@ -1,3 +1,4 @@
+<?php if ( !isset($_SESSION) ) { session_start(); } ?>
 <?php include_once './includes/editshorttitle.inc.php'; ?>
 
 <!DOCTYPE html>
@@ -15,24 +16,7 @@
 </head>
 <body>
 
-<section id="navigation">
-    <nav class="navbar navbar-expand-lg navbar-dark main-color-bg">
-      <a class="navbar-brand" href="#"><h4>AG Dashboard</h4></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="./index.php">Dashboard Home </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./edittitles.php">Edit Short Titles<span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-</section>
+<?php require_once './includes/nav.inc.php'; ?>
 
 <header id="header">
   <div class="container">
@@ -50,7 +34,16 @@
           <p class="card-header main-color-bg" id="main-content-bar"><i class="icon-gears"></i> Edit Short Product Titles</p>
           <div class="card-body">
             <form method="POST">
-            <?= $alert ?>
+                <?php
+                 if (isset($_SESSION['alert'])) {
+                   echo $_SESSION['alert'];
+                   unset($_SESSION['alert']);
+                 }
+                 if (isset($_SESSION['error'])) {
+                   echo $_SESSION['error'];
+                   unset($_SESSION['error']);
+                 }
+                ?>
               <div class="form-group">
                 <label>ASIN</label><br>
                 <?php generateDropdown($pdo) ?>

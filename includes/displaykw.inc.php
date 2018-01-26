@@ -7,6 +7,40 @@ if (!$pdo->query('SELECT asin FROM asins')->fetch(PDO::FETCH_ASSOC)) {
   echo '<div class="alert alert-danger" role="alert">Mans never input any ASINS styll eh</div>';
 }
 
+/*
+ *  genAsinDelModal(String $asin, String $shortTitle, Int $id) => String $modalHTML
+ *    --> This function generates a modal popup and is called whenever an ASIN's delete button is pressed
+ *
+ *      --> String $asin        - The asin to generate the deletion modal for
+ *      --> String $shortTitle  - The short title of $asin
+ *      --> Int $id             - The unique id to be assigned to the modal
+ *      --> String $modalHTML   - Bootstrap modal HTML being generated
+ */
+
+function genAsinDelModal($asin, $shortTitle, $id) {
+  return '<div class="modal fade inverted" id="modalDel' . $id . '" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Delete '.$asin.'?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to delete <b>' . $shortTitle . '</b>?</p>
+                </div>
+                <div class="modal-footer">
+                  <form method="post">
+                    <button type="submit" name="btnDelAsin" value="' . $asin . '" class="btn btn-danger">Delete <b> '. $asin . '</b></button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>';
+}
+
 function outputCards($pdo) {
   $asinList = $pdo->query('SELECT asin FROM asins')->fetchAll(PDO::FETCH_ASSOC);
 
@@ -17,7 +51,24 @@ function outputCards($pdo) {
     echo('<div id="accordion" role="tablist">
             <div class="card">
               <div class="card-header asin-header">
-                <a role="tab" id="heading'.$i.'" data-toggle="collapse" href="#collapse'.$i.'" aria-expanded="true" aria-controls="collapse'.$i.'">'. $title['prod_short_title'] .'</a>
+                <div class="row">
+                  <div class="col-md-11">
+                    <a role="tab" id="heading'.$i.'" data-toggle="collapse" href="#collapse'.$i.'" aria-expanded="true" aria-controls="collapse'.$i.'">'
+                      . $title['prod_short_title'] . '
+                    </a>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="container">
+                      
+                      <button type="button" name="btnDeleteAsin" data-toggle="modal" data-target="#modalDel' . $i . '" class="btn btn-danger del-asin">
+                        <i class="icon-trash"></i>
+                      </button>
+                      
+                      ' . genAsinDelModal($asinList[$i]['asin'], $title['prod_short_title'], $i) . '
+                      
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div id="collapse'.$i.'" class="collapse" role="tabpanel" aria-labelledby="heading'.$i.'" data-parent="#accordion">
@@ -31,18 +82,31 @@ function outputCards($pdo) {
                       <th>Del</th>
                     </tr>
     ');
+    
+    // Get asin_id so we can count how many keywords the current asin has in the iteration
+    $sql = 'SELECT asin_id FROM asins WHERE asin="' . $asinList[$i]['asin'] . '"' ;
+    $asin_id = $pdo->query($sql)->fetch(PDO::FETCH_COLUMN);
+    
+    // Get count of keywords for asin
+    $sql = 'SELECT COUNT(*) FROM keywords WHERE asin_id="' . $asin_id . '"';
+    $kwCount = intval($pdo->query($sql)->fetch(PDO::FETCH_COLUMN));
+  
     // Retrieve kws associated with current ASIN in iteration
-    $sql = 'SELECT keywords.keyword, oldranks.page, oldranks.rank, MAX(oldranks.rank_id) 
-            FROM asins 
-              JOIN keywords JOIN oldranks
-            ON asins.asin_id = keywords.asin_id 
-            AND oldranks.kw_id = keywords.kw_id
-            AND asins.asin="'.$asinList[$i]['asin'].'" 
-            GROUP BY keywords.keyword';
+    $sql = 'SELECT * FROM (
+                SELECT keywords.keyword, oldranks.page AS `page`, oldranks.rank AS `rank`, oldranks.rank_id
+                FROM asins
+                  JOIN keywords JOIN oldranks
+                ON asins.asin_id = keywords.asin_id
+                AND oldranks.kw_id = keywords.kw_id
+                AND asins.asin="'.$asinList[$i]['asin'].'"
+              GROUP BY oldranks.rank_id
+              ORDER BY oldranks.rank_id DESC LIMIT ' . $kwCount . '
+            ) AS `results`';
+    
     if ($_GET['kwsort'] == 'page') {
-      $sql .= ' ORDER BY oldranks.page ASC';
+      $sql .= ' ORDER BY page ASC';
     } elseif ($_GET['kwsort'] == 'rank') {
-      $sql .= ' ORDER BY oldranks.page ASC, oldranks.rank ASC';      
+      $sql .= ' ORDER BY page ASC, rank ASC';
     }
 
     $kwToAsinList = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -91,8 +155,12 @@ function outputCards($pdo) {
         'animation' => false,
         'maintainAspectRatio' => false,
         'legend' => array( 'display' => false ),
+        'layout' => array(
+          'padding' => array(
+            'top'     => 1
+          )
+        ),
         'scales' => array(
-
           'xAxes' => array(array(
             'display' => false,
             'gridLines' => array( 'display' => false )
@@ -105,7 +173,7 @@ function outputCards($pdo) {
 
             'ticks' => array(
               'beginAtZero' => true,
-              'stepSize'   => 1,
+              'stepSize'   => 0.1,
               'max'        => $maxValue
             )
           )
@@ -114,10 +182,10 @@ function outputCards($pdo) {
       );
       $dataset = array(
         'data'             => $rankData,
-        'borderWidth'      => 1.5,
+        'borderWidth'      => 2,
         'borderColor'      => 'lightblue',
         'fill'             => false,
-        'lineTension'      => 0,
+        'lineTension'      => 0.4,
         'pointRadius'      => 0
       );
       $attributes = array('height' => 50, 'width' => 200);
@@ -144,12 +212,6 @@ function outputCards($pdo) {
   }
 }
 
-
-// If delete button is pressed, then run this shit
-if (!empty($_POST['btnDeleteKw'])) {
-  deleteKw($pdo, $_POST['btnDeleteKw']);
-  echo createAlert('success', '<b>'. $_POST['btnDeleteKw'] . '</b> has been deleted.');
-}
 
 outputCards($pdo);
 

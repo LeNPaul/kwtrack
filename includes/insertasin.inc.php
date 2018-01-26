@@ -1,6 +1,4 @@
 <?php
-include_once './database/pdo.inc.php';
-//require './node_modules/hquery.php/hquery.php';
 
 /*
  * getTitleFromASIN(String $asin) => String $title 
@@ -28,17 +26,7 @@ function insertASIN($pdo, $asin, $shortTitle) {
     ':title'      => $title,
     ':shortTitle' => $shortTitle
   ));
-  echo createAlert('success', '<strong>'. $asin . '</strong> has been added!');
 }
 
 
-
-// If an ASIN was added, insert into db
-if (!empty($_POST['addAsin']) && !empty($_POST['newAsin']) && !empty($_POST['prodShortTitle']) && strlen($_POST['newAsin']) == 10) {
-  insertASIN($pdo, $_POST['newAsin'], $_POST['prodShortTitle']);
-} elseif (strlen($_POST['newAsin'] < 10) && !empty($_POST['addAsin'])) {
-  echo createAlert('danger', 'Please enter ASIN correctly');
-} elseif (!empty($_POST['addAsin']) && empty($_POST['prodShortTitle'])) {
-  echo createAlert('danger', 'Please enter a short title for your product');  
-}
 ?>
