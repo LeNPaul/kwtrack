@@ -1,6 +1,5 @@
 <?php include_once './includes/editshorttitle.inc.php'; ?>
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -24,31 +23,50 @@
 </header>
 
 <section id="main-content">
-<!--  <div class="container-fluid">-->
+<!--  <div  class="container-fluid">-->
     <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item prodtr">
-              <a class="nav-link prodtr" href="#">
-                <span class="icon-home"></span> Brands <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item prodtr">
-              <a class="nav-link prodtr" href="#">
-                <span data-feather="file"></span>
-                Orders
-              </a>
-            </li>
-            <li class="nav-item prodtr">
-              <a class="nav-link prodtr" href="#">
-                <span data-feather="shopping-cart"></span>
-                Products
-              </a>
-            </li>
-          </ul>
+      <div class="col-md-3">
+        <div class="nav-side-menu">
+          <div class="brand">Menu</div>
+          <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+          <div class="menu-list">
+            <ul id="menu-content" class="menu-content collapse out">
+              <li class="single">
+                <a href="prodtracker.php">
+                  <i class="fa icon-gears fa-lg"></i> Overview
+                </a>
+              </li>
+              
+              <li data-toggle="collapse" data-target="#brandMenu" class="collapsed">
+                <a href="#">
+                  <i class="fa icon-building fa-lg"></i> Brands
+                  <span class="arrow"></span>
+                </a>
+              </li>
+              <ul class="sub-menu collapse" id="brandMenu">
+                <li>
+                  <a href="?manage=brands">Manage Brands <i class="fa-lg icon-gears sub-menu-item"></i></a>
+                </li>
+              </ul>
+              
+              
+              <li data-toggle="collapse" data-target="#prodMenu" class="collapsed">
+                <a href="#"><i class="fa icon-sitemap fa-lg"></i> Products <span class="arrow"></span></a>
+              </li>
+              <ul class="sub-menu collapse" id="prodMenu">
+                <li>
+                  <a href="?manage=products">Manage Products <i class="fa-lg icon-gears sub-menu-item"></i></a>
+                </li>
+              </ul>
+              
+              
+            </ul>
+          </div>
         </div>
-      </nav>
+      </div>
+      <div class="col-md-9 col-sm-offset-1">
+        <?php include_once './includes/prodtracker/pagemanager.inc.php'; ?>
+      </div>
     </div>
 <!--  </div>-->
 </section>

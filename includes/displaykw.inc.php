@@ -222,9 +222,7 @@ function outputCards($pdo) {
       }
   
       /* Finish finding historical rank data */
-      echo $kwToAsinList[$j]['keyword']. ': <pre>';
-      print_r($rankData);
-      echo '</pre>';
+
       echo('<tr>
         <td>' . $kwToAsinList[$j]['keyword'] . "</td>
         <td> $trendGraph </td>
