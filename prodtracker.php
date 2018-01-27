@@ -25,7 +25,7 @@
 <section id="main-content">
 <!--  <div  class="container-fluid">-->
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="nav-side-menu">
           <div class="brand">Menu</div>
           <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-9 col-sm-offset-1">
+      <div class="col-md-10 col-sm-offset-1">
         <?php include_once './includes/prodtracker/pagemanager.inc.php'; ?>
       </div>
     </div>

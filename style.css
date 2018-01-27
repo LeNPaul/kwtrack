@@ -160,7 +160,7 @@ header#header.prodtr {
 
 .nav-side-menu ul .sub-menu li .sub-menu-item{
   float: right;
-  line-height: 30px;
+  line-height: 50px;
 }
 
 .nav-side-menu ul .sub-menu li,
@@ -191,6 +191,7 @@ header#header.prodtr {
   width: 92%;
   margin: 0;
   display: inline-block;
+  line-height: 50px;
 }
 
 .nav-side-menu li {
@@ -298,5 +299,32 @@ div.brand-header:hover{
   margin-top: 6px;
 }
 
+.expense {
+  background: #feffb3;
+  color: #b33535;
+  font-weight: bold;
+  transition: all ease-in-out 300ms;
+}
+
+.income {
+  background: rgb(187, 255, 203);
+  color: #154a15;
+  font-weight: bold;
+  transition: all ease-in-out 300ms;
+}
+
+.expense:hover {
+  background: #f8ff97;
+  color: #b33535;
+}
+
+.income:hover {
+  background: rgb(146, 255, 173);
+  color: #154a15;
+}
+
+.container-brands {
+  margin: 10px 15px 10px 15px !important;
+}
 
 /* END PRODUCT TRACKER OVERVIEW PAGE CSS */
