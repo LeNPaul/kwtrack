@@ -264,4 +264,39 @@ h1.overview {
   background-color: #aeaeae;
 }
 
+button.action-btn {
+  margin-right: 20px;
+}
+
+div.brand-header {
+  background-color: rgba(90, 87, 94, 0.53);
+  height: 50px;
+  padding: 0;
+  width: 100% !important;
+  text-align: center;
+  color: #ffffff;
+  transition: background ease 200ms;
+  cursor: pointer;
+}
+
+div.brand-header > a{
+  text-decoration: none;
+  font-weight: lighter;
+  font-size: 1.2em;
+  color: #ffffff;
+  width: 85%;
+  height: 40px;
+  line-height: 33px;
+  display: inline-block;
+}
+
+div.brand-header:hover{
+  background-color: rgb(177, 61, 61);
+}
+
+.brand-header .btn-group {
+  margin-top: 6px;
+}
+
+
 /* END PRODUCT TRACKER OVERVIEW PAGE CSS */

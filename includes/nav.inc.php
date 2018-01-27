@@ -28,7 +28,7 @@ function outputNav($currentPage) {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item ' . $active1 . '">
-          <a class="nav-link" href="./index.php">Dashboard Home' . $place1 . '</a>
+          <a class="nav-link" href="./index.php">Keyword Rank Tracker' . $place1 . '</a>
         </li>
         <li class="nav-item ' . $active2 . '">
           <a class="nav-link" href="./edittitles.php">Edit Short Titles ' . $place2 . '</a>

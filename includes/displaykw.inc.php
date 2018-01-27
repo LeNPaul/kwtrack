@@ -213,7 +213,7 @@ function outputCards($pdo) {
         $pageIcon = '<i class="icon-long-arrow-down text-danger"></i>';
       }
       
-      if ($oldranks[1]['rank'] > $oldranks[0]['rank']) {
+      if ($oldranks[1]['rank'] > $oldranks[0]['rank'] || $oldranks[1]['page'] > $oldranks[0]['page']) {
         $rankIcon = '<i class="icon-long-arrow-up text-success"></i>';
       } else if ($oldranks[1]['rank'] == $oldranks[0]['rank']) {
         $rankIcon = '<i class="icon-long-arrow-right text-warning"></i>';

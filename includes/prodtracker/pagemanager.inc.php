@@ -1,4 +1,5 @@
 <?php
+if ( !isset($_SESSION) ) { session_start(); }
 require_once './database/pdo.inc.php';
 
 /* If user JUST clicked on the Product Tracker from main nav ($_GET will be empty) -- so show homepage*/
@@ -7,7 +8,7 @@ if (empty($_GET)) {
 }
 /* If user clicks Brands -> Manage Brands */
 else if ($_GET['manage'] == 'brands') {
-  echo 'Hello brands.';
+  include_once './includes/prodtracker/pages/managebrands.inc.php';
 }
 /* If user clicks Products -> Manage Products */
 else if ($_GET['manage'] == 'products') {

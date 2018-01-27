@@ -23,7 +23,7 @@
 
 <header id="header">
   <div class="container">
-    <h3><i class="icon-gear"></i> Dashboard - Edit keywords<small></small></h3>
+    <h3><i class="icon-gear"></i> Dashboard - Keyword Rank Tracker<small></small></h3>
   </div>
 </header>
 
