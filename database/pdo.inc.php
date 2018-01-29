@@ -24,6 +24,15 @@ function createAlert($contextual, $alertMsg) {
 /* HELPER FUNCTIONS */
 
 /*
+ *
+ *
+ *
+ */
+function executeDb($pdo, $sql, $bindedArr) {
+  return $pdo->prepare($sql)->execute($bindedArr);
+}
+
+/*
  *  deleteKw(PDO $pdo, String $kw) => void
  *    --> Deletes keyword $kw from the db
  * 

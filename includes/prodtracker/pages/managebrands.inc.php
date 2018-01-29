@@ -2,6 +2,59 @@
 require_once './database/pdo.inc.php';
 
 /*
+ *  genProdEditModal(String $prodName, String $prod_id, Int $id) => String
+ *    --> Generates popup modals for products when you want to edit them.
+ *
+ *      String $prodName - Name of product
+ *      String $prod_id  - prod_id from `products`
+ *      Int $id          - id number to generate for the modal
+ */
+function genProdEditModal($prodName, $prod_id, $id) {
+  return '<div class="modal fade inverted" id="modalEdit' . $id . '" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <form method="post">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit '.$prodName.'</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label>Product Name</label>
+                      <input type="text" name="prod_name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Product Cost</label>
+                      <input type="text" name="prod_cost" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Product Shipping Cost</label>
+                      <input type="text" name="prod_ship_cost" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Product Amazon Fees</label>
+                      <input type="text" name="prod_amz_fees" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Product Sale Price</label>
+                      <input type="text" name="prod_sale_price" class="form-control">
+                    </div>
+                  </div>
+                  
+                  <div class="modal-footer">
+                      <button type="submit" name="btnEditProd" value="' . $prod_id . '" class="btn btn-success">Save Changes</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>';
+}
+
+/*
  *  genProdDelModal(String $prodName, String $prod_id, Int $id) => String
  *    --> Generates popup modals for products when you want to delete them.
  *
@@ -35,12 +88,12 @@ function genProdDelModal($prodName, $prod_id, $id) {
 }
 
 /*
- *  genProdTable(Array $prodList) => String $tableNest
+ *  genProdTable(PDO $pdo, Array $prodList) => String $tableNest
  *    --> Generates the table to view all products in $prodList
  *
  *      Array $prodList - Array of products queried from `products`
  */
-function genProdTable($prodList) {
+function genProdTable($pdo, $prodList) {
   $tdhtml = '';
   
   for ($i = 0; $i < sizeof($prodList); $i++) {
@@ -65,11 +118,30 @@ function genProdTable($prodList) {
     $profit = number_format(($netRev - $landedCost), 2);
     $generatedTDs .= '<td class="income ">$' . $profit . '</td>';
     // Profit Margin
-    $generatedTDs .= '<td class="income ">' . number_format(100*($profit/$prodList[$i]['prod_sale_price']), 2) . '%</td>';
+    $profitMargin = number_format(100*($profit/$prodList[$i]['prod_sale_price']), 2);
+    $generatedTDs .= '<td class="income ">' . $profitMargin . '%</td>';
+    /* Update profit margin of product in db */
+    $sql = 'UPDATE products SET prod_profit=:profitMargin WHERE prod_name=:productName';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':profitMargin'   => $profitMargin,
+      ':productName'    => $prodList[$i]['prod_name']
+    ));
     // Gross ROI
-    $generatedTDs .= '<td class="income ">' . number_format(100*($profit/$landedCost), 2) . '%</td>';
+    $grossROI = number_format(100*($profit/$landedCost), 2);
+    $generatedTDs .= '<td class="income ">' . $grossROI . '%</td>';
+    /* Update ROI of product in db */
+    $sql = 'UPDATE products SET prod_roi=:grossROI WHERE prod_name=:productName';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':grossROI'       => $grossROI,
+      ':productName'    => $prodList[$i]['prod_name']
+    ));
     // Actions
-    $editIcon = '<i class="fa-lg icon-edit text-warning"></i>';
+    $editIcon = '<a href="#" style="text-decoration:none;" name="btnEditProduct" data-toggle="modal" data-target="#modalEdit' . $i . '">
+                   <i class="fa-lg icon-edit text-warning"></i>
+                 </a>' . genProdEditModal($prodList[$i]['prod_name'], $prodList[$i]['product_id'], $i);
+    
     $deleteIcon = '<a href="#" style="text-decoration:none;" name="btnDeleteProduct" data-toggle="modal" data-target="#modalDel' . $i . '">
                      <i class="fa-lg icon-trash text-danger"></i>
                    </a>' . genProdDelModal($prodList[$i]['prod_name'], $prodList[$i]['product_id'], $i);
@@ -121,7 +193,7 @@ function genAccordionCard($pdo, $i, $brandName, $brand_id) {
   if (empty($prodList)) {
     $prodListHTML = 'No products have been added to <b>' . $brandName . '</b> yet.';
   } else {
-    $prodListHTML = genProdTable($prodList);
+    $prodListHTML = genProdTable($pdo, $prodList);
   }
   
   return '<div class="card">
@@ -171,6 +243,67 @@ function genBrandCards($pdo) {
                     </div>';
   return $accordionNest;
 }
+
+/* ------------------- START INPUT CHECKING -------------------------------------------------------------*/
+
+/* Check if a product was edited */
+if (isset($_POST['btnEditProd'])) {
+  $prod_id = htmlentities($_POST['btnEditProd']);
+  
+  // Default all properties to what they currently are in the db. This allows us to
+  // save the product's current state IF the user leaves fields blank.
+
+  if (!empty($_POST['prod_name'])) {
+    // If product name was changed, then change in DB
+    $sql = 'UPDATE products SET prod_name=:prod_name WHERE product_id=:product_id';
+    $arr = array(
+      ':prod_name'    => htmlentities($_POST['prod_name']),
+      ':product_id'   => $prod_id
+    );
+    executeDb($pdo, $sql, $arr);
+  }
+  if (!empty($_POST['prod_cost'])) {
+    // If product cost was changed, then change in DB
+    $sql = 'UPDATE products SET prod_cost=:prod_cost WHERE product_id=:product_id';
+    $arr = array(
+      ':prod_cost'    => htmlentities($_POST['prod_cost']),
+      ':product_id'   => $prod_id
+    );
+    executeDb($pdo, $sql, $arr);
+  }
+  if (!empty($_POST['prod_ship_cost'])) {
+    // If product shipping cost was changed, then change in DB
+    $sql = 'UPDATE products SET prod_ship_cost=:prod_ship_cost WHERE product_id=:product_id';
+    $arr = array(
+      ':prod_ship_cost'    => htmlentities($_POST['prod_ship_cost']),
+      ':product_id'        => $prod_id
+    );
+    executeDb($pdo, $sql, $arr);
+  }
+  if (!empty($_POST['prod_amz_fees'])) {
+    // If AMZ fees were changed, then change in DB
+    $sql = 'UPDATE products SET prod_amz_fees=:prod_amz_fees WHERE product_id=:product_id';
+    $arr = array(
+      ':prod_amz_fees'    => htmlentities($_POST['prod_amz_fees']),
+      ':product_id'       => $prod_id
+    );
+    executeDb($pdo, $sql, $arr);
+  }
+  if (!empty($_POST['prod_sale_price'])) {
+    // If product price was changed, then change in DB
+    $sql = 'UPDATE products SET prod_sale_price=:prod_sale_price WHERE product_id=:product_id';
+    $arr = array(
+      ':prod_sale_price'  => htmlentities($_POST['prod_sale_price']),
+      ':product_id'       => $prod_id
+    );
+    executeDb($pdo, $sql, $arr);
+  }
+  $_SESSION['prod_name'] = htmlentities($_POST['prod_name']);
+  $_SESSION['alert'] = createAlert('success', 'Your changes have been saved.');
+  header("Location: prodtracker.php?manage=brands");
+  exit();
+}
+
 
 /* Check if a product was deleted */
 if (isset($_POST['btnDelProd'])) {
