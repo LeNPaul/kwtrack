@@ -1,6 +1,14 @@
 <?php
 require_once './database/pdo.inc.php';
 
+/*
+ *  genProdDelModal(String $prodName, String $prod_id, Int $id) => String
+ *    --> Generates popup modals for products when you want to delete them.
+ *
+ *      String $prodName - Name of product
+ *      String $prod_id  - prod_id from `products`
+ *      Int $id          - id number to generate for the modal
+ */
 function genProdDelModal($prodName, $prod_id, $id) {
   return '<div class="modal fade inverted" id="modalDel' . $id . '" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -26,6 +34,12 @@ function genProdDelModal($prodName, $prod_id, $id) {
           </div>';
 }
 
+/*
+ *  genProdTable(Array $prodList) => String $tableNest
+ *    --> Generates the table to view all products in $prodList
+ *
+ *      Array $prodList - Array of products queried from `products`
+ */
 function genProdTable($prodList) {
   $tdhtml = '';
   
@@ -87,6 +101,15 @@ function genProdTable($prodList) {
   return $tableNest;
 }
 
+/*
+ *  genAccordionCard(PDO $pdo, Int $i, String $brandName, Int $brand_id) => String
+ *    --> Generates a boostrap accordion card for $brandName
+ *
+ *      PDO $pdo            - db connection
+ *      Int $i              - unique id to give the accordion card
+ *      String $brandName   - The name of the brand
+ *      Int $brand_id       - brand_id queried from `brands`
+ */
 function genAccordionCard($pdo, $i, $brandName, $brand_id) {
   $prodListHTML = '';
   /* Check if there are any products under $brandName */
@@ -126,6 +149,13 @@ function genAccordionCard($pdo, $i, $brandName, $brand_id) {
           </div>';
 }
 
+/*
+ *  genBrandCards(PDO $pdo) => String
+ *    --> Generates ALL collapsable Bootstrap accordion brand cards. $brandList is initialized in this function
+ *        and gets passed into genAccordionCard() to generate the individual accordion for each brand.
+ *
+ *      PDO $pdo - db connection
+ */
 function genBrandCards($pdo) {
   $sql = 'SELECT brand_name FROM brands';
   $brandList = $pdo->query($sql)->fetchAll(PDO::FETCH_COLUMN);
