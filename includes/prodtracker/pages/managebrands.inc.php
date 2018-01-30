@@ -2,6 +2,148 @@
 require_once './database/pdo.inc.php';
 
 /*
+ *  genDelBrandModal(String $brandName, Int $brand_id) => String
+ *    --> Generates popup modals for brands when you want to delete them. $brand_id gets passed as
+ *        $_POST['btnbEditBrand']
+ *
+ *      String $brandName - Name of brand
+ *      String $brand_id  - brand_id from `brand`. Used as a unique ID for the modal.
+ */
+function genDelBrandModal($brandName, $brand_id) {
+  return '<div class="modal fade inverted" id="modalDelBrand' . $brand_id . '" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Delete '.$brandName.'?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>All products and information for this brand will be deleted. This cannot be undone.
+                     Are you sure you want to delete <b>' . $brandName . '</b>?</p>
+                </div>
+                <div class="modal-footer">
+                  <form method="post">
+                    <button type="submit" name="btnDelBrand" value="' . $brand_id . '" class="btn btn-danger">Delete Brand</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>';
+}
+
+/*
+ *  genEditBrandModal(String $prodName, String $prod_id, Int $id) => String
+ *    --> Generates popup modals for brands when you want to edit them. $brand_id gets passed as
+ *        $_POST['btnbEditBrand']
+ *
+ *      String $brandName - Name of brand
+ *      String $brand_id  - brand_id from `brand`. Used as a unique ID for the modal.
+ */
+function genEditBrandModal($brandName, $brand_id) {
+  return '<div class="modal fade inverted" id="modalEditBrand' . $brand_id . '" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Edit '.$brandName.'</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form method="post">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" placeholder="New name of brand..." name="brand_name" required>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" name="btnEditBrand" value="' . $brand_id . '" class="btn btn-success">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>';
+}
+
+/*
+ *  genAddProdModal(String $brandName, Int $brand_id) => String
+ *    --> Generates popup modals for adding products. $brand_id gets passed under $_POST['btnAddProd']
+ *
+ *      String $brandName - Brand name to add the product under
+ *      Int $brand_id     - unique id number to generate for the modal
+ */
+function genAddProdModal($brandName, $brand_id) {
+  return '<div class="modal fade inverted" id="modalAddProd' . $brand_id . '" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <form method="post">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Add a Product to <b>' . $brandName . '</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label>Product Name</label>
+                      <input type="text" name="prod_name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label>Product Cost</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text" name="prod_cost" class="form-control" required>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label>Product Shipping Cost</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text" name="prod_ship_cost" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Product Amazon Fees</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text" name="prod_amz_fees" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Product Sale Price</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text" name="prod_sale_price" class="form-control" required>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="modal-footer">
+                      <button type="submit" name="btnAddProd" value="' . $brand_id . '" class="btn btn-success">Add Product</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>';
+}
+
+/*
  *  genProdEditModal(String $prodName, String $prod_id, Int $id) => String
  *    --> Generates popup modals for products when you want to edit them.
  *
@@ -138,13 +280,14 @@ function genProdTable($pdo, $prodList) {
       ':productName'    => $prodList[$i]['prod_name']
     ));
     // Actions
-    $editIcon = '<a href="#" style="text-decoration:none;" name="btnEditProduct" data-toggle="modal" data-target="#modalEdit' . $i . '">
+    $uniqueID = $i + rand(1,10000);
+    $editIcon = '<a href="#" style="text-decoration:none;" name="btnEditProduct" data-toggle="modal" data-target="#modalEdit' . $uniqueID . '">
                    <i class="fa-lg icon-edit text-warning"></i>
-                 </a>' . genProdEditModal($prodList[$i]['prod_name'], $prodList[$i]['product_id'], $i);
+                 </a>' . genProdEditModal($prodList[$i]['prod_name'], $prodList[$i]['product_id'], $uniqueID);
     
-    $deleteIcon = '<a href="#" style="text-decoration:none;" name="btnDeleteProduct" data-toggle="modal" data-target="#modalDel' . $i . '">
+    $deleteIcon = '<a href="#" style="text-decoration:none;" name="btnDeleteProduct" data-toggle="modal" data-target="#modalDel' . $uniqueID . '">
                      <i class="fa-lg icon-trash text-danger"></i>
-                   </a>' . genProdDelModal($prodList[$i]['prod_name'], $prodList[$i]['product_id'], $i);
+                   </a>' . genProdDelModal($prodList[$i]['prod_name'], $prodList[$i]['product_id'], $uniqueID);
     
     $generatedTDs .=  '<td class="text-center">' . $editIcon . '  ' . $deleteIcon . '</td>';
     
@@ -206,9 +349,9 @@ function genAccordionCard($pdo, $i, $brandName, $brand_id) {
                   Actions
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <a class="dropdown-item" href="#">Add a Product</a>
-                  <a class="dropdown-item" href="#">Edit Brand Name</a>
-                  <a class="dropdown-item bg-danger text-white" href="#">Delete Brand</a>
+                  <a class="dropdown-item" href="#" name="btnAddProduct" data-toggle="modal" data-target="#modalAddProd' . $brand_id . '">Add a Product</a>
+                  <a class="dropdown-item" href="#" name="btnEditBrand" data-toggle="modal" data-target="#modalEditBrand' . $brand_id . '">Edit Brand Name</a>
+                  <a class="dropdown-item bg-danger text-white" href="#" name="btnDeleteBrand" data-toggle="modal" data-target="#modalDelBrand' . $brand_id . '">Delete Brand</a>
                 </div>
               </div>
             </div>
@@ -218,7 +361,10 @@ function genAccordionCard($pdo, $i, $brandName, $brand_id) {
                 ' . $prodListHTML . '
               </div>
             </div>
-          </div>';
+          </div>'
+          . genAddProdModal($brandName, $brand_id)
+          . genEditBrandModal($brandName, $brand_id)
+          . genDelBrandModal($brandName, $brand_id);
 }
 
 /*
@@ -245,6 +391,64 @@ function genBrandCards($pdo) {
 }
 
 /* ------------------- START INPUT CHECKING -------------------------------------------------------------*/
+
+/* Check if brand was deleted */
+if (isset($_POST['btnDelBrand'])) {
+  $brand_name = $pdo->query('SELECT brand_name FROM brands WHERE brand_id='.htmlentities($_POST['btnDelBrand']))->fetch(PDO::FETCH_COLUMN);
+  $sql = 'DELETE FROM brands WHERE brand_id=:brand_id';
+  $arr = array(':brand_id' => htmlentities($_POST['btnDelBrand']));
+  executeDb($pdo, $sql, $arr);
+  $_SESSION['alert'] = createAlert('success', '<b>' . $brand_name . '</b> has been permanently deleted.');
+  header("Location: prodtracker.php?manage=brands");
+  exit();
+}
+
+/* Check if brand name was edited */
+if (isset($_POST['btnEditBrand'])) {
+  $sql = 'UPDATE brands SET brand_name=:brand_name WHERE brand_id=:brand_id';
+  $arr = array(
+    ':brand_name'   => htmlentities($_POST['brand_name']),
+    ':brand_id'     => htmlentities($_POST['btnEditBrand'])
+  );
+  executeDb($pdo, $sql, $arr);
+  $_SESSION['alert'] = createAlert('success', '<b>' . htmlentities($_POST['brand_name']) . '</b> has been updated.');
+  header("Location: prodtracker.php?manage=brands");
+  exit();
+}
+
+/* Check if a product was added */
+if (isset($_POST['btnAddProd'])) {
+  $brand_id = htmlentities($_POST['btnAddProd']);
+  $brand_name = $pdo->query('SELECT brand_name FROM brands WHERE brand_id='.$brand_id)->fetch(PDO::FETCH_COLUMN);
+  // Check if there the int fields are not numeric (ie - strings)
+  if ((!is_numeric($_POST['prod_cost']))
+    || (!is_numeric($_POST['prod_ship_cost']))
+    || (!is_numeric($_POST['prod_amz_fees']) )
+    || (!is_numeric($_POST['prod_sale_price']))) {
+    
+    $_SESSION['alert'] = createAlert('danger', 'Please enter your costs and sale price in numerical format.');
+    header("Location: prodtracker.php?manage=brands");
+    exit();
+  } else {
+    // Insert product into DB
+    $sql = 'INSERT INTO products
+            (brand_id, prod_name, prod_cost, prod_ship_cost, prod_amz_fees, prod_sale_price)
+            VALUES
+            (:brand_id, :prod_name, :prod_cost, :prod_ship_cost, :prod_amz_fees, :prod_sale_price)';
+    $arr = array(
+      ':brand_id'         => $brand_id,
+      ':prod_name'        => htmlentities($_POST['prod_name']),
+      ':prod_cost'        => htmlentities($_POST['prod_cost']),
+      ':prod_ship_cost'   => htmlentities($_POST['prod_ship_cost']),
+      ':prod_amz_fees'    => htmlentities($_POST['prod_amz_fees']),
+      ':prod_sale_price'  => htmlentities($_POST['prod_sale_price'])
+    );
+    executeDb($pdo, $sql, $arr);
+    $_SESSION['alert'] = createAlert('success', '<b>' . htmlentities($_POST['prod_name']). '</b> has been added to <b>' . $brand_name . '</b>');
+    header("Location: prodtracker.php?manage=brands");
+    exit();
+  }
+}
 
 /* Check if a product was edited */
 if (isset($_POST['btnEditProd'])) {
@@ -303,7 +507,6 @@ if (isset($_POST['btnEditProd'])) {
   header("Location: prodtracker.php?manage=brands");
   exit();
 }
-
 
 /* Check if a product was deleted */
 if (isset($_POST['btnDelProd'])) {
@@ -382,13 +585,13 @@ if ($brandCount == 0) {
 </div>
 
 <div class="container-brands">
-      <!-- Echo all alerts here -->
-      <?php
-        if (isset($_SESSION['alert'])) {
-          echo $_SESSION['alert'];
-          unset($_SESSION['alert']);
-        }
-        
-        echo genBrandCards($pdo);
-      ?>
+  <!-- Echo all alerts here -->
+  <?php
+    if (isset($_SESSION['alert'])) {
+      echo $_SESSION['alert'];
+      unset($_SESSION['alert']);
+    }
+    
+    echo genBrandCards($pdo);
+  ?>
 </div>
