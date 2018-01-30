@@ -209,7 +209,7 @@ function updateRanks($pdo, $kw, $asin) {
   // Figure out what kw_id for current keyword is
   $sql = "SELECT kw_id FROM keywords WHERE keyword='$kwSpaces'";
   $kw_id = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC)['kw_id'];
-  
+
   if ($pageNum >= 10) {
     // Before returning rank, insert rank into 'oldranks'
     $sql = "INSERT INTO oldranks (page, rank, kw_id) VALUES (:pageNum, :kwrank, :kw_id)";

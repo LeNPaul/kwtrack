@@ -170,19 +170,39 @@ function genProdEditModal($prodName, $prod_id, $id) {
                     </div>
                     <div class="form-group">
                       <label>Product Cost</label>
-                      <input type="text" name="prod_cost" class="form-control">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text" name="prod_cost" class="form-control">
+                      </div>
                     </div>
                     <div class="form-group">
                       <label>Product Shipping Cost</label>
-                      <input type="text" name="prod_ship_cost" class="form-control">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text" name="prod_ship_cost" class="form-control">
+                      </div>
                     </div>
                     <div class="form-group">
                       <label>Product Amazon Fees</label>
-                      <input type="text" name="prod_amz_fees" class="form-control">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text" name="prod_amz_fees" class="form-control">
+                      </div>
                     </div>
                     <div class="form-group">
                       <label>Product Sale Price</label>
-                      <input type="text" name="prod_sale_price" class="form-control">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text" name="prod_sale_price" class="form-control">
+                      </div>
                     </div>
                   </div>
                   
@@ -280,7 +300,7 @@ function genProdTable($pdo, $prodList) {
       ':productName'    => $prodList[$i]['prod_name']
     ));
     // Actions
-    $uniqueID = $i + rand(1,10000);
+    $uniqueID = $prodList[$i]['product_id'];
     $editIcon = '<a href="#" style="text-decoration:none;" name="btnEditProduct" data-toggle="modal" data-target="#modalEdit' . $uniqueID . '">
                    <i class="fa-lg icon-edit text-warning"></i>
                  </a>' . genProdEditModal($prodList[$i]['prod_name'], $prodList[$i]['product_id'], $uniqueID);
@@ -587,11 +607,11 @@ if ($brandCount == 0) {
 <div class="container-brands">
   <!-- Echo all alerts here -->
   <?php
-    if (isset($_SESSION['alert'])) {
-      echo $_SESSION['alert'];
-      unset($_SESSION['alert']);
-    }
-    
-    echo genBrandCards($pdo);
+  if (isset($_SESSION['alert'])) {
+    echo $_SESSION['alert'];
+    unset($_SESSION['alert']);
+  }
+  
+  echo genBrandCards($pdo);
   ?>
 </div>
