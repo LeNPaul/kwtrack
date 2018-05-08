@@ -1,4 +1,5 @@
 <?php if ( !isset($_SESSION) ) { session_start(); } ?>
+<?php include_once './includes/accounts/index.php'; ?>
 <?php include_once './includes/addkw.inc.php'; ?>
 <?php include_once './includes/insertasin.inc.php'; ?>
 
@@ -8,6 +9,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- Google Sign-In -->
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="446928133679-t5tnlmec6g3i9ogsfebamb005ka1vd45.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script>
+      function onSignIn(user) {
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '');
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          xhr.onload = function() {
+              console.log('Signed in as: ' + xhr.responseText);
+          };
+          xhr.send('id_token=' + user.getAuthResponse().id_token);
+      }
+  </script>
+  
+  
   <title>Ace Global Dashboard | Keyword Tracker</title>
 
   <!-- BOOTSTRAP STYLES -->
@@ -131,10 +150,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 <script src="./charts/includes/Chart.js"></script>
 <script src="./charts/includes/driver.js"></script>
-    <script>
-      (function() {
-        loadChartJsPhp();
-      })();
-    </script>
+<script>
+  (function() {
+    loadChartJsPhp();
+  })();
+</script>
 </body>
 </html>
