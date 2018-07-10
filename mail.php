@@ -20,7 +20,7 @@
 
         // Set the recipient email address.
         // FIXME: Update this to your desired email address.
-        $recipient = "n.islamprivate@gmail.com";
+        $recipient = "info@ppcology.io";
 
         // Set the email subject.
         $subject = "New Message from $name";

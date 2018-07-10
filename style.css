@@ -700,7 +700,7 @@ header {
       margin-top: -1.5px;
       position: absolute;
       top: 50%;
-      width: 120px;
+      width: 140px;
       z-index: -5; }
     .single_about_part .feature_icon::after {
       content: "";

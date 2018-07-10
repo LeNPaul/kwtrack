@@ -131,18 +131,24 @@
 
     // :: 5.0 ScrollDown Active Code
 
-    var downloadbtn = $("#downloadAppbtn");
     var contactbtn = $("#contactbtn");
+    var startTrialBtn = $("#startTrial");
+    var startTrialBtn2 = $("#startTrial2");
 
-    downloadbtn.click(function () {
-        $('html, body').animate({
-            scrollTop: $("#download").offset().top
-        }, 1500);
-    });
     contactbtn.click(function () {
         $('html, body').animate({
             scrollTop: $("#contact").offset().top
-        }, 1500);
+        }, 3000);
+    });
+    startTrialBtn.click(function () {
+        $('html, body').animate({
+            scrollTop: $("#price").offset().top
+        }, 2500);
+    });
+    startTrialBtn2.click(function () {
+        $('html, body').animate({
+            scrollTop: $("#price").offset().top
+        }, 1000);
     });
 
     // :: 6.0 Onepage Nav Active Code
