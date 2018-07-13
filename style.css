@@ -658,6 +658,7 @@ header {
 /* ***************************
 :: 7.0 About Product Area CSS
 *************************** */
+
 .single_about_part {
   border-radius: 6px;
   margin-bottom: 30px;
@@ -700,7 +701,7 @@ header {
       margin-top: -1.5px;
       position: absolute;
       top: 50%;
-      width: 140px;
+      width: 120px;
       z-index: -5; }
     .single_about_part .feature_icon::after {
       content: "";
@@ -730,6 +731,48 @@ header {
   .single_about_part.active h3 {
     color: #ffffff; }
 
+/* Registration Section CSS (uses source from this section) */
+
+#register_feature_icon {
+    background-color: #d63031;
+    border-radius: 50%;
+    height: 50px;
+    right: -25px;
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    margin-top: -25px;
+    text-align: center; }
+@media only screen and (max-width: 767px) {
+    #register_feature_icon {
+        display: none; } }
+#register_feature_icon::before {
+    content: "";
+    height: 3px;
+    left: 50%;
+    margin-top: -1.5px;
+    position: absolute;
+    top: 50%;
+    width: 120px;
+    z-index: -5; }
+#register_feature_icon::after {
+    content: "";
+    height: 20px;
+    left: calc(50% + 110px);
+    margin-top: -10px;
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    z-index: 9;
+    border-radius: 50%;
+    -webkit-animation: sonarWave 2s linear infinite;
+    animation: sonarWave 2s linear infinite; }
+#register_feature_icon i {
+    color: #ffffff;
+    display: block;
+    font-size: 24px;
+    line-height: 50px; }
+
 @-webkit-keyframes sonarWave {
   from {
     opacity: 1; }
@@ -744,6 +787,7 @@ header {
     -webkit-transform: scale(2);
     transform: scale(2);
     opacity: 0; } }
+
 /* ***********************
 :: 8.0 More Features Area
 *********************** */
