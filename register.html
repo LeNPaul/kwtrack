@@ -25,6 +25,19 @@
 </head>
 
 <body class="gradients red">
+<div id="amazon-root"></div>
+<script type="text/javascript">
+    window.onAmazonLoginReady = function() {
+        amazon.Login.setClientId('amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf');
+    };
+    (function(d) {
+        var a = d.createElement('script'); a.type = 'text/javascript';
+        a.async = true; a.id = 'amazon-login-sdk';
+        a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+        d.getElementById('amazon-root').appendChild(a);
+    })(document);
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Color Picker Start
 <div class="color_picker_area">
     <div class="color_picker_switcher">
@@ -117,28 +130,50 @@ Color Picker End -->
       <div class="col-12 col-md-6 col-lg-4">
         <div class="about_product_discription">
           <div class="row">
-            <!-- LwA Button Section -->
+            
             <div class="col-12">
               <div class="single_about_part wow fadeInUp" data-wow-delay="0.2s">
                 <div id="register_feature_icon">
                   <!-- Adjust width of line in style.css line 703 -->
-                  <i class="pe-7s-leaf" aria-hidden="true"></i>
+                  <i class="pe-7s-users" aria-hidden="true"></i>
                 </div>
-                <h3>1) Login with Amazon</h3>
-                <p>Login to you Amazon account and we will import all the important data we need.</p>
+                <h3>Login with Amazon</h3>
+                <p>Login to <you>r</you> Amazon account and we will import all the important data we need.</p>
               </div>
             </div>
+            
+            <div class="col-12 add-margin">
+              <a href id="LoginWithAmazon">
+                <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_312x64.png" width="312" height="64" />
+              </a>
+              <script type="text/javascript">
+                  document.getElementById('LoginWithAmazon').onclick = function() {
+                      options = { scope : 'profile' };
+                      amazon.Login.authorize(options,
+                          'https://ppcology.io/');
+                      return false;
+                  };
+              </script>
+            </div>
+            
             <!-- Plan Selection -->
             <div class="col-12">
               <div class="single_about_part wow fadeInUp active" data-wow-delay="0.4s">
                 <div id="register_feature_icon">
-                  <i class="pe-7s-bicycle" aria-hidden="true"></i>
+                  <i class="pe-7s-diamond" aria-hidden="true"></i>
                 </div>
-                <h3>2) Select Your Plan</h3>
+                <h3>Select Your Plan</h3>
                 <p>Choose the plan that best suits your business' needs.</p>
               </div>
             </div>
-
+            
+            <label class="check-container col-12">
+              By clicking on create account, you agree to our terms of service and that you have read our privacy policy, including our cookie use policy
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+            
+            <button type="button" class="col-12 btn btn-lg btn-danger">Start 14-Day Free Trial</button>
             
           </div>
         </div>
