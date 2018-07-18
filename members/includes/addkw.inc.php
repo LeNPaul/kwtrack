@@ -29,6 +29,7 @@ function generateDropdown($pdo) {
   echo('</select>');
 }
 
+
 // If an ASIN was added, insert into db
 if (!empty($_POST['addAsin']) && !empty($_POST['newAsin']) && !empty($_POST['prodShortTitle']) && strlen($_POST['newAsin']) == 10) {
   insertASIN($pdo, $_POST['newAsin'], $_POST['prodShortTitle']);

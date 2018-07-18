@@ -16,6 +16,7 @@ function updateListingTitle($pdo, $asin) {
   ));
 }
 
+
 if (!empty($_POST['btnUpdateRanks'])) {
   // Get all keywords and set it to $kwArr
   $sql = 'SELECT keyword, asin_id FROM keywords';

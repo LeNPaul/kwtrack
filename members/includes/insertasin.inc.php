@@ -28,5 +28,4 @@ function insertASIN($pdo, $asin, $shortTitle) {
   ));
 }
 
-
 ?>

@@ -1,6 +1,7 @@
 <?php if ( !isset($_SESSION) ) { session_start(); } ?>
 <?php include_once './includes/editshorttitle.inc.php'; ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

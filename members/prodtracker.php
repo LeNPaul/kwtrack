@@ -1,5 +1,6 @@
 <?php include_once './includes/editshorttitle.inc.php'; ?>
 
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">

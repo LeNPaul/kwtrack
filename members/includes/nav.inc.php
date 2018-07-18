@@ -8,6 +8,7 @@ function outputNav($currentPage) {
   $place3 = '';
   $active3 = '';
 
+
   if ($currentPage == 'index') {
     $place1 = '<span class="sr-only">(current)</span>';
     $active1 = 'active';

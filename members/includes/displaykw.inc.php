@@ -220,7 +220,8 @@ function outputCards($pdo) {
       } else {
         $rankIcon = '<i class="icon-long-arrow-down text-danger"></i>';
       }
-  
+
+
       /* Finish finding historical rank data */
 
       echo('<tr>
