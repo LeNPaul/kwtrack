@@ -173,7 +173,7 @@ Color Picker End -->
               <span class="checkmark"></span>
             </label>
             
-            <button type="button" class="col-12 btn btn-lg btn-danger">Start 14-Day Free Trial</button>
+            <button type="button" class="col-12 btn btn-lg btn-danger" id="login-btn">Start 14-Day Free Trial</button>
             
           </div>
         </div>

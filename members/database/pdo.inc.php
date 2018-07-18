@@ -5,7 +5,7 @@ require_once './node_modules/hquery.php/hquery.php';
 hQuery::$cache_path = "./cache";
 
 try {
-  $pdo = new PDO('mysql:host=localhost;port=3306;dbname=kwtracker', 'pojka', '123456');
+  $pdo = new PDO('mysql:host=http://162.248.48.19;port=2082;dbname=pp554547_ppcology', 'pp5545474169', 'n=K=%pScxihS');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
 } catch (PDOException $er) {
   echo $e->getMessage();
