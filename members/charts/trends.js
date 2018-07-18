@@ -15,6 +15,7 @@ $('.chart').each((index, element) => {
     }
   }
 
+
   let maxValue = ranks.reduce((a, b) => Math.max(a, b));
   console.log(ranks);
 

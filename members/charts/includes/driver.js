@@ -1,6 +1,7 @@
 // Will be filled with canvas
 var ChartJSPHP = new Array();
 
+
 // You must call this function after document.ready
 function loadChartJsPhp() {
 	// Getting all chart.js canvas

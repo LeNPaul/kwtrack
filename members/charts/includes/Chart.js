@@ -3,6 +3,7 @@
  * http://chartjs.org/
  * Version: 2.7.1
  *
+ *
  * Copyright 2017 Nick Downie
  * Released under the MIT license
  * https://github.com/chartjs/Chart.js/blob/master/LICENSE.md

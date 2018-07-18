@@ -1,5 +1,6 @@
 /*!
  * Chart.js
+ *
  * http://chartjs.org/
  * Version: 2.7.1
  *

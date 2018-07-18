@@ -1,5 +1,6 @@
 $(document).ready(() => {
 
+
   $.ajax({
     url: "./charts/data.php",
     type: "POST",
