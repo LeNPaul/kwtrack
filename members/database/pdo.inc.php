@@ -4,12 +4,12 @@ require_once './node_modules/hquery.php/hquery.php';
 // Set the cache path 
 hQuery::$cache_path = "./cache";
 
-/*try {
-  $pdo = new PDO('mysql:host=http://162.248.48.19;port=2082;dbname=pp554547_ppcology', 'pp5545474169', 'n=K=%pScxihS');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
+try {
+  $pdo = new PDO('mysql:host=162.248.48.19;port=2082;dbname=pp554547_ppcology', 'pp554547_ppc', '@Rl)CWz6N;d&');
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $er) {
   echo $e->getMessage();
-}*/
+}
 
 function createAlert($contextual, $alertMsg) {
   $alertHTML = '<div class="alert fade show alert-dismissable alert-'.$contextual.'" role="alert">
