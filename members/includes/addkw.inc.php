@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . 'members/database/pdo.inc.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . 'members/includes/insertasin.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/members/database/pdo.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/members/includes/insertasin.inc.php';
 
 /* 
  * checkAsinExists(PDO $pdo, String $asin) => Bool
