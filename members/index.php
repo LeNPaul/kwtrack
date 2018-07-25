@@ -1,7 +1,7 @@
 <?php if ( !isset($_SESSION) ) { session_start(); } ?>
 <?php //include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/accounts/index.php'; ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . 'members/includes/addkw.inc.php'; ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . 'members/includes/insertasin.inc.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/members/includes/addkw.inc.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/members/includes/insertasin.inc.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
