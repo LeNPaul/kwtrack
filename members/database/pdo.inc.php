@@ -1,4 +1,6 @@
 <?php
+use PDO;
+
 require_once $_SERVER['DOCUMENT_ROOT'] . 'members/node_modules/hquery.php/hquery.php';
 
 // Set the cache path 
