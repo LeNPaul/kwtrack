@@ -1,4 +1,4 @@
-<?php include_once './includes/editshorttitle.inc.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/editshorttitle.inc.php'; ?>
 
 
 <html lang="en">

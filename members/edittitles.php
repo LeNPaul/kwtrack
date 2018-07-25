@@ -1,5 +1,5 @@
 <?php if ( !isset($_SESSION) ) { session_start(); } ?>
-<?php include_once './includes/editshorttitle.inc.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/editshorttitle.inc.php'; ?>
 
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<?php require_once './includes/nav.inc.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.inc.php'; ?>
 
 <header id="header">
   <div class="container">

@@ -1,6 +1,6 @@
 <?php
-include_once './includes/addkw.inc.php';
-include_once './database/pdo.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/addkw.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/database/pdo.inc.php';
 
 if (!empty($_POST['btnChangeProdName']) && !empty($_POST['newProdName']) && !empty($_POST['asin'])) {
   $sql = 'UPDATE asins SET prod_short_title = :newProdName WHERE asin = :asin';
