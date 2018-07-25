@@ -1,0 +1,3 @@
+php_value extension pdo.so
+php_value extension pdo_sqlite.so
+php_value extension pdo_mysql.so
