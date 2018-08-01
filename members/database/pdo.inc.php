@@ -1,11 +1,11 @@
 <?php
-require_once './node_modules/hquery.php/hquery.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquery.php';
 
 // Set the cache path 
 hQuery::$cache_path = "./cache";
 
 try {
-  $pdo = new PDO('mysql:host=162.248.48.19;port=2082;dbname=pp554547_ppcology', 'pp554547_ppc', '@Rl)CWz6N;d&');
+  $pdo = new PDO('mysql:host=localhost;port=3306;dbname=pp554547_ppcology', 'pp554547_ppc', '@Rl)CWz6N;d&');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $er) {
   echo $e->getMessage();

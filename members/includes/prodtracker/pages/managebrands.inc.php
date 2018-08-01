@@ -1,5 +1,5 @@
 <?php
-require_once './database/pdo.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/database/pdo.inc.php';
 
 /*
  *  genDelBrandModal(String $brandName, Int $brand_id) => String

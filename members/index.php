@@ -1,7 +1,7 @@
 <?php if ( !isset($_SESSION) ) { session_start(); } ?>
-<?php include_once './includes/accounts/index.php'; ?>
-<?php include_once './includes/addkw.inc.php'; ?>
-<?php include_once './includes/insertasin.inc.php'; ?>
+<?php //include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/accounts/index.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/members/includes/addkw.inc.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/members/includes/insertasin.inc.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
   <!-- Google Sign-In -->
-  <meta name="google-signin-scope" content="profile email">
+<!--  <meta name="google-signin-scope" content="profile email">
   <meta name="google-signin-client_id" content="446928133679-t5tnlmec6g3i9ogsfebamb005ka1vd45.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script>
@@ -24,7 +24,7 @@
           };
           xhr.send('id_token=' + user.getAuthResponse().id_token);
       }
-  </script>
+  </script>-->
   
   
   <title>Ace Global Dashboard | Keyword Tracker</title>

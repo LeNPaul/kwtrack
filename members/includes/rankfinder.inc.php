@@ -1,5 +1,5 @@
 <?php
-include_once './database/pdo.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/database/pdo.inc.php';
 ini_set('max_execution_time', 1000); //set timeout time to 5 mins
 
 /*

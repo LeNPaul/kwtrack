@@ -1,7 +1,7 @@
 <?php
-include_once('./database/pdo.inc.php');
-include_once('./includes/rankfinder.inc.php');
-require('./charts/includes/ChartJS.php');
+include_once( $_SERVER['DOCUMENT_ROOT'] . '/database/pdo.inc.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/rankfinder.inc.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/charts/includes/ChartJS.php');
 
 if (!$pdo->query('SELECT asin FROM asins')->fetch(PDO::FETCH_ASSOC)) {
   echo '<div class="alert alert-danger" role="alert">Mans never input any ASINS styll eh</div>';
