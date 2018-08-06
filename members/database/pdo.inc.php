@@ -1,11 +1,11 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquery.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquery.php';
 
-// Set the cache path 
+// Set the cache path
 hQuery::$cache_path = "./cache";
 
 try {
-  $pdo = new PDO('mysql:host=localhost;port=3306;dbname=pp554547_ppcology', 'pp554547_ppc', '@Rl)CWz6N;d&');
+  $pdo = new PDO('mysql:host=localhost;port=3306;dbname=pppcology_ppcology', 'ppcology_root', 'kA#3q5T}(|X70IcUl');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $er) {
   echo $e->getMessage();
@@ -35,10 +35,10 @@ function executeDb($pdo, $sql, $bindedArr) {
 /*
  *  deleteKw(PDO $pdo, String $kw) => void
  *    --> Deletes keyword $kw from the db
- * 
+ *
  *      --> PDO $pdo    - db handler
  *      --> String $kw  - keyword to delete
- * 
+ *
  */
 function deleteKw($pdo, $kw) {
   // Find kw_id of $kw
@@ -94,7 +94,7 @@ function deleteAsin($pdo, $asin) {
 /*
  *  getProductsOnPage(Int $pageNum, String $kw) => Array $products
  *    --> Outputs an array of SERPs from an AMZ search for $kw to $products
- * 
+ *
  *      --> Int $pageNum - Page number to search for $asin
  *      --> String $kw - CST for search
  */
@@ -134,9 +134,9 @@ function getProductsOnPage($pageNum, $kw) {
 /*
  *  findOnPage(Array $products, String $listingTitle) => Array [Bool, Int $curPageRank]
  *    --> Return array that indidicates array[0] => true if listing was found on current page
- *    --> and array[1] => rank of listing if found on current page. If array[0] === false, then 
+ *    --> and array[1] => rank of listing if found on current page. If array[0] === false, then
  *    --> array[1] = -1
- * 
+ *
  *      --> Array $products - Array of SERPs
  *      --> String $listingTitle - Exact title of listing
  */
@@ -167,7 +167,7 @@ function findOnPage($products, $listingTitle) {
  *  updateRanks(PDO $pdo, String $kw, String $asin) => Array [Int/String $pageNum, Int/String $kwrank]
  *    --> Returns array that indicates what page $asin is on for keyword $kw and also
  *        inserts ranking into db table 'oldranks'
- *        
+ *
  *      --> String $kw - keyword to search for
  *      --> String $asin - asin to search for
  *      --> Int $pageNum - page asin was found in
@@ -183,7 +183,7 @@ function updateRanks($pdo, $kw, $asin) {
   // Query exact long title of $asin from db and assign to $sellerListingTitle
   $sql = "SELECT prod_title FROM asins WHERE asin='$asin'";
   $sellerListingTitle = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC)['prod_title'];
- 
+
   while (!$isFound) {
     $products = getProductsOnPage($pageNum, $kw);
     $x = findOnPage($products, $sellerListingTitle);
@@ -196,7 +196,7 @@ function updateRanks($pdo, $kw, $asin) {
       $kwrank = $x[1];
       $isFound = true;
       break;
-    } 
+    }
     // If product wasn't found on this page
     else {
       $pageNum++;
