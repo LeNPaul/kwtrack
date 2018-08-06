@@ -10,15 +10,15 @@
   
   <!-- Title  -->
   <title>PPCology | The World's Leading Amazon PPC Tool</title>
-  
+
   <!-- Favicon  -->
   <link rel="icon" href="img/core-img/favicon.ico">
-  
+
   <!-- ***** All CSS Files ***** -->
-  
+
   <!-- Style css -->
   <link rel="stylesheet" href="style.css">
-  
+
   <!-- Skin css -->
   <link rel="stylesheet" href="css/skin.css">
 
@@ -38,11 +38,11 @@
       <nav class="navbar h-100 navbar-expand-lg">
         <!-- Logo -->
         <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-        
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#aplandmenu" aria-controls="aplandmenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        
+
         <div class="collapse navbar-collapse" id="aplandmenu">
-          
+
           <ul class="navbar-nav ml-auto" id="corenav">
             <!-- Start Dropdown Sample
             <li class="nav-item dropdown active">
@@ -61,8 +61,8 @@
                 </div>
             </li>
             End Dropdown Sample -->
-        
-        
+
+
         </div>
       </nav>
     </div>
@@ -80,9 +80,9 @@
             <h3>Login to <span>PPCOLOGY</span></h3>
             <p>Follow the steps below to register for a PPCology account and start maximizing your profits!</p>
           </div>
-          
+
           <form id="login-form" method="post">
-            
+
             <div class="row">
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
@@ -91,7 +91,7 @@
               </div>
               <div class="col-md-3 col-sm-1col-lg-2"></div>
             </div>
-            
+
             <div class="row">
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
@@ -100,11 +100,11 @@
               </div>
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
             </div>
-            
+
             <div class="col-12 text-center">
               <button type="submit" class="btn btn-danger centered" id="login-btn">Login</button>
             </div>
-            
+
           </form>
         </div>
       </div>
@@ -135,7 +135,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="footer_copywrite_area">
     <div class="container">
       <div class="row">
