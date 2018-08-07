@@ -11,6 +11,13 @@
  // Escape all $_POST vars to protect against SQL injection
  $first_name = htmlentities($_POST['firstname']);
  $last_name = htmlentities($_POST['lastname']);
+ $email = htmlentities($_POST['email']);
+ $password = htmlentities(password_hash($_POST['password'], PASSWORD_BCRYPT));
+ $hash = htmlentities(md5(rand(0, 1000)));
+
+ echo $password . "<br />";
+ echo $hash;
+ die;
 ?>
 
 <!DOCTYPE html>
@@ -198,10 +205,10 @@ Color Picker End -->
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input required type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                  <input required pattern=".{8,}" type="password" class="form-control" id="password" name="password" placeholder="Enter password">
                 </div>
                 <div class="form-group">
-                  <input required type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password">
+                  <input required pattern=".{8,}" type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password">
                 </div>
               </div>
 
