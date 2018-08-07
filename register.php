@@ -3,6 +3,10 @@
    and sends account confirmation email
  */
 
+ if ( !isset($_SESSION) ) { session_start(); }
+
+ include './members/database/pdo.inc.php';
+
  // Set session variables to be used on profile.php page
  $_SESSION['email'] = $_POST['email'];
  $_SESSION['first_name'] = $_POST['firstname'];
@@ -15,11 +19,49 @@
  $password = htmlentities(password_hash($_POST['password'], PASSWORD_BCRYPT));
  $hash = htmlentities(md5(rand(0, 1000)));
 
- if (isset($_POST['register'])) {
-   echo $password . "<br />";
-   echo $hash;
- }
+ // Check if user with that email already exists
+ $stmt = $pdo->query("SELECT * FROM users WHERE email='$email'");
+ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+ // If count($results) > 0, then we know that the user exists
+ if (count($result) > 0) {
+   $_SESSION['message'] = createAlert('danger', 'User with this email already exists.');
+   header("location: register.php");
+ } else { // Email doesn't exist in the database, so create new account
+   // Insert SQL --> add PLAN LEVEL once we figure out plan pricing
+   $sql = 'INSERT INTO users (first_name, last_name, email, password, hash)
+           VALUES (:first_name, :last_name, :email, :password, :hash)';
+   $stmt = $pdo->prepare($sql);
+   $stmt->execute(array(
+     ':first_name'    => $first_name,
+     ':last_name'     => $last_name,
+     ':email'         => $email,
+     ':password'      => $password,
+     ':hash'          => $hash
+   ));
+
+   // Set session vars for new user
+   $_SESSION['active'] = 0; // active = 0 for users that haven't verified their emails yet
+   $_SESSION['logged_in'] = true; // So we know the user has logged in
+   $_SESSION['message'] = createAlert('warning',
+                          "Confirmation link has been sent to $email. Please verify your account
+                          by clicking on the link in the message!");
+
+   // Send registration confirmation link
+   $to = $email;
+   $subject = 'PPCOLOGY Account Verification';
+   $messageBody = "
+   Hello $first_name,
+
+   Thanks for signing up with PPCOLOGY!
+
+   Please click this link to activate your account:
+
+   https://ppcology.io/verify.php?email=$email&hash=$hash";
+
+   mail($to, $subject, $messageBody);
+   header("location: profile.php");
+ }
 ?>
 
 <!DOCTYPE html>
@@ -139,6 +181,14 @@ Color Picker End -->
 
 <!-- ***** Product Area Start ***** -->
 <section class="about_area section_padding_100_70" id="product">
+
+  <?php
+  if (isset($_SESSION['message'])) {
+    echo $_SESSION['message'];
+    unset($_SESSION['message']);
+  }
+  ?>
+
   <div class="container">
     <div class="row">
       <div class="col-12">
