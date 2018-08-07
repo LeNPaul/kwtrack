@@ -1,5 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquery.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquery.php';
 
 
 
@@ -10,7 +10,7 @@ try {
   $pdo = new PDO('mysql:host=localhost;port=3306;dbname=pppcology_ppcology', 'ppcology_root', 'kA#3q5T}(|X70IcUl');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $er) {
-  echo $e->getMessage();
+  echo $er->getMessage();
 }
 
 function createAlert($contextual, $alertMsg) {
