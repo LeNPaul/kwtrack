@@ -7,6 +7,10 @@
  $_SESSION['email'] = $_POST['email'];
  $_SESSION['first_name'] = $_POST['firstname'];
  $_SESSION['last_name'] = $_POST['lastname'];
+
+ // Escape all $_POST vars to protect against SQL injection
+ $first_name = htmlentities($_POST['firstname']);
+ $last_name = htmlentities($_POST['lastname']);
 ?>
 
 <!DOCTYPE html>
@@ -150,7 +154,7 @@ Color Picker End -->
                     <i class="pe-7s-users" aria-hidden="true"></i>
                   </div>
                   <h3>Login with Amazon</h3>
-                  <p>Login to <you>r</you> Amazon account and we will import all the important data we need.</p>
+                  <p>Login to your Amazon account and we will import all the important data we need.</p>
                 </div>
               </div>
 
@@ -191,6 +195,13 @@ Color Picker End -->
                 <div class="form-group">
                   <label for="email">E-Mail</label>
                   <input required type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input required type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                  <input required type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password">
                 </div>
               </div>
 
@@ -291,6 +302,22 @@ Color Picker End -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk9KNSL1jTv4MY9Pza6w8DJkpI_nHyCnk"></script>
 <script src="js/google-map/map-active.js"></script>
 
+<!-- Password Confirmation Script -->
+<script>
+var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
 </body>
 
 </html>
