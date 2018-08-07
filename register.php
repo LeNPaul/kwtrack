@@ -15,7 +15,7 @@
  $password = htmlentities(password_hash($_POST['password'], PASSWORD_BCRYPT));
  $hash = htmlentities(md5(rand(0, 1000)));
 
- if ($_POST['register']) {
+ if (isset($_POST['register'])) {
    echo $password . "<br />";
    echo $hash;
  }
