@@ -1,3 +1,16 @@
+<?php
+require './members/database/pdo.inc.php';
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (isset($_POST['login'])) {
+    require 'login.php';
+  }
+  elseif (isset($_POST['register'])) {
+    require 'register.php';
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +20,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  
+
   <!-- Title  -->
   <title>PPCology | The World's Leading Amazon PPC Tool</title>
 
@@ -102,7 +115,14 @@
             </div>
 
             <div class="col-12 text-center">
-              <button type="submit" class="btn btn-danger centered" id="login-btn">Login</button>
+              <button type="submit" class="btn btn-danger centered" id="login-btn" name="login">Login</button>
+            </div>
+
+            <div class="col-12 text-center">
+              <p id="register_text">
+                Don't have an account yet?
+                <a href="register.php">Sign Up Now</a>
+              </p>
             </div>
 
           </form>
