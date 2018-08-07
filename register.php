@@ -211,7 +211,9 @@ Color Picker End -->
                 <span class="checkmark"></span>
               </label>
 
-              <button type="button" class="col-12 btn btn-lg btn-danger" id="login-btn" name="register">Start 14-Day Free Trial</button>
+              <div class="col-12">
+                <button type="submit" class="btn btn-lg btn-danger" id="login-btn" name="register">Start 14-Day Free Trial</button>
+              </div>
 
           </form>
 
