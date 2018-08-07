@@ -11,6 +11,9 @@ try {
   echo $er->getMessage();
 }
 
+
+/* HELPER FUNCTIONS */
+
 function createAlert($contextual, $alertMsg) {
   $alertHTML = '<div class="alert fade show alert-dismissable alert-'.$contextual.'" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -20,8 +23,6 @@ function createAlert($contextual, $alertMsg) {
                 </div>';
   return $alertHTML;
 }
-
-/* HELPER FUNCTIONS */
 
 /*
  *

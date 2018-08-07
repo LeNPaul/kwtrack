@@ -874,6 +874,7 @@ a#LoginWithAmazon img {
 *********************** */
 
 #register_text {
+  margin-top: 15px;
   font-size: 12px;
   color: #616161;
 }

@@ -1,3 +1,14 @@
+<?php
+/* Registration process , inserts user into database
+   and sends account confirmation email
+ */
+
+ // Set session variables to be used on profile.php page
+ $_SESSION['email'] = $_POST['email'];
+ $_SESSION['first_name'] = $_POST['firstname'];
+ $_SESSION['last_name'] = $_POST['lastname'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,18 +18,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  
+
   <!-- Title  -->
   <title>PPCology | The World's Leading Amazon PPC Tool</title>
-  
+
   <!-- Favicon  -->
   <link rel="icon" href="img/core-img/favicon.ico">
-  
+
   <!-- ***** All CSS Files ***** -->
-  
+
   <!-- Style css -->
   <link rel="stylesheet" href="style.css">
-  
+
   <!-- Skin css -->
   <link rel="stylesheet" href="css/skin.css">
 
@@ -81,11 +92,11 @@ Color Picker End -->
       <nav class="navbar h-100 navbar-expand-lg">
         <!-- Logo -->
         <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-        
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#aplandmenu" aria-controls="aplandmenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        
+
         <div class="collapse navbar-collapse" id="aplandmenu">
-          
+
           <ul class="navbar-nav ml-auto" id="corenav">
             <!-- Start Dropdown Sample
             <li class="nav-item dropdown active">
@@ -104,8 +115,8 @@ Color Picker End -->
                 </div>
             </li>
             End Dropdown Sample -->
-            
-        
+
+
         </div>
       </nav>
     </div>
@@ -125,62 +136,91 @@ Color Picker End -->
         </div>
       </div>
     </div>
-    
+
     <div class="row justify-content-center align-items-center">
       <div class="col-12 col-md-6 col-lg-4">
         <div class="about_product_discription">
           <div class="row">
-            
-            <div class="col-12">
-              <div class="single_about_part wow fadeInUp" data-wow-delay="0.2s">
-                <div id="register_feature_icon">
-                  <!-- Adjust width of line in style.css line 703 -->
-                  <i class="pe-7s-users" aria-hidden="true"></i>
+            <form method="post">
+
+              <div class="col-12">
+                <div class="single_about_part wow fadeInUp" data-wow-delay="0.2s">
+                  <div id="register_feature_icon">
+                    <!-- Adjust width of line in style.css line 703 -->
+                    <i class="pe-7s-users" aria-hidden="true"></i>
+                  </div>
+                  <h3>Login with Amazon</h3>
+                  <p>Login to <you>r</you> Amazon account and we will import all the important data we need.</p>
                 </div>
-                <h3>Login with Amazon</h3>
-                <p>Login to <you>r</you> Amazon account and we will import all the important data we need.</p>
               </div>
-            </div>
-            
-            <div class="col-12 add-margin">
-              <a href id="LoginWithAmazon">
-                <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_312x64.png" width="312" height="64" />
-              </a>
-              <script type="text/javascript">
-                  document.getElementById('LoginWithAmazon').onclick = function() {
-                      options = { scope : 'profile' };
-                      amazon.Login.authorize(options,
-                          'https://ppcology.io/');
-                      return false;
-                  };
-              </script>
-            </div>
-            
-            <!-- Plan Selection -->
-            <div class="col-12">
-              <div class="single_about_part wow fadeInUp active" data-wow-delay="0.4s">
-                <div id="register_feature_icon">
-                  <i class="pe-7s-diamond" aria-hidden="true"></i>
+
+              <div class="col-12 add-margin">
+                <a href id="LoginWithAmazon">
+                  <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_312x64.png" width="312" height="64" />
+                </a>
+                <script type="text/javascript">
+                    document.getElementById('LoginWithAmazon').onclick = function() {
+                        options = { scope : 'profile' };
+                        amazon.Login.authorize(options,
+                            'https://ppcology.io/');
+                        return false;
+                    };
+                </script>
+              </div>
+
+              <!-- Personal Information Section -->
+              <div class="col-12">
+                <div class="single_about_part wow fadeInUp active" data-wow-delay="0.4s">
+                  <div id="register_feature_icon">
+                    <i class="pe-7s-diamond" aria-hidden="true"></i>
+                  </div>
+                  <h3>Personal Information</h3>
+                  <p>Enter your personal information so we can best serve you.</p>
                 </div>
-                <h3>Select Your Plan</h3>
-                <p>Choose the plan that best suits your business' needs.</p>
               </div>
-            </div>
-            
-            <label class="check-container col-12">
-              By clicking on create account, you agree to our terms of service and that you have read our privacy policy, including our cookie use policy
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            
-            <button type="button" class="col-12 btn btn-lg btn-danger" id="login-btn">Start 14-Day Free Trial</button>
-            
+
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="firstname">First Name</label>
+                  <input required type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your first name">
+                </div>
+                <div class="form-group">
+                  <label for="lastname">Last Name</label>
+                  <input required type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name">
+                </div>
+                <div class="form-group">
+                  <label for="email">E-Mail</label>
+                  <input required type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+              </div>
+
+              <!-- Plan Selection -->
+              <div class="col-12">
+                <div class="single_about_part wow fadeInUp active" data-wow-delay="0.4s">
+                  <div id="register_feature_icon">
+                    <i class="pe-7s-diamond" aria-hidden="true"></i>
+                  </div>
+                  <h3>Select Your Plan</h3>
+                  <p>Choose the plan that best suits your business' needs.</p>
+                </div>
+              </div>
+
+              <label class="check-container col-12">
+                By clicking on create account, you agree to our terms of service and that you have read our privacy policy, including our cookie use policy
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+
+              <button type="button" class="col-12 btn btn-lg btn-danger" id="login-btn" name="register">Start 14-Day Free Trial</button>
+
+          </form>
+
           </div>
         </div>
       </div>
-      
+
       <!-- About Product Thumb Area Start -->
-     
+
     </div>
   </div>
 </section>
@@ -217,7 +257,7 @@ Color Picker End -->
       </div>
     </div>
   </div>
-  
+
   <div class="footer_copywrite_area">
     <div class="container">
       <div class="row">
