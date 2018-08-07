@@ -196,7 +196,7 @@ Color Picker End -->
 
               <!-- Plan Selection -->
               <div class="col-12">
-                <div class="single_about_part wow fadeInUp active" data-wow-delay="0.4s">
+                <div class="single_about_part wow fadeInUp" data-wow-delay="0.4s">
                   <div id="register_feature_icon">
                     <i class="pe-7s-diamond" aria-hidden="true"></i>
                   </div>
