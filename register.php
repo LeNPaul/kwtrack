@@ -239,8 +239,6 @@ Color Picker End -->
 </section>
 <!-- ***** Product Area End ***** -->
 
-
-
 <!-- ***** Footer Area Start ***** -->
 <footer class="footer_area">
   <!-- Bottom Footer Area Start -->
