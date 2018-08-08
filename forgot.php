@@ -9,10 +9,28 @@ if (isset($_POST['forgot'])) {
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   if (count($results) == 0) { // User doesn't exist
-    $_SESSION['message'] = createAlert(danger, "User with that email doesn't exist!");
+    $_SESSION['message'] = createAlert('danger', "User with that email doesn't exist!");
     header("location: forgot.php");
   } else { // User exists if count != 0
-    
+    $email = $results[0]['email'];
+    $hash = $results[0]['hash'];
+    $first_name = $results[0]['first_name'];
+
+    // Session message to display if user exists
+    $_SESSION['message'] = createAlert('success', "Please check your email $email for a confirmation link to complete your password reset.");
+
+    // Send confirmation link via email
+    $to = $email;
+    $subject = 'PPCOLOGY Password Reset Link';
+    $message = "
+    Hello $first_name,
+
+    You have requested a password reset. Please click the link below to reset your password:
+
+    https://ppcology.io/reset.php?email=$email&hash=$hash";
+
+    mail($to, $subject, $message);
+    header("location: forgot.php");
   }
 }
 ?>

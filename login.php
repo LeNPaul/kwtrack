@@ -13,10 +13,10 @@ if (!empty($_POST['login'])) {
   $stmt = $pdo->query($sql);
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
   if (count($results) == 0) { // User doesn't exist
-    $_SESSION['message'] = createAlert(danger, "User with that email doesn't exist!");
+    $_SESSION['message'] = createAlert("danger", "User with that email doesn't exist!");
     header("location: login.php");
   } else { // User exists
-    $user = $results;
+    $user = $results[0];
 
     if (password_verify($_POST['password'], $user['password'])) {
       $_SESSION['email'] = $user['email'];
@@ -29,7 +29,7 @@ if (!empty($_POST['login'])) {
 
       header("location: login.php");
     } else {
-      $_SESSION['message'] = createAlert(danger, 'You have entered the wrong password, please try again.');
+      $_SESSION['message'] = createAlert("danger", 'You have entered the wrong password, please try again.');
       header("location: login.php");
     }
   }

@@ -16,9 +16,9 @@ if ((isset($_GET['email']) && !empty($_GET['email'])) && (isset($_GET['hash']) &
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   if (count($results) == 0) {
-    $_SESSION['message'] = createAlert(danger, 'Account has already been activated or the URL is invalid!');
+    $_SESSION['message'] = createAlert('danger', 'Account has already been activated or the URL is invalid!');
   } else {
-    $_SESSION['message'] = createAlert(success, 'Your account has been activated!');
+    $_SESSION['message'] = createAlert('success', 'Your account has been activated!');
 
     // Set the user status to active (active = 1)
     $sql = "UPDATE users SET active='1' WHERE email=:email";
@@ -29,7 +29,7 @@ if ((isset($_GET['email']) && !empty($_GET['email'])) && (isset($_GET['hash']) &
     header("location: success.php");
   }
 } else {
-  $_SESSION['message'] = createAlert(danger, 'Invalid parameters provided for account verification!');
+  $_SESSION['message'] = createAlert('danger', 'Invalid parameters provided for account verification!');
   header("locatiion: verify.php");
 }
 
