@@ -285,7 +285,7 @@ Color Picker End -->
               </label>
 
               <div class="col-12">
-                <button type="submit" class="btn btn-lg btn-danger" id="login-btn" name="register">Start 14-Day Free Trial</button>
+                <button type="submit" class="btn btn-lg btn-danger" id="register-btn" name="register">Start 14-Day Free Trial</button>
               </div>
 
           </form>

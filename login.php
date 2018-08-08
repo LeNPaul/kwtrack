@@ -120,6 +120,14 @@ if (!empty($_POST['login'])) {
             <p>Follow the steps below to register for a PPCology account and start maximizing your profits!</p>
           </div>
 
+          <?php
+          if (isset($_SESSION['message'])) {
+            echo $_SESSION['message'];
+            unset $_SESSION['message'];
+          }
+
+          ?>
+
           <form id="login-form" method="post">
 
             <div class="row">
