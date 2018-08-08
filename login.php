@@ -3,7 +3,7 @@
  * User login process. Checks if user exists and password is correct
  */
 include './members/database/pdo.inc.php';
-if ( !isset($_SESSION) ) { session_start(); }
+if ( empty($_SESSION) ) { session_start(); }
 
 // Escape email to protect against SQL injections
 $email = htmlentities($_POST['email']);
@@ -16,7 +16,22 @@ if (count($results) == 0) { // User doesn't exist
   $_SESSION['message'] = createAlert(danger, "User with that email doesn't exist!");
   header("location: login.php");
 } else { // User exists
+  $user = $results;
   
+  if (password_verify($_POST['password'], $user['password'])) {
+    $_SESSION['email'] = $user['email'];
+    $_SESSION['first_name'] = $user['first_name'];
+    $_SESSION['last_name'] = $user['last_name'];
+    $_SESSION['active'] = $user['active'];
+    
+    // This is how we'll know the user is logged in
+    $_SESSION['logged_in'] = true;
+    
+    header("location: login.php");
+  } else {
+    $_SESSION['message'] = createAlert(danger, 'You have entered the wrong password, please try again.');
+    header("location: login.php");
+  }
 }
 ?>
 
