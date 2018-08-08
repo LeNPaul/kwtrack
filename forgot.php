@@ -1,3 +1,22 @@
+<?php
+require './members/database/pdo.inc.php';
+
+// If forgot password button is clicked
+if (isset($_POST['forgot'])) {
+  $email = htmlentities($_POST['email']);
+  $sql = "SELECT * FROM users WHERE email='$email'";
+  $stmt = $pdo->query($sql);
+  $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  if (count($results) == 0) { // User doesn't exist
+    $_SESSION['message'] = createAlert(danger, "User with that email doesn't exist!");
+    header("location: forgot.php");
+  } else { // User exists if count != 0
+    
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,6 +99,13 @@
             <h3>Password <span>Reset</span></h3>
             <p>Follow the steps below to register for a PPCology account and start maximizing your profits!</p>
           </div>
+
+          <?php
+            if (!empty($_SESSION['message'])) {
+              echo $_SESSION['message'];
+              unset($_SESSION['message']);
+            }
+          ?>
 
           <form id="login-form" method="post">
 
