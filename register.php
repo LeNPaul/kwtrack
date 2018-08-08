@@ -45,7 +45,7 @@
      // Set session vars for new user
      $_SESSION['active'] = 0; // active = 0 for users that haven't verified their emails yet
      $_SESSION['logged_in'] = true; // So we know the user has logged in
-     $_SESSION['message'] = createAlert('warning',
+     $_SESSION['message'] = createAlert('success',
                             "Confirmation link has been sent to $email. Please verify your account
                             by clicking on the link in the message!");
 
