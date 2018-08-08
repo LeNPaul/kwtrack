@@ -120,7 +120,7 @@ if (!empty($_POST['login'])) {
           </div>
 
           <?php
-          if (isset($_SESSION['message'])) {
+          if (!empty($_SESSION['message'])) {
             echo $_SESSION['message'];
             unset($_SESSION['message']);
           }
