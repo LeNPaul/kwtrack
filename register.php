@@ -1,5 +1,5 @@
 <?php
-/* Registration process , inserts user into database
+/* Registration process, inserts user into database
    and sends account confirmation email
  */
 
@@ -28,7 +28,7 @@
    // If count($results) > 0, then we know that the user exists
    if (count($result) > 0) {
      $_SESSION['message'] = createAlert('danger', 'User with this email already exists.');
-     header("location: register.php");
+     header("location: error.php");
    } else { // Email doesn't exist in the database, so create new account
      // Insert SQL --> add PLAN LEVEL once we figure out plan pricing
      $sql = 'INSERT INTO users (first_name, last_name, email, password, hash)
