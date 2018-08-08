@@ -1,0 +1,10 @@
+<?php
+requiire './pdo.inc.php';
+
+$sql = 'SELECT * FROM users';
+$stmt = $pdo->query($sql);
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+print_r($result);
+
+?>

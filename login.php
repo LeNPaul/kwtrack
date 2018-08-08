@@ -1,13 +1,22 @@
 <?php
+/*
+ * User login process. Checks if user exists and password is correct
+ */
 include './members/database/pdo.inc.php';
+if ( !isset($_SESSION) ) { session_start(); }
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-  if (isset($_POST['login'])) {
-    require 'login.php';
-  }
-  elseif (isset($_POST['register'])) {
-    require 'register.php';
-  }
+// Escape email to protect against SQL injections
+$email = htmlentities($_POST['email']);
+// Grab user from database
+$sql = "SELECT * FROM users WHERE email='$email'";
+$stmt = $pdo->query($sql);
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if (count($results) == 0) { // User doesn't exist
+  $_SESSION['message'] = createAlert(danger, "User with that email doesn't exist!");
+  header("location: login.php");
+} else { // User exists
+  
 }
 ?>
 
@@ -100,7 +109,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
                 <label for="userEmail">Email address</label>
-                <input type="email" class="form-control" name="userEmail" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                <input type="email" class="form-control" name="email" id="userEmail" placeholder="Enter email" required>
               </div>
               <div class="col-md-3 col-sm-1col-lg-2"></div>
             </div>
@@ -109,7 +118,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
                 <label for="userPassword">Password</label>
-                <input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="Password" required>
+                <input type="password" class="form-control" name="password" id="userPassword" placeholder="Password" required>
               </div>
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
             </div>
