@@ -5,4 +5,4 @@ $sql = 'SELECT * FROM users';
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-print_r($result);
+var_dump($result);
