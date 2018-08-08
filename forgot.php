@@ -93,8 +93,8 @@
             </div>
 
             <div class="col-12 text-center">
-              <button type="submit" class="btn btn-danger centered" id="login-btn" name="login">Reset Password</button>
-            </div> 
+              <button type="submit" class="btn btn-danger centered" id="login-btn" name="forgot" value="x">Reset Password</button>
+            </div>
 
             <div class="col-12 text-center">
               <p id="register_text">

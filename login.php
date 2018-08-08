@@ -5,32 +5,34 @@
 include './members/database/pdo.inc.php';
 if ( empty($_SESSION) ) { session_start(); }
 
-// Escape email to protect against SQL injections
-$email = htmlentities($_POST['email']);
-// Grab user from database
-$sql = "SELECT * FROM users WHERE email='$email'";
-$stmt = $pdo->query($sql);
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if (!empty($_POST['login'])) {
+  // Escape email to protect against SQL injections
+  $email = htmlentities($_POST['email']);
+  // Grab user from database
+  $sql = "SELECT * FROM users WHERE email='$email'";
+  $stmt = $pdo->query($sql);
+  $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if (count($results) == 0) { // User doesn't exist
-  $_SESSION['message'] = createAlert(danger, "User with that email doesn't exist!");
-  header("location: login.php");
-} else { // User exists
-  $user = $results;
-  
-  if (password_verify($_POST['password'], $user['password'])) {
-    $_SESSION['email'] = $user['email'];
-    $_SESSION['first_name'] = $user['first_name'];
-    $_SESSION['last_name'] = $user['last_name'];
-    $_SESSION['active'] = $user['active'];
-    
-    // This is how we'll know the user is logged in
-    $_SESSION['logged_in'] = true;
-    
+  if (count($results) == 0) { // User doesn't exist
+    $_SESSION['message'] = createAlert(danger, "User with that email doesn't exist!");
     header("location: login.php");
-  } else {
-    $_SESSION['message'] = createAlert(danger, 'You have entered the wrong password, please try again.');
-    header("location: login.php");
+  } else { // User exists
+    $user = $results;
+
+    if (password_verify($_POST['password'], $user['password'])) {
+      $_SESSION['email'] = $user['email'];
+      $_SESSION['first_name'] = $user['first_name'];
+      $_SESSION['last_name'] = $user['last_name'];
+      $_SESSION['active'] = $user['active'];
+
+      // This is how we'll know the user is logged in
+      $_SESSION['logged_in'] = true;
+
+      header("location: login.php");
+    } else {
+      $_SESSION['message'] = createAlert(danger, 'You have entered the wrong password, please try again.');
+      header("location: login.php");
+    }
   }
 }
 ?>
@@ -139,7 +141,7 @@ if (count($results) == 0) { // User doesn't exist
             </div>
 
             <div class="col-12 text-center">
-              <button type="submit" class="btn btn-danger centered" id="login-btn" name="login">Login</button>
+              <button type="submit" class="btn btn-danger centered" id="login-btn" name="login" value="x">Login</button>
             </div>
 
             <div class="col-12 text-center">
