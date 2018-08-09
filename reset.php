@@ -119,7 +119,7 @@ if (isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
                 <label for="userEmail">New Password</label>
-                <input type="email" class="form-control" name="newpassword" id="userEmail" placeholder="Enter email" required>
+                <input type="password" class="form-control" name="newpassword" id="userEmail" placeholder="Enter email" required>
               </div>
               <div class="col-md-3 col-sm-1col-lg-2"></div>
             </div>
@@ -128,7 +128,7 @@ if (isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
                 <label for="userEmail">Re-enter New Password</label>
-                <input type="email" class="form-control" name="newpasswordconfirm" id="userEmail" placeholder="Enter email" required>
+                <input type="password" class="form-control" name="newpasswordconfirm" id="userEmail" placeholder="Enter email" required>
               </div>
               <div class="col-md-3 col-sm-1col-lg-2"></div>
             </div>
