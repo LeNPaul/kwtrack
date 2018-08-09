@@ -13,7 +13,7 @@
  $_SESSION['last_name'] = $_POST['lastname'];
 
  // Escape all $_POST vars to protect against SQL injection
- $first_name = htmlspecialchars($_POST['firstname']);
+
  $last_name = htmlspecialchars($_POST['lastname']);
  $email = htmlspecialchars($_POST['email']);
  $password = htmlspecialchars(password_hash($_POST['password'], PASSWORD_BCRYPT));
