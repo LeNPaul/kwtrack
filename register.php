@@ -13,11 +13,11 @@
  $_SESSION['last_name'] = $_POST['lastname'];
 
  // Escape all $_POST vars to protect against SQL injection
- $first_name = htmlentities($_POST['firstname']);
- $last_name = htmlentities($_POST['lastname']);
- $email = htmlentities($_POST['email']);
- $password = htmlentities(password_hash($_POST['password'], PASSWORD_BCRYPT));
- $hash = htmlentities(md5(rand(0, 1000)));
+ $first_name = htmlspecialchars($_POST['firstname']);
+ $last_name = htmlspecialchars($_POST['lastname']);
+ $email = htmlspecialchars($_POST['email']);
+ $password = htmlspecialchars(password_hash($_POST['password'], PASSWORD_BCRYPT));
+ $hash = htmlspecialchars(md5(rand(0, 1000)));
 
  // First check if the Register button has been clicked
  if (isset($_POST['register'])) {
