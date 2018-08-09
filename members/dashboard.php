@@ -78,7 +78,7 @@
         </div>
         <ul class="nav">
           <li class="active">
-            <a href="../examples/dashboard.html">
+            <a href="#">
               <i class="nc-icon nc-bank"></i>
               <p>Dashboard</p>
             </a>
