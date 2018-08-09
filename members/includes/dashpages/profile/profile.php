@@ -53,7 +53,7 @@ require '../../../database/pdo.inc.php';
     <div class="sidebar-wrapper">
       <div class="user">
         <div class="photo">
-          <img src="../../../../assets/img/faces/ayo-ogunseinde-2.jpg" />
+          <img src="../../../assets/img/faces/ayo-ogunseinde-2.jpg" />
         </div>
         <div class="info">
           <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -312,6 +312,7 @@ require '../../../database/pdo.inc.php';
       </ul>
     </div>
   </div>
+  
   <div class="main-panel">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -385,7 +386,6 @@ require '../../../database/pdo.inc.php';
     <!-- End Navbar -->
     <!-- <div class="panel-header panel-header-sm">
 
-
 </div> -->
     <div class="content">
       <div class="row">
@@ -436,73 +436,9 @@ require '../../../database/pdo.inc.php';
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Team Members</h4>
-            </div>
-            <div class="card-body">
-              <ul class="list-unstyled team-members">
-                <li>
-                  <div class="row">
-                    <div class="col-md-2 col-2">
-                      <div class="avatar">
-                        <img src="../../../assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                      </div>
-                    </div>
-                    <div class="col-md-7 col-7">
-                      DJ Khaled
-                      <br />
-                      <span class="text-muted">
-                          <small>Offline</small>
-                        </span>
-                    </div>
-                    <div class="col-md-3 col-3 text-right">
-                      <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></btn>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="row">
-                    <div class="col-md-2 col-2">
-                      <div class="avatar">
-                        <img src="../../../assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                      </div>
-                    </div>
-                    <div class="col-md-7 col-7">
-                      Creative Tim
-                      <br />
-                      <span class="text-success">
-                          <small>Available</small>
-                        </span>
-                    </div>
-                    <div class="col-md-3 col-3 text-right">
-                      <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></btn>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="row">
-                    <div class="col-md-2 col-2">
-                      <div class="avatar">
-                        <img src="../../../assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                      </div>
-                    </div>
-                    <div class="col-ms-7 col-7">
-                      Flume
-                      <br />
-                      <span class="text-danger">
-                          <small>Busy</small>
-                        </span>
-                    </div>
-                    <div class="col-md-3 col-3 text-right">
-                      <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></btn>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+          
         </div>
+        
         <div class="col-md-8">
           <div class="card">
             <div class="card-header">
@@ -584,6 +520,7 @@ require '../../../database/pdo.inc.php';
             </div>
           </div>
         </div>
+        
       </div>
     </div>
     
@@ -616,6 +553,7 @@ require '../../../database/pdo.inc.php';
       </div>
     </footer>
   </div>
+  
 </div>
 <!--   Core JS Files   -->
 <script src="../../../assets/js/core/jquery.min.js"></script>
