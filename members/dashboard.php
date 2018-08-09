@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     Paper Dashboard 2 PRO by Creative Tim
@@ -14,10 +14,10 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <!-- CSS Files -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <link href="/assets/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -29,20 +29,20 @@
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
-            <img src="../assets/img/logo-small.png">
+            <img src="/assets/img/logo-small.png">
           </div>
         </a>
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
           Creative Tim
           <!-- <div class="logo-image-big">
-            <img src="../assets/img/logo-big.png">
+            <img src="/assets/img/logo-big.png">
           </div> -->
         </a>
       </div>
       <div class="sidebar-wrapper">
         <div class="user">
           <div class="photo">
-            <img src="../assets/img/faces/ayo-ogunseinde-2.jpg" />
+            <img src="/assets/img/faces/ayo-ogunseinde-2.jpg" />
           </div>
           <div class="info">
             <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -620,7 +620,7 @@
                           <tr>
                             <td>
                               <div class="flag">
-                                <img src="../assets/img/flags/US.png">
+                                <img src="/assets/img/flags/US.png">
                               </div>
                             </td>
                             <td>USA</td>
@@ -634,7 +634,7 @@
                           <tr>
                             <td>
                               <div class="flag">
-                                <img src="../assets/img/flags/DE.png">
+                                <img src="/assets/img/flags/DE.png">
                               </div>
                             </td>
                             <td>Germany</td>
@@ -648,7 +648,7 @@
                           <tr>
                             <td>
                               <div class="flag">
-                                <img src="../assets/img/flags/AU.png">
+                                <img src="/assets/img/flags/AU.png">
                               </div>
                             </td>
                             <td>Australia</td>
@@ -662,7 +662,7 @@
                           <tr>
                             <td>
                               <div class="flag">
-                                <img src="../assets/img/flags/GB.png">
+                                <img src="/assets/img/flags/GB.png">
                               </div>
                             </td>
                             <td>United Kingdom</td>
@@ -676,7 +676,7 @@
                           <tr>
                             <td>
                               <div class="flag">
-                                <img src="../assets/img/flags/RO.png">
+                                <img src="/assets/img/flags/RO.png">
                               </div>
                             </td>
                             <td>Romania</td>
@@ -690,7 +690,7 @@
                           <tr>
                             <td>
                               <div class="flag">
-                                <img src="../assets/img/flags/BR.png">
+                                <img src="/assets/img/flags/BR.png">
                               </div>
                             </td>
                             <td>Brasil</td>
@@ -735,7 +735,7 @@
                         </td>
                         <td class="img-row">
                           <div class="img-wrapper">
-                            <img src="../assets/img/faces/ayo-ogunseinde-2.jpg" class="img-raised" />
+                            <img src="/assets/img/faces/ayo-ogunseinde-2.jpg" class="img-raised" />
                           </div>
                         </td>
                         <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
@@ -759,7 +759,7 @@
                         </td>
                         <td class="img-row">
                           <div class="img-wrapper">
-                            <img src="../assets/img/faces/erik-lucatero-2.jpg" class="img-raised" />
+                            <img src="/assets/img/faces/erik-lucatero-2.jpg" class="img-raised" />
                           </div>
                         </td>
                         <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
@@ -783,7 +783,7 @@
                         </td>
                         <td class="img-row">
                           <div class="img-wrapper">
-                            <img src="../assets/img/faces/kaci-baum-2.jpg" class="img-raised" />
+                            <img src="/assets/img/faces/kaci-baum-2.jpg" class="img-raised" />
                           </div>
                         </td>
                         <td class="text-left">Using dummy content or fake information in the Web design process can result in products with unrealistic
@@ -808,7 +808,7 @@
                         </td>
                         <td class="img-row">
                           <div class="img-wrapper">
-                            <img src="../assets/img/faces/joe-gardner-2.jpg" class="img-raised" />
+                            <img src="/assets/img/faces/joe-gardner-2.jpg" class="img-raised" />
                           </div>
                         </td>
                         <td class="text-left">But I must explain to you how all this mistaken idea of denouncing pleasure</td>
@@ -968,45 +968,45 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script src="../assets/js/plugins/moment.min.js"></script>
+  <script src="/assets/js/core/jquery.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap.min.js"></script>
+  <script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="/assets/js/plugins/moment.min.js"></script>
   <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script src="../assets/js/plugins/bootstrap-switch.js"></script>
+  <script src="/assets/js/plugins/bootstrap-switch.js"></script>
   <!--  Plugin for Sweet Alert -->
-  <script src="../assets/js/plugins/sweetalert2.min.js"></script>
+  <script src="/assets/js/plugins/sweetalert2.min.js"></script>
   <!-- Forms Validations Plugin -->
-  <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+  <script src="/assets/js/plugins/jquery.validate.min.js"></script>
   <!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+  <script src="/assets/js/plugins/jquery.bootstrap-wizard.js"></script>
   <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+  <script src="/assets/js/plugins/bootstrap-selectpicker.js"></script>
   <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <script src="../assets/js/plugins/bootstrap-datetimepicker.js"></script>
+  <script src="/assets/js/plugins/bootstrap-datetimepicker.js"></script>
   <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
-  <script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
+  <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
   <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-  <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+  <script src="/assets/js/plugins/bootstrap-tagsinput.js"></script>
   <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-  <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+  <script src="/assets/js/plugins/jasny-bootstrap.min.js"></script>
   <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-  <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+  <script src="/assets/js/plugins/fullcalendar.min.js"></script>
   <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-  <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+  <script src="/assets/js/plugins/jquery-jvectormap.js"></script>
   <!--  Plugin for the Bootstrap Table -->
-  <script src="../assets/js/plugins/nouislider.min.js"></script>
+  <script src="/assets/js/plugins/nouislider.min.js"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chart JS -->
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="/assets/js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="/assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+  <script src="/assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
+  <script src="/assets/demo/demo.js"></script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
