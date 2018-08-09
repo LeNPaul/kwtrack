@@ -2,8 +2,8 @@
 /*
  * User login process. Checks if user exists and password is correct
  */
+session_start();
 include './members/database/pdo.inc.php';
-if ( empty($_SESSION) ) { session_start(); }
 
 if (!empty($_POST['login'])) {
   // Escape email to protect against SQL injections

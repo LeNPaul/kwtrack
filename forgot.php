@@ -1,6 +1,6 @@
 <?php
-require './members/database/pdo.inc.php';
 session_start();
+require './members/database/pdo.inc.php';
 
 // If forgot password button is clicked
 if (isset($_POST['forgot'])) {
