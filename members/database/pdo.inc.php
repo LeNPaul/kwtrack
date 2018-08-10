@@ -25,6 +25,17 @@ function createAlert($contextual, $alertMsg) {
 }
 
 /*
+ * checkLoggedIn() => void
+ *   --> Checks if user is logged in. Redirects to login page if not logged in.
+ *   --> Only to be used in dashboard pages
+ */
+function checkLoggedIn() {
+  if (!isset($_SESSION['logged_in'])) {
+    header("location: ~/public_html/login.php");
+  }
+}
+
+/*
  *
  *
  *
