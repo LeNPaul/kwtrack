@@ -31,7 +31,7 @@ function createAlert($contextual, $alertMsg) {
  */
 function checkLoggedIn() {
   if (!isset($_SESSION['logged_in'])) {
-    header("location: ~/public_html/login.php");
+    header("location: https://ppcology.io/login.php");
   }
 }
 
