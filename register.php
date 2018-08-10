@@ -2,72 +2,79 @@
 /* Registration process, inserts user into database
    and sends account confirmation email
  */
- session_start();
- if ( empty($_SESSION) ) { session_start(); }
+session_start();
+if ( empty($_SESSION) ) { session_start(); }
 
- include './members/database/pdo.inc.php';
+include './members/database/pdo.inc.php';
 
- // Set session variables to be used on profile.php page
- $_SESSION['email'] = $_POST['email'];
- $_SESSION['first_name'] = $_POST['firstname'];
- $_SESSION['last_name'] = $_POST['lastname'];
+// Check if user went thru LwA and got their access token
+// If there is an access_token in the URL, then they finished LwA authentication
+if (!empty($_GET['access_token'])) {
+  $access_token = htmlspecialchars($_GET['access_token']);
+}
 
- // Escape all $_POST vars to protect against SQL injection
+// Check if the Register button has been clicked
+if (isset($_POST['register'])) {
+ // Check if user with that email already exists
+ $stmt = $pdo->query("SELECT * FROM users WHERE email='$email'");
+ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
- $last_name = htmlspecialchars($_POST['lastname']);
- $email = htmlspecialchars($_POST['email']);
- $password = htmlspecialchars(password_hash($_POST['password'], PASSWORD_BCRYPT));
- $hash = htmlspecialchars(md5(rand(0, 1000)));
+ // If count($results) > 0, then we know that the user exists
+ if (count($result) > 0) {
+   $_SESSION['message'] = createAlert('danger', 'User with this email already exists.');
+   header("location: register.php");
+   exit();
+ } else { // Email doesn't exist in the database, so create new account
 
- // First check if the Register button has been clicked
- if (isset($_POST['register'])) {
-   // Check if user with that email already exists
-   $stmt = $pdo->query("SELECT * FROM users WHERE email='$email'");
-   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   // Set session variables to be used on profile.php page
+   $_SESSION['email'] = $_POST['email'];
+   $_SESSION['first_name'] = $_POST['firstname'];
+   $_SESSION['last_name'] = $_POST['lastname'];
 
-   // If count($results) > 0, then we know that the user exists
-   if (count($result) > 0) {
-     $_SESSION['message'] = createAlert('danger', 'User with this email already exists.');
-     header("location: register.php");
-     exit();
-   } else { // Email doesn't exist in the database, so create new account
-     // Insert SQL --> add PLAN LEVEL once we figure out plan pricing
-     $sql = 'INSERT INTO users (first_name, last_name, email, password, hash)
-             VALUES (:first_name, :last_name, :email, :password, :hash)';
-     $stmt = $pdo->prepare($sql);
-     $stmt->execute(array(
-       ':first_name'    => $first_name,
-       ':last_name'     => $last_name,
-       ':email'         => $email,
-       ':password'      => $password,
-       ':hash'          => $hash
-     ));
+   // Escape all $_POST vars to protect against SQL injection
+   $first_name = htmlspecialchars($_POST['firstname']);
+   $last_name = htmlspecialchars($_POST['lastname']);
+   $email = htmlspecialchars($_POST['email']);
+   $password = htmlspecialchars(password_hash($_POST['password'], PASSWORD_BCRYPT));
+   $hash = htmlspecialchars(md5(rand(0, 1000)));
+   
+   // Insert SQL --> add PLAN LEVEL once we figure out plan pricing
+   $sql = 'INSERT INTO users (first_name, last_name, email, password, hash)
+           VALUES (:first_name, :last_name, :email, :password, :hash)';
+   $stmt = $pdo->prepare($sql);
+   $stmt->execute(array(
+     ':first_name'    => $first_name,
+     ':last_name'     => $last_name,
+     ':email'         => $email,
+     ':password'      => $password,
+     ':hash'          => $hash
+   ));
 
-     // Set session vars for new user
-     $_SESSION['active'] = 0; // active = 0 for users that haven't verified their emails yet
-     $_SESSION['logged_in'] = true; // So we know the user has logged in
-     $_SESSION['message'] = createAlert('success',
-                            "Confirmation link has been sent to $email. Please verify your account
-                            by clicking on the link in the message!");
+   // Set session vars for new user
+   $_SESSION['active'] = 0; // active = 0 for users that haven't verified their emails yet
+   $_SESSION['logged_in'] = true; // So we know the user has logged in
+   $_SESSION['message'] = createAlert('success',
+                          "Confirmation link has been sent to $email. Please verify your account
+                          by clicking on the link in the message!");
 
-     // Send registration confirmation link
-     $to = $email;
-     $subject = 'PPCOLOGY Account Verification';
-     $messageBody = "
-     Hello $first_name,
+   // Send registration confirmation link
+   $to = $email;
+   $subject = 'PPCOLOGY Account Verification';
+   $messageBody = "
+   Hello $first_name,
 
-     Thanks for signing up with PPCOLOGY!
+   Thanks for signing up with PPCOLOGY!
 
-     Please click this link to activate your account:
+   Please click this link to activate your account:
 
-     https://ppcology.io/verify.php?email=$email&hash=$hash";
+   https://ppcology.io/verify.php?email=$email&hash=$hash";
 
-     mail($to, $subject, $messageBody);
-     $_SESSION['message'] = createAlert('success', 'Your account has been successfully created. Please check your email to verify your account.');
-     header("location: login.php");
-     exit();
-   }
+   mail($to, $subject, $messageBody);
+   $_SESSION['message'] = createAlert('success', 'Your account has been successfully created. Please check your email to verify your account.');
+   header("location: login.php");
+   exit();
  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -231,7 +238,7 @@ Color Picker End -->
                     document.getElementById('LoginWithAmazon').onclick = function() {
                         options = { scope : 'profile' };
                         amazon.Login.authorize(options,
-                            'https://ppcology.io/');
+                            'https://ppcology.io/register.php');
                         return false;
                     };
                 </script>
