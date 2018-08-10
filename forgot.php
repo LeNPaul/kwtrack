@@ -12,6 +12,7 @@ if (isset($_POST['forgot'])) {
   if (count($results) == 0) { // User doesn't exist
     $_SESSION['message'] = createAlert('danger', "User with that email doesn't exist!");
     header("location: forgot.php");
+    exit();
   } else { // User exists if count != 0
     $email = $results[0]['email'];
     $hash = $results[0]['hash'];
@@ -32,6 +33,7 @@ if (isset($_POST['forgot'])) {
 
     mail($to, $subject, $message);
     header("location: forgot.php");
+    exit();
   }
 }
 ?>
