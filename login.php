@@ -18,7 +18,7 @@ if (!empty($_POST['login'])) {
   } else { // User exists
     $user = $results[0];
 
-    if (password_verify($_POST['password'], $user['password'])) {
+    if (password_verify($_POST['password'], $user['password'])) { // If password was correct
       $_SESSION['email'] = $user['email'];
       $_SESSION['first_name'] = $user['first_name'];
       $_SESSION['last_name'] = $user['last_name'];
@@ -26,12 +26,15 @@ if (!empty($_POST['login'])) {
 
       // This is how we'll know the user is logged in
       $_SESSION['logged_in'] = true;
-
-      header("location: login.php");
-    } else {
+      
+      header("location: dashboard.php");
+      exit();
+    } else { // If password isn't correct
       $_SESSION['message'] = createAlert("danger", 'You have entered the wrong password, please try again.');
       header("location: login.php");
+      exit();
     }
+    
   }
 }
 ?>
