@@ -124,14 +124,15 @@ if (!empty($_POST['login'])) {
           </div>
 
           <form id="login-form" method="post">
-            <?php
-            if (!empty($_SESSION['message'])) {
-              echo $_SESSION['message'];
-              unset($_SESSION['message']);
-            }
-  
-            ?>
+            
             <div class="row">
+              <?php
+              if (!empty($_SESSION['message'])) {
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+              }
+  
+              ?>
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
                 <label for="userEmail">Email address</label>
