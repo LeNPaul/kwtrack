@@ -13,8 +13,9 @@ if (!empty($_POST['login'])) {
   $stmt = $pdo->query($sql);
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
   if (count($results) == 0) { // User doesn't exist
-    $_SESSION['message'] = 'asdfasdfasdf'/*createAlert("danger", "User with that email doesn't exist!")*/;
+    $_SESSION['message'] = createAlert('danger', "User with that email doesn't exist!");
     header("location: login.php");
+    exit();
   } else { // User exists
     $user = $results[0];
 
