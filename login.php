@@ -123,16 +123,14 @@ if (!empty($_POST['login'])) {
             <p>Follow the steps below to register for a PPCology account and start maximizing your profits!</p>
           </div>
 
-          <?php
-          if (!empty($_SESSION['message'])) {
-            echo $_SESSION['message'];
-            unset($_SESSION['message']);
-          }
-
-          ?>
-
           <form id="login-form" method="post">
-
+            <?php
+            if (!empty($_SESSION['message'])) {
+              echo $_SESSION['message'];
+              unset($_SESSION['message']);
+            }
+  
+            ?>
             <div class="row">
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
@@ -159,6 +157,13 @@ if (!empty($_POST['login'])) {
               <p id="register_text">
                 Don't have an account yet?
                 <a href="register.php">Sign Up Now</a>
+              </p>
+            </div>
+  
+            <div class="col-12 text-center">
+              <p id="register_text">
+                Forgot your password?
+                <a href="forgot.php">Reset Password</a>
               </p>
             </div>
 
