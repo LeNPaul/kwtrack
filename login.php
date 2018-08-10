@@ -18,7 +18,7 @@ if (!empty($_POST['login'])) {
     exit();
   } else { // User exists
     $user = $results[0];
-
+    var_dump($user); die;
     if (password_verify($_POST['password'], $user['password'])) { // If password was correct
       $_SESSION['email'] = $user['email'];
       $_SESSION['first_name'] = $user['first_name'];
