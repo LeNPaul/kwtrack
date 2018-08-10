@@ -18,7 +18,7 @@ require '../../../database/pdo.inc.php';
   <link rel="icon" type="image/png" href="../../../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Paper Dashboard 2 PRO by Creative Tim
+    PPCOLOGY | User Profile
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -436,7 +436,6 @@ require '../../../database/pdo.inc.php';
               </div>
             </div>
           </div>
-          
         </div>
         
         <div class="col-md-8">
