@@ -16,10 +16,12 @@ if (isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !
   if (count($results) == 0) { // User does not exist
     $_SESSION['message'] = createAlert('danger', 'You have entered an invalid URL for password reset.');
     header("location: forgot.php");
+    exit();
   }
 } else {
   $_SESSION['message'] = createAlert('danger', 'An error has occurred. Please try again.');
   header("location: forgot.php");
+  exit();
 }
 ?>
 
@@ -103,7 +105,7 @@ if (isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !
         <div class="card-body">
           <div class="section_heading text-center" id="login-header">
             <h3>Password <span>Reset</span></h3>
-            <p>Follow the steps below to register for a PPCology account and start maximizing your profits!</p>
+            <p>Enter your new password below in order to login</p>
           </div>
 
           <?php

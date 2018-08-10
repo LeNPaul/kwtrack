@@ -22,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ( $results ) {
 
-    $_SESSION['message'] = "Your password has been reset successfully!";
+    $_SESSION['message'] = createAlert('success', 'Your password has been reset successfully. Please continue to log in.');
     header("location: login.php");
-
+    exit();
   }
 }
 ?>

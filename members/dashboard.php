@@ -8,7 +8,7 @@ require './database/pdo.inc.php';
 
 // Check if user is not logged in. Redirect to login page if not logged in.
 if (!isset($_SESSION['logged_in'])) {
-  header("location: login.php");
+  header("location: ../login.php");
 }
 
 ?>
