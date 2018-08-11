@@ -248,6 +248,7 @@ Color Picker End -->
 							return;
 							}
 							amazon.Login.retrieveProfile(response.access_token, function(response) {
+								alert(response.access_token);
 								alert('Hello ' + response.profile_name);
 								alert('Your email address is ' + response.profile.PrimaryEmail);
 								alert('Your unique ID is ' + response.profile.CustomerId);
