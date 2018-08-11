@@ -116,31 +116,6 @@ if (isset($_POST['register'])) {
         d.getElementById('amazon-root').appendChild(a);
     })(document);
 </script>
-
-<script type="text/javascript">
-document.getElementById('LoginWithAmazon').onclick = function() {
- setTimeout(window.doLogin, 1);
- return false;
-};
-window.doLogin = function() {
-  options = {};
-  options.scope = 'profile';
-  amazon.Login.authorize(options, function(response) {
-     if ( response.error ) {
-       alert('oauth error ' + response.error);
-       return;
-     }
-     amazon.Login.retrieveProfile(response.access_token, function(response) {
-         alert('Hello, ' + response.profile.Name);
-         alert('Your e-mail address is ' + response.profile.PrimaryEmail);
-         alert('Your unique ID is ' + response.profile.CustomerId);
-         if (window.console && window.console.log)
-         window.console.log(response);
-     });
- });
-};
-</script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Color Picker Start
 <div class="color_picker_area">
@@ -259,14 +234,25 @@ Color Picker End -->
                 <a href id="LoginWithAmazon">
                   <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_312x64.png" width="312" height="64" />
                 </a>
-                <!--<script type="text/javascript">
-                    document.getElementById('LoginWithAmazon').onclick = function() {
-                        options = { scope : 'profile' };
-                        amazon.Login.authorize(options,
-                            'https://ppcology.io/register.php');
-                        return false;
-                    };
-                </script>-->
+				<script type="text/javascript">
+					document.getElementById('LoginWithAmazon').onclick = function() {
+						setTimeout(window.doLogin, 1);
+						return false;
+					};
+					window.doLogin = function() {
+						options = {};
+						options.scope = 'profile';
+						amazon.Login.authorize(options, function(response) {
+							if (response.error) {
+								alert('oauth error ' + response.error);
+							return;
+							}
+							amazon.Login.retrieveProfile(response.access_token, function(response) {
+								alert('Hello ' + response.profile_name);
+							});
+						});
+					};
+				</script>
               </div>
 
               <!-- Personal Information Section -->
