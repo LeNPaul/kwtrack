@@ -234,7 +234,6 @@ Color Picker End -->
                 <a href id="LoginWithAmazon">
                   <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_312x64.png" width="312" height="64" />
                 </a>
-<<<<<<< HEAD
                 <script type="text/javascript">
                   document.getElementById('LoginWithAmazon').onclick = function() {
                     setTimeout(window.doLogin, 1);
@@ -257,7 +256,6 @@ Color Picker End -->
                     });
                   };
                 </script>
-=======
 				<script type="text/javascript">
 					document.getElementById('LoginWithAmazon').onclick = function() {
 						setTimeout(window.doLogin, 1);
@@ -283,7 +281,6 @@ Color Picker End -->
 						});
 					};
 				</script>
->>>>>>> autofill registration
               </div>
 
               <!-- Personal Information Section -->
