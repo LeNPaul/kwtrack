@@ -275,7 +275,7 @@ Color Picker End -->
 								console.log(response.profile.Name);
 								alert('Your email address is ' + response.profile.PrimaryEmail);
 								alert('Your unique ID is ' + response.profile.CustomerId);
-								if (response.profile_name !== undefined) {
+								if (response.profile.Name !== undefined) {
 									document.getElementById("firstname").value = String(response.profile.Name.split(" ")[0]);
 									document.getElementById("lastname").value = String(response.profile.Name.split(" ")[1]);
 								}
