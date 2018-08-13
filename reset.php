@@ -121,8 +121,7 @@ if (isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
                 <label for="userEmail">New Password</label>
-                <input type="password" pattern=".{8,}" oninvalid="setCustomValidity('Please enter a password at least 8 characters in length.')"
-                       onchange="try{setCustomValidity('')}catch(e){}" title="Please enter a password at least 8 characters in length." class="form-control" name="newpassword" id="newpassword" placeholder="Enter your new password" required>
+                <input type="password" pattern=".{8,}" title="Please enter a password at least 8 characters in length." class="form-control" name="newpassword" id="newpassword" placeholder="Enter your new password" required>
               </div>
               <div class="col-md-3 col-sm-1col-lg-2"></div>
             </div>
@@ -131,8 +130,7 @@ if (isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
                 <label for="userEmail">Re-enter New Password</label>
-                <input type="password" pattern=".{8,}" oninvalid="setCustomValidity('Please enter a password at least 8 characters in length.')"
-                       onchange="try{setCustomValidity('')}catch(e){}" title="Please enter a password at least 8 characters in length." class="form-control" name="newpasswordconfirm" id="newpasswordconfirm" placeholder="Re-enter your new password" required>
+                <input type="password" pattern=".{8,}" title="Please enter a password at least 8 characters in length." class="form-control" name="newpasswordconfirm" id="newpasswordconfirm" placeholder="Re-enter your new password" required>
               </div>
               <div class="col-md-3 col-sm-1col-lg-2"></div>
             </div>
