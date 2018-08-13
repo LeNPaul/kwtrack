@@ -35,7 +35,7 @@ if (isset($_POST['register'])) {
    $first_name = htmlspecialchars($_POST['firstname']);
    $last_name = htmlspecialchars($_POST['lastname']);
    $email = htmlspecialchars($_POST['email']);
-   $password = htmlspecialchars(password_hash($_POST['password'], PASSWORD_BCRYPT));
+   $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
    $hash = htmlspecialchars(md5(rand(0, 1000)));
    
    // Insert SQL --> add PLAN LEVEL once we figure out plan pricing
@@ -256,6 +256,7 @@ Color Picker End -->
                     });
                   };
                 </script>
+                
 				<script type="text/javascript">
 					document.getElementById('LoginWithAmazon').onclick = function() {
 						setTimeout(window.doLogin, 1);

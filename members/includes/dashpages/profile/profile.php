@@ -8,7 +8,7 @@ require '../../../database/pdo.inc.php';
 // Check if user is not logged in. Redirect to login page if not logged in.
 checkLoggedIn();
 
-// Grab user info from db and store it into vars. (Passed thru session vars asfter successful login)
+// Grab user info from db and store it into vars. (Passed thru session vars after successful login)
 $first
 
 ?>
