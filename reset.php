@@ -121,7 +121,7 @@ if (isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
                 <label for="userEmail">New Password</label>
-                <input type="password" class="form-control" name="newpassword" id="userEmail" placeholder="Enter email" required>
+                <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="Enter your new password" required>
               </div>
               <div class="col-md-3 col-sm-1col-lg-2"></div>
             </div>
@@ -130,7 +130,7 @@ if (isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !
               <div class="col-md-3 col-sm-1 col-lg-2"></div>
               <div class="form-group col-md-6 col-sm-10 col-lg-8">
                 <label for="userEmail">Re-enter New Password</label>
-                <input type="password" class="form-control" name="newpasswordconfirm" id="userEmail" placeholder="Enter email" required>
+                <input type="password" class="form-control" name="newpasswordconfirm" id="newpasswordconfirm" placeholder="Re-enter your new password" required>
               </div>
               <div class="col-md-3 col-sm-1col-lg-2"></div>
             </div>
@@ -212,7 +212,7 @@ var password = document.getElementById("newpassword")
 
 function validatePassword(){
   if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Passwords do not match");
+    confirm_password.setCustomValidity("Passwords do not match.");
   } else {
     confirm_password.setCustomValidity('');
   }
