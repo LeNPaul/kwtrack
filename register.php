@@ -7,12 +7,6 @@ if ( empty($_SESSION) ) { session_start(); }
 
 include './members/database/pdo.inc.php';
 
-// Check if user went thru LwA and got their access token
-// If there is an access_token in the URL, then they finished LwA authentication
-if (!empty($_GET['access_token'])) {
-  $access_token = htmlspecialchars($_GET['access_token']);
-}
-
 // Check if the Register button has been clicked
 if (isset($_POST['register'])) {
  // Check if user with that email already exists
@@ -234,28 +228,6 @@ Color Picker End -->
                 <a href id="LoginWithAmazon">
                   <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_312x64.png" width="312" height="64" />
                 </a>
-                <script type="text/javascript">
-                  document.getElementById('LoginWithAmazon').onclick = function() {
-                    setTimeout(window.doLogin, 1);
-                    return false;
-                  };
-                  window.doLogin = function() {
-                    options = {};
-                    options.scope = 'profile';
-                    amazon.Login.authorize(options, function(response) {
-                      if (response.error) {
-                        alert('oauth error ' + response.error);
-                      return;
-                      }
-                      alert(response.access_token);
-                      amazon.Login.retrieveProfile(response.access_token, function(response) {
-                        alert('Hello ' + response.profile_name);
-                        alert('Your email address is ' + response.profile.PrimaryEmail);
-                        alert('Your unique ID is ' + response.profile.CustomerId);
-                      });
-                    });
-                  };
-                </script>
                 
 				<script type="text/javascript">
 					document.getElementById('LoginWithAmazon').onclick = function() {
