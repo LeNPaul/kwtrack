@@ -278,7 +278,7 @@ Color Picker End -->
 									document.getElementById("firstname").value = String(response.profile_name.split(" ")[0]);
 									document.getElementById("lastname").value = String(response.profile_name.split(" ")[1]);
 								}
-								document.getElementById("email").value = String(response.PrimaryEmail);
+								document.getElementById("email").value = String(response.profile.PrimaryEmail)	;
 							});
 						});
 					};
