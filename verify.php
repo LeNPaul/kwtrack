@@ -29,7 +29,7 @@ if ((isset($_GET['email']) && !empty($_GET['email'])) && (isset($_GET['hash']) &
     $stmt->execute(array("email" => $email));
     $_SESSION['active'] = 1;
 
-    header("location: dashboard.php");
+    header("location: https://ppcology.io/members/dashboard.php");
     exit();
   }
 } else {

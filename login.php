@@ -20,8 +20,9 @@ if (!empty($_POST['login'])) {
     $user = $results[0];
     echo '<pre>';
     var_dump($user);
-    echo $_POST['password'];
+    echo $_POST['password'] . '<br />';
     echo $user['password'] . '<br />';
+    echo $user['hash'] . '<br />';
     echo password_verify($_POST['password'], $user['hash']) ? 'true' : 'false';
 
     echo '</pre>'; die;
