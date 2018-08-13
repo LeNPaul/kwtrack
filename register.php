@@ -35,8 +35,7 @@ if (isset($_POST['register'])) {
    $first_name = htmlspecialchars($_POST['firstname']);
    $last_name = htmlspecialchars($_POST['lastname']);
    $email = htmlspecialchars($_POST['email']);
-   $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-   $hash = htmlspecialchars(md5(rand(0, 1000)));
+   $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
    
    // Insert SQL --> add PLAN LEVEL once we figure out plan pricing
    $sql = 'INSERT INTO users (first_name, last_name, email, password, hash)
@@ -46,7 +45,7 @@ if (isset($_POST['register'])) {
      ':first_name'    => $first_name,
      ':last_name'     => $last_name,
      ':email'         => $email,
-     ':password'      => $password,
+     //':password'      => $password,
      ':hash'          => $hash
    ));
 

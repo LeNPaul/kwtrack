@@ -19,13 +19,17 @@ if (!empty($_POST['login'])) {
   } else { // User exists
     $user = $results[0];
     echo '<pre>';
-    var_dump($user);
     echo $_POST['password'] . '<br />';
     echo $user['password'] . '<br />';
     echo $user['hash'] . '<br /><br />';
     
     var_dump(password_get_info($user['password'])); echo '<br />';
     var_dump(password_get_info(password_hash($_POST['password'], PASSWORD_BCRYPT))); echo '<br />';
+    
+    $hash = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
+    
+    $postedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT, ['salt' => $hash]);
+  
     
     echo password_verify($_POST['password'], $user['hash']) ? 'true' : 'false';
 
