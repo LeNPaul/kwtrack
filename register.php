@@ -234,28 +234,28 @@ Color Picker End -->
                 <a href id="LoginWithAmazon">
                   <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_312x64.png" width="312" height="64" />
                 </a>
-				<script type="text/javascript">
-					document.getElementById('LoginWithAmazon').onclick = function() {
-						setTimeout(window.doLogin, 1);
-						return false;
-					};
-					window.doLogin = function() {
-						options = {};
-						options.scope = 'profile';
-						amazon.Login.authorize(options, function(response) {
-							if (response.error) {
-								alert('oauth error ' + response.error);
-							return;
-							}
-							alert(response.access_token);
-							amazon.Login.retrieveProfile(response.access_token, function(response) {
-								alert('Hello ' + response.profile_name);
-								alert('Your email address is ' + response.profile.PrimaryEmail);
-								alert('Your unique ID is ' + response.profile.CustomerId);
-							});
-						});
-					};
-				</script>
+                <script type="text/javascript">
+                  document.getElementById('LoginWithAmazon').onclick = function() {
+                    setTimeout(window.doLogin, 1);
+                    return false;
+                  };
+                  window.doLogin = function() {
+                    options = {};
+                    options.scope = 'profile';
+                    amazon.Login.authorize(options, function(response) {
+                      if (response.error) {
+                        alert('oauth error ' + response.error);
+                      return;
+                      }
+                      alert(response.access_token);
+                      amazon.Login.retrieveProfile(response.access_token, function(response) {
+                        alert('Hello ' + response.profile_name);
+                        alert('Your email address is ' + response.profile.PrimaryEmail);
+                        alert('Your unique ID is ' + response.profile.CustomerId);
+                      });
+                    });
+                  };
+                </script>
               </div>
 
               <!-- Personal Information Section -->
