@@ -22,7 +22,8 @@ if (!empty($_POST['login'])) {
     var_dump($user);
     echo $_POST['password'];
     echo $user['password'];
-    echo password_verify($_POST['password'], $user['password']);
+    echo password_verify($_POST['password'], $user['password']) ? 'true' : 'false';
+
     echo '</pre>'; die;
     if (password_verify($_POST['password'], $user['password'])) { // If password was correct
       $_SESSION['email'] = $user['email'];
