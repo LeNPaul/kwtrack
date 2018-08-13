@@ -274,8 +274,10 @@ Color Picker End -->
 								alert('Hello ' + response.profile_name);
 								alert('Your email address is ' + response.profile.PrimaryEmail);
 								alert('Your unique ID is ' + response.profile.CustomerId);
-								document.getElementById("firstname").value = response.profile_name.split(" ")[0];
-								document.getElementById("lastname").value = response.profile_name.split(" ")[1];
+								if (response.profile_name !== undefined) {
+									document.getElementById("firstname").value = response.profile_name.split(" ")[0];
+									document.getElementById("lastname").value = response.profile_name.split(" ")[1];
+								}
 								document.getElementById("email").value = response.PrimaryEmail;
 							});
 						});
