@@ -22,7 +22,11 @@ if (!empty($_POST['login'])) {
     var_dump($user);
     echo $_POST['password'] . '<br />';
     echo $user['password'] . '<br />';
-    echo $user['hash'] . '<br />';
+    echo $user['hash'] . '<br /><br />';
+    
+    echo password_get_info($user['password']) . '<br />';
+    echo password_get_info(password_hash($_POST['password'], PASSWORD_BCRYPT)) . '<br />';
+    
     echo password_verify($_POST['password'], $user['hash']) ? 'true' : 'false';
 
     echo '</pre>'; die;

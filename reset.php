@@ -139,7 +139,7 @@ if (isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !
               <button type="submit" class="btn btn-danger centered" id="login-btn" name="newPassBtn" value="x">Reset Password</button>
             </div>
 
-            <!-- This input field is needed, to get the email of the user -->
+            <!-- This input field is needed to get the email of the user -->
             <input type="hidden" name="email" value="<?= $email ?>">
             <input type="hidden" name="hash" value="<?= $hash ?>">
 
