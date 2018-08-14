@@ -99,9 +99,11 @@ if (isset($_POST['register'])) {
 
 <body class="gradients red">
 
-<button type="button" onclick="test()">Test</button>
+<button type="button" id="test">Test</button>
 
 <script type="text/javascript">
+	document.getElementById("test").onclick = function() {test()};
+	
 	function test() {
 		window.location.replace("https://www.amazon.com/ap/oa?client_id=amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf&scope=cpc_advertising:campaign_management&response_type=code&state=208257577110975193121591895857093449424&redirect_uri=https://ppcology.io/");
 		alert("redirected");
