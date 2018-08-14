@@ -15,7 +15,7 @@ curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
-$result = curl_exec($curl);
+$result = json_decode(curl_exec($curl));
 
 curl_close($curl);
 
