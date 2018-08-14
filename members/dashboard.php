@@ -954,15 +954,18 @@ checkLoggedIn();
         </div>
       </div>-->
       
-      <?php
-      if ($_SESSION['active'] == 0) {
-        include './includes/dashpages/main/dashboard_active0.php';
-      } elseif ($_SESSION['active'] == 1) {
-        include './includes/dashpages/main/dashboard_active1.php';
-      } elseif ($_SESSION['active'] == 2) {
-        include './includes/dashpages/main/dashboard_active2.php';
-      }
-      ?>
+      <div class="content">
+        <?php
+        if ($_SESSION['active'] == 0) {
+          include './includes/dashpages/main/dashboard_active0.php';
+        } elseif ($_SESSION['active'] == 1) {
+          include './includes/dashpages/main/dashboard_active1.php';
+        } elseif ($_SESSION['active'] == 2) {
+          include './includes/dashpages/main/dashboard_active2.php';
+        }
+        ?>
+      </div>
+      
       
       <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
