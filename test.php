@@ -28,3 +28,5 @@ $result = json_decode(stripslashes($jsonString),true);
 echo '<pre>';
 var_dump($result);
 echo '</pre>';
+
+echo $result['refresh_token'];
