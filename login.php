@@ -20,10 +20,7 @@ if (!empty($_POST['login'])) {
     $user = $results[0];
     
 //    $hash = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
-//
 //    $postedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT, ['salt' => $hash]);
-  
-    
 //    echo password_verify($_POST['password'], $user['hash']) ? 'true' : 'false';
     
     if (password_verify($_POST['password'], $user['password'])) { // If password was correct
@@ -35,7 +32,7 @@ if (!empty($_POST['login'])) {
       // This is how we'll know the user is logged in
       $_SESSION['logged_in'] = true;
       
-      header("location: dashboard.php");
+      header("location: ./members/dashboard.php");
       exit();
     } else { // If password isn't correct
       $_SESSION['message'] = createAlert("danger", 'You have entered the wrong password, please try again.');
