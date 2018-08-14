@@ -393,6 +393,12 @@ $first
 </div> -->
     <div class="content">
       <div class="row">
+        <?php
+        if (isset($_SESSION['message'])) {
+          echo $_SESSION['message'];
+          unset($_SESSION['message']);
+        }
+        ?>
         <div class="col-md-4">
           <div class="card card-user">
             <div class="image">
