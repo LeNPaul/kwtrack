@@ -35,7 +35,7 @@ checkLoggedIn();
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="orange" data-active-color="danger">
+    <div class="sidebar" data-color="red" data-active-color="danger">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -391,7 +391,9 @@ checkLoggedIn();
   
   
 </div> -->
-      <div class="content">
+      
+      <!--   ORIGINAL CONTENT. EDIT THIS AFTER FINISHING DASHBOARD_ACTIVE1.PHP   -->
+      <!--<div class="content">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
@@ -950,7 +952,18 @@ checkLoggedIn();
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
+      
+      <?php
+      if ($_SESSION['active'] == 0) {
+        include './includes/dashpages/main/dashboard_active0.php';
+      } elseif ($_SESSION['active'] == 1) {
+        include './includes/dashpages/main/dashboard_active1.php';
+      } elseif ($_SESSION['active'] == 2) {
+        include './includes/dashpages/main/dashboard_active2.php';
+      }
+      ?>
+      
       <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
           <div class="row">
