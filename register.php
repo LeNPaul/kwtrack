@@ -103,7 +103,7 @@ if (isset($_POST['register'])) {
 
 <script type="text/javascript">
 	function test() {
-		window.location.replace("https://www.amazon.com/ap/oa?client_id=amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf&scope=cpc_advertising:campaign_management&response_type=code&state=208257577110975193121591895857093449424&redirect_uri=https://ppcology.io/);
+		window.location.replace("https://www.amazon.com/ap/oa?client_id=amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf&scope=cpc_advertising:campaign_management&response_type=code&state=208257577110975193121591895857093449424&redirect_uri=https://ppcology.io/");
 		alert("redirected");
 		alert(window.location.search);
 		var code = window.location.search;
