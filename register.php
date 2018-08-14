@@ -107,7 +107,7 @@ if (isset($_POST['register'])) {
 		alert("redirected");
 		alert(window.location.search);
 		var code = window.location.search;
-	}
+	};
 </script>
 
 <div id="amazon-root"></div>
