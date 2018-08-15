@@ -41,6 +41,7 @@ $stmt->execute(array(
   ':user_id'       => $_SESSION['user_id']
 ));
 
+echo curl_error($curl);
 var_dump($jsonResult);
 die;
 // Set success message and redirect them back to dashboard
