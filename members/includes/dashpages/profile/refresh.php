@@ -43,5 +43,5 @@ $stmt->execute(array(
 
 // Set success message and redirect them back to dashboard
 $_SESSION['message'] = createAlert('success', 'Your advertising data has been put in queue to be imported. Campaign data importing may take up to 48 hours.');
-header('location: profile.php');
+header('location: ../../dashboard.php');
 exit();
