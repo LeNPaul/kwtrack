@@ -33,10 +33,6 @@ $jsonResult = json_decode(stripslashes($result),true);
 
 // Get refresh token and store it in db for the user
 $refreshToken = $jsonResult['refresh_token'];
-echo $refreshToken . '<br />';
-echo $_SESSION['user_id']; die;
-
-
 $sql = 'UPDATE users SET refresh_token=:refresh_token, active=:active WHERE user_id=:user_id';
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
