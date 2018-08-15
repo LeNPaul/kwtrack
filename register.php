@@ -32,14 +32,13 @@ if (isset($_POST['register'])) {
    $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
    
    // Insert SQL --> add PLAN LEVEL once we figure out plan pricing
-   $sql = 'INSERT INTO users (first_name, last_name, email, password, hash)
-           VALUES (:first_name, :last_name, :email, :password, :hash)';
+   $sql = 'INSERT INTO users (first_name, last_name, email, hash)
+           VALUES (:first_name, :last_name, :email, :hash)';
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
      ':first_name'    => $first_name,
      ':last_name'     => $last_name,
      ':email'         => $email,
-     //':password'      => $password,
      ':hash'          => $hash
    ));
 
