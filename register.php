@@ -3,7 +3,7 @@
    and sends account confirmation email
  */
 session_start();
-if ( empty($_SESSION) ) { session_start(); }
+// if ( empty($_SESSION) ) { session_start(); }
 
 include './members/database/pdo.inc.php';
 
