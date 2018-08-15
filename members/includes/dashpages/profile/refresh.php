@@ -41,9 +41,6 @@ $stmt->execute(array(
   ':user_id'       => $_SESSION['user_id']
 ));
 
-echo curl_error($curl);
-var_dump($jsonResult);
-die;
 // Set success message and redirect them back to dashboard
 $_SESSION['message'] = createAlert('success', 'Your advertising data has been put in queue to be imported. Campaign data importing may take up to 48 hours.');
 header('location: ../../../dashboard.php');
