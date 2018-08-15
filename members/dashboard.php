@@ -680,6 +680,7 @@ checkLoggedIn();
       
       <div class="content">
         <?php
+        echo $_SESSION['active'];
         if ($_SESSION['active'] == 0) {
           include './includes/dashpages/main/dashboard_active0.php';
         } elseif ($_SESSION['active'] == 1) {
