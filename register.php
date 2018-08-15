@@ -257,9 +257,9 @@ Color Picker End -->
 							}
 							alert(response.access_token);
 							amazon.Login.retrieveProfile(response.access_token, function(response) {
-								alert('Hello ' + response.profile.Name);
-								alert('Your email address is ' + response.profile.PrimaryEmail);
-								alert('Your unique ID is ' + response.profile.CustomerId);
+								// alert('Hello ' + response.profile.Name);
+								// alert('Your email address is ' + response.profile.PrimaryEmail);
+								// alert('Your unique ID is ' + response.profile.CustomerId);
 								if (response.profile.Name !== undefined) {
 									document.getElementById("firstname").value = String(response.profile.Name.split(" ")[0]);
 									document.getElementById("lastname").value = String(response.profile.Name.split(" ")[1]);

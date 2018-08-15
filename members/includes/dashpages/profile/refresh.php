@@ -3,6 +3,7 @@ session_start();
 require '../../../database/pdo.inc.php';
 $curl = curl_init();
 
+// Redirect if someone goes to this link directly
 if (empty($_GET['code']) || !isset($_SESSION['logged_in'])) {
   $_SESSION['message'] = createAlert('success', 'An error has occurred. Please try again.');
   header('location: ../../../dashboard.php');
@@ -35,9 +36,9 @@ $refreshToken = $jsonResult['refresh_token'];
 $sql = 'UPDATE users SET refresh_token=:refresh_token, active=:active WHERE user_id=:user_id';
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
-  'refresh_token' => $refreshToken,
-  'active'        => 2,
-  'user_id'       => $_SESSION['user_id']
+  ':refresh_token' => $refreshToken,
+  ':active'        => 2,
+  ':user_id'       => $_SESSION['user_id']
 ));
 
 // Set success message and redirect them back to dashboard
