@@ -8,6 +8,7 @@
 ?>
 
 <?= $_SESSION['logged_in'] ?>
+<?= $_SESSION['message'] ?>
 <h2>Thank you for activating your account, <?= $_SESSION['first_name']?></h2>
 <p>We will now need to import your advertising data from Amazon. Please note that this process may take up to 48 hours to complete.</p>
 <p>Please click the Login with Amazon button below.</p>
