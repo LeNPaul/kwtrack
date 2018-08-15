@@ -35,7 +35,7 @@ function outputSideNav($currentPage) {
             <div class="info">
               <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                 <span>
-                  <?= $_SESSION["first_name"] . " " . $_SESSION["last_name"] ?>
+                  ' . $_SESSION["first_name"] . ' ' . $_SESSION["last_name"] . '
                   <b class="caret"></b>
                 </span>
               </a>
@@ -126,5 +126,5 @@ function outputSideNav($currentPage) {
 }
 
 $currentPage = pathinfo($_SERVER['SCRIPT_FILENAME'], PATHINFO_FILENAME);
-outputSideNav();
+outputSideNav($currentPage);
 ?>
