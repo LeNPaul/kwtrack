@@ -9,9 +9,12 @@ require '../helper.inc.php';
 require '../../../ppc/AmazonAdvertisingApi/Client.php';
 
 // Grab refresh token from db
-getRefreshToken($pdo, $_SESSION['user_id']);
+$sql = 'SELECT refresh_token FROM users WHERE user_id=:user_id';
+$stmt = $pdo->query($sql);
+$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+var_dump($result);
 
-die;
+die;``
 
 $config = array(
   "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
