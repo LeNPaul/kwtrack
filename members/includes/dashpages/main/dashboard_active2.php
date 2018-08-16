@@ -3,7 +3,7 @@
  *  User will see this page if they have activated AND initiated import of their data from the API
  */
 
-namespace AmazonAdvertisingApi;
+//namespace AmazonAdvertisingApi;
 require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
 require '../../../ppc/AmazonAdvertisingApi/Client.php';
