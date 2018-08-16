@@ -14,7 +14,7 @@ echo 'asdfasdfasdf';
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT refresh_token FROM users WHERE user_id='$user_id'";
 $stmt = $pdo->query($sql);
-$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 var_dump($result);
 
 die;
