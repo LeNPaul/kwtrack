@@ -8,13 +8,13 @@ require './database/pdo.inc.php';
 require './includes/dashpages/helper.inc.php';
 require './ppc/AmazonAdvertisingApi/Client.php';
 
- echo 'asdfasdfasdf';
+echo 'asdfasdfasdf';
 
 // Grab refresh token from db
-$sql = "SELECT refresh_token FROM users WHERE user_id=$_SESSION['user_id']";
-$stmt = $pdo->query($sql);
-$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-var_dump($result);
+//$sql = "SELECT refresh_token FROM users WHERE user_id=$_SESSION['user_id']";
+//$stmt = $pdo->query($sql);
+//$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+//var_dump($result);
 
 die;
 
