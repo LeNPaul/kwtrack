@@ -45,6 +45,7 @@ $stmt->execute(array(
 $_SESSION['active'] = 2;
 
 // Start importing data
+$accessToken = $jsonResult['access_token'];
 exec("php ../import_data.php {$authCode} > /dev/null &");
 
 // Set success message and redirect them back to dashboard

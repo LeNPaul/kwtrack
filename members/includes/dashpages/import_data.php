@@ -5,7 +5,7 @@ $curl = curl_init();
 
 //grab profile for profile ID. Todo: store profileID in db
 $accessToken = $_GET[$argv[1]];
-$url = "https://advertising-api.amazon.com/v1/profiles"
+$url = "https://advertising-api.amazon.com/v1/profiles";
 $options = array(
   "Content-Type:application/json",
   "Authorization: Bearer {$accessToken}"
