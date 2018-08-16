@@ -4,9 +4,9 @@
  */
 
 //namespace AmazonAdvertisingApi;
-require '../../../database/pdo.inc.php';
-require '../helper.inc.php';
-require '../../../ppc/AmazonAdvertisingApi/Client.php';
+require './database/pdo.inc.php';
+require './includes/dashpages/helper.inc.php';
+require './ppc/AmazonAdvertisingApi/Client.php';
 
 // Grab refresh token from db
 $sql = "SELECT refresh_token FROM users WHERE user_id=$_SESSION['user_id']";
