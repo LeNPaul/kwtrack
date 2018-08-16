@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.inc.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidenav.inc.php'; ?>
 
 <header id="header">
   <div class="container">

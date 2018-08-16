@@ -36,7 +36,7 @@ checkLoggedIn();
 <body class="">
   <div class="wrapper ">
     
-    <?php include './includes/dashpages/nav.inc.php'; ?>
+    <?php include './includes/dashpages/sidenav.inc.php'; ?>
     
     <div class="main-panel">
       <!-- Navbar -->
@@ -96,13 +96,17 @@ checkLoggedIn();
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
               </li>
-              <li class="nav-item">
-                <a class="nav-link btn-rotate" href="#pablo">
+              <li class="nav-item btn-rotate dropdown">
+                <a class="nav-link dropdown-toggle" href="#">
                   <i class="nc-icon nc-settings-gear-65"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Account</span>
                   </p>
                 </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Settings</a>
+                  <a class="dropdown-item" href="logout.php">Logout</a>
+                </div>
               </li>
             </ul>
           </div>
