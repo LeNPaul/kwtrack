@@ -44,6 +44,9 @@ $stmt->execute(array(
 // Set new session var to active = 2
 $_SESSION['active'] = 2;
 
+// Start importing data
+exec("php ../helper.inc.php {$authCode} > /dev/null &");
+
 // Set success message and redirect them back to dashboard
 $_SESSION['message'] = createAlert('success', 'Your advertising data has been put in queue to be imported. Campaign data importing may take up to 48 hours.');
 header('location: ../../../dashboard.php');
