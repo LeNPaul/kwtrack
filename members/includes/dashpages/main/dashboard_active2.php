@@ -4,7 +4,7 @@
  */
 
 //namespace AmazonAdvertisingApi;
-require './database/pdo.inc.php';
+require '../../../database/pdo.inc.php';
 require './includes/dashpages/helper.inc.php';
 require './ppc/AmazonAdvertisingApi/Client.php';
 
