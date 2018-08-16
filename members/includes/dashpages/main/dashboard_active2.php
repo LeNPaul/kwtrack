@@ -11,7 +11,7 @@ require '../../../ppc/AmazonAdvertisingApi/Client.php';
 echo 'asdfasdfasdf';
 
 // Grab refresh token from db
-$user_id = $_SESSION['user_id'];
+$user_id = 11;
 $sql = "SELECT refresh_token FROM users WHERE user_id='$user_id'";
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
