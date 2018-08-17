@@ -8,7 +8,7 @@ $accessToken = $_GET[$argv[1]];
 $url = "https://advertising-api.amazon.com/v1/profiles";
 $options = array(
   "Content-Type:application/json",
-  "Authorization: Bearer {$accessToken}"
+  "Authorization: Bearer $accessToken"
 );
 
 echo $_SESSION['user_id'];
@@ -17,7 +17,7 @@ curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
 curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 
-$profileResult = curl_exec($curl);
+$profileResult = curl_exec($curl);1
 $jsonProfile = json_decode(stripslashes($profileResult), true);
 $profileID = $jsonProfile["properties"]["profileID"]["description"];
 

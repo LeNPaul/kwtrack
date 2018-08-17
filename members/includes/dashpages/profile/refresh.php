@@ -31,12 +31,14 @@ $result = curl_exec($curl);
 curl_close($curl);
 $jsonResult = json_decode(stripslashes($result),true);
 
-// Get refresh token and store it in db for the user
+// Get refresh token + access token and store it in db for the user
 $refreshToken = $jsonResult['refresh_token'];
-$sql = 'UPDATE users SET refresh_token=:refresh_token, active=:active WHERE user_id=:user_id';
+$accessToken = $jsonResult['access_token'];
+$sql = 'UPDATE users SET refresh_token=:refresh_token, access_token=:access_token, active=:active WHERE user_id=:user_id';
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
   ':refresh_token' => $refreshToken,
+  ':access_token'  => $accessToken,
   ':active'        => 2,
   ':user_id'       => $_SESSION['user_id']
 ));
@@ -45,7 +47,7 @@ $stmt->execute(array(
 $_SESSION['active'] = 2;
 
 // Start importing data
-$accessToken = $jsonResult['access_token'];
+
 exec("php ../import_data.php $accessToken > /dev/null &");
 
 // Set success message and redirect them back to dashboard
