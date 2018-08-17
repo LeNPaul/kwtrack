@@ -9,7 +9,7 @@ $curl = curl_init();
 
 $accessToken = $argv[1];
 $user_id = $argv[2];
-$url = "https://advertising-api.amazon.com/profiles";
+$url = "https://advertising-api.amazon.com/v1/profiles";
 $options = array(
   "Content-Type: application/json",
   "Authorization: Bearer {$accessToken}"
@@ -41,7 +41,7 @@ $stmt->execute(array(
 $curl = curl_init();
 
 // Use profileID to get all the campaigns and store them in db
-$url = "https://advertising-api.amazon.com/campaigns";
+$url = "https://advertising-api.amazon.com/v1/campaigns";
 $options = array(
 	"Content-Type:application/json",
 	"Authorization: Bearer {$accessToken}",
