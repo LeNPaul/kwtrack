@@ -9,9 +9,9 @@ $curl = curl_init();
 
 $accessToken = $argv[1];
 $user_id = $argv[2];
-$url = "https://advertising-api.amazon.com/v1/profiles";
+$url = "https://advertising-api.amazon.com/profiles";
 $options = array(
-  "Content-Type:application/json",
+  "Content-Type: application/json",
   "Authorization: Bearer {$accessToken}"
 );
 
@@ -20,6 +20,7 @@ curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
 curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 
 $profileResult = curl_exec($curl);
+var_dump($profileResult);
 curl_close($curl);
 $jsonProfile = json_decode(stripslashes($profileResult), true);
 $profileID = $jsonProfile["properties"]["profileID"]["description"];
@@ -40,9 +41,9 @@ $stmt->execute(array(
 $curl = curl_init();
 
 // Use profileID to get all the campaigns and store them in db
-$url = "https://advertising-api.amazon.com/v1/campaigns";
+$url = "https://advertising-api.amazon.com/campaigns";
 $options = array(
-	"Context-Type:application/json",
+	"Content-Type:application/json",
 	"Authorization: Bearer {$accessToken}",
 	"Amazon-Advertising-API-Scope: {$profileID}"
 );
@@ -92,7 +93,4 @@ $stmt->execute(array(
   ':active'   => 3,
   ':user_id'  => $user_id
 ));
-
-header('location: ../../dashboard.php');
-exit();
 ?>
