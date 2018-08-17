@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL); ini_set('display_errors', TRUE); 
 require $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquery.php';
 
 // Set the cache path
