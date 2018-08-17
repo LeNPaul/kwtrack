@@ -9,8 +9,8 @@ require './database/pdo.inc.php';
 // Grab current active level to actively set $_SESSION['active']
 $sql = 'SELECT active FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
-$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-var_dump($result);
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 // Check if user is not logged in. Redirect to login page if not logged in.
 checkLoggedIn();
@@ -691,6 +691,7 @@ checkLoggedIn();
       <div class="content">
         <?php
         echo $_SESSION['active'];
+        var_dump($result);
         if ($_SESSION['active'] == 0) {
           include './includes/dashpages/main/dashboard_active0.php';
         } elseif ($_SESSION['active'] == 1) {
