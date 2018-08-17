@@ -16,7 +16,7 @@ curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
 curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 
-$profileResult = curl_exec($curl);1
+$profileResult = curl_exec($curl);
 $jsonProfile = json_decode(stripslashes($profileResult), true);
 $profileID = $jsonProfile["properties"]["profileID"]["description"];
 
