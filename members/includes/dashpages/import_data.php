@@ -7,8 +7,8 @@ $curl = curl_init();
  * First request to grab profile for profile ID
  */
 
-$accessToken = $argv[1];
-$user_id = $argv[2];
+$accessToken = /*$argv[1]*/ 'Atza|IwEBIJaUnPD8-kgsyTZpfykOAkJdfM74EXJmNt7oSWgjHAmi1OkaoAtGOXxBmeYEOrOqUpVphfciJ8slG5kxaFzr0Abd9rmBfbHqOiaonvfRb_n-3FS7hziHqZzc56yDYHRPY6CNrRZ2ZAm75-FzhhpRIT5WpU-sSJzOtMKHWPPlwcq8i65wyAnwJhtKNRvBAlnGdL0jXzgbt-vEeqqXE3eMjpKfwxSZBg8naVuPj_aXEr5iyPjvcbHvrggERwKidPj4PHNEFoqXvPwiGRXw-CPRRAHy2br07_8xruTVVvjFcPaXKmnEKgzrTFuuuVWu1zKoA17jTRKBbdyVnUHtN0gfLcnTjAtSD5mZwE7MiUE_2P5vwNCtCa_YtZ1Pnuyp4aewfDBAFrWQ7IQyLcZ2jzMly2I_DO9STn4-fVyP9dca1-P-QlQFrgERbP3APW1Bo-j9kpCym3Hayi-jnKQmKKKK6Hoihg5fWliEd7CTTuJVNFziVw9DFR5St8MnjpgN6f5FFgRgAce8XOE3fTIAZMjyM3uOHMgEc7spypDJD-W4R0AdSva0kDuX_o7pgQsIkVaB7dnv7tzwLtmR0CClFddGdw6P';
+$user_id = /*$argv[2]*/ 11;
 $url = "https://advertising-api.amazon.com/v1/profiles";
 $options = array(
   "Content-Type: application/json",
