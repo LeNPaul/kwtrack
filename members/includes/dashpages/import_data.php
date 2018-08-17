@@ -20,7 +20,7 @@ $profileResult = curl_exec($curl);1
 $jsonProfile = json_decode(stripslashes($profileResult), true);
 $profileID = $jsonProfile["properties"]["profileID"]["description"];
 
-// store profileID in users db
+// Store profileID in users table
 $sql = "UPDATE users SET profileID=:profileID WHERE user_id=:user_id" /* access_token=:accessToken */;
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
@@ -29,7 +29,7 @@ $stmt->execute(array(
 	// ":accessToken" => $accessToken
 ));
 
-//use profileID to get all the campaigns and store them in db
+// Use profileID to get all the campaigns and store them in db
 $url = "https://advertising-api.amazon.com/v1/campaigns";
 $options = array(
 	"Context-Type:application/jason",
@@ -41,7 +41,7 @@ curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
 curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 
-//get and store campaign name, campaign type, campaign id, targetting type, state, daily budget
+// Get and store campaign name, campaign type, campaign id, targetting type, state, daily budget
 $campaignResult = curl_exec($curl);
 $jsonCampaign = json_decode(stripslashes($campaignResult), true);
 foreach($jsonCampaign as $campaign) {
@@ -56,7 +56,7 @@ foreach($jsonCampaign as $campaign) {
 	$stmt->execute(array(
 	  ':name' => $name,
 		':id' => $id,
-    ':user_id' => $_SESSION['user_id'],
+    ':user_id' => $user_id,
 		':campaignType' => $type,
 		':targetingType' => $targetType,
 		':state' => $state,
