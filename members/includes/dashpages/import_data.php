@@ -3,6 +3,8 @@
 require '../../database/pdo2.inc.php';
 $curl = curl_init();
 
+var_dump($argv);
+
 //grab profile for profile ID
 $accessToken = $_GET[$argv[1]];
 $user_id = $_GET[$argv[2]];
@@ -25,7 +27,7 @@ $sql = "UPDATE users SET profileID=:profileID WHERE user_id=:user_id" /* access_
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
 	':profileID' => $profileID,
-  ':user_id'   => $_SESSION['user_id']
+  ':user_id'   => $user_id
 	// ":accessToken" => $accessToken
 ));
 
