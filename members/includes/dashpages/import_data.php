@@ -3,8 +3,6 @@
 require '../../database/pdo2.inc.php';
 $curl = curl_init();
 
-var_dump($argv);
-
 //grab profile for profile ID
 $accessToken = $argv[1];
 $user_id = $argv[2];
@@ -46,13 +44,15 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 // Get and store campaign name, campaign type, campaign id, targetting type, state, daily budget
 $campaignResult = curl_exec($curl);
 $jsonCampaign = json_decode(stripslashes($campaignResult), true);
-foreach($jsonCampaign as $campaign) {
-	$name = $campaign["properties"]["name"]["description"];
-	$type = $campaign["properties"]["campaignType"]["oneOf"];
-	$id = $campaign["properties"]["campaignId"]["description"];
-	$budget = $campaign["properties"]["dailyBudget"]["minimum"];
-	$state = $campaign["properties"]["state"]["oneOf"];
-	$targetType = $campaign["properties"]["targetingType"]["oneOf"];
+foreach($jsonCampaign as $item) {
+  // Get values from json
+	$name = $item["properties"]["name"]["description"];
+	$type = $item["properties"]["campaignType"]["oneOf"];
+	$id = $item["properties"]["campaignId"]["description"];
+	$budget = $item["properties"]["dailyBudget"]["minimum"];
+	$state = $item["properties"]["state"]["oneOf"];
+	$targetType = $item["properties"]["targetingType"]["oneOf"];
+  // Insert values into db
 	$sql = "INSERT INTO campaigns (campaign_name, amz_campaign_id, user_id, campaign_type, targeting_type, state, daily_budget) VALUES (:name, :id, , :user_id, :campaignType, :targetingType, :state, :dailyBudget)";
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(array(
@@ -77,6 +77,7 @@ $stmt->execute(array(
   ':active'   => 3,
   ':user_id'  => $user_id
 ));
+
 header('location: ../../dashboard.php');
 exit();
 ?>
