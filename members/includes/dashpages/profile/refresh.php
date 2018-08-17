@@ -31,6 +31,8 @@ $result = curl_exec($curl);
 curl_close($curl);
 $jsonResult = json_decode(stripslashes($result),true);
 
+var_dump($jsonResult); die;
+
 // Get refresh token + access token and store it in db for the user
 $refreshToken = $jsonResult['refresh_token'];
 $accessToken = $jsonResult['access_token'];
