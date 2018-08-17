@@ -11,7 +11,7 @@ $options = array(
   "Authorization: Bearer {$accessToken}"
 );
 
-echo
+echo $_SESSION['user_id'];
 
 curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
@@ -57,7 +57,7 @@ foreach($jsonCampaign as $campaign) {
 	$stmt->execute(array(
 	  ':name' => $name,
 		':id' => $id,
-    ':user_id' =>
+    ':user_id' => $_SESSION['user_id'],
 		':campaignType' => $type,
 		':targetingType' => $targetType,
 		':state' => $state,
