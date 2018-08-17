@@ -1,6 +1,6 @@
 <?php
 // file to import data and store in db
-require '../../database/pdo.inc.php';
+require '../../database/pdo2.inc.php';
 $curl = curl_init();
 
 //grab profile for profile ID
