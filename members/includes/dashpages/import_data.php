@@ -1,18 +1,16 @@
 <?php
 // file to import data and store in db
 require '../../database/pdo.inc.php';
-session_start();
 $curl = curl_init();
 
 //grab profile for profile ID
 $accessToken = $_GET[$argv[1]];
+$user_id = $_GET[$argv[2]];
 $url = "https://advertising-api.amazon.com/v1/profiles";
 $options = array(
   "Content-Type:application/json",
   "Authorization: Bearer $accessToken"
 );
-
-echo $_SESSION['user_id'];
 
 curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
@@ -70,9 +68,13 @@ foreach($jsonCampaign as $campaign) {
 
 // Get and store keywords
 
-
-$_SESSION['active'] = 3;
+// Change active=3 for the user and redirect to dashboard
+$sql = "UPDATE users SET active=:active WHERE user_id=:user_id";
+$stmt = $pdo->prepare($sql);
+$stmt->execute(array(
+  ':active'   => 3,
+  ':user_id'  => $user_id
+));
 header('location: ../../dashboard.php');
-$_SESSION['message'] = createAlert('success', 'Your campaign data has successfuly been imported');
 exit();
 ?>
