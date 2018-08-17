@@ -6,8 +6,8 @@ $curl = curl_init();
 var_dump($argv);
 
 //grab profile for profile ID
-$accessToken = $_GET[$argv[1]];
-$user_id = $_GET[$argv[2]];
+$accessToken = $argv[1];
+$user_id = $argv[2];
 $url = "https://advertising-api.amazon.com/v1/profiles";
 $options = array(
   "Content-Type:application/json",
