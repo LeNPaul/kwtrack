@@ -20,11 +20,12 @@ $jsonProfile = json_decode(stripslashes($profileResult), true);
 $profileID = $jsonProfile["properties"]["profileID"]["description"];
 
 // store profileID in users db
-$sql = "UPDATE users SET user_id=:profileID WHERE access_token=:accessToken";
+$sql = "UPDATE users SET profileID=:profileID WHERE user_id=:user_id" /* access_token=:accessToken */;
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
-	":profileID" => $profileID,
-	":accessToken" => $accessToken
+	':profileID' => $profileID,
+  ':user_id'   => $_SESSION['user_id'];
+	// ":accessToken" => $accessToken
 ));
 
 //use profileID to get all the campaigns and store them in db
@@ -49,15 +50,26 @@ foreach($jsonCampaign as $campaign) {
 	$budget = $campaign["properties"]["dailyBudget"]["minimum"];
 	$state = $campaign["properties"]["state"]["oneOf"];
 	$targetType = $campaign["properties"]["targetingType"]["oneOf"];
-	$sql = "INSERT INTO campaigns (campaign_name, amz_campaign_id, campaign_type, targeting_type, state, daily_budget) VALUES (:name, :id, :campaignType, :targetingType, :state, :dailyBudget)";
+	$sql = "INSERT INTO campaigns (campaign_name, amz_campaign_id, user_id, campaign_type, targeting_type, state, daily_budget) VALUES (:name, :id, , :user_id, :campaignType, :targetingType, :state, :dailyBudget)";
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(array(
-		":name" => $name,
-		":id" => $id,
-		":campaignType" => $type,
-		":targetingType" => $targetType,
-		":state" => $state,
-		":dailyBudget" => $dailyBudget
+	  ':name' => $name,
+		':id' => $id,
+    ':user_id' =>
+		':campaignType' => $type,
+		':targetingType' => $targetType,
+		':state' => $state,
+		':dailyBudget' => $dailyBudget
 	));
 }
+
+// Get and store ad groups
+
+// Get and store keywords
+
+
+$_SESSION['active'] = 3;
+header('location: ../../dashboard.php');
+$_SESSION['message'] = createAlert('success', 'Your campaign data has successfuly been imported');
+exit();
 ?>
