@@ -1,5 +1,6 @@
 <?php
 // file to import data and store in db
+require '../../database/pdo.inc.php';
 session_start();
 $curl = curl_init();
 
