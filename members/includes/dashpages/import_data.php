@@ -3,13 +3,16 @@
 require '../../database/pdo2.inc.php';
 $curl = curl_init();
 
-//grab profile for profile ID
+/*
+ * First request to grab profile for profile ID
+ */
+
 $accessToken = $argv[1];
 $user_id = $argv[2];
 $url = "https://advertising-api.amazon.com/v1/profiles";
 $options = array(
   "Content-Type:application/json",
-  "Authorization: Bearer $accessToken"
+  "Authorization: Bearer {$accessToken}"
 );
 
 curl_setopt($curl, CURLOPT_URL, $url);
@@ -17,6 +20,7 @@ curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
 curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 
 $profileResult = curl_exec($curl);
+curl_close();
 $jsonProfile = json_decode(stripslashes($profileResult), true);
 $profileID = $jsonProfile["properties"]["profileID"]["description"];
 
@@ -28,6 +32,12 @@ $stmt->execute(array(
   ':user_id'   => $user_id
 	// ":accessToken" => $accessToken
 ));
+
+/*
+ * Second request to grab campaigns
+ */
+
+$curl = curl_init();
 
 // Use profileID to get all the campaigns and store them in db
 $url = "https://advertising-api.amazon.com/v1/campaigns";
@@ -43,7 +53,10 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 
 // Get and store campaign name, campaign type, campaign id, targetting type, state, daily budget
 $campaignResult = curl_exec($curl);
+curl_close();
 $jsonCampaign = json_decode(stripslashes($campaignResult), true);
+var_dump($jsonCampaign);
+
 foreach($jsonCampaign as $item) {
   // Get values from json
 	$name = $item["properties"]["name"]["description"];
@@ -66,9 +79,11 @@ foreach($jsonCampaign as $item) {
 	));
 }
 
-// Get and store ad groups
+// Third request to get and store ad groups
 
-// Get and store keywords
+// Fourth request to get and store keywords
+
+
 
 // Change active=3 for the user and redirect to dashboard
 $sql = "UPDATE users SET active=:active WHERE user_id=:user_id";
