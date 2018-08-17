@@ -6,6 +6,12 @@
 session_start();
 require './database/pdo.inc.php';
 
+// Grab current active level to actively set $_SESSION['active']
+$sql = 'SELECT active FROM users WHERE user_id=' . $_SESSION['user_id'];
+$stmt = $pdo->query($sql);
+$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+var_dump($result);
+
 // Check if user is not logged in. Redirect to login page if not logged in.
 checkLoggedIn();
 
@@ -35,9 +41,9 @@ checkLoggedIn();
 
 <body class="">
   <div class="wrapper ">
-    
+
     <?php include './includes/dashpages/sidenav.inc.php'; ?>
-    
+
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -114,12 +120,12 @@ checkLoggedIn();
       </nav>
       <!-- End Navbar -->
       <!-- <div class="panel-header">
-  
+
   <canvas id="bigDashboardChart"></canvas>
-  
-  
+
+
 </div> -->
-      
+
       <!--   ORIGINAL CONTENT. EDIT THIS AFTER FINISHING DASHBOARD_ACTIVE1.PHP   -->
       <!--<div class="content">
         <div class="row">
@@ -681,7 +687,7 @@ checkLoggedIn();
           </div>
         </div>
       </div>-->
-      
+
       <div class="content">
         <?php
         echo $_SESSION['active'];
@@ -694,8 +700,8 @@ checkLoggedIn();
         }
         ?>
       </div>
-      
-      
+
+
       <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
           <div class="row">
