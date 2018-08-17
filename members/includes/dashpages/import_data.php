@@ -11,6 +11,8 @@ $options = array(
   "Authorization: Bearer {$accessToken}"
 );
 
+echo
+
 curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
 curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
@@ -24,7 +26,7 @@ $sql = "UPDATE users SET profileID=:profileID WHERE user_id=:user_id" /* access_
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
 	':profileID' => $profileID,
-  ':user_id'   => $_SESSION['user_id'];
+  ':user_id'   => $_SESSION['user_id']
 	// ":accessToken" => $accessToken
 ));
 

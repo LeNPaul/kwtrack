@@ -46,7 +46,7 @@ $_SESSION['active'] = 2;
 
 // Start importing data
 $accessToken = $jsonResult['access_token'];
-exec("php ../import_data.php {$accessToken} > /dev/null &");
+exec("php ../import_data.php $accessToken > /dev/null &");
 
 // Set success message and redirect them back to dashboard
 $_SESSION['message'] = createAlert('success', 'Your advertising data has been put in queue to be imported. Campaign data importing may take up to 48 hours.');
