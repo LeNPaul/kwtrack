@@ -9,7 +9,7 @@ require './database/pdo.inc.php';
 // Grab current active level to actively set $_SESSION['active']
 $sql = 'SELECT active FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 
 // Check if user is not logged in. Redirect to login page if not logged in.
