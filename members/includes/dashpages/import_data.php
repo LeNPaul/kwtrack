@@ -20,7 +20,7 @@ curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
 curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 
 $profileResult = curl_exec($curl);
-curl_close();
+curl_close($curl);
 $jsonProfile = json_decode(stripslashes($profileResult), true);
 $profileID = $jsonProfile["properties"]["profileID"]["description"];
 
@@ -42,7 +42,7 @@ $curl = curl_init();
 // Use profileID to get all the campaigns and store them in db
 $url = "https://advertising-api.amazon.com/v1/campaigns";
 $options = array(
-	"Context-Type:application/jason",
+	"Context-Type:application/json",
 	"Authorization: Bearer {$accessToken}",
 	"Amazon-Advertising-API-Scope: {$profileID}"
 );
@@ -53,7 +53,7 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, $options);
 
 // Get and store campaign name, campaign type, campaign id, targetting type, state, daily budget
 $campaignResult = curl_exec($curl);
-curl_close();
+curl_close($curl);
 $jsonCampaign = json_decode(stripslashes($campaignResult), true);
 var_dump($jsonCampaign);
 
