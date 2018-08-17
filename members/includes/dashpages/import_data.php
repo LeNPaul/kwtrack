@@ -31,7 +31,7 @@ $stmt->execute(array(
 ));
 
 //use profileID to get all the campaigns and store them in db
-$url = "https://advertising-api.amazon.com/v1/campaigns"
+$url = "https://advertising-api.amazon.com/v1/campaigns";
 $options = array(
 	"Context-Type:application/jason",
 	"Authorization: Bearer {$accessToken}",
