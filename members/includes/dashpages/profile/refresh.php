@@ -47,8 +47,8 @@ $stmt->execute(array(
 $_SESSION['active'] = 2;
 
 // Start importing data
-
-exec("php ../import_data.php $accessToken $_SESSION['user_id'] > /dev/null &");
+$user_id = $_SESSION['user_id'];
+exec("php ../import_data.php $accessToken $user_id > /dev/null &");
 
 // Set success message and redirect them back to dashboard
 $_SESSION['message'] = createAlert('success', 'Your advertising data has been put in queue to be imported. Campaign data importing may take up to 48 hours.');
