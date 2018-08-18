@@ -6,14 +6,14 @@
 session_start();
 require './database/pdo.inc.php';
 
+// Check if user is not logged in. Redirect to login page if not logged in.
+checkLoggedIn();
+
 // Grab current active level to actively set $_SESSION['active']
 $sql = 'SELECT active FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 $_SESSION['active'] = intval($result[0]);
-
-// Check if user is not logged in. Redirect to login page if not logged in.
-checkLoggedIn();
 
 ?>
 
