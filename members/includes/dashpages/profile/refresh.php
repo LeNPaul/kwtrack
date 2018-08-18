@@ -60,7 +60,7 @@ $client = new Client($config);
 
 $request = $client->listProfiles();
 echo '<pre>';
-var_dump($request);
+var_dump($request['response']);
 echo '</pre>';
 die;
 
