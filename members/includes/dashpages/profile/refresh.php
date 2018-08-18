@@ -61,7 +61,7 @@ $client = new Client($config);
 $request = $client->listProfiles();
 $profiles = json_decode(stripslashes($request['response']),true);
 echo '<pre>';
-var_dump($request['response']);
+var_dump($profiles);
 echo '</pre>';
 die;
 
