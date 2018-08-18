@@ -1,6 +1,8 @@
 <?php
 session_start();
 require '../../../database/pdo.inc.php';
+require_once '../../AmazonAdvertisingApi/Client.php';
+
 $curl = curl_init();
 
 // Redirect if someone goes to this link directly
@@ -44,8 +46,26 @@ $stmt->execute(array(
   ':user_id'       => $_SESSION['user_id']
 ));
 
+// Instantiate client for advertising API
+$config = array(
+  "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
+  "clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
+  "refreshToken" => $refreshToken,
+  "region" => "na",
+  "sandbox" => false,
+  );
+
+$client = new Client($config);
+
+$request = $client->listProfiles();
+
+var_dump($request); die;
+
 // Set new session var to active = 2
 $_SESSION['active'] = 2;
+
+// Import profiles and bring them to dashboard to select the correct profile
+
 
 // Start importing data
 $user_id = $_SESSION['user_id'];
