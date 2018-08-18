@@ -59,8 +59,10 @@ $config = array(
 $client = new Client($config);
 
 $request = $client->listProfiles();
-
-var_dump($request); die;
+echo '<pre>';
+var_dump($request);
+echo '</pre>';
+die;
 
 // Set new session var to active = 2
 $_SESSION['active'] = 2;
