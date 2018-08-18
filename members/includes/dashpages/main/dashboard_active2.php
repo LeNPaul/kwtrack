@@ -16,10 +16,17 @@ function displayProfiles($profiles) {
   // Scrape Amazon to grab seller name
   $url = 'https://www.amazon.com/sp?seller=' . $profiles[0]['accountInfo']['sellerStringId'];
   $doc = hQuery::fromUrl($url, ['Accept' => 'text/html,application/xhtml+xml;q=0.9,*/*;q=0.8']);
-
   $sellerName = $doc->find("h1#sellerName");
-  
-  return $sellerName;
+  $output = '';
+  // Iterate through profiles and append block level buttons to $output
+  for ($i = 0; $i < count($profiles); $i++) {
+    // Find out which country the profile is from so we can put the country flag in the button
+    if ($profiles[$i]['countryCode'] == 'US') {
+      // Set USA flag
+      $output .= '<button type="button" class="btn btn-primary btn-lg btn-block" name="" value="">US - ' . $sellerName . ' - ' . $profiles[$i]['accountInfo']['sellerStringId'] . '</button>';
+
+    }
+  }
 }
 
 ?>
