@@ -3,7 +3,7 @@
  *  User will see this page if they have activated and authorized their profiles.
  *  Users will have a refresh token at this point and will have to choose which profile they
  */
-require $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquery.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquery.php';
 
 /*
  * function displayProfiles(Array $profiles) => html shit
