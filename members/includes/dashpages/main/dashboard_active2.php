@@ -17,8 +17,9 @@ function displayProfiles($profiles) {
   $url = 'https://www.amazon.com/sp?seller=' . $profiles[0]['accountInfo']['sellerStringId'];
   $doc = hQuery::fromUrl($url, ['Accept' => 'text/html,application/xhtml+xml;q=0.9,*/*;q=0.8']);
 
-  $sellerName = $doc->find('h1#sellerName');
+  $sellerName = $doc->find("h1#sellerName");
   var_dump($sellerName);
+  echo '<br /><br /><br />';
   return $sellerName;
 }
 
