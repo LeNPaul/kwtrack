@@ -1,4 +1,5 @@
 <?php
+namespace AmazonAdvertisingApi;
 session_start();
 require '../../../database/pdo.inc.php';
 require_once '../../AmazonAdvertisingApi/Client.php';
