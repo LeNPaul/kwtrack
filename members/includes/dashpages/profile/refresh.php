@@ -58,18 +58,15 @@ $config = array(
 
 $client = new Client($config);
 
+// Grab profiles for user's seller account
 $request = $client->listProfiles();
 $profiles = json_decode(stripslashes($request['response']),true);
-echo '<pre>';
-var_dump($profiles);
-echo '</pre>';
-die;
+
+// Set profiles session var
+$_SESSION['profiles'] = $profiles;
 
 // Set new session var to active = 2
 $_SESSION['active'] = 2;
-
-// Import profiles and bring them to dashboard to select the correct profile
-
 
 // Start importing data
 $user_id = $_SESSION['user_id'];

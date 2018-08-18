@@ -698,6 +698,10 @@ $_SESSION['active'] = intval($result[0]);
           include './includes/dashpages/main/dashboard_active1.php';
         } elseif ($_SESSION['active'] == 2) {
           include './includes/dashpages/main/dashboard_active2.php';
+        } elseif ($_SESSION['active'] == 3) {
+          include './includes/dashpages/main/dashboard_active3.php';
+        } elseif ($_SESSION['active'] == 4) {
+          include './includes/dashpages/main/dashboard_active4.php';
         }
         ?>
       </div>
