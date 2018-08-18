@@ -26,5 +26,5 @@ function displayProfiles($profiles) {
 ?>
 
 <div class="container text-center">
-  <?php var_dump(displayProfiles($_SESSION['profiles'])) ?>
+  <?php echo displayProfiles($_SESSION['profiles']) ?>
 </div>
