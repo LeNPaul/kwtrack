@@ -9,7 +9,7 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $refreshToken = $result[0];
 
-echo $refreshToken;die;
+var_dump($refreshToken);die;
 
 // Insert profileID in database for the user and set active level to 3
 $profileId = $_POST['selectedProfile[0]'];
