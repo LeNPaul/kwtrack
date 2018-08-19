@@ -25,9 +25,9 @@ function displayProfiles($profiles) {
     if ($profiles[$i]['countryCode'] == 'US') {
       // Set USA flag
       $output .= '<button type="button" class="btn btn-primary btn-lg btn-block" name="selectedProfile[]" value="' . $profiles[$i]['profileId'] . '">US - ' . $sellerName . ' - ' . $profiles[$i]['accountInfo']['sellerStringId'] . '</button>';
-
     }
   }
+  return $output;
 }
 
 // Check if profile was selected
