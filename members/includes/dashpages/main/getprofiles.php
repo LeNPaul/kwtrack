@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../../../database/pdo.inc.php';
+require '../helper.inc.php';
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 
 // Insert profileID in database for the user and set active level to 3
@@ -22,7 +23,10 @@ $refreshToken = $result[0]['refresh_token'];
 
 // Run campaign importing in background
 $user_id = $_SESSION['user_id'];
-shell_exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
+$cmd = "php import_data.php {$refreshToken} {$user_id} {$profileId}";
+launchBackgroundProcess($cmd);
+
+//shell_exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
 
 // Redirect to dashboard
 header('location: ../../../dashboard.php');
