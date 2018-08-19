@@ -24,7 +24,7 @@ function displayProfiles($profiles) {
     // Find out which country the profile is from so we can put the country flag in the button
     if ($profiles[$i]['countryCode'] == 'US') {
       // Set USA flag
-      $output .= '<button type="button" class="btn btn-primary btn-lg btn-block" name="selectedProfile[]" value="' . $profiles[$i]['profileId'] . '">US - ' . $sellerName . ' - ' . $profiles[$i]['accountInfo']['sellerStringId'] . '</button>';
+      $output .= '<button type="submit" class="btn btn-primary btn-lg btn-block" name="selectedProfile[]" value="' . $profiles[$i]['profileId'] . '">US - ' . $sellerName . ' - ' . $profiles[$i]['accountInfo']['sellerStringId'] . '</button>';
     }
   }
   return $output;
@@ -45,6 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <p>Here are the profiles that we detected on your Seller Central account. Please select the profile that you would like to integrate PPCOLOGY with.</p>
 
   <form method="post">
-    <?php var_dump($_POST); echo displayProfiles($_SESSION['profiles']); ?>    
+    <?php var_dump($_POST); echo displayProfiles($_SESSION['profiles']); ?>
   </form>
 </div>
