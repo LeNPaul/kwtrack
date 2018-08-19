@@ -18,6 +18,7 @@ function displayProfiles($profiles) {
   $doc = hQuery::fromUrl($url, ['Accept' => 'text/html,application/xhtml+xml;q=0.9,*/*;q=0.8']);
   $sellerName = $doc->find("h1#sellerName");
   $output = '';
+  var_dump($profiles);
   // Iterate through profiles and append block level buttons to $output
   for ($i = 0; $i < count($profiles); $i++) {
     // Find out which country the profile is from so we can put the country flag in the button
