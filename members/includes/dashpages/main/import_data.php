@@ -22,7 +22,7 @@ $client->profileId = $profileId;
 // First, grab campaigns and store them in db
 $result = $client->listCampaigns(array("stateFilter" => "enabled"));
 $campJson = $result['response'];
-$campaigns = json_decode(stripslashes($campJson, true);
+$campaigns = json_decode(stripslashes($campJson, true));
 
 echo '<pre>';
 var_dump($result['response']);
