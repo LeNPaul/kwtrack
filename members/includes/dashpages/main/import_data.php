@@ -22,5 +22,5 @@ $client->profileId = $profileId;
 $campaigns = $client->listCampaigns(array("stateFilter" => "enabled"));
 
 echo '<pre>';
-var_dump($campaigns);
+var_dump(json_decode(stripslashes($campaigns['response']), true));
 echo '</pre>';
