@@ -23,14 +23,22 @@ function displayProfiles($profiles) {
     // Find out which country the profile is from so we can put the country flag in the button
     if ($profiles[$i]['countryCode'] == 'US') {
       // Set USA flag
-      $output .= '<button type="button" class="btn btn-primary btn-lg btn-block" name="" value="">US - ' . $sellerName . ' - ' . $profiles[$i]['accountInfo']['sellerStringId'] . '</button>';
+      $output .= '<button type="button" class="btn btn-primary btn-lg btn-block" name="selectedProfile[]" value="' . $profile[$i]['profileID'] . '">US - ' . $sellerName . ' - ' . $profiles[$i]['accountInfo']['sellerStringId'] . '</button>';
 
     }
   }
 }
 
+// Check if profile was selected
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // Insert profileID in database for the user
+  $profileID = $_POST['selectedProfile'];
+  // Update active level to 3
+  
+}
+
 ?>
 
 <div class="container text-center">
-  <?php echo displayProfiles($_SESSION['profiles']) ?>
+  <?php var_dump($_POST); echo displayProfiles($_SESSION['profiles']); ?>
 </div>
