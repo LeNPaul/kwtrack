@@ -16,3 +16,8 @@ $config = array(
   );
 
 // First, grab campaigns and store them in db
+$campaigns = $client->listCampaigns(array("stateFilter" => "enabled"));
+
+echo '<pre>';
+var_dump($campaigns);
+echo '</pre>';
