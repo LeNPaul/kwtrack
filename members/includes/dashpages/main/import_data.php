@@ -14,7 +14,7 @@ $config = array(
   "region" => "na",
   "sandbox" => false,
   );
-$client = new Clinet($config);
+$client = new Client($config);
 
 // First, grab campaigns and store them in db
 $campaigns = $client->listCampaigns(array("stateFilter" => "enabled"));
