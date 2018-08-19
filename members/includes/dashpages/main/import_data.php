@@ -23,5 +23,5 @@ $result = $client->listCampaigns(array("stateFilter" => "enabled"));
 $campaigns = json_decode(stripslashes($result['response']), true);
 
 echo '<pre>';
-var_dump($result);
+var_dump($result['response']);
 echo '</pre>';
