@@ -4,7 +4,7 @@ require '../../../database/pdo.inc.php';
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 
 // Insert profileID in database for the user and set active level to 3
-$profileId = $_POST[selectedProfile];
+$profileId = $_POST['selectedProfile'];
 var_dump($profileId);die;
 $sql = 'UPDATE users SET profileId=:profileId, active=:level WHERE user_id=:user_id';
 $stmt = $pdo->prepare($sql);
