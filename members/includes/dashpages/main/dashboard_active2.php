@@ -41,5 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <div class="container text-center">
-  <?php var_dump($_POST); echo displayProfiles($_SESSION['profiles']); ?>
+  <h2>Select Your Profile</h2>
+  <p>Here are the profiles that we detected on your Seller Central account. Please select the profile that you would like to integrate PPCOLOGY with.</p>
+
+  <form method="post">
+    <?php var_dump($_POST); echo displayProfiles($_SESSION['profiles']); ?>    
+  </form>
 </div>
