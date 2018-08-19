@@ -25,8 +25,8 @@ $campJson = $result['response'];
 $campaigns = json_decode(stripslashes($campJson), true);
 
 echo $campJson;
-echo $campaigns;
-
-echo '<pre>';
-var_dump($campaigns);
-echo '</pre>';
+echo var_dump($campaigns);
+//
+// echo '<pre>';
+// var_dump($campaigns);
+// echo '</pre>';
