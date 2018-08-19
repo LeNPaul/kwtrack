@@ -42,7 +42,7 @@ function displayProfiles($profiles) {
   <h2>Select Your Profile</h2>
   <p>Here are the profiles that we detected on your Seller Central account. Please select the profile that you would like to integrate PPCOLOGY with.</p>
 
-  <form method="post">
+  <form method="post" action="includes/dashpages/main/getprofiles.php">
     <?php var_dump($_POST); echo displayProfiles($_SESSION['profiles']); ?>
   </form>
 </div>
