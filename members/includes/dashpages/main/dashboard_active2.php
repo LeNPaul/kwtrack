@@ -13,7 +13,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquer
  */
 
 function displayProfiles($profiles) {
-
   $output = '';
   var_dump($profiles);
   // Iterate through profiles and append block level buttons to $output
