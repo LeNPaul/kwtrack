@@ -24,9 +24,7 @@ $result = $client->listCampaigns(array("stateFilter" => "enabled"));
 $campJson = $result['response'];
 $campaigns = json_decode($campJson, true);
 
-echo $campJson;
-echo var_dump($campaigns);
-//
-// echo '<pre>';
-// var_dump($campaigns);
-// echo '</pre>';
+
+echo '<pre>';
+var_dump($campaigns);
+echo '</pre>';
