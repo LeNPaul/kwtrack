@@ -1,5 +1,8 @@
 <?php
+session_start();
+require '../../../database/pdo.inc.php';
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
+
 // Get refresh token to pass onto import_data.php
 $sql = 'SELECT refresh_token FROM users WHERE user=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
