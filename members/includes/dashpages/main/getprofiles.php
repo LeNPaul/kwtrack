@@ -11,7 +11,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
   ':profileId' => $profileId,
   ':level'     => 3,
-  'user_id'    => $_SESSION['user_id']
+  ':user_id'    => $_SESSION['user_id']
 ));
 
 // Get refresh token to pass onto import_data.php
@@ -22,7 +22,7 @@ $refreshToken = $result[0]['refresh_token'];
 
 // Run campaign importing in background
 $user_id = $_SESSION['user_id'];
-exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
+shell_exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
 
 // Redirect to dashboard
 header('location: ../../../dashboard.php');
