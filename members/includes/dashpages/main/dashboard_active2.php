@@ -24,9 +24,9 @@ function displayProfiles($profiles) {
     // Find out which country the profile is from so we can put the country flag in the button
     if ($profiles[$i]['countryCode'] == 'US') {
       // Set USA flag
-      $flag = '<span class="flag-icon flag-icon-us"></span>';
+      $flag = '<span class="flag-icon flag-icon-us flag-icon-squared"></span> ';
       $output .= '<button type="submit" class="btn btn-primary btn-lg btn-block" name="selectedProfile[]" value="' . $profiles[$i]['profileId'] . '">'
-      . $flag .'US - '
+      . $flag . ' US - '
       . $sellerName . ' - '
       . $profiles[$i]['accountInfo']['sellerStringId']
       . '</button>';
