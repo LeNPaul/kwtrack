@@ -20,7 +20,7 @@ $client = new Client($config);
 $client->profileId = $profileId;
 
 // First, grab campaigns and store them in db
-$result = $client->listCampaigns(array("stateFilter" => "enabled"));
+$result = $client->listCampaigns();
 $campJson = $result['response'];
 $campaigns = json_decode($campJson, true);
 
@@ -48,5 +48,7 @@ for ($i = 0; $i < count($campaigns); $i++) {
     ':state'           => $campaigns[$i]['state'],
     ':daily_budget'    => $campaigns[$i]['dailyBudget']
   ));
-
 }
+
+// Second, grab ad groups and store them in db
+$result = $client->listAdGroups();
