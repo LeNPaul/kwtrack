@@ -31,6 +31,8 @@ echo '</pre>';
 
 // Iterate through campaign array and add them to db w/ foreign key user_id
 for ($i = 0; $i < count($campaigns); $i++) {
+  var_dump($campaigns[$i]);
+  echo '<br /><br />';
   $sql = 'INSERT INTO campaigns
           VALUES(:campaign_name, :amz_campaign_id, :user_id, :campaign_type, :targeting_type, :state, :daily_budget)';
   $stmt = $pdo->prepare($sql);
@@ -43,5 +45,5 @@ for ($i = 0; $i < count($campaigns); $i++) {
     ':state'           => $campaigns[$i]['state'],
     ':daily_budget'    => $campaigns[$i]['dailyBudget']
   ));
-  var_dump($campaigns[$i]);
+
 }
