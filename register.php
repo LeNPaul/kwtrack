@@ -9,12 +9,13 @@ include './members/database/pdo.inc.php';
 
 // Check if the Register button has been clicked
 if (isset($_POST['register'])) {
+  $email = $_POST['email'];
  // Check if user with that email already exists
  $stmt = $pdo->query("SELECT * FROM users WHERE email='$email'");
  $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
  // If count($results) > 0, then we know that the user exists
- if (count($result) > 0) {
+ if (count($results) > 0) {
    $_SESSION['message'] = createAlert('danger', 'User with this email already exists.');
    header("location: register.php");
    exit();
@@ -30,7 +31,7 @@ if (isset($_POST['register'])) {
    $last_name = htmlspecialchars($_POST['lastname']);
    $email = htmlspecialchars($_POST['email']);
    $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
-   
+
    // Insert SQL --> add PLAN LEVEL once we figure out plan pricing
    $sql = 'INSERT INTO users (first_name, last_name, email, hash)
            VALUES (:first_name, :last_name, :email, :hash)';
@@ -101,7 +102,7 @@ if (isset($_POST['register'])) {
 
 <script type="text/javascript">
 	document.getElementById("test").onclick = function() {test()};
-	
+
 	function test() {
 		window.location.replace("https://www.amazon.com/ap/oa?client_id=amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf&scope=cpc_advertising:campaign_management&response_type=code&state=208257577110975193121591895857093449424&redirect_uri=https://ppcology.io/register.php");
 		alert("redirected");
@@ -240,7 +241,7 @@ Color Picker End -->
                 <a href id="LoginWithAmazon">
                   <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_312x64.png" width="312" height="64" />
                 </a>
-                
+
 				<script type="text/javascript">
 					document.getElementById('LoginWithAmazon').onclick = function() {
 						setTimeout(window.doLogin, 1);
