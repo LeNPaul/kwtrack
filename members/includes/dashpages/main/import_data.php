@@ -33,6 +33,9 @@ echo '</pre>';
 for ($i = 0; $i < count($campaigns); $i++) {
   var_dump($campaigns[$i]);
   echo '<br /><br />';
+  echo $campaigns[$i]['campaignId'];
+  echo '<br /><br />';
+  
   $sql = 'INSERT INTO campaigns (campaign_name, /*amz_campaign_id,*/ user_id, campaign_type, targeting_type, state, daily_budget)
           VALUES(:campaign_name, /*:amz_campaign_id,*/ :user_id, :campaign_type, :targeting_type, :state, :daily_budget)';
   $stmt = $pdo->prepare($sql);
