@@ -19,9 +19,7 @@ $result = $client->requestReport(
   "campaigns",
   array("reportDate"    => "20180810",
         "campaignType"  => "sponsoredProducts",
-        "metrics"       => "campaignName, campaignBudget, impressions, clicks, cost,
-                            attributedConversions30d, attributedUnitsOrdered30d,
-                            attributedSales30d"
+        "metrics"       => "campaignName, impressions, clicks, cost"
   )
 );
 
