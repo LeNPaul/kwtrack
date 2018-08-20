@@ -29,6 +29,8 @@ echo '<pre>';
 var_dump($campaigns);
 echo '</pre>';
 
+die;
+
 // Iterate through campaign array and add them to db w/ foreign key user_id
 for ($i = 0; $i < count($campaigns); $i++) {
   var_dump($campaigns[$i]);
