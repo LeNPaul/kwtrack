@@ -47,7 +47,7 @@ for ($i = 0; $i < count($campaigns); $i++) {
 // Second, grab ad groups and store them in db
 $result = $client->listAdGroups(array("stateFilter" => "enabled", "stateFilter" => "paused"));
 $adgrJson = $result['response'];
-$adgroups = json_decode($campJson, true);
+$adgroups = json_decode($adgrJson, true);
 
 echo '<pre>';
 var_dump($adgroups);
