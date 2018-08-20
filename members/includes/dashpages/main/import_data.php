@@ -33,13 +33,13 @@ echo '</pre>';
 for ($i = 0; $i < count($campaigns); $i++) {
   var_dump($campaigns[$i]);
   echo '<br /><br />';
-  $sql = 'INSERT INTO campaigns
-          VALUES(:campaign_name, :amz_campaign_id, :user_id, :campaign_type, :targeting_type, :state, :daily_budget)';
+  $sql = 'INSERT INTO campaigns (campaign_name, amz_campaign_id, /*user_id,*/ campaign_type, targeting_type, state, daily_budget)
+          VALUES(:campaign_name, :amz_campaign_id, /*:user_id,*/ :campaign_type, :targeting_type, :state, :daily_budget)';
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
     ':campaign_name'   => htmlspecialchars($campaigns[$i]['name'], ENT_QUOTES),
     ':amz_campaign_id' => $campaigns[$i]['campaignId'],
-    ':user_id'         => $user_id,
+    /*':user_id'         => $user_id,*/
     ':campaign_type'   => $campaigns[$i]['campaignType'],
     ':targeting_type'  => $campaigns[$i]['targetingType'],
     ':state'           => $campaigns[$i]['state'],
