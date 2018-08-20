@@ -65,5 +65,5 @@ for ($i = 0; $i < count($adgroups); $i++) {
   //   ':amz_campaign_id' = ,
   //   ':default_bid' = ,
   //   ':state' =
-  ));
+  //));
 }
