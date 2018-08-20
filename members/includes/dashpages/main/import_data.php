@@ -59,11 +59,11 @@ for ($i = 0; $i < count($adgroups); $i++) {
   $sql = 'INSERT INTO ad_groups
           VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id, :default_bid, :state)';
   $stmt = $pdo->prepare($sql);
-  $stmt->execute(array(
-    ':amz_adgroup_id' = $adgroups[$i],
-    ':ad_group_name' = ,
-    ':amz_campaign_id' = ,
-    ':default_bid' = ,
-    ':state' =
+  // $stmt->execute(array(
+  //   ':amz_adgroup_id' = $adgroups[$i],
+  //   ':ad_group_name' = ,
+  //   ':amz_campaign_id' = ,
+  //   ':default_bid' = ,
+  //   ':state' =
   ));
 }
