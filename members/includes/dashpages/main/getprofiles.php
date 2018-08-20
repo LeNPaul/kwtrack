@@ -23,8 +23,14 @@ $refreshToken = $result[0]['refresh_token'];
 
 // Run campaign importing in background [FIX WHEN YOU COME BACK]
 $user_id = $_SESSION['user_id'];
-$cmd = "exec php ~/public_html/members/includes/dashpages/main/import_data.php {$refreshToken} {$user_id} {$profileId} > /dev/null &";
-exec($cmd);
+$cmd = "php ~/public_html/members/includes/dashpages/main/import_data.php {$refreshToken} {$user_id} {$profileId} > /dev/null &";
+exec($cmd, $output, $return);
+if ($return !== 0){
+	echo "fail";
+}
+else{
+	echo "success";
+}
 
 //shell_exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
 
