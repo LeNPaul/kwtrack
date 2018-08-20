@@ -43,5 +43,4 @@ for ($i = 0; $i < count($campaigns); $i++) {
     ':state'           => $campaigns[$i]['state'],
     ':daily_budget'    => $campaigns[$i]['dailyBudget']
   ));
-  break;
 }
