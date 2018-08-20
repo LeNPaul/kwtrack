@@ -35,7 +35,7 @@ for ($i = 0; $i < count($campaigns); $i++) {
           VALUES(:campaign_name, :amz_campaign_id, :user_id, :campaign_type, :targeting_type, :state, :daily_budget)';
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
-    ':campaign_name'   => $campaigns[$i]['name'],
+    ':campaign_name'   => htmlspecialchars($campaigns[$i]['name'], ENT_QUOTES),
     ':amz_campaign_id' => $campaigns[$i]['campaignId'],
     ':user_id'         => $user_id,
     ':campaign_type'   => $campaigns[$i]['campaignType'],
