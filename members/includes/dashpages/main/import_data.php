@@ -19,25 +19,15 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
+/*
+
 // First, grab campaigns and store them in db
 $result = $client->listCampaigns(array("stateFilter" => "enabled", "stateFilter" => "paused"));
 $campJson = $result['response'];
 $campaigns = json_decode($campJson, true);
 
-
-echo '<pre>';
-var_dump($campaigns);
-echo '</pre>';
-
-die;
-
 // Iterate through campaign array and add them to db w/ foreign key user_id
 for ($i = 0; $i < count($campaigns); $i++) {
-  var_dump($campaigns[$i]);
-  echo '<br /><br />';
-  echo $campaigns[$i]['campaignId'];
-  echo '<br /><br />';
-
   $sql = 'INSERT INTO campaigns
           VALUES(:campaign_name, :amz_campaign_id, :user_id, :campaign_type, :targeting_type, :state, :daily_budget)';
   $stmt = $pdo->prepare($sql);
@@ -52,5 +42,26 @@ for ($i = 0; $i < count($campaigns); $i++) {
   ));
 }
 
+*/
+
 // Second, grab ad groups and store them in db
-$result = $client->listAdGroups();
+$result = $client->listAdGroups(array("stateFilter" => "enabled", "stateFilter" => "paused"));
+$adgrJson = $result['response'];
+$adgroups = json_decode($campJson, true);
+
+echo '<pre>';
+var_dump($adgroups);
+echo '</pre>';
+
+for ($i = 0; $i < count($adgroups); $i++) {
+  $sql = 'INSERT INTO ad_groups
+          VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id, :default_bid, :state)';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ':amz_adgroup_id' = $adgroups[$i],
+    ':ad_group_name' = ,
+    ':amz_campaign_id' = ,
+    ':default_bid' = ,
+    ':state' =
+  ));
+}
