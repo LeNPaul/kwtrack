@@ -20,7 +20,7 @@ $client = new Client($config);
 $client->profileId = $profileId;
 
 // First, grab campaigns and store them in db
-$result = $client->listCampaigns(array("stateFilter" => "enabled", "stateFilter" => "paused");
+$result = $client->listCampaigns(array("stateFilter" => "enabled", "stateFilter" => "paused"));
 $campJson = $result['response'];
 $campaigns = json_decode($campJson, true);
 
