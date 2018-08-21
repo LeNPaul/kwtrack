@@ -15,24 +15,35 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$result = $client->requestReport(
-  "campaigns",
-  array("reportDate"    => "20180820",
-        "campaignType"  => "sponsoredProducts",
-        "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
-  )
-);
+// $result = $client->requestReport(
+//   "campaigns",
+//   array("reportDate"    => "20180820",
+//         "campaignType"  => "sponsoredProducts",
+//         "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
+//   )
+// );
 
-$result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C878F.82e926a1-c640-4620-a215-0eaeaef5a705");
+// $result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C878F.82e926a1-c640-4620-a215-0eaeaef5a705");
 
-echo '<pre>';
-var_dump(json_decode($result['response'], true));
-// var_dump(json_decode($result, true));
-echo '</pre>';
+// echo '<pre>';
+// var_dump(json_decode($result['response'], true));
+// // var_dump(json_decode($result, true));
+// echo '</pre>';
 
-/*
+$impressions = [];
+$clicks = [];
+$ctr = [];
+$adSpend = [];
+$avgCpc = [];
+$unitsSold = [];
+$sales = [];
+$acos = [];
+
 for ($i = 0; $i < 60; $i++) {
+  // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days')) . '<br />';
+
+  // Request the report from API
   $result = $client->requestReport(
     "campaigns",
     array("reportDate"    => $date,
@@ -40,9 +51,77 @@ for ($i = 0; $i < 60; $i++) {
           "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
     )
   );
+
+  // Get the report id so we can use it to get the report
   $reportId = $result['response']['reportId'];
+
+  // Get the report using the report id
   $result = $client->getReport($reportId);
   $result = json_decode($result['response'], true);
+
+  // Initialize variables that we need in order to calculate ACoS for the DAY
+  // These variables only track cost and sales for the day
+  $totalCost = 0.0;
+  $totalSales = 0.0;
+
+  // Loop to iterate through the report response
+  for ($j = 0; $j < count($result); $j++) {
+
+    // Take into account cost, and sales so we can calculate the average later
+    if ($results[$j]['cost'] != 0 || $results[$j]['attributedSales1d'] != 0) {
+      $totalCost += (double)$result[$j]['cost'];
+      $totalSales += (double)$result[$j]['attributedSales1d'];
+    }
+
+    // Check if campaign is archived. If it is archived, then we push 0 for all metrics
+    if ($result[$j]['status'] == 'archived') {
+      $impressions[] = 0;
+      $clicks[] = 0
+      $ctr[] = 0;
+      $adSpend[] = 0.0;
+      $avgCpc[] = 0.0;
+      $unitsSold[] = 0;
+      $sales[] = 0.0;
+    }
+
+    $impressions[$i][] = $result[$j]['impressions']
+    $clicks[$i][] = $result[$j]['clicks'];
+
+    // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
+    if ($results[$j]['impressions'] == 0) {
+      $ctr[$i][] = 0;
+    } else {
+      $str[$i][] = (double)($result[$j]['clicks'] / $result[$j]['impressions']);
+    }
+
+    // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
+    if ($results[$j]['clicks'] == 0) {
+      $avgCpc[$i][] = 0;
+    } else {
+      $avgCpc[$i][] = (double)($result[$j]['cost'] / $result[$j]['clicks']);
+    }
+
+    // Push ad spend, units sold, and $ sales for the day to our arrays.
+    $adSpend[$i][] = $result[$j]['cost'];
+    $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
+    $sales[$i][] = $result[$j]['attributedSales1d'];
+
+  }
+
+  // Calculate ACoS for the day and push it to our array
+  $acos[] = (double)($results[$j]['cost'] / $results[$j]['attributedSales1d']);
+
 }
-*/
+
+echo '<pre>';
+var_dump($impressions);
+var_dump($clicks);
+var_dump($ctr);
+var_dump($adSpend);
+var_dump($avgCpc);
+var_dump($unitsSold);
+var_dump($sales);
+var_dump($acos);
+echo '</pre>';
+
 ?>
