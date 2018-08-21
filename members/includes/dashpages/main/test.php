@@ -35,6 +35,9 @@ var_dump(unserialize($arser));
 echo '</pre>';
 */
 
-echo date('Ymd', strtotime('-30 days'));
+for ($i = 1; $i < 61; $i++) {
+  echo date('Ymd', strtotime('-' . $i . ' days'));
+
+}
 
 ?>
