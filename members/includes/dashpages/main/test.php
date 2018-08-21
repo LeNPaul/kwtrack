@@ -23,7 +23,7 @@ $result = $client->requestReport(
   )
 );
 
-//$result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7B53C3.f5c1c143-4429-490a-8403-bedbd27345ea");
+$result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C6E5F.91192fe2-a43b-4331-b54b-00575913e774");
 echo '<pre>';
 var_dump($result);
 echo '</pre>';
