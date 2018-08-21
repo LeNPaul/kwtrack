@@ -19,7 +19,6 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-/*
 
 // First, grab campaigns and store them in db
 $result = $client->listCampaigns(array("stateFilter" => "enabled", "stateFilter" => "paused"));
@@ -41,8 +40,6 @@ for ($i = 0; $i < count($campaigns); $i++) {
     ':daily_budget'    => $campaigns[$i]['dailyBudget']
   ));
 }
-
-*/
 
 // Second, grab ad groups and store them in db
 $result = $client->listAdGroups(array("stateFilter" => "enabled", "stateFilter" => "paused"));
