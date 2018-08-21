@@ -41,7 +41,7 @@ $acos = [];
 
 for ($i = 0; $i < 60; $i++) {
   // Get date from $i days before today and format it as YYYYMMDD
-  $date = date('Ymd', strtotime('-' . $i . ' days')) . '<br />';
+  $date = date('Ymd', strtotime('-' . $i . ' days'));
 
   // Request the report from API
   $result = $client->requestReport(
