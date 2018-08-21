@@ -19,13 +19,13 @@ $result = $client->requestReport(
   "campaigns",
   array("reportDate"    => "20180810",
         "campaignType"  => "sponsoredProducts",
-        "metrics"       => "campaignName,impressions,clicks,cost"
+        "metrics"       => "campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedConversions1d,attributedUnitsOrdered1d,attributedSales1d"
   )
 );
 
 $result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C6E5F.91192fe2-a43b-4331-b54b-00575913e774");
 echo '<pre>';
-var_dump($result);
+var_dump($result['response']);
 echo '</pre>';
 
 ?>
