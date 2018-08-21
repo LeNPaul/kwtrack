@@ -24,6 +24,7 @@ $client->profileId = $profileId;
 $result = $client->listCampaigns(array("stateFilter" => "enabled", "stateFilter" => "paused"));
 $campJson = $result['response'];
 $campaigns = json_decode($campJson, true);
+echo count($campaigns);
 
 // Iterate through campaign array and add them to db w/ foreign key user_id
 for ($i = 0; $i < count($campaigns); $i++) {
