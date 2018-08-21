@@ -22,9 +22,10 @@ $result = $client->requestReport(
         "metrics"       => "campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedConversions1d,attributedUnitsOrdered1d,attributedSales1d"
   )
 );
+
 $result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C72BF.3e172900-f3de-4bab-94d5-6f73ab22a178");
 echo '<pre>';
-var_dump($result);
+var_dump($result['response']);
 echo '</pre>';
 
 ?>
