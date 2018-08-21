@@ -26,6 +26,8 @@ $campJson = $result['response'];
 $campaigns = json_decode($campJson, true);
 echo count($campaigns);
 
+/*
+
 // Iterate through campaign array and add them to db w/ foreign key user_id
 for ($i = 0; $i < count($campaigns); $i++) {
   $sql = 'INSERT INTO campaigns
@@ -41,6 +43,8 @@ for ($i = 0; $i < count($campaigns); $i++) {
     ':daily_budget'    => $campaigns[$i]['dailyBudget']
   ));
 }
+
+*/
 
 // Second, grab ad groups and store them in db
 $result = $client->listAdGroups(array("stateFilter" => "enabled", "stateFilter" => "paused"));
