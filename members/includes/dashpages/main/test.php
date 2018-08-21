@@ -55,6 +55,7 @@ for ($i = 0; $i < 60; $i++) {
   // Get the report id so we can use it to get the report
   $reportId = $result['response']['reportId'];
 
+  sleep(60);
 
   // Get the report using the report id
   $result = $client->getReport($reportId);
