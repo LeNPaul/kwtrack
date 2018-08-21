@@ -84,7 +84,7 @@ for ($i = 0; $i < 60; $i++) {
       $sales[] = 0.0;
     }
 
-    $impressions[$i][] = $result[$j]['impressions']
+    $impressions[$i][] = $result[$j]['impressions'];
     $clicks[$i][] = $result[$j]['clicks'];
 
     // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
