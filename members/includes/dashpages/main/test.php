@@ -55,6 +55,7 @@ for ($i = 0; $i < 60; $i++) {
   // Get the report id so we can use it to get the report
   $reportId = $result['response']['reportId'];
 
+
   // Get the report using the report id
   $result = $client->getReport($reportId);
   $result = json_decode($result['response'], true);
@@ -110,17 +111,25 @@ for ($i = 0; $i < 60; $i++) {
 
   // Calculate ACoS for the day and push it to our array
   $acos[] = (double)($results[$j]['cost'] / $results[$j]['attributedSales1d']);
-
+  break;
 }
 
 echo '<pre>';
+echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
 var_dump($impressions);
+echo '<hr /><h1>CLICKS</h1><br /><br />';
 var_dump($clicks);
+echo '<hr /><h1>CTR</h1><br /><br />';
 var_dump($ctr);
+echo '<hr /><h1>ADSPEND</h1><br /><br />';
 var_dump($adSpend);
+echo '<hr /><h1>CPC</h1><br /><br />';
 var_dump($avgCpc);
+echo '<hr /><h1>UNITS SOLD</h1><br /><br />';
 var_dump($unitsSold);
+echo '<hr /><h1>SALES</h1><br /><br />';
 var_dump($sales);
+echo '<hr /><h1>ACOS</h1><br /><br />';
 var_dump($acos);
 echo '</pre>';
 
