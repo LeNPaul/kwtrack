@@ -53,6 +53,7 @@ for ($i = 0; $i < 60; $i++) {
   );
 
   $result = json_decode($result, true);
+  var_dump($result);
 
   // Get the report id so we can use it to get the report
   $reportId = $result['response']['reportId'];
