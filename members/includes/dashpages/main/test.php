@@ -36,7 +36,7 @@ echo '</pre>';
 */
 
 for ($i = 1; $i < 61; $i++) {
-  echo date('Ymd', strtotime('-' . $i . ' days'));
+  echo date('Ymd', strtotime('-' . $i . ' days')) . '<br />';
 
 }
 
