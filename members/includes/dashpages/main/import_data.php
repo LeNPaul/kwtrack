@@ -51,6 +51,7 @@ $adgroups = json_decode($adgrJson, true);
 
 echo '<pre>';
 var_dump($adgroups);
+echo "test";
 echo '</pre>';
 
 die;
