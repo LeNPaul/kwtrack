@@ -25,7 +25,7 @@ $refreshToken = $result[0]['refresh_token'];
 $user_id = $_SESSION['user_id'];
 $cmd = "php ~/public_html/members/includes/dashpages/main/import_data.php {$refreshToken} {$user_id} {$profileId} &";
 $execResult = shell_exec($cmd);
-echo $execResult
+echo $execResult;
 
 //shell_exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
 
