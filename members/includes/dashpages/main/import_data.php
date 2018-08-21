@@ -55,6 +55,8 @@ echo '<pre>';
 var_dump($adgroups);
 echo '</pre>';
 
+/*
+
 for ($i = 0; $i < count($adgroups); $i++) {
   $sql = 'INSERT INTO ad_groups
           VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id, :default_bid, :state)';
@@ -67,3 +69,4 @@ for ($i = 0; $i < count($adgroups); $i++) {
   //   ':state' =
   //));
 }
+*/
