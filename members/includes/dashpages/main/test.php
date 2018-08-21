@@ -15,24 +15,27 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$result = $client->requestReport(
-  "campaigns",
-  array("reportDate"    => "20180810",
-        "campaignType"  => "sponsoredProducts",
-        "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
-  )
-);
+
 
 // $result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C72BF.3e172900-f3de-4bab-94d5-6f73ab22a178");
 
 echo '<pre>';
-var_dump(json_decode($result['response'], true));
+var_dump(json_decode($result, true));
 echo '</pre>';
 
-//
-// for ($i = 1; $i < 61; $i++) {
-//   echo date('Ymd', strtotime('-' . $i . ' days')) . '<br />';
-//
-// }
-
+/*
+for ($i = 0; $i < 60; $i++) {
+  $date = date('Ymd', strtotime('-' . $i . ' days')) . '<br />';
+  $result = $client->requestReport(
+    "campaigns",
+    array("reportDate"    => $date,
+          "campaignType"  => "sponsoredProducts",
+          "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
+    )
+  );
+  $reportId = $result['response']['reportId'];
+  $result = $client->getReport($reportId);
+  $result = json_decode($result['response'], true);
+}
+*/
 ?>
