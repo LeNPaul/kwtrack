@@ -48,7 +48,6 @@ $adgroups = json_decode($adgrJson, true);
 
 echo '<pre>';
 var_dump($adgroups);
-alert("dumps");
 echo '</pre>';
 
 for ($i = 0; $i < count($adgroups); $i++) {

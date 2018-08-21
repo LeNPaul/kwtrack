@@ -30,5 +30,5 @@ echo $execResult;
 //shell_exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
 
 // Redirect to dashboard
-header('location: ../../../dashboard.php');
-exit();
+//header('location: ../../../dashboard.php');
+//exit();
