@@ -30,4 +30,5 @@ exec($cmd, $output, $return);
 
 // Redirect to dashboard
 header('location: ../../../dashboard.php');
+echo "finished";
 exit();
