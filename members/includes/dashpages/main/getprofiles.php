@@ -11,7 +11,7 @@ $sql = 'UPDATE users SET profileId=:profileId, active=:level WHERE user_id=:user
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
   ':profileId' => $profileId,
-  ':level'     => 1,
+  ':level'     => 3,
   ':user_id'    => $_SESSION['user_id']
 ));
 
