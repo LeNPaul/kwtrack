@@ -60,6 +60,10 @@ for ($i = 0; $i < 60; $i++) {
   $result = $client->getReport($reportId);
   $result = json_decode($result['response'], true);
 
+  echo '<pre>';
+  var_dump($result);
+  echo '</pre>';
+
   // Initialize variables that we need in order to calculate ACoS for the DAY
   // These variables only track cost and sales for the day
   $totalCost = 0.0;
