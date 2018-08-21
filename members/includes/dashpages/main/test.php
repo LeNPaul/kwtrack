@@ -51,13 +51,11 @@ for ($i = 0; $i < 60; $i++) {
           "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
     )
   );
-  var_dump($result);
-
-  $result = json_decode($result, true);
 
   // Get the report id so we can use it to get the report
-  $reportId = $result['response']['reportId'];
-  //var_dump($reportId);
+  $result = json_decode($result['response'], true);
+  $reportId = $result['reportId'];
+  var_dump($reportId);
   sleep(60);
 
   // Get the report using the report id
