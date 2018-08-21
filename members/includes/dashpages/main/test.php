@@ -35,6 +35,6 @@ var_dump(unserialize($arser));
 echo '</pre>';
 */
 
-echo date('Ymd', strtotime('-1 days'));
+echo date('Ymd', strtotime('-30 days'));
 
 ?>
