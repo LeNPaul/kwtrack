@@ -22,22 +22,17 @@ $result = $client->requestReport(
         "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
   )
 );
-/*
-$result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C72BF.3e172900-f3de-4bab-94d5-6f73ab22a178");
 
-$ar = [1,2,3,4,5,6,7,8,9,10];
-$arser = serialize($ar);
+// $result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C72BF.3e172900-f3de-4bab-94d5-6f73ab22a178");
 
 echo '<pre>';
 var_dump(json_decode($result['response'], true));
-var_dump(serialize($ar));
-var_dump(unserialize($arser));
 echo '</pre>';
-*/
 
-for ($i = 1; $i < 61; $i++) {
-  echo date('Ymd', strtotime('-' . $i . ' days')) . '<br />';
-
-}
+//
+// for ($i = 1; $i < 61; $i++) {
+//   echo date('Ymd', strtotime('-' . $i . ' days')) . '<br />';
+//
+// }
 
 ?>
