@@ -18,15 +18,13 @@ $config = array(
   );
 $client = new Client($config);
 $client->profileId = $profileId;
-
-
+echo "finished";
+/*
 // First, grab campaigns and store them in db
 $result = $client->listCampaigns(array("stateFilter" => "enabled", "stateFilter" => "paused"));
 $campJson = $result['response'];
 $campaigns = json_decode($campJson, true);
 echo count($campaigns);
-
-/*
 
 // Iterate through campaign array and add them to db w/ foreign key user_id
 for ($i = 0; $i < count($campaigns); $i++) {
@@ -46,6 +44,7 @@ for ($i = 0; $i < count($campaigns); $i++) {
 
 */
 
+/*
 // Second, grab ad groups and store them in db
 $result = $client->listAdGroups(array("stateFilter" => "enabled", "stateFilter" => "paused"));
 $adgrJson = $result['response'];
@@ -54,8 +53,6 @@ $adgroups = json_decode($adgrJson, true);
 echo '<pre>';
 var_dump($adgroups);
 echo '</pre>';
-
-/*
 
 for ($i = 0; $i < count($adgroups); $i++) {
   $sql = 'INSERT INTO ad_groups
