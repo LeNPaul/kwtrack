@@ -28,6 +28,7 @@ $result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C72BF.3e172900-f3de-4bab-
 echo '<pre>';
 var_dump(json_decode($result['response'], true));
 var_dump(serialize(json_decode($result['response'], true)));
+var_dump(unserialize(json_decode($result['response'], true)));
 echo '</pre>';
 
 ?>
