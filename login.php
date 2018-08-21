@@ -5,8 +5,6 @@
 session_start();
 include './members/database/pdo.inc.php';
 
-phpinfo();
-
 if (!empty($_POST['login'])) {
   // Escape email to protect against SQL injections
   $email = htmlentities($_POST['email']);
