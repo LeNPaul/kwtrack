@@ -18,7 +18,7 @@ $config = array(
   "region" => "na",
   "sandbox" => false,
   );
-$client = new Client($config);
+$client = new AmazonAdvertisingApi\Client($config);
 $client->profileId = $profileId;
 
 // First, grab campaigns and store them in db
