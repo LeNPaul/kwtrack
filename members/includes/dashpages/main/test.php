@@ -107,9 +107,6 @@ for ($i = 0; $i < 60; $i++) {
   $totalCost = 0.0;
   $totalSales = 0.0;
 
-  echo '<br /><br />' . count($result) . '<br /><br />';
-
-
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
 
@@ -141,7 +138,6 @@ for ($i = 0; $i < 60; $i++) {
 
       // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
       if ($result[$j]['clicks'] == 0) {
-        $avgCpc[$i][] = 0.0;
         array_push($avgCpc[$i], 0.0);
       } else {
         $val = (double)($result[$j]['cost'] / $result[$j]['clicks']);
@@ -159,12 +155,8 @@ for ($i = 0; $i < 60; $i++) {
   // Calculate ACoS for the day and push it to our array
   if ($totalSales == 0) {
     $acos[] = 0.0;
-    var_dump($acos);
-    echo '<br />';
   } else {
     $acos[] = (double)($totalCost / $totalSales);
-    var_dump($acos);
-    echo '<br />';
   }
   if ($i === 1) {
     break;
@@ -176,10 +168,6 @@ for ($i = 0; $i < 60; $i++) {
 $sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-echo '<pre>';
-var_dump($result);
-echo '</pre>';
 
 echo '<pre>';
 echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
