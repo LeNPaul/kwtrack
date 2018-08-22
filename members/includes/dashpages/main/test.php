@@ -62,7 +62,7 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
     $reportId = $result['reportId'];
 
-    sleep(6);
+    sleep(10);
 
     // Get the report using the report id
     $result = $client->getReport($reportId);
@@ -89,12 +89,14 @@ for ($i = 0; $i < 60; $i++) {
     );
   }
 
+  echo "calling result <br />";
+
   // Get the report id so we can use it to get the report
   $result = json_decode($result['response'], true);
   $reportId = $result['reportId'];
   var_dump($reportId);
 
-  sleep(6);
+  sleep(10);
 
   // Get the report using the report id
   $result = $client->getReport($reportId);
