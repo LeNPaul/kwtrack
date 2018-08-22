@@ -165,6 +165,7 @@ for ($i = 0; $i < 60; $i++) {
     $acos[] = 0.0;
   } else {
     $acos[] = (double)($totalCost / $totalSales);
+    echo $acos . '<br />';
   }
   if ($i === 1) {
     break;
