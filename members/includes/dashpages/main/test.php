@@ -96,7 +96,7 @@ for ($i = 0; $i < 60; $i++) {
     }
 
     // Check if campaign is archived. If it is archived, then we push 0 for all metrics
-    if ($result[$j]['status'] == 'archived') {
+    if ($result[$j]['campaignStatus'] == 'archived') {
       $impressions[] = 0;
       $clicks[] = 0;
       $ctr[] = 0;
