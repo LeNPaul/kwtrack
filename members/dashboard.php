@@ -12,7 +12,7 @@ checkLoggedIn();
 // Grab current active level to actively set $_SESSION['active']
 $sql = 'SELECT active FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
-$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$result = $stmt->fetchAll(\PDO::FETCH_COLUMN);
 $_SESSION['active'] = intval($result[0]);
 
 ?>
