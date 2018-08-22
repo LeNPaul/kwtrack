@@ -210,7 +210,7 @@ $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
 // Grab impression data from array and store in their respective campaigns
 $dbClicks = prepareDbArrays($clicks, $dbClicks);
 // Grab impression data from array and store in their respective campaigns
-$dbCtr = prepareDbArrays($ctr, $dbCtr);
+// $dbCtr = prepareDbArrays($ctr, $dbCtr);
 // Grab impression data from array and store in their respective campaigns
 $dbAdSpend = prepareDbArrays($adSpend, $dbAdSpend);
 // Grab impression data from array and store in their respective campaigns
@@ -227,7 +227,7 @@ var_dump($dbImpressions);
 echo '<hr /><h1>CLICKS</h1><br /><br />';
 var_dump($dbClicks);
 echo '<hr /><h1>CTR</h1><br /><br />';
-var_dump($dbCtr);
+var_dump($ctr);
 echo '<hr /><h1>ADSPEND</h1><br /><br />';
 var_dump($dbAdSpend);
 echo '<hr /><h1>CPC</h1><br /><br />';
