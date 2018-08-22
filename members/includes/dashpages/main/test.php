@@ -125,7 +125,7 @@ for ($i = 0; $i < 60; $i++) {
 
     // Check if campaign is archived. If it is archived, then we push 0 for all metrics
     if ($result[$j]['campaignStatus'] == 'archived') {
-      $impressions[$i][] = [0, $result[$j]['campaignId']];
+      $impressions[$i][] = 0;
       $clicks[$i][] = 0;
       $ctr[$i][] = 0.0;
       $adSpend[$i][] = 0.0;
@@ -133,7 +133,7 @@ for ($i = 0; $i < 60; $i++) {
       $unitsSold[$i][] = 0;
       $sales[$i][] = 0.0;
     } else { // If campaign is paused or active, then run this code
-      $impressions[$i][] = [$result[$j]['impressions'], $result[$j]['campaignId']];
+      $impressions[$i][] = $result[$j]['impressions'];
       $clicks[$i][] = $result[$j]['clicks'];
 
       // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
