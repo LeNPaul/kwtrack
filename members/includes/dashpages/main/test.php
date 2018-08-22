@@ -90,7 +90,7 @@ for ($i = 0; $i < 60; $i++) {
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
     // Take into account cost, and sales so we can calculate the average later
-    if ($results[$j]['cost'] != 0 || $results[$j]['attributedSales1d'] != 0) {
+    if ($result[$j]['cost'] != 0 || $result[$j]['attributedSales1d'] != 0) {
       $totalCost += (double)$result[$j]['cost'];
       $totalSales += (double)$result[$j]['attributedSales1d'];
     }
@@ -110,14 +110,14 @@ for ($i = 0; $i < 60; $i++) {
     $clicks[$i][] = $result[$j]['clicks'];
 
     // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
-    if ($results[$j]['impressions'] == 0) {
+    if ($result[$j]['impressions'] == 0) {
       $ctr[$i][] = 0;
     } else {
       $str[$i][] = (double)($result[$j]['clicks'] / $result[$j]['impressions']);
     }
 
     // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
-    if ($results[$j]['clicks'] == 0) {
+    if ($result[$j]['clicks'] == 0) {
       $avgCpc[$i][] = 0;
     } else {
       $avgCpc[$i][] = (double)($result[$j]['cost'] / $result[$j]['clicks']);
@@ -131,7 +131,7 @@ for ($i = 0; $i < 60; $i++) {
   }
 
   // Calculate ACoS for the day and push it to our array
-  $acos[] = (double)($results[$j]['cost'] / $results[$j]['attributedSales1d']);
+  $acos[] = (double)($result[$j]['cost'] / $result[$j]['attributedSales1d']);
   break;
 }
 
