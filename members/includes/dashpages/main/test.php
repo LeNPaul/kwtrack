@@ -98,8 +98,6 @@ for ($i = 0; $i < 60; $i++) {
   $totalCost = 0.0;
   $totalSales = 0.0;
 
-
-
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
     // Take into account cost, and sales so we can calculate the average later
@@ -110,37 +108,36 @@ for ($i = 0; $i < 60; $i++) {
 
     // Check if campaign is archived. If it is archived, then we push 0 for all metrics
     if ($result[$j]['campaignStatus'] == 'archived') {
-      $impressions[] = 0;
-      $clicks[] = 0;
-      $ctr[] = 0;
-      $adSpend[] = 0.0;
-      $avgCpc[] = 0.0;
-      $unitsSold[] = 0;
-      $sales[] = 0.0;
-    }
-
-    $impressions[$i][] = $result[$j]['impressions'];
-    $clicks[$i][] = $result[$j]['clicks'];
-
-    // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
-    if ($result[$j]['impressions'] == 0) {
+      $impressions[$i][] = 0;
+      $clicks[$i][] = 0;
       $ctr[$i][] = 0;
-    } else {
-      $str[$i][] = (double)($result[$j]['clicks'] / $result[$j]['impressions']);
+      $adSpend[$i][] = 0.0;
+      $avgCpc[$i][] = 0.0;
+      $unitsSold[$i][] = 0;
+      $sales[$i][] = 0.0;
+    } else { // If campaign is paused or active, then run this code
+      $impressions[$i][] = $result[$j]['impressions'];
+      $clicks[$i][] = $result[$j]['clicks'];
+
+      // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
+      if ($result[$j]['impressions'] == 0) {
+        $ctr[$i][] = 0;
+      } else {
+        $str[$i][] = (double)($result[$j]['clicks'] / $result[$j]['impressions']);
+      }
+
+      // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
+      if ($result[$j]['clicks'] == 0) {
+        $avgCpc[$i][] = 0;
+      } else {
+        $avgCpc[$i][] = (double)($result[$j]['cost'] / $result[$j]['clicks']);
+      }
+
+      // Push ad spend, units sold, and $ sales for the day to our arrays.
+      $adSpend[$i][] = $result[$j]['cost'];
+      $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
+      $sales[$i][] = $result[$j]['attributedSales1d'];
     }
-
-    // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
-    if ($result[$j]['clicks'] == 0) {
-      $avgCpc[$i][] = 0;
-    } else {
-      $avgCpc[$i][] = (double)($result[$j]['cost'] / $result[$j]['clicks']);
-    }
-
-    // Push ad spend, units sold, and $ sales for the day to our arrays.
-    $adSpend[$i][] = $result[$j]['cost'];
-    $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
-    $sales[$i][] = $result[$j]['attributedSales1d'];
-
   }
 
   // Calculate ACoS for the day and push it to our array
@@ -156,7 +153,7 @@ for ($i = 0; $i < 60; $i++) {
   }
 }
 
-
+/*
 // Grab array of campaigns by their campaign ID
 $sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
 $stmt = $pdo->query($sql);
@@ -174,7 +171,7 @@ for ($i = 0; $i < 60; $i++) {
     $currentImpressions[$j][] = array_shift($impressions[$i]);
   }
 }
-
+*/
 
 
 echo '<pre>';
