@@ -75,7 +75,7 @@ for ($i = 0; $i < 60; $i++) {
 
   // Only on the very first iteration of this loop, we will iterate through the array
   // and store campaign name and campaign ID in the database
-  if ($i == 0) {
+  if ($i === 0) {
     for ($x = 0; $x < count($result); $x++) {
       $sql = 'INSERT INTO campaigns (campaign_name, amz_campaign_id, daily_budget) VALUES (:campaign_name, :amz_campaign_id, :daily_budget)';
       $stmt = $pdo->prepare($sql);
