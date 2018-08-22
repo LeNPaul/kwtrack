@@ -72,10 +72,12 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
 
     for ($x = 0; $x < count($result); $x++) {
-      $sql = 'INSERT INTO campaigns (user_id, campaign_name, amz_campaign_id, daily_budget) VALUES (:user_id, :campaign_name, :amz_campaign_id, :daily_budget)';
+      $sql = 'INSERT INTO campaigns (user_id, status, campaign_name, amz_campaign_id, daily_budget)
+              VALUES (:user_id, :status, :campaign_name, :amz_campaign_id, :daily_budget)';
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
         ':user_id'          => $user_id,
+        ':status'           => $result[$x]['campaignStatus'],
         ':campaign_name'    => htmlspecialchars($result[$x]['campaignName'], ENT_QUOTES),
         ':amz_campaign_id'  => $result[$x]['campaignId'],
         ':daily_budget'     => $result[$x]['campaignBudget']
