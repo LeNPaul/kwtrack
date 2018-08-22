@@ -4,6 +4,24 @@ require_once '../../AmazonAdvertisingApi/Client.php';
 require '../../../database/pdo.inc.php';
 use PDO;
 
+/*
+ *  function prepareDbArrays(Array $dataset) --> Array $dbVar
+ *    --> Takes $dataset and prepares it for insertion in database
+ *
+ *      --> Array $dataset --> unprepared array for specific metric
+ *      --> Array $dbVar --> prepared array for specific metric
+ */
+function prepareDbArrays($dataset, $dbVar) {
+  for ($i = 0; $i < 60; $i++) {
+    if ($i === 2) { break; }
+    $secondLoopLimit = count($dataset[$i]);
+    for ($j = 0; $j < $secondLoopLimit; $j++) {
+      $dbVar[$j][] = array_shift($dataset[$i]);
+    }
+  }
+  return $dbVar;
+}
+
 /* TESTING PURPOSES ONLY */
 $sql = 'DELETE FROM campaigns';
 $stmt = $pdo->prepare($sql);
@@ -176,18 +194,19 @@ echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
 var_dump($impressions);
 echo '</pre>';
 
+
+// Declare arrays that we will serialize and store in the database
 $dbImpressions = [];
+$dbClicks = [];
+$dbCtr = [];
+$dbAdSpend = [];
+$dbAvgCpc = [];
+$dbUnitsSold = [];
+$dbSales = [];
+
 
 // Grab impression data from array and store in their respective campaigns
-for ($i = 0; $i < 60; $i++) {
-  if ($i === 2) { break; }
-
-  $secondLoopLimit = count($impressions[$i]);
-  for ($j = 0; $j < $secondLoopLimit; $j++) {
-    $dbImpressions[$j][] = array_shift($impressions[$i]);
-  }
-}
-
+$dbImpressions = prepareDbArrays($impressions, $dbImpressions);
 
 
 echo '<pre>';
