@@ -27,7 +27,7 @@ echo 'refresh token got';
 
 // Run campaign importing in background [FIX WHEN YOU COME BACK]
 $user_id = $_SESSION['user_id'];
-exec("echo test", $output);
+exec("php import_data.php", $output);
 var_dump($output);
 echo 'finished';
 
