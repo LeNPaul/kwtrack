@@ -102,12 +102,6 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
   }
 
-  echo "calling result <br />";
-
-  echo '<pre>';
-  var_dump($result);
-  echo '</pre>';
-
   // Initialize variables that we need in order to calculate ACoS for the DAY
   // These variables only track cost and sales for the day
   $totalCost = 0.0;
@@ -148,8 +142,11 @@ for ($i = 0; $i < 60; $i++) {
       // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
       if ($result[$j]['clicks'] == 0) {
         $avgCpc[$i][] = 0.0;
+        array_push($avgCpc[$i], 0.0);
       } else {
-        $avgCpc[$i][] = (double)($result[$j]['cost'] / $result[$j]['clicks']);
+        $val = (double)($result[$j]['cost'] / $result[$j]['clicks']);
+        array_push($avgCpc[$i], $val);
+
       }
 
       // Push ad spend, units sold, and $ sales for the day to our arrays.
