@@ -3,7 +3,6 @@ namespace AmazonAdvertisingApi;
 require_once '../../AmazonAdvertisingApi/Client.php';
 require '../../../database/pdo.inc.php';
 use PDO;
-use SplFixedArray;
 
 /* TESTING PURPOSES ONLY */
 $sql = 'DELETE FROM campaigns';
@@ -120,14 +119,15 @@ for ($i = 0; $i < 60; $i++) {
 
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
+
     // Take into account cost, and sales so we can calculate the average later
     if ($result[$j]['cost'] != 0 || $result[$j]['attributedSales1d'] != 0) {
       $totalCost += (double)$result[$j]['cost'];
       $totalSales += (double)$result[$j]['attributedSales1d'];
     }
 
-    // Check if campaign is archived. If it is archived, then we push 0 for all metrics
-    if ($result[$j]['campaignStatus'] == 'archived') {
+    // Check if campaign is archived/paused. If it is archived/paused, then we push 0 for all metrics
+    if ($result[$j]['campaignStatus'] == 'archived' || $result[$j]['campaignStatus'] == 'paused') {
       $impressions[$i][] = 0;
       $clicks[$i][] = 0;
       $ctr[$i][] = 0.0;
@@ -135,7 +135,7 @@ for ($i = 0; $i < 60; $i++) {
       $avgCpc[$i][] = 0.0;
       $unitsSold[$i][] = 0;
       $sales[$i][] = 0.0;
-    } else { // If campaign is paused or active, then run this code
+    } else { // If campaign is active, then run this code
       $impressions[$i][] = $result[$j]['impressions'];
       $clicks[$i][] = $result[$j]['clicks'];
 
@@ -181,6 +181,11 @@ echo '<pre>';
 var_dump($result);
 echo '</pre>';
 
+echo '<pre>';
+echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
+var_dump($impressions);
+echo '</pre>';
+
 $currentImpressions = [];
 
 // Grab impression data from array and store in their respective campaigns
@@ -200,8 +205,6 @@ for ($i = 0; $i < 60; $i++) {
 echo '<pre>';
 echo '<hr /><h1>CURRENT IMPRESSIONS</h1><br /><br />';
 var_dump($currentImpressions);
-echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
-var_dump($impressions);
 echo '<hr /><h1>CLICKS</h1><br /><br />';
 var_dump($clicks);
 echo '<hr /><h1>CTR</h1><br /><br />';
