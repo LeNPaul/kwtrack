@@ -71,9 +71,22 @@ for ($i = 0; $i < 60; $i++) {
   $totalCost = 0.0;
   $totalSales = 0.0;
 
+  // Only on the very first iteration of this loop, we will iterate through the array
+  // and store campaign name and campaign ID in the database
+  if ($i == 0) {
+    for ($x = 0; $x < count($result); $x++) {
+      $sql = 'INSERT INTO campaigns (campaign_name, amz_campaign_id, daily_budget) VALUES (:campaign_name, :amz_campaign_id, :daily_budget)';
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute(array(
+        ':campaign_name'    => htmlspecialchars($result['campaignName'], ENT_QUOTES);
+        ':amz_campaign_id'  => $result['campaignId'];
+        ':daily_budget'     => $result['campaignBudget'];
+      ));
+    }
+  }
+
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
-
     // Take into account cost, and sales so we can calculate the average later
     if ($results[$j]['cost'] != 0 || $results[$j]['attributedSales1d'] != 0) {
       $totalCost += (double)$result[$j]['cost'];
