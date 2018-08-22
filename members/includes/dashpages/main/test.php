@@ -18,8 +18,6 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-/*
-
 $impressions = [];
 $clicks = [];
 $ctr = [];
@@ -135,9 +133,13 @@ for ($i = 0; $i < 60; $i++) {
   } else {
     $acos[] = (double)($totalCost / $totalSales);
   }
-  break;
+
+
+  if ($i === 1) {
+    break;
+  }
 }
-*/
+
 
 // Grab array of campaigns by their campaign ID
 $sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
@@ -148,12 +150,20 @@ echo '<pre>';
 var_dump($result);
 echo '</pre>';
 
-// Grab impression data from array and store in their respective campaigns
-for ($i = 0; $i < count($impressions); $i++) {
+$currentImpressions = new SplFixedArray(60);
 
+// Grab impression data from array and store in their respective campaigns
+for ($i = 0; $i < 60; $i++) {
+  for ($j = 0; $j < count($impressions[$i]); $j++) {
+    $currentImpressions[$j][] = array_shift($impressions[$i]);
+  }
 }
 
+
+
 echo '<pre>';
+echo '<hr /><h1>CURRENT IMPRESSIONS</h1><br /><br />';
+var_dump($currentImpressions);
 echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
 var_dump($impressions);
 echo '<hr /><h1>CLICKS</h1><br /><br />';
