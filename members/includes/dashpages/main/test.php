@@ -197,6 +197,10 @@ for ($i = 0; $i < 60; $i++) {
 
   for ($j = 0; $j < count($impressions[$i]); $j++) {
     $currentImpressions[$j][] = array_shift($impressions[$i]);
+    var_dump($impressions[$i]);
+    echo '<br />';
+    var_dump($currentImpressions[$j]);
+    echo '<br />';
   }
 }
 
