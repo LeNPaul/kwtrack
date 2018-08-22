@@ -23,11 +23,10 @@ $refreshToken = $result[0]['refresh_token'];
 
 // Run campaign importing in background [FIX WHEN YOU COME BACK]
 $user_id = $_SESSION['user_id'];
-exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
-echo 'finished';
+exec("php import_data.php $refreshToken $user_id $profileId > /dev/null 2>&1 &");
 
 //shell_exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
 
 // Redirect to dashboard
-//header('location: ../../../dashboard.php');
+header('location: ../../../dashboard.php');
 //exit();
