@@ -86,7 +86,7 @@ for ($i = 0; $i < 60; $i++) {
     // All other iterations, we request this report to optimize time
     $result = $client->requestReport(
       "campaigns",
-      array("reportDate"    => "20180713", // placeholder date
+      array("reportDate"    => "20180627", // placeholder date
             "campaignType"  => "sponsoredProducts",
             "metrics"       => "campaignId,impressions,clicks,cost,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
       )
