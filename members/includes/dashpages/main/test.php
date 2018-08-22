@@ -131,7 +131,7 @@ for ($i = 0; $i < 60; $i++) {
   }
 
   // Calculate ACoS for the day and push it to our array
-  $acos[] = (double)($result[$j]['cost'] / $result[$j]['attributedSales1d']);
+  $acos[] = (double)($totalCost / $totalSales);
   break;
 }
 
