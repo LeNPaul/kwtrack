@@ -32,26 +32,51 @@ $sales = [];
 $acos = [];
 
 for ($i = 0; $i < 60; $i++) {
-  $impressions[] = [];
-  $clicks[] = [];
-  $ctr[] = [];
-  $adSpend[] = [];
-  $avgCpc[] = [];
-  $unitsSold[] = [];
-  $sales[] = [];
-  $acos[] = [];
+  $impressions[$i] = [];
+  $clicks[$i] = [];
+  $ctr[$i] = [];
+  $adSpend[$i] = [];
+  $avgCpc[$i] = [];
+  $unitsSold[$i] = [];
+  $sales[$i] = [];
+  $acos[$i] = [];
 
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
 
-  // Request the report from API
-  $result = $client->requestReport(
-    "campaigns",
-    array("reportDate"    => "20180713",
-          "campaignType"  => "sponsoredProducts",
-          "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
-    )
-  );
+  // Only on the very first iteration of this loop, we will iterate through the array
+  // and store campaign name and campaign ID in the database
+  if ($i === 0) {
+    for ($x = 0; $x < count($result); $x++) {
+      $sql = 'INSERT INTO campaigns (user_id, campaign_name, amz_campaign_id, daily_budget) VALUES (:user_id, :campaign_name, :amz_campaign_id, :daily_budget)';
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute(array(
+        ':user_id'          => $user_id,
+        ':campaign_name'    => htmlspecialchars($result[$x]['campaignName'], ENT_QUOTES),
+        ':amz_campaign_id'  => $result[$x]['campaignId'],
+        ':daily_budget'     => $result[$x]['campaignBudget']
+      ));
+
+      // Request the report from API with campaign name, campaignId, and campaign budget only
+      // for the first iteration
+      $result = $client->requestReport(
+        "campaigns",
+        array("reportDate"    => "20180713", // placeholder date
+              "campaignType"  => "sponsoredProducts",
+              "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
+        )
+      );
+    }
+  } else {
+    // All other iterations, we request this report to optimize time
+    $result = $client->requestReport(
+      "campaigns",
+      array("reportDate"    => "20180713", // placeholder date
+            "campaignType"  => "sponsoredProducts",
+            "metrics"       => "impressions,clicks,cost,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
+      )
+    );
+  }
 
   // Get the report id so we can use it to get the report
   $result = json_decode($result['response'], true);
@@ -73,20 +98,7 @@ for ($i = 0; $i < 60; $i++) {
   $totalCost = 0.0;
   $totalSales = 0.0;
 
-  // Only on the very first iteration of this loop, we will iterate through the array
-  // and store campaign name and campaign ID in the database
-  if ($i === 0) {
-    for ($x = 0; $x < count($result); $x++) {
-      $sql = 'INSERT INTO campaigns (user_id, campaign_name, amz_campaign_id, daily_budget) VALUES (:user_id, :campaign_name, :amz_campaign_id, :daily_budget)';
-      $stmt = $pdo->prepare($sql);
-      $stmt->execute(array(
-        ':user_id'          => $user_id,
-        ':campaign_name'    => htmlspecialchars($result[$x]['campaignName'], ENT_QUOTES),
-        ':amz_campaign_id'  => $result[$x]['campaignId'],
-        ':daily_budget'     => $result[$x]['campaignBudget']
-      ));
-    }
-  }
+
 
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
