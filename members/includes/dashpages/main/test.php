@@ -44,9 +44,20 @@ for ($i = 0; $i < 60; $i++) {
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
 
+
   // Only on the very first iteration of this loop, we will iterate through the array
   // and store campaign name and campaign ID in the database
   if ($i === 0) {
+    // Request the report from API with campaign name, campaignId, and campaign budget only
+    // for the first iteration
+    $result = $client->requestReport(
+      "campaigns",
+      array("reportDate"    => "20180713", // placeholder date
+            "campaignType"  => "sponsoredProducts",
+            "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
+      )
+    );
+
     for ($x = 0; $x < count($result); $x++) {
       $sql = 'INSERT INTO campaigns (user_id, campaign_name, amz_campaign_id, daily_budget) VALUES (:user_id, :campaign_name, :amz_campaign_id, :daily_budget)';
       $stmt = $pdo->prepare($sql);
@@ -56,16 +67,6 @@ for ($i = 0; $i < 60; $i++) {
         ':amz_campaign_id'  => $result[$x]['campaignId'],
         ':daily_budget'     => $result[$x]['campaignBudget']
       ));
-
-      // Request the report from API with campaign name, campaignId, and campaign budget only
-      // for the first iteration
-      $result = $client->requestReport(
-        "campaigns",
-        array("reportDate"    => "20180713", // placeholder date
-              "campaignType"  => "sponsoredProducts",
-              "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
-        )
-      );
     }
   } else {
     // All other iterations, we request this report to optimize time
