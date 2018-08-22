@@ -15,20 +15,15 @@ $stmt->execute(array(
   ':user_id'    => $_SESSION['user_id']
 ));
 
-echo 'profileID inserted';
-
 // Get refresh token to pass onto import_data.php
 $sql = 'SELECT refresh_token FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $refreshToken = $result[0]['refresh_token'];
 
-echo 'refresh token got';
-
 // Run campaign importing in background [FIX WHEN YOU COME BACK]
 $user_id = $_SESSION['user_id'];
-exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &", $output);
-var_dump($output);
+exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
 echo 'finished';
 
 //shell_exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
