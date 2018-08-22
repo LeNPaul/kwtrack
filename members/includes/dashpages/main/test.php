@@ -195,8 +195,10 @@ for ($i = 0; $i < 60; $i++) {
   var_dump($impressions[$i]);
   echo '<br /><br />';
 
-  for ($j = 0; $j < count($impressions[$i]); $j++) {
+  $secondLoopLimit = count($impressions[$i]);
+  for ($j = 0; $j < $secondLoopLimit; $j++) {
     $currentImpressions[$j][] = array_shift($impressions[$i]);
+    echo "<b>Index: $j</b>, <b>Count: $secondLoopLimit</b>";
     echo "<b>impressions[$i]</b>: ";
     var_dump($impressions[$i]);
     echo '<br />';
