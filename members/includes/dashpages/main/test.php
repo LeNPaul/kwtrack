@@ -78,9 +78,9 @@ for ($i = 0; $i < 60; $i++) {
       $sql = 'INSERT INTO campaigns (campaign_name, amz_campaign_id, daily_budget) VALUES (:campaign_name, :amz_campaign_id, :daily_budget)';
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
-        ':campaign_name'    => htmlspecialchars($result['campaignName'], ENT_QUOTES);
-        ':amz_campaign_id'  => $result['campaignId'];
-        ':daily_budget'     => $result['campaignBudget'];
+        ':campaign_name'    => htmlspecialchars($result['campaignName'], ENT_QUOTES),
+        ':amz_campaign_id'  => $result['campaignId'],
+        ':daily_budget'     => $result['campaignBudget']
       ));
     }
   }
