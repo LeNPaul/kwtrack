@@ -5,6 +5,7 @@ require '../../../database/pdo.inc.php';
 
 $refreshToken = 'Atzr|IwEBID8Cr8D51I4XzWRU5wdohHUoGJRY1rempo6uwgk_niC5AgqZo_SVul0Nt8V5oU1j8P2T08oPjR8gLKSsWnJuAflfBzcMky0NzBoKcSIYH62WJ4I86G6t4jGxU7fitoLO79TJPFjCoHPXyjnvaNLxFaJPxOaW3t4fLBH9-1RGsAaEdrP0-r85iVNgG_pQE2HA7bl_ZMqWoJbXhww-YEsfMH6tBKXG0S0dMreLkEkdx75eABfzKwdDm9jokTL8YZjkqj1ELRFOwK6Pgv1PsYTvdI2Us1fTw-Bu1n_n4am_vlrK4ntseK_dqFHvrV4_h0aup1hoChA5KZD2ID3fG4e4be4iCRC66QdJxmjv_q_o8RxoZR_bG0vhlkU2rSYKnMnZOj7nkRS2Z6JoRPWRLw7nP8nEfHLRkCQnrOn2PHkrKX7MWTIWt1f-_rkr3ocfvgKfcixFvTc6XmNGg0IYbVidw0thS3-AgSpnGaG0O7Q-W9VZPFRFtas1PltUG69LL0ko2EOz6yW-RG9071MfpUMgre2_TUildA68rlcdikXtNfMtyYNwqvQhlSZ_eVXWGclIpk4XQ39a-5eJiB8HVfsAvgdF';
 $profileId = '1215041354659387';
+$user_id = 0;
 
 $config = array(
   "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
@@ -16,20 +17,7 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-// $result = $client->requestReport(
-//   "campaigns",
-//   array("reportDate"    => "20180820",
-//         "campaignType"  => "sponsoredProducts",
-//         "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
-//   )
-// );
-
-// $result = $client->getReport("amzn1.clicksAPI.v1.p1.5B7C878F.82e926a1-c640-4620-a215-0eaeaef5a705");
-
-// echo '<pre>';
-// var_dump(json_decode($result['response'], true));
-// // var_dump(json_decode($result, true));
-// echo '</pre>';
+/*
 
 $impressions = [];
 $clicks = [];
@@ -86,9 +74,10 @@ for ($i = 0; $i < 60; $i++) {
   // and store campaign name and campaign ID in the database
   if ($i === 0) {
     for ($x = 0; $x < count($result); $x++) {
-      $sql = 'INSERT INTO campaigns (campaign_name, amz_campaign_id, daily_budget) VALUES (:campaign_name, :amz_campaign_id, :daily_budget)';
+      $sql = 'INSERT INTO campaigns (user_id, campaign_name, amz_campaign_id, daily_budget) VALUES (:user_id, :campaign_name, :amz_campaign_id, :daily_budget)';
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
+        ':user_id'          => $user_id,
         ':campaign_name'    => htmlspecialchars($result[$x]['campaignName'], ENT_QUOTES),
         ':amz_campaign_id'  => $result[$x]['campaignId'],
         ':daily_budget'     => $result[$x]['campaignBudget']
@@ -140,8 +129,27 @@ for ($i = 0; $i < 60; $i++) {
   }
 
   // Calculate ACoS for the day and push it to our array
-  $acos[] = (double)($totalCost / $totalSales);
+  if ($totalSales == 0) {
+    $acos[] = 0;
+  } else {
+    $acos[] = (double)($totalCost / $totalSales);
+  }
   break;
+}
+*/
+
+// Grab array of campaigns by their campaign ID
+$sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
+$stmt = $pdo->query($sql);
+$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+echo '<pre>';
+var_dump($result);
+echo '</pre>';
+
+// Grab impression data from array and store in their respective campaigns
+for ($i = 0; $i < count($impressions); $i++) {
+
 }
 
 echo '<pre>';
