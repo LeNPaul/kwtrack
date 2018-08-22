@@ -170,7 +170,7 @@ for ($i = 0; $i < 60; $i++) {
 
 
 // Grab array of campaigns by their campaign ID
-$sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
+$sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id) ' ORDER BY date DESC';
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
