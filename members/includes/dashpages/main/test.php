@@ -56,6 +56,7 @@ for ($i = 0; $i < 60; $i++) {
   $result = json_decode($result['response'], true);
   $reportId = $result['reportId'];
   var_dump($reportId);
+
   sleep(15);
 
   // Get the report using the report id
@@ -78,9 +79,9 @@ for ($i = 0; $i < 60; $i++) {
       $sql = 'INSERT INTO campaigns (campaign_name, amz_campaign_id, daily_budget) VALUES (:campaign_name, :amz_campaign_id, :daily_budget)';
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
-        ':campaign_name'    => htmlspecialchars($result['campaignName'], ENT_QUOTES),
-        ':amz_campaign_id'  => $result['campaignId'],
-        ':daily_budget'     => $result['campaignBudget']
+        ':campaign_name'    => htmlspecialchars($result[$x]['campaignName'], ENT_QUOTES),
+        ':amz_campaign_id'  => $result[$x]['campaignId'],
+        ':daily_budget'     => $result[$x]['campaignBudget']
       ));
     }
   }
