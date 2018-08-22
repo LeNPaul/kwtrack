@@ -3,13 +3,13 @@ namespace AmazonAdvertisingApi;
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 require '../../../database/pdo.inc.php';
 require_once '../../AmazonAdvertisingApi/Client.php';
+//'Atzr|IwEBID8Cr8D51I4XzWRU5wdohHUoGJRY1rempo6uwgk_niC5AgqZo_SVul0Nt8V5oU1j8P2T08oPjR8gLKSsWnJuAflfBzcMky0NzBoKcSIYH62WJ4I86G6t4jGxU7fitoLO79TJPFjCoHPXyjnvaNLxFaJPxOaW3t4fLBH9-1RGsAaEdrP0-r85iVNgG_pQE2HA7bl_ZMqWoJbXhww-YEsfMH6tBKXG0S0dMreLkEkdx75eABfzKwdDm9jokTL8YZjkqj1ELRFOwK6Pgv1PsYTvdI2Us1fTw-Bu1n_n4am_vlrK4ntseK_dqFHvrV4_h0aup1hoChA5KZD2ID3fG4e4be4iCRC66QdJxmjv_q_o8RxoZR_bG0vhlkU2rSYKnMnZOj7nkRS2Z6JoRPWRLw7nP8nEfHLRkCQnrOn2PHkrKX7MWTIWt1f-_rkr3ocfvgKfcixFvTc6XmNGg0IYbVidw0thS3-AgSpnGaG0O7Q-W9VZPFRFtas1PltUG69LL0ko2EOz6yW-RG9071MfpUMgre2_TUildA68rlcdikXtNfMtyYNwqvQhlSZ_eVXWGclIpk4XQ39a-5eJiB8HVfsAvgdF'/*$argv[1]*/;
+$refreshToken = $argv[1];
+$user_id = $argv[2];
+//'1215041354659387'
+$profileId = ;
 
-$refreshToken = 'Atzr|IwEBID8Cr8D51I4XzWRU5wdohHUoGJRY1rempo6uwgk_niC5AgqZo_SVul0Nt8V5oU1j8P2T08oPjR8gLKSsWnJuAflfBzcMky0NzBoKcSIYH62WJ4I86G6t4jGxU7fitoLO79TJPFjCoHPXyjnvaNLxFaJPxOaW3t4fLBH9-1RGsAaEdrP0-r85iVNgG_pQE2HA7bl_ZMqWoJbXhww-YEsfMH6tBKXG0S0dMreLkEkdx75eABfzKwdDm9jokTL8YZjkqj1ELRFOwK6Pgv1PsYTvdI2Us1fTw-Bu1n_n4am_vlrK4ntseK_dqFHvrV4_h0aup1hoChA5KZD2ID3fG4e4be4iCRC66QdJxmjv_q_o8RxoZR_bG0vhlkU2rSYKnMnZOj7nkRS2Z6JoRPWRLw7nP8nEfHLRkCQnrOn2PHkrKX7MWTIWt1f-_rkr3ocfvgKfcixFvTc6XmNGg0IYbVidw0thS3-AgSpnGaG0O7Q-W9VZPFRFtas1PltUG69LL0ko2EOz6yW-RG9071MfpUMgre2_TUildA68rlcdikXtNfMtyYNwqvQhlSZ_eVXWGclIpk4XQ39a-5eJiB8HVfsAvgdF'/*$argv[1]*/;
-$user_id = 2 /*$argv[2]*/ ;
-$profileId = '1215041354659387';
 
-echo ("will it echo?");
-/*
 // Instantiate client for advertising API
 $config = array(
   "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
@@ -22,9 +22,6 @@ $client = new Client($config);
 $client->profileId = $profileId;
 echo "finished";
 
-*/
-
-/*
 // First, grab campaigns and store them in db
 $result = $client->listCampaigns(array("stateFilter" => "enabled", "stateFilter" => "paused"));
 $campJson = $result['response'];
@@ -47,9 +44,6 @@ for ($i = 0; $i < count($campaigns); $i++) {
   ));
 }
 
-*/
-
-/*
 // Second, grab ad groups and store them in db
 $result = $client->listAdGroups(array("stateFilter" => "enabled", "stateFilter" => "paused"));
 $adgrJson = $result['response'];
@@ -71,4 +65,3 @@ for ($i = 0; $i < count($adgroups); $i++) {
   //   ':state' =
   //));
 }
-*/
