@@ -73,8 +73,6 @@ for ($i = 0; $i < 60; $i++) {
     $result = $client->getReport($reportId);
     $result = json_decode($result['response'], true);
 
-    echo '<br /><br />' . count($result) . '<br /><br />';
-
     for ($x = 0; $x < count($result); $x++) {
       $sql = 'INSERT INTO campaigns (user_id, campaign_name, amz_campaign_id, daily_budget) VALUES (:user_id, :campaign_name, :amz_campaign_id, :daily_budget)';
       $stmt = $pdo->prepare($sql);
@@ -116,6 +114,9 @@ for ($i = 0; $i < 60; $i++) {
   // These variables only track cost and sales for the day
   $totalCost = 0.0;
   $totalSales = 0.0;
+
+  echo '<br /><br />' . count($result) . '<br /><br />';
+
 
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
