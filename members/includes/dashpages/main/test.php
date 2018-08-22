@@ -183,7 +183,7 @@ $currentImpressions = new SplFixedArray(60);
 // Grab impression data from array and store in their respective campaigns
 for ($i = 0; $i < 60; $i++) {
   echo "calling impressions[{$i}]";
-  var_dump($impressions[{$i}]);
+  var_dump($impressions[$i]);
   echo '<br /><br />';
   for ($j = 0; $j < count($impressions[$i]); $j++) {
     $currentImpressions[$j][] = array_shift($impressions[$i]);
