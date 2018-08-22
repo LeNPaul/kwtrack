@@ -153,16 +153,14 @@ for ($i = 0; $i < 60; $i++) {
       if ($result[$j]['impressions'] == 0) {
         $ctr[$i][] = 0.0;
       } else {
-        $str[$i][] = (double)($result[$j]['clicks'] / $result[$j]['impressions']);
+        $ctr[$i][] = (double)($result[$j]['clicks'] / $result[$j]['impressions']);
       }
 
       // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
       if ($result[$j]['clicks'] == 0) {
-        array_push($avgCpc[$i], 0.0);
+        $avgCpc[$i][] = 0.0;
       } else {
-        $val = (double)($result[$j]['cost'] / $result[$j]['clicks']);
-        array_push($avgCpc[$i], $val);
-
+        $avgCpc[$i][] = (double)($result[$j]['cost'] / $result[$j]['clicks']);
       }
 
       // Push ad spend, units sold, and $ sales for the day to our arrays.
