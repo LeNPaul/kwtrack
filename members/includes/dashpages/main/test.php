@@ -207,23 +207,35 @@ $dbSales = [];
 
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
+// Grab impression data from array and store in their respective campaigns
+$dbClicks = prepareDbArrays($clicks, $dbClicks);
+// Grab impression data from array and store in their respective campaigns
+$dbCtr = prepareDbArrays($ctr, $dbCtr);
+// Grab impression data from array and store in their respective campaigns
+$dbAdSpend = prepareDbArrays($adSpend, $dbAdSpend);
+// Grab impression data from array and store in their respective campaigns
+$dbAvgCpc = prepareDbArrays($avgCpc, $dbAvgCpc);
+// Grab impression data from array and store in their respective campaigns
+$dbUnitsSold = prepareDbArrays($unitsSold, $dbUnitsSold);
+// Grab impression data from array and store in their respective campaigns
+$dbSales = prepareDbArrays($sales, $dbSales);
 
 
 echo '<pre>';
 echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
 var_dump($dbImpressions);
 echo '<hr /><h1>CLICKS</h1><br /><br />';
-var_dump($clicks);
+var_dump($dbClicks);
 echo '<hr /><h1>CTR</h1><br /><br />';
-var_dump($ctr);
+var_dump($dbCtr);
 echo '<hr /><h1>ADSPEND</h1><br /><br />';
-var_dump($adSpend);
+var_dump($dbAdSpend);
 echo '<hr /><h1>CPC</h1><br /><br />';
-var_dump($avgCpc);
+var_dump($dbAvgCpc);
 echo '<hr /><h1>UNITS SOLD</h1><br /><br />';
-var_dump($unitsSold);
+var_dump($dbUnitsSold);
 echo '<hr /><h1>SALES</h1><br /><br />';
-var_dump($sales);
+var_dump($dbSales);
 echo '<hr /><h1>ACOS</h1><br /><br />';
 var_dump($acos);
 echo '</pre>';
