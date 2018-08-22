@@ -122,7 +122,7 @@ for ($i = 0; $i < 60; $i++) {
     if ($result[$j]['campaignStatus'] == 'archived') {
       $impressions[$i][] = 0;
       $clicks[$i][] = 0;
-      $ctr[$i][] = 0;
+      $ctr[$i][] = 0.0;
       $adSpend[$i][] = 0.0;
       $avgCpc[$i][] = 0.0;
       $unitsSold[$i][] = 0;
@@ -133,14 +133,14 @@ for ($i = 0; $i < 60; $i++) {
 
       // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
       if ($result[$j]['impressions'] == 0) {
-        $ctr[$i][] = 0;
+        $ctr[$i][] = 0.0;
       } else {
         $str[$i][] = (double)($result[$j]['clicks'] / $result[$j]['impressions']);
       }
 
       // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
       if ($result[$j]['clicks'] == 0) {
-        $avgCpc[$i][] = 0;
+        $avgCpc[$i][] = 0.0;
       } else {
         $avgCpc[$i][] = (double)($result[$j]['cost'] / $result[$j]['clicks']);
       }
@@ -154,7 +154,7 @@ for ($i = 0; $i < 60; $i++) {
 
   // Calculate ACoS for the day and push it to our array
   if ($totalSales == 0) {
-    $acos[] = 0;
+    $acos[] = 0.0;
   } else {
     $acos[] = (double)($totalCost / $totalSales);
   }
@@ -163,7 +163,7 @@ for ($i = 0; $i < 60; $i++) {
   }
 }
 
-/*
+
 // Grab array of campaigns by their campaign ID
 $sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
 $stmt = $pdo->query($sql);
@@ -181,7 +181,7 @@ for ($i = 0; $i < 60; $i++) {
     $currentImpressions[$j][] = array_shift($impressions[$i]);
   }
 }
-*/
+
 
 
 echo '<pre>';
