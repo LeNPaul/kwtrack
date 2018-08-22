@@ -58,6 +58,16 @@ for ($i = 0; $i < 60; $i++) {
       )
     );
 
+    // Get the report id so we can use it to get the report
+    $result = json_decode($result['response'], true);
+    $reportId = $result['reportId'];
+
+    sleep(6);
+
+    // Get the report using the report id
+    $result = $client->getReport($reportId);
+    $result = json_decode($result['response'], true);
+
     for ($x = 0; $x < count($result); $x++) {
       $sql = 'INSERT INTO campaigns (user_id, campaign_name, amz_campaign_id, daily_budget) VALUES (:user_id, :campaign_name, :amz_campaign_id, :daily_budget)';
       $stmt = $pdo->prepare($sql);
