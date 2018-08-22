@@ -163,6 +163,8 @@ for ($i = 0; $i < 60; $i++) {
   // Calculate ACoS for the day and push it to our array
   if ($totalSales == 0) {
     $acos[] = 0.0;
+    var_dump($acos);
+    echo '<br />';
   } else {
     $acos[] = (double)($totalCost / $totalSales);
     var_dump($acos);
@@ -188,33 +190,23 @@ echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
 var_dump($impressions);
 echo '</pre>';
 
-$currentImpressions = [];
+$dbImpressions = [];
 
 // Grab impression data from array and store in their respective campaigns
 for ($i = 0; $i < 60; $i++) {
   if ($i === 2) { break; }
-  echo "calling impressions[{$i}]";
-  var_dump($impressions[$i]);
-  echo '<br /><br />';
 
   $secondLoopLimit = count($impressions[$i]);
   for ($j = 0; $j < $secondLoopLimit; $j++) {
-    $currentImpressions[$j][] = array_shift($impressions[$i]);
-    echo "<b>Index: $j</b>, <b>Count: $secondLoopLimit</b>";
-    echo "<b>impressions[$i]</b>: ";
-    var_dump($impressions[$i]);
-    echo '<br />';
-    echo "<b>currentImpressions[$j]</b>: ";
-    var_dump($currentImpressions[$j]);
-    echo '<br /><br />';
+    $dbImpressions[$j][] = array_shift($impressions[$i]);
   }
 }
 
 
 
 echo '<pre>';
-echo '<hr /><h1>CURRENT IMPRESSIONS</h1><br /><br />';
-var_dump($currentImpressions);
+echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
+var_dump($dbImpressions);
 echo '<hr /><h1>CLICKS</h1><br /><br />';
 var_dump($clicks);
 echo '<hr /><h1>CTR</h1><br /><br />';
