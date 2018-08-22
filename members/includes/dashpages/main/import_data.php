@@ -7,7 +7,7 @@ require_once '../../AmazonAdvertisingApi/Client.php';
 $refreshToken = $argv[1];
 $user_id = $argv[2];
 //'1215041354659387'
-$profileId = ;
+$profileId = $argv[3];
 
 
 // Instantiate client for advertising API
