@@ -41,6 +41,15 @@ $sales = [];
 $acos = [];
 
 for ($i = 0; $i < 60; $i++) {
+  $impressions[] = [];
+  $clicks[] = [];
+  $ctr[] = [];
+  $adSpend[] = [];
+  $avgCpc[] = [];
+  $unitsSold[] = [];
+  $sales[] = [];
+  $acos[] = [];
+
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
 
