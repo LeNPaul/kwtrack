@@ -91,6 +91,8 @@ for ($i = 0; $i < 60; $i++) {
 
   echo "calling result <br />";
 
+  var_dump($result);
+
   // Get the report id so we can use it to get the report
   $result = json_decode($result['response'], true);
   $reportId = $result['reportId'];
