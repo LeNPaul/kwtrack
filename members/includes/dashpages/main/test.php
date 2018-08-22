@@ -43,7 +43,6 @@ for ($i = 0; $i < 60; $i++) {
   $avgCpc[$i] = [];
   $unitsSold[$i] = [];
   $sales[$i] = [];
-  $acos[$i] = [];
 
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
