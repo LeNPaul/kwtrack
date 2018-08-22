@@ -8,7 +8,7 @@ $refreshToken = 'Atzr|IwEBID8Cr8D51I4XzWRU5wdohHUoGJRY1rempo6uwgk_niC5AgqZo_SVul
 $user_id = 2/*$argv[2]*/;
 $profileId = '1215041354659387';
 
-echo ($refreshToken);
+echo ($argv);
 /*
 // Instantiate client for advertising API
 $config = array(
