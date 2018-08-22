@@ -22,6 +22,17 @@ function prepareDbArrays($dataset, $dbVar) {
   return $dbVar;
 }
 
+function storeCampaignArrays($pdo, $dbVar, $arrCampaignIds, $dbColName) {
+  for ($i = 0; $i < count($arrCampaignIds); $i++) {
+    $sql = "UPDATE campaigns SET {$dbColName}=:value WHERE amz_campaign_id=:amz_campaign_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':value'            => serialize($dbVar[$i]),
+      ':amz_campaign_id'  => $arrCampaignIds[$i]
+    ));
+  }
+}
+
 /* TESTING PURPOSES ONLY */
 $sql = 'DELETE FROM campaigns';
 $stmt = $pdo->prepare($sql);
@@ -205,6 +216,7 @@ $dbSales = [];
 
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
+storeCampaignArrays($pdo, $dbImpressions, $result, 'impressions');
 // Grab impression data from array and store in their respective campaigns
 $dbClicks = prepareDbArrays($clicks, $dbClicks);
 // Grab impression data from array and store in their respective campaigns
