@@ -54,7 +54,7 @@ for ($i = 0; $i < 60; $i++) {
   $reportId = $result['reportId'];
   var_dump($reportId);
 
-  sleep(15);
+  sleep(6);
 
   // Get the report using the report id
   $result = $client->getReport($reportId);
