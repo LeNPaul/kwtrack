@@ -214,9 +214,11 @@ storeCampaignArrays($pdo, $dbSales, $result, 'sales');
 
 /*
  *
- *    SECOND, IMPORT CAMPAIGNS
+ *    SECOND, IMPORT AD_GROUPS
  *
  */
+ 
+ 
 
 echo '<pre>';
 echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
