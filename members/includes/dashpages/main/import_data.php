@@ -7,6 +7,8 @@ require_once '../../AmazonAdvertisingApi/Client.php';
 //'1215041354659387'
 $myFile = fopen("testFile.txt", w);
 
+
+/*
 // Instantiate client for advertising API
 $config = array(
   "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
@@ -57,3 +59,4 @@ for ($i = 0; $i < count($adgroups); $i++) {
   //));
 }
 exit();
+*/
