@@ -61,12 +61,12 @@ function is_windows(){
 echo 'running exec <br /><br />';
 //exec("php import_data.php > /dev/null 2>&1");
 //launchBackgroundProcess("php import_data.php");
-echo pclose(popen('php import_data.php /dev/null &', 'r'));
+pclose(popen('php import_data.php /dev/null &', 'r'));
 echo 'finished running exec <br />';
 
 
 //shell_exec("php import_data.php $refreshToken $user_id $profileId > /dev/null &");
 
 // Redirect to dashboard
-header('location: ../../../dashboard.php');
-//exit();
+// header('location: ../../../dashboard.php');
+// exit();
