@@ -26,7 +26,7 @@ $refreshToken = $result[0]['refresh_token'];
 //$user_id = $_SESSION['user_id'];
 echo 'running exec <br /><br />';
 //exec("php import_data.php > /dev/null 2>&1");
-shell_exec("nohup php -f import_data.php 2>&1 >> phpbg-out.txt");
+exec("php -f import_data.php 2>&1 >> phpbg-out.txt");
 echo 'finished running exec <br />';
 
 
