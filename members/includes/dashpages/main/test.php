@@ -24,6 +24,12 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
+/*
+ *
+ *    FIRST, IMPORT CAMPAIGNS
+ *
+ */
+
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
 //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
@@ -163,7 +169,6 @@ for ($i = 0; $i < 60; $i++) {
   }
 }
 
-
 // Grab array of campaigns by their campaign ID
 $sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
 $stmt = $pdo->query($sql);
@@ -206,6 +211,12 @@ storeCampaignArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 // Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
 storeCampaignArrays($pdo, $dbSales, $result, 'sales');
+
+/*
+ *
+ *    SECOND, IMPORT CAMPAIGNS
+ *
+ */
 
 echo '<pre>';
 echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
