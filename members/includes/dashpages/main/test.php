@@ -2,36 +2,8 @@
 namespace AmazonAdvertisingApi;
 require_once '../../AmazonAdvertisingApi/Client.php';
 require '../../../database/pdo.inc.php';
+require '../helper.inc.php';
 use PDO;
-
-/*
- *  function prepareDbArrays(Array $dataset) --> Array $dbVar
- *    --> Takes $dataset and prepares it for insertion in database
- *
- *      --> Array $dataset --> unprepared array for specific metric
- *      --> Array $dbVar --> prepared array for specific metric
- */
-function prepareDbArrays($dataset, $dbVar) {
-  for ($i = 0; $i < 60; $i++) {
-    if ($i === 2) { break; }
-    $secondLoopLimit = count($dataset[$i]);
-    for ($j = 0; $j < $secondLoopLimit; $j++) {
-      $dbVar[$j][] = array_shift($dataset[$i]);
-    }
-  }
-  return $dbVar;
-}
-
-function storeCampaignArrays($pdo, $dbVar, $arrCampaignIds, $dbColName) {
-  for ($i = 0; $i < count($arrCampaignIds); $i++) {
-    $sql = "UPDATE campaigns SET {$dbColName}=:value WHERE amz_campaign_id=:amz_campaign_id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
-      ':value'            => serialize($dbVar[$i]),
-      ':amz_campaign_id'  => $arrCampaignIds[$i]
-    ));
-  }
-}
 
 /* TESTING PURPOSES ONLY */
 $sql = 'DELETE FROM campaigns';
@@ -75,7 +47,6 @@ for ($i = 0; $i < 60; $i++) {
 
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
-
 
   // Only on the very first iteration of this loop, we will iterate through the array
   // and store campaign name and campaign ID in the database
@@ -217,19 +188,24 @@ $dbSales = [];
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
 storeCampaignArrays($pdo, $dbImpressions, $result, 'impressions');
-// Grab impression data from array and store in their respective campaigns
+// Grab clicks data from array and store in their respective campaigns
 $dbClicks = prepareDbArrays($clicks, $dbClicks);
-// Grab impression data from array and store in their respective campaigns
+storeCampaignArrays($pdo, $dbClicks, $result, 'clicks');
+// Grab ctr data from array and store in their respective campaigns
 $dbCtr = prepareDbArrays($ctr, $dbCtr);
-// Grab impression data from array and store in their respective campaigns
+storeCampaignArrays($pdo, $dbCtr, $result, 'ctr');
+// Grab ad spend data from array and store in their respective campaigns
 $dbAdSpend = prepareDbArrays($adSpend, $dbAdSpend);
-// Grab impression data from array and store in their respective campaigns
+storeCampaignArrays($pdo, $dbAdSpend, $result, 'ad_spend');
+// Grab average cpc data from array and store in their respective campaigns
 $dbAvgCpc = prepareDbArrays($avgCpc, $dbAvgCpc);
-// Grab impression data from array and store in their respective campaigns
+storeCampaignArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
+// Grab units sold data from array and store in their respective campaigns
 $dbUnitsSold = prepareDbArrays($unitsSold, $dbUnitsSold);
-// Grab impression data from array and store in their respective campaigns
+storeCampaignArrays($pdo, $dbUnitsSold, $result, 'units_sold');
+// Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
-
+storeCampaignArrays($pdo, $dbSales, $result, 'sales');
 
 echo '<pre>';
 echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
