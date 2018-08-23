@@ -35,11 +35,11 @@ $refreshToken = $result[0]['refresh_token'];
 function launchBackgroundProcess($call) {
     // Windows
     if(is_windows()){
-        pclose(popen(‘start /b ‘.$call.”, ‘r’));
+        pclose(popen('start /b '.$call, 'r'));
     }
     // Some sort of UNIX
     else {
-        pclose(popen($call.‘ /dev/null &’, ‘r’));
+        pclose(popen($call.' /dev/null &', 'r'));
     }
     return true;
 }
@@ -52,7 +52,7 @@ function launchBackgroundProcess($call) {
 * @author raccettura
 */
 function is_windows(){
-    if(PHP_OS == ‘WINNT’ || PHP_OS == ‘WIN32’){
+    if(PHP_OS == 'WINNT' || PHP_OS == 'WIN32'){
         return true;
     }
     return false;
