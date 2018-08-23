@@ -146,7 +146,7 @@ for ($i = 0; $i < 60; $i++) {
       }
 
       // Push ad spend, units sold, and $ sales for the day to our arrays.
-      $adSpend[$i][] = $result[$j]['cost'];
+      $adSpend[$i][] = round($result[$j]['cost'], 2);
       $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
       $sales[$i][] = $result[$j]['attributedSales1d'];
     }
