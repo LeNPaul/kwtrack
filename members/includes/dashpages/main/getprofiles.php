@@ -60,7 +60,8 @@ function is_windows(){
 
 echo 'running exec <br /><br />';
 //exec("php import_data.php > /dev/null 2>&1");
-launchBackgroundProcess("php import_data.php");
+//launchBackgroundProcess("php import_data.php");
+echo pclose(popen('php import_data.php /dev/null &', 'r'));
 echo 'finished running exec <br />';
 
 
