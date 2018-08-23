@@ -24,9 +24,43 @@ $refreshToken = $result[0]['refresh_token'];
 */
 // Run campaign importing in background [FIX WHEN YOU COME BACK]
 //$user_id = $_SESSION['user_id'];
+
+/**
+* Launch Background Process
+*
+* Launches a background process (note, provides no security itself, $call must be sanitized prior to use)
+* @param string $call the system call to make
+* @author raccettura
+*/
+function launchBackgroundProcess($call) {
+    // Windows
+    if(is_windows()){
+        pclose(popen(‘start /b ‘.$call.”, ‘r’));
+    }
+    // Some sort of UNIX
+    else {
+        pclose(popen($call.‘ /dev/null &’, ‘r’));
+    }
+    return true;
+}
+
+
+/**
+* Is Windows
+*
+* Tells if we are running on Windows Platform
+* @author raccettura
+*/
+function is_windows(){
+    if(PHP_OS == ‘WINNT’ || PHP_OS == ‘WIN32’){
+        return true;
+    }
+    return false;
+}
+
 echo 'running exec <br /><br />';
 //exec("php import_data.php > /dev/null 2>&1");
-exec("php -f import_data.php 2>&1 >> phpbg-out.txt");
+launchBackgroundProcess("php import_data.php");
 echo 'finished running exec <br />';
 
 
