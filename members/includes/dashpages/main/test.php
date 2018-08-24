@@ -203,6 +203,7 @@ $adSpend = [];
 $avgCpc = [];
 $unitsSold = [];
 $sales = [];
+$extraArray = [];
 
 for ($i = 0; $i < 60; $i++) {
   $impressions[$i] = [];
@@ -241,7 +242,7 @@ for ($i = 0; $i < 60; $i++) {
 	
     for ($x = 0; $x < count($result); $x++) {
 	  $extra = $client->getAdGroup($result[$x]['adGroupId'];
-	  $extra = json_decode($extra['response', true);
+	  $extraArray[] = json_decode($extra['response', true);
       $sql = 'INSERT INTO ad_groups (user_id, status, default_bid, amz_adgroup_id, amz_campaign_id, ad_group_name)
               VALUES (:user_id, :status, :default_bid, :adgroup_id, :amz_campaign_id, :adgroup_name)';
       $stmt = $pdo->prepare($sql);
@@ -258,7 +259,7 @@ for ($i = 0; $i < 60; $i++) {
   } else {
 	// All other iterations, we request this report to optimize time
     $result = $client->requestReport(
-      "campaigns",
+      "adGroups",
       array("reportDate"    => "20180627", // placeholder date
             "campaignType"  => "sponsoredProducts",
             "metrics"       => "campaignId,adGroupName,adGroupId,impressions,clicks,cost,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
@@ -274,6 +275,43 @@ for ($i = 0; $i < 60; $i++) {
     // Get the report using the report id
     $result = $client->getReport($reportId);
     $result = json_decode($result['response'], true);
+  }
+  
+    // Loop to iterate through the report response
+  for ($j = 0; $j < count($result); $j++) {
+
+    // Check if campaign is archived/paused. If it is archived/paused, then we push 0 for all metrics
+    if ($extraArray[$j]['state'] == 'archived' || $extraArray[$j]['state'] == 'paused') {
+      $impressions[$i][] = 0;
+      $clicks[$i][] = 0;
+      $ctr[$i][] = 0.0;
+      $adSpend[$i][] = 0.0;
+      $avgCpc[$i][] = 0.0;
+      $unitsSold[$i][] = 0;
+      $sales[$i][] = 0.0;
+    } else { // If campaign is active, then run this code
+      $impressions[$i][] = $result[$j]['impressions'];
+      $clicks[$i][] = $result[$j]['clicks'];
+
+      // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
+      if ($result[$j]['impressions'] == 0) {
+        $ctr[$i][] = 0.0;
+      } else {
+        $ctr[$i][] = round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
+      }
+
+      // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
+      if ($result[$j]['clicks'] == 0) {
+        $avgCpc[$i][] = 0.0;
+      } else {
+        $avgCpc[$i][] = round(($result[$j]['cost'] / $result[$j]['clicks']), 2);
+      }
+
+      // Push ad spend, units sold, and $ sales for the day to our arrays.
+      $adSpend[$i][] = round($result[$j]['cost'], 2);
+      $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
+      $sales[$i][] = $result[$j]['attributedSales1d'];
+    }
   }
 }
 
