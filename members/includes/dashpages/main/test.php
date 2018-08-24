@@ -250,9 +250,9 @@ for ($i = 0; $i < 60; $i++) {
         ':user_id'          => $user_id,
 		':status'			=> $extra['state'],
 		':default_bid'		=> $extra['defaultBid'],
-		':adgroup_id'		=> $result[$x]['adGroupId'],
-        ':amz_campaign_id'  => $result[$x]['campaignId'],
-        ':adgroup_name'     => $result[$x]['campaignBudget']
+		':adgroup_id'		=> $extra['adGroupId'],
+        ':amz_campaign_id'  => $extra['campaignId'],
+        ':adgroup_name'     => $extra'name'
       ));
     }
 	
@@ -277,7 +277,7 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
   }
   
-    // Loop to iterate through the report response
+    // Loop to iterate through the report response, CONTINUE HERE
   for ($j = 0; $j < count($result); $j++) {
 
     // Check if campaign is archived/paused. If it is archived/paused, then we push 0 for all metrics
