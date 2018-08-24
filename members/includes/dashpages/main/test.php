@@ -40,7 +40,6 @@ $adSpend = [];
 $avgCpc = [];
 $unitsSold = [];
 $sales = [];
-$acos = [];
 
 for ($i = 0; $i < 60; $i++) {
   $impressions[$i] = [];
@@ -110,19 +109,8 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
   }
 
-  // Initialize variables that we need in order to calculate ACoS for the DAY
-  // These variables only track cost and sales for the day
-  $totalCost = 0.0;
-  $totalSales = 0.0;
-
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
-
-    // Take into account cost, and sales so we can calculate the average later
-    if ($result[$j]['cost'] != 0 || $result[$j]['attributedSales1d'] != 0) {
-      $totalCost += (double)$result[$j]['cost'];
-      $totalSales += (double)$result[$j]['attributedSales1d'];
-    }
 
     // Check if campaign is archived/paused. If it is archived/paused, then we push 0 for all metrics
     if ($result[$j]['campaignStatus'] == 'archived' || $result[$j]['campaignStatus'] == 'paused') {
@@ -156,16 +144,6 @@ for ($i = 0; $i < 60; $i++) {
       $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
       $sales[$i][] = $result[$j]['attributedSales1d'];
     }
-  }
-
-  // Calculate ACoS for the day and push it to our array
-  if ($totalSales == 0) {
-    $acos[] = 0.0;
-  } else {
-    $acos[] = (double)($totalCost / $totalSales);
-  }
-  if ($i === 1) {
-    break;
   }
 }
 
@@ -218,7 +196,86 @@ storeCampaignArrays($pdo, $dbSales, $result, 'sales');
  *
  */
  
- 
+$impressions = [];
+$clicks = [];
+$ctr = [];
+$adSpend = [];
+$avgCpc = [];
+$unitsSold = [];
+$sales = [];
+
+for ($i = 0; $i < 60; $i++) {
+  $impressions[$i] = [];
+  $clicks[$i] = [];
+  $ctr[$i] = [];
+  $adSpend[$i] = [];
+  $avgCpc[$i] = [];
+  $unitsSold[$i] = [];
+  $sales[$i] = [];
+
+  // Get date from $i days before today and format it as YYYYMMDD
+  $date = date('Ymd', strtotime('-' . $i . ' days'));
+  
+  // Only on the very first iteration of this loop, we will iterate through the array
+  // and store campaign name and campaign ID in the database
+  if ($i === 0) {
+    // Request the report from API with adGroup name, adGroup Id and campaign Id only
+    // for the first iteration
+    $result = $client->requestReport(
+      "adGroups",
+      array("reportDate"    => "20180713", // placeholder date
+            "campaignType"  => "sponsoredProducts",
+            "metrics"       => "campaignId,adGroupName,adGroupId,impressions,clicks,cost,impressions,clicks,attributedUnitsOrdered1d,attributedSales1d"
+      )
+    );
+	
+	// Get the report id so we can use it to get the report
+    $result = json_decode($result['response'], true);
+    $reportId = $result['reportId'];
+
+    sleep(7);
+
+    // Get the report using the report id
+    $result = $client->getReport($reportId);
+    $result = json_decode($result['response'], true);
+	
+    for ($x = 0; $x < count($result); $x++) {
+	  $extra = $client->getAdGroup($result[$x]['adGroupId'];
+	  $extra = json_decode($extra['response', true);
+      $sql = 'INSERT INTO ad_groups (user_id, status, default_bid, amz_adgroup_id, amz_campaign_id, ad_group_name)
+              VALUES (:user_id, :status, :default_bid, :adgroup_id, :amz_campaign_id, :adgroup_name)';
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute(array(
+        ':user_id'          => $user_id,
+		':status'			=> $extra['state'],
+		':default_bid'		=> $extra['defaultBid'],
+		':adgroup_id'		=> $result[$x]['adGroupId'],
+        ':amz_campaign_id'  => $result[$x]['campaignId'],
+        ':adgroup_name'     => $result[$x]['campaignBudget']
+      ));
+    }
+	
+  } else {
+	// All other iterations, we request this report to optimize time
+    $result = $client->requestReport(
+      "campaigns",
+      array("reportDate"    => "20180627", // placeholder date
+            "campaignType"  => "sponsoredProducts",
+            "metrics"       => "campaignId,adGroupName,adGroupId,impressions,clicks,cost,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
+      )
+    );
+
+    // Get the report id so we can use it to get the report
+    $result = json_decode($result['response'], true);
+    $reportId = $result['reportId'];
+
+    sleep(7);
+
+    // Get the report using the report id
+    $result = $client->getReport($reportId);
+    $result = json_decode($result['response'], true);
+  }
+}
 
 echo '<pre>';
 echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
