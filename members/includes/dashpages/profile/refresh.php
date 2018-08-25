@@ -66,7 +66,7 @@ $profiles = json_decode(stripslashes($request['response']),true);
 $_SESSION['profiles'] = $profiles;
 
 // Set new session var to active = 2
-$_SESSION['active'] = 2;
+$_SESSION['active'] = 1;
 
 // Start importing data
 //$user_id = $_SESSION['user_id'];
