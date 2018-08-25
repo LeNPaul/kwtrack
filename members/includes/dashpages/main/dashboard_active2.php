@@ -53,7 +53,7 @@ function displayProfiles($profiles) {
 			$("button").click(function(){
 				$.ajax({
 					type: 'POST',
-					url: 'getprofiles.php',
+					url: 'includes/dashpages/main/getprofiles.php',
 					success: function(data) {
 						alert("success");
 					}
