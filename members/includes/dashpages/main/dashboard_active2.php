@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
  *  User will see this page if they have activated and authorized their profiles.
  *  Users will have a refresh token at this point and will have to choose which profile they
@@ -43,12 +44,6 @@ function displayProfiles($profiles) {
 	<p>Here are the profiles that we detected on your Seller Central account. Please select the profile that you would like to integrate PPCOLOGY with.</p>
 
 	<?php 
-	
-	
-	
-	
-	
-	
 	echo displayProfiles($_SESSION['profiles']);
 	?>
 	
