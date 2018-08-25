@@ -41,6 +41,17 @@
      ));
    }
  }
+ 
+ function storeAdGroupArrays($pdo, $dbVar, $arrAdGroupIds, $dbColName) {
+	for ($i = 0; $i < count(arrAdGroupIds); $i++) {
+		$sql "UPDATE ad_groups SET {$dbColName}=:value WHERE amz_adgroup_id=:amz_adgroup_id";
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute(array(
+			':value'			=> serialize(dbVar[$i]),
+			':amz_campaign_id'	=> $arrAdGroupIds[$i]
+			));
+	}
+ }
 
 function getRefreshToken($pdo, $user_id) {
   $sql = 'SELECT refresh_token FROM users WHERE user_id=:user_id';

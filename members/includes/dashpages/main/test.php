@@ -170,25 +170,25 @@ $dbSales = [];
 
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
-storeCampaignArrays($pdo, $dbImpressions, $result, 'impressions');
+storeAdGroupArrays($pdo, $dbImpressions, $result, 'impressions');
 // Grab clicks data from array and store in their respective campaigns
 $dbClicks = prepareDbArrays($clicks, $dbClicks);
-storeCampaignArrays($pdo, $dbClicks, $result, 'clicks');
+storeAdGroupArrays($pdo, $dbClicks, $result, 'clicks');
 // Grab ctr data from array and store in their respective campaigns
 $dbCtr = prepareDbArrays($ctr, $dbCtr);
-storeCampaignArrays($pdo, $dbCtr, $result, 'ctr');
+storeAdGroupArrays($pdo, $dbCtr, $result, 'ctr');
 // Grab ad spend data from array and store in their respective campaigns
 $dbAdSpend = prepareDbArrays($adSpend, $dbAdSpend);
-storeCampaignArrays($pdo, $dbAdSpend, $result, 'ad_spend');
+storeAdGroupArrays($pdo, $dbAdSpend, $result, 'ad_spend');
 // Grab average cpc data from array and store in their respective campaigns
 $dbAvgCpc = prepareDbArrays($avgCpc, $dbAvgCpc);
-storeCampaignArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
+storeAdGroupArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
 // Grab units sold data from array and store in their respective campaigns
 $dbUnitsSold = prepareDbArrays($unitsSold, $dbUnitsSold);
-storeCampaignArrays($pdo, $dbUnitsSold, $result, 'units_sold');
+storeAdGroupArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 // Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
-storeCampaignArrays($pdo, $dbSales, $result, 'sales');
+storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 /*
  *
@@ -277,7 +277,7 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
   }
   
-    // Loop to iterate through the report response, CONTINUE HERE
+    // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
 
     // Check if campaign is archived/paused. If it is archived/paused, then we push 0 for all metrics
@@ -314,6 +314,47 @@ for ($i = 0; $i < 60; $i++) {
     }
   }
 }
+
+// Grab array of adGroups by their adGroup ID
+$sql = 'SELECT amz_adgroup_id FROM ad_groups WHERE user_id=' . htmlspecialchars($user_id);
+$stmt = $pdo->query($sql);
+$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+echo '<pre>';
+echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
+var_dump($impressions);
+echo '</pre>';
+
+// Declare arrays that we will serialize and store in the database
+$dbImpressions = [];
+$dbClicks = [];
+$dbCtr = [];
+$dbAdSpend = [];
+$dbAvgCpc = [];
+$dbUnitsSold = [];
+$dbSales = [];
+
+// Grab impression data from array and store in their respective campaigns
+$dbImpressions = prepareDbArrays($impressions, $dbImpressions);
+storeAdGroupArrays($pdo, $dbImpressions, $result, 'impressions');
+// Grab clicks data from array and store in their respective campaigns
+$dbClicks = prepareDbArrays($clicks, $dbClicks);
+storeAdGroupArrays($pdo, $dbClicks, $result, 'clicks');
+// Grab ctr data from array and store in their respective campaigns
+$dbCtr = prepareDbArrays($ctr, $dbCtr);
+storeAdGroupArrays($pdo, $dbCtr, $result, 'ctr');
+// Grab ad spend data from array and store in their respective campaigns
+$dbAdSpend = prepareDbArrays($adSpend, $dbAdSpend);
+storeAdGroupArrays($pdo, $dbAdSpend, $result, 'ad_spend');
+// Grab average cpc data from array and store in their respective campaigns
+$dbAvgCpc = prepareDbArrays($avgCpc, $dbAvgCpc);
+storeAdGroupArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
+// Grab units sold data from array and store in their respective campaigns
+$dbUnitsSold = prepareDbArrays($unitsSold, $dbUnitsSold);
+storeAdGroupArrays($pdo, $dbUnitsSold, $result, 'units_sold');
+// Grab sales data from array and store in their respective campaigns
+$dbSales = prepareDbArrays($sales, $dbSales);
+storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 echo '<pre>';
 echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
