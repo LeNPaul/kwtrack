@@ -38,6 +38,8 @@ function displayProfiles($profiles) {
 
 ?>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 <div class="container text-center">
 	<h2>Select Your Profile</h2>
 	<p>Here are the profiles that we detected on your Seller Central account. Please select the profile that you would like to integrate PPCOLOGY with.</p>
