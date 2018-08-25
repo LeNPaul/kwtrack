@@ -1,5 +1,4 @@
 <?php
-session_start();
 /*
  *  User will see this page if they have activated and authorized their profiles.
  *  Users will have a refresh token at this point and will have to choose which profile they
