@@ -1,8 +1,14 @@
 <?php
 session_start();
+namespace AmazonAdvertisingApi;
 require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
+require_once '../../AmazonAdvertisingApi/Client.php';
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
+
+$sql = 'INSERT INTO users (first_name) VALUES (:first_name)';
+$stmt = $pdo->prepare($sql);
+$stmt->execute(array(':first_name' => "alfksjdhfldskjfhsdflkjh"));
 
 /*
 // Insert profileID in database for the user and set active level to 3
@@ -25,6 +31,9 @@ $refreshToken = $result[0]['refresh_token'];
 // Run campaign importing in background [FIX WHEN YOU COME BACK]
 //$user_id = $_SESSION['user_id'];
 
+
+
+
 /**
 * Launch Background Process
 *
@@ -32,6 +41,8 @@ $refreshToken = $result[0]['refresh_token'];
 * @param string $call the system call to make
 * @author raccettura
 */
+
+/*
 function launchBackgroundProcess($call) {
     // Windows
     if(is_windows()){
@@ -43,7 +54,7 @@ function launchBackgroundProcess($call) {
     }
     return true;
 }
-
+*/
 
 /**
 * Is Windows
@@ -51,6 +62,8 @@ function launchBackgroundProcess($call) {
 * Tells if we are running on Windows Platform
 * @author raccettura
 */
+
+/*
 function is_windows(){
     if(PHP_OS == 'WINNT' || PHP_OS == 'WIN32'){
         return true;
@@ -70,3 +83,5 @@ echo 'finished running exec <br />';
 // Redirect to dashboard
 // header('location: ../../../dashboard.php');
 // exit();
+
+*/
