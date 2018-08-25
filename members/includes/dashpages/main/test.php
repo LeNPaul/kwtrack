@@ -170,32 +170,32 @@ $dbSales = [];
 
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
-storeAdGroupArrays($pdo, $dbImpressions, $result, 'impressions');
+storeCampaignArrays($pdo, $dbImpressions, $result, 'impressions');
 // Grab clicks data from array and store in their respective campaigns
 $dbClicks = prepareDbArrays($clicks, $dbClicks);
-storeAdGroupArrays($pdo, $dbClicks, $result, 'clicks');
+storeCampaignArrays($pdo, $dbClicks, $result, 'clicks');
 // Grab ctr data from array and store in their respective campaigns
 $dbCtr = prepareDbArrays($ctr, $dbCtr);
-storeAdGroupArrays($pdo, $dbCtr, $result, 'ctr');
+storeCampaignArrays($pdo, $dbCtr, $result, 'ctr');
 // Grab ad spend data from array and store in their respective campaigns
 $dbAdSpend = prepareDbArrays($adSpend, $dbAdSpend);
-storeAdGroupArrays($pdo, $dbAdSpend, $result, 'ad_spend');
+storeCampaignArrays($pdo, $dbAdSpend, $result, 'ad_spend');
 // Grab average cpc data from array and store in their respective campaigns
 $dbAvgCpc = prepareDbArrays($avgCpc, $dbAvgCpc);
-storeAdGroupArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
+storeCampaignArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
 // Grab units sold data from array and store in their respective campaigns
 $dbUnitsSold = prepareDbArrays($unitsSold, $dbUnitsSold);
-storeAdGroupArrays($pdo, $dbUnitsSold, $result, 'units_sold');
+storeCampaignArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 // Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
-storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
+storeCampaignArrays($pdo, $dbSales, $result, 'sales');
 
 /*
  *
  *    SECOND, IMPORT AD_GROUPS
  *
  */
- 
+
 $impressions = [];
 $clicks = [];
 $ctr = [];
@@ -216,7 +216,7 @@ for ($i = 0; $i < 60; $i++) {
 
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
-  
+
   // Only on the very first iteration of this loop, we will iterate through the array
   // and store campaign name and campaign ID in the database
   if ($i === 0) {
@@ -229,7 +229,7 @@ for ($i = 0; $i < 60; $i++) {
             "metrics"       => "campaignId,adGroupName,adGroupId,impressions,clicks,cost,impressions,clicks,attributedUnitsOrdered1d,attributedSales1d"
       )
     );
-	
+
 	// Get the report id so we can use it to get the report
     $result = json_decode($result['response'], true);
     $reportId = $result['reportId'];
@@ -239,7 +239,7 @@ for ($i = 0; $i < 60; $i++) {
     // Get the report using the report id
     $result = $client->getReport($reportId);
     $result = json_decode($result['response'], true);
-	
+
     for ($x = 0; $x < count($result); $x++) {
 	  $extra = $client->getAdGroup($result[$x]['adGroupId'];
 	  $extraArray[] = json_decode($extra['response', true);
@@ -255,7 +255,7 @@ for ($i = 0; $i < 60; $i++) {
         ':adgroup_name'     => $extra'name'
       ));
     }
-	
+
   } else {
 	// All other iterations, we request this report to optimize time
     $result = $client->requestReport(
@@ -276,7 +276,7 @@ for ($i = 0; $i < 60; $i++) {
     $result = $client->getReport($reportId);
     $result = json_decode($result['response'], true);
   }
-  
+
     // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
 
