@@ -41,7 +41,10 @@
      ));
    }
  }
+<<<<<<< HEAD
  
+=======
+>>>>>>> c43c13be49a2795e6337151716f512a009c8f232
  //change
  function storeAdGroupArrays($pdo, $dbVar, $arrAdGroupIds, $dbColName) {
     for ($i = 0; $i < count(arrAdGroupIds); $i++) {
