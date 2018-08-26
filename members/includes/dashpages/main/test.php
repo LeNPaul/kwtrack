@@ -381,7 +381,7 @@ $result = $client->requestReport(
   "keywords",
   array("reportDate"    => "20180713", // placeholder date
         "campaignType"  => "sponsoredProducts",
-        "metrics"       => "campaignName,adGroupId,bid,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+        "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
   )
 );
 
