@@ -375,7 +375,7 @@ $sales = [];
 $matchType =
 
 $result = $client->getBiddableKeywordEx(82763020309402);
-var_dump($result); die;
+var_dump($result); echo '<br /><br /><br />';
 
 $result = $client->requestReport(
   "keywords",
