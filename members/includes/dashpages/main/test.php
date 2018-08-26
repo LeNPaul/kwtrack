@@ -375,7 +375,7 @@ $sales = [];
 $matchType =
 
 $result = $client->requestReport(
-  "campaigns",
+  "keywords",
   array("reportDate"    => "20180713", // placeholder date
         "campaignType"  => "sponsoredProducts",
         "metrics"       => "campaignName,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
