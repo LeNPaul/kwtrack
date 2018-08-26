@@ -55,7 +55,7 @@ function displayProfiles($profiles) {
 					type: 'POST',
 					url: 'includes/dashpages/main/getprofiles.php',
 					success: function(data) {
-						alert("success");
+						alert(data.responseText);
 					},
 					error: function(msg, xhr) {
 						alert(msg + ", " + xhr.responseText);
