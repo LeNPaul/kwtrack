@@ -56,6 +56,9 @@ function displayProfiles($profiles) {
 					success: function(data) {
 						alert("success");
 					}
+					error: function(msg, xhr) {
+						alert(msg + ", " + xhr.responseText);
+					}
 				});
 			});
 		});
