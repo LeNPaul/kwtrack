@@ -458,7 +458,7 @@ for ($i = 0; $i < 60; $i++) {
         ':amz_campaign_id'  => $result[$x]['campaignId'],
         ':amz_adgroup_id'   => $result[$x]['adGroupId'],
         ':amz_kw_id'        => $result[$x]['keywordId'],
-        ':match_type'       => $result[$x]['match_type']
+        ':match_type'       => $result[$x]['matchType']
       ));
     }
   } else {
