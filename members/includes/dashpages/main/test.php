@@ -374,14 +374,14 @@ $unitsSold = [];
 $sales = [];
 $matchType =
 
-$result = $client->getBiddableKeywordEx(82763020309402);
-var_dump($result); echo '<br /><br /><br />';
+$result = $client->getBiddableKeyword(82763020309402);
+var_dump($result); echo '<br /><br /><br />'; die;
 
 $result = $client->requestReport(
   "keywords",
   array("reportDate"    => "20180713", // placeholder date
         "campaignType"  => "sponsoredProducts",
-        "metrics"       => "keywordStatus,adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+        "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
   )
 );
 
@@ -399,7 +399,7 @@ echo '<pre>';
 var_dump($result);
 echo '</pre>';
 
-/*
+
 for ($i = 0; $i < 60; $i++) {
   // TESTING PURPOSES ONLY
   if ($i == 1) {
@@ -423,10 +423,10 @@ for ($i = 0; $i < 60; $i++) {
     // Request the report from API with campaign name, campaignId, and campaign budget only
     // for the first iteration
     $result = $client->requestReport(
-      "campaigns",
+      "keywords",
       array("reportDate"    => "20180713", // placeholder date
             "campaignType"  => "sponsoredProducts",
-            "metrics"       => "campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+            "metrics"       => "keywordStatus,adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
       )
     );
 
@@ -441,6 +441,10 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
 
     for ($x = 0; $x < count($result); $x++) {
+      // Get status for each keyword
+      $kw_id = $result['keywordId'];
+
+
       $sql = 'INSERT INTO ppc_keywords (user_id, status, campaign_name, amz_campaign_id, daily_budget)
               VALUES (:user_id, :status, :campaign_name, :amz_campaign_id, :daily_budget)';
       $stmt = $pdo->prepare($sql);
@@ -454,10 +458,10 @@ for ($i = 0; $i < 60; $i++) {
   } else {
     // All other iterations, we request this report to optimize time
     $result = $client->requestReport(
-      "campaigns",
+      "keywords",
       array("reportDate"    => "20180627", // placeholder date
             "campaignType"  => "sponsoredProducts",
-            "metrics"       => "campaignId,impressions,clicks,cost,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
+            "metrics"       => "impressions,clicks,cost,attributedUnitsOrdered1d,attributedSales1d"
       )
     );
 
@@ -571,5 +575,5 @@ var_dump($dbSales);
 echo '<hr /><h1>ACOS</h1><br /><br />';
 var_dump($acos);
 echo '</pre>';
-*/
+
 ?>
