@@ -544,19 +544,19 @@ storeKeywordArrays($pdo, $dbSales, $result, 'sales');
 
 echo '<pre>';
 echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
-var_dump($impressions);
+var_dump($dbImpressions);
 echo '<hr /><h1>CLICKS</h1><br /><br />';
-var_dump($clicks);
+var_dump($dbClicks);
 echo '<hr /><h1>CTR</h1><br /><br />';
-var_dump($ctr);
+var_dump($dbCtr);
 echo '<hr /><h1>ADSPEND</h1><br /><br />';
-var_dump($adSpend);
+var_dump($dbAdSpend);
 echo '<hr /><h1>CPC</h1><br /><br />';
-var_dump($avgCpc);
+var_dump($dbAvgCpc);
 echo '<hr /><h1>UNITS SOLD</h1><br /><br />';
-var_dump($unitsSold);
+var_dump($dbUnitsSold);
 echo '<hr /><h1>SALES</h1><br /><br />';
-var_dump($sales);
+var_dump($dbSales);
 echo '</pre>';
 
 ?>
