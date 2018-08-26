@@ -378,7 +378,7 @@ $result = $client->requestReport(
   "keywords",
   array("reportDate"    => "20180713", // placeholder date
         "campaignType"  => "sponsoredProducts",
-        "metrics"       => "campaignName,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+        "metrics"       => "campaignName,adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
   )
 );
 
@@ -423,7 +423,7 @@ for ($i = 0; $i < 60; $i++) {
       "campaigns",
       array("reportDate"    => "20180713", // placeholder date
             "campaignType"  => "sponsoredProducts",
-            "metrics"       => "campaignName,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+            "metrics"       => "campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
       )
     );
 
