@@ -400,6 +400,7 @@ var_dump($result);
 echo '</pre>';
 
 die;
+exit;
 
 for ($i = 0; $i < 60; $i++) {
   // TESTING PURPOSES ONLY
@@ -455,7 +456,7 @@ for ($i = 0; $i < 60; $i++) {
       $stmt->execute(array(
         ':user_id'          => $user_id,
         ':status'           => $status,
-        ':keyword_text'     => $result[$x]['']
+        ':keyword_text'     => $result[$x][''],
         ':amz_campaign_id'  =>
         ':amz_adgroup_id'   =>
         ':amz_kw_id'        =>
