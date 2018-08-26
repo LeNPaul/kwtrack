@@ -374,11 +374,14 @@ $unitsSold = [];
 $sales = [];
 $matchType =
 
+$result = $client->getBiddableKeywordEx(82763020309402);
+var_dump($result); die;
+
 $result = $client->requestReport(
   "keywords",
   array("reportDate"    => "20180713", // placeholder date
         "campaignType"  => "sponsoredProducts",
-        "metrics"       => "campaignName,adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+        "metrics"       => "campaignName,adGroupId,bid,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
   )
 );
 
