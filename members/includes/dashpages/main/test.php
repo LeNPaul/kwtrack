@@ -505,7 +505,7 @@ for ($i = 0; $i < 60; $i++) {
 
 
 // Grab array of keywords by their keyword ID
-$sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
+$sql = 'SELECT amz_kw_id FROM ppc_keywords WHERE user_id=' . htmlspecialchars($user_id);
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 

@@ -78,7 +78,7 @@
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(
             ':value'            => serialize($dbVar[$i]),
-            ':amz_campaign_id'  => $arrKeywordIds[$i]
+            ':amz_kw_id'        => $arrKeywordIds[$i]
             ));
     }
  }
