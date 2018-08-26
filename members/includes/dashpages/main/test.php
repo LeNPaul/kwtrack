@@ -375,7 +375,7 @@ $sales = [];
 $matchType =
 
 $result = $client->getBiddableKeyword(82763020309402);
-var_dump($result); echo '<br /><br /><br />'; die;
+var_dump($result); echo '<br /><br /><br />';
 
 $result = $client->requestReport(
   "keywords",
@@ -399,6 +399,7 @@ echo '<pre>';
 var_dump($result);
 echo '</pre>';
 
+die;
 
 for ($i = 0; $i < 60; $i++) {
   // TESTING PURPOSES ONLY
@@ -426,7 +427,7 @@ for ($i = 0; $i < 60; $i++) {
       "keywords",
       array("reportDate"    => "20180713", // placeholder date
             "campaignType"  => "sponsoredProducts",
-            "metrics"       => "keywordStatus,adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+            "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
       )
     );
 
@@ -440,19 +441,24 @@ for ($i = 0; $i < 60; $i++) {
     $result = $client->getReport($reportId);
     $result = json_decode($result['response'], true);
 
+    // Insert keywords into database
     for ($x = 0; $x < count($result); $x++) {
       // Get status for each keyword
-      $kw_id = $result['keywordId'];
+      $kw_id = $result[$x]['keywordId'];
+      $status = $client->getBiddableKeyword($kw_id);
+      $status = json_decode($status['response'], true);
+      $status = $status['state'];
 
-
-      $sql = 'INSERT INTO ppc_keywords (user_id, status, campaign_name, amz_campaign_id, daily_budget)
-              VALUES (:user_id, :status, :campaign_name, :amz_campaign_id, :daily_budget)';
+      $sql = 'INSERT INTO ppc_keywords (user_id, status, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id)
+              VALUES (:user_id, :status, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id)';
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
         ':user_id'          => $user_id,
-        ':campaign_name'    => htmlspecialchars($result[$x]['campaignName'], ENT_QUOTES),
-        ':amz_campaign_id'  => $result[$x]['campaignId'],
-        ':daily_budget'     => $result[$x]['campaignBudget']
+        ':status'           => $status,
+        ':keyword_text'     => $result[$x]['']
+        ':amz_campaign_id'  =>
+        ':amz_adgroup_id'   =>
+        ':amz_kw_id'        =>
       ));
     }
   } else {
