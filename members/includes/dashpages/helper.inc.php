@@ -74,7 +74,7 @@
   */
  function storeKeywordArrays($pdo, $dbVar, $arrKeywordIds, $dbColName) {
     for ($i = 0; $i < count($arrKeywordIds); $i++) {
-        $sql = "UPDATE ad_groups SET {$dbColName}=:value WHERE amz_adgroup_id=:amz_adgroup_id";
+        $sql = "UPDATE ppc_keywords SET {$dbColName}=:value WHERE amz_adgroup_id=:amz_adgroup_id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(
             ':value'            => serialize($dbVar[$i]),
