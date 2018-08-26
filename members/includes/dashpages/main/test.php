@@ -401,7 +401,7 @@ echo '</pre>';
 
 die;
 exit;
-
+/*
 for ($i = 0; $i < 60; $i++) {
   // TESTING PURPOSES ONLY
   if ($i == 1) {
@@ -582,5 +582,5 @@ var_dump($dbSales);
 echo '<hr /><h1>ACOS</h1><br /><br />';
 var_dump($acos);
 echo '</pre>';
-
+*/
 ?>
