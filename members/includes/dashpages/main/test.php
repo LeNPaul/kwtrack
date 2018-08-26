@@ -372,36 +372,35 @@ $adSpend = [];
 $avgCpc = [];
 $unitsSold = [];
 $sales = [];
-$matchType =
 
-$result = $client->getBiddableKeyword(82763020309402);
-var_dump($result); echo '<br /><br /><br />';
+// $result = $client->getBiddableKeyword(82763020309402);
+// var_dump($result); echo '<br /><br /><br />';
+//
+// $result = $client->requestReport(
+//   "keywords",
+//   array("reportDate"    => "20180713", // placeholder date
+//         "campaignType"  => "sponsoredProducts",
+//         "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+//   )
+// );
+//
+// // Get the report id so we can use it to get the report
+// $result = json_decode($result['response'], true);
+// $reportId = $result['reportId'];
+//
+// sleep(7);
+//
+// // Get the report using the report id
+// $result = $client->getReport($reportId);
+// $result = json_decode($result['response'], true);
+//
+// echo '<pre>';
+// var_dump($result);
+// echo '</pre>';
+//
+// die;
+// exit;
 
-$result = $client->requestReport(
-  "keywords",
-  array("reportDate"    => "20180713", // placeholder date
-        "campaignType"  => "sponsoredProducts",
-        "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
-  )
-);
-
-// Get the report id so we can use it to get the report
-$result = json_decode($result['response'], true);
-$reportId = $result['reportId'];
-
-sleep(7);
-
-// Get the report using the report id
-$result = $client->getReport($reportId);
-$result = json_decode($result['response'], true);
-
-echo '<pre>';
-var_dump($result);
-echo '</pre>';
-
-die;
-exit;
-/*
 for ($i = 0; $i < 60; $i++) {
   // TESTING PURPOSES ONLY
   if ($i == 1) {
@@ -414,7 +413,6 @@ for ($i = 0; $i < 60; $i++) {
   $avgCpc[$i] = [];
   $unitsSold[$i] = [];
   $sales[$i] = [];
-  $matchType[$i] = [];
 
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
@@ -450,16 +448,17 @@ for ($i = 0; $i < 60; $i++) {
       $status = json_decode($status['response'], true);
       $status = $status['state'];
 
-      $sql = 'INSERT INTO ppc_keywords (user_id, status, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id)
-              VALUES (:user_id, :status, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id)';
+      $sql = 'INSERT INTO ppc_keywords (user_id, status, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id, match_type)
+              VALUES (:user_id, :status, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
         ':user_id'          => $user_id,
         ':status'           => $status,
-        ':keyword_text'     => $result[$x][''],
-        ':amz_campaign_id'  =>
-        ':amz_adgroup_id'   =>
-        ':amz_kw_id'        =>
+        ':keyword_text'     => $result[$x]['keywordText'],
+        ':amz_campaign_id'  => $result[$x]['campaignId'],
+        ':amz_adgroup_id'   => $result[$x]['adGroupId'],
+        ':amz_kw_id'        => $result[$x]['keywordId'],
+        ':match_type'       => $result[$x]['match_type']
       ));
     }
   } else {
@@ -486,8 +485,14 @@ for ($i = 0; $i < 60; $i++) {
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
 
-    // Check if campaign is archived/paused. If it is archived/paused, then we push 0 for all metrics
-    if ($result[$j]['campaignStatus'] == 'archived' || $result[$j]['campaignStatus'] == 'paused') {
+    // Get status for each keyword
+    $kw_id = $result[$j]['keywordId'];
+    $status = $client->getBiddableKeyword($kw_id);
+    $status = json_decode($status['response'], true);
+    $status = $status['state'];
+
+    // Check if keyword is archived/paused. If it is archived/paused, then we push 0 for all metrics
+    if ($status == 'archived' || $status == 'paused') {
       $impressions[$i][] = 0;
       $clicks[$i][] = 0;
       $ctr[$i][] = 0.0;
@@ -495,7 +500,7 @@ for ($i = 0; $i < 60; $i++) {
       $avgCpc[$i][] = 0.0;
       $unitsSold[$i][] = 0;
       $sales[$i][] = 0.0;
-    } else { // If campaign is active, then run this code
+    } else { // If keyword is active, then run this code
       $impressions[$i][] = $result[$j]['impressions'];
       $clicks[$i][] = $result[$j]['clicks'];
 
@@ -521,15 +526,11 @@ for ($i = 0; $i < 60; $i++) {
   }
 }
 
+
 // Grab array of campaigns by their campaign ID
 $sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-echo '<pre>';
-echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
-var_dump($impressions);
-echo '</pre>';
 
 
 // Declare arrays that we will serialize and store in the database
@@ -541,7 +542,7 @@ $dbAvgCpc = [];
 $dbUnitsSold = [];
 $dbSales = [];
 
-
+/*
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
 storeCampaignArrays($pdo, $dbImpressions, $result, 'impressions');
@@ -563,24 +564,23 @@ storeCampaignArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 // Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
 storeCampaignArrays($pdo, $dbSales, $result, 'sales');
+*/
 
 echo '<pre>';
 echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
-var_dump($dbImpressions);
+var_dump($impressions);
 echo '<hr /><h1>CLICKS</h1><br /><br />';
-var_dump($dbClicks);
+var_dump($clicks);
 echo '<hr /><h1>CTR</h1><br /><br />';
-var_dump($dbCtr);
+var_dump($ctr);
 echo '<hr /><h1>ADSPEND</h1><br /><br />';
-var_dump($dbAdSpend);
+var_dump($adSpend);
 echo '<hr /><h1>CPC</h1><br /><br />';
-var_dump($dbAvgCpc);
+var_dump($avgCpc);
 echo '<hr /><h1>UNITS SOLD</h1><br /><br />';
-var_dump($dbUnitsSold);
+var_dump($unitsSold);
 echo '<hr /><h1>SALES</h1><br /><br />';
-var_dump($dbSales);
-echo '<hr /><h1>ACOS</h1><br /><br />';
-var_dump($acos);
+var_dump($sales);
 echo '</pre>';
-*/
+
 ?>
