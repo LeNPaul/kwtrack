@@ -373,34 +373,6 @@ $avgCpc = [];
 $unitsSold = [];
 $sales = [];
 
-// $result = $client->getBiddableKeyword(82763020309402);
-// var_dump($result); echo '<br /><br /><br />';
-//
-// $result = $client->requestReport(
-//   "keywords",
-//   array("reportDate"    => "20180713", // placeholder date
-//         "campaignType"  => "sponsoredProducts",
-//         "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
-//   )
-// );
-//
-// // Get the report id so we can use it to get the report
-// $result = json_decode($result['response'], true);
-// $reportId = $result['reportId'];
-//
-// sleep(7);
-//
-// // Get the report using the report id
-// $result = $client->getReport($reportId);
-// $result = json_decode($result['response'], true);
-//
-// echo '<pre>';
-// var_dump($result);
-// echo '</pre>';
-//
-// die;
-// exit;
-
 for ($i = 0; $i < 60; $i++) {
   // TESTING PURPOSES ONLY
   if ($i == 1) {
@@ -442,6 +414,9 @@ for ($i = 0; $i < 60; $i++) {
 
     // Insert keywords into database
     for ($x = 0; $x < count($result); $x++) {
+      //TESTING PURPOSES ONLY
+      if ($x == 10) { break; }
+
       // Get status for each keyword
       $kw_id = $result[$x]['keywordId'];
       $status = $client->getBiddableKeyword($kw_id);
@@ -484,6 +459,8 @@ for ($i = 0; $i < 60; $i++) {
 
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
+    // TESTING PURPOSES ONLY
+    if ($j == 1) { break; }
 
     // Get status for each keyword
     $kw_id = $result[$j]['keywordId'];
@@ -527,7 +504,7 @@ for ($i = 0; $i < 60; $i++) {
 }
 
 
-// Grab array of campaigns by their campaign ID
+// Grab array of keywords by their keyword ID
 $sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -542,29 +519,28 @@ $dbAvgCpc = [];
 $dbUnitsSold = [];
 $dbSales = [];
 
-/*
+
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
-storeCampaignArrays($pdo, $dbImpressions, $result, 'impressions');
+storeKeywordArrays($pdo, $dbImpressions, $result, 'impressions');
 // Grab clicks data from array and store in their respective campaigns
 $dbClicks = prepareDbArrays($clicks, $dbClicks);
-storeCampaignArrays($pdo, $dbClicks, $result, 'clicks');
+storeKeywordArrays($pdo, $dbClicks, $result, 'clicks');
 // Grab ctr data from array and store in their respective campaigns
 $dbCtr = prepareDbArrays($ctr, $dbCtr);
-storeCampaignArrays($pdo, $dbCtr, $result, 'ctr');
+storeKeywordArrays($pdo, $dbCtr, $result, 'ctr');
 // Grab ad spend data from array and store in their respective campaigns
 $dbAdSpend = prepareDbArrays($adSpend, $dbAdSpend);
-storeCampaignArrays($pdo, $dbAdSpend, $result, 'ad_spend');
+storeKeywordArrays($pdo, $dbAdSpend, $result, 'ad_spend');
 // Grab average cpc data from array and store in their respective campaigns
 $dbAvgCpc = prepareDbArrays($avgCpc, $dbAvgCpc);
-storeCampaignArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
+storeKeywordArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
 // Grab units sold data from array and store in their respective campaigns
 $dbUnitsSold = prepareDbArrays($unitsSold, $dbUnitsSold);
-storeCampaignArrays($pdo, $dbUnitsSold, $result, 'units_sold');
+storeKeywordArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 // Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
-storeCampaignArrays($pdo, $dbSales, $result, 'sales');
-*/
+storeKeywordArrays($pdo, $dbSales, $result, 'sales');
 
 echo '<pre>';
 echo '<hr /><h1>DB IMPRESSIONS</h1><br /><br />';
