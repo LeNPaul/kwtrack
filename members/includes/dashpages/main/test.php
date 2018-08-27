@@ -509,6 +509,10 @@ $sql = 'SELECT amz_kw_id FROM ppc_keywords WHERE user_id=' . htmlspecialchars($u
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
+echo '<pre>';
+var_dump($result);
+echo '</pre>'; die;
+
 
 // Declare arrays that we will serialize and store in the database
 $dbImpressions = [];
