@@ -374,10 +374,7 @@ $unitsSold = [];
 $sales = [];
 
 for ($i = 0; $i < 60; $i++) {
-  // TESTING PURPOSES ONLY
-  if ($i == 3) {
-    break;
-  }
+
   $impressions[$i] = [];
   $clicks[$i] = [];
   $ctr[$i] = [];
@@ -414,8 +411,6 @@ for ($i = 0; $i < 60; $i++) {
 
     // Insert keywords into database
     for ($x = 0; $x < count($result); $x++) {
-      //TESTING PURPOSES ONLY
-      if ($x == 10) { break; }
 
       // Get status for each keyword
       $kw_id = $result[$x]['keywordId'];
@@ -459,8 +454,6 @@ for ($i = 0; $i < 60; $i++) {
 
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
-    // TESTING PURPOSES ONLY
-    if ($j == 10) { break; }
 
     // Get status for each keyword
     $kw_id = $result[$j]['keywordId'];
@@ -526,7 +519,7 @@ $dbSales = [];
 
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
-storeKeywordArrays($pdo, $dbImpressions, $result, 'impressions'); die;
+storeKeywordArrays($pdo, $dbImpressions, $result, 'impressions');
 // Grab clicks data from array and store in their respective campaigns
 $dbClicks = prepareDbArrays($clicks, $dbClicks);
 storeKeywordArrays($pdo, $dbClicks, $result, 'clicks');

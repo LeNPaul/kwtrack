@@ -1,6 +1,6 @@
 <?php
 /*
- *  User will see this after selecting their profile. Will show this page until all of their data has finished importing.
+ *  User will see this after all preliminary importing has been completed.
  */
 
 ?>
