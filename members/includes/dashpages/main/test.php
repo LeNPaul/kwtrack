@@ -6,7 +6,7 @@ require '../helper.inc.php';
 use PDO;
 
 /* TESTING PURPOSES ONLY */
-$sql = 'DELETE FROM campaigns';
+$sql = 'DELETE FROM ppc_keywords';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
