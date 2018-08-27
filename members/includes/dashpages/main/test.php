@@ -511,7 +511,7 @@ $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 echo '<pre>';
 var_dump($result);
-echo '</pre>'; die;
+echo '</pre>';
 
 
 // Declare arrays that we will serialize and store in the database
@@ -526,7 +526,7 @@ $dbSales = [];
 
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
-storeKeywordArrays($pdo, $dbImpressions, $result, 'impressions');
+storeKeywordArrays($pdo, $dbImpressions, $result, 'impressions'); die;
 // Grab clicks data from array and store in their respective campaigns
 $dbClicks = prepareDbArrays($clicks, $dbClicks);
 storeKeywordArrays($pdo, $dbClicks, $result, 'clicks');
