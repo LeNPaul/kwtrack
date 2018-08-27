@@ -375,7 +375,7 @@ $sales = [];
 
 for ($i = 0; $i < 60; $i++) {
   // TESTING PURPOSES ONLY
-  if ($i == 2) {
+  if ($i == 3) {
     break;
   }
   $impressions[$i] = [];
@@ -460,7 +460,7 @@ for ($i = 0; $i < 60; $i++) {
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
     // TESTING PURPOSES ONLY
-    if ($j == 6) { break; }
+    if ($j == 10) { break; }
 
     // Get status for each keyword
     $kw_id = $result[$j]['keywordId'];

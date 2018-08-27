@@ -54,12 +54,12 @@
   */
  function storeAdGroupArrays($pdo, $dbVar, $arrAdGroupIds, $dbColName) {
     for ($i = 0; $i < count($arrAdGroupIds); $i++) {
-        $sql = "UPDATE ad_groups SET {$dbColName}=:value WHERE amz_adgroup_id=:amz_adgroup_id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(
-            ':value'            => serialize($dbVar[$i]),
-            ':amz_adgroup_id'  => $arrAdGroupIds[$i]
-            ));
+      $sql = "UPDATE ad_groups SET {$dbColName}=:value WHERE amz_adgroup_id=:amz_adgroup_id";
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute(array(
+        ':value'            => serialize($dbVar[$i]),
+        ':amz_adgroup_id'  => $arrAdGroupIds[$i]
+      ));
     }
  }
 
@@ -73,14 +73,14 @@
   *      --> String $dbColName     - column name for the table you want to update
   */
  function storeKeywordArrays($pdo, $dbVar, $arrKeywordIds, $dbColName) {
-    for ($i = 0; $i < count($arrKeywordIds); $i++) {
-        $sql = "UPDATE ppc_keywords SET {$dbColName}=:value WHERE amz_kw_id=:amz_kw_id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(
-            ':value'            => serialize($dbVar[$i]),
-            ':amz_kw_id'        => $arrKeywordIds[$i]
-            ));
-    }
+   for ($i = 0; $i < count($arrKeywordIds); $i++) {
+     $sql = "UPDATE ppc_keywords SET {$dbColName}=:value WHERE amz_kw_id=:amz_kw_id";
+     $stmt = $pdo->prepare($sql);
+     $stmt->execute(array(
+         ':value'            => serialize($dbVar[$i]),
+         ':amz_kw_id'        => $arrKeywordIds[$i]
+     ));
+   }
  }
 
 function getRefreshToken($pdo, $user_id) {
