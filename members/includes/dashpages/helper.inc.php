@@ -122,7 +122,7 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   // Algorithm will pop the end of each array $numDays times and append it to the output array
   // After appending to output array, we use array_filter to calculate the metric needed
 
-  $outputArr = [];
+  $outputA = [];
 
   for ($i = 0; $i < count($metricArr); $i++) {
     // If the output array has the required length, then break the loop
@@ -131,8 +131,13 @@ function calculateMetrics($metricArr, $numDays, $metric) {
     $output[] = array_pop($metricArr[$i]);
   }
 
-  if ($metric == 'adSpend') {
-    $output = array_reduce($outputArr, function($carry, $element) { $carry += $element });
+  if ($metric == 'adSpend' || $metric == 'sales') {
+    $output = array_reduce($outputArr, function($carry, $element) { $carry += $element; });
   }
+
+
+
+
+  return $output;
 }
 ?>
