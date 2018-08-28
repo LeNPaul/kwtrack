@@ -4,7 +4,7 @@
  *  User will see this after all preliminary importing has been completed.
  */
 
-require '../helper.inc.php';
+require './includes/dashpages/helper.inc.php';
 
 ?>
 
