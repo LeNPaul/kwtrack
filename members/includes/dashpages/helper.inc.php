@@ -110,7 +110,7 @@ function multiUnserialize($arr) {
 
 /*
  *  function calculateMetrics(Array $metricArr[Array, Array, ..., Array], Int $numDays, String $metric) --> Int $output
- *    --> Outputs a Bootstrap card that displays PPC metrics for a variable number of days
+ *    --> Outputs a float that represents a metric
  *
  *      --> Array $metricArr    - Array of arrays pulled from the database.
  *                                - Length will be equal to # of campaigns for the user
@@ -122,22 +122,20 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   // Algorithm will pop the end of each array $numDays times and append it to the output array
   // After appending to output array, we use array_filter to calculate the metric needed
 
-  $outputA = [];
+  $output = [];
 
   for ($i = 0; $i < count($metricArr); $i++) {
     // If the output array has the required length, then break the loop
     if (count($output) == $numDays) { break; }
-
     $output[] = array_pop($metricArr[$i]);
   }
 
-  if ($metric == 'adSpend' || $metric == 'sales') {
-    $output = array_reduce($outputArr, function($carry, $element) { $carry += $element; });
+  if ($metric == 'adSpend' || $metric == 'ppcSales') {
+    // If the metric being calculated is ad spend or PPC sales, then all we need to do is
+    // get the sum of the array
+    $output = array_reduce($output, function($carry, $element) { return $carry += $element; });
   }
-
-
-
-
+  
   return $output;
 }
 ?>
