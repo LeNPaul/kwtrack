@@ -1,11 +1,13 @@
 <?php
 /*
+ *  Final step for dashboard pages
  *  User will see this after all preliminary importing has been completed.
  */
 
+require '../helper.inc.php';
+
 ?>
 
-<div class="container text-center">
-  <h2>Your campaign data is currently importing</h2>
-  <p>Please check back in a few hours.</p>
+<div class="container">
+  
 </div>

@@ -3,6 +3,12 @@
  * Helper functions for campaign data manipulation
  */
 
+ /*----------------------------------------------------------
+  *
+  *     DATA IMPORT HELPER FUNCTIONS
+  *
+  *----------------------------------------------------------*/
+
  /*
   *  function prepareDbArrays(Array $dataset) --> Array $dbVar
   *    --> Takes $dataset and prepares it for insertion in database
@@ -83,10 +89,50 @@
    }
  }
 
-function getRefreshToken($pdo, $user_id) {
-  $sql = 'SELECT refresh_token FROM users WHERE user_id=:user_id';
-  $stmt = $pdo->query($sql);
-  $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-  var_dump($result);
+ /*----------------------------------------------------------
+  *
+  *     DASHBOARD DISPLAY HELPER FUNCTIONS
+  *
+  *----------------------------------------------------------*/
+
+/*
+ *  function multiUnserialize(Array $arr) --> Array $output
+ *    --> Takes array of serialized arrays and returns array of unserialized arrays
+ *
+ *      --> Array $arr - array of unserialized arrays
+ */
+function multiUnserialize($arr) {
+  for ($i = 0; $i < count($arr); $i++) {
+    unserialize($arr[$i]);
+  }
+  return $arr;
+}
+
+/*
+ *  function calculateMetrics(Array $metricArr[Array, Array, ..., Array], Int $numDays, String $metric) --> Int $output
+ *    --> Outputs a Bootstrap card that displays PPC metrics for a variable number of days
+ *
+ *      --> Array $metricArr    - Array of arrays pulled from the database.
+ *                                - Length will be equal to # of campaigns for the user
+ *      --> Int $numDays        - number of days to calculate data for
+ *      --> Int $output         - summed up total for the metric
+ *      --> String $metric      - String that represents which metric we are calculating
+ */
+function calculateMetrics($metricArr, $numDays, $metric) {
+  // Algorithm will pop the end of each array $numDays times and append it to the output array
+  // After appending to output array, we use array_filter to calculate the metric needed
+
+  $outputArr = [];
+
+  for ($i = 0; $i < count($metricArr); $i++) {
+    // If the output array has the required length, then break the loop
+    if (count($output) == $numDays) { break; }
+
+    $output[] = array_pop($metricArr[$i]);
+  }
+
+  if ($metric == 'adSpend') {
+    $output = array_reduce($outputArr, function($carry, $element) { $carry += $element });
+  }
 }
 ?>

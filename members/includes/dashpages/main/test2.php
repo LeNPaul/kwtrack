@@ -1,4 +1,6 @@
 <?php
-$a = (double)(241.87 / 32.54);
-echo $a;
+$arr = [1,1,1,1,1];
+$arr = array_reduce($arr, function($carry, $element) { $carry += $element });
+
+echo $arr;
 ?>
