@@ -109,6 +109,21 @@ function multiUnserialize($arr) {
 }
 
 /*
+ * function getMetricData(PDO $pdo, String $metric, Int $user_id) --> Array $output
+ *    --> Returns array of all metric data for $metric for the user
+ *
+ *      --> PDO $pdo       - database handle
+ *      --> String $metric - metric to search for in the database
+ *      --> Int $user_id   - user ID of the user
+ */
+function getMetricData($pdo, $metric, $user_id) {
+  // Grab metric data for ALL CAMPAIGNS for the user
+  $sql = "SELECT {$metric} FROM campaigns WHERE user_id={$user_id}";
+  $stmt = $pdo->query($sql);
+  return $stmt->fetchAll(PDO::FETCH_COLUMN);
+}
+
+/*
  *  function calculateMetrics(Array $metricArr[Array, Array, ..., Array], Int $numDays, String $metric) --> Int $output
  *    --> Outputs a float that represents a metric
  *

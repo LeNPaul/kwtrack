@@ -6,6 +6,13 @@
 
 require './includes/dashpages/helper.inc.php';
 
+// Grab metric data for all campaigns and store in an array for each metric
+$adSpend = [];
+$ppcSales = [];
+$ppcACoS = [];
+
+
+
 ?>
 
 
