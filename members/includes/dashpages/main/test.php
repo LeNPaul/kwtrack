@@ -6,7 +6,7 @@ require '../helper.inc.php';
 use PDO;
 
 /* TESTING PURPOSES ONLY */
-//$sql = 'DELETE FROM campaigns';
+$sql = 'DELETE FROM campaigns';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
@@ -41,7 +41,7 @@ $avgCpc = [];
 $unitsSold = [];
 $sales = [];
 
-for ($i = 0; $i < 60; $i++) {
+for ($i = 0; $i < 4; $i++) {
   $impressions[$i] = [];
   $clicks[$i] = [];
   $ctr[$i] = [];
