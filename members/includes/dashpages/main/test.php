@@ -151,12 +151,6 @@ $sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-echo '<pre>';
-echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
-var_dump($impressions);
-echo '</pre>';
-
-
 // Declare arrays that we will serialize and store in the database
 $dbImpressions = [];
 $dbClicks = [];
@@ -166,6 +160,10 @@ $dbAvgCpc = [];
 $dbUnitsSold = [];
 $dbSales = [];
 
+echo '<pre>';
+echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
+var_dump($dbImpressions);
+echo '</pre>';
 
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
