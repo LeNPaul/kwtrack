@@ -144,6 +144,7 @@ function calculateMetrics($metricArr, $numDays, $metric) {
     // If the output array has the required length, then break the loop
     if (count($output) == $numDays) { break; }
     $output[] = array_pop($metricArr[$i]);
+    echo '<br />';
     var_dump($output);
   }
 
