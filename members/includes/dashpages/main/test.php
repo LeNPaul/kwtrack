@@ -51,7 +51,10 @@ for ($i = 0; $i < 60; $i++) {
   $avgCpc[$i] = [];
   $unitsSold[$i] = [];
   $sales[$i] = [];
-
+  
+  // TESTING PURPOSES ONLY.
+  if ($i == 1) { break; }
+  
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
 
@@ -103,8 +106,6 @@ for ($i = 0; $i < 60; $i++) {
     // Get the report id so we can use it to get the report
     $result = json_decode($result['response'], true);
     $reportId = $result['reportId'];
-    
-    var_dump($result);
 
     sleep(7);
 
@@ -115,7 +116,8 @@ for ($i = 0; $i < 60; $i++) {
 
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
-
+    //TESTING PURPOSES
+    if ($j == 2) { break; }
     // Check if campaign is archived/paused. If it is archived/paused, then we push 0 for all metrics
     if ($result[$j]['campaignStatus'] == 'archived' || $result[$j]['campaignStatus'] == 'paused') {
       $impressions[$i][] = 0;
