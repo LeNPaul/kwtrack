@@ -10,7 +10,7 @@ $executable = '~/opt/cpanel/ea-php56/root/usr/bin/php.exe';
 $path = '~/public_html/members/include/dashpages/main/import_data.php';
 
 exec($executable." ".$path." 2>&1", $output, $return);
-echo ($output);
+echo ($return);
 echo 'doneprogiles';
 
 /*
