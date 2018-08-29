@@ -132,6 +132,7 @@ function getMetricData($pdo, $metric, $user_id) {
  *      --> Int $numDays        - number of days to calculate data for
  *      --> Int $output         - summed up total for the metric
  *      --> String $metric      - String that represents which metric we are calculating
+ *                                - Allowed inputs: adSpend, ppcSales, ...
  */
 function calculateMetrics($metricArr, $numDays, $metric) {
   // Algorithm will pop the end of each array $numDays times and append it to the output array
