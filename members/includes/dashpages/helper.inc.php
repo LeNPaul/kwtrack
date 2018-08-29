@@ -139,11 +139,14 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   // After appending to output array, we use array_filter to calculate the metric needed
 
   $output = [];
-
+  
+  // FIND OUT WHY THIS IS FUCKING UP
+  
   for ($i = 0; $i < count($metricArr); $i++) {
     // If the output array has the required length, then break the loop
     if (count($output) == $numDays) { break; }
     $output[] = array_pop($metricArr[$i]);
+    
     echo '<br />';
     var_dump($output);
   }
