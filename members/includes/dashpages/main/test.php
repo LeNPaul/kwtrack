@@ -103,8 +103,10 @@ for ($i = 0; $i < 60; $i++) {
     // Get the report id so we can use it to get the report
     $result = json_decode($result['response'], true);
     $reportId = $result['reportId'];
+    
+    var_dump($result);
 
-    sleep(10);
+    sleep(7);
 
     // Get the report using the report id
     $result = $client->getReport($reportId);
