@@ -6,11 +6,11 @@ require '../../../database/pdo.inc.php';
 require_once '../../AmazonAdvertisingApi/Client.php';
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 
-$sql = 'INSERT INTO users (first_name) VALUES (:first_name)';
-$stmt = $pdo->prepare($sql);
-$stmt->execute(array(':first_name' => "alfksjdhfldskjfhsdflkjh"));
+$executable = '~/opt/cpanel/ea-php56/root/usr/bin/php.exe'
+$path = '~/public_html/members/include/dashpages/main/import_data.php'
 
-echo "done";
+exec($executable." ".$path);
+echo 'done';
 
 /*
 // Insert profileID in database for the user and set active level to 3
