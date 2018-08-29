@@ -11,8 +11,8 @@ $adSpend = [];
 $ppcSales = [];
 $ppcACoS = [];
 
-$adSpend = getMetricData($pdo, 'ad_spend', 0);
-$adSpend = multiUnserialize($adSpend);
+$adSpend = multiUnserialize(getMetricData($pdo, 'ad_spend', 0));
+
 
 echo '<pre>';
 var_dump($adSpend);
