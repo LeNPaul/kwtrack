@@ -103,7 +103,7 @@
  */
 function multiUnserialize($arr) {
   for ($i = 0; $i < count($arr); $i++) {
-    unserialize($arr[$i]);
+    $arr[$i] = unserialize($arr[$i]);
   }
   return $arr;
 }
