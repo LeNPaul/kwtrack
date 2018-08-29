@@ -10,7 +10,7 @@ $executable = '~/opt/cpanel/ea-php56/root/usr/bin/php.exe';
 $path = '~/public_html/members/include/dashpages/main/import_data.php';
 
 exec($executable." ".$path, $output, $return);
-var_dump($return);
+echo 'doneprofiles';
 
 /*
 // Insert profileID in database for the user and set active level to 3
