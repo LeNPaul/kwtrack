@@ -7,9 +7,9 @@ require_once '../../AmazonAdvertisingApi/Client.php';
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 
 $executable = '~/opt/cpanel/ea-php56/root/usr/bin/php.exe';
-$path = '~/public_html/members/include/dashpages/main/import_data.php';
+$customPath = '~/public_html/members/include/dashpages/main/import_data.php';
 
-exec($executable." ".$path." 2>&1", $output, $return);
+exec($executable." ".$customPath." 2>&1", $output, $return);
 echo ($return);
 echo 'doneprogiles';
 
