@@ -9,13 +9,9 @@ error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 $executable = '~/opt/cpanel/ea-php56/root/usr/bin/php.exe';
 $path = '~/public_html/members/include/dashpages/main/import_data.php';
 
-exec($executable." ".$path, $output, $return);
-echo exec_enabled();
-
-function exec_enabled() {
-  $disabled = explode(',', ini_get('disable_functions'));
-  return !in_array('exec', $disabled);
-}
+exec($executable." ".$path." 2>&1", $output, $return);
+echo ($output);
+echo 'doneprogiles';
 
 /*
 // Insert profileID in database for the user and set active level to 3
