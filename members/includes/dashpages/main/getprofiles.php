@@ -6,8 +6,8 @@ require '../../../database/pdo.inc.php';
 require_once '../../AmazonAdvertisingApi/Client.php';
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 
-$executable = '~/opt/cpanel/ea-php56/root/usr/bin/php.exe'
-$path = '~/public_html/members/include/dashpages/main/import_data.php'
+$executable = '~/opt/cpanel/ea-php56/root/usr/bin/php.exe';
+$path = '~/public_html/members/include/dashpages/main/import_data.php';
 
 exec($executable." ".$path, $output, $return);
 echo 'doneprofiles';
