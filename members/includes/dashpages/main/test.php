@@ -160,10 +160,7 @@ $dbAvgCpc = [];
 $dbUnitsSold = [];
 $dbSales = [];
 
-echo '<pre>';
-echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
-var_dump($dbImpressions);
-echo '</pre>';
+
 
 // Grab impression data from array and store in their respective campaigns
 $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
@@ -187,6 +184,10 @@ storeCampaignArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 $dbSales = prepareDbArrays($sales, $dbSales);
 storeCampaignArrays($pdo, $dbSales, $result, 'sales');
 
+echo '<pre>';
+echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
+var_dump($dbImpressions);
+echo '</pre>';
 
 /*
  *
