@@ -72,7 +72,7 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
     $reportId = $result['reportId'];
 
-    sleep(7);
+    sleep(12);
 
     // Get the report using the report id
     $result = $client->getReport($reportId);
