@@ -6,7 +6,7 @@ require '../helper.inc.php';
 use PDO;
 
 /* TESTING PURPOSES ONLY */
-$sql = 'DELETE FROM campaigns';
+//$sql = 'DELETE FROM campaigns';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
@@ -30,8 +30,6 @@ $client->profileId = $profileId;
  *
  */
 
-
-
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
 //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
@@ -51,9 +49,6 @@ for ($i = 0; $i < 60; $i++) {
   $avgCpc[$i] = [];
   $unitsSold[$i] = [];
   $sales[$i] = [];
-  
-  // TESTING PURPOSES ONLY.
-  if ($i == 1) { break; }
   
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
