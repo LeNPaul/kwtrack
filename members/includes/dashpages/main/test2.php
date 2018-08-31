@@ -53,7 +53,7 @@ for ($i = 0; $i < count($result); $i++) {
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
     ':kw_id'          => $result[$i]['keywordId'],
-    ':amz_campaign_id' => $result[$i]['adGroupId'],
+    ':amz_campaign_id' => $result[$i]['campaignId'],
     ':keyword_text'   => $result[$i]['keywordText'],
     ':state'          => $result[$i]['state'],
     ':match_type'     => $result[$i]['matchType']
