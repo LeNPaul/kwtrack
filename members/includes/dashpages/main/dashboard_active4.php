@@ -32,7 +32,7 @@ echo '</pre>';
       <!--    <div class="card-header">Header</div>-->
       <div class="card-body">
         <h5 class="card-title">Ad Spend</h5>
-        <p class="card-text"><?= '$'.$adSpend ?></p>
+        <p class="card-text"><?= '$' . $adSpend ?></p>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@ echo '</pre>';
     <div class="card text-white bg-success mb-3">
       <div class="card-body">
         <h5 class="card-title">PPC Sales</h5>
-        <p class="card-text"><?= '$'.$ppcSales ?></p>
+        <p class="card-text"><?= '$' . $ppcSales ?></p>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@ echo '</pre>';
   <div class="col-sm-4">
     <div class="card text-white bg-success mb-3">
       <div class="card-body">
-        <h5 class="card-title">PPC ACoS</h5>
+        <h5 class="card-title"><?= $acos . '%' ?></h5>
         <p class="card-text">test</p>
       </div>
     </div>
