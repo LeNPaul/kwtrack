@@ -27,9 +27,11 @@ $client = new Client($config);
 $client->profileId = $profileId;
 
 $result = $client->listBiddableKeywords(array("stateFilter" => "enabled"));
+$result = $client->getBiddableKeywordEx(109662743843344);
 
 echo '<pre>';
-var_dump(json_decode($result['response'], true));
+//var_dump(json_decode($result['response'], true));
+var_dump($result);
 echo '</pre>';
 
 ?>
