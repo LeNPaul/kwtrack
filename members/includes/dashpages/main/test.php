@@ -278,6 +278,9 @@ for ($i = 0; $i < 60; $i++) {
 
     // Get the report id so we can use it to get the report
     $result = json_decode($result['response'], true);
+    
+    var_dump($result); die;
+    
     $reportId = $result['reportId'];
 
     sleep(7);
