@@ -147,9 +147,6 @@ function calculateMetrics($metricArr, $numDays, $metric) {
     // Required length = numDays * number of campaigns
     if (count($output) == ($numDays * count($metricArr))) { break; }
     $output[] = array_pop($metricArr[$i]);
-    
-    echo '<br />';
-    var_dump($output);
   }
 
   if ($metric == 'adSpend' || $metric == 'ppcSales') {
