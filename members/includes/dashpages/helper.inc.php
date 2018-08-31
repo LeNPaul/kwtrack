@@ -140,8 +140,6 @@ function calculateMetrics($metricArr, $numDays, $metric) {
 
   $output = [];
   
-  // FIND OUT WHY THIS IS FUCKING UP
-  
   for ($i = 0; $i < count($metricArr); $i++) {
     // If the output array has the required length, then break the loop
     // Required length = numDays * number of campaigns
