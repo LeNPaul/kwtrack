@@ -10,8 +10,6 @@ $sql = 'INSERT INTO users (first_name) VALUES (:first_name)';
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(':first_name' => "alfksjdhfldskjfhsdflkjh"));
 
-echo 'done';
-
 /*
 // Instantiate client for advertising API
 $config = array(
