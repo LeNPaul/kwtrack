@@ -13,7 +13,7 @@ $ppcSales = 98.12;
 if ($ppcSales == 0) {
   $acos = 0;
 } else {
-  $acos = round((double)($adSpend / $ppcSales) * 100, 2);
+  $acos = round((double)($adSpend / $ppcSales) * 100, 3);
 }
 
 ?>
