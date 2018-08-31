@@ -43,5 +43,12 @@ for ($i = 0; $i < count($result); $i++) {
   ));
 }
 
+//Get campaign level negative keywords and store them in db
+$result = $client->listCampaignNegativeKeywords(array("stateFilter" => "enabled"));
+$result = json_decode($result['response'], true);
+
+echo '<pre>';
+var_dump($result);
+echo '<pre>';
 
 ?>
