@@ -247,11 +247,11 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
 
     for ($x = 0; $x < count($result); $x++) {
-		echo ($result[$x]['adGroupId']);
+	  print_r ($result[$x]['adGroupId']);
   	  $extra = $client->getAdGroup($result[$x]['adGroupId']);
-	  echo($extra);
+	  print_r($extra);
   	  $extraArray[] = json_decode($extra, true);
-	  echo($extraArray);
+	  print_r($extraArray);
       $sql = 'INSERT INTO ad_groups (user_id, status, default_bid, amz_adgroup_id, amz_campaign_id, ad_group_name)
               VALUES (:user_id, :status, :default_bid, :adgroup_id, :amz_campaign_id, :adgroup_name)';
       $stmt = $pdo->prepare($sql);
