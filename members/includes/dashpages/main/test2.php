@@ -47,8 +47,17 @@ for ($i = 0; $i < count($result); $i++) {
 $result = $client->listCampaignNegativeKeywords(array("stateFilter" => "enabled"));
 $result = json_decode($result['response'], true);
 
-echo '<pre>';
-var_dump($result);
-echo '<pre>';
+for ($i = 0; $i < count($result); $i++) {
+  $sql = 'INSERT INTO campaign_neg_kw (kw_id, amz_campaign_id, keyword_text, state, match_type)
+          VALUES (:kw_id, :amz_campaign_id, :keyword_text, :state, :match_type)';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ':kw_id'          => $result[$i]['keywordId'],
+    ':amz_campaign_id' => $result[$i]['adGroupId'],
+    ':keyword_text'   => $result[$i]['keywordText'],
+    ':state'          => $result[$i]['state'],
+    ':match_type'     => $result[$i]['matchType']
+  ));
+}
 
 ?>
