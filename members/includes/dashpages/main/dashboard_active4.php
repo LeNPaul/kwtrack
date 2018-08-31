@@ -7,11 +7,14 @@
 require './includes/dashpages/helper.inc.php';
 
 // Grab metric data for all campaigns and store in an array for each metric
-$adSpend = [];
-$ppcSales = [];
-
 $adSpend = calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 0)), 2, 'adSpend');
 $ppcSales = calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', 0)), 2, 'ppcSales');
+
+if ($ppcSales == 0) {
+  $acos = 0;
+} else {
+  $acos = round((double)($adSpend / $ppcSales), 2);
+}
 
 echo '<pre>';
 var_dump($adSpend);
@@ -29,7 +32,7 @@ echo '</pre>';
       <!--    <div class="card-header">Header</div>-->
       <div class="card-body">
         <h5 class="card-title">Ad Spend</h5>
-        <p class="card-text">test</p>
+        <p class="card-text"><?= '$'.$adSpend ?></p>
       </div>
     </div>
   </div>
@@ -38,7 +41,7 @@ echo '</pre>';
     <div class="card text-white bg-success mb-3">
       <div class="card-body">
         <h5 class="card-title">PPC Sales</h5>
-        <p class="card-text">test</p>
+        <p class="card-text"><?= '$'.$ppcSales ?></p>
       </div>
     </div>
   </div>
