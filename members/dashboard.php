@@ -705,6 +705,8 @@ $_SESSION['active'] = intval($result[0]);
           include './includes/dashpages/main/dashboard_active3.php';
         } elseif ($_SESSION['active'] == 4) {
           include './includes/dashpages/main/dashboard_active4.php';
+        } elseif ($_SESSION['active'] == 5) {
+          include './includes/dashpages/main/dashboard_active5.php';
         }
         ?>
       </div>
