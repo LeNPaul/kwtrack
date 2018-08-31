@@ -5,7 +5,9 @@ require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
 use PDO;
 
-/* TESTING PURPOSES ONLY */
+
+
+// TESTING PURPOSES ONLY
 $sql = 'DELETE FROM campaigns';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
@@ -33,6 +35,8 @@ $client->profileId = $profileId;
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
 //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
+
+/*
 $impressions = [];
 $clicks = [];
 $ctr = [];
@@ -189,13 +193,15 @@ echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
 var_dump($dbImpressions);
 echo '</pre>';
 
+*/
+
 /*
  *
  *    SECOND, IMPORT AD_GROUPS
  *
  */
 
-/*
+
 $impressions = [];
 $clicks = [];
 $ctr = [];
@@ -350,7 +356,6 @@ storeAdGroupArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 // Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
 storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
-*/
 
 /*
  *
