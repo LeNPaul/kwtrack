@@ -16,12 +16,6 @@ if ($ppcSales == 0) {
   $acos = round((double)($adSpend / $ppcSales), 2);
 }
 
-echo '<pre>';
-var_dump($adSpend);
-echo '<br>';
-var_dump($ppcSales);
-echo '</pre>';
-
 ?>
 
 
