@@ -250,7 +250,9 @@ for ($i = 0; $i < 60; $i++) {
     for ($x = 0; $x < count($result); $x++) {
   	  $extra = $client->getAdGroup($result[$x]['adGroupId']);
   	  $extraArray[] = json_decode($extra['response'], true);
-	  print_r($extraArray[$x]);
+  	  
+	    //print_r($extraArray[$x]);
+	    
       $sql = 'INSERT INTO ad_groups (user_id, status, default_bid, amz_adgroup_id, amz_campaign_id, ad_group_name)
               VALUES (:user_id, :status, :default_bid, :adgroup_id, :amz_campaign_id, :adgroup_name)';
       $stmt = $pdo->prepare($sql);
@@ -276,7 +278,7 @@ for ($i = 0; $i < 60; $i++) {
 
     // Get the report id so we can use it to get the report
     $result = json_decode($result['response'], true);
-    $reportId = $result[$i]['reportId'];
+    $reportId = $result['reportId'];
 
     sleep(7);
 
