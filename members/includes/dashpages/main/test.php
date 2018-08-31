@@ -255,11 +255,11 @@ for ($i = 0; $i < 60; $i++) {
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
         ':user_id'          => $user_id,
-    		':status'			      => $extraArray['state'],
-    		':default_bid'	   	=> $extraArray['defaultBid'],
-    		':adgroup_id'	    	=> $extraArray['adGroupId'],
-        ':amz_campaign_id'  => $extraArray['campaignId'],
-        ':adgroup_name'     => $extraArray['name']
+    		':status'			      => $extraArray[$x]['state'],
+    		':default_bid'	   	=> $extraArray[$x]['defaultBid'],
+    		':adgroup_id'	    	=> $extraArray[$x]['adGroupId'],
+        ':amz_campaign_id'  => $extraArray[$x]['campaignId'],
+        ':adgroup_name'     => $extraArray[$x]['name']
       ));
     }
 
