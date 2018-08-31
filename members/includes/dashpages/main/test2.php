@@ -28,8 +28,6 @@ $client->profileId = $profileId;
 
 // Get ad group level negative keywords and store them in db
 $result = $client->listNegativeKeywords(array("stateFilter" => "enabled"));
-var_dump($result);
-print_r($result['response']);
 $result = json_decode($result['response'], true);
 
 for ($i = 0; $i < count($result); $i++) {
@@ -45,8 +43,5 @@ for ($i = 0; $i < count($result); $i++) {
   ));
 }
 
-echo '<pre>';
-var_dump(json_decode($result['response'], true));
-echo '</pre>';
 
 ?>
