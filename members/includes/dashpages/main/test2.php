@@ -26,7 +26,7 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$result = $client->listCampaignNegativeKeywords();
+$result = $client->listCampaignNegativeKeywords(array("stateFilter" => "enabled"));
 
 echo '<pre>';
 var_dump(json_decode($result['response'], true));
