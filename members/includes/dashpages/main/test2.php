@@ -29,7 +29,7 @@ $client->profileId = $profileId;
 $result = $client->listBiddableKeywords(array("stateFilter" => "enabled"));
 
 echo '<pre>';
-var_dump($result);
+var_dump(json_decode($result['response'], true));
 echo '</pre>';
 
 ?>
