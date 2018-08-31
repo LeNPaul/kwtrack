@@ -575,5 +575,38 @@ echo '</pre>';
  *
  *===============================================================*/
 
+// Get ad group level negative keywords and store them in db
+$result = $client->listNegativeKeywords(array("stateFilter" => "enabled"));
+$result = json_decode($result['response'], true);
+
+for ($i = 0; $i < count($result); $i++) {
+  $sql = 'INSERT INTO adgroup_neg_kw (kw_id, amz_adgroup_id, keyword_text, state, match_type)
+          VALUES (:kw_id, :amz_adgroup_id, :keyword_text, :state, :match_type)';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ':kw_id'          => $result[$i]['keywordId'],
+    ':amz_adgroup_id' => $result[$i]['adGroupId'],
+    ':keyword_text'   => $result[$i]['keywordText'],
+    ':state'          => $result[$i]['state'],
+    ':match_type'     => $result[$i]['matchType']
+  ));
+}
+
+//Get campaign level negative keywords and store them in db
+$result = $client->listCampaignNegativeKeywords(array("stateFilter" => "enabled"));
+$result = json_decode($result['response'], true);
+
+for ($i = 0; $i < count($result); $i++) {
+  $sql = 'INSERT INTO campaign_neg_kw (kw_id, amz_campaign_id, keyword_text, state, match_type)
+          VALUES (:kw_id, :amz_campaign_id, :keyword_text, :state, :match_type)';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ':kw_id'          => $result[$i]['keywordId'],
+    ':amz_campaign_id' => $result[$i]['campaignId'],
+    ':keyword_text'   => $result[$i]['keywordText'],
+    ':state'          => $result[$i]['state'],
+    ':match_type'     => $result[$i]['matchType']
+  ));
+}
 
 ?>
