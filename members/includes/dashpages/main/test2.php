@@ -26,7 +26,7 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$result = $client->listNegativeKeywordsEx();
+$result = $client->listCampaignNegativeKeywords();
 
 echo '<pre>';
 var_dump(json_decode($result['response'], true));
