@@ -270,7 +270,7 @@ for ($i = 0; $i < 60; $i++) {
 	// All other iterations, we request this report to optimize time
     $result = $client->requestReport(
       "adGroups",
-      array("reportDate"    => "20180627", // placeholder date
+      array("reportDate"    => "20180720", // placeholder date
             "campaignType"  => "sponsoredProducts",
             "metrics"       => "impressions,clicks,cost,attributedUnitsOrdered1d,attributedSales1d"
       )
