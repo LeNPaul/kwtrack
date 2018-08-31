@@ -224,7 +224,7 @@ for ($i = 0; $i < 60; $i++) {
   $date = date('Ymd', strtotime('-' . $i . ' days'));
 
   // Only on the very first iteration of this loop, we will iterate through the array
-  // and store campaign name and campaign ID in the database
+  // and store adgroup name, adgroup id, and campaign ID in the database
   if ($i === 0) {
     // Request the report from API with adGroup name, adGroup Id and campaign Id only
     // for the first iteration
@@ -247,7 +247,7 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
 
     for ($x = 0; $x < count($result); $x++) {
-  	  $extra = $client->getAdGroup($result[$x]['adGroupId'];
+  	  $extra = $client->getAdGroup($result[$x]['adGroupId']);
   	  $extraArray[] = json_decode($extra['response', true);
       $sql = 'INSERT INTO ad_groups (user_id, status, default_bid, amz_adgroup_id, amz_campaign_id, ad_group_name)
               VALUES (:user_id, :status, :default_bid, :adgroup_id, :amz_campaign_id, :adgroup_name)';
