@@ -248,6 +248,7 @@ for ($i = 0; $i < 60; $i++) {
 
     for ($x = 0; $x < count($result); $x++) {
   	  $extra = $client->getAdGroup($result[$x]['adGroupId']);
+	  echo($extra);
   	  $extraArray[] = json_decode($extra['response'], true);
 	  echo ($extraArray);
       $sql = 'INSERT INTO ad_groups (user_id, status, default_bid, amz_adgroup_id, amz_campaign_id, ad_group_name)
