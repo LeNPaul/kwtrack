@@ -9,7 +9,7 @@ require './includes/dashpages/helper.inc.php';
 // Grab metric data for all campaigns and store in an array for each metric
 $adSpend = calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 0)), 2, 'adSpend');
 $ppcSales = calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', 0)), 2, 'ppcSales');
-
+$ppcSales = 98.12;
 if ($ppcSales == 0) {
   $acos = 0;
 } else {
@@ -43,8 +43,8 @@ if ($ppcSales == 0) {
   <div class="col-sm-4">
     <div class="card text-white bg-success mb-3">
       <div class="card-body">
-        <h5 class="card-title"><?= $acos . '%' ?></h5>
-        <p class="card-text">test</p>
+        <h5 class="card-title">PPC ACoS</h5>
+        <p class="card-text"><?= $acos . '%' ?></p>
       </div>
     </div>
   </div>
