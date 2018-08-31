@@ -366,6 +366,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
  */
 
 /*
+
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
 //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
@@ -416,18 +417,20 @@ for ($i = 0; $i < 60; $i++) {
     // Insert keywords into database
     for ($x = 0; $x < count($result); $x++) {
 
-      // Get status for each keyword
+      // Get status and bid for each keyword
       $kw_id = $result[$x]['keywordId'];
       $status = $client->getBiddableKeyword($kw_id);
       $status = json_decode($status['response'], true);
+      $bid = $status['bid'];
       $status = $status['state'];
 
-      $sql = 'INSERT INTO ppc_keywords (user_id, status, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id, match_type)
-              VALUES (:user_id, :status, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
+      $sql = 'INSERT INTO ppc_keywords (user_id, status, bid, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id, match_type)
+              VALUES (:user_id, :status, :bid, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
         ':user_id'          => $user_id,
         ':status'           => $status,
+        ':bid'              => $bid,
         ':keyword_text'     => $result[$x]['keywordText'],
         ':amz_campaign_id'  => $result[$x]['campaignId'],
         ':amz_adgroup_id'   => $result[$x]['adGroupId'],
@@ -561,13 +564,6 @@ var_dump($dbSales);
 echo '</pre>';
 */
 
-/*================================================================
- *
- *    AD GROUP STATE/STATUS IMPORTING
- *
- *===============================================================*/
-
-
 
 /*================================================================
  *
@@ -575,10 +571,5 @@ echo '</pre>';
  *
  *===============================================================*/
 
-/*================================================================
- *
- *    DEFAULT BID IMPORTING FOR ALL
- *    CAMPAIGNS, AD GROUPS, AND KEYWORDS
- *
- *===============================================================*/
+
 ?>
