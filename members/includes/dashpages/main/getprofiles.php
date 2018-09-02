@@ -80,6 +80,7 @@ $user_id = $_SESSION['user_id'];
 
 			// Get the report id so we can use it to get the report
 			$result = json_decode($result['response'], true);
+			var_dump($result);
 			$reportId = $result['reportId'];
 
 			sleep(8);
