@@ -198,10 +198,8 @@ function import_data(){
 
 	// Second, grab ad groups and store them in db
 
-}
+} //end function
 
 // Redirect to dashboard
 // header('location: ../../../dashboard.php');
 // exit();
-
-*/
