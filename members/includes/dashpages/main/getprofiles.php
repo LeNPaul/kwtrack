@@ -8,7 +8,6 @@ error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 use PDO;
 
 // Insert profileID in database for the user and set active level to 3
-var_dump($_POST);
 $profileId = $_POST['selectedProfile'];
 $profileId = $profileId[0];
 $sql = 'UPDATE users SET profileId=:profileId, active=:level WHERE user_id=:user_id';

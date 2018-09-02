@@ -54,6 +54,7 @@ function displayProfiles($profiles) {
 				$.ajax({
 					type: 'POST',
 					dataType: 'text',
+					data:{"selectedProfile":$(this).val()},
 					url: 'includes/dashpages/main/getprofiles.php',
 					success: function(data) {
 						alert(data);
