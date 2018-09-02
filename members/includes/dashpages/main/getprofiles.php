@@ -25,10 +25,10 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $refreshToken = $result[0]['refresh_token'];
 $user_id = $_SESSION['user_id'];
 
-import_data();
+//import_data();
 
 
-function import_data(){
+//function import_data(){
 	// TODO: integrate campaign, adgroup, and keyword import code from test.php here
 	// Instantiate client for advertising API
 	$config = array(
@@ -198,7 +198,7 @@ function import_data(){
 
 	// Second, grab ad groups and store them in db
 
-} //end function
+//} //end function
 
 // Redirect to dashboard
 // header('location: ../../../dashboard.php');
