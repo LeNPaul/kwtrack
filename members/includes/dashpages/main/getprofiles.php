@@ -28,6 +28,7 @@ $user_id = $_SESSION['user_id'];
 
 //import_data();
 
+//
 
 //function import_data(){
 	// TODO: integrate campaign, adgroup, and keyword import code from test.php here
@@ -198,6 +199,164 @@ $user_id = $_SESSION['user_id'];
 	storeCampaignArrays($pdo, $dbSales, $result, 'sales');
 
 	// Second, grab ad groups and store them in db
+
+$impressions = [];
+$clicks = [];
+$ctr = [];
+$adSpend = [];
+$avgCpc = [];
+$unitsSold = [];
+$sales = [];
+$extraArray = [];
+
+for ($i = 0; $i < 4; $i++) {
+  $impressions[$i] = [];
+  $clicks[$i] = [];
+  $ctr[$i] = [];
+  $adSpend[$i] = [];
+  $avgCpc[$i] = [];
+  $unitsSold[$i] = [];
+  $sales[$i] = [];
+  
+  // Get date from $i days before today and format it as YYYYMMDD
+  $date = date('Ymd', strtotime('-' . $i . ' days'));
+  
+  // Only on the very first iteration of this loop, we will iterate through the array
+  // and store adgroup name, adgroup id, and campaign ID in the database
+  if ($i === 0) {
+    // Request the report from API with adGroup name, adGroup Id and campaign Id only
+    // for the first iteration
+    $result = $client->requestReport(
+      "adGroups",
+      array("reportDate"    => "20180713", // placeholder date
+        "campaignType"  => "sponsoredProducts",
+        "metrics"       => "campaignId,adGroupName,adGroupId,impressions,clicks,cost,impressions,clicks,attributedUnitsOrdered1d,attributedSales1d"
+      )
+    );
+    
+    // Get the report id so we can use it to get the report
+    $result = json_decode($result['response'], true);
+    $reportId = $result['reportId'];
+    
+    sleep(7);
+    
+    // Get the report using the report id
+    $result = $client->getReport($reportId);
+    $result = json_decode($result['response'], true);
+    
+    for ($x = 0; $x < count($result); $x++) {
+      $extra = $client->getAdGroup($result[$x]['adGroupId']);
+      $extraArray[] = json_decode($extra['response'], true);
+      
+      //print_r($extraArray[$x]);
+      
+      $sql = 'INSERT INTO ad_groups (user_id, status, default_bid, amz_adgroup_id, amz_campaign_id, ad_group_name)
+              VALUES (:user_id, :status, :default_bid, :adgroup_id, :amz_campaign_id, :adgroup_name)';
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute(array(
+        ':user_id'          => $user_id,
+        ':status'			      => $extraArray[$x]['state'],
+        ':default_bid'	   	=> $extraArray[$x]['defaultBid'],
+        ':adgroup_id'	    	=> $extraArray[$x]['adGroupId'],
+        ':amz_campaign_id'  => $extraArray[$x]['campaignId'],
+        ':adgroup_name'     => $extraArray[$x]['name']
+      ));
+    }
+    
+  } else {
+    // All other iterations, we request this report to optimize time
+    $result = $client->requestReport(
+      "adGroups",
+      array("reportDate"    => "20180720", // placeholder date
+        "campaignType"  => "sponsoredProducts",
+        "metrics"       => "impressions,clicks,cost,attributedUnitsOrdered1d,attributedSales1d"
+      )
+    );
+    
+    // Get the report id so we can use it to get the report
+    $result = json_decode($result['response'], true);
+    $reportId = $result['reportId'];
+    
+    sleep(7);
+    
+    // Get the report using the report id
+    $result = $client->getReport($reportId);
+    $result = json_decode($result['response'], true);
+  }
+  
+  // Loop to iterate through the report response
+  for ($j = 0; $j < count($result); $j++) {
+    
+    // Check if campaign is archived/paused. If it is archived/paused, then we push 0 for all metrics
+    if ($extraArray[$j]['state'] == 'archived' || $extraArray[$j]['state'] == 'paused') {
+      $impressions[$i][] = 0;
+      $clicks[$i][] = 0;
+      $ctr[$i][] = 0.0;
+      $adSpend[$i][] = 0.0;
+      $avgCpc[$i][] = 0.0;
+      $unitsSold[$i][] = 0;
+      $sales[$i][] = 0.0;
+    } else { // If campaign is active, then run this code
+      $impressions[$i][] = $result[$j]['impressions'];
+      $clicks[$i][] = $result[$j]['clicks'];
+      
+      // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
+      if ($result[$j]['impressions'] == 0) {
+        $ctr[$i][] = 0.0;
+      } else {
+        $ctr[$i][] = round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
+      }
+      
+      // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
+      if ($result[$j]['clicks'] == 0) {
+        $avgCpc[$i][] = 0.0;
+      } else {
+        $avgCpc[$i][] = round(($result[$j]['cost'] / $result[$j]['clicks']), 2);
+      }
+      
+      // Push ad spend, units sold, and $ sales for the day to our arrays.
+      $adSpend[$i][] = round($result[$j]['cost'], 2);
+      $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
+      $sales[$i][] = $result[$j]['attributedSales1d'];
+    }
+  }
+}
+
+// Grab array of adGroups by their adGroup ID
+$sql = 'SELECT amz_adgroup_id FROM ad_groups WHERE user_id=' . htmlspecialchars($user_id);
+$stmt = $pdo->query($sql);
+$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+// Declare arrays that we will serialize and store in the database
+$dbImpressions = [];
+$dbClicks = [];
+$dbCtr = [];
+$dbAdSpend = [];
+$dbAvgCpc = [];
+$dbUnitsSold = [];
+$dbSales = [];
+
+// Grab impression data from array and store in their respective campaigns
+$dbImpressions = prepareDbArrays($impressions, $dbImpressions);
+storeAdGroupArrays($pdo, $dbImpressions, $result, 'impressions');
+// Grab clicks data from array and store in their respective campaigns
+$dbClicks = prepareDbArrays($clicks, $dbClicks);
+storeAdGroupArrays($pdo, $dbClicks, $result, 'clicks');
+// Grab ctr data from array and store in their respective campaigns
+$dbCtr = prepareDbArrays($ctr, $dbCtr);
+storeAdGroupArrays($pdo, $dbCtr, $result, 'ctr');
+// Grab ad spend data from array and store in their respective campaigns
+$dbAdSpend = prepareDbArrays($adSpend, $dbAdSpend);
+storeAdGroupArrays($pdo, $dbAdSpend, $result, 'ad_spend');
+// Grab average cpc data from array and store in their respective campaigns
+$dbAvgCpc = prepareDbArrays($avgCpc, $dbAvgCpc);
+storeAdGroupArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
+// Grab units sold data from array and store in their respective campaigns
+$dbUnitsSold = prepareDbArrays($unitsSold, $dbUnitsSold);
+storeAdGroupArrays($pdo, $dbUnitsSold, $result, 'units_sold');
+// Grab sales data from array and store in their respective campaigns
+$dbSales = prepareDbArrays($sales, $dbSales);
+storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 //} //end function
 

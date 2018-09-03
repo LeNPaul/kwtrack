@@ -21,8 +21,7 @@ if ($ppcSales == 0) {
 
 <!--  Row for PPC metrics: ad spend, ppc sales, ppc ACoS -->
 <div class="row">
-  
-  <div class="col-lg-3 col-md-6 col-sm-6">
+  <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
@@ -49,20 +48,56 @@ if ($ppcSales == 0) {
     </div>
   </div>
   
-  <div class="col-sm-4">
-    <div class="card text-white bg-success mb-3">
-      <div class="card-body">
-        <h5 class="card-title">PPC Sales</h5>
-        <p class="card-text"><?= '$' . $ppcSales ?></p>
+  <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-globe text-warning"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">PPC Sales</p>
+              <p class="card-title"><?= '$' . $ppcSales ?>
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i> Last updated on ..date..
+        </div>
       </div>
     </div>
   </div>
   
-  <div class="col-sm-4">
-    <div class="card text-white bg-success mb-3">
-      <div class="card-body">
-        <h5 class="card-title">PPC ACoS</h5>
-        <p class="card-text"><?= $acos . '%' ?></p>
+  <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-globe text-warning"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">PPC ACoS</p>
+              <p class="card-title"><?= $acos . '%' ?>
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i> Last updated on ..date..
+        </div>
       </div>
     </div>
   </div>
@@ -70,33 +105,85 @@ if ($ppcSales == 0) {
 
 <!--  Row for organic metrics: true ACoS, total sales, organic sales -->
 <div class="row">
-  <div class="col-sm-4">
-    <div class="card text-white bg-success">
-      <!--    <div class="card-header">Header</div>-->
-      <div class="card-body">
-        <h5 class="card-title">True ACoS</h5>
-        <p class="card-text">test</p>
+  <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-globe text-warning"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">True ACoS</p>
+              <p class="card-title">test
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i> Last updated on ..date..
+        </div>
       </div>
     </div>
   </div>
   
-  <div class="col-sm-4">
-    <div class="card text-white bg-success">
-      <div class="card-body">
-        <h5 class="card-title">Total Sales</h5>
-        <p class="card-text">test</p>
+  <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-globe text-warning"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Total Sales</p>
+              <p class="card-title">test
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i> Last updated on ..date..
+        </div>
       </div>
     </div>
   </div>
   
-  <div class="col-sm-4">
-    <div class="card text-white bg-success">
-      <div class="card-body">
-        <h5 class="card-title">Organic Sales</h5>
-        <p class="card-text">test</p>
+  <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-globe text-warning"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Organic Sales</p>
+              <p class="card-title">test
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i> Last updated on ..date..
+        </div>
       </div>
     </div>
   </div>
-  
 </div>
 
