@@ -22,6 +22,7 @@ $stmt->execute(array(
 $sql = 'SELECT refresh_token FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $refreshToken = $result[0]['refresh_token'];
 $user_id = $_SESSION['user_id'];
 
@@ -72,7 +73,7 @@ $user_id = $_SESSION['user_id'];
 			// for the first iteration
 			$result = $client->requestReport(
 				"campaigns",
-				array("reportDate"    => "20180713", // placeholder date
+				array("reportDate"    => $date,
 					  "campaignType"  => "sponsoredProducts",
 					  "metrics"       => "campaignId,campaignName,impressions,clicks,cost,campaignBudget,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
 				)
@@ -104,7 +105,7 @@ $user_id = $_SESSION['user_id'];
 			// All other iterations, we request this report to optimize time
 			$result = $client->requestReport(
 				"campaigns",
-				array("reportDate"    => "20180727", // placeholder date
+				array("reportDate"    => $date, // placeholder date
 					  "campaignType"  => "sponsoredProducts",
 					  "metrics"       => "campaignId,impressions,clicks,cost,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
 				)

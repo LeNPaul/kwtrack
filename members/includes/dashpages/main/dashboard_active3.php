@@ -1,6 +1,7 @@
 <?php
 /*
- *  User will see this after selecting their profile. Will show this page until all of their data has finished importing.
+ *  User will see this after selecting their profile.
+ *  MWS API Integration
  */
 
 ?>
