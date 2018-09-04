@@ -117,7 +117,7 @@ checkLoggedIn();
     
     
     <div class="content">
-      <h2 class="title">Campaign Manager</h2>
+      <h2 class="title text-center">Campaign Manager</h2>
       
       
     </div>
