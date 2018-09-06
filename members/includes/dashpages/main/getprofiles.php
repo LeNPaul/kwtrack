@@ -56,7 +56,7 @@ $user_id = $_SESSION['user_id'];
 	$unitsSold = [];
 	$sales = [];
 
-	for ($i = 0; $i < 60; $i++) {
+	for ($i = 0; $i < 5; $i++) {
 		$impressions[$i] = [];
 		$clicks[$i] = [];
 		$ctr[$i] = [];
