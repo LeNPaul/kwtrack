@@ -1,6 +1,6 @@
 <?php
 namespace AmazonAdvertisingApi;
-header("Location: https://ppcology.io/members/dashboard.php");
+header("refresh: 5");
 session_start();
 require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
