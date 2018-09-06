@@ -2,7 +2,7 @@
 namespace AmazonAdvertisingApi;
 session_start();
 require '../../../database/pdo.inc.php';
-//require '../helper.inc.php';
+require '../helper.inc.php';
 require_once '../../AmazonAdvertisingApi/Client.php';
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 use PDO;
