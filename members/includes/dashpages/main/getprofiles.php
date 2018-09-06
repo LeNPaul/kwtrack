@@ -16,14 +16,14 @@ $stmt->execute(array(
   ':level'     => 3,
   ':user_id'    => $_SESSION['user_id']
 ));
+// Redirect to dashboard
+header("Refresh: 0");
 // Get refresh token
 $sql = 'SELECT refresh_token FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $refreshToken = $result[0]['refresh_token'];
 $user_id = $_SESSION['user_id'];
-// Redirect to dashboard
-header("Refresh: 0");
 
 // TODO: integrate campaign, adgroup, and keyword import code from test.php here
 // Instantiate client for advertising API
