@@ -1,7 +1,6 @@
 <?php
 namespace AmazonAdvertisingApi;
 session_start();
-// Redirect to dashboard
 header("Refresh: 5");
 require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
