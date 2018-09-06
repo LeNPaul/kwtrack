@@ -26,6 +26,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $refreshToken = $result[0]['refresh_token'];
 $user_id = $_SESSION['user_id'];
 
+// Redirect to dashboard
+header('location: ../../../dashboard.php');
+
 // TODO: integrate campaign, adgroup, and keyword import code from test.php here
 // Instantiate client for advertising API
 echo "start";
@@ -355,7 +358,4 @@ $dbSales = prepareDbArrays($sales, $dbSales);
 storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 echo "finished";
-
-// Redirect to dashboard
-// header('location: ../../../dashboard.php');
 // exit();
