@@ -6,6 +6,8 @@ require '../helper.inc.php';
 require_once '../../AmazonAdvertisingApi/Client.php';
 error_reporting(E_ALL); ini_set("error_reporting", E_ALL);
 use PDO;
+// Redirect to dashboard
+header("Refresh: 5");
 // Insert profileID in database for the user and set active level to 3
 $profileId = $_POST['selectedProfile'];
 //$profileId = $profileId[0];
@@ -16,8 +18,6 @@ $stmt->execute(array(
   ':level'     => 3,
   ':user_id'    => $_SESSION['user_id']
 ));
-// Redirect to dashboard
-header("Refresh: 0");
 // Get refresh token
 $sql = 'SELECT refresh_token FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
