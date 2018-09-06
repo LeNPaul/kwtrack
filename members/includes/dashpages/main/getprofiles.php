@@ -92,16 +92,18 @@ $user_id = $_SESSION['user_id'];
 			$result = json_decode($result['response'], true);
 
 			for ($x = 0; $x < count($result); $x++) {
-				$sql = 'INSERT INTO campaigns (user_id, status, campaign_name, amz_campaign_id, daily_budget)
-						VALUES (:user_id, :status, :campaign_name, :amz_campaign_id, :daily_budget)';
-				$stmt = $pdo->prepare($sql);
-				$stmt->execute(array(
-					':user_id'          => $user_id,
-					':status'           => $result[$x]['campaignStatus'],
-					':campaign_name'    => htmlspecialchars($result[$x]['campaignName'], ENT_QUOTES),
-					':amz_campaign_id'  => $result[$x]['campaignId'],
-					':daily_budget'     => $result[$x]['campaignBudget']
-				));
+				if (!array_key_exists($x, $result)) {
+					$sql = 'INSERT INTO campaigns (user_id, status, campaign_name, amz_campaign_id, daily_budget)
+							VALUES (:user_id, :status, :campaign_name, :amz_campaign_id, :daily_budget)';
+					$stmt = $pdo->prepare($sql);
+					$stmt->execute(array(
+						':user_id'          => $user_id,
+						':status'           => $result[$x]['campaignStatus'],
+						':campaign_name'    => htmlspecialchars($result[$x]['campaignName'], ENT_QUOTES),
+						':amz_campaign_id'  => $result[$x]['campaignId'],
+						':daily_budget'     => $result[$x]['campaignBudget']
+					));
+				}
 			}
 		} else {
 			// All other iterations, we request this report to optimize time
