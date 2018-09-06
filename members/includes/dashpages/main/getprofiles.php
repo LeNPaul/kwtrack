@@ -89,7 +89,7 @@ $user_id = $_SESSION['user_id'];
 			// Get the report using the report id
 			$result = $client->getReport($reportId);
 			$result = json_decode($result['response'], true);
-			var_dump($result);
+			var_dump($result[0]);
 
 			for ($x = 0; $x < count($result); $x++) {
 				$sql = 'INSERT INTO campaigns (user_id, status, campaign_name, amz_campaign_id, daily_budget)
