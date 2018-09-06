@@ -27,11 +27,10 @@ $refreshToken = $result[0]['refresh_token'];
 $user_id = $_SESSION['user_id'];
 
 // Redirect to dashboard
-header('location: ../../../dashboard.php');
+header('Refresh:0');
 
 // TODO: integrate campaign, adgroup, and keyword import code from test.php here
 // Instantiate client for advertising API
-echo "start";
 $config = array(
 	"clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
 	"clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
@@ -158,7 +157,6 @@ for ($i = 0; $i < 4; $i++) {
 		}
 	}
 }
-echo "done fetching campaigns";
 // Grab array of campaigns by their campaign ID
 $sql = 'SELECT amz_campaign_id FROM campaigns WHERE user_id=' . htmlspecialchars($user_id);
 $stmt = $pdo->query($sql);
@@ -356,6 +354,4 @@ storeAdGroupArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 // Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
 storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
-
-echo "finished";
 // exit();
