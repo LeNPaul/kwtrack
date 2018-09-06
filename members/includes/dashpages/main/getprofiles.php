@@ -1,7 +1,7 @@
 <?php
 namespace AmazonAdvertisingApi;
-session_start();
 header("Refresh: 5");
+session_start();
 require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
 require_once '../../AmazonAdvertisingApi/Client.php';
