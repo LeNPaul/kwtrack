@@ -1,6 +1,5 @@
 <?php
 namespace AmazonAdvertisingApi;
-header("refresh: 5");
 session_start();
 require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
