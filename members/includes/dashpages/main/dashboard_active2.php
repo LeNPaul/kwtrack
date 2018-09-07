@@ -50,7 +50,7 @@ function displayProfiles($profiles) {
 	
 	<script type="text/javascript">
 		function refreshPage(){
-			setTimeout(window.location.reload(), 3000);
+			window.location.reload();
 		}
 	
 		$(document).ready(function(){
