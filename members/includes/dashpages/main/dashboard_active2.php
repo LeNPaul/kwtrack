@@ -48,15 +48,16 @@ function displayProfiles($profiles) {
 	echo displayProfiles($_SESSION['profiles']);
 	?>
 	
-	<script type="text/javascript">
+	<script type="text/javascript">	
 		$(document).ready(function(){
 			$("button").click(function(){
 				$.ajax({
 					type: 'POST',
 					dataType: 'text',
+					data:{"selectedProfile":$(this).val()},
 					url: 'includes/dashpages/main/getprofiles.php',
-					success: function(data) {
-						alert(data);
+					success: function() {
+						window.location.reload();
 					},
 					error: function(msg, xhr) {
 						alert(msg + ", " + xhr.responseText);

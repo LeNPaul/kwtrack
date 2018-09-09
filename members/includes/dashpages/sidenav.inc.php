@@ -11,6 +11,8 @@ function outputSideNav($currentPage) {
   
   if ($currentPage == 'dashboard') {
     $active1 = 'class="active"';
+  } elseif ($currentPage == 'campaign_manager') {
+    $active2 = 'class="active"';
   }
   
   echo '<div class="sidebar" data-color="red" data-active-color="danger">
@@ -82,7 +84,7 @@ function outputSideNav($currentPage) {
               <div class="collapse " id="pagesExamples">
                 <ul class="nav">
                   <li ' . $active2 . '>
-                    <a href="../examples/pages/timeline.html">
+                    <a href="includes/dashpages/cmanager/campaign_manager.php">
                       <span class="sidebar-mini-icon">VEC</span>
                       <span class="sidebar-normal"> View and Edit Campaigns </span>
                     </a>

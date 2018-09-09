@@ -5,8 +5,10 @@ require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
 use PDO;
 
-/* TESTING PURPOSES ONLY */
-$sql = 'DELETE FROM campaigns';
+
+
+// TESTING PURPOSES ONLY
+$sql = 'DELETE FROM ad_groups';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
@@ -29,6 +31,8 @@ $client->profileId = $profileId;
  *    FIRST, IMPORT CAMPAIGNS
  *
  */
+
+/*
 
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
@@ -70,7 +74,7 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
     $reportId = $result['reportId'];
 
-    sleep(12);
+    sleep(8);
 
     // Get the report using the report id
     $result = $client->getReport($reportId);
@@ -189,13 +193,16 @@ echo '<hr /><h1>IMPRESSIONS</h1><br /><br />';
 var_dump($dbImpressions);
 echo '</pre>';
 
+*/
+
 /*
  *
  *    SECOND, IMPORT AD_GROUPS
  *
  */
 
-/*
+
+
 $impressions = [];
 $clicks = [];
 $ctr = [];
@@ -205,7 +212,7 @@ $unitsSold = [];
 $sales = [];
 $extraArray = [];
 
-for ($i = 0; $i < 60; $i++) {
+for ($i = 0; $i < 4; $i++) {
   $impressions[$i] = [];
   $clicks[$i] = [];
   $ctr[$i] = [];
@@ -218,7 +225,7 @@ for ($i = 0; $i < 60; $i++) {
   $date = date('Ymd', strtotime('-' . $i . ' days'));
 
   // Only on the very first iteration of this loop, we will iterate through the array
-  // and store campaign name and campaign ID in the database
+  // and store adgroup name, adgroup id, and campaign ID in the database
   if ($i === 0) {
     // Request the report from API with adGroup name, adGroup Id and campaign Id only
     // for the first iteration
@@ -241,18 +248,21 @@ for ($i = 0; $i < 60; $i++) {
     $result = json_decode($result['response'], true);
 
     for ($x = 0; $x < count($result); $x++) {
-  	  $extra = $client->getAdGroup($result[$x]['adGroupId'];
-  	  $extraArray[] = json_decode($extra['response', true);
+  	  $extra = $client->getAdGroup($result[$x]['adGroupId']);
+  	  $extraArray[] = json_decode($extra['response'], true);
+  	  
+	    //print_r($extraArray[$x]);
+	    
       $sql = 'INSERT INTO ad_groups (user_id, status, default_bid, amz_adgroup_id, amz_campaign_id, ad_group_name)
               VALUES (:user_id, :status, :default_bid, :adgroup_id, :amz_campaign_id, :adgroup_name)';
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
         ':user_id'          => $user_id,
-    		':status'			      => $extra['state'],
-    		':default_bid'	   	=> $extra['defaultBid'],
-    		':adgroup_id'	    	=> $extra['adGroupId'],
-        ':amz_campaign_id'  => $extra['campaignId'],
-        ':adgroup_name'     => $extra['name']
+    		':status'			      => $extraArray[$x]['state'],
+    		':default_bid'	   	=> $extraArray[$x]['defaultBid'],
+    		':adgroup_id'	    	=> $extraArray[$x]['adGroupId'],
+        ':amz_campaign_id'  => $extraArray[$x]['campaignId'],
+        ':adgroup_name'     => $extraArray[$x]['name']
       ));
     }
 
@@ -260,7 +270,7 @@ for ($i = 0; $i < 60; $i++) {
 	// All other iterations, we request this report to optimize time
     $result = $client->requestReport(
       "adGroups",
-      array("reportDate"    => "20180627", // placeholder date
+      array("reportDate"    => "20180720", // placeholder date
             "campaignType"  => "sponsoredProducts",
             "metrics"       => "impressions,clicks,cost,attributedUnitsOrdered1d,attributedSales1d"
       )
@@ -350,7 +360,8 @@ storeAdGroupArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 // Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
 storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
-*/
+
+
 
 /*
  *
@@ -359,6 +370,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
  */
 
 /*
+
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
 //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
@@ -409,18 +421,20 @@ for ($i = 0; $i < 60; $i++) {
     // Insert keywords into database
     for ($x = 0; $x < count($result); $x++) {
 
-      // Get status for each keyword
+      // Get status and bid for each keyword
       $kw_id = $result[$x]['keywordId'];
       $status = $client->getBiddableKeyword($kw_id);
       $status = json_decode($status['response'], true);
+      $bid = $status['bid'];
       $status = $status['state'];
 
-      $sql = 'INSERT INTO ppc_keywords (user_id, status, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id, match_type)
-              VALUES (:user_id, :status, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
+      $sql = 'INSERT INTO ppc_keywords (user_id, status, bid, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id, match_type)
+              VALUES (:user_id, :status, :bid, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
         ':user_id'          => $user_id,
         ':status'           => $status,
+        ':bid'              => $bid,
         ':keyword_text'     => $result[$x]['keywordText'],
         ':amz_campaign_id'  => $result[$x]['campaignId'],
         ':amz_adgroup_id'   => $result[$x]['adGroupId'],
@@ -553,4 +567,46 @@ echo '<hr /><h1>SALES</h1><br /><br />';
 var_dump($dbSales);
 echo '</pre>';
 */
+
+
+/*================================================================
+ *
+ *    NEGATIVE KEYWORD IMPORTING
+ *
+ *===============================================================*/
+
+// Get ad group level negative keywords and store them in db
+$result = $client->listNegativeKeywords(array("stateFilter" => "enabled"));
+$result = json_decode($result['response'], true);
+
+for ($i = 0; $i < count($result); $i++) {
+  $sql = 'INSERT INTO adgroup_neg_kw (kw_id, amz_adgroup_id, keyword_text, state, match_type)
+          VALUES (:kw_id, :amz_adgroup_id, :keyword_text, :state, :match_type)';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ':kw_id'          => $result[$i]['keywordId'],
+    ':amz_adgroup_id' => $result[$i]['adGroupId'],
+    ':keyword_text'   => $result[$i]['keywordText'],
+    ':state'          => $result[$i]['state'],
+    ':match_type'     => $result[$i]['matchType']
+  ));
+}
+
+//Get campaign level negative keywords and store them in db
+$result = $client->listCampaignNegativeKeywords(array("stateFilter" => "enabled"));
+$result = json_decode($result['response'], true);
+
+for ($i = 0; $i < count($result); $i++) {
+  $sql = 'INSERT INTO campaign_neg_kw (kw_id, amz_campaign_id, keyword_text, state, match_type)
+          VALUES (:kw_id, :amz_campaign_id, :keyword_text, :state, :match_type)';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ':kw_id'          => $result[$i]['keywordId'],
+    ':amz_campaign_id' => $result[$i]['campaignId'],
+    ':keyword_text'   => $result[$i]['keywordText'],
+    ':state'          => $result[$i]['state'],
+    ':match_type'     => $result[$i]['matchType']
+  ));
+}
+
 ?>
