@@ -24,3 +24,5 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $refreshToken = $result[0]['refresh_token'];
 $user_id = $_SESSION['user_id'];
+
+echo "finished";
