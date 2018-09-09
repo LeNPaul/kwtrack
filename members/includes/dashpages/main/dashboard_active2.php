@@ -57,9 +57,7 @@ function displayProfiles($profiles) {
 					data:{"selectedProfile":$(this).val()},
 					url: 'includes/dashpages/main/getprofiles.php',
 					success: function(data) {
-						if (data == "finished") {
-							window.location.reload();
-						}
+						window.location.reload();
 					},
 					error: function(msg, xhr) {
 						alert(msg + ", " + xhr.responseText);
