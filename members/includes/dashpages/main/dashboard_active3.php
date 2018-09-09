@@ -13,6 +13,12 @@
 				type: 'POST',
 				dataType: 'text',
 				url: 'includes/dashpages/main/import_data.php',
+				success: function() {
+					alert('success');
+				}
+				error: function(msg, xhr) {
+					alert(msg + ", " + xhr.responseText);
+				}				
 			});
 		});
 	</script>
