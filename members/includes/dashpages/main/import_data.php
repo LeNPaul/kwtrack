@@ -40,7 +40,7 @@ $avgCpc = [];
 $unitsSold = [];
 $sales = [];
 
-for ($i = 0; $i < 60; $i++) {
+for ($i = 0; $i < 4; $i++) {
 	$impressions[$i] = [];
 	$clicks[$i] = [];
 	$ctr[$i] = [];
@@ -194,7 +194,7 @@ $unitsSold = [];
 $sales = [];
 $extraArray = [];
 
-for ($i = 0; $i < 60; $i++) {
+for ($i = 0; $i < 4; $i++) {
   $impressions[$i] = [];
   $clicks[$i] = [];
   $ctr[$i] = [];
