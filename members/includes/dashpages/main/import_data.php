@@ -6,6 +6,7 @@ require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
 require_once '../../AmazonAdvertisingApi/Client.php';
 use PDO;
+
 //'Atzr|IwEBID8Cr8D51I4XzWRU5wdohHUoGJRY1rempo6uwgk_niC5AgqZo_SVul0Nt8V5oU1j8P2T08oPjR8gLKSsWnJuAflfBzcMky0NzBoKcSIYH62WJ4I86G6t4jGxU7fitoLO79TJPFjCoHPXyjnvaNLxFaJPxOaW3t4fLBH9-1RGsAaEdrP0-r85iVNgG_pQE2HA7bl_ZMqWoJbXhww-YEsfMH6tBKXG0S0dMreLkEkdx75eABfzKwdDm9jokTL8YZjkqj1ELRFOwK6Pgv1PsYTvdI2Us1fTw-Bu1n_n4am_vlrK4ntseK_dqFHvrV4_h0aup1hoChA5KZD2ID3fG4e4be4iCRC66QdJxmjv_q_o8RxoZR_bG0vhlkU2rSYKnMnZOj7nkRS2Z6JoRPWRLw7nP8nEfHLRkCQnrOn2PHkrKX7MWTIWt1f-_rkr3ocfvgKfcixFvTc6XmNGg0IYbVidw0thS3-AgSpnGaG0O7Q-W9VZPFRFtas1PltUG69LL0ko2EOz6yW-RG9071MfpUMgre2_TUildA68rlcdikXtNfMtyYNwqvQhlSZ_eVXWGclIpk4XQ39a-5eJiB8HVfsAvgdF'/*$argv[1]*/;
 //'1215041354659387'
 
@@ -28,7 +29,15 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $_SESSION['profileID'];
 
-// First, grab campaigns and store them in db
+
+/***********************************************************
+ *
+ *
+ *					CAMPAIGN IMPORTING
+ *
+ *
+ ***********************************************************/
+
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
 //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
@@ -69,7 +78,7 @@ for ($i = 0; $i < 4; $i++) {
 		$result = json_decode($result['response'], true);
 		$reportId = $result['reportId'];
 
-	sleep(8);
+		sleep(8);
 
 		// Get the report using the report id
 		$result = $client->getReport($reportId);
@@ -183,7 +192,13 @@ storeCampaignArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 $dbSales = prepareDbArrays($sales, $dbSales);
 storeCampaignArrays($pdo, $dbSales, $result, 'sales');
 
-// Second, grab ad groups and store them in db
+/***********************************************************
+ *
+ *
+ *					AD GROUP IMPORTING
+ *
+ *
+ ***********************************************************/
 
 $impressions = [];
 $clicks = [];
