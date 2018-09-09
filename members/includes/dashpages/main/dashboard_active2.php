@@ -26,7 +26,7 @@ function displayProfiles($profiles) {
     if ($profiles[$i]['countryCode'] == 'US') {
       // Set USA flag
       $flag = '<span class="flag-icon flag-icon-us"></span> ';
-      $output .= '<button onclick="refreshPage()" type="button" class="btn btn-primary btn-lg btn-block" name="selectedProfile[]" value="' . $profiles[$i]['profileId'] . '">'
+      $output .= '<button type="button" class="btn btn-primary btn-lg btn-block" name="selectedProfile[]" value="' . $profiles[$i]['profileId'] . '">'
       . $flag . ' US - '
       . $sellerName . ' - '
       . $profiles[$i]['accountInfo']['sellerStringId']
@@ -48,11 +48,7 @@ function displayProfiles($profiles) {
 	echo displayProfiles($_SESSION['profiles']);
 	?>
 	
-	<script type="text/javascript">
-		function refreshPage(){
-			window.location.reload();
-		}
-	
+	<script type="text/javascript">	
 		$(document).ready(function(){
 			$("button").click(function(){
 				$.ajax({
