@@ -7,7 +7,13 @@
 ?>
 
 <div class="container text-center">
-
+	<h2>Integrate Your Amazon Account</h2>
+	<p>In order for PPCOLOGY to optimize your campaigns at its full potential, we
+		need to import a few important things from your Amazon account. </p>
+	<p>
+		Follow the steps below to import your products and sales data.
+	</p>
+	
 </div>
 
 <input type="hidden" id="user_id" value="<?= $_SESSION['user_id'] ?>" />
