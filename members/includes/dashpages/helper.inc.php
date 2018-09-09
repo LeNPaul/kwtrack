@@ -19,7 +19,7 @@
  function prepareDbArrays($dataset, $dbVar) {
    for ($i = 0; $i < 60; $i++) {
      /* TESTING PURPOSES ONLY. REMOVE BREAK WHEN READY FOR FINAL TESTING PHASE */
-     // if ($i === 2) { break; }
+     if ($i === 2) { break; }
 
      $secondLoopLimit = count($dataset[$i]);
      for ($j = 0; $j < $secondLoopLimit; $j++) {
@@ -103,62 +103,41 @@
  */
 function multiUnserialize($arr) {
   for ($i = 0; $i < count($arr); $i++) {
-    $arr[$i] = unserialize($arr[$i]);
+    unserialize($arr[$i]);
   }
   return $arr;
 }
 
 /*
- * function getMetricData(PDO $pdo, String $metric, Int $user_id) --> Array $output
- *    --> Returns array of all metric data for $metric for the user
- *
- *      --> PDO $pdo       - database handle
- *      --> String $metric - metric to search for in the database
- *      --> Int $user_id   - user ID of the user
- */
-function getMetricData($pdo, $metric, $user_id) {
-  // Grab metric data for ALL CAMPAIGNS for the user
-  $sql = "SELECT {$metric} FROM campaigns WHERE user_id={$user_id}";
-  $stmt = $pdo->query($sql);
-  return $stmt->fetchAll(PDO::FETCH_COLUMN);
-}
-
-/*
  *  function calculateMetrics(Array $metricArr[Array, Array, ..., Array], Int $numDays, String $metric) --> Int $output
- *    --> Outputs a float that represents a metric
+ *    --> Outputs a Bootstrap card that displays PPC metrics for a variable number of days
  *
  *      --> Array $metricArr    - Array of arrays pulled from the database.
  *                                - Length will be equal to # of campaigns for the user
  *      --> Int $numDays        - number of days to calculate data for
  *      --> Int $output         - summed up total for the metric
  *      --> String $metric      - String that represents which metric we are calculating
- *                                - Allowed inputs: adSpend, ppcSales, ...
  */
 function calculateMetrics($metricArr, $numDays, $metric) {
   // Algorithm will pop the end of each array $numDays times and append it to the output array
   // After appending to output array, we use array_filter to calculate the metric needed
 
-  $output = [];
-  
-  // FIND OUT WHY THIS IS FUCKING UP
-  
+  $outputA = [];
+
   for ($i = 0; $i < count($metricArr); $i++) {
     // If the output array has the required length, then break the loop
-    // Required length = numDays * number of campaigns
-    if (count($output) == ($numDays * count($metricArr))) { break; }
+    if (count($output) == $numDays) { break; }
+
     $output[] = array_pop($metricArr[$i]);
-    
-    echo '<br />';
-    var_dump($output);
   }
 
-  if ($metric == 'adSpend' || $metric == 'ppcSales') {
-    // If the metric being calculated is ad spend or PPC sales, then all we need to do is
-    // get the sum of the array
-    $output = array_reduce($output, function($carry, $element) { return $carry += $element; });
-  
+  if ($metric == 'adSpend' || $metric == 'sales') {
+    $output = array_reduce($outputArr, function($carry, $element) { $carry += $element; });
   }
-  
+
+
+
+
   return $output;
 }
 ?>
