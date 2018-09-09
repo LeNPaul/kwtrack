@@ -26,7 +26,7 @@ $config = array(
 	"sandbox" => false,
 );
 $client = new Client($config);
-$client->profileId = $profileId;
+$client->profileId = $_SESSION['profileID'];
 
 // First, grab campaigns and store them in db
 // Each metric array will be storing campaign data like the following in a 2D array:

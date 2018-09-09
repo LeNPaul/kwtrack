@@ -8,6 +8,7 @@ use PDO;
 
 // Insert profileID in database for the user and set active level to 3
 $profileId = $_POST['selectedProfile'];
+$_SESSION['profileID'] = $profileId;
 //$profileId = $profileId[0];
 $sql = 'UPDATE users SET profileId=:profileId, active=:level WHERE user_id=:user_id';
 $stmt = $pdo->prepare($sql);
