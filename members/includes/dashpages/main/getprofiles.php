@@ -17,10 +17,11 @@ $stmt->execute(array(
   ':level'     => 3,
   ':user_id'    => $_SESSION['user_id']
 ));
-
+/*
 // Get refresh token
 $sql = 'SELECT refresh_token FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $refreshToken = $result[0]['refresh_token'];
 $user_id = $_SESSION['user_id'];
+*/
