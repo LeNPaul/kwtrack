@@ -14,7 +14,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquer
 
 function displayProfiles($profiles) {
   $output = '';
-  var_dump($profiles);
   // Iterate through profiles and append block level buttons to $output
   for ($i = 0; $i < count($profiles); $i++) {
     // Scrape Amazon to grab seller name
@@ -44,11 +43,11 @@ function displayProfiles($profiles) {
 	<h2>Select Your Profile</h2>
 	<p>Here are the profiles that we detected on your Seller Central account. Please select the profile that you would like to integrate PPCOLOGY with.</p>
 
-	<?php 
+	<?php
 	echo displayProfiles($_SESSION['profiles']);
 	?>
-	
-	<script type="text/javascript">	
+
+	<script type="text/javascript">
 		$(document).ready(function(){
 			$("button").click(function(){
 				$.ajax({
