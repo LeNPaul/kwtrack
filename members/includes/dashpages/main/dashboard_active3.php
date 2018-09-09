@@ -10,16 +10,19 @@
 
 </div>
 
+<input type="hidden" id="user_id" value="<?= $_SESSION['user_id'] ?>" />
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript">
-var user_id = "<?= $_SESSION['user_id'] ?>";
+var user_id = $("#user_id").val();
 	$(document).ready(function(){
 		$.ajax({
 			type: 'POST',
 			dataType: 'text',
+			data: { "user_id": user_id },
 			url: 'includes/dashpages/main/import_data.php',
 			success: function() {
-				alert('user id: ' . user_id);
+				alert('success');
 			},
 			error: function(msg, xhr) {
 				alert(msg + ", " + xhr.responseText);

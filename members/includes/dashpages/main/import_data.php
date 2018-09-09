@@ -10,14 +10,18 @@ use PDO;
 //'Atzr|IwEBID8Cr8D51I4XzWRU5wdohHUoGJRY1rempo6uwgk_niC5AgqZo_SVul0Nt8V5oU1j8P2T08oPjR8gLKSsWnJuAflfBzcMky0NzBoKcSIYH62WJ4I86G6t4jGxU7fitoLO79TJPFjCoHPXyjnvaNLxFaJPxOaW3t4fLBH9-1RGsAaEdrP0-r85iVNgG_pQE2HA7bl_ZMqWoJbXhww-YEsfMH6tBKXG0S0dMreLkEkdx75eABfzKwdDm9jokTL8YZjkqj1ELRFOwK6Pgv1PsYTvdI2Us1fTw-Bu1n_n4am_vlrK4ntseK_dqFHvrV4_h0aup1hoChA5KZD2ID3fG4e4be4iCRC66QdJxmjv_q_o8RxoZR_bG0vhlkU2rSYKnMnZOj7nkRS2Z6JoRPWRLw7nP8nEfHLRkCQnrOn2PHkrKX7MWTIWt1f-_rkr3ocfvgKfcixFvTc6XmNGg0IYbVidw0thS3-AgSpnGaG0O7Q-W9VZPFRFtas1PltUG69LL0ko2EOz6yW-RG9071MfpUMgre2_TUildA68rlcdikXtNfMtyYNwqvQhlSZ_eVXWGclIpk4XQ39a-5eJiB8HVfsAvgdF'/*$argv[1]*/;
 //'1215041354659387'
 
-// Get refresh token
-$sql = 'SELECT refresh_token FROM users WHERE user_id=' . $_SESSION['user_id'];
+// Get user_id from AJAX POST request
+$user_id = $_POST['user_id'];
+
+// Get refresh token and profileId from database using user_id
+$sql = 'SELECT refresh_token, profileId FROM users WHERE user_id=' . $user_id;
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $refreshToken = $result[0]['refresh_token'];
-$user_id = $_SESSION['user_id'];
+$profileId = $result[0]['profileId'];
 
 // TODO: integrate keyword import code from test.php here
+
 // Instantiate client for advertising API
 $config = array(
 	"clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
@@ -27,7 +31,7 @@ $config = array(
 	"sandbox" => false,
 );
 $client = new Client($config);
-$client->profileId = $_SESSION['profileID'];
+$client->profileId = $profileId;
 
 
 /***********************************************************

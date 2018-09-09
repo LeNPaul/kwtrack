@@ -43,26 +43,25 @@ function displayProfiles($profiles) {
 	<h2>Select Your Profile</h2>
 	<p>Here are the profiles that we detected on your Seller Central account. Please select the profile that you would like to integrate PPCOLOGY with.</p>
 
-	<?php
-	echo displayProfiles($_SESSION['profiles']);
-	?>
+	<?= displayProfiles($_SESSION['profiles']) ?>
 
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("button").click(function(){
-				$.ajax({
-					type: 'POST',
-					dataType: 'text',
-					data:{"selectedProfile":$(this).val()},
-					url: 'includes/dashpages/main/getprofiles.php',
-					success: function() {
-						window.location.reload();
-					},
-					error: function(msg, xhr) {
-						alert(msg + ", " + xhr.responseText);
-					}
-				});
-			});
-		});
-	</script>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("button").click(function(){
+      $.ajax({
+        type: 'POST',
+        dataType: 'text',
+        data: {"selectedProfile":$(this).val()},
+        url: 'includes/dashpages/main/getprofiles.php',
+        success: function() {
+          window.location.reload();
+        },
+        error: function(msg, xhr) {
+          alert(msg + ", " + xhr.responseText);
+        }
+      });
+    });
+  });
+</script>
