@@ -18,8 +18,8 @@
   */
  function prepareDbArrays($dataset, $dbVar) {
    for ($i = 0; $i < 4; $i++) {
-     /* TESTING PURPOSES ONLY. REMOVE BREAK WHEN READY FOR FINAL TESTING PHASE */
-     if ($i === 2) { break; }
+     /* TESTING PURPOSES ONLY. REMOVE BREAK WHEN READY FOR FINAL TESTING PHASE test*/
+     // if ($i === 2) { break; }
 
      $secondLoopLimit = count($dataset[$i]);
      for ($j = 0; $j < $secondLoopLimit; $j++) {
