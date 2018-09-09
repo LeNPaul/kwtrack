@@ -74,6 +74,7 @@ for ($i = 0; $i < 4; $i++) {
 		// Get the report using the report id
 		$result = $client->getReport($reportId);
 		$result = json_decode($result['response'], true);
+		var_dump($result);
 
 		for ($x = 0; $x < count($result); $x++) {
 			$sql = 'INSERT INTO campaigns (user_id, status, campaign_name, amz_campaign_id, daily_budget)
