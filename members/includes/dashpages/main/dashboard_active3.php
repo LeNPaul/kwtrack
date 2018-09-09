@@ -17,7 +17,6 @@ var user_id = "<?= $_SESSION['user_id'] ?>";
 		$.ajax({
 			type: 'POST',
 			dataType: 'text',
-			data:
 			url: 'includes/dashpages/main/import_data.php',
 			success: function() {
 				alert('user id: ' . user_id);
