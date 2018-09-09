@@ -53,7 +53,7 @@ for ($i = 0; $i < 60; $i++) {
   $avgCpc[$i] = [];
   $unitsSold[$i] = [];
   $sales[$i] = [];
-  
+
   // Get date from $i days before today and format it as YYYYMMDD
   $date = date('Ymd', strtotime('-' . $i . ' days'));
 
@@ -250,9 +250,9 @@ for ($i = 0; $i < 4; $i++) {
     for ($x = 0; $x < count($result); $x++) {
   	  $extra = $client->getAdGroup($result[$x]['adGroupId']);
   	  $extraArray[] = json_decode($extra['response'], true);
-  	  
+
 	    //print_r($extraArray[$x]);
-	    
+
       $sql = 'INSERT INTO ad_groups (user_id, status, default_bid, amz_adgroup_id, amz_campaign_id, ad_group_name)
               VALUES (:user_id, :status, :default_bid, :adgroup_id, :amz_campaign_id, :adgroup_name)';
       $stmt = $pdo->prepare($sql);
@@ -369,7 +369,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
  *
  */
 
-/*
+
 
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
@@ -566,7 +566,7 @@ var_dump($dbUnitsSold);
 echo '<hr /><h1>SALES</h1><br /><br />';
 var_dump($dbSales);
 echo '</pre>';
-*/
+
 
 
 /*================================================================
