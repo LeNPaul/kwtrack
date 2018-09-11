@@ -116,7 +116,7 @@ for ($i = 0; $i < 60; $i++) {
 		$result = json_decode($result['response'], true);
 		$reportId = $result['reportId'];
 
-		sleep(10);
+		sleep(15);
 
 		// Get the report using the report id
 		$result = $client->getReport($reportId);
