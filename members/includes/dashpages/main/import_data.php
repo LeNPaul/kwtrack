@@ -92,9 +92,6 @@ for ($i = 0; $i < 60; $i++) {
 		$result = $client->getReport($reportId);
 		$result = json_decode($result['response'], true);
 
-		echo 'result: <br /><br />';
-		var_dump($result); die;
-
 		for ($x = 0; $x < count($result); $x++) {
 			$sql = 'INSERT INTO campaigns (user_id, status, campaign_name, amz_campaign_id, daily_budget)
 					VALUES (:user_id, :status, :campaign_name, :amz_campaign_id, :daily_budget)';
