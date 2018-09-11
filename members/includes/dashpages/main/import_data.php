@@ -127,7 +127,7 @@ for ($i = 0; $i < 60; $i++) {
 
 	// Loop to iterate through the report response
 	for ($j = 0; $j < count($result); $j++) {
-		
+
 		// Check if campaign is archived/paused. If it is archived/paused, then we push 0 for all metrics
 		if ($result[$j]['campaignStatus'] == 'archived' || $result[$j]['campaignStatus'] == 'paused') {
 			$impressions[$i][] = 0;

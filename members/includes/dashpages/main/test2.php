@@ -19,9 +19,11 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
+$date = date('Ymd', strtotime('-1 days'));
+
 $result = $client->requestReport(
   "campaigns",
-  array("reportDate"    => $date, // placeholder date
+  array("reportDate"    => $date,
       "campaignType"  => "sponsoredProducts",
       "metrics"       => "campaignId,impressions,clicks,cost,campaignStatus,attributedUnitsOrdered1d,attributedSales1d"
   )
