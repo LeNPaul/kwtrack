@@ -33,7 +33,7 @@ $result = $client->requestReport(
 $result = json_decode($result['response'], true);
 $reportId = $result['reportId'];
 
-sleep(20);
+sleep(30);
 
 // Get the report using the report id
 $result = $client->getReport($reportId);
