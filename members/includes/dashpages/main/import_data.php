@@ -14,6 +14,8 @@ use PDO;
 // Get user_id from AJAX POST request
 $user_id = $_POST['user_id'];
 
+$user_id = 2;
+
 // Get refresh token and profileId from database using user_id
 $sql = 'SELECT refresh_token, profileId FROM users WHERE user_id=' . $user_id;
 $stmt = $pdo->query($sql);
@@ -89,7 +91,7 @@ for ($i = 0; $i < 60; $i++) {
 		// Get the report using the report id
 		$result = $client->getReport($reportId);
 		$result = json_decode($result['response'], true);
-		
+
 		var_dump($result);
 
 		for ($x = 0; $x < count($result); $x++) {
