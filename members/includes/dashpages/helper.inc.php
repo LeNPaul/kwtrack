@@ -137,9 +137,6 @@ function calculateMetrics($metricArr, $numDays, $metric) {
     $output = array_reduce($output, function($carry, $element) { return $carry += $element; });
   }
 
-
-
-
   return $output;
 }
 ?>
