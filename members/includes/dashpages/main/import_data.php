@@ -467,44 +467,32 @@ for ($i = 0; $i < 60; $i++) {
   // Loop to iterate through the report response
   for ($j = 0; $j < count($result); $j++) {
 
-    // Get status for each keyword
-    $kw_id = $result[$j]['keywordId'];
-    $status = $client->getBiddableKeyword($kw_id);
-    $status = json_decode($status['response'], true);
-    $status = $status['state'];
+    // Removed the 'archived/paused' check for keywords since their states/status
+		// are not provided in the reports. You can only get their CURRENT states and not
+		// their past states.
 
-    // Check if keyword is archived/paused. If it is archived/paused, then we push 0 for all metrics
-    if ($status == 'archived' || $status == 'paused') {
-      $impressions[$i][] = 0;
-      $clicks[$i][] = 0;
+    $impressions[$i][] = $result[$j]['impressions'];
+    $clicks[$i][] = $result[$j]['clicks'];
+
+    // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
+    if ($result[$j]['impressions'] == 0) {
       $ctr[$i][] = 0.0;
-      $adSpend[$i][] = 0.0;
-      $avgCpc[$i][] = 0.0;
-      $unitsSold[$i][] = 0;
-      $sales[$i][] = 0.0;
-    } else { // If keyword is active, then run this code
-      $impressions[$i][] = $result[$j]['impressions'];
-      $clicks[$i][] = $result[$j]['clicks'];
-
-      // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
-      if ($result[$j]['impressions'] == 0) {
-        $ctr[$i][] = 0.0;
-      } else {
-        $ctr[$i][] = round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
-      }
-
-      // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
-      if ($result[$j]['clicks'] == 0) {
-        $avgCpc[$i][] = 0.0;
-      } else {
-        $avgCpc[$i][] = round(($result[$j]['cost'] / $result[$j]['clicks']), 2);
-      }
-
-      // Push ad spend, units sold, and $ sales for the day to our arrays.
-      $adSpend[$i][] = round($result[$j]['cost'], 2);
-      $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
-      $sales[$i][] = $result[$j]['attributedSales1d'];
+    } else {
+      $ctr[$i][] = round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
     }
+
+    // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
+    if ($result[$j]['clicks'] == 0) {
+      $avgCpc[$i][] = 0.0;
+    } else {
+      $avgCpc[$i][] = round(($result[$j]['cost'] / $result[$j]['clicks']), 2);
+    }
+
+    // Push ad spend, units sold, and $ sales for the day to our arrays.
+    $adSpend[$i][] = round($result[$j]['cost'], 2);
+    $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
+    $sales[$i][] = $result[$j]['attributedSales1d'];
+
   }
 }
 
