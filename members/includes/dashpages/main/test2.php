@@ -11,6 +11,7 @@ $user_id = 2;
 
 $array = [1,0,2,3,0.0,4,5,0,6,7,0.0];
 $array = array_filter($array, function($a) { return ($a !== 0); });
-var_dump($array);
-
+echo '<pre>';
+var_dump(array_filter($array, function($a) { return ($a !== 0); }));
+echo '</pre>';
 ?>
