@@ -309,7 +309,7 @@
       // because 0's will skew the average calculation
       $avg_cpc = array_filter($avg_cpc, function($a) { return ($a !== 0); });
       // Now that 0's are removed, we need to find the average
-      $avg_cpc
+      
 
     }
   }
