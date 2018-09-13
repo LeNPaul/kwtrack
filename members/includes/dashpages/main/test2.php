@@ -38,7 +38,7 @@ $client->profileId = $profileId;
 $arr = [1,1,1,1,1];
 
 echo '<pre>';
-var_dump(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)));
+var_dump(calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)), 3, 'adSpend'));
 echo '</pre>';
 
 ?>
