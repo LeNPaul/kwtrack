@@ -20,7 +20,9 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$status = $client->getBiddableKeywordEx('149149401142848');
+// $status = $client->getBiddableKeywordEx('149149401142848');
+
+$status = $client->listAdGroups(array("stateFilter" => "enabled"));
 $status = json_decode($status['response'], true);
 
 echo '<pre>';
