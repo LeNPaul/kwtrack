@@ -211,6 +211,8 @@ storeCampaignArrays($pdo, $dbSales, $result, 'sales');
  *
  ***********************************************************/
 
+/*
+
 $impressions = [];
 $clicks = [];
 $ctr = [];
