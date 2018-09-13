@@ -153,7 +153,7 @@
           echo '<pre>';
           var_dump($status);
           echo '<br /><br />' . $status['bid'];
-          echo '</pre>';
+          echo '</pre>';die;
           $bid = $status['bid'];
           $status = $status['state'];
 
