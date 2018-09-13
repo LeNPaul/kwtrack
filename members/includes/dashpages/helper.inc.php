@@ -398,13 +398,9 @@
 
 function multiUnserialize($arr) {
   for ($i = 0; $i < count($arr); $i++) {
-    unserialize($arr[$i]);
+    $arr[$i] = unserialize($arr[$i]);
   }
-
-  echo '<pre>';
-  var_dump($arr);
-  echo '</pre>';
-
+  
   return $arr;
 }
 
