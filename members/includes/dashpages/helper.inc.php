@@ -399,7 +399,7 @@
 function multiUnserialize($arr) {
   for ($i = 0; $i < count($arr); $i++) {
 
-    $arr[$i] = unserialize(repairSerializeString($arr[$i]););
+    $arr[$i] = unserialize(repairSerializeString($arr[$i]));
   }
 
   return $arr;
