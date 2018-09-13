@@ -27,12 +27,12 @@ $client->profileId = $profileId;
 // var_dump($status);
 // echo '</pre>';
 
-$sql = "SELECT ad_spend FROM campaigns WHERE user_id=2";
+$sql = "SELECT sales FROM campaigns WHERE user_id=2";
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo '<pre>';
-var_dump($result[1]['ad_spend']);
+var_dump($result);
 echo '</pre>';
 
 ?>
