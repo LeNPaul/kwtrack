@@ -109,6 +109,7 @@ if ($ppcSales == 0) {
 </div>
 
 <!--  Row for organic metrics: true ACoS, total sales, organic sales -->
+<!--
 <div class="row">
   <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
@@ -190,4 +191,4 @@ if ($ppcSales == 0) {
       </div>
     </div>
   </div>
-</div>
+</div> -->

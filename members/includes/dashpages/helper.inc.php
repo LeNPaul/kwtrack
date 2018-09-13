@@ -421,9 +421,8 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   $output = [];
 
   for ($i = 0; $i < count($metricArr); $i++) {
-    // If the output array has the required length, then break the loop
+    // If the output array has the required length (number of days x number of campaigns), then break the loop
     if (count($output) == ($numDays * count($metricArr))) { break; }
-
     $output[] = array_pop($metricArr[$i]);
   }
 
