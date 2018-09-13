@@ -383,8 +383,6 @@
     ));
   }
 
-
-
  /*----------------------------------------------------------
   *
   *     DASHBOARD DISPLAY HELPER FUNCTIONS
@@ -434,5 +432,9 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   }
 
   return $output;
+}
+
+function getMetricData($pdo, $dbColName) {
+  $sql = "";
 }
 ?>

@@ -47,7 +47,7 @@ if ($ppcSales == 0) {
       </div>
     </div>
   </div>
-  
+
   <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
@@ -74,7 +74,7 @@ if ($ppcSales == 0) {
       </div>
     </div>
   </div>
-  
+
   <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
@@ -131,7 +131,7 @@ if ($ppcSales == 0) {
       </div>
     </div>
   </div>
-  
+
   <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
@@ -158,7 +158,7 @@ if ($ppcSales == 0) {
       </div>
     </div>
   </div>
-  
+
   <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
@@ -186,4 +186,3 @@ if ($ppcSales == 0) {
     </div>
   </div>
 </div>
-
