@@ -90,12 +90,12 @@
  }
 
  /*
-  *  function importKeywords(Int $user_id) --> void
+  *  function importKeywords(Obj $client, Int $user_id) --> void
   *    --> Imports all keywords for the user into database. Imports all data from past 60 days.
   *        ONLY TO BE USED FOR NEW USERS.
   */
 
-  function importKeywords($user_id) {
+  function importKeywords($client, $user_id) {
     $impressions = [];
     $clicks = [];
     $ctr = [];
