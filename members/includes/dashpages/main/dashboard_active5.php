@@ -195,7 +195,7 @@ if ($ppcSales == 0) {
 
 <canvas id="testChart" width="400" height="400"></canvas>
 <script>
-var ctx = "testChart";
+var ctx = document.getElementById("testChart");
 
 var myChart = new Chart(ctx, {
 	type: "line",
