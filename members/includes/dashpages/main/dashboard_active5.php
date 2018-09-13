@@ -5,7 +5,6 @@
  */
 
 require './includes/dashpages/helper.inc.php';
-require './charts/Chart.js';
 
 // Grab metric data for all campaigns and store in an array for each metric
 $adSpend = calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 0)), 2, 'adSpend');
