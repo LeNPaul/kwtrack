@@ -26,7 +26,7 @@ $_SESSION['active'] = intval($result[0]);
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Paper Dashboard 2 PRO by Creative Tim
+    PPCOLOGY
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -36,7 +36,7 @@ $_SESSION['active'] = intval($result[0]);
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-<!--  <link href="assets/demo/demo.css" rel="stylesheet" />-->
+  <!--  <link href="assets/demo/demo.css" rel="stylesheet" />-->
 
   <link href="node_modules/flag-icon-css/assets/docs.css" rel="stylesheet">
   <link href="node_modules/flag-icon-css/css/flag-icon.css" rel="stylesheet">
