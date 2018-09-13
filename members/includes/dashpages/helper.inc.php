@@ -399,22 +399,10 @@
 function multiUnserialize($arr) {
   for ($i = 0; $i < count($arr); $i++) {
 
-    $arr[$i] = unserialize(repairSerializeString($arr[$i]));
+    $arr[$i] = unserialize();
   }
 
   return $arr;
-}
-
-function repairSerializeString($value)
-{
-    $regex = '/s:([0-9]+):"(.*?)"/';
-
-    return preg_replace_callback(
-        $regex, function($match) {
-            return "s:".mb_strlen($match[2]).":\"".$match[2]."\"";
-        },
-        $value
-    );
 }
 
 /*
