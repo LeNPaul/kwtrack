@@ -265,12 +265,15 @@
   }
 
   /*
-   *  function importAdGroupOrCampaignMetrics(PDO $pdo, String $dbColName, String $id) --> void
+   *  function importAdGroupOrCampaignMetrics(PDO $pdo, String $dbName, String $dbColName, String $id) --> void
+   *    --> Imports ad group or campaign metrics derived from their respective keywords.
    *
-   *
-   *
+   *      --> PDO $pdo          - database handler
+   *      --> String $dbName    - name of the table to insert all metrics into
+   *      --> String $dbColName - name of the column in the table
+   *      --> String $id        - id of the ad group or campaign
    */
-  function importAdGroupOrCampaignMetrics($pdo, $dbColName, $id) {
+  function importAdGroupOrCampaignMetrics($pdo, $dbName, $dbColName, $id) {
     // Query the database for all keywords under the specific ad group and store in $result
     $sql = "SELECT impressions, clicks, ctr, ad_spend, avg_cpc, units_sold, sales
             FROM ppc_keywords WHERE {$dbColName}={$id}";
@@ -280,19 +283,20 @@
     // For each keyword:
     // 1) unserialize arrays
     // 2) pull metrics then sum to 1 value
-    // 3) store metric value in db for that ad group
+    // 3) append the metrics to their respective db prepared array
+    // 3) store db prepared array in db for that ad group
 
     // Initialize database-ready arrays
     $impressionsDb = [];
-    $clicksDb = [];
-    $ctrDb = [];
-    $ad_spendDb = [];
-    $avg_cpcDb = [];
-    $avg_cpcDb = [];
-    $units_soldDb = [];
-    $salsDb = [];
+    $clicksDb      = [];
+    $ctrDb         = [];
+    $ad_spendDb    = [];
+    $avg_cpcDb     = [];
+    $units_soldDb  = [];
+    $salsDb        = [];
 
     for ($i = 0; $i < count($result); $i++) {
+      // Unserialize the keyword's metric arrays
       $impressions = unserialize($result[$i]['impressions']);
       $clicks = unserialize($result[$i]['clicks']);
       $ad_spend = unserialize($result[$i]['ad_spend']);
@@ -300,6 +304,7 @@
       $units_sold = unserialize($result[$i]['units_sold']);
       $sales = unserialize($result[$i]['sales']);
 
+      // Reduce all metric arrays to 1 value
       $impressions = round(array_reduce($impressions, function($carry, $element) { return $carry += $element; }), 2);
       $clicks = round(array_reduce($clicks, function($carry, $element) { return $carry += $element; }), 2);
       $ctr = round($impressions / $clicks, 2);
@@ -307,11 +312,64 @@
 
       // For average CPC, we need to filter the array to remove 0's
       // because 0's will skew the average calculation
-      $avg_cpc = array_filter($avg_cpc, function($a) { return ($a !== 0); });
+      $avg_cpc = array_filter($avg_cpc, function($a) { return ($a != 0); });
       // Now that 0's are removed, we need to find the average
-      
+      $avg_cpc = round(array_sum($avg_cpc) / count($avg_cpc), 2);
 
+      $units_sold = array_reduce($units_sold, function($carry, $element) { return $carry += $element; });
+      $sales = round(array_reduce($sales, function($carry, $element) { return $carry += $element; }), 2);
+
+      // Append all values to db prepared arrays
+      $impressionsDb[] = $impressions;
+      $clicksDb[]      = $clicks;
+      $ctrDb[]         = $ctr;
+      $ad_spendDb[]    = $ad_spend;
+      $avg_cpcDb[]     = $avg_cpc;
+      $units_soldDb[]  = $units_sold;
     }
+
+    // After db prepared arrays are full, insert into the db
+    $sql = "UPDATE {$dbName} SET impressions=:impressionsDb WHERE {$dbColName}=:id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':impressionsDb'  => serialize($impressionsDb),
+      ':id'             => $id
+    ));
+
+    $sql = "UPDATE {$dbName} SET clicks=:clicksDb WHERE {$dbColName}=:id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':clicksDb'  => serialize($clicksDb),
+      ':id'             => $id
+    ));
+
+    $sql = "UPDATE {$dbName} SET ctr=:ctrDb WHERE {$dbColName}=:id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':ctrDb'  => serialize($ctrDb),
+      ':id'             => $id
+    ));
+
+    $sql = "UPDATE {$dbName} SET ad_spend=:ad_spendDb WHERE {$dbColName}=:id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':ad_spendDb'  => serialize($ad_spendDb),
+      ':id'             => $id
+    ));
+
+    $sql = "UPDATE {$dbName} SET avg_cpc=:avg_cpcDb WHERE {$dbColName}=:id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':avg_cpcDb'  => serialize($avg_cpcDb),
+      ':id'             => $id
+    ));
+
+    $sql = "UPDATE {$dbName} SET units_sold=:units_soldDb WHERE {$dbColName}=:id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':units_soldDb'  => serialize($units_soldDb),
+      ':id'             => $id
+    ));
   }
 
 

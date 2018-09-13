@@ -13,7 +13,7 @@
 	<p>
 		Follow the steps below to import your products and sales data.
 	</p>
-	
+
 </div>
 
 <input type="hidden" id="user_id" value="<?= $_SESSION['user_id'] ?>" />
