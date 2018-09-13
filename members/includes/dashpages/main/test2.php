@@ -35,4 +35,8 @@ echo '<pre>';
 var_dump($result);
 echo '</pre>';
 
+$arr = [1,1,1,1,1];
+
+echo array_reduce($arr, function($carry, $element) { return $carry += $element; });
+
 ?>
