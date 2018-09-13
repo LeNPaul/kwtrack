@@ -153,7 +153,7 @@
           $status = json_decode($status['response'], true);
           echo '<pre>';
           var_dump($status);
-          echo '</pre>';
+          echo '</pre>';die;
 
           $bid = $status['bid'];
           $status = $status['state'];
