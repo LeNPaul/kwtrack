@@ -138,7 +138,7 @@
         $result = json_decode($result['response'], true);
         $reportId = $result['reportId'];
 
-        sleep(40);
+        sleep(10);
 
         // Get the report using the report id
         $result = $client->getReport($reportId);
@@ -151,11 +151,16 @@
           $kw_id = $result[$x]['keywordId'];
           $status = $client->getBiddableKeyword($kw_id);
           $status = json_decode($status['response'], true);
-          echo '<pre>';
-          var_dump($status);
-          echo '<br /><br />' . $status['bid'];
-          echo '</pre>';
-          $bid = $status['bid'];
+
+          // Check if bid index exists in the report
+          // If it does, set bid to what it is
+          // If not, then set it to 0.0
+          if (array_key_exists('bid', $status)) {
+            $bid = $status['bid'];
+          } else {
+            $bid = 0.0;
+          }
+
           $status = $status['state'];
 
           $sql = 'INSERT INTO ppc_keywords (user_id, status, bid, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id, match_type)
@@ -186,7 +191,7 @@
         $result = json_decode($result['response'], true);
         $reportId = $result['reportId'];
 
-        sleep(40);
+        sleep(10);
 
         // Get the report using the report id
         $result = $client->getReport($reportId);
