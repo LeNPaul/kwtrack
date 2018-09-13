@@ -20,7 +20,7 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$status = $client->getBiddableKeyword('31982835809301');
+$status = $client->getBiddableKeywordEx('149149401142848');
 $status = json_decode($status['response'], true);
 
 echo '<pre>';
