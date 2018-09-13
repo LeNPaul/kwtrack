@@ -90,12 +90,12 @@
  }
 
  /*
-  *  function importKeywords(PDO $pdo, Obj $client, Int $user_id) --> void
+  *  function importKeywords(PDO $pdo, Obj $client, Int $user_id, Int $days) --> void
   *    --> Imports all keywords for the user into database. Imports all data from past 60 days.
   *        ONLY TO BE USED FOR NEW USERS.
   */
 
-  function importKeywords($pdo, $client, $user_id) {
+  function importKeywords($pdo, $client, $user_id, $days) {
     $impressions = [];
     $clicks = [];
     $ctr = [];
@@ -104,7 +104,7 @@
     $unitsSold = [];
     $sales = [];
 
-    for ($i = 0; $i < 5; $i++) {
+    for ($i = 0; $i < $days; $i++) {
 
       // Each metric array will be storing campaign data like the following in a 2D array:
       //    METRIC ARRAY => [ARRAY1( * all data for metric for each keyword * ), ARRAY2(...), ..., ARRAY60(...)]

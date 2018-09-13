@@ -424,5 +424,3 @@ for ($i = 0; $i < count($result); $i++) {
     ':match_type'     => $result[$i]['matchType']
   ));
 }
-
-echo "finished";
