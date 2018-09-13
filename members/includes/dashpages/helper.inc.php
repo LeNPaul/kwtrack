@@ -395,6 +395,7 @@
  *
  *      --> Array $arr - array of unserialized arrays
  */
+
 function multiUnserialize($arr) {
   for ($i = 0; $i < count($arr); $i++) {
     unserialize($arr[$i]);
@@ -434,7 +435,15 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   return $output;
 }
 
-function getMetricData($pdo, $dbColName) {
-  $sql = "";
+function getMetricData($pdo, $dbColName, $user_id) {
+  $sql = "SELECT ad_spend FROM campaigns WHERE user_id={$user_id}";
+  $stmt = $pdo->query($sql);
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+  $arr = [];
+
+  for ($i = 0; $i < count($result); $i++) {
+
+  }
 }
 ?>

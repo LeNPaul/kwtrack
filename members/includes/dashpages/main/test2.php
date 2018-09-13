@@ -20,10 +20,19 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$status = $client->getBiddableKeywordEx('225434316448793');
-$status = json_decode($status['response'], true);
+// $status = $client->getBiddableKeywordEx('225434316448793');
+// $status = json_decode($status['response'], true);
+//
+// echo '<pre>';
+// var_dump($status);
+// echo '</pre>';
+
+$sql = "SELECT ad_spend FROM campaigns WHERE user_id={$user_id}";
+$stmt = $pdo->query($sql);
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo '<pre>';
-var_dump($status);
+var_dump($result);
 echo '</pre>';
+
 ?>
