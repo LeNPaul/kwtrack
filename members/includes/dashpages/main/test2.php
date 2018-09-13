@@ -9,9 +9,21 @@ $refreshToken = 'Atzr|IwEBID8Cr8D51I4XzWRU5wdohHUoGJRY1rempo6uwgk_niC5AgqZo_SVul
 $profileId = '1215041354659387';
 $user_id = 2;
 
-$array = [1,0,2,3,0.0,4,5,0,6,7,0.0];
-$array2 = array_filter($array, function($a) { return ($a !== 0); });
+// Instantiate client for advertising API
+$config = array(
+	"clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
+	"clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
+	"refreshToken" => $refreshToken,
+	"region" => "na",
+	"sandbox" => false,
+);
+$client = new Client($config);
+$client->profileId = $profileId;
+
+$status = $client->getBiddableKeyword('149149401142848');
+$status = json_decode($status['response'], true);
+
 echo '<pre>';
-var_dump(array_filter($array, function($a) { return ($a != 0); }));
+var_dump($status);
 echo '</pre>';
 ?>

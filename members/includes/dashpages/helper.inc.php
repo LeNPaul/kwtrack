@@ -137,6 +137,7 @@
         // Get the report id so we can use it to get the report
         $result = json_decode($result['response'], true);
         $reportId = $result['reportId'];
+
         sleep(40);
 
         // Get the report using the report id
