@@ -27,16 +27,18 @@ $client->profileId = $profileId;
 // var_dump($status);
 // echo '</pre>';
 
-$sql = "SELECT sales FROM campaigns WHERE user_id=2";
-$stmt = $pdo->query($sql);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-echo '<pre>';
-var_dump($result);
-echo '</pre>';
+// $sql = "SELECT sales FROM campaigns WHERE user_id=2";
+// $stmt = $pdo->query($sql);
+// $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//
+// echo '<pre>';
+// var_dump($result);
+// echo '</pre>';
 
 $arr = [1,1,1,1,1];
 
-echo array_reduce($arr, function($carry, $element) { return $carry += $element; });
+echo '<pre>';
+var_dump(getMetricData($pdo, 'ad_spend', 2));
+echo '</pre>';
 
 ?>
