@@ -48,7 +48,7 @@ $client->profileId = $profileId;
  *
  *
  ***********************************************************/
-
+/*
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
 //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
@@ -210,7 +210,7 @@ storeCampaignArrays($pdo, $dbSales, $result, 'sales');
  *
  *
  ***********************************************************/
-
+/*
 $impressions = [];
 $clicks = [];
 $ctr = [];
