@@ -104,7 +104,7 @@
     $unitsSold = [];
     $sales = [];
 
-    for ($i = 0; $i < 60; $i++) {
+    for ($i = 0; $i < 5; $i++) {
 
       // Each metric array will be storing campaign data like the following in a 2D array:
       //    METRIC ARRAY => [ARRAY1( * all data for metric for each keyword * ), ARRAY2(...), ..., ARRAY60(...)]
@@ -154,11 +154,13 @@
 
           // Check if bid index exists in the report
           // If it does, set bid to what it is
-          // If not, then set it to 0.0
+          // If not, then set it to the ad group's default bid
           if (array_key_exists('bid', $status)) {
             $bid = $status['bid'];
           } else {
-            $bid = 0.0;
+            // Get default bid from adgroup
+            $adgBid = $client->getAdGroup($status['adGroupId']);
+            $adgBid = $adgBid['defaultBid'];
           }
 
           $status = $status['state'];
