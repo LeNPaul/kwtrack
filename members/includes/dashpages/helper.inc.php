@@ -400,6 +400,10 @@ function multiUnserialize($arr) {
   for ($i = 0; $i < count($arr); $i++) {
     unserialize($arr[$i]);
   }
+  echo '<pre>';
+  var_dump($arr);
+  echo '</pre>';
+
   return $arr;
 }
 
@@ -425,10 +429,6 @@ function calculateMetrics($metricArr, $numDays, $metric) {
 
     $output[] = array_pop($metricArr[$i]);
   }
-
-  echo '<pre>';
-  var_dump($metricArr);
-  echo '</pre>';
 
 
   if ($metric == 'adSpend' || $metric == 'ppcSales') {
