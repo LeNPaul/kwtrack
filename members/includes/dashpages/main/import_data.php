@@ -381,7 +381,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
  *
  ***********************************************************/
 
-importKeywords($client, $user_id);
+importKeywords($pdo, $client, $user_id);
 
 /*================================================================
  *

@@ -90,12 +90,12 @@
  }
 
  /*
-  *  function importKeywords(Obj $client, Int $user_id) --> void
+  *  function importKeywords(PDO $pdo, Obj $client, Int $user_id) --> void
   *    --> Imports all keywords for the user into database. Imports all data from past 60 days.
   *        ONLY TO BE USED FOR NEW USERS.
   */
 
-  function importKeywords($client, $user_id) {
+  function importKeywords($pdo, $client, $user_id) {
     $impressions = [];
     $clicks = [];
     $ctr = [];
