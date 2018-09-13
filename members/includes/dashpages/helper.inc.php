@@ -424,6 +424,8 @@ function calculateMetrics($metricArr, $numDays, $metric) {
     if (count($output) == $numDays) { break; }
 
     $output[] = array_pop($metricArr[$i]);
+
+    var_dump($output);
   }
 
   if ($metric == 'adSpend' || $metric == 'ppcSales') {
