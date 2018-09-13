@@ -27,7 +27,7 @@ $client->profileId = $profileId;
 // var_dump($status);
 // echo '</pre>';
 
-$sql = "SELECT ad_spend FROM campaigns WHERE user_id={$user_id}";
+$sql = "SELECT ad_spend FROM campaigns WHERE user_id=2";
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
