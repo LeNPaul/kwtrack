@@ -151,9 +151,6 @@
           $kw_id = $result[$x]['keywordId'];
           $status = $client->getBiddableKeyword($kw_id);
           $status = json_decode($status['response'], true);
-          echo '<pre>';
-          var_dump($status);
-          echo '</pre>';die;
 
           $bid = $status['bid'];
           $status = $status['state'];
