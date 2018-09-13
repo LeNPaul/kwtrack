@@ -137,7 +137,6 @@
         // Get the report id so we can use it to get the report
         $result = json_decode($result['response'], true);
         $reportId = $result['reportId'];
-
         sleep(40);
 
         // Get the report using the report id
@@ -151,7 +150,10 @@
           $kw_id = $result[$x]['keywordId'];
           $status = $client->getBiddableKeyword($kw_id);
           $status = json_decode($status['response'], true);
-
+          echo '<pre>';
+          var_dump($status);
+          echo '<br /><br />' . $status['bid'];
+          echo '</pre>';
           $bid = $status['bid'];
           $status = $status['state'];
 
