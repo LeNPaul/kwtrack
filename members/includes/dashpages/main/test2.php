@@ -32,7 +32,7 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo '<pre>';
-var_dump($result);
+var_dump($result[1]['ad_spend']);
 echo '</pre>';
 
 ?>
