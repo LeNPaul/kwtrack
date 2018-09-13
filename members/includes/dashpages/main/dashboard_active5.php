@@ -192,3 +192,17 @@ if ($ppcSales == 0) {
     </div>
   </div>
 </div> -->
+
+<canvas id="testChart" width="400" height="400"></canvas>
+<script>
+var ctx = "testChart";
+
+var myChart = new Chart(ctx, {
+	type: "line",
+	data: {
+		"labels": ["test", "test2", "test3"], 
+		"datasets": [{"label": "test dataset", "data": [20,35,43,56,70], "fill": false, "borderColor": "rgb(75, 200, 200)",}]
+	},
+	options: {}
+});
+</script>
