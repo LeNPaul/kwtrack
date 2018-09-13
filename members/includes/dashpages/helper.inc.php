@@ -424,9 +424,12 @@ function calculateMetrics($metricArr, $numDays, $metric) {
     if (count($output) == $numDays) { break; }
 
     $output[] = array_pop($metricArr[$i]);
-
-    var_dump($output);
   }
+
+  echo '<pre>';
+  var_dump($metricArr);
+  echo '</pre>';
+
 
   if ($metric == 'adSpend' || $metric == 'ppcSales') {
     // If the metric being calculated is ad spend or PPC sales, then all we need to do is
