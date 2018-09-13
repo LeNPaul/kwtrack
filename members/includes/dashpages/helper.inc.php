@@ -442,7 +442,7 @@ function calculateMetrics($metricArr, $numDays, $metric) {
 }
 
 function getMetricData($pdo, $dbColName, $user_id) {
-  $sql = "SELECT ad_spend FROM campaigns WHERE user_id={$user_id}";
+  $sql = "SELECT {$dbColName} FROM campaigns WHERE user_id={$user_id}";
   $stmt = $pdo->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
