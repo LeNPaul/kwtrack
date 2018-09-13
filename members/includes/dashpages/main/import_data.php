@@ -49,8 +49,6 @@ $client->profileId = $profileId;
  *
  ***********************************************************/
 
-/*
-
 // Each metric array will be storing campaign data like the following in a 2D array:
 //    METRIC ARRAY => [ARRAY1( * all data for metric for each campaign * ), ARRAY2(...), ..., ARRAY60(...)]
 //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
@@ -62,7 +60,7 @@ $avgCpc = [];
 $unitsSold = [];
 $sales = [];
 
-for ($i = 0; $i < 60; $i++) {
+for ($i = 0; $i < 6; $i++) {
 	$impressions[$i] = [];
 	$clicks[$i] = [];
 	$ctr[$i] = [];
@@ -213,8 +211,6 @@ storeCampaignArrays($pdo, $dbSales, $result, 'sales');
  *
  ***********************************************************/
 
-/*
-
 $impressions = [];
 $clicks = [];
 $ctr = [];
@@ -224,7 +220,7 @@ $unitsSold = [];
 $sales = [];
 $extraArray = [];
 
-for ($i = 0; $i < 60; $i++) {
+for ($i = 0; $i < 6; $i++) {
   $impressions[$i] = [];
   $clicks[$i] = [];
   $ctr[$i] = [];
@@ -372,8 +368,6 @@ storeAdGroupArrays($pdo, $dbUnitsSold, $result, 'units_sold');
 // Grab sales data from array and store in their respective campaigns
 $dbSales = prepareDbArrays($sales, $dbSales);
 storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
-
-*/
 
 /***********************************************************
  *
