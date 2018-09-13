@@ -200,9 +200,12 @@ var ctx = "testChart";
 var myChart = new Chart(ctx, {
 	type: "line",
 	data: {
-		"labels": ["test", "test2", "test3"], 
-		"datasets": [{"label": "test dataset", "data": [20,35,43,56,70], "fill": false, "borderColor": "rgb(75, 200, 200)",}]
+		labels: ["test", "test2", "test3"], 
+		datasets: [{label: "test dataset", data: [20,35,43,56,70], fill: false, borderColor: "rgb(75, 200, 200)",}]
 	},
-	options: {}
+	options: {
+		scales
+		
+	}
 });
 </script>
