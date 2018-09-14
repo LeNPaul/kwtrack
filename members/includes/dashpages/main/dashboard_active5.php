@@ -219,7 +219,7 @@ var myChart = new Chart(ctx, {
 	options: {
 		responsive: false,
 		legend: {
-			display: true
+			display: true,
 			labels: {
 				fontColor: "rgb(150, 150, 150)"
 			}
