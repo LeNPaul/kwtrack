@@ -199,7 +199,7 @@ if ($ppcSales == 0) {
 var ctx = document.getElementById("testChart");
 
 var data = {
-		labels: ["test", "test2", "test3"], 
+		labels: ["test", "test2", "test3", "test4", "test5"], 
 		datasets: [{
 			label: "test dataset", 
 			data: [20,35,43,56,70], 
