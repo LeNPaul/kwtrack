@@ -201,10 +201,15 @@ var ctx = document.getElementById("testChart");
 var data = {
 		labels: ["test", "test2", "test3", "test4", "test5"], 
 		datasets: [{
-			label: "test dataset", 
+			label: "test dataset 1", 
 			data: [20,35,43,56,70], 
 			fill: false, 
-			borderColor: "rgb(75, 200, 200)"
+			borderColor: "rgb(151, 253, 143)"
+		}, {
+			label: "test dataset 2",
+			data: [53, 14, 68, 42, 80],
+			fill: false,
+			borderColor: "rgb(127, 225, 255)"
 		}]
 	}
 
