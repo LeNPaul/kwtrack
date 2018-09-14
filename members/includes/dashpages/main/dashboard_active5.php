@@ -217,7 +217,13 @@ var myChart = new Chart(ctx, {
 	type: "line",
 	data: data,
 	options: {
-		responsive: false
+		responsive: false,
+		legend: {
+			display: true
+			labels: {
+				fontColor: "rgb(150, 150, 150)"
+			}
+		}
 	}
 });
 </script>
