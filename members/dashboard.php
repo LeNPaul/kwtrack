@@ -741,8 +741,7 @@ $_SESSION['active'] = intval($result[0]);
       </footer>
     </div>
   </div>
-  <!-- Chart.js Files -->
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>-->
+  
   <!--   Core JS Files   -->
   <script src="assets/js/core/jquery.min.js"></script>
   <script src="assets/js/core/popper.min.js"></script>
