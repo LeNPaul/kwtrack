@@ -194,7 +194,7 @@ if ($ppcSales == 0) {
 </div> -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-<canvas id="testChart" width="400" height="400"></canvas>
+<div><canvas id="testChart" width="400" height="400"></canvas></div>
 <script>
 var ctx = document.getElementById("testChart");
 
