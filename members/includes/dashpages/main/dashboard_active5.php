@@ -197,8 +197,6 @@ if ($ppcSales == 0) {
 <div><canvas id="testChart" width="1000" height="400"></canvas></div>
 <script>
 var ctx = document.getElementById("testChart");
-var adSpendArr = JSON.parse(<?php echo json_encode($adSpendArr); ?>);
-var ppcSalesArr = JSON.parse(<?php echo json_encode($ppcSalesArr); ?>);
 var ppcAcosArr = [];
 
 var data = {
