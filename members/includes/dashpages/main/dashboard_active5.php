@@ -210,6 +210,9 @@ var data = {
 
 var myChart = new Chart(ctx, {
 	type: "line",
-	data: data
+	data: data,
+	options: {
+		responsive: false
+	}
 });
 </script>
