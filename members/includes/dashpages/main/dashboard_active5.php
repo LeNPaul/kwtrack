@@ -5,7 +5,6 @@
  */
 
 require './includes/dashpages/helper.inc.php';
-use Chart;
 
 // Grab metric data for all campaigns and store in an array for each metric
 $adSpend = calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)), 5, 'adSpend');
@@ -194,6 +193,7 @@ if ($ppcSales == 0) {
   </div>
 </div> -->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <canvas id="testChart" width="400" height="400"></canvas>
 <script>
 var ctx = document.getElementById("testChart");
