@@ -7,8 +7,9 @@
 require './includes/dashpages/helper.inc.php';
 
 // Grab metric data for all campaigns and store in an array for each metric
-$adSpendArr = multiUnserialize(getMetricData($pdo, 'ad_spend', 2));
+$adSpendArr = calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)), 5, 'ad_spend');
 var_dump($adSpendArr);
+
 $ppcSalesArr = multiUnserialize(getMetricData($pdo, 'sales', 2));
 
 echo '<pre>';
