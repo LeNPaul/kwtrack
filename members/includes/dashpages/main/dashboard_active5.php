@@ -198,6 +198,7 @@ if ($ppcSales == 0) {
 <script>
 var ctx = document.getElementById("testChart");
 var adSpendArr = <?php echo json_encode($adSpendArr); ?>;
+adSpendArr = JSON.parse(adSpendArr);
 var ppcSalesArr = <?php echo json_encode($ppcSalesArr); ?>;
 var ppcAcosArr = [];
 
