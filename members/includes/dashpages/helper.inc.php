@@ -444,7 +444,7 @@ function getMetricData($pdo, $dbColName, $user_id) {
   $arr = [];
 
   for ($i = 0; $i < count($result); $i++) {
-    $arr[] = $result[$i][$dbColName];
+    $arr[] = $result[$i];
   }
 
   return $arr;
