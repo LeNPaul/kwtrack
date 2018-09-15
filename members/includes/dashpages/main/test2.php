@@ -37,7 +37,7 @@ $client->profileId = $profileId;
 
 $result = $client->requestReport(
   "keywords",
-  array("reportDate"    => '20170908',
+  array("reportDate"    => '20180908',
         "campaignType"  => "sponsoredProducts",
         "metrics"       => "impressions,clicks,cost,attributedUnitsOrdered1d,attributedSales1d"
   )
