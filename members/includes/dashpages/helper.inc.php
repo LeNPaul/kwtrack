@@ -18,9 +18,6 @@
   */
  function prepareDbArrays($dataset, $dbVar) {
    for ($i = 0; $i < 60; $i++) {
-     /* TESTING PURPOSES ONLY. REMOVE BREAK WHEN READY FOR FINAL TESTING PHASE test*/
-     // if ($i === 2) { break; }
-
      $secondLoopLimit = count($dataset[$i]);
      for ($j = 0; $j < $secondLoopLimit; $j++) {
        $dbVar[$j][] = array_shift($dataset[$i]);
@@ -185,7 +182,7 @@
           "keywords",
           array("reportDate"    => $date,
                 "campaignType"  => "sponsoredProducts",
-                "metrics"       => "impressions,clicks,cost,attributedUnitsOrdered1d,attributedSales1d"
+                "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
           )
         );
 
