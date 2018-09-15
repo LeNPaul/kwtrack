@@ -45,6 +45,11 @@ $result = $client->requestReport(
 
 // Get the report id so we can use it to get the report
 $result = json_decode($result['response'], true);
+
+echo '<pre>';
+var_dump($result);
+echo '<pre>';
+
 $reportId = $result['reportId'];
 
 sleep(10);
