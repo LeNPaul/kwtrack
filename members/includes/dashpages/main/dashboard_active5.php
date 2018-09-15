@@ -3,12 +3,11 @@
  *  Final step for dashboard pages
  *  User will see this after all preliminary importing has been completed.
  */
-
 require './includes/dashpages/helper.inc.php';
 
 // Grab metric data for all campaigns and store in an array for each metric
-$adSpendArr = calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)), 15, 'ad_spend');
-$ppcSalesArr = calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', 2)), 15,'ad_spend');
+$adSpendArr = calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', $_SESSION['user_id'])), 15, 'ad_spend');
+$ppcSalesArr = calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])), 15,'ad_spend');
 
 $adSpend = array_sum($adSpendArr);
 $ppcSales = array_sum($ppcSalesArr);
