@@ -7,8 +7,11 @@
 require './includes/dashpages/helper.inc.php';
 
 // Grab metric data for all campaigns and store in an array for each metric
-$adSpendArr = array_sum(calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)), 1, 'ad_spend'));
-$ppcSalesArr = array_sum(calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', 2)), 1,'ad_spend'));
+$adSpendArr = calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)), 1, 'ad_spend');
+$ppcSalesArr = calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', 2)), 1,'ad_spend');
+
+$adSpend = array_sum($adSpendArr);
+$ppcSales = array_sum($ppcSalesArr);
 
 if ($ppcSalesArr == 0) {
   $acos = 0;
@@ -33,7 +36,7 @@ if ($ppcSalesArr == 0) {
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Ad Spend</p>
-              <p class="card-title"><?= '$' . $adSpendArr ?>
+              <p class="card-title"><?= '$' . $adSpend ?>
               <p>
             </div>
           </div>
@@ -60,7 +63,7 @@ if ($ppcSalesArr == 0) {
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">PPC Sales</p>
-              <p class="card-title"><?= '$' . $ppcSalesArr ?>
+              <p class="card-title"><?= '$' . $ppcSales ?>
               <p>
             </div>
           </div>
