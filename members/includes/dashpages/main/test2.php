@@ -35,10 +35,27 @@ $client->profileId = $profileId;
 // var_dump($result);
 // echo '</pre>';
 
-$arr = [1,1,1,1,1];
+$result = $client->requestReport(
+  "keywords",
+  array("reportDate"    => $date,
+        "campaignType"  => "sponsoredProducts",
+        "metrics"       => "impressions,clicks,cost,attributedUnitsOrdered1d,attributedSales1d"
+  )
+);
+
+// Get the report id so we can use it to get the report
+$result = json_decode($result['response'], true);
+$reportId = $result['reportId'];
+
+sleep(10);
+
+// Get the report using the report id
+$result = $client->getReport($reportId);
+$result = json_decode($result['response'], true);
 
 echo '<pre>';
-var_dump(calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)), 3, 'adSpend'));
-echo '</pre>';
+var_dump($result);
+echo '<pre>';
+
 
 ?>
