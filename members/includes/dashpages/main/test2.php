@@ -37,7 +37,7 @@ $client->profileId = $profileId;
 
 $result = $client->requestReport(
   "keywords",
-  array("reportDate"    => '20180908',
+  array("reportDate"    => '20170908',
         "campaignType"  => "sponsoredProducts",
         "metrics"       => "impressions,clicks,cost,attributedUnitsOrdered1d,attributedSales1d"
   )
@@ -50,12 +50,12 @@ echo '<pre>';
 var_dump($result);
 echo '<pre>';
 
-$requestId = $result['requestId'];
+$reportId = $result['reportId'];
 
 sleep(10);
 
 // Get the report using the report id
-$result = $client->getReport($requestId);
+$result = $client->getReport($reportId);
 $result = json_decode($result['response'], true);
 
 echo '<pre>';
