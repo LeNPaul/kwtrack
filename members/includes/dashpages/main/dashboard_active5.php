@@ -10,11 +10,6 @@ require './includes/dashpages/helper.inc.php';
 $adSpendArr = array_sum(calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)), 1, 'ad_spend'));
 $ppcSalesArr = array_sum(calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', 2)), 1,'ad_spend'));
 
-echo '<pre>';
-multiUnserialize(getMetricData($pdo, 'ad_spend', 0));
-echo '</pre>';
-
-
 if ($ppcSales == 0) {
   $acos = 0;
 } else {
