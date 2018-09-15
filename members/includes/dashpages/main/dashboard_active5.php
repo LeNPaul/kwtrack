@@ -38,7 +38,7 @@ if ($ppcSales == 0) {
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Ad Spend</p>
-              <p class="card-title"><?= '$' . $adSpend ?>
+              <p class="card-title"><?= '$' . $adSpendArr ?>
               <p>
             </div>
           </div>
@@ -65,7 +65,7 @@ if ($ppcSales == 0) {
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">PPC Sales</p>
-              <p class="card-title"><?= '$' . $ppcSales ?>
+              <p class="card-title"><?= '$' . $ppcSalesArr ?>
               <p>
             </div>
           </div>
