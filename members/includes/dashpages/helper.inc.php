@@ -141,8 +141,12 @@
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
 
+        // Save count of the number of keywords today (will always be max keywords)
+        // so we can use it in the future
+        $numMaxKeywords = count($result);
+
         // Insert keywords into database
-        for ($x = 0; $x < count($result); $x++) {
+        for ($x = 0; $x < $countMaxKeywords; $x++) {
 
           // Get status and bid for each keyword
           $kw_id = $result[$x]['keywordId'];
@@ -195,6 +199,9 @@
         // Get the report using the report id
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
+
+        // Save count of keywords for $date (only starts for "yesterday")
+        $numCurrentKeywords = count($result);
       }
 
       // Loop to iterate through the report response
@@ -225,6 +232,21 @@
         $adSpend[$i][] = round($result[$j]['cost'], 2);
         $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
         $sales[$i][] = $result[$j]['attributedSales1d'];
+
+        // Get how many 0.0's we need to append to the end of the loop if $numCurrentKeywords < $numMaxKeywords
+        if ($numCurrentKeywords < $numMaxKeywords) {
+          $count = $numMaxKeywords - $numMaxKeywords;
+          while ($count != 0) {
+            $impressions[$i][] = 0.0;
+            $clicks[$i][]      = 0.0;
+            $ctr[$i][]         = 0.0;
+            $avgCpc[$i][]      = 0.0;
+            $adSpend[$i][]     = 0.0;
+            $unitsSold[$i][]   = 0.0;
+            $sales[$i][]       = 0.0;
+            $count--;
+          }
+        }
 
       }
     }
