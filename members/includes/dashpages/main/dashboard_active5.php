@@ -10,7 +10,7 @@ require './includes/dashpages/helper.inc.php';
 $adSpendArr = array_sum(calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', 2)), 1, 'ad_spend'));
 $ppcSalesArr = array_sum(calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', 2)), 1,'ad_spend'));
 
-if ($ppcSales == 0) {
+if ($ppcSalesArr == 0) {
   $acos = 0;
 } else {
   $acos = round((double)($adSpend / $ppcSales) * 100, 2);
