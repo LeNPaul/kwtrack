@@ -50,12 +50,12 @@ echo '<pre>';
 var_dump($result);
 echo '<pre>';
 
-$reportId = $result['reportId'];
+$requestId = $result['requestId'];
 
 sleep(10);
 
 // Get the report using the report id
-$result = $client->getReport($reportId);
+$result = $client->getReport($requestId);
 $result = json_decode($result['response'], true);
 
 echo '<pre>';
