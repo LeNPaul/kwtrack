@@ -56,7 +56,7 @@ $dateArr = array_reverse($dateArr);
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on ..date..
+          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
         </div>
       </div>
     </div>
@@ -83,7 +83,7 @@ $dateArr = array_reverse($dateArr);
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on ..date..
+          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
         </div>
       </div>
     </div>
@@ -110,7 +110,7 @@ $dateArr = array_reverse($dateArr);
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on ..date..
+          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
         </div>
       </div>
     </div>
