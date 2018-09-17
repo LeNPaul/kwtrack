@@ -28,7 +28,7 @@ for ($j = 0; $j < 60; $j++) {
 	$dateArr[] = date("d/m", strtotime("-".$j." days"));
 }
 
-$dateArr = array_reverse($dateArr);
+//$dateArr = array_reverse($dateArr);
 
 ?>
 
