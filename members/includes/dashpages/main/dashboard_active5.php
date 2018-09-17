@@ -202,12 +202,35 @@ $dateArr = array_reverse($dateArr);
   </div>
 </div> -->
 
-<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
-<button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
-<button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
-<button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
+<div class="row">
+	<div class="col-lg-7 col-md-7 col-sm-12">
+		<div class="card ">
 
-<canvas id="Chart" width="1000" height="400"></canvas>
+      <div class="card-header ">
+        <h4 class="card-title">PPC Analytics</h4>
+        <p class="card-category">Ad Spend, PPC Sales, and PPC ACoS</p>
+      </div>
+
+      <div class="card-body ">
+				<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
+				<button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
+				<button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
+				<button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
+
+				<canvas id="Chart" width="1000" height="400"></canvas>
+			</div>
+
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-check"></i> Lsat updated on ..date..
+        </div>
+      </div>
+    </div>
+	</div>
+</div>
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <script>
@@ -251,20 +274,20 @@ function buttonClick(numDays) {
 			myChart.data.labels = dateArr.slice(0, 7);
 			myChart.update();
 			break;
-			
+
 		case "14":
 			myChart.data.labels = dateArr.slice(0, 14);
 			myChart.update();
 			break;
-			
-		case "30": 
+
+		case "30":
 			myChart,data.labels = dateArr.slice(0, 30);
 			myChart.update();
 			break;
-			
+
 		default:
 			myChart.data.labels = dateArr;
 			myChart.update();
 	}
-}	
+}
 </script>
