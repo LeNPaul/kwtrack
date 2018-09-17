@@ -202,7 +202,8 @@ $dateArr = array_reverse($dateArr);
   </div>
 </div> -->
 
-<button type="button" id="fourDays" onclick="buttonClick()">4 days</button>
+<button type="button" id="fourDays" onclick="buttonClick('4')">4 days</button>
+<button type="button" id="sixtyDays" onclick="buttonClick()">60 days</button>
 
 <canvas id="testChart" width="1000" height="400"></canvas>
 
@@ -242,8 +243,13 @@ var myChart = new Chart(ctx, {
 	}
 });
 
-function buttonClick() {
-	myChart.data.labels = [dateArr[0], dateArr[1], dateArr[2], dateArr[3]];
-	myChart.update();
+function buttonClick(numDays) {
+	if (numDays == 4) {
+		myChart.data.labels = [dateArr[0], dateArr[1], dateArr[2], dateArr[3]];
+		myChart.update();
+	} else {
+		myChart.data.labels = dateArr;
+		myChart.update();
+	}
 }	
 </script>
