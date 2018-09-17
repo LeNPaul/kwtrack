@@ -199,10 +199,10 @@
         // Get the report using the report id
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
-
-        // Save count of keywords for $date (only starts for "yesterday")
-        $numCurrentKeywords = count($result);
       }
+
+      // Save count of keywords for $date (only starts for "yesterday")
+      $numCurrentKeywords = count($result);
 
       // Loop to iterate through the report response
       for ($j = 0; $j < 10 /*count($result)*/; $j++) {
