@@ -22,11 +22,13 @@ for ($i = 0; $i < count($adSpendArr); $i++) {
 }
 
 $dateArr = [];
-$dateArr[] = date("d/m/Y");
+$dateArr[] = date("d/m");
 
-for ($j = 1; $j < 60; $j++) {
-	$dateArr[] = date("d/m/Y", strtotime("-".$j." days"));
+for ($j = 0; $j < 60; $j++) {
+	$dateArr[] = date("d/m", strtotime("-".$j." days"));
 }
+
+$dateArr = array_reverse($dateArr);
 
 ?>
 
