@@ -13,7 +13,7 @@ set_time_limit(0);
 //'1215041354659387'
 
 // Get user_id from AJAX POST request
-$user_id = $_POST['user_id'];
+// $user_id = $_POST['user_id'];
 
 $user_id = 2;
 
