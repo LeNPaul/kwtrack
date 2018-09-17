@@ -272,11 +272,11 @@ var myChart = new Chart(ctx, {
 
 		scales: {
 			// Remove grid lines
-	    xAxes: [{
+	    /*xAxes: [{
 		            gridLines: {
 		                color: "rgba(0, 0, 0, 0)",
 		            }
-	            }],
+	            }],*/
 	    yAxes: [{
                 gridLines: {
                     color: "rgba(0, 0, 0, 0)",
