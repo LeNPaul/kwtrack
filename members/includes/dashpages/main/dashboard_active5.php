@@ -25,7 +25,7 @@ $dateArr = [];
 $dateArr[] = date("d/m");
 
 for ($j = 1; $j < 60; $j++) {
-	$dateArr[] = date("d/m", strtotime("-".$j." days"));
+	$dateArr[] = date("f d", strtotime("-".$j." days"));
 }
 
 $dateArr = array_reverse($dateArr);
@@ -264,7 +264,21 @@ var myChart = new Chart(ctx, {
 	type: "line",
 	data: data,
 	options: {
-		responsive: true
+		responsive: true,
+
+		scales: {
+			// Remove grid lines
+	    xAxes: [{
+		            gridLines: {
+		                color: "rgba(0, 0, 0, 0)",
+		            }
+	            }],
+	    yAxes: [{
+                gridLines: {
+                    color: "rgba(0, 0, 0, 0)",
+                }
+	            }]
+    }
 	}
 });
 
