@@ -207,11 +207,11 @@ $dateArr = array_reverse($dateArr);
 <button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
 <button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
 
-<canvas id="testChart" width="1000" height="400"></canvas>
+<canvas id="Chart" width="1000" height="400"></canvas>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <script>
-var ctx = document.getElementById("testChart");
+var ctx = document.getElementById("Chart");
 var adSpendArr = <?= json_encode($adSpendArr); ?>;
 var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
 var ppcAcosArr = <?= json_encode($acos); ?>;
