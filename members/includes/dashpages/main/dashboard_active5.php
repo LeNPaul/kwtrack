@@ -247,15 +247,15 @@ var myChart = new Chart(ctx, {
 
 function buttonClick(numDays) {
 	switch (numDays) {
-		case 7:
+		case "7":
 			myChart.data.labels = dateArr.slice(0, 7);
 			myChart.update();
 			break;
-		case 14:
+		case "14":
 			myChart.data.labels = dateArr.slice(0, 14);
 			myChart.update();
 			break;
-		case 30: 
+		case "30": 
 			myChart,data.labels = dateArr.slice(0, 30);
 			myChart.update();
 			break;
