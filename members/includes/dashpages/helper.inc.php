@@ -161,6 +161,11 @@
           } else {
             // Get default bid from adgroup
             $adgBid = $client->getAdGroup($status['adGroupId']);
+
+            echo '<pre>';
+            var_dump($adgBid);
+            echo '</pre>'; die;
+
             $adgBid = $adgBid['defaultBid'];
           }
 
