@@ -385,6 +385,8 @@ importKeywords($pdo, $client, $user_id, 10);
  *
  *===============================================================*/
 
+ /*
+
 // Get ad group level negative keywords and store them in db
 $result = $client->listNegativeKeywords(array("stateFilter" => "enabled"));
 $result = json_decode($result['response'], true);
