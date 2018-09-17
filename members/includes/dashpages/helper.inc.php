@@ -146,7 +146,7 @@
         $numMaxKeywords = count($result);
 
         // Insert keywords into database
-        for ($x = 0; $x < $countMaxKeywords; $x++) {
+        for ($x = 0; $x < 10/*$countMaxKeywords*/; $x++) {
 
           // Get status and bid for each keyword
           $kw_id = $result[$x]['keywordId'];
@@ -194,7 +194,7 @@
         $result = json_decode($result['response'], true);
         $reportId = $result['reportId'];
 
-        sleep(10);
+        sleep(15);
 
         // Get the report using the report id
         $result = $client->getReport($reportId);
@@ -255,11 +255,6 @@
     $sql = 'SELECT amz_kw_id FROM ppc_keywords WHERE user_id=' . htmlspecialchars($user_id);
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-    echo '<pre>';
-    var_dump($result);
-    echo '</pre>';
-
 
     // Declare arrays that we will serialize and store in the database
     $dbImpressions = [];
