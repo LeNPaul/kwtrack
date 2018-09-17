@@ -94,8 +94,8 @@ $dateArr = array_reverse($dateArr);
       <div class="card-body ">
         <div class="row">
           <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-success">
-              <i class="fa fa-money"></i>
+            <div class="icon-big text-center">
+              <i class="fa fa-money text-primary"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
