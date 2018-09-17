@@ -264,7 +264,7 @@ var myChart = new Chart(ctx, {
 	type: "line",
 	data: data,
 	options: {
-		responsive: false
+		responsive: true
 	}
 });
 
