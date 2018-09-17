@@ -247,6 +247,7 @@ var data = {
 			label: "Ad Spend",
 			data: adSpendArr,
 			fill: false,
+			backgroundColor: "rgb(244, 72, 66)",
 			borderColor: "rgb(244, 72, 66)",
 			type: 'line'
 		}, {
@@ -254,6 +255,7 @@ var data = {
 			data: ppcSalesArr,
 			fill: false,
 			backgroundColor: "rgb(151, 253, 143)",
+			borderColor: "rgb(151, 253, 143)",
 			type: 'line'
 		}, {
 			label: "PPC ACoS",
