@@ -95,7 +95,7 @@ $dateArr = array_reverse($dateArr);
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-success">
-              <i class="fa fa-money-check-alt text-success"></i>
+              <i class="fa fa-money"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
