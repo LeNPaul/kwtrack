@@ -12,10 +12,14 @@ $ppcSalesArr = array_reverse(calculateMetrics(multiUnserialize(getMetricData($pd
 $adSpend = array_sum($adSpendArr);
 $ppcSales = array_sum($ppcSalesArr);
 
-if ($ppcSalesArr == 0) {
-  $acos = 0;
-} else {
-  $acos = round((double)($adSpend / $ppcSales) * 100, 2);
+$acos[] = 
+
+for ($i = 0; $i < count($adSpendArr); $i++) {
+	if ($ppcSalesArr == 0) {
+		$acos = 0;
+	} else {
+		$acos = round((double)($adSpend / $ppcSales) * 100, 2);
+	}
 }
 
 ?>
@@ -215,7 +219,7 @@ var data = {
 			borderColor: "rgb(127, 225, 255)"
 		}, {
 			label: "PPC ACoS",
-			data: [1, 24, 64, 30, 60],
+			data: ,
 			fill: false,
 			borderColor: "rgb(252, 108, 108)"
 		}]
