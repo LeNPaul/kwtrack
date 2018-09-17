@@ -93,7 +93,7 @@ for ($i = 0; $i < count($adSpendArr); $i++) {
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">PPC ACoS</p>
-              <p class="card-title"><?= $acos . '%' ?>
+              <p class="card-title"><?= round((double)($adSpend / $ppcSales) * 100, 2) . '%' ?>
               <p>
             </div>
           </div>
