@@ -441,7 +441,7 @@ function calculateMetrics($metricArr, $numDays, $metric) {
 
   for ($j = 0; $j < count($metricArr); $j++) {
 		for ($i = 0; $i < 6; $i++) {
-			$output[$i] = $metricArr[$j][$i];
+			$output[$i] += $metricArr[$j][$i];
 		}
   }
 
