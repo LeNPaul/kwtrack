@@ -437,15 +437,21 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   // Algorithm will pop the end of each array $numDays times and append it to the output array
   // After appending to output array, we use array_reduce to calculate the metric needed
 
-  $output = [];
+  $output = array_fill(0, 6, 0);
+  
+  for ($j = 0; $j < count($metricArr); j++) {
+		for ($i = 0; $i < 6; $i++) {
+			$output[$i] = $metricArr[$j][$i];
+		}
+  }
 
+  /*
   for ($i = 0; $i < count($metricArr); $i++) {
     // If the output array has the required length (number of days x number of campaigns), then break the loop
     if (count($output) == ($numDays * count($metricArr))) { break; }
     $output[] = array_pop($metricArr[$i]);
   }
 
-  /*
   if ($metric == 'adSpend' || $metric == 'ppcSales') {
     // If the metric being calculated is ad spend or PPC sales, then all we need to do is
     // get the sum of the array
