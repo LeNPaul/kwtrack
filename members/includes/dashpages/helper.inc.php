@@ -11,7 +11,7 @@
 
  /*
   *  function prepareDbArrays(Array $dataset) --> Array $dbVar
-  *    --> Takes $dataset and prepares it for insertion in database
+  *    --> Takes $dataset and prepares it for insertion in database. Index 0 = TODAY = MOST RECENT.
   *
   *      --> Array $dataset - unprepared array for specific metric
   *      --> Array $dbVar   - prepared array for specific metric
@@ -445,13 +445,14 @@ function calculateMetrics($metricArr, $numDays, $metric) {
     $output[] = array_pop($metricArr[$i]);
   }
 
-/*
+  /*
   if ($metric == 'adSpend' || $metric == 'ppcSales') {
     // If the metric being calculated is ad spend or PPC sales, then all we need to do is
     // get the sum of the array
     $output = array_reduce($output, function($carry, $element) { return $carry += $element; });
   }
-*/
+  */
+
   return $output;
 }
 
