@@ -202,11 +202,10 @@ $dateArr = array_reverse($dateArr);
   </div>
 </div> -->
 
-<button type="button" id="fourDays" onclick="buttonClick('this')"> This Week</button>
-<button type="button" id="fourDays" onclick="buttonClick('last')"> Last Week</button>
-<button type="button" id="fourteenDays" onclick="buttonClick('14')">14 days</button>
-<button type="button" id="thirtyDays" onclick="buttonClick('30')">30 days</button>
-<button type="button" id="sixtyDays" onclick="buttonClick('60')">60 days</button>
+<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
+<button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
+<button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
+<button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
 
 <canvas id="testChart" width="1000" height="400"></canvas>
 
@@ -248,13 +247,8 @@ var myChart = new Chart(ctx, {
 
 function buttonClick(numDays) {
 	switch (numDays) {
-		case "this":
+		case "7":
 			myChart.data.labels = dateArr.slice(0, 7);
-			myChart.update();
-			break;
-			
-		case "last":
-			myChart.data.labels = dateArr.slice(7, 14);
 			myChart.update();
 			break;
 			
