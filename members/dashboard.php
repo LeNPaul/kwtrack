@@ -693,8 +693,7 @@ $_SESSION['active'] = intval($result[0]);
 
       <div class="content">
         <?php
-        echo $_SESSION['active'];
-        echo $_SERVER['DOCUMENT_ROOT'];
+        //echo $_SESSION['active'];
         if ($_SESSION['active'] == 0) {
           include './includes/dashpages/main/dashboard_active0.php';
         } elseif ($_SESSION['active'] == 1) {
@@ -741,7 +740,7 @@ $_SESSION['active'] = intval($result[0]);
       </footer>
     </div>
   </div>
-  
+
   <!--   Core JS Files   -->
   <script src="assets/js/core/jquery.min.js"></script>
   <script src="assets/js/core/popper.min.js"></script>
