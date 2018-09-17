@@ -254,8 +254,8 @@ var data = {
 			label: "PPC Sales",
 			data: ppcSalesArr,
 			fill: false,
-			backgroundColor: "rgb(151, 253, 143)",
-			borderColor: "rgb(151, 253, 143)",
+			backgroundColor: "rgb(1, 153, 16)",
+			borderColor: "rgb(1, 153, 16)",
 			type: 'line'
 		}, {
 			label: "PPC ACoS",
