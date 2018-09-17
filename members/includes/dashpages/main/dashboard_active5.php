@@ -7,7 +7,7 @@ require './includes/dashpages/helper.inc.php';
 
 // Grab metric data for all campaigns and store in an array for each metric
 $adSpendArr = array_reverse(calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', $_SESSION['user_id'])), 1, 'ad_spend'));
-$ppcSalesArr = calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])), 1,'ad_spend');
+$ppcSalesArr = array_reverse(calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])), 1,'ad_spend'));
 
 $adSpend = array_sum($adSpendArr);
 $ppcSales = array_sum($ppcSalesArr);
@@ -210,7 +210,7 @@ var data = {
 			borderColor: "rgb(151, 253, 143)"
 		}, {
 			label: "PPC Sales",
-			data: [53, 14, 68, 42, 80],
+			data: ppcSalesArr,
 			fill: false,
 			borderColor: "rgb(127, 225, 255)"
 		}, {
