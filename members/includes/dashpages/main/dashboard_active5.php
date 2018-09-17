@@ -202,8 +202,9 @@ $dateArr = array_reverse($dateArr);
   </div>
 </div> -->
 
-<canvas id="testChart" width="1000" height="400"></canvas>
+<button type="button" id="fourDays" onclick="buttonClick()">4 days</button>
 
+<canvas id="testChart" width="1000" height="400"></canvas>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <script>
@@ -240,4 +241,9 @@ var myChart = new Chart(ctx, {
 		responsive: false
 	}
 });
+
+function buttonClick() {
+	myChart.data.labels = [dateArr[0], dateArr[1], dateArr[2], dateArr[3]];
+	myChart.update();
+}	
 </script>
