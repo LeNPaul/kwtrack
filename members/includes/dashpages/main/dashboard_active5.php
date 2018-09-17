@@ -242,16 +242,19 @@ var dateArr = <?= json_encode($dateArr); ?>;
 
 var data = {
 		labels: dateArr,
+
 		datasets: [{
 			label: "Ad Spend",
 			data: adSpendArr,
 			fill: false,
-			borderColor: "rgb(151, 253, 143)"
+			borderColor: "rgb(151, 253, 143)",
+			type: line
 		}, {
 			label: "PPC Sales",
 			data: ppcSalesArr,
 			fill: false,
-			borderColor: "rgb(127, 225, 255)"
+			borderColor: "rgb(127, 225, 255)",
+			type: line
 		}, {
 			label: "PPC ACoS",
 			data: ppcAcosArr,
@@ -261,18 +264,19 @@ var data = {
 	}
 
 var myChart = new Chart(ctx, {
-	type: "line",
+	type: "bar",
 	data: data,
+
 	options: {
 		responsive: true,
 
 		scales: {
 			// Remove grid lines
-	    xAxes: [{
+	    /*xAxes: [{
 		            gridLines: {
 		                color: "rgba(0, 0, 0, 0)",
 		            }
-	            }],
+	            }],*/
 	    yAxes: [{
                 gridLines: {
                     color: "rgba(0, 0, 0, 0)",
