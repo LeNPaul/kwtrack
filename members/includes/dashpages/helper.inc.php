@@ -438,8 +438,8 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   // After appending to output array, we use array_reduce to calculate the metric needed
 
   $output = array_fill(0, 6, 0);
-  
-  for ($j = 0; $j < count($metricArr); j++) {
+
+  for ($j = 0; $j < count($metricArr); $j++) {
 		for ($i = 0; $i < 6; $i++) {
 			$output[$i] = $metricArr[$j][$i];
 		}
