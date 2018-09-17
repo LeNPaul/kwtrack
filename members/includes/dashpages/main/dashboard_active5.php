@@ -14,7 +14,7 @@ $ppcSales = array_sum($ppcSalesArr);
 $acos = [];
 
 for ($i = 0; $i < count($adSpendArr); $i++) {
-	if ($ppcSalesArr == 0) {
+	if ($ppcSalesArr[$i] == 0) {
 		$acos[] = 0;
 	} else {
 		$acos[] = round((double)($adSpendArr[$i] / $ppcSalesArr[$i]) * 100, 2);
