@@ -239,6 +239,8 @@ $(function() {
     var end = moment();
 
     function cb(start, end) {
+		start = start.format('MMM D');
+		end= end.format('MMM D');
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     }
 
