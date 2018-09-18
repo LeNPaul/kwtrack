@@ -293,18 +293,16 @@
   }
 
   /*
-   *  function importAdGroupOrCampaignMetrics(PDO $pdo, String $dbName, String $dbColName, String $id) --> void
+   *  function importAdGroupMetrics(PDO $pdo, String $adGroupId) --> void
    *    --> Imports ad group or campaign metrics derived from their respective keywords.
    *
    *      --> PDO $pdo          - database handler
-   *      --> String $dbName    - name of the table to insert all metrics into
-   *      --> String $dbColName - name of the column in the table
-   *      --> String $id        - id of the ad group or campaign
+   *      --> String $adGroupId - id of the ad group or campaign
    */
-  function importAdGroupOrCampaignMetrics($pdo, $dbName, $dbColName, $id) {
+  function importAdGroupMetrics($pdo, $adGroupId) {
     // Query the database for all keywords under the specific ad group and store in $result
     $sql = "SELECT impressions, clicks, ctr, ad_spend, avg_cpc, units_sold, sales
-            FROM ppc_keywords WHERE {$dbColName}={$id}";
+            FROM ppc_keywords WHERE amz_adgroup_id={$adGroupId}";
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -357,48 +355,58 @@
     }
 
     // After db prepared arrays are full, insert into the db
-    $sql = "UPDATE {$dbName} SET impressions=:impressionsDb WHERE {$dbColName}=:id";
+    $sql = "UPDATE ad_groups SET impressions=:impressionsDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
       ':impressionsDb'  => serialize($impressionsDb),
-      ':id'             => $id
+      ':id'             => $adGroupId
     ));
 
-    $sql = "UPDATE {$dbName} SET clicks=:clicksDb WHERE {$dbColName}=:id";
+    $sql = "UPDATE ad_groups SET clicks=:clicksDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
       ':clicksDb'  => serialize($clicksDb),
-      ':id'             => $id
+      ':id'        => $adGroupId
     ));
 
-    $sql = "UPDATE {$dbName} SET ctr=:ctrDb WHERE {$dbColName}=:id";
+    $sql = "UPDATE ad_groups SET ctr=:ctrDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
       ':ctrDb'  => serialize($ctrDb),
-      ':id'             => $id
+      ':id'     => $adGroupId
     ));
 
-    $sql = "UPDATE {$dbName} SET ad_spend=:ad_spendDb WHERE {$dbColName}=:id";
+    $sql = "UPDATE ad_groups SET ad_spend=:ad_spendDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
       ':ad_spendDb'  => serialize($ad_spendDb),
-      ':id'             => $id
+      ':id'          => $adGroupId
     ));
 
-    $sql = "UPDATE {$dbName} SET avg_cpc=:avg_cpcDb WHERE {$dbColName}=:id";
+    $sql = "UPDATE ad_groups SET avg_cpc=:avg_cpcDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
       ':avg_cpcDb'  => serialize($avg_cpcDb),
-      ':id'             => $id
+      ':id'         => $adGroupId
     ));
 
-    $sql = "UPDATE {$dbName} SET units_sold=:units_soldDb WHERE {$dbColName}=:id";
+    $sql = "UPDATE ad_groups SET units_sold=:units_soldDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
-      ':units_soldDb'  => serialize($units_soldDb),
-      ':id'             => $id
+      ':units_soldDb'    => serialize($units_soldDb),
+      ':adGroupId'       => $adGroupId
     ));
   }
+
+  /*
+   *  function importCampaignMetrics(PDO $pdo) --> void
+   *    --> Sums up metrics from ad groups and imports to campaigns.
+   *
+   *      --> PDO $pdo - database handle
+   *      -->
+   *
+   *
+   */
 
  /*----------------------------------------------------------
   *
