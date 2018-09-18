@@ -40,7 +40,6 @@ $_SESSION['active'] = intval($result[0]);
 
   <link href="node_modules/flag-icon-css/assets/docs.css" rel="stylesheet">
   <link href="node_modules/flag-icon-css/css/flag-icon.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/js-datepicker/datepicker.css">
 </head>
 
 <body class="">
