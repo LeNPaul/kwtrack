@@ -396,7 +396,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 ============================================================================*/
 
 // First, import all ad group names, campaign Id's, ad group Id's, default bids, and states
-
+/*
 $result = $client->listAdGroups();
 $result = json_decode($result['response'], true);
 
@@ -412,6 +412,15 @@ for ($i = 0; $i < count($result); $i++) {
 		':status'						=> $result[$i]['state']
 	));
 }
+*/
+// Second, query database for list of all adgroup id's
+$sql = "SELECT amz_adgroup_id FROM ad_groups WHERE user_id=$user_id";
+$stmt = $pdo->query($sql):
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+echo '<pre>';
+var_dump($result);
+echo '<pre>';
 
 
 /*==========================================================================
