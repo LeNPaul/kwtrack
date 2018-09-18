@@ -235,7 +235,7 @@ $dateArr = array_reverse($dateArr);
 </div>
 
 <script>
-const picker = datepicker('datePicker');
+const picker = datepicker("#datePicker");
 </script>
 
 <script>
