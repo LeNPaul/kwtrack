@@ -792,8 +792,6 @@ $_SESSION['active'] = intval($result[0]);
 
     });
   </script>
-  
-  <script src="https://unpkg.com/js-datepicker"></script>
 </body>
 
 </html>
