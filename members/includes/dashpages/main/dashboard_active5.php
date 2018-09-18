@@ -237,7 +237,6 @@ $dateArr = array_reverse($dateArr);
 </div>
 
 <script type="text/javascript">
-$.noConflict();
 $(function() {
 
     var start = moment().subtract(29, 'days');
