@@ -217,11 +217,7 @@ $dateArr = array_reverse($dateArr);
 			<i class="fa fa-calendar"></i>
 			<span></span> <i class="fa fa-caret-down"></i>
 		</div>
-		<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
-		<button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
-		<button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
-		<button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
-
+		
 		<canvas id="Chart" width="1000" height="400"></canvas>
 	  </div>
 
@@ -317,27 +313,4 @@ var myChart = new Chart(ctx, {
     }
 	}
 });
-
-function buttonClick(numDays) {
-	switch (numDays) {
-		case "7":
-			myChart.data.labels = dateArr.slice(0, 7);
-			myChart.update();
-			break;
-
-		case "14":
-			myChart.data.labels = dateArr.slice(0, 14);
-			myChart.update();
-			break;
-
-		case "30":
-			myChart,data.labels = dateArr.slice(0, 30);
-			myChart.update();
-			break;
-
-		default:
-			myChart.data.labels = dateArr;
-			myChart.update();
-	}
-}
 </script>
