@@ -256,7 +256,7 @@ $(function() {
         }
     }, cb);
 
-    cb(start, end);
+    //cb(start, end);
 
 });
 </script>
