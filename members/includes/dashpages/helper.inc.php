@@ -331,7 +331,7 @@
 
   function importAdGroupMetrics($pdo, $adGroupId, $days) {
     // Query the database for all keywords under the specific ad group and store in $result
-    $sql = "SELECT amz_kw_id, impressions, clicks, ctr, ad_spend, avg_cpc, units_sold, sales
+    $sql = "SELECT impressions, clicks, ctr, ad_spend, avg_cpc, units_sold, sales
             FROM ppc_keywords WHERE amz_adgroup_id={$adGroupId}";
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -484,20 +484,20 @@
    $stmt = $pdo->query($sql);
    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-   // For each keyword:
+   // For each ad group:
    // 1) unserialize arrays
    // 2) pull metrics then sum to 1 value
    // 3) append the metrics to their respective db prepared array
    // 3) store db prepared array in db for that ad group
 
    // Initialize database-ready arrays
-   $impressionsDb = [];
-   $clicksDb      = [];
-   $ctrDb         = [];
-   $ad_spendDb    = [];
-   $avg_cpcDb     = [];
-   $units_soldDb  = [];
-   $salsDb        = [];
+   $impressionsDb = array_fill(0, $days, 0.0);
+   $clicksDb      = array_fill(0, $days, 0.0);
+   $ctrDb         = array_fill(0, $days, 0.0);
+   $ad_spendDb    = array_fill(0, $days, 0.0);
+   $avg_cpcDb     = array_fill(0, $days, 0.0);
+   $units_soldDb  = array_fill(0, $days, 0.0);
+   $salesDb       = array_fill(0, $days, 0.0);
 
    for ($i = 0; $i < count($result); $i++) {
      // Unserialize the keyword's metric arrays
@@ -508,28 +508,20 @@
      $units_sold = unserialize($result[$i]['units_sold']);
      $sales = unserialize($result[$i]['sales']);
 
-     // Reduce all metric arrays to 1 value
-     $impressions = round(array_reduce($impressions, function($carry, $element) { return $carry += $element; }), 2);
-     $clicks = round(array_reduce($clicks, function($carry, $element) { return $carry += $element; }), 2);
-     $ctr = round($impressions / $clicks, 2);
-     $ad_spend = round(array_reduce($ad_spend, function($carry, $element) { return $carry += $element; }), 2);
+     for ($j = 0; $j < $days; $j++) {
+       $impressionsDb[$j] += $impressions[$j];
+       $clicksDb[$j]      += $clicks[$j];
+       $ad_spendDb[$j]    += $ad_spend[$j];
+       $avg_cpcDb[$j]     += $avg_cpc[$j];
+       $units_soldDb[$j]  += $units_sold[$j];
+       $salesDb[$j]       += $sales[$j];
+     }
 
-     // For average CPC, we need to filter the array to remove 0's
-     // because 0's will skew the average calculation
-     $avg_cpc = array_filter($avg_cpc, function($a) { return ($a != 0); });
-     // Now that 0's are removed, we need to find the average
-     $avg_cpc = round(array_sum($avg_cpc) / count($avg_cpc), 2);
-
-     $units_sold = array_reduce($units_sold, function($carry, $element) { return $carry += $element; });
-     $sales = round(array_reduce($sales, function($carry, $element) { return $carry += $element; }), 2);
-
-     // Append all values to db prepared arrays
-     $impressionsDb[] = $impressions;
-     $clicksDb[]      = $clicks;
-     $ctrDb[]         = $ctr;
-     $ad_spendDb[]    = $ad_spend;
-     $avg_cpcDb[]     = $avg_cpc;
-     $units_soldDb[]  = $units_sold;
+     // Create and calculate CTR array
+     for ($x = 0; $x < $days; $x++) {
+       // If impressionsDb[$x] = 0, then ctrDb[$x] = 0
+       $ctrDb[$x] = ($impressionsDb[$x] == 0) ? 0.0 : ($clicksDb[$x] / $impressionsDb[$x]);
+     }
    }
 
    // After db prepared arrays are full, insert into the db
@@ -537,44 +529,52 @@
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
      ':impressionsDb'  => serialize($impressionsDb),
-     ':campaignId'             => $adGroupId
+     ':campaignId'      => $campaignId
    ));
 
    $sql = "UPDATE campaigns SET clicks=:clicksDb WHERE amz_campaign_id=:campaignId";
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
      ':clicksDb'  => serialize($clicksDb),
-     ':campaignId'        => $adGroupId
+     ':campaignId' => $campaignId
    ));
 
    $sql = "UPDATE campaigns SET ctr=:ctrDb WHERE amz_campaign_id=:campaignId";
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
-     ':ctrDb'  => serialize($ctrDb),
-     ':campaignId'     => $adGroupId
+     ':ctrDb'      => serialize($ctrDb),
+     ':campaignId'  => $campaignId
    ));
 
    $sql = "UPDATE campaigns SET ad_spend=:ad_spendDb WHERE amz_campaign_id=:campaignId";
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
      ':ad_spendDb'  => serialize($ad_spendDb),
-     ':campaignId'          => $adGroupId
+     ':campaignId'   => $campaignId
    ));
 
    $sql = "UPDATE campaigns SET avg_cpc=:avg_cpcDb WHERE amz_campaign_id=:campaignId";
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
      ':avg_cpcDb'  => serialize($avg_cpcDb),
-     ':campaignId'         => $adGroupId
+     ':campaignId'  => $campaignId
    ));
 
    $sql = "UPDATE campaigns SET units_sold=:units_soldDb WHERE amz_campaign_id=:campaignId";
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
      ':units_soldDb'    => serialize($units_soldDb),
-     ':campaignId'       => $adGroupId
+     ':campaignId'       => $campaignId
+   ));
+
+   $sql = "UPDATE campaigns SET sales=:salesDb WHERE amz_campaign_id=:campaignId";
+   $stmt = $pdo->prepare($sql);
+   $stmt->execute(array(
+     ':salesDb'    => serialize($salesDb),
+     ':campaignId'  => $campaignId
    ));
  }
+
 
 
  /*----------------------------------------------------------
