@@ -398,7 +398,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 // First, import all ad group names, campaign Id's, ad group Id's, default bids, and states
 
 $result = $client->listAdGroups();
-$result = json_decode($result, true);
+$result = json_decode($result['response'], true);
 
 // Iterate through all ad groups and insert them into database
 for ($i = 0; $i < count($result); $i++) {
