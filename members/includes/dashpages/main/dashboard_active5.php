@@ -238,7 +238,7 @@ $dateArr = array_reverse($dateArr);
 </div>
 
 <script>
-$('input[names="dates"]').daterangepicker();
+$('input[id="datePicker"]').daterangepicker();
 </script>
 
 <script>
