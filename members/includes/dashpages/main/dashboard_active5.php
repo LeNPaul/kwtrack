@@ -202,6 +202,7 @@ $dateArr = array_reverse($dateArr);
   </div>
 </div> -->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12">
 		<div class="card ">
@@ -212,13 +213,27 @@ $dateArr = array_reverse($dateArr);
       </div>
 
       <div class="card-body ">
-				<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
-				<button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
-				<button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
-				<button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <link rel="stylesheet" href="/resources/demos/style.css">
+	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <script>
+		$( function() {
+		$( "#datepicker" ).datepicker{
+			minDate: new Date("d/m/y", "-60 days"),
+			maxDate: new Date("d/m/y")
+		});
+		} );
+	  </script>
 
-				<canvas id="Chart" width="1000" height="400"></canvas>
-			</div>
+	  <p>Custom Date Between: <input type="text" id="datepicker"></p>
+	  <button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
+	  <button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
+	  <button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
+	  <button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
+
+	  <canvas id="Chart" width="1000" height="400"></canvas>
+	  </div>
 
       <div class="card-footer ">
         <hr>
@@ -230,30 +245,6 @@ $dateArr = array_reverse($dateArr);
 	</div>
 </div>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-  $( function() {
-    $( "#datepicker" ).datepicker{
-		minDate: new Date("d/m/y", "-60 days"),
-		maxDate: new Date("d/m/y")
-	});
-  } );
-</script>
-
-<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
-<button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
-<button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
-<button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
-
-<p>Custom Date Between: <input type="text" id="datepicker"></p>
-
-
-<canvas id="Chart" width="1000" height="400"></canvas>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <script>
 var ctx = document.getElementById("Chart");
 var adSpendArr = <?= json_encode($adSpendArr); ?>;
