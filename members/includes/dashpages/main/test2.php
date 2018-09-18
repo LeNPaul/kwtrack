@@ -67,7 +67,7 @@ echo '<pre>';
 
 $result = $client->listAdGroups();
 echo '<pre>';
-var_dump($result);
+var_dump(json_decode($result['response']));
 echo '</pre>';
 
 ?>
