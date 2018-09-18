@@ -235,12 +235,12 @@ $dateArr = array_reverse($dateArr);
 <script type="text/javascript">
 $(function() {
 
-    var start = moment().subtract(59, 'days');
-    var end = moment();
+    var begin = moment().subtract(59, 'days');
+    var finish = moment();
 
     function cb(start, end) {
-		start = start.format('MMM D');
-		end= end.format('MMM D');
+		begin = start.format('MMM D');
+		finish = end.format('MMM D');
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     }
 
