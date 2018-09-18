@@ -327,6 +327,11 @@
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    echo '<pre>';
+    var_dump($result);
+    echo '<pre>';
+
+
     // For each keyword:
     // 1) unserialize arrays
     // 2) pull metrics then sum to 1 value
@@ -363,10 +368,6 @@
       }
 
       $ad_spend = round(array_reduce($ad_spend, function($carry, $element) { return $carry += $element; }), 2);
-
-
-      var_dump($avg_cpc);
-      echo '<br />' . count($avg_cpc) . ' <b> ' . $result[$i]['amz_kw_id'] . '</b>';
 
       // For average CPC, we need to filter the array to remove 0's
       // because 0's will skew the average calculation
