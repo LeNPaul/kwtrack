@@ -214,7 +214,7 @@ $dateArr = array_reverse($dateArr);
       </div>
 
       <div class="card-body ">
-		
+
 		<p>Custom Date: <input id="datePicker"></p>
 		<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
 		<button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>

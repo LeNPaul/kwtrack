@@ -381,7 +381,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 ============================================================================*/
 
-importKeywords($pdo, $client, $user_id, 10);
+// importKeywords($pdo, $client, $user_id, 10);
 
 /*==========================================================================
 
@@ -395,15 +395,22 @@ importKeywords($pdo, $client, $user_id, 10);
 
 ============================================================================*/
 
-// First, set date to today so we have most recent ad groups
-$date = date('Ymd', strtotime('-0 days'));
-
-// Second, import all ad group names, Id's
+// First, import all ad group names, campaign Id's, ad group Id's, default bids, and states
 
 $result = $client->listAdGroups();
-$result = json
+$result = json_decode($result, true);
 
-
+// Iterate through all ad groups and insert them into database
+for ($i = 0; $i < count($result); $i++) {
+	$sql = "INSERT INTO ad_groups (amz_adgroup_id, ad_group_name, amz_campaign_id)
+					VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id)";
+  $stmt = $pdo->prepare($sql);
+	$stmt->execute(array(
+		:amz_adgroup_id		=> $response[$i]['adGroupId'],
+		:ad_group_name		=> $response[$i]['name'],
+		:amz_campaign_id	=> $response[$i]['campaignId']
+	));
+}
 
 
 /*==========================================================================
