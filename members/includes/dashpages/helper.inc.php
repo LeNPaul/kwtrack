@@ -160,7 +160,7 @@
         $numMaxKeywords = count($result);
 
         // Insert keywords into database
-        for ($x = 0; $x < 100/*$numMaxKeywords*/; $x++) {
+        for ($x = 0; $x < $numMaxKeywords; $x++) {
 
           // Get status and bid for each keyword
           $kw_id = $result[$x]['keywordId'];
@@ -222,7 +222,7 @@
       $numCurrentKeywords = count($result);
 
       // Loop to iterate through the report response
-      for ($j = 0; $j < 100/*count($result)*/; $j++) {
+      for ($j = 0; $j < count($result); $j++) {
 
         // Removed the 'archived/paused' check for keywords since their states/status
     		// are not provided in the reports. You can only get their CURRENT states and not
@@ -303,16 +303,16 @@
     // Grab sales data from array and store in their respective campaigns
     $dbSales = prepareDbArrays($sales, $dbSales);
     storeKeywordArrays($pdo, $dbSales, $result, 'sales');
-
-    echo '<pre>';
-    var_dump($dbImpressions);
-    var_dump($dbClicks);
-    var_dump($dbCtr);
-    var_dump($dbAdSpend);
-    var_dump($dbAvgCpc);
-    var_dump($dbUnitsSold);
-    var_dump($dbSales);
-    echo '</pre>';
+    //
+    // echo '<pre>';
+    // var_dump($dbImpressions);
+    // var_dump($dbClicks);
+    // var_dump($dbCtr);
+    // var_dump($dbAdSpend);
+    // var_dump($dbAvgCpc);
+    // var_dump($dbUnitsSold);
+    // var_dump($dbSales);
+    // echo '</pre>';
   }
 
   /*

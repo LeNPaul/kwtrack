@@ -381,7 +381,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 ============================================================================*/
 
-//importKeywords($pdo, $client, $user_id, 10);
+importKeywords($pdo, $client, $user_id, 10);
 
 /*==========================================================================
 
@@ -441,7 +441,7 @@ for ($i = 0; $i < count($result); $i++) {
 
 
 ============================================================================*/
-
+/*
 $result = $client->listCampaigns();
 $result = json_decode($result['response'], true);
 
