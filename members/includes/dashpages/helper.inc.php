@@ -361,12 +361,12 @@
       $sales = unserialize($result[$i]['sales']);
 
       for ($j = 0; $j < $days; $j++) {
-        $impressionsDb += $impressions[$j];
-        $clicksDb      += $clicks[$j];
-        $ad_spendDb    += $ad_spend[$j];
-        $avg_cpcDb     += $avg_cpc[$j];
-        $units_soldDb  += $units_sold[$j];
-        $salesDb       += $sales[$j];
+        $impressionsDb[$j] += $impressions[$j];
+        $clicksDb[$j]      += $clicks[$j];
+        $ad_spendDb[$j]    += $ad_spend[$j];
+        $avg_cpcDb[$j]     += $avg_cpc[$j];
+        $units_soldDb[$j]  += $units_sold[$j];
+        $salesDb[$j]       += $sales[$j];
       }
 
       // Create and calculate CTR array
