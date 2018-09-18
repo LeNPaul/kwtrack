@@ -46,6 +46,7 @@ $_SESSION['active'] = intval($result[0]);
 
 <body class="">
   <script src="assets/js/core/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 
   <div class="wrapper ">
