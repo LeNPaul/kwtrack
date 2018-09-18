@@ -22,7 +22,7 @@ for ($i = 0; $i < count($adSpendArr); $i++) {
 }
 
 $dateArr = [];
-$dateArr[] = date("d/m");
+$dateArr[] = date("M d");
 
 for ($j = 1; $j < 60; $j++) {
 	$dateArr[] = date("M d", strtotime("-".$j." days"));
