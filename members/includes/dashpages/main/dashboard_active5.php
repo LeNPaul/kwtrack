@@ -235,8 +235,7 @@ $dateArr = array_reverse($dateArr);
 
 <script>
 const picker = datepicker('datePicker', {
-	maxDate: new Date("d/m/y"),
-	minDate: new Date("d/m/y", "-60 days")
+	maxDate: new Date(),
 });
 </script>
 
