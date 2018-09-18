@@ -213,23 +213,17 @@ $dateArr = array_reverse($dateArr);
       </div>
 
       <div class="card-body ">
-	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	  <link rel="stylesheet" href="/resources/demos/style.css">
-	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	  <script>
-		$( function() {
-		$( "#datepicker" ).datepicker("show");
-		} );
-	  </script>
+	  
+		<link rel="stylesheet" href="https://unpkg.com/js-datepicker/datepicker.css">
+		
+		<p>Custom Date: <input id="datePicker"></p>
+		<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
+		<button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
+		<button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
+		<button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
 
-	  <p>Custom Date Between: <input type="text" id="datepicker"></p>
-	  <button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
-	  <button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
-	  <button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
-	  <button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
-
-	  <canvas id="Chart" width="1000" height="400"></canvas>
+		<script src="https://unpkg.com/js-datepicker"></script>
+		<canvas id="Chart" width="1000" height="400"></canvas>
 	  </div>
 
       <div class="card-footer ">
@@ -241,6 +235,13 @@ $dateArr = array_reverse($dateArr);
     </div>
 	</div>
 </div>
+
+<script>
+const picker = datepicker('datePicker', {
+	maxDate: new Date("d/m/y"),
+	minDate: new Date("d/m/y", "-60 days")
+});
+</script>
 
 <script>
 var ctx = document.getElementById("Chart");
