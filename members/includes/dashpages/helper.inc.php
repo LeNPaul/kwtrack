@@ -371,8 +371,12 @@
       // For average CPC, we need to filter the array to remove 0's
       // because 0's will skew the average calculation
       $avg_cpc = array_filter($avg_cpc, function($a) { return ($a != 0); });
-      // Now that 0's are removed, we need to find the average
-      $avg_cpc = round(array_sum($avg_cpc) / count($avg_cpc), 2);
+
+      /* Now that 0's are removed, we need to find the average. But first, check
+         if the newly filtered $avg_cpc array is empty. If it is empty, then ctr
+         will be 0
+      */
+      $avg_cpc = (count($avg_cpc) == 0) ? 0 : round(array_sum($avg_cpc) / count($avg_cpc), 2);
 
       $units_sold = array_reduce($units_sold, function($carry, $element) { return $carry += $element; });
       $sales = round(array_reduce($sales, function($carry, $element) { return $carry += $element; }), 2);
