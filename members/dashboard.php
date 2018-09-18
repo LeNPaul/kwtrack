@@ -47,7 +47,7 @@ $_SESSION['active'] = intval($result[0]);
 <body class="">
   <script src="assets/js/core/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
+  <script src="assets/js/plugins/moment.min.js"></script>
 
   <div class="wrapper ">
 
@@ -751,7 +751,6 @@ $_SESSION['active'] = intval($result[0]);
   <script src="assets/js/core/popper.min.js"></script>
   <script src="assets/js/core/bootstrap.min.js"></script>
   <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script src="assets/js/plugins/moment.min.js"></script>
   <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
   <script src="assets/js/plugins/bootstrap-switch.js"></script>
   <!--  Plugin for Sweet Alert -->
