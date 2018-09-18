@@ -160,7 +160,7 @@
         $numMaxKeywords = count($result);
 
         // Insert keywords into database
-        for ($x = 0; $x < 10/*$countMaxKeywords*/; $x++) {
+        for ($x = 0; $x < $countMaxKeywords; $x++) {
 
           // Get status and bid for each keyword
           $kw_id = $result[$x]['keywordId'];
