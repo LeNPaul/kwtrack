@@ -257,9 +257,7 @@ $(function() {
         }
     }, cb);
 });
-</script>
 
-<script>
 var ctx = document.getElementById("Chart");
 var adSpendArr = <?= json_encode($adSpendArr); ?>;
 var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
