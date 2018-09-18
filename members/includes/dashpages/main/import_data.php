@@ -401,6 +401,7 @@ $date = date('Ymd', strtotime('-0 days'));
 // Second, import all ad group names, Id's
 
 $result = $client->listAdGroups();
+$result = json
 
 
 
