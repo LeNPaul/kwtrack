@@ -160,7 +160,7 @@
         $numMaxKeywords = count($result);
 
         // Insert keywords into database
-        for ($x = 0; $x < $numMaxKeywords; $x++) {
+        for ($x = 0; $x < 700/*$numMaxKeywords*/; $x++) {
 
           // Get status and bid for each keyword
           $kw_id = $result[$x]['keywordId'];
@@ -222,7 +222,7 @@
       $numCurrentKeywords = count($result);
 
       // Loop to iterate through the report response
-      for ($j = 0; $j < count($result); $j++) {
+      for ($j = 0; $j < 700/*count($result)*/; $j++) {
 
         // Removed the 'archived/paused' check for keywords since their states/status
     		// are not provided in the reports. You can only get their CURRENT states and not
