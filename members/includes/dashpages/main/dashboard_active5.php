@@ -239,7 +239,7 @@ d = new Date();
 d.setDate(d.getDate() - 60);
 
 const picker = datepicker("#datePicker", {
-	minDate: d
+	minDate: d,
 	maxDate: new Date()
 });
 </script>
