@@ -213,8 +213,6 @@ $dateArr = array_reverse($dateArr);
       </div>
 
       <div class="card-body ">
-	  
-		<link rel="stylesheet" href="https://unpkg.com/js-datepicker/datepicker.css">
 		
 		<p>Custom Date: <input id="datePicker"></p>
 		<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
@@ -222,7 +220,6 @@ $dateArr = array_reverse($dateArr);
 		<button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
 		<button type="button" id="sixtyDays" onclick="buttonClick('60')">2 Months</button>
 
-		<script src="https://unpkg.com/js-datepicker"></script>
 		<canvas id="Chart" width="1000" height="400"></canvas>
 	  </div>
 
