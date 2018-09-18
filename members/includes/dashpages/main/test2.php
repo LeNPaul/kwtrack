@@ -35,6 +35,7 @@ $client->profileId = $profileId;
 // var_dump($result);
 // echo '</pre>';
 
+/*
 $result = $client->requestReport(
   "keywords",
   array("reportDate"    => '20180725',
@@ -62,6 +63,11 @@ $result = json_decode($result['response'], true);
 echo '<pre>';
 var_dump($result);
 echo '<pre>';
+*/
 
+$result = $client->listAdGroups();
+echo '<pre>';
+var_dump($result);
+echo '</pre>';
 
 ?>
