@@ -218,7 +218,10 @@ $dateArr = array_reverse($dateArr);
 
       <div class="card-body ">
 
-		<p>Custom Date: <input id="datePicker"></p>
+		<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+			<i class="fa fa-calendar"></i>&nbsp;
+			<span></span> <i class="fa fa-caret-down"></i>
+		</div>
 		<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
 		<button type="button" id="fourteenDays" onclick="buttonClick('14')">2 Weeks</button>
 		<button type="button" id="thirtyDays" onclick="buttonClick('30')">1 Month</button>
@@ -238,7 +241,27 @@ $dateArr = array_reverse($dateArr);
 </div>
 
 <script>
-$('input[id="datePicker"]').daterangepicker();
+$(function() {
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'Last 60 Days': [moment().subtract(1, 'month').startOf('month'), moment().subtract(2, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+
+});
 </script>
 
 <script>
