@@ -265,6 +265,8 @@ var adSpendArr = <?= json_encode($adSpendArr); ?>;
 var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
 var ppcAcosArr = <?= json_encode($acos); ?>;
 var dateArr = <?= json_encode($dateArr); ?>;
+var startRange = dateArr.indexOf(start);
+var endRange = dartArr.indexOf(end);
 
 var data = {
 		labels: dateArr,
