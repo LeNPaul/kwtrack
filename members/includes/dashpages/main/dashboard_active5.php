@@ -236,7 +236,7 @@ $dateArr = array_reverse($dateArr);
 
 <script>
 const picker = datepicker("#datePicker", {
-	maxDate: new Date("d/m/y")
+	maxDate: new Date(2018, 8, 18)
 });
 </script>
 
