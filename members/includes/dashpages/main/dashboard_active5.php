@@ -328,5 +328,7 @@ function chartUpdate(startUpdate, endUpdate) {
 	myChart.data.datasets[0].data = subAdSpend;
 	myChart.data.datasets[1].data = subSales;
 	myChart.data.datasets[2].data = subAcos;
+	
+	myChart.update();
 };
 </script>
