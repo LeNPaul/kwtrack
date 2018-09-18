@@ -238,8 +238,8 @@ $(function() {
     var start = moment().subtract(59, 'days');
     var end = moment();
 
-    function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    function cb(begin, finish) {
+        $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
     }
 
     $('#reportrange').daterangepicker({
