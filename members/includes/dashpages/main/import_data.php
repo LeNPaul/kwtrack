@@ -396,23 +396,24 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 ============================================================================*/
 
 // First, import all ad group names, campaign Id's, ad group Id's, default bids, and states
-/*
+
 $result = $client->listAdGroups();
 $result = json_decode($result['response'], true);
 
 // Iterate through all ad groups and insert them into database
 for ($i = 0; $i < count($result); $i++) {
-	$sql = "INSERT INTO ad_groups (amz_adgroup_id, ad_group_name, amz_campaign_id, status)
-					VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id, :status)";
+	$sql = "INSERT INTO ad_groups (amz_adgroup_id, ad_group_name, amz_campaign_id, status, user_id)
+					VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id, :status, :user_id)";
   $stmt = $pdo->prepare($sql);
 	$stmt->execute(array(
 		':amz_adgroup_id'		=> $result[$i]['adGroupId'],
 		':ad_group_name'		=> $result[$i]['name'],
 		':amz_campaign_id'	=> $result[$i]['campaignId'],
-		':status'						=> $result[$i]['state']
+		':status'						=> $result[$i]['state'],
+		':user_id'					=> $user_id
 	));
 }
-*/
+/*
 // Second, query database for list of all adgroup id's
 $sql = "SELECT amz_adgroup_id FROM ad_groups WHERE user_id=$user_id";
 $stmt = $pdo->query($sql);
