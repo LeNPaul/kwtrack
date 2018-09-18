@@ -418,7 +418,7 @@ for ($i = 0; $i < count($result); $i++) {
 // Second, query database for list of all adgroup id's
 $sql = "SELECT amz_adgroup_id FROM ad_groups WHERE user_id=$user_id";
 $stmt = $pdo->query($sql);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 echo '<pre>';
 var_dump($result);
