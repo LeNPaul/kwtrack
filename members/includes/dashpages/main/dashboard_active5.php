@@ -217,6 +217,7 @@ $dateArr = array_reverse($dateArr);
 			<i class="fa fa-calendar"></i>
 			<span></span> <i class="fa fa-caret-down"></i>
 		</div>
+		<br>
 		
 		<canvas id="Chart" width="1000" height="400"></canvas>
 	  </div>
