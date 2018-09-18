@@ -351,10 +351,18 @@
       $units_sold = unserialize($result[$i]['units_sold']);
       $sales = unserialize($result[$i]['sales']);
 
+      var_dump($avg_cpc);
+
       // Reduce all metric arrays to 1 value
       $impressions = round(array_reduce($impressions, function($carry, $element) { return $carry += $element; }), 2);
       $clicks = round(array_reduce($clicks, function($carry, $element) { return $carry += $element; }), 2);
-      $ctr = round($impressions / $clicks, 2);
+
+      // Check if clicks = 0. If no clicks, then CTR = 0
+      if ($clicks == 0) {
+        $ctr = 0;
+      } else {
+        $ctr = round($impressions / $clicks, 2);
+      }
       $ad_spend = round(array_reduce($ad_spend, function($carry, $element) { return $carry += $element; }), 2);
 
       // For average CPC, we need to filter the array to remove 0's
