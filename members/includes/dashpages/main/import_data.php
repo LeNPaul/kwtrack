@@ -425,7 +425,7 @@ $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 // echo '<pre>';
 
 for ($i = 0; $i < count($result); $i++) {
-	importAdGroupMetrics($pdo, $result[$i]);
+	importAdGroupMetrics($pdo, $result[$i], 10);
 }
 
 
