@@ -219,7 +219,7 @@ $dateArr = array_reverse($dateArr);
       <div class="card-body ">
 
 		<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-			<i class="fa fa-calendar"></i>&nbsp;
+			<i class="fa fa-calendar"></i>
 			<span></span> <i class="fa fa-caret-down"></i>
 		</div>
 		<button type="button" id="fourDays" onclick="buttonClick('7')"> This Week</button>
