@@ -402,13 +402,14 @@ $result = json_decode($result['response'], true);
 
 // Iterate through all ad groups and insert them into database
 for ($i = 0; $i < count($result); $i++) {
-	$sql = "INSERT INTO ad_groups (amz_adgroup_id, ad_group_name, amz_campaign_id)
-					VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id)";
+	$sql = "INSERT INTO ad_groups (amz_adgroup_id, ad_group_name, amz_campaign_id, status)
+					VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id, :status)";
   $stmt = $pdo->prepare($sql);
 	$stmt->execute(array(
 		':amz_adgroup_id'		=> $result[$i]['adGroupId'],
 		':ad_group_name'		=> $result[$i]['name'],
-		':amz_campaign_id'	=> $result[$i]['campaignId']
+		':amz_campaign_id'	=> $result[$i]['campaignId'],
+		':status'						=> $result[$i]['state']
 	));
 }
 
