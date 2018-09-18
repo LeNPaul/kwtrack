@@ -203,7 +203,6 @@ $dateArr = array_reverse($dateArr);
 </div> -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-<script src="https://unpkg.com/js-datepicker"></script>
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12">
 		<div class="card ">
@@ -233,12 +232,6 @@ $dateArr = array_reverse($dateArr);
     </div>
 	</div>
 </div>
-
-<script>
-const picker = datepicker("#datePicker", {
-	maxDate: new Date()
-});
-</script>
 
 <script>
 var ctx = document.getElementById("Chart");
