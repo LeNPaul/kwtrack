@@ -233,10 +233,6 @@ $dateArr = array_reverse($dateArr);
 
 <script type="text/javascript">
 $(function() {
-
-    var start = moment().subtract(29, 'days');
-    var end = moment();
-
     function cb(start, end) {
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     }
@@ -255,9 +251,6 @@ $(function() {
            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         }
     }, cb);
-
-    //cb(start, end);
-
 });
 </script>
 
