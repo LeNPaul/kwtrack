@@ -322,7 +322,7 @@
 
   function importAdGroupMetrics($pdo, $adGroupId) {
     // Query the database for all keywords under the specific ad group and store in $result
-    $sql = "SELECT impressions, clicks, ctr, ad_spend, avg_cpc, units_sold, sales
+    $sql = "SELECT amz_kw_id, impressions, clicks, ctr, ad_spend, avg_cpc, units_sold, sales
             FROM ppc_keywords WHERE amz_adgroup_id={$adGroupId}";
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -351,8 +351,6 @@
       $units_sold = unserialize($result[$i]['units_sold']);
       $sales = unserialize($result[$i]['sales']);
 
-      var_dump($avg_cpc);
-
       // Reduce all metric arrays to 1 value
       $impressions = round(array_reduce($impressions, function($carry, $element) { return $carry += $element; }), 2);
       $clicks = round(array_reduce($clicks, function($carry, $element) { return $carry += $element; }), 2);
@@ -363,7 +361,12 @@
       } else {
         $ctr = round($impressions / $clicks, 2);
       }
+
       $ad_spend = round(array_reduce($ad_spend, function($carry, $element) { return $carry += $element; }), 2);
+
+
+      var_dump($avg_cpc);
+      echo '<br />' . count($avg_cpc) . ' <b> ' . $result[$i]['amz_kw_id'] . '</b>';
 
       // For average CPC, we need to filter the array to remove 0's
       // because 0's will skew the average calculation
