@@ -45,6 +45,12 @@ $_SESSION['active'] = intval($result[0]);
 </head>
 
 <body class="">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
   <div class="wrapper ">
 
     <?php include './includes/dashpages/sidenav.inc.php'; ?>
@@ -784,10 +790,7 @@ $_SESSION['active'] = intval($result[0]);
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="assets/demo/demo.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-  <script>
+    <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
       demo.initDashboardPageCharts();
