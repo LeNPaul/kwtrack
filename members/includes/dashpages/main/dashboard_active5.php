@@ -244,7 +244,7 @@ $(function() {
     $('#reportrange').daterangepicker({
 		alwaysShowCalendars: true,
 		maxDate: moment(),
-		minDate: moment.subtract(60, 'days'),
+		minDate: moment().subtract(60, 'days'),
         startDate: start,
         endDate: end,
         ranges: {
