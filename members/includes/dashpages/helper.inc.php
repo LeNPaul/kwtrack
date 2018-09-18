@@ -25,7 +25,7 @@
    for ($i = 0; $i < 60; $i++) {
      $secondLoopLimit = count($dataset[$i]);
      for ($j = 0; $j < $secondLoopLimit; $j++) {
-       $dbVar[$j][] = array_shift($dataset[$i]);
+       $dbVar[$j][] = array_push($dataset[$i][$j]);
      }
    }
    return $dbVar;
