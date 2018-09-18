@@ -327,11 +327,6 @@
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo '<pre>';
-    var_dump($result);
-    echo '<pre>';
-
-
     // For each keyword:
     // 1) unserialize arrays
     // 2) pull metrics then sum to 1 value
