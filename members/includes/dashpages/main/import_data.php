@@ -406,9 +406,9 @@ for ($i = 0; $i < count($result); $i++) {
 					VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id)";
   $stmt = $pdo->prepare($sql);
 	$stmt->execute(array(
-		':amz_adgroup_id'		=> $response[$i]['adGroupId'],
-		':ad_group_name'		=> $response[$i]['name'],
-		':amz_campaign_id'	=> $response[$i]['campaignId']
+		':amz_adgroup_id'		=> $result[$i]['adGroupId'],
+		':ad_group_name'		=> $result[$i]['name'],
+		':amz_campaign_id'	=> $result[$i]['campaignId']
 	));
 }
 
