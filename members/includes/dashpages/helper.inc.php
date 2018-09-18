@@ -322,11 +322,12 @@
       ██   ██ ██   ██     ██    ██ ██   ██ ██    ██ ██    ██ ██           ██
       ██   ██ ██████       ██████  ██   ██  ██████   ██████  ██      ███████
 
-   *  function importAdGroupMetrics(PDO $pdo, String $adGroupId) --> void
+   *  function importAdGroupMetrics(PDO $pdo, String $adGroupId, Int $days) --> void
    *    --> Imports ad group or campaign metrics derived from their respective keywords.
    *
    *      --> PDO $pdo          - database handler
    *      --> String $adGroupId - id of the ad group or campaign
+   *      --> Int $days         - number of days to import
    */
 
   function importAdGroupMetrics($pdo, $adGroupId, $days) {
@@ -471,13 +472,14 @@
     ██      ██   ██ ██  ██  ██ ██      ██   ██ ██ ██    ██ ██  ██ ██      ██
      ██████ ██   ██ ██      ██ ██      ██   ██ ██  ██████  ██   ████ ███████
 
- *  function importCampaignMetrics(PDO $pdo, Int $campaignId) --> void
+ *  function importCampaignMetrics(PDO $pdo, Int $campaignId, Int $days) --> void
  *    --> Sums up metrics from ad groups and imports to campaigns.
  *
  *      --> PDO $pdo        - database handle
  *      --> Int $campaignId - campaign id
+ *      --> Int $days       - number of days to import data for
  */
- function importCampaignMetrics($pdo, $campaignId) {
+ function importCampaignMetrics($pdo, $campaignId, $days) {
    // Query the database for all keywords under the specific ad group and store in $result
    $sql = "SELECT impressions, clicks, ctr, ad_spend, avg_cpc, units_sold, sales
            FROM ad_groups WHERE amz_campaign_id={$campaignId}";
