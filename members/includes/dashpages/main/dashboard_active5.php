@@ -241,6 +241,7 @@ $(function() {
     function cb(begin, finish) {
 		start = begin.format('MMM D');
 		end = finish.format('MMM D');
+		chartUpdate(start, end);
         $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
     }
 
@@ -265,8 +266,6 @@ var adSpendArr = <?= json_encode($adSpendArr); ?>;
 var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
 var ppcAcosArr = <?= json_encode($acos); ?>;
 var dateArr = <?= json_encode($dateArr); ?>;
-var startRange = dateArr.indexOf(start);
-var endRange = dartArr.indexOf(end);
 
 var data = {
 		labels: dateArr,
@@ -315,4 +314,19 @@ var myChart = new Chart(ctx, {
     }
 	}
 });
+
+function chartUpdate(startUpdate, endUpdate) {
+	startArr = dateArr.indexOf(startUpdate);
+	endArr = dateArr.indexOf(endUpdate);
+	
+	subLabels = dateArr.slice(startArr, endArr + 1);
+	subAdSpend = adSpendArr.slice(startArr, endArr + 1);
+	subSales = ppcSalesArr.slice(startArr, endArr + 1);
+	subAcos = ppcAcosArr.slice(startArr, endArr + 1);
+	
+	myChart.data.labels = subLabels;
+	myChart.data.datasets[0].data = subAdSpend;
+	myChart.data.datasets[1].data = subSales;
+	myChart.data.datasets[2].data = subAcos;
+};
 </script>
