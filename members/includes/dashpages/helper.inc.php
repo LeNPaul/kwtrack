@@ -282,6 +282,17 @@
     $dbUnitsSold = [];
     $dbSales = [];
 
+    echo '<pre>';
+    var_dump($dbImpressions);
+    var_dump($dbClicks);
+    var_dump($dbCtr);
+    var_dump($dbAdSpend);
+    var_dump($dbAvgCpc);
+    var_dump($dbUnitsSold);
+    var_dump($dbSales);
+    echo '</pre>';
+
+
 
     // Grab impression data from array and store in their respective campaigns
     $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
