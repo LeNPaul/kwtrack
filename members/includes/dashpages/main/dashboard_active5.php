@@ -243,6 +243,7 @@ $(function() {
 
     $('#reportrange').daterangepicker({
 		alwaysShowCalendars: true,
+		maxDate: moment(),
         startDate: start,
         endDate: end,
         ranges: {
