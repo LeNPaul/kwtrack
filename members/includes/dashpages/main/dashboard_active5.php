@@ -235,9 +235,7 @@ $dateArr = array_reverse($dateArr);
 </div>
 
 <script>
-const picker = datepicker('datePicker', {
-	maxDate: new Date(),
-});
+const picker = datepicker('datePicker');
 </script>
 
 <script>
