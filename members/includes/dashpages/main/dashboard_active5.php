@@ -219,10 +219,7 @@ $dateArr = array_reverse($dateArr);
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	  <script>
 		$( function() {
-		$( "#datepicker" ).datepicker{
-			minDate: new Date("d/m/y", "-60 days"),
-			maxDate: new Date("d/m/y")
-		});
+		$( "#datepicker" ).datepicker();
 		} );
 	  </script>
 
