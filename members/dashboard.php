@@ -45,6 +45,7 @@ $_SESSION['active'] = intval($result[0]);
 </head>
 
 <body class="">
+  <script src="assets/js/core/jquery.min.js"></script>
 
 
   <div class="wrapper ">
@@ -746,7 +747,6 @@ $_SESSION['active'] = intval($result[0]);
   </div>
 
   <!--   Core JS Files   -->
-  <script src="assets/js/core/jquery.min.js"></script>
   <script src="assets/js/core/popper.min.js"></script>
   <script src="assets/js/core/bootstrap.min.js"></script>
   <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
