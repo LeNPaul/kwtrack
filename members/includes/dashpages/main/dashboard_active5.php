@@ -10,6 +10,8 @@ $adSpendArr = array_reverse(calculateMetrics(multiUnserialize(getMetricData($pdo
 $ppcSalesArr = array_reverse(calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])), 1,'ad_spend'));
 $acos = [];
 
+var_dump($adSpendArr);
+
 $adSpend = array_sum($adSpendArr);
 $ppcSales = array_sum($ppcSalesArr);
 $displayACoS = 0;
@@ -52,7 +54,7 @@ $dateArr = array_reverse($dateArr);
             <div class="numbers">
               <p class="card-category">
 								Ad Spend
-								
+
 							</p>
               <p class="card-title"><?= '$' . $adSpend ?>
               <p>
