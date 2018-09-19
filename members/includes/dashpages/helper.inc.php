@@ -185,7 +185,7 @@
           }
 
           $status = $status['state'];
-          
+
           $stmt->execute(array(
             ':user_id'          => $user_id,
             ':status'           => $status,
@@ -627,7 +627,7 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   $output = array_fill(0, 6, 0);
 
   for ($j = 0; $j < count($metricArr); $j++) {
-		for ($i = 0; $i < 6; $i++) {
+		for ($i = 0; $i < 60; $i++) {
 			$output[$i] += $metricArr[$j][$i];
 		}
   }
