@@ -160,6 +160,11 @@
         $numMaxKeywords = count($result);
 
         // Insert keywords into database
+
+        $sql = 'INSERT INTO ppc_keywords (user_id, status, bid, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id, match_type)
+                VALUES (:user_id, :status, :bid, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
+        $stmt = $pdo->prepare($sql);
+
         for ($x = 0; $x < 1000 /*$numMaxKeywords*/; $x++) {
 
           // Get status and bid for each keyword
@@ -180,10 +185,7 @@
           }
 
           $status = $status['state'];
-
-          $sql = 'INSERT INTO ppc_keywords (user_id, status, bid, keyword_text, amz_campaign_id, amz_adgroup_id, amz_kw_id, match_type)
-                  VALUES (:user_id, :status, :bid, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
-          $stmt = $pdo->prepare($sql);
+          
           $stmt->execute(array(
             ':user_id'          => $user_id,
             ':status'           => $status,
