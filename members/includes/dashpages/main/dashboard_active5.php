@@ -58,9 +58,9 @@ $dateArr = array_reverse($dateArr);
             <div class="numbers">
               <p class="card-category">
 								Ad Spend
-								<button class="button tooltipster" id="db_metric_tooltip" data-tooltip-content="#tooltip_content">
+								<span class="tooltipster" id="db_metric_tooltip" data-tooltip-content="#tooltip_content">
 									i
-								</button>
+								</span>
 							</p>
               <p class="card-title"><?= '$' . $adSpend ?>
               <p>
