@@ -283,15 +283,15 @@ var data = {
 			label: "Ad Spend",
 			yAxisID: 'A',
 			data: adSpendArr,
-			fill: false,
+			fill: true,
 			backgroundColor: "rgb(244, 72, 66)",
-			borderColor: "rgb(244, 72, 66)"
-			//type: 'line'
+			borderColor: "rgb(244, 72, 66)",
+			type: 'line'
 		}, {
 			label: "PPC Sales",
 			yAxisID: 'A',
 			data: ppcSalesArr,
-			fill: false,
+			fill: true,
 			backgroundColor: "rgb(89, 255, 152)",
 			borderColor: "rgb(89, 255, 152)",
 			type: 'line'
@@ -328,6 +328,9 @@ var myChart = new Chart(ctx, {
 			        	position: 'right'
 							}]
     }
+
+
+
 	}
 });
 
