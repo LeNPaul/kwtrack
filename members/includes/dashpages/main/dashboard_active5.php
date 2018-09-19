@@ -332,7 +332,13 @@ var myChart = new Chart(ctx, {
 	            }, {
 			      		id: 'B',
 			        	type: 'logarithmic',
-			        	position: 'right'
+			        	position: 'right',
+								ticks: {
+									      beginAtZero: true,
+									      min: 0,
+									      max: 200,
+									      stepSize: 5
+									    }
 							}]
     }
 
