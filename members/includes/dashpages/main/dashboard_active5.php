@@ -331,7 +331,7 @@ var myChart = new Chart(ctx, {
 								position: 'left'
 	            }, {
 			      		id: 'B',
-			        	type: 'logarithmic',
+			        	type: 'linear',
 			        	position: 'right',
 								ticks: {
 									      beginAtZero: true,
