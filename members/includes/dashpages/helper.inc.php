@@ -22,7 +22,7 @@
   *      --> Array $dbVar   - prepared array for specific metric
   */
  function prepareDbArrays($dataset, $dbVar) {
-   for ($i = 0; $i < 60; $i++) {
+   for ($i = 0; $i < 10 /*60*/; $i++) {
      $secondLoopLimit = count($dataset[$i]);
      for ($j = 0; $j < $secondLoopLimit; $j++) {
        $dbVar[$j][] = $dataset[$i][$j];
@@ -160,7 +160,7 @@
         $numMaxKeywords = count($result);
 
         // Insert keywords into database
-        for ($x = 0; $x < $numMaxKeywords; $x++) {
+        for ($x = 0; $x < 1000 /*$numMaxKeywords*/; $x++) {
 
           // Get status and bid for each keyword
           $kw_id = $result[$x]['keywordId'];
@@ -175,9 +175,7 @@
           } else {
             // Get default bid from adgroup
             $adgBid = $client->getAdGroup($status['adGroupId']);
-
             $adgBid = json_decode($adgBid['response'], true);
-
             $adgBid = $adgBid['defaultBid'];
           }
 
@@ -222,7 +220,7 @@
       $numCurrentKeywords = count($result);
 
       // Loop to iterate through the report response
-      for ($j = 0; $j < count($result); $j++) {
+      for ($j = 0; $j < 10 /*count($result)*/; $j++) {
 
         // Removed the 'archived/paused' check for keywords since their states/status
     		// are not provided in the reports. You can only get their CURRENT states and not
@@ -250,7 +248,7 @@
         $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
         $sales[$i][] = $result[$j]['attributedSales1d'];
 
-        // Get how many 0.0's we need to append to the end of the loop if $numCurrentKeywords < $numMaxKeywords
+        // Get how many 0.0's we need to append to the end of the metric arrays if $numCurrentKeywords < $numMaxKeywords
         if ($numCurrentKeywords < $numMaxKeywords) {
           $count = $numMaxKeywords - $numMaxKeywords;
           while ($count != 0) {
@@ -264,8 +262,8 @@
             $count--;
           }
         }
-
       }
+
     }
 
     // Grab array of keywords by their keyword ID
