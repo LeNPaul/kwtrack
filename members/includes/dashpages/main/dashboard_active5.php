@@ -281,7 +281,7 @@ var data = {
 
 		datasets: [{
 			label: "Ad Spend",
-			yAxisId: 'A',
+			yAxisID: 'A',
 			data: adSpendArr,
 			fill: false,
 			backgroundColor: "rgb(244, 72, 66)",
@@ -289,7 +289,7 @@ var data = {
 			//type: 'line'
 		}, {
 			label: "PPC Sales",
-			yAxisId: 'A',
+			yAxisID: 'A',
 			data: ppcSalesArr,
 			fill: false,
 			backgroundColor: "rgb(89, 255, 152)",
@@ -297,7 +297,7 @@ var data = {
 			type: 'line'
 		}, {
 			label: "PPC ACoS",
-			yAxisId: 'B',
+			yAxisID: 'B',
 			data: ppcAcosArr,
 			fill: true,
 			backgroundColor: "rgb(114, 187, 255)"
