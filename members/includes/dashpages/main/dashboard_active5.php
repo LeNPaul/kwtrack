@@ -8,16 +8,19 @@ require './includes/dashpages/helper.inc.php';
 // Grab metric data for all campaigns and store in an array for each metric
 $adSpendArr = array_reverse(calculateMetrics(multiUnserialize(getMetricData($pdo, 'ad_spend', $_SESSION['user_id'])), 1, 'ad_spend'));
 $ppcSalesArr = array_reverse(calculateMetrics(multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])), 1,'ad_spend'));
+$acos = [];
 
 $adSpend = array_sum($adSpendArr);
 $ppcSales = array_sum($ppcSalesArr);
-$acos = [];
+$displayACoS = 0;
 
 for ($i = 0; $i < count($adSpendArr); $i++) {
 	if ($ppcSalesArr[$i] == 0) {
 		$acos[] = 0;
+		$displayACoS = 0;
 	} else {
 		$acos[] = round((double)($adSpendArr[$i] / $ppcSalesArr[$i]) * 100, 2);
+		$displayACoS = round((double)($adSpend / $ppcSales) * 100, 2);
 	}
 }
 
@@ -101,7 +104,7 @@ $dateArr = array_reverse($dateArr);
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">PPC ACoS</p>
-              <p class="card-title"><?= round((double)($adSpend / $ppcSales) * 100, 2) . '%' ?>
+              <p class="card-title"><?=  $displayACoS . '%' ?>
               <p>
             </div>
           </div>
@@ -203,6 +206,7 @@ $dateArr = array_reverse($dateArr);
 </div> -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12">
 		<div class="card ">
@@ -218,7 +222,7 @@ $dateArr = array_reverse($dateArr);
 			<span></span> <i class="fa fa-caret-down"></i>
 		</div>
 		<br>
-		
+
 		<canvas id="Chart" width="1000" height="400"></canvas>
 	  </div>
 
@@ -318,17 +322,17 @@ var myChart = new Chart(ctx, {
 function chartUpdate(startUpdate, endUpdate) {
 	startArr = dateArr.indexOf(startUpdate);
 	endArr = dateArr.indexOf(endUpdate);
-	
+
 	subLabels = dateArr.slice(startArr, endArr + 1);
 	subAdSpend = adSpendArr.slice(startArr, endArr + 1);
 	subSales = ppcSalesArr.slice(startArr, endArr + 1);
 	subAcos = ppcAcosArr.slice(startArr, endArr + 1);
-	
+
 	myChart.data.labels = subLabels;
 	myChart.data.datasets[0].data = subAdSpend;
 	myChart.data.datasets[1].data = subSales;
 	myChart.data.datasets[2].data = subAcos;
-	
+
 	myChart.update();
 };
 </script>

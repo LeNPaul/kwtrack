@@ -63,11 +63,13 @@ $result = json_decode($result['response'], true);
 echo '<pre>';
 var_dump($result);
 echo '<pre>';
-*/
+
 
 $result = $client->listAdGroups();
 echo '<pre>';
 var_dump(json_decode($result['response'], true));
 echo '</pre>';
+*/
+
 
 ?>
