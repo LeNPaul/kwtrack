@@ -281,6 +281,7 @@ var data = {
 
 		datasets: [{
 			label: "Ad Spend",
+			yAxisId: 'A',
 			data: adSpendArr,
 			fill: false,
 			backgroundColor: "rgb(244, 72, 66)",
@@ -288,6 +289,7 @@ var data = {
 			//type: 'line'
 		}, {
 			label: "PPC Sales",
+			yAxisId: 'A',
 			data: ppcSalesArr,
 			fill: false,
 			backgroundColor: "rgb(89, 255, 152)",
@@ -295,6 +297,7 @@ var data = {
 			type: 'line'
 		}, {
 			label: "PPC ACoS",
+			yAxisId: 'B',
 			data: ppcAcosArr,
 			fill: true,
 			backgroundColor: "rgb(114, 187, 255)"
@@ -314,12 +317,18 @@ var myChart = new Chart(ctx, {
 		            gridLines: {
 		                color: "rgba(0, 0, 0, 0)",
 		            }
-	            }]/*,
+	            }],
 	    yAxes: [{
-                gridLines: {
-                    color: "rgba(0, 0, 0, 0)",
-                }
-	            }]*/
+								id: 'A',
+                type: 'linear',
+								position: 'left'
+	            },
+
+							{
+			      		id: 'B',
+			        	type: 'linear',
+			        	position: 'right'
+							}]
     }
 	}
 });
