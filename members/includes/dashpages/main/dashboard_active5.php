@@ -284,8 +284,7 @@ var data = {
 			yAxisID: 'A',
 			data: adSpendArr,
 			fill: true,
-			opacity: 45,
-			backgroundColor: "rgba(244, 72, 66, 50)",
+			backgroundColor: "rgba(244, 72, 66, 0.5)",
 			borderColor: "rgb(244, 72, 66)",
 			type: 'line'
 		}, {
@@ -293,7 +292,7 @@ var data = {
 			yAxisID: 'A',
 			data: ppcSalesArr,
 			fill: true,
-			backgroundColor: "rgba(89, 255, 152, 50)",
+			backgroundColor: "rgba(89, 255, 152, 0.5)",
 			borderColor: "rgb(89, 255, 152)",
 			type: 'line'
 		}, {
