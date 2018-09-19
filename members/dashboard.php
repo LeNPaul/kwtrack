@@ -29,12 +29,15 @@ $_SESSION['active'] = intval($result[0]);
     PPCOLOGY
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+
   <!-- CSS Files -->
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!--  <link href="assets/demo/demo.css" rel="stylesheet" />-->
 
@@ -42,6 +45,15 @@ $_SESSION['active'] = intval($result[0]);
   <link href="node_modules/flag-icon-css/css/flag-icon.css" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <!--  Tooltipster JS and CSS Files -->
+  <link rel="stylesheet" type="text/css" href="assets/tooltipster/css/tooltipster.bundle.min.css" />
+  <script type="text/javascript" src="assets/tooltipster/js/tooltipster.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.tooltipster').tooltipster();
+    });
+  </script>
 </head>
 
 <body class="">

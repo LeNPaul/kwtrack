@@ -35,6 +35,11 @@ $dateArr = array_reverse($dateArr);
 
 ?>
 
+<div class="tooltip_templates">
+    <span id="tooltip_content">
+        <img src="myimage.png" /> <strong>This is the content of my tooltip!</strong>
+    </span>
+</div>
 
 <!--  Row for PPC metrics: ad spend, ppc sales, ppc ACoS -->
 <div class="row">
@@ -42,18 +47,26 @@ $dateArr = array_reverse($dateArr);
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
+
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-danger">
               <i class="nc-icon nc-tag-content text-danger"></i>
             </div>
           </div>
+
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Ad Spend</p>
+              <p class="card-category">
+								Ad Spend
+								<button class="button tooltipster" id="db_metric_tooltip" data-tooltip-content="#tooltip_content">
+									i
+								</button>
+							</p>
               <p class="card-title"><?= '$' . $adSpend ?>
               <p>
             </div>
           </div>
+
         </div>
       </div>
       <div class="card-footer ">
