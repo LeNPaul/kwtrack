@@ -22,7 +22,7 @@
   *      --> Array $dbVar   - prepared array for specific metric
   */
  function prepareDbArrays($dataset, $dbVar) {
-   for ($i = 0; $i < 10 /*60*/; $i++) {
+   for ($i = 0; $i < 60; $i++) {
      $secondLoopLimit = count($dataset[$i]);
      for ($j = 0; $j < $secondLoopLimit; $j++) {
        $dbVar[$j][] = $dataset[$i][$j];
@@ -220,7 +220,7 @@
       $numCurrentKeywords = count($result);
 
       // Loop to iterate through the report response
-      for ($j = 0; $j < 10 /*count($result)*/; $j++) {
+      for ($j = 0; $j < 1000 /*count($result)*/; $j++) {
 
         // Removed the 'archived/paused' check for keywords since their states/status
     		// are not provided in the reports. You can only get their CURRENT states and not
