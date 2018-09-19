@@ -280,6 +280,12 @@ var data = {
 		labels: dateArr,
 
 		datasets: [{
+			label: "PPC ACoS",
+			yAxisID: 'B',
+			data: ppcAcosArr,
+			fill: true,
+			backgroundColor: "rgb(114, 187, 255)"
+		}, {
 			label: "Ad Spend",
 			yAxisID: 'A',
 			data: adSpendArr,
@@ -302,12 +308,6 @@ var data = {
 			backgroundColor: "rgba(89, 255, 152, 0.5)",
 			borderColor: "rgba(89, 255, 152, 0.7)",
 			type: 'line'
-		}, {
-			label: "PPC ACoS",
-			yAxisID: 'B',
-			data: ppcAcosArr,
-			fill: true,
-			backgroundColor: "rgb(114, 187, 255)"
 		}]
 	}
 
