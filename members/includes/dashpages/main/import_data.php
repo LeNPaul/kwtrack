@@ -401,10 +401,6 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 $result = $client->listAdGroups();
 $result = json_decode($result['response'], true);
 
-echo '<pre>';
-var_dump($result);
-echo '</pre>';
-
 // Iterate through all ad groups and insert them into database
 
 $sql = "INSERT INTO ad_groups (amz_adgroup_id, ad_group_name, amz_campaign_id, status, user_id)
@@ -450,10 +446,6 @@ for ($i = 0; $i < count($result); $i++) {
 
 $result = $client->listCampaigns();
 $result = json_decode($result['response'], true);
-
-echo '<pre>';
-var_dump($result);
-echo '</pre>';
 
 // Iterate through all ad groups and insert them into database
 
