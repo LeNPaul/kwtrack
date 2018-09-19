@@ -322,9 +322,7 @@ var myChart = new Chart(ctx, {
 								id: 'A',
                 type: 'linear',
 								position: 'left'
-	            },
-
-							{
+	            }, {
 			      		id: 'B',
 			        	type: 'linear',
 			        	position: 'right'
