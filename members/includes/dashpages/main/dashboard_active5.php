@@ -336,8 +336,8 @@ var myChart = new Chart(ctx, {
 								ticks: {
 									      beginAtZero: true,
 									      min: 0,
-									      max: 200,
-									      stepSize: 5
+									      max: 150,
+									      stepSize: 20
 									    }
 							}]
     }
