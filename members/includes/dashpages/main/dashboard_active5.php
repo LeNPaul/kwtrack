@@ -332,13 +332,7 @@ var myChart = new Chart(ctx, {
 	            }, {
 			      		id: 'B',
 			        	type: 'linear',
-			        	position: 'right',
-								ticks: {
-									      beginAtZero: true,
-									      min: 0,
-									      max: 100,
-									      stepSize: 20
-									    }
+			        	position: 'right'
 							}]
     }
 
