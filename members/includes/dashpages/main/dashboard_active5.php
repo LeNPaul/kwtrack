@@ -17,12 +17,12 @@ $displayACoS = 0;
 for ($i = 0; $i < count($adSpendArr); $i++) {
 	if ($ppcSalesArr[$i] == 0) {
 		$acos[] = 0;
-		$displayACoS = 0;
 	} else {
 		$acos[] = round((double)($adSpendArr[$i] / $ppcSalesArr[$i]) * 100, 2);
-		$displayACoS = round((double)($adSpend / $ppcSales) * 100, 2);
 	}
 }
+
+$displayACoS = ($ppcSales == 0) ? 0.00 : round((double)($adSpend / $ppcSales) * 100, 2);
 
 $dateArr = [];
 $dateArr[] = date("M d");
