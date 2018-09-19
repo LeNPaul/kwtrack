@@ -447,6 +447,10 @@ for ($i = 0; $i < count($result); $i++) {
 $result = $client->listCampaigns();
 $result = json_decode($result['response'], true);
 
+echo '<pre>';
+var_dump($result);
+echo '</pre>';
+
 // Iterate through all ad groups and insert them into database
 
 $sql = "INSERT INTO campaigns (campaign_name, amz_campaign_id, user_id, campaign_type, targeting_type, status, daily_budget)
