@@ -45,15 +45,6 @@ $_SESSION['active'] = intval($result[0]);
   <link href="node_modules/flag-icon-css/css/flag-icon.css" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-  <!--  Tooltipster JS and CSS Files -->
-  <link rel="stylesheet" type="text/css" href="assets/tooltipster/css/tooltipster.bundle.min.css" />
-  <script type="text/javascript" src="assets/tooltipster/js/tooltipster.bundle.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('.tooltipster').tooltipster();
-    });
-  </script>
 </head>
 
 <body class="">

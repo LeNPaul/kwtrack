@@ -22,19 +22,6 @@
  ██████  ██   ██ ███████ ██   ██ ██████   ██████  ██   ██ ██   ██ ██████
  */
 
-#db_metric_tooltip {
-  border-radius: 10px;
-  font-size: 10px;
-  background: #3c35ff;
-  padding: 0px;
-  margin: 0px;
-}
-
-#tooltip_content {
-
-}
-
-.tooltip_templates { display: none; }
 
 /*
 ███    ███  █████  ██ ███    ██
