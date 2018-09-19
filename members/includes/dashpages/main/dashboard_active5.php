@@ -284,8 +284,8 @@ var data = {
 			data: adSpendArr,
 			fill: false,
 			backgroundColor: "rgb(244, 72, 66)",
-			borderColor: "rgb(244, 72, 66)",
-			type: 'line'
+			borderColor: "rgb(244, 72, 66)"
+			//type: 'line'
 		}, {
 			label: "PPC Sales",
 			data: ppcSalesArr,
