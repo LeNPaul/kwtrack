@@ -628,10 +628,10 @@ function calculateMetrics($metricArr, $numDays, $metric) {
 
   for ($j = 0; $j < count($metricArr); $j++) {
 		for ($i = 0; $i < 20; $i++) {
-      echo '<pre>';
-      var_dump($output);
-      var_dump($metricArr);
-      echo '</pre>';
+      // echo '<pre>';
+      // var_dump($output);
+      // var_dump($metricArr);
+      // echo '</pre>';
 
 			$output[$i] += $metricArr[$j][$i];
 		}
