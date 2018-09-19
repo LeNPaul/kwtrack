@@ -284,6 +284,7 @@ var data = {
 			yAxisID: 'A',
 			data: adSpendArr,
 			fill: true,
+			opacity: 45,
 			backgroundColor: "rgba(244, 72, 66, 50)",
 			borderColor: "rgb(244, 72, 66)",
 			type: 'line'
