@@ -22,7 +22,7 @@
  ██████  ██   ██ ███████ ██   ██ ██████   ██████  ██   ██ ██   ██ ██████
  */
 
-button#db_metric_tooltip {
+#db_metric_tooltip {
   border-radius: 10px;
   font-size: 10px;
   background: #3c35ff;
@@ -31,7 +31,7 @@ button#db_metric_tooltip {
 }
 
 #tooltip_content {
-  
+
 }
 
 .tooltip_templates { display: none; }
