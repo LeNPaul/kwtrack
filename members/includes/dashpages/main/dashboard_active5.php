@@ -290,7 +290,7 @@ var data = {
 			backgroundColor: "rgba(244, 72, 66, 0.5)",
 			borderWidth: 2,
 			borderColor: "rgba(244, 72, 66, 0.7)",
-			type: 'line',
+			type: 'line'
 		}, {
 			label: "PPC Sales",
 			yAxisID: 'A',
