@@ -283,10 +283,14 @@ var data = {
 			label: "Ad Spend",
 			yAxisID: 'A',
 			data: adSpendArr,
-			fill: true,
+			fill: 'bottom',
+			pointRadius: 3,
+			hoverRadius: 4,
+			hoverBorderWidth: 3,
 			backgroundColor: "rgba(244, 72, 66, 0.5)",
+			borderWidth: 2,
 			borderColor: "rgba(244, 72, 66, 0.7)",
-			type: 'line'
+			type: 'line',
 		}, {
 			label: "PPC Sales",
 			yAxisID: 'A',
