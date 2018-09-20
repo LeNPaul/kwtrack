@@ -73,32 +73,22 @@ echo '</pre>';
 
 $arr = array(
 	'id1' => [1,2,3,4,5,6,7,8,9,10],
-	'id2' => [2,3,4,5,6,7,8,9,10],
-	'id3' => [2,3,4,5,6,7,8,9,10],
-	'id4' => [3,4,5,6,7,8,9,10],
-	'id5' => [3,4,5,6,7,8,9,10],
-	'id6' => [4,5,6,7,8,9,10],
-	'id7' => [5,6,7,8,9,10],
-	'id8' => [8,9,10],
+	'id9' => [10],
 	'id9' => [10]
 );
 
 //$arr = adjustDayOffset($arr, 10);
 
 foreach ($arr as $key => $value) {
-	array_unshift($value, 'L');
-
 	echo $key . ' => ';
 	print_r($value);
 	echo ' - '.count($value) . '<br />';
-
-	echo (count($value) < 10);
 
 	if (count($value) < 10) {
 		echo 'starting<br />';
 		// Prepend $numDays-1 0's to $value
 		for ($i = 0; $i < 10; $i++) {
-			array_unshift($value, 0);
+			$value[] = 0;
 		}
 	}
 }
