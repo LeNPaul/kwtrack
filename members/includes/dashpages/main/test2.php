@@ -83,7 +83,7 @@ $arr = array(
 	'id9' => [10]
 );
 
-adjustDayOffset($arr, 10);
+$arr = adjustDayOffset($arr, 10);
 
 echo '<pre>';
 var_dump($arr);
