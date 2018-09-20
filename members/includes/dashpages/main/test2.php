@@ -71,18 +71,22 @@ var_dump(json_decode($result['response'], true));
 echo '</pre>';
 */
 
-$arr = [];
+$arr = array(
+	'id1' => [1,2,3,4,5,6,7,8,9,10];
+	'id2' => [2,3,4,5,6,7,8,9,10];
+	'id3' => [2,3,4,5,6,7,8,9,10];
+	'id4' => [3,4,5,6,7,8,9,10];
+	'id5' => [3,4,5,6,7,8,9,10];
+	'id6' => [4,5,6,7,8,9,10];
+	'id7' => [5,6,7,8,9,10];
+	'id8' => [8,9,10];
+	'id9' => [10];
+);
 
-$arr['a'] = 'asdf';
-$arr['b'] = 'asdf1';
-$arr['c'] = 'asdf2';
-$arr['d'] = 'asdf3';
-
-$arr = [1,2,3,4,5];
-array_unshift($arr, 0,0,0,0);
+adjustDayOffset($arr, 10);
 
 foreach ($arr as $key => $value) {
-	echo $key . ' => ' . $value . '<br />';
+	echo $key.' => '.$value.'<br />';
 }
 
 ?>

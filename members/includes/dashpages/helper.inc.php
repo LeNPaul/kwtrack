@@ -27,10 +27,12 @@
       if (count($value) < $numDays) {
         // Prepend $numDays-1 0's to $value
         for ($i = 0; $i < 5; $i++) {
-          
+          array_unshift($value, 0);
         }
       }
     }
+
+    return $metricArr;
   }
 
  /*
@@ -287,9 +289,6 @@
         $adSpend[$kw_id][]     = round($result[$j]['cost'], 2);
         $unitsSold[$kw_id][]   = $result[$j]['attributedUnitsOrdered1d'];
         $sales[$kw_id][]       = $result[$j]['attributedSales1d'];
-
-
-
         /*
         // Removed the 'archived/paused' check for keywords since their states/status
     		// are not provided in the reports. You can only get their CURRENT states and not
@@ -338,6 +337,13 @@
          through the dates. If there are, then we need to append $numDays 0's
          to the beginning of that keyword's array value */
 
+      $impressions = adjustDayOffset($impressions, $numDays);
+      $clicks      = adjustDayOffset($clicks, $numDays);
+      $ctr         = adjustDayOffset($ctr, $numDays);
+      $avgCpc      = adjustDayOffset($avgCpc, $numDays);
+      $adSpend     = adjustDayOffset($adSpend, $numDays);
+      $unitsSold   = adjustDayOffset($unitsSold, $numDays);
+      $sales       = adjustDayOffset($sales, $numDays);
 
       $numDays++;
     }
