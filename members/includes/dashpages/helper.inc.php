@@ -237,10 +237,6 @@
                 VALUES (:user_id, :status, :bid, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
         $stmt = $pdo->prepare($sql);
 
-        echo '<pre>';
-        var_dump($result);
-        echo '</pre>';
-
         for ($x = 0; $x < 10 /*$numMaxKeywords*/; $x++) {
 
           // Get status and bid for each keyword
@@ -355,6 +351,10 @@
         }
         */
       }
+
+      echo '<pre>';
+      var_dump($impressions);
+      echo '<pre>';
 
       /* Now we have to do a check if there are any less keywords as we progress
          through the dates. If there are, then we need to append 1 0 to each metric array */

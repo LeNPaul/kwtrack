@@ -396,7 +396,7 @@ importKeywords($pdo, $client, $user_id, 5);
 
 
 ============================================================================*/
-
+/*
 // First, import all ad group names, campaign Id's, ad group Id's, default bids, and states
 
 
@@ -445,7 +445,7 @@ for ($i = 0; $i < count($result); $i++) {
 
 
 ============================================================================*/
-
+/*
 $result = $client->listCampaigns();
 $result = json_decode($result['response'], true);
 
@@ -497,7 +497,7 @@ for ($i = 0; $i < count($result); $i++) {
 
  *===============================================================*/
 
-
+/*
 
 // Get ad group level negative keywords and store them in db
 $result = $client->listNegativeKeywords(array("stateFilter" => "enabled"));
@@ -532,7 +532,7 @@ for ($i = 0; $i < count($result); $i++) {
     ':match_type'     => $result[$i]['matchType']
   ));
 }
-
+*/
 
 /*===============================================================
 
@@ -544,8 +544,10 @@ for ($i = 0; $i < count($result); $i++) {
 
  *===============================================================*/
 
+/*
 // Set user's active level to 4
 
 $sql = "UPDATE users SET active=4 WHERE user_id=:user_id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(':user_id' => $user_id));
+*/
