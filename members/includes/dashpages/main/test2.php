@@ -92,7 +92,8 @@ foreach ($arr as $key => $value) {
 	print_r($value);
 	echo ' - '.count($value) . '<br />';
 
-
+	echo (count($value) < 10);
+	
 	if (count($value) < 10) {
 		// Prepend $numDays-1 0's to $value
 		for ($i = 0; $i < 10; $i++) {
