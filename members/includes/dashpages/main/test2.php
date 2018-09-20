@@ -71,25 +71,13 @@ var_dump(json_decode($result['response'], true));
 echo '</pre>';
 */
 
-$arr =
-array(
-	array(1,2,3,4,5,6,7,8,9),
-	array(1,2,3,4,5,6,7,8,9),
-	array(1,2,3,4,5,6,7,8,9),
-	array(1,2,3,4,5,6,7,8,9),
-	array(1,2,3,4,5,6,7,8,9),
-	array(1,2,3,4,5,6,7,8,9),
-	array(1,2,3,4,5,6,7,8,9),
-	array(1,2,3,4,5,6,7,8,9),
-	array(1,2,3,4,5,6,7,8,9),
-	array(1,2,3,4,5,6,7,8,9)
-);
+$arr = [];
 
-$arr2 = [];
-
-$arr2 = prepareDbArrays($arr, $arr2);
+$arr['Fernand'] = 'loves';
+$arr['Olivia'] = 'too much';
 
 echo '<pre>';
-var_dump($arr2);
-echo '</pre>';
+var_dump($arr);
+echo '<pre>';
+
 ?>

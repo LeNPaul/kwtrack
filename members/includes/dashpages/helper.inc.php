@@ -17,17 +17,41 @@
  /*
   *  function prepareDbArrays(Array $dataset) --> Array $dbVar
   *    --> Takes $dataset and prepares it for insertion in database. Index 0 = TODAY = MOST RECENT.
+  *    --> Preparing process:
   *
-  *      --> Array $dataset - unprepared array for specific metric
-  *      --> Array $dbVar   - prepared array for specific metric
+  *       CONVERTS UNPREPARED ARRAY - [d1:[a1, b1, ..., z1], d2:[a2, b2, ..., z2], ..., d60:[a60, b60, ..., z60]]
+  *                                           (where d = day, a-z = unique keyword data)
+  *       TO PREPARED ARRAY - [ Ka:{KWIDa, [a1, a2, ..., a60]}, ..., Kz:{KWIDz, [z1, z2, ..., z60]} ]
+  *                                           (where K = unique keyword, a-z = unique keyword data)
+  *
+  *       --> Array $dataset - unprepared array for specific metric
+  *       --> Array $dbVar   - prepared array for specific metric
+  *
   */
  function prepareDbArrays($dataset, $dbVar) {
-   for ($i = 0; $i < 60; $i++) {
+   /*for ($i = 0; $i < 60; $i++) {
      $secondLoopLimit = count($dataset[$i]);
      for ($j = 0; $j < $secondLoopLimit; $j++) {
        $dbVar[$j][] = $dataset[$i][$j];
      }
+   }*/
+
+   // Get keyword ID's and insert them into first index of each inner array
+   // representing 60 days of data for 1 keyword.
+
+   /* All keyword ID's will be in the first index of $dataset
+      So we can limit the first loop to count($dataset[0]) */
+   for ($i = 0; $i < count($dataset[0]); $i++) {
+     // Create array inside Array$dbVar.
+     // First index = keyword ID, second index = Array(keyword data)
+     $dbVar[] = array($dataset[0][$i][0], array());
    }
+
+   // Get keyword data associated with the KWID and insert it into $dbVar
+   for ($i = 0; $i < count($dataset); $i++) {
+
+   }
+
    return $dbVar;
  }
 
@@ -104,6 +128,11 @@
   *  function importKeywords(PDO $pdo, Obj $client, Int $user_id, Int $days) --> void
   *    --> Imports all keywords for the user into database. Imports all data from past 60 days.
   *        ONLY TO BE USED FOR NEW USERS.
+  *
+  *       --> PDO $pdo        - database handle
+  *       --> Obj $client     - client object from Advertising API
+  *       --> Int $user_id    - user id of the user
+  *       --> int $days       - number of days to import for
   */
 
   function importKeywords($pdo, $client, $user_id, $days) {
@@ -228,39 +257,39 @@
     		// are not provided in the reports. You can only get their CURRENT states and not
     		// their past states.
 
-        $impressions[$i][] = $result[$j]['impressions'];
-        $clicks[$i][] = $result[$j]['clicks'];
+        $impressions[$i][] = array($result[$j]['keywordId'], $result[$j]['impressions']);
+        $clicks[$i][] = array($result[$j]['keywordId'], $result[$j]['clicks']);
 
         // Check if impressions are 0. If impressions are 0, then we know that CTR will also be 0.
         if ($result[$j]['impressions'] == 0) {
-          $ctr[$i][] = 0.0;
+          $ctr[$i][] = array($result[$j]['keywordId'], 0.0);
         } else {
-          $ctr[$i][] = round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
+          $ctr[$i][] = array($result[$j]['keywordId'], round(($result[$j]['clicks'] / $result[$j]['impressions']), 2));
         }
 
         // Check if clicks are 0. If clicks are 0, then we know that CPC will also be 0.
         if ($result[$j]['clicks'] == 0) {
-          $avgCpc[$i][] = 0.0;
+          $avgCpc[$i][] = array($result[$j]['keywordId'], 0.0);
         } else {
-          $avgCpc[$i][] = round(($result[$j]['cost'] / $result[$j]['clicks']), 2);
+          $avgCpc[$i][] = array($result[$j]['keywordId'], round(($result[$j]['cost'] / $result[$j]['clicks']), 2));
         }
 
         // Push ad spend, units sold, and $ sales for the day to our arrays.
-        $adSpend[$i][] = round($result[$j]['cost'], 2);
-        $unitsSold[$i][] = $result[$j]['attributedUnitsOrdered1d'];
-        $sales[$i][] = $result[$j]['attributedSales1d'];
+        $adSpend[$i][] = array($result[$j]['keywordId'], round($result[$j]['cost'], 2));
+        $unitsSold[$i][] = array($result[$j]['keywordId'], $result[$j]['attributedUnitsOrdered1d']);
+        $sales[$i][] = array($result[$j]['keywordId'], $result[$j]['attributedSales1d']);
 
         // Get how many 0.0's we need to append to the end of the metric arrays if $numCurrentKeywords < $numMaxKeywords
         if ($numCurrentKeywords < $numMaxKeywords) {
           $count = $numMaxKeywords - $numMaxKeywords;
           while ($count != 0) {
-            $impressions[$i][] = 0.0;
-            $clicks[$i][]      = 0.0;
-            $ctr[$i][]         = 0.0;
-            $avgCpc[$i][]      = 0.0;
-            $adSpend[$i][]     = 0.0;
-            $unitsSold[$i][]   = 0.0;
-            $sales[$i][]       = 0.0;
+            $impressions[$i][] = array($result[$j]['keywordId'], 0.0);
+            $clicks[$i][]      = array($result[$j]['keywordId'], 0.0);
+            $ctr[$i][]         = array($result[$j]['keywordId'], 0.0);
+            $avgCpc[$i][]      = array($result[$j]['keywordId'], 0.0);
+            $adSpend[$i][]     = array($result[$j]['keywordId'], 0.0);
+            $unitsSold[$i][]   = array($result[$j]['keywordId'], 0.0);
+            $sales[$i][]       = array($result[$j]['keywordId'], 0.0);
             $count--;
           }
         }
