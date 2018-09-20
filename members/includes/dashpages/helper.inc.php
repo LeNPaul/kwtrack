@@ -22,7 +22,7 @@
   *      --> Int $numDays     - number of days we've gone through in importKeywords()
   *
   */
-  function adjustDayOffset($pdo, $metricArr, $numDays) {
+  function adjustDayOffset($metricArr, $numDays) {
     foreach ($metricArr as $key => $value) {
       if (count($value) < $numDays) {
         // Prepend $numDays-1 0's to $value
