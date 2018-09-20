@@ -18,7 +18,7 @@ if ((isset($_GET['email']) && !empty($_GET['email'])) && (isset($_GET['hash']) &
 
   if (count($results) == 0) {
     $_SESSION['message'] = createAlert('danger', 'Account has already been activated or the URL is invalid!');
-    header("location: login.php");
+    header("location: ../login.php");
     exit();
   } else {
     $_SESSION['message'] = createAlert('success', 'Your account has been activated!');
@@ -34,7 +34,7 @@ if ((isset($_GET['email']) && !empty($_GET['email'])) && (isset($_GET['hash']) &
   }
 } else {
   $_SESSION['message'] = createAlert('danger', 'Invalid parameters provided for account verification!');
-  header("location: login.php");
+  header("location: ../login.php");
   exit();
 }
 
