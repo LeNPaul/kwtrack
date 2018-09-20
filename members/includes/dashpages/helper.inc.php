@@ -146,10 +146,11 @@
   function insertKeywords($pdo, $dataset, $metric) {
     $sql = "UPDATE ppc_keywords SET {$metric}=:{$metric} WHERE kw_id=:kw_id";
     $stmt = $pdo->prepare($sql);
+    echo $sql.'<br />';
     foreach ($dataset as $key => $value) {
-      echo 'inserting '.serialize($value). ' in ' . $key;
+      echo 'inserting '.serialize($value). ' in ' . $key.'<br />';
       $stmt->execute(array(
-        ":{$metric}"   => serialize($value),
+        ":$metric"     => serialize($value),
         ':kw_id'       => $key
       ));
     }
