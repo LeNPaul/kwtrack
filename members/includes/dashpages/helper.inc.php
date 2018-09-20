@@ -281,7 +281,7 @@
         $clicks[$kw_id][]      = $result[$j]['clicks'];
         $ctr[$kw_id][]         = ($result[$j]['impressions'] == 0) ? 0.0 : round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
         $avgCpc[$kw_id][]      = ($result[$j]['clicks'] == 0) ? 0.0 : round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
-        $adSpend[$kw_id][]     = $result[$j]['cost'], 2);
+        $adSpend[$kw_id][]     = round($result[$j]['cost'], 2);
         $unitsSold[$kw_id][]   = $result[$j]['attributedUnitsOrdered1d'];
         $sales[$kw_id][]       = $result[$j]['attributedSales1d'];
 
