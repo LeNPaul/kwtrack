@@ -24,7 +24,9 @@
   */
   function adjustDayOffset($pdo, $metricArr, $numDays) {
     for ($i = 0; $i < count($metricArr); $i++) {
-      
+      if ($metricArr) {
+
+      }
     }
   }
 
