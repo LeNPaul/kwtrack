@@ -87,7 +87,7 @@ foreach ($arr as $key => $value) {
 	if (count($value) < 10) {
 		echo 'starting<br />';
 		// Prepend $numDays-1 0's to $value
-		for ($i = 0; $i < 10; $i++) {
+		for ($i = 1; $i < 10; $i++) {
 			$value[] = 0;
 		}
 	}
