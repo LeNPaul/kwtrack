@@ -25,10 +25,8 @@
   function adjustDayOffset($metricArr, $numDays) {
     foreach ($metricArr as $key => $value) {
       if (count($value) < $numDays) {
-        // Prepend $numDays-1 0's to $value
-        for ($i = 0; $i < $numDays; $i++) {
-          array_unshift($value, 0);
-        }
+        // Append a 0 to $value
+        $value[] = 0;
       }
     }
 
