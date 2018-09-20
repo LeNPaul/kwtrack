@@ -83,10 +83,18 @@ $arr = array(
 	'id9' => [10]
 );
 
-$arr = adjustDayOffset($arr, 10);
+//$arr = adjustDayOffset($arr, 10);
 
-//echo '<pre>';
+foreach ($arr as $key => $value) {
+	if (count($value) < $numDays) {
+		// Prepend $numDays-1 0's to $value
+		for ($i = 0; $i < $numDays; $i++) {
+			array_unshift($value, 0);
+		}
+	}
+}
+
+echo '<pre>';
 var_dump($arr);
-echo '<br />';
-//echo '</pre>';
+echo '</pre>';
 ?>
