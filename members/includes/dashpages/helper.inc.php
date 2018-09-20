@@ -237,6 +237,10 @@
                 VALUES (:user_id, :status, :bid, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
         $stmt = $pdo->prepare($sql);
 
+        echo '<pre>';
+        var_dump($result);
+        echo '</pre>';
+
         for ($x = 0; $x < 10 /*$numMaxKeywords*/; $x++) {
 
           // Get status and bid for each keyword
