@@ -92,7 +92,7 @@ foreach ($arr as $key => $value) {
 	if (count($value) < 10) {
 		// Prepend $numDays-1 0's to $value
 		for ($i = 0; $i < 10; $i++) {
-			array_unshift($value, 0);
+			$value = array_unshift($value, 0);
 		}
 	}
 }
