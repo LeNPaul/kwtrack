@@ -93,8 +93,9 @@ foreach ($arr as $key => $value) {
 	echo ' - '.count($value) . '<br />';
 
 	echo (count($value) < 10);
-	
+
 	if (count($value) < 10) {
+		echo 'starting<br />';
 		// Prepend $numDays-1 0's to $value
 		for ($i = 0; $i < 10; $i++) {
 			array_unshift($value, 0);
