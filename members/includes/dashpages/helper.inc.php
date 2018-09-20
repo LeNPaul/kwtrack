@@ -237,7 +237,7 @@
                 VALUES (:user_id, :status, :bid, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
         $stmt = $pdo->prepare($sql);
 
-        for ($x = 0; $x < 1000 /*$numMaxKeywords*/; $x++) {
+        for ($x = 0; $x < 100 /*$numMaxKeywords*/; $x++) {
 
           // Get status and bid for each keyword
           $kw_id = $result[$x]['keywordId'];
@@ -294,7 +294,7 @@
       $numCurrentKeywords = count($result);
 
       // Loop to iterate through the report response
-      for ($j = 0; $j < 1000 /*count($result)*/; $j++) {
+      for ($j = 0; $j < 100 /*count($result)*/; $j++) {
 
         // Get keyword ID
         $kw_id = $result[$j]['keywordId'];
