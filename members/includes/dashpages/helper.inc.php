@@ -352,10 +352,6 @@
         */
       }
 
-      echo '<pre>';
-      var_dump($impressions);
-      echo '<pre>';
-
       /* Now we have to do a check if there are any less keywords as we progress
          through the dates. If there are, then we need to append 1 0 to each metric array */
 
@@ -369,6 +365,10 @@
 
       $numDays++;
     }
+
+    echo '<pre>';
+    var_dump($impressions);
+    echo '<pre>';
 
     // Insert all this shit into the database
 
