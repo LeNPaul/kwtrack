@@ -92,7 +92,7 @@ foreach ($arr as $key => $value) {
 		}
 	}
 
-	echo '<br /><br />'$key . ' => ';
+	echo '<br /><br />'.$key . ' => ';
 	print_r($value);
 	echo ' - '.count($value) . '<br />';
 }
