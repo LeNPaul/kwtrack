@@ -16,16 +16,19 @@
 
  /*
   *  function adjustDayOffset(Array $metricArr, Int $numDays) --> Array $output
-  *    --> Takes $metricArr and prepends 0's $numDays times for each old keyword that we encounter.
+  *    --> Takes $metricArr and prepends 0's $numDays-1 times for each old keyword that we encounter.
   *
   *      --> Array $metricArr - Associative array of metric data
   *      --> Int $numDays     - number of days we've gone through in importKeywords()
   *
   */
   function adjustDayOffset($pdo, $metricArr, $numDays) {
-    for ($i = 0; $i < count($metricArr); $i++) {
-      if ($metricArr) {
-
+    foreach ($metricArr as $key => $value) {
+      if (count($value) < $numDays) {
+        // Prepend $numDays-1 0's to $value
+        for ($i = 0; $i < 5; $i++) {
+          
+        }
       }
     }
   }
@@ -335,7 +338,7 @@
          through the dates. If there are, then we need to append $numDays 0's
          to the beginning of that keyword's array value */
 
-      
+
       $numDays++;
     }
 
