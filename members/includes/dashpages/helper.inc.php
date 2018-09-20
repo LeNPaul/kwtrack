@@ -253,6 +253,12 @@
       // Loop to iterate through the report response
       for ($j = 0; $j < 1000 /*count($result)*/; $j++) {
 
+        // Get keyword ID
+        $kw_id = $result[$j]['keywordId'];
+
+        // Append day's data of the keyword to its key (keyword ID) in the metric array
+        $impressions[$kw_id] = 
+
         // Removed the 'archived/paused' check for keywords since their states/status
     		// are not provided in the reports. You can only get their CURRENT states and not
     		// their past states.

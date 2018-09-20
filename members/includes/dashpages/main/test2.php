@@ -73,11 +73,16 @@ echo '</pre>';
 
 $arr = [];
 
-$arr['Fernand'] = 'loves';
-$arr['Olivia'] = 'too much';
+$arr['Fernand'] = array(1,2,3,4,5,6);
+$arr['Olivia'] = 'cute';
 
 echo '<pre>';
-var_dump($arr);
+var_dump($arr['Fernand']);
+echo '<pre>';
+
+$arr['Fernand'][] = 7;
+echo '<pre>';
+var_dump($arr['Fernand']);
 echo '<pre>';
 
 ?>
