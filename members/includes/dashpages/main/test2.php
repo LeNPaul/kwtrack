@@ -86,9 +86,13 @@ $arr = array(
 //$arr = adjustDayOffset($arr, 10);
 
 foreach ($arr as $key => $value) {
+	array_unshift($value, 'L');
+
 	echo $key . ' => ';
 	print_r($value);
 	echo ' - '.count($value) . '<br />';
+
+
 	if (count($value) < 10) {
 		// Prepend $numDays-1 0's to $value
 		for ($i = 0; $i < 10; $i++) {
