@@ -147,6 +147,7 @@
     $sql = "UPDATE ppc_keywords SET {$metric}=:{$metric} WHERE kw_id=:kw_id";
     $stmt = $pdo->prepare($sql);
     foreach ($dataset as $key => $value) {
+      echo 'inserting '.serialize($value). ' in ' . $key;
       $stmt->execute(array(
         ":{$metric}"   => serialize($value),
         ':kw_id'       => $key
