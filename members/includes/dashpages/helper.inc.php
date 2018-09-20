@@ -148,8 +148,8 @@
     $stmt = $pdo->prepare($sql);
     foreach ($dataset as $key => $value) {
       $stmt->execute(array(
-        ':value'     => serialize($value),
-        ':kw_id'       => $key
+        ':value' => serialize($value),
+        ':kw_id' => $key
       ));
     }
   }
