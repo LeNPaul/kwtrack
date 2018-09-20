@@ -279,7 +279,7 @@
         // key's (keyword ID) value (array of metric data) in the metric array
         $impressions[$kw_id][] = $result[$j]['impressions'];
         $clicks[$kw_id][]      = $result[$j]['clicks'];
-        $ctr[$kw_id][]         = ($result[$j]['impressions'] == 0) ? 0.0 : round(($result[$j]['clicks'] / $result[$j]['impressions']), 2));
+        $ctr[$kw_id][]         = ($result[$j]['impressions'] == 0) ? 0.0 : round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
         $avgCpc[$kw_id][]      = ($result[$j]['clicks'] == 0) ? 0.0 : round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
         $adSpend[$kw_id][]     = $result[$j]['cost'], 2);
         $unitsSold[$kw_id][]   = $result[$j]['attributedUnitsOrdered1d'];
