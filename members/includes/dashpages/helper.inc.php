@@ -193,13 +193,13 @@
       //    METRIC ARRAY => [ARRAY1( * all data for metric for each keyword * ), ARRAY2(...), ..., ARRAY60(...)]
       //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
 
-      $impressions[$i] = [];
+      /*$impressions[$i] = [];
       $clicks[$i] = [];
       $ctr[$i] = [];
       $adSpend[$i] = [];
       $avgCpc[$i] = [];
       $unitsSold[$i] = [];
-      $sales[$i] = [];
+      $sales[$i] = [];*/
 
       // Get date from $i days before today and format it as YYYYMMDD
       $date = date('Ymd', strtotime('-' . $i . ' days'));
