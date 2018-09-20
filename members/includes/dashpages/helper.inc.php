@@ -144,7 +144,7 @@
   *     --> String $metric  - metric to update in the database
   */
   function insertKeywords($pdo, $dataset, $metric) {
-    $sql = "UPDATE ppc_keywords SET {$metric}=:{$metric} WHERE kw_id=:kw_id":
+    $sql = "UPDATE ppc_keywords SET {$metric}=:{$metric} WHERE kw_id=:kw_id";
     $stmt = $pdo->prepare($sql);
     foreach ($dataset as $key => $value) {
       $stmt->execute(array(
