@@ -79,7 +79,7 @@ $arr['c'] = 'asdf2';
 $arr['d'] = 'asdf3';
 
 $arr = [1,2,3,4,5];
-array_unshift($arr, [0,0,0,0]);
+array_unshift($arr, 0,0,0,0);
 
 foreach ($arr as $key => $value) {
 	echo $key . ' => ' . $value . '<br />';
