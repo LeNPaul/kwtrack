@@ -85,7 +85,7 @@ $arr = array(
 
 $arr = adjustDayOffset($arr, 10);
 
-echo '<pre>';
+//echo '<pre>';
 var_dump($arr);
-echo '</pre>';
+//echo '</pre>';
 ?>
