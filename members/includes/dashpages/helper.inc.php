@@ -135,6 +135,26 @@
  }
 
  /*
+  * function insertKeywords(PDO $pdo, Array $dataset, String $metric) --> void
+  *   --> Updates the database for all keywords in $dataset. $dataset is an associative
+  *       array with the keyword ID as the key and its historical data (as an array) as the value.
+  *
+  *     --> PDO $pdo        - database handl
+  *     --> Array $dataset  - Associative array with all keyword data
+  *     --> String $metric  - metric to update in the database
+  */
+  function insertKeywords($pdo, $dataset, $metric) {
+    $sql = "UPDATE ppc_keywords SET {$metric}=:{$metric} WHERE kw_id=:kw_id":
+    $stmt = $pdo->prepare($sql);
+    foreach ($dataset as $key => $value) {
+      $stmt->execute(array(
+        ':impressions' => serialize($value),
+        ':kw_id'       => $key
+      ));
+    }
+  }
+
+ /*
 
  /*
 
@@ -163,7 +183,8 @@
     $unitsSold = [];
     $sales = [];
 
-    // Keep count of days of data gone through
+    // Keep count of days of data gone through. For each iteration of $i,
+    // the max number of days of data will always equal $numDays
     $numDays = 1;
 
     for ($i = 0; $i < $days; $i++) {
@@ -346,6 +367,17 @@
       $numDays++;
     }
 
+    // Insert all this shit into the database
+
+    insertKeywords($pdo, $impressions, 'impressions');
+    insertKeywords($pdo, $clicks, 'clicks');
+    insertKeywords($pdo, $ctr, 'ctr');
+    insertKeywords($pdo, $adSpend, 'ad_spend');
+    insertKeywords($pdo, $avgCpc, 'avg_cpc');
+    insertKeywords($pdo, $unitsSold, 'units_sold');
+    insertKeywords($pdo, $sales, 'sales');
+
+    /*
     // Grab array of keywords by their keyword ID
     $sql = 'SELECT amz_kw_id FROM ppc_keywords WHERE user_id=' . htmlspecialchars($user_id);
     $stmt = $pdo->query($sql);
@@ -381,16 +413,7 @@
     // Grab sales data from array and store in their respective campaigns
     $dbSales = prepareDbArrays($sales, $dbSales);
     storeKeywordArrays($pdo, $dbSales, $result, 'sales');
-    //
-    // echo '<pre>';
-    // var_dump($dbImpressions);
-    // var_dump($dbClicks);
-    // var_dump($dbCtr);
-    // var_dump($dbAdSpend);
-    // var_dump($dbAvgCpc);
-    // var_dump($dbUnitsSold);
-    // var_dump($dbSales);
-    // echo '</pre>';
+    */
   }
 
   /*
