@@ -335,9 +335,7 @@
          through the dates. If there are, then we need to append $numDays 0's
          to the beginning of that keyword's array value */
 
-      for ($k = 0; $k < count()) {
-
-      }
+      
       $numDays++;
     }
 
