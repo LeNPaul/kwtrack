@@ -73,16 +73,14 @@ echo '</pre>';
 
 $arr = [];
 
-$arr['Fernand'] = array(1,2,3,4,5,6);
-$arr['Olivia'] = 'cute';
+$arr['a'] = 'asdf';
+$arr['b'] = 'asdf1';
+$arr['c'] = 'asdf2';
+$arr['d'] = 'asdf3';
 
-echo '<pre>';
-var_dump($arr['Fernand']);
-echo '<pre>';
 
-$arr['Fernand'][] = 7;
-echo '<pre>';
-var_dump($arr['Fernand']);
-echo '<pre>';
+foreach ($arr as $key => $value) {
+	echo $key . ' => ' . $value . '<br />';
+}
 
 ?>

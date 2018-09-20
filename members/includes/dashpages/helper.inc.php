@@ -15,6 +15,20 @@
   *----------------------------------------------------------*/
 
  /*
+  *  function adjustDayOffset(Array $metricArr, Int $numDays) --> Array $output
+  *    --> Takes $metricArr and prepends 0's $numDays times for each old keyword that we encounter.
+  *
+  *      --> Array $metricArr - Associative array of metric data
+  *      --> Int $numDays     - number of days we've gone through in importKeywords()
+  *
+  */
+  function adjustDayOffset($pdo, $metricArr, $numDays) {
+    for ($i = 0; $i < count($metricArr); $i++) {
+      
+    }
+  }
+
+ /*
   *  function prepareDbArrays(Array $dataset) --> Array $dbVar
   *    --> Takes $dataset and prepares it for insertion in database. Index 0 = TODAY = MOST RECENT.
   *    --> Preparing process:
@@ -144,6 +158,9 @@
     $unitsSold = [];
     $sales = [];
 
+    // Keep count of days of data gone through
+    $numDays = 1;
+
     for ($i = 0; $i < $days; $i++) {
 
       // Each metric array will be storing campaign data like the following in a 2D array:
@@ -256,9 +273,19 @@
         // Get keyword ID
         $kw_id = $result[$j]['keywordId'];
 
-        // Append day's data of the keyword to its key (keyword ID) in the metric array
-        $impressions[$kw_id] = 
+        // Append day's data of the keyword to the
+        // key's (keyword ID) value (array of metric data) in the metric array
+        $impressions[$kw_id][] = $result[$j]['impressions'];
+        $clicks[$kw_id][]      = $result[$j]['clicks'];
+        $ctr[$kw_id][]         = ($result[$j]['impressions'] == 0) ? 0.0 : round(($result[$j]['clicks'] / $result[$j]['impressions']), 2));
+        $avgCpc[$kw_id][]      = ($result[$j]['clicks'] == 0) ? 0.0 : round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
+        $adSpend[$kw_id][]     = $result[$j]['cost'], 2);
+        $unitsSold[$kw_id][]   = $result[$j]['attributedUnitsOrdered1d'];
+        $sales[$kw_id][]       = $result[$j]['attributedSales1d'];
 
+
+
+        /*
         // Removed the 'archived/paused' check for keywords since their states/status
     		// are not provided in the reports. You can only get their CURRENT states and not
     		// their past states.
@@ -299,8 +326,17 @@
             $count--;
           }
         }
+        */
       }
 
+      /* Now we have to do a check if there are any less keywords as we progress
+         through the dates. If there are, then we need to append $numDays 0's
+         to the beginning of that keyword's array value */
+
+      for ($k = 0; $k < count()) {
+
+      }
+      $numDays++;
     }
 
     // Grab array of keywords by their keyword ID
