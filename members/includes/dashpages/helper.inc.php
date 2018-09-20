@@ -26,7 +26,7 @@
     foreach ($metricArr as $key => $value) {
       if (count($value) < $numDays) {
         // Prepend $numDays-1 0's to $value
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < $numDays; $i++) {
           array_unshift($value, 0);
         }
       }
