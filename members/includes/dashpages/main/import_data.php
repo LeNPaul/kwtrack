@@ -383,7 +383,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 ============================================================================*/
 
-//importKeywords($pdo, $client, $user_id, 20);
+importKeywords($pdo, $client, $user_id, 20);
 
 /*==========================================================================
 
@@ -497,7 +497,7 @@ for ($i = 0; $i < count($result); $i++) {
 
  *===============================================================*/
 
- /*
+
 
 // Get ad group level negative keywords and store them in db
 $result = $client->listNegativeKeywords(array("stateFilter" => "enabled"));
@@ -532,7 +532,6 @@ for ($i = 0; $i < count($result); $i++) {
     ':match_type'     => $result[$i]['matchType']
   ));
 }
-*/
 
 
 /*===============================================================
@@ -545,7 +544,7 @@ for ($i = 0; $i < count($result); $i++) {
 
  *===============================================================*/
 
-// Set user's active level to 3
+// Set user's active level to 4
 
 $sql = "UPDATE users SET active=4 WHERE user_id=:user_id";
 $stmt = $pdo->prepare($sql);
