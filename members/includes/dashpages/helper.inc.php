@@ -148,7 +148,7 @@
     $stmt = $pdo->prepare($sql);
     foreach ($dataset as $key => $value) {
       $stmt->execute(array(
-        ':impressions' => serialize($value),
+        ":{$metric}"   => serialize($value),
         ':kw_id'       => $key
       ));
     }
@@ -353,8 +353,7 @@
       }
 
       /* Now we have to do a check if there are any less keywords as we progress
-         through the dates. If there are, then we need to append $numDays 0's
-         to the beginning of that keyword's array value */
+         through the dates. If there are, then we need to append 1 0 to each metric array */
 
       $impressions = adjustDayOffset($impressions, $numDays);
       $clicks      = adjustDayOffset($clicks, $numDays);
