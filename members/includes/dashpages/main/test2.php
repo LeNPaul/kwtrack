@@ -91,6 +91,10 @@ foreach ($arr as $key => $value) {
 			$value[] = 0;
 		}
 	}
+
+	echo '<br /><br />'$key . ' => ';
+	print_r($value);
+	echo ' - '.count($value) . '<br />';
 }
 
 // echo '<pre>';
