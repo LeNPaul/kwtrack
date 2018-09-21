@@ -299,12 +299,11 @@ var data = {
 			fill: false,
 			backgroundColor: "rgba(114, 187, 255, 0.4)",
 			type: 'line',
-			steppedLine: true
 		}, {
 			label: "PPC Sales",
 			yAxisID: 'A',
 			data: ppcSalesArr,
-			fill: true,
+			//fill: true,
 			pointRadius: 2.5,
 			hoverRadius: 4,
 			pointBorderColor: '#ffffff',
@@ -319,7 +318,7 @@ var data = {
 			label: "Ad Spend",
 			yAxisID: 'A',
 			data: adSpendArr,
-			fill: '-1',
+			//fill: '-1',
 			pointRadius: 2.5,
 			hoverRadius: 4,
 			pointBorderColor: '#ffffff',
