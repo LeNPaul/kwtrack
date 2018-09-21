@@ -68,7 +68,7 @@ function outputSideNav($currentPage) {
           </div>
           <ul class="nav">
             <li ' . $active1 . '>
-              <a href="../dashboard.php">
+              <a href="members/dashboard.php">
                 <i class="nc-icon nc-bank"></i>
                 <p>Dashboard</p>
               </a>
@@ -84,7 +84,7 @@ function outputSideNav($currentPage) {
               <div class="collapse " id="pagesExamples">
                 <ul class="nav">
                   <li ' . $active2 . '>
-                    <a href="../dashboard.php?p=campaign_manager">
+                    <a href="members/dashboard.php?p=campaign_manager">
                       <span class="sidebar-mini-icon">VEC</span>
                       <span class="sidebar-normal"> View and Edit Campaigns </span>
                     </a>
