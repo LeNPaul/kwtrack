@@ -18,13 +18,10 @@ $ppcSalesArr = array_reverse(
 		60,
 		'ad_spend'));
 
-echo count($adSpendArr) . ' ' . count($ppcSalesArr);
-
 $acos = [];
-
+$displayACoS = 0;
 $adSpend = array_sum($adSpendArr);
 $ppcSales = array_sum($ppcSalesArr);
-$displayACoS = 0;
 
 for ($i = 0; $i < count($adSpendArr); $i++) {
 	if ($ppcSalesArr[$i] == 0) {
