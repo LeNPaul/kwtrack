@@ -383,7 +383,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 ============================================================================*/
 
-importKeywords($pdo, $client, $user_id, 60);
+importKeywords($pdo, $client, $user_id, 10);
 
 /*==========================================================================
 
@@ -544,9 +544,10 @@ for ($i = 0; $i < count($result); $i++) {
 
  *===============================================================*/
 
-
+/*
 // Set user's active level to 4
 
 $sql = "UPDATE users SET active=4 WHERE user_id=:user_id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(':user_id' => $user_id));
+*/
