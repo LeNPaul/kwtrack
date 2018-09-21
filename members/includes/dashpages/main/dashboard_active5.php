@@ -298,6 +298,7 @@ var data = {
 			data: ppcAcosArr,
 			fill: true,
 			backgroundColor: "rgba(114, 187, 255, 0.4)",
+			type: 'line',
 			steppedLine: true
 		}, {
 			label: "PPC Sales",
