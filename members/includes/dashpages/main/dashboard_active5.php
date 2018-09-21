@@ -300,21 +300,6 @@ var data = {
 			backgroundColor: "rgba(114, 187, 255, 0.4)",
 			type: 'line',
 		}, {
-			label: "PPC Sales",
-			yAxisID: 'A',
-			data: ppcSalesArr,
-			//fill: true,
-			pointRadius: 2.5,
-			hoverRadius: 4,
-			pointBorderColor: '#ffffff',
-			pointBorderWidth: 1,
-			pointBackgroundColor: "rgb(89, 255, 152)",
-			hoverBorderWidth: 3,
-			backgroundColor: "rgba(89, 255, 152, 0.1)",
-			borderWidth: 1.2,
-			borderColor: "rgba(89, 255, 152, 0.7)",
-			type: 'line'
-		}, {
 			label: "Ad Spend",
 			yAxisID: 'A',
 			data: adSpendArr,
@@ -328,6 +313,21 @@ var data = {
 			backgroundColor: "rgba(244, 72, 66, 0.1)",
 			borderWidth: 1.5,
 			borderColor: "rgba(244, 72, 66, 0.7)",
+			type: 'line'
+		}, {
+			label: "PPC Sales",
+			yAxisID: 'A',
+			data: ppcSalesArr,
+			//fill: true,
+			pointRadius: 2.5,
+			hoverRadius: 4,
+			pointBorderColor: '#ffffff',
+			pointBorderWidth: 1,
+			pointBackgroundColor: "rgb(89, 255, 152)",
+			hoverBorderWidth: 3,
+			backgroundColor: "rgba(89, 255, 152, 0.1)",
+			borderWidth: 1.2,
+			borderColor: "rgba(89, 255, 152, 0.7)",
 			type: 'line'
 		}]
 	}
