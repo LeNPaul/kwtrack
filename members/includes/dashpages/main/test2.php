@@ -53,10 +53,14 @@ $result = $client->requestSnapshot(
 echo '<pre>';
 var_dump($result);
 echo '</pre>';
-
-/*
+$result = json_decode($result['response'], true);
+$snapshotId = $result['snapshotId'];
 sleep(5);
-$result = $client->getSnapshot();
+$result = $client->getSnapshot($snapshotId);
+$result = json_decode($result['response'], true);
+echo '<pre>';
+var_dump($result);
+echo '</pre>';
 
 //shell_exec("php test3.php");
 
