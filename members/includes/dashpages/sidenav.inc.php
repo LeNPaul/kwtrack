@@ -84,7 +84,7 @@ function outputSideNav($currentPage) {
               <div class="collapse " id="pagesExamples">
                 <ul class="nav">
                   <li ' . $active2 . '>
-                    <a href="dashboard.php?p=campaign_manager">
+                    <a href="../../../dashboard.php?p=campaign_manager">
                       <span class="sidebar-mini-icon">VEC</span>
                       <span class="sidebar-normal"> View and Edit Campaigns </span>
                     </a>
