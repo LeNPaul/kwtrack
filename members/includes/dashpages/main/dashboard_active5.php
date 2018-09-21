@@ -15,9 +15,9 @@ $adSpendArr = array_reverse(
 $ppcSalesArr = array_reverse(
 	calculateMetrics(
 		multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])),
-		1,
+		60,
 		'ad_spend'));
-		
+
 $acos = [];
 
 $adSpend = array_sum($adSpendArr);
