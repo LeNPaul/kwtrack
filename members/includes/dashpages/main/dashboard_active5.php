@@ -35,7 +35,6 @@ echo '<pre>';
 var_dump($acos);
 echo '</pre>';
 
-
 $displayACoS = ($ppcSales == 0) ? 0.00 : round((double)($adSpend / $ppcSales) * 100, 2);
 
 $dateArr = [];
@@ -298,7 +297,7 @@ var data = {
 			yAxisID: 'B',
 			data: ppcAcosArr,
 			fill: true,
-			backgroundColor: "rgba(114, 187, 255, 0.2)"
+			backgroundColor: "rgba(114, 187, 255, 0.4)"
 		}, {
 			label: "Ad Spend",
 			yAxisID: 'A',
@@ -319,7 +318,14 @@ var data = {
 			yAxisID: 'A',
 			data: ppcSalesArr,
 			fill: true,
+			pointRadius: 2.5,
+			hoverRadius: 4,
+			pointBorderColor: '#ffffff',
+			pointBorderWidth: 1,
+			pointBackgroundColor: "rgb(89, 255, 152)",
+			hoverBorderWidth: 3,
 			backgroundColor: "rgba(89, 255, 152, 0.1)",
+			borderWidth: 1,
 			borderColor: "rgba(89, 255, 152, 0.7)",
 			type: 'line'
 		}]
