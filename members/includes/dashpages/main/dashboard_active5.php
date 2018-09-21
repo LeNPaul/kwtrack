@@ -31,6 +31,11 @@ for ($i = 0; $i < count($adSpendArr); $i++) {
 	}
 }
 
+echo '<pre>';
+var_dump($acos);
+echo '</pre>';
+
+
 $displayACoS = ($ppcSales == 0) ? 0.00 : round((double)($adSpend / $ppcSales) * 100, 2);
 
 $dateArr = [];
