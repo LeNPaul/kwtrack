@@ -296,7 +296,7 @@ var data = {
 			label: "PPC ACoS",
 			yAxisID: 'B',
 			data: ppcAcosArr,
-			fill: true,
+			fill: false,
 			backgroundColor: "rgba(114, 187, 255, 0.4)",
 			type: 'line',
 			steppedLine: true
@@ -340,6 +340,11 @@ var myChart = new Chart(ctx, {
 	options: {
 		responsive: true,
 
+		elements: {
+			line: {
+				fill: '-1'
+			}
+		},
 		scales: {
 			// Remove grid lines
 	    xAxes: [{
