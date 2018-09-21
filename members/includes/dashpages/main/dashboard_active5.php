@@ -357,14 +357,16 @@ var myChart = new Chart(ctx, {
 								position: 'left',
 								gridLines: {
 	                color: "rgba(0, 0, 0, 0)",
-		            }
+		            },
+								stacked: true
 	            }, {
 			      		id: 'B',
 			        	type: 'linear',
 			        	position: 'right',
 								gridLines: {
 	                color: "rgba(0, 0, 0, 0)",
-		            }
+		            },
+								stacked: true
 							}]
     }
 
