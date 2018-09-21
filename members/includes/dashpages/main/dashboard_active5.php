@@ -225,7 +225,7 @@ $dateArr = array_reverse($dateArr);
 	<div class="col-lg-12 col-md-12 col-sm-12">
 		<div class="card ">
 
-      <div class="card-header ">
+      <div class="card-header text-center">
         <h4 class="card-title">PPC Analytics</h4>
         <p class="card-category">Ad Spend, PPC Sales, and PPC ACoS</p>
       </div>
@@ -293,7 +293,7 @@ var data = {
 			yAxisID: 'B',
 			data: ppcAcosArr,
 			fill: true,
-			backgroundColor: "rgb(114, 187, 255)"
+			backgroundColor: "rgba(114, 187, 255, 0.2)"
 		}, {
 			label: "Ad Spend",
 			yAxisID: 'A',
@@ -305,7 +305,7 @@ var data = {
 			pointBorderWidth: 1,
 			pointBackgroundColor: "rgb(244, 72, 66)",
 			hoverBorderWidth: 3,
-			backgroundColor: "rgba(244, 72, 66, 0.5)",
+			backgroundColor: "rgba(244, 72, 66, 0.1)",
 			borderWidth: 1,
 			borderColor: "rgba(244, 72, 66, 0.7)",
 			type: 'line'
@@ -314,7 +314,7 @@ var data = {
 			yAxisID: 'A',
 			data: ppcSalesArr,
 			fill: true,
-			backgroundColor: "rgba(89, 255, 152, 0.5)",
+			backgroundColor: "rgba(89, 255, 152, 0.1)",
 			borderColor: "rgba(89, 255, 152, 0.7)",
 			type: 'line'
 		}]
