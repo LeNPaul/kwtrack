@@ -8785,8 +8785,8 @@ img {
     left: 0; }
   .sidebar:after,
   .off-canvas-sidebar:after {
-    background: #66615B;
-    background: linear-gradient(#66615B 0%, #000 80%);
+    background: #ff352b;
+    /*background: linear-gradient(#66615B 0%, #000 80%);*/
     z-index: 3; }
   .sidebar[data-color="white"]:after,
   .off-canvas-sidebar[data-color="white"]:after {
