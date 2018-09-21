@@ -325,7 +325,7 @@ var data = {
 			pointBackgroundColor: "rgb(244, 72, 66)",
 			hoverBorderWidth: 3,
 			backgroundColor: "rgba(244, 72, 66, 0.1)",
-			borderWidth: 1.2,
+			borderWidth: 1.5,
 			borderColor: "rgba(244, 72, 66, 0.7)",
 			type: 'line'
 		}]
