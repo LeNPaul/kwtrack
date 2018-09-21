@@ -304,7 +304,7 @@ var data = {
 			label: "PPC Sales",
 			yAxisID: 'A',
 			data: ppcSalesArr,
-			fill: '-1',
+			fill: true,
 			pointRadius: 2.5,
 			hoverRadius: 4,
 			pointBorderColor: '#ffffff',
