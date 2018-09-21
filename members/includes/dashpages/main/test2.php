@@ -43,6 +43,19 @@ echo '<pre>';
 var_dump($result);
 echo '</pre>';
 
+$result = $client->requestSnapshot(
+    "keywords",
+    array("stateFilter" => "enabled,paused,archived",
+          "campaignType" => "sponsoredProducts"));
+
+echo '<pre>';
+var_dump($result);
+echo '</pre>';
+
+/*
+sleep(5);
+$result = $client->getSnapshot();
+
 //shell_exec("php test3.php");
 
 /*
