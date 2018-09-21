@@ -297,7 +297,8 @@ var data = {
 			yAxisID: 'B',
 			data: ppcAcosArr,
 			fill: true,
-			backgroundColor: "rgba(114, 187, 255, 0.4)"
+			backgroundColor: "rgba(114, 187, 255, 0.4)",
+			steppedLine: true
 		}, {
 			label: "PPC Sales",
 			yAxisID: 'A',
