@@ -175,6 +175,7 @@
   */
 
   function importKeywords($pdo, $client, $user_id, $days) {
+    echo '======= START IMPORT ======== <br />';
     $impressions = [];
     $clicks = [];
     $ctr = [];
@@ -188,7 +189,7 @@
     $numDays = 1;
 
     for ($i = 0; $i < $days; $i++) {
-
+      echo '---- STARTING day #' . $i.'<br />';
       // Each metric array will be storing campaign data like the following in a 2D array:
       //    METRIC ARRAY => [ARRAY1( * all data for metric for each keyword * ), ARRAY2(...), ..., ARRAY60(...)]
       //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
@@ -207,6 +208,7 @@
       // Only on the very first iteration of this loop, we will iterate through the array
       // and store campaign name and campaign ID in the database
       if ($i === 0) {
+        echo '------ INITIATING 1st iteration import<br />';
         // Request the report from API with campaign name, campaignId, and campaign budget only
         // for the first iteration
         $result = $client->requestReport(
@@ -269,6 +271,7 @@
             ':match_type'       => $result[$x]['matchType']
           ));
         }
+        echo '------ COMPLETING 1st iteration import<br />';
       } else {
         // All other iterations, we request this report to optimize time
         $result = $client->requestReport(
@@ -364,6 +367,7 @@
       $sales       = adjustDayOffset($sales, $numDays);
 
       $numDays++;
+      echo '-------- FINISH day #'.$i.'<br />';
     }
 
     echo '<pre>';
