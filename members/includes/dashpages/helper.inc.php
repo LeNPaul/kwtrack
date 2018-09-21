@@ -733,10 +733,10 @@ function calculateMetrics($metricArr, $numDays, $metric) {
   // After appending to output array, we use array_reduce to calculate the metric needed
 
   // NOTE: Change 20's to 60's after testing is completed
-  $output = array_fill(0, 20, 0);
+  $output = array_fill(0, $numDays, 0);
 
   for ($j = 0; $j < count($metricArr); $j++) {
-		for ($i = 0; $i < 20; $i++) {
+		for ($i = 0; $i < $numDays; $i++) {
 			$output[$i] += $metricArr[$j][$i];
 		}
   }
