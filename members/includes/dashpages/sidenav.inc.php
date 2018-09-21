@@ -15,7 +15,7 @@ function outputSideNav($currentPage) {
     $active2 = 'class="active"';
   }
 
-  echo '<div class="sidebar" data-color="red" data-active-color="danger">
+  echo '<div class="sidebar" data-color="blue" data-active-color="danger">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
         -->
