@@ -365,7 +365,11 @@ var myChart = new Chart(ctx, {
 			        	position: 'right',
 								gridLines: {
 	                color: "rgba(0, 0, 0, 0)",
-		            }
+		            },
+								ticks: {
+									beginAtZero: true,
+									max: Math.max.apply(null, ppcSalesArr)
+								}
 							}]
     }
 
