@@ -20,6 +20,7 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
+/*
 $result = $client->requestReport(
 	"keywords",
 	array("reportDate"    => "20180907",
@@ -42,6 +43,7 @@ $result = json_decode($result['response'], true);
 echo '<pre>';
 var_dump($result);
 echo '</pre>';
+*/
 
 $result = $client->requestSnapshot(
     "keywords",
