@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 namespace AmazonAdvertisingApi;
 require_once '../../AmazonAdvertisingApi/Client.php';
