@@ -348,11 +348,17 @@ var myChart = new Chart(ctx, {
 	    yAxes: [{
 								id: 'A',
                 type: 'linear',
-								position: 'left'
+								position: 'left',
+								gridLines: {
+	                color: "rgba(0, 0, 0, 0)",
+		            }
 	            }, {
 			      		id: 'B',
 			        	type: 'linear',
-			        	position: 'right'
+			        	position: 'right',
+								gridLines: {
+	                color: "rgba(0, 0, 0, 0)",
+		            }
 							}]
     }
 
