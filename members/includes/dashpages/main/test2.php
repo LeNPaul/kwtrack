@@ -55,7 +55,7 @@ var_dump($result);
 echo '</pre>';
 $result = json_decode($result['response'], true);
 $snapshotId = $result['snapshotId'];
-sleep(5);
+sleep(10);
 $result = $client->getSnapshot($snapshotId);
 $result = json_decode($result['response'], true);
 echo '<pre>';
