@@ -18,6 +18,8 @@ $ppcSalesArr = array_reverse(
 		60,
 		'ad_spend'));
 
+echo count($adSpendArr) . ' ' . count($ppcSalesArr);
+
 $acos = [];
 
 $adSpend = array_sum($adSpendArr);
