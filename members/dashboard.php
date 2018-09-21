@@ -716,7 +716,7 @@ $_SESSION['active'] = intval($result[0]);
         } elseif ($_SESSION['active'] == 5 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active5.php';
         } elseif (isset($_GET['p']) && $_GET['p'] == 'campaign_manager') {
-          include './includes/dashpages/cmanger/campaign_manager.php';
+          include './includes/dashpages/cmanager/campaign_manager.php';
         }
         ?>
       </div>
