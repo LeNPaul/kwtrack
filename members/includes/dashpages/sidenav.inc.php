@@ -8,13 +8,13 @@ function outputSideNav($currentPage) {
   $active5 = '';
   $active6 = '';
   $active7 = '';
-  
+
   if ($currentPage == 'dashboard') {
     $active1 = 'class="active"';
   } elseif ($currentPage == 'campaign_manager') {
     $active2 = 'class="active"';
   }
-  
+
   echo '<div class="sidebar" data-color="red" data-active-color="danger">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
@@ -84,7 +84,7 @@ function outputSideNav($currentPage) {
               <div class="collapse " id="pagesExamples">
                 <ul class="nav">
                   <li ' . $active2 . '>
-                    <a href="includes/dashpages/cmanager/campaign_manager.php">
+                    <a href="dashboard.php?p=campaign_manager">
                       <span class="sidebar-mini-icon">VEC</span>
                       <span class="sidebar-normal"> View and Edit Campaigns </span>
                     </a>

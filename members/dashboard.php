@@ -703,18 +703,20 @@ $_SESSION['active'] = intval($result[0]);
       <div class="content">
         <?php
         //echo $_SESSION['active'];
-        if ($_SESSION['active'] == 0) {
+        if ($_SESSION['active'] == 0 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active0.php';
-        } elseif ($_SESSION['active'] == 1) {
+        } elseif ($_SESSION['active'] == 1 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active1.php';
-        } elseif ($_SESSION['active'] == 2) {
+        } elseif ($_SESSION['active'] == 2 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active2.php';
-        } elseif ($_SESSION['active'] == 3) {
+        } elseif ($_SESSION['active'] == 3 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active3.php';
-        } elseif ($_SESSION['active'] == 4) {
+        } elseif ($_SESSION['active'] == 4 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active4.php';
-        } elseif ($_SESSION['active'] == 5) {
+        } elseif ($_SESSION['active'] == 5 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active5.php';
+        } elseif (isset($_GET['p']) && $_GET['p'] == 'campaign_manager') {
+          include './includes/dashpages/cmanger/campaign_manager.php';
         }
         ?>
       </div>
