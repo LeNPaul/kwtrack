@@ -296,11 +296,11 @@ var pieData = {
 		data: [10, 20, 30]
 	}],
 	
-	labels: [{
+	labels: [
 		'True ACoS',
 		'Total Sales',
 		'Organic Sales'
-	}]
+	]
 };
 
 var lineData = {
