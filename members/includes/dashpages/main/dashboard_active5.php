@@ -60,7 +60,7 @@ $dateArr = array_reverse($dateArr);
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">
-								Ad Spend ($)
+								Ad Spend
 
 							</p>
               <p class="card-title"><?= '$' . $adSpend ?>
@@ -90,7 +90,7 @@ $dateArr = array_reverse($dateArr);
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">PPC Sales ($)</p>
+              <p class="card-category">PPC Sales</p>
               <p class="card-title"><?= '$' . $ppcSales ?>
               <p>
             </div>
@@ -117,7 +117,7 @@ $dateArr = array_reverse($dateArr);
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">PPC ACoS (%)</p>
+              <p class="card-category">PPC ACoS</p>
               <p class="card-title"><?=  $displayACoS . '%' ?>
               <p>
             </div>
@@ -290,13 +290,13 @@ var data = {
 		labels: dateArr,
 
 		datasets: [{
-			label: "PPC ACoS",
+			label: "PPC ACoS (%)",
 			yAxisID: 'B',
 			data: ppcAcosArr,
 			fill: true,
 			backgroundColor: "rgba(114, 187, 255, 0.4)",
 		}, {
-			label: "Ad Spend",
+			label: "Ad Spend($)",
 			yAxisID: 'A',
 			data: adSpendArr,
 			fill: 'origin',
@@ -311,7 +311,7 @@ var data = {
 			borderColor: "rgba(244, 72, 66, 0.7)",
 			type: 'line'
 		}, {
-			label: "PPC Sales",
+			label: "PPC Sales ($)",
 			yAxisID: 'A',
 			data: ppcSalesArr,
 			fill: true,
