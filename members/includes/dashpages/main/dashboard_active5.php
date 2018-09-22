@@ -292,9 +292,8 @@ var data = {
 			label: "PPC ACoS",
 			yAxisID: 'B',
 			data: ppcAcosArr,
-			fill: false,
+			fill: true,
 			backgroundColor: "rgba(114, 187, 255, 0.4)",
-			type: 'line',
 		}, {
 			label: "Ad Spend",
 			yAxisID: 'A',
@@ -364,7 +363,7 @@ var myChart = new Chart(ctx, {
 		            },
 								ticks: {
 									beginAtZero: true,
-									max: Math.max.apply(null, ppcSalesArr)
+									max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2
 								}
 							}]
     }
