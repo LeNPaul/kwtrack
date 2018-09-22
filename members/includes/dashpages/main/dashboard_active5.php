@@ -60,7 +60,7 @@ $dateArr = array_reverse($dateArr);
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">
-								Ad Spend
+								Ad Spend ($)
 
 							</p>
               <p class="card-title"><?= '$' . $adSpend ?>
@@ -90,7 +90,7 @@ $dateArr = array_reverse($dateArr);
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">PPC Sales</p>
+              <p class="card-category">PPC Sales ($)</p>
               <p class="card-title"><?= '$' . $ppcSales ?>
               <p>
             </div>
@@ -117,7 +117,7 @@ $dateArr = array_reverse($dateArr);
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">PPC ACoS</p>
+              <p class="card-category">PPC ACoS (%)</p>
               <p class="card-title"><?=  $displayACoS . '%' ?>
               <p>
             </div>
