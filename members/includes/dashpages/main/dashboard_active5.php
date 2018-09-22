@@ -44,6 +44,7 @@ $dateArr = array_reverse($dateArr);
 
 var_dump($adSpendArr);
 var_dump($ppcSalesArr);
+var_dump($acos);
 
 ?>
 
