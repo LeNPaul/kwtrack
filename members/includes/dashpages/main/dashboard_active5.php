@@ -363,6 +363,7 @@ var myChart = new Chart(ctx, {
 		            },
 								ticks: {
 									beginAtZero: true,
+									display: false,
 									max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2
 								}
 							}]
