@@ -296,7 +296,7 @@ var data = {
 			fill: true,
 			backgroundColor: "rgba(114, 187, 255, 0.4)",
 		}, {
-			label: "Ad Spend($)",
+			label: "Ad Spend ($)",
 			yAxisID: 'A',
 			data: adSpendArr,
 			fill: 'origin',
