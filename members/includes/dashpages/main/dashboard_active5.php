@@ -42,10 +42,6 @@ for ($j = 1; $j < 60; $j++) {
 
 $dateArr = array_reverse($dateArr);
 
-var_dump($adSpendArr);
-var_dump($ppcSalesArr);
-var_dump($acos);
-
 ?>
 
 <!--  Row for PPC metrics: ad spend, ppc sales, ppc ACoS -->
