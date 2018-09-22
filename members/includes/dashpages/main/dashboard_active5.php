@@ -293,7 +293,8 @@ var dateArr = <?= json_encode($dateArr); ?>;
 
 var pieData = {
 	datasets: [{
-		data: [10, 20, 30]
+		data: [10, 20, 30],
+		backgroundColor: ["rgb(244, 72, 66, 0.1)", "rgb(89, 255, 152, 0.1)", "rgb(114, 187, 255, 0.4)"]
 	}],
 	
 	labels: [
