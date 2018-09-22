@@ -298,7 +298,7 @@ var data = {
 			label: "Ad Spend",
 			yAxisID: 'A',
 			data: adSpendArr,
-			//fill: '-1',
+			fill: 'origin',
 			pointRadius: 2.5,
 			hoverRadius: 4,
 			pointBorderColor: '#ffffff',
@@ -336,7 +336,7 @@ var myChart = new Chart(ctx, {
 
 		elements: {
 			line: {
-				fill: '-1'
+				//fill: '-1'
 			}
 		},
 		scales: {
@@ -352,8 +352,8 @@ var myChart = new Chart(ctx, {
 								position: 'left',
 								gridLines: {
 	                color: "rgba(0, 0, 0, 0)",
-		            },
-								stacked: true
+		            }
+								//stacked: true
 	            }, {
 			      		id: 'B',
 			        	type: 'linear',
