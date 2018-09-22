@@ -230,14 +230,18 @@ $dateArr = array_reverse($dateArr);
         <p class="card-category">Ad Spend, PPC Sales, and PPC ACoS</p>
       </div>
 
-      <div class="card-body ">
+	  <div class="card-body">
+		<canvas id="pieChart" width="1000" height="400"></canvas>
+	  </div>
+	  
+      <div class="card-body">
 		<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 			<i class="fa fa-calendar"></i>
 			<span></span> <i class="fa fa-caret-down"></i>
 		</div>
 		<br>
 
-		<canvas id="Chart" width="1000" height="400"></canvas>
+		<canvas id="lineChart" width="1000" height="400"></canvas>
 	  </div>
 
       <div class="card-footer ">
@@ -280,15 +284,27 @@ $(function() {
     }, cb);
 });
 
-var ctx = document.getElementById("Chart");
+var ctx = document.getElementById("lineChart");
+var ctx2 = document.getElementById("pieChart");
 var adSpendArr = <?= json_encode($adSpendArr); ?>;
 var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
 var ppcAcosArr = <?= json_encode($acos); ?>;
 var dateArr = <?= json_encode($dateArr); ?>;
 
-var data = {
-		labels: dateArr,
+var pieData = {
+	datasets: [{
+		data: [10, 20, 30]
+	}],
+	
+	labels: [{
+		'True ACoS',
+		'Total Sales',
+		'Organic Sales'
+	}]
+};
 
+var lineData = {
+		labels: dateArr,
 		datasets: [{
 			label: "Ad Spend ($)",
 			yAxisID: 'A',
@@ -326,11 +342,16 @@ var data = {
 			fill: true,
 			backgroundColor: "rgba(114, 187, 255, 0.4)",
 		}]
-	}
+	};
+	
+var pieChart = new Chart(ctx2, {
+	type: "pie",
+	data: pieData
+});
 
 var myChart = new Chart(ctx, {
 	type: "bar",
-	data: data,
+	data: lineData,
 
 	options: {
 		responsive: true,
