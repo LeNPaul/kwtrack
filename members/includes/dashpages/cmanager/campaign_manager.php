@@ -43,6 +43,8 @@ $cGroupsExist = (count($result) == 0) ? 0 : 1;
 
 <script>
 $(document).ready( function () {
-    $('#campaign_manager').DataTable();
+    $('#campaign_manager').DataTable(
+      paging: true
+    );
 } );
 </script>
