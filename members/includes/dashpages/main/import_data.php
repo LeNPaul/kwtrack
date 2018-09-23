@@ -496,7 +496,7 @@ for ($i = 0; $i < count($result); $i++) {
  *===============================================================*/
 
 
-/
+
 // Get ad group level negative keywords and store them in db
 $result = $client->listNegativeKeywords(array("stateFilter" => "enabled"));
 $result = json_decode($result['response'], true);
