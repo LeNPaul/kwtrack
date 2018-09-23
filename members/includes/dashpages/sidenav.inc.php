@@ -9,9 +9,9 @@ function outputSideNav($currentPage) {
   $active6 = '';
   $active7 = '';
 
-  if ($currentPage == 'dashboard') {
+  if ($currentPage == 'dashboard' && empty($_GET)) {
     $active1 = 'class="active"';
-  } elseif ($currentPage == 'campaign_manager') {
+  } elseif ($currentPage == 'dashboard' && $_GET['p'] == 'campaign_manager') {
     $active2 = 'class="active"';
   }
 
