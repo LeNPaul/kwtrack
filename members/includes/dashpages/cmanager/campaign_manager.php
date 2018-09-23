@@ -4,7 +4,7 @@
  *    Allows users to edit and change all their campaigns in PPCOLOGY.
  */
 
- echo $_GET['p'];
+ echo $_GET['s'];
 
 ?>
 
