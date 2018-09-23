@@ -383,7 +383,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 ============================================================================*/
 
-importKeywords($pdo, $client, $user_id, 60);
+// importKeywords($pdo, $client, $user_id, 60);
 
 /*==========================================================================
 
@@ -399,7 +399,7 @@ importKeywords($pdo, $client, $user_id, 60);
 
 // First, import all ad group names, campaign Id's, ad group Id's, default bids, and states
 
-
+/*
 $result = $client->listAdGroups();
 $result = json_decode($result['response'], true);
 
@@ -495,7 +495,7 @@ for ($i = 0; $i < count($result); $i++) {
  *===============================================================*/
 
 
-
+/*
 // Get ad group level negative keywords and store them in db
 $result = $client->listNegativeKeywords(array("stateFilter" => "enabled"));
 $result = json_decode($result['response'], true);
