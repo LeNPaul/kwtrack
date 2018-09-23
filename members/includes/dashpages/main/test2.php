@@ -46,7 +46,7 @@ echo '</pre>';
 */
 
 $result = $client->requestSnapshot(
-    "keywords",
+    "campaigns",
     array("stateFilter" => "enabled,paused,archived",
           "campaignType" => "sponsoredProducts"));
 $result = json_decode($result['response'], true);
