@@ -50,3 +50,9 @@
     </table>
   </div>
 </div>
+
+<script>
+$(document).ready( function () {
+    $('#campaign_manager').DataTable();
+} );
+</script>
