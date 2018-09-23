@@ -456,9 +456,6 @@ $sql = "INSERT INTO campaigns (campaign_name, amz_campaign_id, user_id, campaign
 $stmt = $pdo->prepare($sql);
 
 for ($i = 0; $i < count($result); $i++) {
-	$sql = "INSERT INTO campaigns (campaign_name, amz_campaign_id, user_id, campaign_type, targeting_type, status, daily_budget)
-					VALUES (:camapign_name, :amz_campaign_id, :user_id, :campaign_type, :targeting_type, :status, :daily_budget)";
-  $stmt = $pdo->prepare($sql);
 	$stmt->execute(array(
 		':camapign_name'		=> $result[$i]['name'],
 		':amz_campaign_id'	=> $result[$i]['campaignId'],
