@@ -456,13 +456,13 @@ $sql = "INSERT INTO campaigns (campaign_name, amz_campaign_id, user_id, campaign
 $stmt = $pdo->prepare($sql);
 
 for ($i = 0; $i < count($result); $i++) {
-	echo $result[$i]['targetingType']. '<br />';
+	$targetingType = ($result[$i]['targetingType'] == 'auto') ? 0 : 1;
 	$stmt->execute(array(
 		':camapign_name'		=> $result[$i]['name'],
 		':amz_campaign_id'	=> $result[$i]['campaignId'],
 		':user_id'					=> $user_id,
 		':campaign_type'		=> $result[$i]['campaignType'],
-		':targeting_type'		=> $result[$i]['targetingType'],
+		':targeting_type'		=> $targetingType,
 		':status'						=> $result[$i]['state'],
 		':daily_budget'			=> $result[$i]['dailyBudget']
 	));
