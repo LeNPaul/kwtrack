@@ -233,7 +233,7 @@ $dateArr = array_reverse($dateArr);
 	  <div class="card-body">
 		<canvas id="pieChart" width="1000" height="400"></canvas>
 	  </div>
-	  
+
       <div class="card-body">
 		<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 			<i class="fa fa-calendar"></i>
@@ -296,7 +296,7 @@ var pieData = {
 		data: [10, 20, 30],
 		backgroundColor: ["rgb(244, 72, 66, 0.1)", "rgb(89, 255, 152, 0.1)", "rgb(114, 187, 255, 0.4)"]
 	}],
-	
+
 	labels: [
 		'True ACoS',
 		'Total Sales',
@@ -344,7 +344,7 @@ var lineData = {
 			backgroundColor: "rgba(114, 187, 255, 0.4)",
 		}]
 	};
-	
+
 var pieChart = new Chart(ctx2, {
 	type: "pie",
 	data: pieData
@@ -356,6 +356,11 @@ var myChart = new Chart(ctx, {
 
 	options: {
 		responsive: true,
+
+		toolip: {
+			mode: 'index',
+			intersect: false
+		},
 
 		elements: {
 			line: {
