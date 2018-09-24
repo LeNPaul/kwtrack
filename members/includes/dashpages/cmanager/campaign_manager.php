@@ -47,7 +47,8 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
 <script>
 $(document).ready( function () {
   console.log('asdf');
-  var dataset = <?php $campaignData ?>;
+  var dataset = <?= json_encode($campaignData) ?>;
+  
 
   $('#campaign_manager').DataTable(
     paging: true,
