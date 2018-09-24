@@ -21,7 +21,7 @@ $cGroupsExist = (count($result) == 0) ? 0 : 1;
 
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-    <table id="campaign_manager" class="table table-hover table-responsive">
+    <!-- <table id="campaign_manager" class="table table-hover table-responsive">
       <thead>
         <tr>
           <th scope="col">Campaigns</th>
@@ -40,7 +40,8 @@ $cGroupsExist = (count($result) == 0) ? 0 : 1;
 
       </tbody>
 
-    </table>
+    </table> -->
+    <table id="campaign_manager" class="display" width="100%"></table>
   </div>
 </div>
 
@@ -50,7 +51,19 @@ $(document).ready( function () {
 
   $('#campaign_manager').DataTable(
     paging: true,
-    data: dataset
-);
+    data: dataset,
+    columns: [
+      { title: "Campaigns" },
+      { title: "Impressions" },
+      { title: "Clicks" },
+      { title: "CTR" },
+      { title: "Spend" },
+      { title: "CPC" },
+      { title: "Units Sold" },
+      { title: "Sales" },
+      { title: "ACoS" }
+    ]
+  );
+
 } );
 </script>
