@@ -6,7 +6,7 @@
 
 function calculateMetricAvg($arr) {
   $arr = array_filter($arr);
-  $average = array_sum($arr)/count($arr);
+  $average = (count($arr) == 0) ? 0 : array_sum($arr)/count($arr);
   return $average;
 }
 
