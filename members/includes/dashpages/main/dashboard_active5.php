@@ -357,7 +357,7 @@ var myChart = new Chart(ctx, {
 	options: {
 		responsive: true,
 
-		toolip: {
+		toolips: {
 			mode: 'index',
 			intersect: false
 		},
