@@ -355,18 +355,19 @@ var myChart = new Chart(ctx, {
 	data: lineData,
 
 	options: {
-		responsive: true,
-
 		toolips: {
 			mode: 'index',
 			intersect: false
 		},
+
+		responsive: true,
 
 		elements: {
 			line: {
 				//fill: '-1'
 			}
 		},
+		
 		scales: {
 			// Remove grid lines
 	    xAxes: [{
