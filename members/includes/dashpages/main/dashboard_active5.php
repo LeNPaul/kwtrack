@@ -359,7 +359,7 @@ var myChart = new Chart(ctx, {
 
 		toolips: {
 			mode: 'index',
-			intersect: false
+			intersect: true
 		},
 
 		elements: {
