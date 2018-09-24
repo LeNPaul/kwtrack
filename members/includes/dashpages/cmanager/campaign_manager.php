@@ -53,6 +53,9 @@ $(document).ready( function () {
   $('#campaign_manager').DataTable(
     {
       paging: true,
+      fixedColumns: {
+        leftColumns: 1
+      },
       data: dataset,
       columns: [
         { title: "Campaigns" },
