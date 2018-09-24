@@ -34,7 +34,7 @@ $cGroupsExist = (count($result) == 0) ? 0 : 1;
       </thead>
 
       <tbody>
-        
+
       </tbody>
 
     </table>
