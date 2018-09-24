@@ -12,7 +12,7 @@ checkLoggedIn();
 // Grab current active level to actively set $_SESSION['active']
 $sql = 'SELECT active FROM users WHERE user_id=' . $_SESSION['user_id'];
 $stmt = $pdo->query($sql);
-$result = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 $_SESSION['active'] = intval($result[0]);
 
 ?>
@@ -772,7 +772,8 @@ $_SESSION['active'] = intval($result[0]);
   <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
   <script src="assets/js/plugins/bootstrap-datetimepicker.js"></script>
   <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
-  <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
   <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
   <script src="assets/js/plugins/bootstrap-tagsinput.js"></script>
   <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
