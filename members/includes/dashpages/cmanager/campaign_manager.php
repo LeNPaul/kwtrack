@@ -54,6 +54,11 @@ $(document).ready( function () {
     {
       scrollX: true,
       paging: true,
+      pagingType: "full_numbers",
+      lengthMenu: [
+          [10, 25, 50, 100, -1],
+          [10, 25, 50, 100, "All"]
+        ],
       fixedColumns: {
         leftColumns: 1
       },
