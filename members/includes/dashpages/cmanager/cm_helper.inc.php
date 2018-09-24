@@ -4,7 +4,7 @@
  *    - All helper functions used for the campaign manager
  */
 
-function calculateMetricAvg($arr) {}
+function calculateMetricAvg($arr) {
   $arr = array_filter($arr);
   $average = array_sum($arr)/count($arr);
   return $average;
