@@ -48,7 +48,7 @@ $cGroupsExist = (count($result) == 0) ? 0 : 1;
 <script>
 $(document).ready( function () {
   console.log('asdf');
-  var dataset = <?php cmGetCampaignData($pdo, $user_id) ?>;
+  var dataset = <?= cmGetCampaignData($pdo, $user_id) ?>;
 
   $('#campaign_manager').DataTable(
     paging: true,
