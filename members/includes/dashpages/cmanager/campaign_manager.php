@@ -16,7 +16,7 @@ $cGroupsExist = (count($result) == 0) ? 0 : 1;
 $campaignData = cmGetCampaignData($pdo, $user_id);
 
 echo '<pre>';
-var_dump(cmGetCampaignData($pdo, $user_id));
+var_dump($campaignData);
 echo '</pre>';
 ?>
 

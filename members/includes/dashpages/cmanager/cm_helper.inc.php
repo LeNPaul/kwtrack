@@ -17,7 +17,7 @@ function calculateMetricAvg($arr) {
  */
 function cmGetCampaignData($pdo, $user_id) {
   $output = [];
-  $sql = "SELECT * FROM campaigns WHERE amz_campaign_id={$user_id}";
+  $sql = "SELECT * FROM campaigns WHERE user_id={$user_id}";
   $stmt = $pdo->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
