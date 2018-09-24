@@ -39,7 +39,8 @@
   color: #666 !important;
   border: 1px solid transparent;
   background: transparent;
-  box-shadow: none; }
+  box-shadow: none;
+}
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   color: white !important;
   border: 1px solid #aaddff;
