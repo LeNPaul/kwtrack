@@ -6,7 +6,7 @@
 
 $user_id = $_SESSION['user_id'];
 // Check to see if user has any campaign groups
-$sql = "SELECT * FROM cgroups WHERE user_id={}";
+$sql = "SELECT * FROM cgroups WHERE user_id={$user_id}";
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $cGroupsExist = (count($result) == 0) ? 0 : 1;
@@ -34,7 +34,7 @@ $cGroupsExist = (count($result) == 0) ? 0 : 1;
       </thead>
 
       <tbody>
-
+        
       </tbody>
 
     </table>
