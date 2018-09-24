@@ -27,6 +27,8 @@ function cmGetCampaignData($pdo, $user_id) {
     $acos = ($sales == 0) ? 0.0 : round(($ad_spend / $sales) * 100, 2) . '%';
     $output[] = array(
       $result[$i]['campaign_name'],
+      '$' . $result[$i]['daily_budget'],
+      $result[$i]['targeting_type'],
       array_sum(unserialize($result[$i]['impressions'])),
       array_sum(unserialize($result[$i]['clicks'])),
       round(calculateMetricAvg(unserialize($result[$i]['ctr'])), 2) . '%',

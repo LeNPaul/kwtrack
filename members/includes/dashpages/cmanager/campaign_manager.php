@@ -56,6 +56,8 @@ $(document).ready( function () {
       data: dataset,
       columns: [
         { title: "Campaigns" },
+        { title: "Budget" },
+        { title: "Targeting Type" },
         { title: "Impressions" },
         { title: "Clicks" },
         { title: "CTR" },
