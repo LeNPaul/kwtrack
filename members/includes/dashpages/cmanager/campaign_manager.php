@@ -52,6 +52,7 @@ $(document).ready( function () {
 
   $('#campaign_manager').DataTable(
     {
+      scrollX: true,
       paging: true,
       fixedColumns: {
         leftColumns: 1
