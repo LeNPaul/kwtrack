@@ -24,16 +24,16 @@ function cmGetCampaignData($pdo, $user_id) {
   for ($i = 0; $i < count($result); $i++) {
     $ad_spend = array_sum(unserialize($result[$i]['ad_spend']));
     $sales = array_sum(unserialize($result[$i]['sales']));
-    $acos = ($sales == 0) ? 0.0 : round($ad_spend / $sales, 2);
+    $acos = ($sales == 0) ? 0.0 : round(($ad_spend / $sales) * 100, 2) . '%';
     $output[] = array(
       $result[$i]['campaign_name'],
       array_sum(unserialize($result[$i]['impressions'])),
       array_sum(unserialize($result[$i]['clicks'])),
       calculateMetricAvg(unserialize($result[$i]['ctr'])),
-      $ad_spend,
-      calculateMetricAvg(unserialize($result[$i]['avg_cpc'])),
+      '$' . round($ad_spend, 2),
+      round(calculateMetricAvg(unserialize($result[$i]['avg_cpc'])), 2),
       array_sum(unserialize($result[$i]['units_sold'])),
-      $sales,
+      '$' . round($sales, 2),
       $acos
     );
   }

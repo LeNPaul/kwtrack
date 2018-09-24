@@ -40,7 +40,7 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
       </tbody>
 
     </table> -->
-    <table id="campaign_manager" class="display" width="100%"></table>
+    <table id="campaign_manager" class="display" style="width:100%;"></table>
   </div>
 </div>
 
