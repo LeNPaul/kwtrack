@@ -48,22 +48,24 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
 $(document).ready( function () {
   console.log('asdf');
   var dataset = <?= json_encode($campaignData) ?>;
-  
+
 
   $('#campaign_manager').DataTable(
-    paging: true,
-    data: dataset,
-    columns: [
-      { title: "Campaigns" },
-      { title: "Impressions" },
-      { title: "Clicks" },
-      { title: "CTR" },
-      { title: "Spend" },
-      { title: "CPC" },
-      { title: "Units Sold" },
-      { title: "Sales" },
-      { title: "ACoS" }
-    ]
+    {
+      paging: true,
+      data: dataset,
+      columns: [
+        { title: "Campaigns" },
+        { title: "Impressions" },
+        { title: "Clicks" },
+        { title: "CTR" },
+        { title: "Spend" },
+        { title: "CPC" },
+        { title: "Units Sold" },
+        { title: "Sales" },
+        { title: "ACoS" }
+      ]
+    }
   );
 
 } );
