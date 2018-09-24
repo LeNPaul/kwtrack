@@ -13,8 +13,11 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $cGroupsExist = (count($result) == 0) ? 0 : 1;
 
+$campaignData = cmGetCampaignData($pdo, $user_id);
 
-
+echo '<pre>';
+var_dump($campaignData);
+echo '</pre>';
 ?>
 
 <h2>Campaigns</h2>
@@ -48,7 +51,7 @@ $cGroupsExist = (count($result) == 0) ? 0 : 1;
 <script>
 $(document).ready( function () {
   console.log('asdf');
-  var dataset = <?= cmGetCampaignData($pdo, $user_id); ?>;
+  var dataset = <?php  ?>;
 
   $('#campaign_manager').DataTable(
     paging: true,
