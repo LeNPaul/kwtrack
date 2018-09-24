@@ -373,7 +373,12 @@ var myChart = new Chart(ctx, {
 	    xAxes: [{
 		            gridLines: {
 		                color: "rgba(0, 0, 0, 0)",
-		            }
+		            },
+
+								scaleLabel: {
+					          show: true,
+					          labelString: 'Value'
+				        }
 	            }],
 	    yAxes: [{
 								id: 'A',
