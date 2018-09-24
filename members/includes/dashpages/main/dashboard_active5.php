@@ -367,7 +367,7 @@ var myChart = new Chart(ctx, {
 				//fill: '-1'
 			}
 		},
-		
+
 		scales: {
 			// Remove grid lines
 	    xAxes: [{
@@ -382,11 +382,11 @@ var myChart = new Chart(ctx, {
 								gridLines: {
 	                color: "rgba(0, 0, 0, 0)",
 		            },
-								ticks: {
+								/*ticks: {
 									callback: function(value, index, values) {
                   	return '$' + value;
                   }
-								}
+								}*/
 								//stacked: true
 	            }, {
 			      		id: 'B',
@@ -399,9 +399,9 @@ var myChart = new Chart(ctx, {
 									beginAtZero: true,
 									display: false,
 									max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2,
-									callback: function(value, index, values) {
+									/*callback: function(value, index, values) {
                   	return value + '%';
-                  }
+                  }*/
 								}
 							}]
     }
