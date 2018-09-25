@@ -19,11 +19,11 @@ function calculateMetricAvg($arr) {
  */
 function cmCheckboxState($status) {
   if ($status == 'enabled') {
-    return '<input type="checkbox" checked data-toggle="toggle">';
+    echo '<input type="checkbox" checked data-toggle="toggle">';
   } elseif ($status == 'paused') {
-    return '<input type="checkbox" data-toggle="toggle">';
+    echo '<input type="checkbox" data-toggle="toggle">';
   } else {
-    return '-';
+    echo '-';
   }
 }
 
@@ -52,7 +52,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $sales = array_sum(unserialize($result[$i]['sales']));
     $acos = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
     $output[] = array(
-	    '<input type="checkbox" checked data-toggle="toggle">',
+	    cmCheckboxState($result[$i]['status']),
       $result[$i]['campaign_name'],
 	    $result[$i]['status'],
       '$' . $result[$i]['daily_budget'],
