@@ -24,7 +24,7 @@ function cmGetCampaignData($pdo, $user_id) {
   for ($i = 0; $i < count($result); $i++) {
     $ad_spend = array_sum(unserialize($result[$i]['ad_spend']));
     $sales = array_sum(unserialize($result[$i]['sales']));
-    $acos = ($sales == 0) ? 0.0 : round(($ad_spend / $sales) * 100, 2) . '%';
+    $acos = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
     $output[] = array(
       $result[$i]['campaign_name'],
       '$' . $result[$i]['daily_budget'],
