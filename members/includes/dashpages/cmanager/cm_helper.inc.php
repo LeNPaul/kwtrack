@@ -11,9 +11,28 @@ function calculateMetricAvg($arr) {
 }
 
 /*
+ *  function cmCheckboxState(String $status) --> String $output
+ *    --> Outputs a checkbox (toggler) on the campaign manager based on the
+ *        campaign status.
  *
+ *      --> String $status - string representing the status of the campaign
+ */
+function cmCheckboxState($status) {
+  if ($status == 'enabled') {
+    return '<input type="checkbox" checked data-toggle="toggle">';
+  } elseif ($status == 'paused') {
+    return '<input type="checkbox" data-toggle="toggle">';
+  } else {
+    return '-';
+  }
+}
+
+/*
+ *  function cmGetCampaignData(PDO $pdo, Int $user_id) --> Array $output
+ *    --> Gets campaign metrics from DB to output onto campaign manager.
  *
- *
+ *      --> PDO $pdo     - database handle
+ *      --> Int $user_id - user id of the user
  */
 function cmGetCampaignData($pdo, $user_id) {
   $output = [];
@@ -33,9 +52,9 @@ function cmGetCampaignData($pdo, $user_id) {
     $sales = array_sum(unserialize($result[$i]['sales']));
     $acos = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
     $output[] = array(
-	  '<input type="checkbox" checked data-toggle="toggle">',
+	    '<input type="checkbox" checked data-toggle="toggle">',
       $result[$i]['campaign_name'],
-	  $result[$i]['status'],
+	    $result[$i]['status'],
       '$' . $result[$i]['daily_budget'],
       $result[$i]['targeting_type'],
       array_sum(unserialize($result[$i]['impressions'])),
