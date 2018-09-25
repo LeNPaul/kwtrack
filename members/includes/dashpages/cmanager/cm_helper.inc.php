@@ -19,11 +19,11 @@ function calculateMetricAvg($arr) {
  */
 function cmCheckboxState($status) {
   if ($status == 'enabled') {
-    echo '<input type="checkbox" checked data-toggle="toggle">';
+    return '<input type="checkbox" checked data-toggle="toggle">';
   } elseif ($status == 'paused') {
-    echo '<input type="checkbox" data-toggle="toggle">';
+    return '<input type="checkbox" data-toggle="toggle">';
   } else {
-    echo '-';
+    return '-';
   }
 }
 
@@ -41,7 +41,7 @@ function cmGetCampaignData($pdo, $user_id) {
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   for ($i = 0; $i < count($result); $i++) {
-    
+
   	if ($result[$i]['status'] == 'enabled') {
   		$active = 0;
   	} else if ($result[$i]['status'] == 'paused') {
