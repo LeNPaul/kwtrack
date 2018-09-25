@@ -40,7 +40,7 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
       </tbody>
 
     </table> -->
-    <table id="campaign_manager" class="table table-hover order-column" style="width:100%;"></table>
+    <table id="campaign_manager" class="table table-hover table-light" style="width:100%;"></table>
   </div>
 </div>
 
@@ -64,9 +64,9 @@ $(document).ready( function () {
       },
       data: dataset,
       columns: [
-		{ title: "Active" },
+		    { title: "Active" },
         { title: "Campaigns" },
-		{ title: "Status" },
+		    { title: "Status" },
         { title: "Budget" },
         { title: "Targeting Type" },
         { title: "Impressions" },

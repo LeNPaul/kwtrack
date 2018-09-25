@@ -51,6 +51,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $ad_spend = array_sum(unserialize($result[$i]['ad_spend']));
     $sales = array_sum(unserialize($result[$i]['sales']));
     $acos = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
+    
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $result[$i]['campaign_name'],
