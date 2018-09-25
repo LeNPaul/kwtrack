@@ -24,7 +24,7 @@ function cmGetCampaignData($pdo, $user_id) {
   for ($i = 0; $i < count($result); $i++) {
 	if ($result[$i]['status'] == 'enabled') {
 		$active = 0;
-	} else if ($result[$i]['status' == 'paused') {
+	} elseif ($result[$i]['status' == 'paused') {
 		$active = 1;
 	} else {
 		$active = 2;
