@@ -41,17 +41,18 @@ function cmGetCampaignData($pdo, $user_id) {
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   for ($i = 0; $i < count($result); $i++) {
-	if ($result[$i]['status'] == 'enabled') {
-		$active = 0;
-	} else if ($result[$i]['status'] == 'paused') {
-		$active = 1;
-	} else {
-		$active = 2;
-	}
+    
+  	if ($result[$i]['status'] == 'enabled') {
+  		$active = 0;
+  	} else if ($result[$i]['status'] == 'paused') {
+  		$active = 1;
+  	} else {
+  		$active = 2;
+  	}
     $ad_spend = array_sum(unserialize($result[$i]['ad_spend']));
     $sales = array_sum(unserialize($result[$i]['sales']));
     $acos = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
-    
+
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $result[$i]['campaign_name'],
