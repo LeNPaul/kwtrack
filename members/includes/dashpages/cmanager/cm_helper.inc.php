@@ -24,7 +24,7 @@ function cmGetCampaignData($pdo, $user_id) {
   for ($i = 0; $i < count($result); $i++) {
 	if ($result[$i]['status'] == 'enabled') {
 		$active = 0;
-	} elseif ($result[$i]['status'] == 'paused') {
+	} else if ($result[$i]['status'] == 'paused') {
 		$active = 1;
 	} else {
 		$active = 2;
@@ -33,7 +33,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $sales = array_sum(unserialize($result[$i]['sales']));
     $acos = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
     $output[] = array(
-	  $active,
+	  '<input type="checkbox" checked data-toggle="toggle">',
       $result[$i]['campaign_name'],
 	  $result[$i]['status'],
       '$' . $result[$i]['daily_budget'],
