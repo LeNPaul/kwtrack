@@ -23,7 +23,9 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
     <!-- <table id="campaign_manager" class="table table-hover table-responsive">
       <thead>
         <tr>
+		  <th scope="col">Active</th>
           <th scope="col">Campaigns</th>
+		  <th scope="col">Status</th>
           <th scope="col">Impressions</th>
           <th scope="col">Clicks</th>
           <th scope="col">CTR</th>
