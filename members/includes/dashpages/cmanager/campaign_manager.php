@@ -52,7 +52,7 @@ $(document).ready( function () {
     {
       //buttons: ['copy'],
       responsive: true,
-      autoWidth: false,
+      autoWidth: true,
       scrollX: true,
       paging: true,
       pagingType: "full_numbers",
