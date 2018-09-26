@@ -40,7 +40,7 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
       </tbody>
 
     </table> -->
-    <table id="campaign_manager" class="table table-light table-hover table-responsive row-border order-column nowrap" cellpadding="0" cellsacing="0" border="0" style="width:100%"></table>
+    <table id="campaign_manager" class="table table-light table-hover row-border order-column nowrap" cellpadding="0" cellsacing="0" border="0" style="width:100%"></table>
   </div>
 </div>
 
@@ -83,7 +83,7 @@ $(document).ready( function () {
   );
 
   var cm = $('#campaign_manager').DataTable();
-  cm.columns.adjust().draw();
+  //cm.columns.adjust().draw();
 
 } );
 </script>
