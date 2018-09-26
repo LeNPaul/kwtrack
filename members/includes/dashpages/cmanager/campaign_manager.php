@@ -53,7 +53,7 @@ $(document).ready( function () {
       //buttons: ['copy'],
       responsive: true,
       autoWidth: true,
-      scrollX: "100%",
+      //scrollX: "100%",
       paging: true,
       pagingType: "full_numbers",
       lengthMenu: [
