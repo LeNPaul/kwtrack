@@ -180,14 +180,14 @@
   width: 1.875rem;
   height: 1.875rem;
   border-radius: 1.875rem;
-  background: #fff;
+  background: #fff !important;
   transition: left 0.25s;
 }
 .btn-toggle.btn-lg.active {
   transition: background-color 0.25s;
 }
 .btn-toggle.btn-lg.active > .handle {
-  left: 2.8125rem;
+  left: 2.8125rem !important;
   transition: left 0.25s;
 }
 .btn-toggle.btn-lg.active:before {
@@ -265,7 +265,7 @@
   width: 1.125rem;
   height: 1.125rem;
   border-radius: 1.125rem;
-  background: #fff;
+  background: #fff !important;
   transition: left 0.25s;
 }
 .btn-toggle.btn-sm.active {
@@ -350,7 +350,7 @@
   width: 0.75rem;
   height: 0.75rem;
   border-radius: 0.75rem;
-  background: #fff;
+  background: #fff !important;
   transition: left 0.25s;
 }
 .btn-toggle.btn-xs.active {
@@ -451,7 +451,7 @@
   cursor: pointer;
   display: inline-block !important;
   height: 100%;
-  color: #fff;
+  color: #fff !important;
   padding: 6px 10px;
   font-size: 11px;
   text-indent: -5px;
