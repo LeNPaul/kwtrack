@@ -60,9 +60,9 @@ $(document).ready( function () {
           [10, 25, 50, 100, -1],
           [10, 25, 50, 100, "All"]
         ],
-      fixedColumns: {
-        leftColumns: 2
-      },
+      // fixedColumns: {
+      //   leftColumns: 2
+      // },
       data: dataset,
       columns: [
 		    { title: "Active" },
