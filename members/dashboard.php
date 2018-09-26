@@ -815,8 +815,8 @@ $_SESSION['active'] = intval($result[0]);
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
-      demo.initDashboardPageCharts();
-      demo.initVectorMap();
+      // demo.initDashboardPageCharts();
+      // demo.initVectorMap();
     });
   </script>
 </body>
