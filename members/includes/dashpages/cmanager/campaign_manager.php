@@ -40,7 +40,7 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
       </tbody>
 
     </table> -->
-    <table id="campaign_manager" class="table table-light table-hover responsive row-border nowrap" ></table>
+    <table id="campaign_manager" class="table table-hover responsive row-border order-column nowrap" ></table>
   </div>
 </div>
 
@@ -50,7 +50,8 @@ $(document).ready( function () {
 
   $('#campaign_manager').DataTable(
     {
-      buttons: ['copy'],
+      //buttons: ['copy'],
+      responsive: true,
       autoWidth: true,
       scrollX: "100%",
       paging: true,
