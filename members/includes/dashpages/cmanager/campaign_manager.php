@@ -66,7 +66,7 @@ $(document).ready( function () {
       data: dataset,
       columns: [
 		    { title: "Active" },
-        { title: "Campaigns" },
+        { title: "Campaign Name", width: "200px"},
 		    { title: "Status" },
         { title: "Budget" },
         { title: "Targeting Type" },
