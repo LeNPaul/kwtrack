@@ -50,9 +50,7 @@ $(document).ready( function () {
 
   $('#campaign_manager').DataTable(
     {
-      buttons: [
-        'asdf', 'aaaaa', 'bbbbb'
-      ],
+      autoWidth: true,
       scrollX: true,
       paging: true,
       pagingType: "full_numbers",
