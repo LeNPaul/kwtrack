@@ -295,14 +295,22 @@ $dateArr = array_reverse($dateArr);
 		<div class="card">
       <div class="card-body ">
         <div class="row">
+
           <div class="col-12 col-md-12">
-            <div class="numbers">
-              <p class="card-category">Top Performing Keywords</p>
+            <div class="numbers text-center">
               <p class="card-title">Top Performing Keywords
               <p>
             </div>
           </div>
+
         </div>
+
+				<div class="row">
+					<div class="col-12 col-md-12">
+						Placeholder
+					</div>
+				</div>
+
       </div>
 
       <div class="card-footer ">
