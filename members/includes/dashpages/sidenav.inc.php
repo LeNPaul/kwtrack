@@ -13,6 +13,7 @@ function outputSideNav($currentPage) {
     $active1 = 'class="active"';
   } elseif ($currentPage == 'dashboard' && $_GET['p'] == 'campaign_manager') {
     $active2 = 'class="active"';
+    $cmExpand = ' aria-expanded="true"';
   }
 
   echo '<div class="sidebar" data-color="brown" data-active-color="success">
@@ -74,7 +75,7 @@ function outputSideNav($currentPage) {
               </a>
             </li>
             <li>
-              <a data-toggle="collapse" href="#cm">
+              <a data-toggle="collapse" href="#cm"' . $cmExpand . '>
                 <i class="nc-icon nc-book-bookmark"></i>
                 <p>
                   Campaign Manager
