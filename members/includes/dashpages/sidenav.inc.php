@@ -2,7 +2,11 @@
 
 function outputSideNav($currentPage) {
   $active1 = '';
-  $active2 = '';
+
+  $active2   = '';
+  $cmExpand  = '';
+  $cmExpand2 = '';
+
   $active3 = '';
   $active4 = '';
   $active5 = '';
