@@ -18,10 +18,11 @@ $ppcSalesArr = array_reverse(
 		60,
 		'ad_spend'));
 
-$acos = [];
+$acos 			 = [];
 $displayACoS = 0;
-$adSpend = array_sum($adSpendArr);
-$ppcSales = array_sum($ppcSalesArr);
+$adSpend 		 = array_sum($adSpendArr);
+$ppcSales 	 = array_sum($ppcSalesArr);
+$roas 			 = ($adSpend == 0) ? 0.0 : round($ppcSales / $adSpend, 2);
 
 for ($i = 0; $i < count($adSpendArr); $i++) {
 	if ($ppcSalesArr[$i] == 0) {
@@ -46,7 +47,7 @@ $dateArr = array_reverse($dateArr);
 
 <!--  Row for PPC metrics: ad spend, ppc sales, ppc ACoS -->
 <div class="row">
-  <div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
@@ -79,7 +80,7 @@ $dateArr = array_reverse($dateArr);
     </div>
   </div>
 
-  <div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
@@ -106,7 +107,7 @@ $dateArr = array_reverse($dateArr);
     </div>
   </div>
 
-  <div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
@@ -119,6 +120,33 @@ $dateArr = array_reverse($dateArr);
             <div class="numbers">
               <p class="card-category">PPC ACoS</p>
               <p class="card-title"><?=  $displayACoS . '%' ?>
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center">
+              <i class="fa fa-money text-primary"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">ROAS</p>
+              <p class="card-title"><?= '$' . $roas ?>
               <p>
             </div>
           </div>
@@ -230,9 +258,9 @@ $dateArr = array_reverse($dateArr);
         <p class="card-category">Ad Spend, PPC Sales, and PPC ACoS</p>
       </div>
 
-	  <div class="card-body">
+	  <!-- <div class="card-body">
 		<canvas id="pieChart" width="1000" height="400"></canvas>
-	  </div>
+	  </div> -->
 
       <div class="card-body">
 		<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
