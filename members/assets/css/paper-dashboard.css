@@ -61,6 +61,11 @@ table.dataTable td {
   box-sizing: content-box;
 }
 
+.dataTables_scrollHeadInner {
+  width:100% !important;
+  padding: 0 !important;
+}
+
 
 /*
 ███    ███  █████  ██ ███    ██
