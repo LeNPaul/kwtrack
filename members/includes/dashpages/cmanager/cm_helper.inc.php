@@ -76,8 +76,7 @@ function cmGetCampaignData($pdo, $user_id) {
 
 
     $output[] = array(
-	    //cmCheckboxState($result[$i]['status']),
-      '-',
+	    cmCheckboxState($result[$i]['status']),
       $result[$i]['campaign_name'],
 	    $result[$i]['status'],
       '$' . $result[$i]['daily_budget'],
