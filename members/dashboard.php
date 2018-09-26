@@ -45,7 +45,7 @@ $_SESSION['active'] = intval($result[0]);
   <link href="node_modules/flag-icon-css/css/flag-icon.css" rel="stylesheet">
 
   <!--  Datatables CSS File -->
-
+  
 
   <!-- Date Range Picker CSS File -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
