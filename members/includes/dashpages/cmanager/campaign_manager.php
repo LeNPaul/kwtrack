@@ -46,9 +46,7 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
 
 <script>
 $(document).ready( function () {
-  console.log('asdf');
   var dataset = <?= json_encode($campaignData) ?>;
-
 
   $('#campaign_manager').DataTable(
     {
@@ -59,9 +57,9 @@ $(document).ready( function () {
           [10, 25, 50, 100, -1],
           [10, 25, 50, 100, "All"]
         ],
-      // fixedColumns: {
-      //   leftColumns: 2
-      // },
+      fixedColumns: {
+        leftColumns: 2
+      },
       data: dataset,
       columns: [
 		    { title: "Active" },
