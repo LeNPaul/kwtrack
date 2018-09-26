@@ -19,15 +19,9 @@ function calculateMetricAvg($arr) {
  */
 function cmCheckboxState($status) {
   if ($status == 'enabled') {
-    //return '<input type="checkbox" checked data-toggle="toggle">';
-    return '<button type="button" class="btn btn-secondary btn-xs btn-toggle focus" data-toggle="button" aria-pressed="true" autocomplete="off">
-              <div class="handle"></div>
-            </button>';
+    return '<input type="checkbox" checked data-toggle="toggle" data-size="mini">';
   } elseif ($status == 'paused') {
-    //return '<input type="checkbox" data-toggle="toggle">';
-    return '<button type="button" class="btn btn-secondary btn-xs btn-toggle focus" data-toggle="button" aria-pressed="false" autocomplete="off">
-              <div class="handle"></div>
-            </button>';
+    return '<input type="checkbox" data-toggle="toggle" data-size="mini">';
   } else {
     return '-';
   }
