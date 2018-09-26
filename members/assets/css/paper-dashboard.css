@@ -107,7 +107,7 @@
 .btn-toggle.btn-sm:before,
 .btn-toggle.btn-sm:after {
   line-height: -0.5rem;
-  color: #fff;
+  color: #fff !important;
   letter-spacing: 0.75px;
   left: 0.4125rem;
   width: 2.325rem;
