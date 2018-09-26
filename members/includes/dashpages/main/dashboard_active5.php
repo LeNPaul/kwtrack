@@ -22,7 +22,7 @@ $acos 			 = [];
 $displayACoS = 0;
 $adSpend 		 = array_sum($adSpendArr);
 $ppcSales 	 = array_sum($ppcSalesArr);
-$roas 			 = ($adSpend == 0) ? 0.0 : round($ppcSales / $adSpend, 2);
+$roas 			 = ($adSpend == 0) ? 0.00 : round($ppcSales / $adSpend, 2);
 
 for ($i = 0; $i < count($adSpendArr); $i++) {
 	if ($ppcSalesArr[$i] == 0) {
@@ -140,7 +140,7 @@ $dateArr = array_reverse($dateArr);
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center">
-              <i class="fa fa-money text-primary"></i>
+              <i class="fa fa-money text-success"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
