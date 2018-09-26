@@ -12,8 +12,9 @@ function outputSideNav($currentPage) {
   if ($currentPage == 'dashboard' && empty($_GET)) {
     $active1 = 'class="active"';
   } elseif ($currentPage == 'dashboard' && $_GET['p'] == 'cm') {
-    $active2 = 'class="active"';
-    $cmExpand = ' aria-expanded="true"';
+    $active2   = 'class="active"';
+    $cmExpand  = ' aria-expanded="true"';
+    $cmExpand2 = 'show';
   }
 
   echo '<div class="sidebar" data-color="brown" data-active-color="success">
@@ -82,7 +83,7 @@ function outputSideNav($currentPage) {
                   <b class="caret"></b>
                 </p>
               </a>
-              <div class="collapse " id="cm">
+              <div class="collapse ' . $cmExpand2 . '" id="cm">
                 <ul class="nav">
                   <li ' . $active2 . '>
                     <a href="dashboard.php?p=cm">
