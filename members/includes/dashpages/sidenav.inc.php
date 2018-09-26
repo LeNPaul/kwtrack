@@ -11,7 +11,7 @@ function outputSideNav($currentPage) {
 
   if ($currentPage == 'dashboard' && empty($_GET)) {
     $active1 = 'class="active"';
-  } elseif ($currentPage == 'dashboard' && $_GET['p'] == 'campaign_manager') {
+  } elseif ($currentPage == 'dashboard' && $_GET['p'] == 'cm') {
     $active2 = 'class="active"';
     $cmExpand = ' aria-expanded="true"';
   }
