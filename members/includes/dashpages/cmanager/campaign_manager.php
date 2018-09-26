@@ -60,7 +60,7 @@ $(document).ready( function () {
           [10, 25, 50, 100, "All"]
         ],
       fixedColumns: {
-        leftColumns: 2
+        leftColumns: 1
       },
       data: dataset,
       columns: [
