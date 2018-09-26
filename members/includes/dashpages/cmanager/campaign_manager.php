@@ -50,8 +50,8 @@ $(document).ready( function () {
 
   $('#campaign_manager').DataTable(
     {
-      buttons: ['copy'],
-      responsive: true,
+      // buttons: ['copy'],
+      // responsive: true,
       autoWidth: true,
       scrollX: true,
       paging: true,
@@ -82,10 +82,8 @@ $(document).ready( function () {
     }
   );
 
-  $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
-        $($.fn.dataTable.tables( true ) ).css('width', '100%');
-        $($.fn.dataTable.tables( true ) ).DataTable().columns.adjust().draw();
-    } );
+  var cm = $('#campaign_manager').DataTable;
+
 
 } );
 </script>
