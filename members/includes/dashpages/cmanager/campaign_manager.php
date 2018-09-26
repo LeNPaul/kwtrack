@@ -50,7 +50,7 @@ $(document).ready( function () {
 
   $('#campaign_manager').DataTable(
     {
-      //buttons: ['copy'],
+      buttons: ['copy'],
       responsive: true,
       autoWidth: true,
       scrollX: true,
