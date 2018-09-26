@@ -152,6 +152,7 @@ $dateArr = array_reverse($dateArr);
           </div>
         </div>
       </div>
+
       <div class="card-footer ">
         <hr>
         <div class="stats">
@@ -280,6 +281,39 @@ $dateArr = array_reverse($dateArr);
       </div>
     </div>
 	</div>
+</div>
+
+<!--  Row for pie chart (PPC Sales vs Total Sales) and Top Performing CSTs  -->
+<div class="row">
+	<!--  Pie Chart -->
+	<div class="col-lg-6 col-md-12 col-sm-12">
+
+	</div>
+
+	<!--  Top Performing CSTs -->
+	<div class="col-lg-6 col-md-12 col-sm-12">
+		<div class="card">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-12 col-md-12">
+            <div class="numbers">
+              <p class="card-category">Top Performing Keywords</p>
+              <p class="card-title">Top Performing Keywords
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
+        </div>
+      </div>
+    </div>
+	</div>
+
 </div>
 
 <script type="text/javascript">
