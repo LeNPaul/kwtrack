@@ -40,7 +40,7 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
       </tbody>
 
     </table> -->
-    <table id="campaign_manager" class="table table-light table-hover responsive row-border order-column nowrap" style="width:100%;"></table>
+    <table id="campaign_manager" class="table table-light table-hover responsive row-border order-column nowrap" cellsacing="0" style="width:100%;"></table>
   </div>
 </div>
 
@@ -53,7 +53,7 @@ $(document).ready( function () {
       buttons: ['copy'],
       responsive: true,
       autoWidth: true,
-      scrollX: true,
+      //scrollX: true,
       paging: true,
       pagingType: "full_numbers",
       lengthMenu: [
