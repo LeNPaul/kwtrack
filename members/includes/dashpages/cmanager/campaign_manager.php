@@ -53,7 +53,7 @@ $(document).ready( function () {
       //buttons: ['copy'],
       responsive: true,
       autoWidth: true,
-      //scrollX: "100%",
+      scrollX: true,
       paging: true,
       pagingType: "full_numbers",
       lengthMenu: [
@@ -61,7 +61,7 @@ $(document).ready( function () {
           [10, 25, 50, 100, "All"]
         ],
       fixedColumns: {
-        leftColumns: 1
+        leftColumns: 2
       },
       data: dataset,
       columns: [
