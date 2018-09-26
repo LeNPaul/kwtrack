@@ -263,14 +263,14 @@ $dateArr = array_reverse($dateArr);
 	  </div> -->
 
       <div class="card-body">
-		<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-			<i class="fa fa-calendar"></i>
-			<span></span> <i class="fa fa-caret-down"></i>
-		</div>
-		<br>
+				<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+					<i class="fa fa-calendar"></i>
+					<span></span> <i class="fa fa-caret-down"></i>
+				</div>
+			<br>
 
-		<canvas id="lineChart" width="1000" height="400"></canvas>
-	  </div>
+			<canvas id="lineChart" width="1000" height="400"></canvas>
+		  </div>
 
       <div class="card-footer ">
         <hr>
@@ -319,7 +319,7 @@ var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
 var ppcAcosArr = <?= json_encode($acos); ?>;
 var dateArr = <?= json_encode($dateArr); ?>;
 
-var pieData = {
+/*var pieData = {
 	datasets: [{
 		data: [10, 20, 30],
 		backgroundColor: ["rgb(244, 72, 66, 0.1)", "rgb(89, 255, 152, 0.1)", "rgb(114, 187, 255, 0.4)"]
@@ -330,7 +330,7 @@ var pieData = {
 		'Total Sales',
 		'Organic Sales'
 	]
-};
+};*/
 
 var lineData = {
 		labels: dateArr,
@@ -373,10 +373,10 @@ var lineData = {
 		}]
 	};
 
-var pieChart = new Chart(ctx2, {
+/*var pieChart = new Chart(ctx2, {
 	type: "pie",
 	data: pieData
-});
+});*/
 
 var myChart = new Chart(ctx, {
 	type: "bar",
