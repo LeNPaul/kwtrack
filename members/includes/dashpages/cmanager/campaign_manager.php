@@ -61,7 +61,7 @@ $(document).ready( function () {
       ],
 	  initComplete: function(settings, json) {
 		  $('.sorting_1 input').bootstrapToggle();
-		  alert("done");
+		  alert($('.sorting_1 input'));
 	  }
 	}
   );
