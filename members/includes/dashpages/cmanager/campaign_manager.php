@@ -62,6 +62,7 @@ $(document).ready( function () {
 	  initComplete: function(settings, json) {
 		  $('.sorting_1 input').bootstrapToggle();
 	  }
+	}
   );
 
   var cm = $('#campaign_manager').DataTable();
