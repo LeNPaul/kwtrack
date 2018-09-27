@@ -65,5 +65,7 @@ $(document).ready( function () {
   var cm = $('#campaign_manager').DataTable();
   cm.columns.adjust();
 
+  $('.sorting_1 input').bootstrapToggle();
 } );
+
 </script>
