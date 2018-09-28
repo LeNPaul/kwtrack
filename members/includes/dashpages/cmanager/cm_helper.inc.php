@@ -90,7 +90,7 @@ function cmGetCampaignData($pdo, $user_id) {
       $acos
     );
 
-    $campaigns[] = array($result[$i]['campaign_name'] => $result[$i]['amz_campaign_id']);
+    $campaigns[] = array(htmlspecialchars($result[$i]['campaign_name']) => $result[$i]['amz_campaign_id']);
   }
   return [$output, $campaigns];
 }
@@ -148,7 +148,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
       $acos
     );
 
-    $adgroups[] = array($result[$i]['ad_group_name'] => $result[$i]['amz_adgroup_id']);
+    $adgroups[] = array(htmlspecialchars($result[$i]['ad_group_name']) => $result[$i]['amz_adgroup_id']);
   }
   return [$output, $adgroups];
 }
