@@ -76,6 +76,19 @@ $(document).ready( function () {
 	}
   );
 
+
+
+  $("a .c_link").click(function(e) {
+    var id = $(this).attr('data-id');
+    $.ajax({
+      type:"POST",
+      data: { id : id },
+      url: "delete-project.php",
+      success: function(result){
+        $("#dialog-example").modal('hide');
+      }
+  });
+
 } );
 
 </script>
