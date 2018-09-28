@@ -65,7 +65,7 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
-		$('.sorting_1 input').bootstrapToggle();
+		    $('.sorting_1 input').bootstrapToggle();
 
         $(".c_link").on("click", function() {
           var campaignName     = $(this).text();
@@ -114,7 +114,6 @@ $(document).ready( function () {
 
               dt.destroy();
               dt = $("#campaign_manager").DataTable(adgrOptions);
-              dt.ajax.reload();
             },
 
             error: function(msg) {
