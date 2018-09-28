@@ -24,6 +24,7 @@ $campaignDataBack  = $result[1];
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
     <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
+    <table id="adgroup_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
   </div>
 </div>
 
