@@ -94,10 +94,11 @@ $(document).ready( function () {
       url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
 
       success: function(data){
-
+        console.log('running...');
         var dataset         = data[0];
         var adgroupDataBack = data[1];
-
+        console.log(dataset);
+        console.log(adgroupDataBack);
         var adgrOptions = {
           columns: [
             { title: "Active" },
