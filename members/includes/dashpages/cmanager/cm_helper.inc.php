@@ -152,3 +152,17 @@ function cmGetAdGroupData($pdo, $campaignId) {
   }
   return [$output, $adgroups];
 }
+
+/*
+ *  function cmGetKeywordData($pdo, $adgroupId) --> Array(Array $output, Array $keywords)
+ *    --> Get keyword metrics from DB to output to campaign manager
+ *
+ *      --> PDO $pdo        - database handle
+ *      --> Int $adgroupId  - adgroup ID to pull ad groups for
+ *      --> Array $output   - frontend adgroup data to be shown
+ *      --> Array $adgroups - backend adgroup data with ID's - "adgroup name" => adgroup ID
+ */
+
+function cmGetKeywordData($pdo, $adgroupId) {
+
+}

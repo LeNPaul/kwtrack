@@ -463,7 +463,7 @@
     for ($i = 0; $i < count($result); $i++) {
       // Unserialize the keyword's metric arrays
       $impressions = unserialize($result[$i]['impressions']);
-          $clicks = unserialize($result[$i]['clicks']);
+      $clicks = unserialize($result[$i]['clicks']);
       $ad_spend = unserialize($result[$i]['ad_spend']);
       $avg_cpc = unserialize($result[$i]['avg_cpc']);
       $units_sold = unserialize($result[$i]['units_sold']);
