@@ -67,7 +67,7 @@ $(document).ready( function () {
   );
 
   var cm = $('#campaign_manager').DataTable();
-  cm.columns.adjust();
+  cm.columns.adjust().draw();
 
 } );
 
