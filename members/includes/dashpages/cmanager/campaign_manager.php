@@ -74,7 +74,7 @@ $(document).ready( function () {
   $(".c_link").click(function(e) {
     var campaignName = $(this).text();
     console.log(campaignName);
-    alert('asdfadsfdsfdsf');
+    //alert('asdfadsfdsfdsf');
     /*$.ajax({
       type: "POST",
       data: { id : id },
