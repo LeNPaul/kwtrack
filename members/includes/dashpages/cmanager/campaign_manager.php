@@ -62,9 +62,11 @@ $(document).ready( function () {
 	  //initComplete: function(settings, json) {
 		  //$('.sorting_1 input').bootstrapToggle();
 	  //}
-
-			var cm = $('#campaign_manager').DataTable();
-			cm.columns.adjust().draw();
+	  drawCallback: function(settings) {
+		  $('.sorting_1 input').bootstrapToggle();
+	  }
+			//var cm = $('#campaign_manager').DataTable();
+			//cm.columns.adjust().draw();
 	  }
 	}
   );
