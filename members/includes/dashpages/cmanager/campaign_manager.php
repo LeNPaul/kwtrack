@@ -113,7 +113,7 @@ $(document).ready( function () {
               };
 
               dt.destroy();
-              dt = $("#adgroup_manager").DataTable(adgrOptions);
+              $("#adgroup_manager").DataTable(adgrOptions);
             },
 
             error: function(msg) {
