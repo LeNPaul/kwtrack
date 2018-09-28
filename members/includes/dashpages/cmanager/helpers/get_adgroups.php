@@ -1,5 +1,6 @@
 <?php
 include '../cm_helper.inc.php';
+include '../../../../database/pdo.inc.php';
 
 $campaignName     = $_POST['campaignName'];
 $campaignDataBack = $_POST['campaignDataBack'];
