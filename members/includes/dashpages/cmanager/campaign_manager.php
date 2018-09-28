@@ -31,7 +31,7 @@ $campaignDataBack  = $result[1];
 $(document).ready( function () {
 
   var dataset = <?= json_encode($campaignDataFront) ?>;
-  console.log(dataset);
+
   var dt = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
@@ -85,7 +85,7 @@ $(document).ready( function () {
           success: function(data){
             console.log('running...');
             data = JSON.parse(data);
-            console.log(data);
+            console.log('DATASET: ' + data);
 
             var dataset         = data[0];
             var adgroupDataBack = data[1];
