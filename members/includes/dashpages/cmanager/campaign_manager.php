@@ -95,6 +95,7 @@ $(document).ready( function () {
 
       success: function(data){
         console.log('running...');
+        console.log(data);
         var dataset         = data[0];
         var adgroupDataBack = data[1];
         console.log(dataset);
