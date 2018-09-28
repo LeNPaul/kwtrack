@@ -112,6 +112,7 @@ $(document).ready( function () {
                 data: dataset
               };
 
+              dt.destroy();
               dt = $("#campaign_manager").DataTable(adgrOptions);
               table.ajax.reload();
             },
