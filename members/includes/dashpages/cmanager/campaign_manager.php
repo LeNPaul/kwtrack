@@ -114,6 +114,7 @@ $(document).ready( function () {
 
             dt.destroy();
             dt = $("#campaign_manager").DataTable(adgrOptions);
+            dt.draw();
           },
 
           error: function(msg) {
