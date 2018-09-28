@@ -123,8 +123,7 @@ $(document).ready( function () {
           }); //ajax
         }); //on Click
 	  } //drawCallback
-	} //DataTable
-  ); //document.ready
+	}); //DataTable
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
@@ -133,7 +132,7 @@ $(document).ready( function () {
 
 
 
-} );
+}); //document.ready
 
 
 </script>
