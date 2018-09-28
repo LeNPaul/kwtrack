@@ -72,10 +72,11 @@ function cmGetCampaignData($pdo, $user_id) {
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
+    $campaignLink = '<a href="#" class="c_link">' . $result[$i]['campaign_name'] . '</a>';
 
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
-      $result[$i]['campaign_name'],
+      $campaignLink,
 	    $result[$i]['status'],
       '$' . $result[$i]['daily_budget'],
       $result[$i]['targeting_type'],
