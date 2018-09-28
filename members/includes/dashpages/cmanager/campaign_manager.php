@@ -13,7 +13,11 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $cGroupsExist = (count($result) == 0) ? 0 : 1;
 
-$campaignData = cmGetCampaignData($pdo, $user_id);
+$result = cmGetCampaignData($pdo, $user_id);
+$campaignDataFront = $result[0];
+$campaignDataBack  = $result[1];
+
+
 ?>
 
 <h2>Campaigns</h2>
@@ -26,7 +30,7 @@ $campaignData = cmGetCampaignData($pdo, $user_id);
 
 <script>
 $(document).ready( function () {
-  var dataset = <?= json_encode($campaignData) ?>;
+  var dataset = <?= json_encode($campaignDataFront) ?>;
 
   $('#campaign_manager').DataTable(
     {
@@ -59,14 +63,11 @@ $(document).ready( function () {
         { title: "Sales" },
         { title: "ACoS" }
       ],
-	  //initComplete: function(settings, json) {
+	  initComplete: function(settings, json) {
 		  //$('.sorting_1 input').bootstrapToggle();
-	  //}
-	  drawCallback: function(settings) {
-		  $('.sorting_1 input').bootstrapToggle();
-	  }
-			//var cm = $('#campaign_manager').DataTable();
-			//cm.columns.adjust().draw();
+
+			var cm = $('#campaign_manager').DataTable();
+			cm.columns.adjust().draw();
 	  }
 	}
   );
