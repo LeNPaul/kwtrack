@@ -81,6 +81,8 @@ $(document).ready( function () {
     var campaignName     = $(this).text();
     var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
 
+    console.log(campaignDataBack);
+
     $.ajax({
       type: "POST",
 
