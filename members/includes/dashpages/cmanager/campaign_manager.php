@@ -87,7 +87,7 @@ $(document).ready( function () {
             data = JSON.parse(data);
             console.log(data);
 
-            var dataset         = data[0];
+            var dataset         = data[0][0];
             var adgroupDataBack = data[1];
 
             console.log('DATASET: ');
