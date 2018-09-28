@@ -35,6 +35,7 @@ $(document).ready( function () {
   var dataset = <?= json_encode($campaignDataFront) ?>;
 
   var dt = $('#campaign_manager').DataTable(
+  var table = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
       // responsive: true,
