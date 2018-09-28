@@ -90,7 +90,7 @@ function cmGetCampaignData($pdo, $user_id) {
       $acos
     );
 
-    $campaigns = htmlspecialchars($result[$i]['campaign_name']) => $result[$i]['amz_campaign_id'];
+    $campaigns[htmlspecialchars($result[$i]['campaign_name'])] = $result[$i]['amz_campaign_id'];
   }
   return [$output, $campaigns];
 }
