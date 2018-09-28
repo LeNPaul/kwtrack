@@ -65,67 +65,65 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
-		  $('.sorting_1 input').bootstrapToggle();
+		$('.sorting_1 input').bootstrapToggle();
 
-      $(".c_link").on("click", function() {
-        var campaignName     = $(this).text();
-        var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
+        $(".c_link").on("click", function() {
+          var campaignName     = $(this).text();
+          var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
 
-        $.ajax({
-          type: "POST",
+          $.ajax({
+            type: "POST",
 
-          data: {
-            "campaignName"     : campaignName,
-            "campaignDataBack" : campaignDataBack
-          },
-          dataType: "text",
+            data: {
+              "campaignName"     : campaignName,
+              "campaignDataBack" : campaignDataBack
+            },
+            dataType: "text",
 
-          url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
+            url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
 
-          success: function(data){
-            console.log('running...');
-            data = JSON.parse(data);
-            console.log(data);
+            success: function(data){
+              console.log('running...');
+              data = JSON.parse(data);
+              console.log(data);
 
-            var dataset         = data[0];
-            var adgroupDataBack = data[1];
+              var dataset         = data[0];
+              var adgroupDataBack = data[1];
 
-            console.log('DATASET: ');
-            console.log(dataset);
-            //console.log(adgroupDataBack);
+              console.log('DATASET: ');
+              console.log(dataset);
+              //console.log(adgroupDataBack);
 
-            var adgrOptions = {
-              columns: [
-                { title: "Active" },
-                { title: "Ad Group Name" },
-                { title: "Status" },
-                { title: "Default Bid" },
-                { title: "Impressions" },
-                { title: "Clicks" },
-                { title: "CTR" },
-                { title: "Ad Spend" },
-                { title: "Avg. CPC" },
-                { title: "Units Sold" },
-                { title: "Sales" },
-                { title: "ACoS" }
-              ],
-              data: dataset
-            };
+              var adgrOptions = {
+                columns: [
+                  { title: "Active" },
+                  { title: "Ad Group Name" },
+                  { title: "Status" },
+                  { title: "Default Bid" },
+                  { title: "Impressions" },
+                  { title: "Clicks" },
+                  { title: "CTR" },
+                  { title: "Ad Spend" },
+                  { title: "Avg. CPC" },
+                  { title: "Units Sold" },
+                  { title: "Sales" },
+                  { title: "ACoS" }
+                ],
+                data: dataset
+              };
 
-            dt = $("#campaign_manager").DataTable(adgrOptions);
-            table.ajax.reload();
-          },
+              dt = $("#campaign_manager").DataTable(adgrOptions);
+              table.ajax.reload();
+            },
 
-          error: function(msg) {
-            alert(msg);
-          }
-
-        });
-      });
-
-	  }
-	}
-  );
+            error: function(msg) {
+              alert(msg);
+            } //error
+          }); //ajax
+        }); //on Click
+	  } //drawCallback
+	} //DataTable
+  ); //document.ready
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
