@@ -97,7 +97,7 @@ $(document).ready( function () {
 
         console.log(data);
 
-        var dataset         = data[0];
+        var dataset         = data[0][0];
         var adgroupDataBack = data[1];
         console.log(dataset);
         console.log(adgroupDataBack);
