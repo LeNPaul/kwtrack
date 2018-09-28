@@ -4,8 +4,7 @@ include '../../../../database/pdo.inc.php';
 
 $campaignName     = $_POST['campaignName'];
 $campaignDataBack = $_POST['campaignDataBack'];
-//$campaignId       = $campaignDataBack[$campaignName];
+$campaignId       = $campaignDataBack[$campaignName];
 
-//return cmGetAdGroupData($pdo, $campaignId);
-return $campaignDataBack;
+return cmGetAdGroupData($pdo, $campaignId);
 ?>
