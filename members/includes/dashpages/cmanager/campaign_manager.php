@@ -79,7 +79,7 @@ $(document).ready( function () {
 
   $(".c_link").on("click", function() {
     var campaignName     = $(this).text();
-    var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
+    var campaignDataBack = <?= json_encode($campaignDataBack, true) ?>;
 
     console.log(campaignDataBack);
 
