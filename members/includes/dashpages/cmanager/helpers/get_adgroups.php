@@ -6,7 +6,7 @@ $campaignName     = htmlspecialchars($_POST['campaignName']);
 $campaignDataBack = $_POST['campaignDataBack'];
 $campaignId       = $campaignDataBack[$campaignName];
 
-print_r(cmGetAdGroupData($pdo, $campaignId));
+echo json_encode(cmGetAdGroupData($pdo, $campaignId), true);
 
 //return cmGetAdGroupData($pdo, $campaignId);
 ?>

@@ -94,7 +94,7 @@ $(document).ready( function () {
 
       success: function(data){
         console.log('running...');
-
+        data = JSON.parse(data);
         console.log(data);
 
         var dataset         = data[0][0];
