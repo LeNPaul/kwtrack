@@ -85,12 +85,12 @@ $(document).ready( function () {
           success: function(data){
             console.log('running...');
             data = JSON.parse(data);
-            console.log('DATASET: ' + data);
+            console.log(data);
 
             var dataset         = data[0];
             var adgroupDataBack = data[1];
 
-            console.log(dataset);
+            console.log('DATASET: ' + dataset);
             console.log(adgroupDataBack);
 
             var adgrOptions = {
