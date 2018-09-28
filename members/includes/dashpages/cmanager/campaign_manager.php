@@ -98,6 +98,13 @@ $(document).ready( function () {
               //console.log(adgroupDataBack);
 
               var adgrOptions = {
+                scrollX: true,
+                paging: true,
+                pagingType: "full_numbers",
+                lengthMenu: [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"]
+                  ],
                 data: dataset,
                 columns: [
                   { title: "Active" },
@@ -112,8 +119,31 @@ $(document).ready( function () {
                   { title: "Units Sold" },
                   { title: "Sales" },
                   { title: "ACoS" }
-                ]
-              };
+                ],
+
+                drawCallback: function(settings) {
+                  $('td input').bootstrapToggle();
+
+                  $(".ag_link").on("click", function() {
+                    var adgroupName     = $(this).text();
+                    // backend adgroup data already stored in adgroupDataBack
+                    dt.destroy();
+
+                    $.ajax({
+                      type: "POST";
+
+                      data: {
+                        
+                      }
+
+                    });
+
+                  }); // .ag_link on click
+
+                } // drawCallback
+
+              }; // adgrOptions
+
               console.log('creating new table');
               dt.destroy();
               dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
