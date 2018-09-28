@@ -67,7 +67,7 @@ $(document).ready( function () {
 	  //}
 	  drawCallback: function(settings) {
 		  $('.sorting_1 input').bootstrapToggle();
-		  console.log($('.sorting_1 input').bootstrapToggle());
+		  console.log($('.sorting_1 input').bootstrapToggle(););
 	  }
 
 			var cm = $('#campaign_manager').DataTable();
