@@ -120,8 +120,11 @@ $(document).ready( function () {
 	}
   );
 
+    $('#campaign_manager tbody').on('click', 'tr', function() {
+	  $(this).toggleClass('selected');
+	  alert("clicked");
+  });
 } );
-
 
 
 </script>
