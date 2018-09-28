@@ -95,6 +95,7 @@ $(document).ready( function () {
               //console.log(adgroupDataBack);
 
               var adgrOptions = {
+                data: dataset,
                 columns: [
                   { title: "Active" },
                   { title: "Ad Group Name" },
@@ -108,8 +109,7 @@ $(document).ready( function () {
                   { title: "Units Sold" },
                   { title: "Sales" },
                   { title: "ACoS" }
-                ],
-                data: dataset
+                ]
               };
 
               dt.destroy();
