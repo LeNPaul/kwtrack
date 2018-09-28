@@ -114,7 +114,7 @@ $(document).ready( function () {
 
               dt.destroy();
               dt = $("#campaign_manager").DataTable(adgrOptions);
-              table.ajax.reload();
+              dt.ajax.reload();
             },
 
             error: function(msg) {
