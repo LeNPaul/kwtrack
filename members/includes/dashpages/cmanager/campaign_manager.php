@@ -67,12 +67,13 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
-		    $('.sorting_1 input').bootstrapToggle();
+		    $('td input').bootstrapToggle();
 
         $(".c_link").on("click", function() {
           var campaignName     = $(this).text();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           dt.destroy();
+
           $.ajax({
             type: "POST",
 
