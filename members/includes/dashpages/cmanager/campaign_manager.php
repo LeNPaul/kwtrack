@@ -88,6 +88,7 @@ $(document).ready( function () {
         "campaignName"     : campaignName,
         "campaignDataBack" : campaignDataBack
       },
+      dataType: "json",
 
       url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
 
