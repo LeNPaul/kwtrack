@@ -68,23 +68,23 @@ $(document).ready( function () {
 
 	  drawCallback: function(settings) {
 		  $('.sorting_1 input').bootstrapToggle();
+
+      $(".c_link").on("click", function() {
+        var campaignName = $(this).text();
+        console.log(campaignName);
+        //alert('asdfadsfdsfdsf');
+        /*$.ajax({
+          type: "POST",
+          data: { id : id },
+          url: "delete-project.php",
+          success: function(result){
+            $("#dialog-example").modal('hide');
+          }
+        });*/
+      });
 	  }
 	}
   );
-
-  $(".c_link").on("click", function() {
-    var campaignName = $(this).text();
-    console.log(campaignName);
-    //alert('asdfadsfdsfdsf');
-    /*$.ajax({
-      type: "POST",
-      data: { id : id },
-      url: "delete-project.php",
-      success: function(result){
-        $("#dialog-example").modal('hide');
-      }
-    });*/
-  });
 
 } );
 
