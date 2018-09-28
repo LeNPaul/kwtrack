@@ -109,7 +109,7 @@
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(
         ':value'            => serialize($dbVar[$i]),
-        ':amz_adgroup_id'  => $arrAdGroupIds[$i]
+        ':amz_adgroup_id'   => $arrAdGroupIds[$i]
       ));
     }
  }

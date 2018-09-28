@@ -28,7 +28,7 @@ function cmCheckboxState($status) {
 }
 
 /*
- *  function cmGetCampaignData(PDO $pdo, Int $user_id) --> Array($output, $campaigns)
+ *  function cmGetCampaignData(PDO $pdo, Int $user_id) --> Array(Array $output, Array $campaigns)
  *    --> Gets campaign metrics from DB to output onto campaign manager.
  *
  *      --> PDO $pdo         - database handle
@@ -92,5 +92,63 @@ function cmGetCampaignData($pdo, $user_id) {
 
     $campaigns[] = array($result[$i]['campaign_name'] => $result[$i]['amz_campaign_id']);
   }
-  return array($output, $campaigns);
+  return [$output, $campaigns];
+}
+
+/*
+ *  function cmGetAdGroupData($pdo, $campaignId) --> Array(Array $output, Array $adgroups)
+ *    --> Get ad group metrics from DB to output to campaign manager
+ *
+ *      --> PDO $pdo        - database handle
+ *      --> Int $campaignId - campaign ID to pull ad groups for
+ *      --> Array $output   - frontend adgroup data to be shown
+ *      --> Array $adgroups - backend adgroup data with ID's - "adgroup name" => adgroup ID
+ */
+
+function cmGetAdGroupData($pdo, $campaignId) {
+  $output   = [];
+  $adgroups = [];
+  $sql = "SELECT * FROM ad_groups WHERE amz_campaign_id={$campaignId}";
+  $stmt = $pdo->query($sql);
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  for ($i = 0; $i < count($result); $i++) {
+    $ad_spend    = array_sum(unserialize($result[$i]['ad_spend']));
+    $sales       = array_sum(unserialize($result[$i]['sales']));
+    $impressions = array_sum(unserialize($result[$i]['impressions']));
+    $clicks      = array_sum(unserialize($result[$i]['clicks']));
+    $ctr         = round(calculateMetricAvg(unserialize($result[$i]['ctr'])), 2);
+    $avg_cpc     = round(calculateMetricAvg(unserialize($result[$i]['avg_cpc'])), 2);
+    $units_sold  = array_sum(unserialize($result[$i]['units_sold']));
+
+    // Replace any 0's with "-"
+    $acos        = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
+    $ad_spend    = ($ad_spend == 0) ? '-' : '$' . round($ad_spend, 2);
+    $sales       = ($sales == 0) ? '-' : '$' . round($sales, 2);
+    $impressions = ($impressions == 0) ? '-' : $impressions;
+    $clicks      = ($clicks == 0) ? '-' : $clicks;
+    $ctr         = ($ctr == 0) ? '-' : $ctr . '%';
+    $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
+    $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
+
+    $adgroupLink = '<a href="#" class="c_link">' . $result[$i]['ad_group_name'] . '</a>';
+
+    $output[] = array(
+	    cmCheckboxState($result[$i]['status']),
+      $adgroupLink,
+	    $result[$i]['status'],
+      '$' . $result[$i]['daily_budget'],
+      $impressions,
+      $clicks,
+      $ctr,
+      $ad_spend,
+      $avg_cpc,
+      $units_sold,
+      $sales,
+      $acos
+    );
+
+    $adgroups[] = array($result[$i]['ad_group_name'] => $result[$i]['amz_adgroup_id']);
+  }
+  return [$output, $adgroups];
 }

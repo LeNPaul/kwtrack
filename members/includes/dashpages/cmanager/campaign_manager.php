@@ -70,17 +70,51 @@ $(document).ready( function () {
 		  $('.sorting_1 input').bootstrapToggle();
 
       $(".c_link").on("click", function() {
-        var campaignName = $(this).text();
-        console.log(campaignName);
-        //alert('asdfadsfdsfdsf');
-        /*$.ajax({
+        var campaignName     = $(this).text();
+        var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
+
+        $.ajax({
           type: "POST",
-          data: { id : id },
-          url: "delete-project.php",
-          success: function(result){
-            $("#dialog-example").modal('hide');
+
+          data: {
+            "campaignName"     : campaignName,
+            "campaignDataBack" : campaignDataBack
+          },
+
+          url: "helpers/get_adgroups.php",
+
+          success: function(data){
+
+            var dataset         = data[0];
+            var adgroupDataBack = data[1];
+
+            var adgrOptions = {
+              columns: [
+                { title: "Active" },
+                { title: "Ad Group Name" },
+                { title: "Status" },
+                { title: "Budget" },
+                { title: "Impressions" },
+                { title: "Clicks" },
+                { title: "CTR" },
+                { title: "Ad Spend" },
+                { title: "Avg. CPC" },
+                { title: "Units Sold" },
+                { title: "Sales" },
+                { title: "ACoS" }
+              ],
+              data: dataset,
+              bDestroy: true
+            };
+
+            var dt = $("#campaign_manager").Datatable(adgrOptions);
+          },
+
+          error: function(msg) {
+            alert(msg);
           }
-        });*/
+
+        });
       });
 	  }
 	}
