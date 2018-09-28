@@ -107,7 +107,7 @@ $(document).ready( function () {
               bDestroy: true
             };
 
-            var dt = $("#campaign_manager").Datatable(adgrOptions);
+            var dt = $("#campaign_manager").DataTable(adgrOptions);
           },
 
           error: function(msg) {
