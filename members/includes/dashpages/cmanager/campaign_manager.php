@@ -113,8 +113,8 @@ $(document).ready( function () {
             };
 
             dt.destroy();
-            dt = $("#campaign_manager").DataTable(adgrOptions);
-            dt.draw();
+            table = $("#campaign_manager").DataTable(adgrOptions);
+            table.draw();
           },
 
           error: function(msg) {
