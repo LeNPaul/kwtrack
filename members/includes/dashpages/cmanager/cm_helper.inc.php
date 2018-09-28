@@ -148,7 +148,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
       $acos
     );
 
-    $adgroups[array(htmlspecialchars($result[$i]['ad_group_name'])] = $result[$i]['amz_adgroup_id']);
+    $adgroups[htmlspecialchars($result[$i]['ad_group_name'])] = $result[$i]['amz_adgroup_id']);
   }
   return [$output, $adgroups];
 }
