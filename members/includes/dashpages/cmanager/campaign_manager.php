@@ -133,7 +133,19 @@ $(document).ready( function () {
                       type: "POST";
 
                       data: {
-                        
+                        "adgroupName"     : adgroupName,
+                        "adgroupDataBack" : adgroupDataBack
+                      },
+                      dataType: "text",
+
+                      url: "includes/dashpages/cmanager/helpers/get_keywords.php",
+
+                      success: function(data) {
+
+                      },
+
+                      error: function(msg) {
+                        alert(msg);
                       }
 
                     });
