@@ -77,6 +77,7 @@ $(document).ready( function () {
 
   $("a.c_link").click(function(e) {
     var campaignName = $(this).text();
+    console.log(campaignName);
     alert('asdfadsfdsfdsf');
     /*$.ajax({
       type: "POST",
