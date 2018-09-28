@@ -76,15 +76,16 @@ $(document).ready( function () {
 
 
   $("a.c_link").click(function(e) {
-    var campaignName = $(this).attr('data-id');
-    $.ajax({
+    var campaignName = $(this).text();
+    alert(campaignName);
+    /*$.ajax({
       type: "POST",
       data: { id : id },
       url: "delete-project.php",
       success: function(result){
         $("#dialog-example").modal('hide');
       }
-    });
+    });*/
   } );
 
 } );
