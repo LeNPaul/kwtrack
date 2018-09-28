@@ -94,8 +94,6 @@ $(document).ready( function () {
               console.log(dataset);
               //console.log(adgroupDataBack);
 
-              dt.destroy();
-
               var adgrOptions = {
                 data: dataset,
                 columns: [
@@ -114,8 +112,8 @@ $(document).ready( function () {
                 ]
               };
 
-
-              dt = $("#campaign_manager").DataTable(adgrOptions);
+              dt.destroy();
+              dt = $("#adgroup_manager").DataTable(adgrOptions);
             },
 
             error: function(msg) {
