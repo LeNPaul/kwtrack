@@ -62,15 +62,11 @@ $(document).ready( function () {
         { title: "Sales" },
         { title: "ACoS" }
       ],
-	  //initComplete: function(settings, json) {
-		  //$('.sorting_1 input').bootstrapToggle();
-	  //}
+	  
 	  drawCallback: function(settings) {
 		  $('.sorting_1 input').bootstrapToggle();
 	  }
 	}
-/* 			var cm = $('#campaign_manager').DataTable();
-			cm.columns.adjust().draw(); */
   );
 
 
