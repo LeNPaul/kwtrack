@@ -81,7 +81,7 @@ $(document).ready( function () {
             "campaignDataBack" : campaignDataBack
           },
 
-          url: "helpers/get_adgroups.php",
+          url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
 
           success: function(data){
 
@@ -120,10 +120,11 @@ $(document).ready( function () {
 	}
   );
 
-    $('#campaign_manager tbody').on('click', 'tr', function() {
+  $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
-	  alert("clicked");
+	  //alert("clicked");
   });
+
 } );
 
 
