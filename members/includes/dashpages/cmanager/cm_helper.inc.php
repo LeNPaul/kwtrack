@@ -28,14 +28,18 @@ function cmCheckboxState($status) {
 }
 
 /*
- *  function cmGetCampaignData(PDO $pdo, Int $user_id) --> Array $output
+ *  function cmGetCampaignData(PDO $pdo, Int $user_id) --> Array($output, $campaigns)
  *    --> Gets campaign metrics from DB to output onto campaign manager.
  *
- *      --> PDO $pdo     - database handle
- *      --> Int $user_id - user id of the user
+ *      --> PDO $pdo         - database handle
+ *      --> Int $user_id     - user id of the user
+ *      --> Array $output    - frontend data that user sees on Datatables
+ *      --> Array $campaigns - server side associative array of "campaign name" => campaign ID
+ *                             Use this to make AJAX request to pull ad group data
  */
 function cmGetCampaignData($pdo, $user_id) {
   $output = [];
+  $campaigns = [];
   $sql = "SELECT * FROM campaigns WHERE user_id={$user_id}";
   $stmt = $pdo->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -84,6 +88,8 @@ function cmGetCampaignData($pdo, $user_id) {
       $sales,
       $acos
     );
+
+    $campaigns[] = array($result[$i]['campaign_name'] => $result[$i]['amz_campaign_id']);
   }
-  return $output;
+  return array($output, $campaigns);
 }
