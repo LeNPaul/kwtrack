@@ -34,7 +34,7 @@ $(document).ready( function () {
 
   var dataset = <?= json_encode($campaignDataFront) ?>;
 
-  $('#campaign_manager').DataTable(
+  var dt = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
       // responsive: true,
@@ -113,11 +113,11 @@ $(document).ready( function () {
             { title: "Sales" },
             { title: "ACoS" }
           ],
-          data: dataset,
-          destroy: true
+          data: dataset
         };
 
-        var dt = $("#campaign_manager").DataTable(adgrOptions);
+        dt.destroy();
+        dt = $("#campaign_manager").DataTable(adgrOptions);
       },
 
       error: function(msg) {
