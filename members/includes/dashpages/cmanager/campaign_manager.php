@@ -90,8 +90,9 @@ $(document).ready( function () {
             var dataset         = data[0];
             var adgroupDataBack = data[1];
 
-            console.log('DATASET: ' + dataset);
-            console.log(adgroupDataBack);
+            console.log('DATASET: ');
+            console.log(dataset);
+            //console.log(adgroupDataBack);
 
             var adgrOptions = {
               columns: [
