@@ -17,10 +17,6 @@ $result = cmGetCampaignData($pdo, $user_id);
 $campaignDataFront = $result[0];
 $campaignDataBack  = $result[1];
 
-echo '<pre>';
-var_dump($campaignDataBack);
-echo '</pre>';
-
 ?>
 
 <h2>Campaigns</h2>
@@ -84,8 +80,6 @@ $(document).ready( function () {
   $(".c_link").on("click", function() {
     var campaignName     = $(this).text();
     var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
-
-    console.log(campaignDataBack);
 
     $.ajax({
       type: "POST",
