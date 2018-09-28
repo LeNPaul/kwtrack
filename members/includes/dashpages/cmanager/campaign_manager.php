@@ -17,6 +17,9 @@ $result = cmGetCampaignData($pdo, $user_id);
 $campaignDataFront = $result[0];
 $campaignDataBack  = $result[1];
 
+echo '<pre>';
+var_dump($campaignDataBack);
+echo '</pre>';
 
 ?>
 
