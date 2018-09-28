@@ -137,7 +137,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
 	    cmCheckboxState($result[$i]['status']),
       $adgroupLink,
 	    $result[$i]['status'],
-      '$' . $result[$i]['daily_budget'],
+      $result[$i]['default_bid'],
       $impressions,
       $clicks,
       $ctr,
@@ -148,7 +148,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
       $acos
     );
 
-    $adgroups[] = array(htmlspecialchars($result[$i]['ad_group_name']) => $result[$i]['amz_adgroup_id']);
+    $adgroups[array(htmlspecialchars($result[$i]['ad_group_name'])] = $result[$i]['amz_adgroup_id']);
   }
   return [$output, $adgroups];
 }

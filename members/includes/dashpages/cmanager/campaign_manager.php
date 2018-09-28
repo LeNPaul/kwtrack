@@ -109,7 +109,7 @@ $(document).ready( function () {
             { title: "Active" },
             { title: "Ad Group Name" },
             { title: "Status" },
-            { title: "Budget" },
+            { title: "Default Bid" },
             { title: "Impressions" },
             { title: "Clicks" },
             { title: "CTR" },
