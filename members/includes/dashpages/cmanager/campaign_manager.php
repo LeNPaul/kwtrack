@@ -32,7 +32,7 @@ $(document).ready( function () {
     {
       // buttons: ['copy'],
       // responsive: true,
-      //autoWidth: true,
+      // autoWidth: true,
       scrollX: true,
       paging: true,
       pagingType: "full_numbers",
