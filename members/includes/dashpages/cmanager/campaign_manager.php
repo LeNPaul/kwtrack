@@ -30,19 +30,7 @@ $campaignDataBack  = $result[1];
 <script>
 $(document).ready( function () {
 
-  $(".c_link").click(function(e) {
-    var campaignName = $(this).text();
-    console.log(campaignName);
-    //alert('asdfadsfdsfdsf');
-    /*$.ajax({
-      type: "POST",
-      data: { id : id },
-      url: "delete-project.php",
-      success: function(result){
-        $("#dialog-example").modal('hide');
-      }
-    });*/
-  } );
+
 
   var dataset = <?= json_encode($campaignDataFront) ?>;
 
@@ -84,9 +72,19 @@ $(document).ready( function () {
 	}
   );
 
-
-
-
+  $(".c_link").click(function(e) {
+    var campaignName = $(this).text();
+    console.log(campaignName);
+    //alert('asdfadsfdsfdsf');
+    /*$.ajax({
+      type: "POST",
+      data: { id : id },
+      url: "delete-project.php",
+      success: function(result){
+        $("#dialog-example").modal('hide');
+      }
+    });*/
+  } );
 
 } );
 
