@@ -114,7 +114,7 @@ $(document).ready( function () {
                 ]
               };
               console.log('creating new table');
-
+              dt.destroy();
               dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
             },
 
