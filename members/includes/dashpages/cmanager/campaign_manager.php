@@ -111,7 +111,7 @@ $(document).ready( function () {
                   { title: "ACoS" }
                 ]
               };
-
+              console.log('creating new table');
               dt.destroy();
               $("#adgroup_manager").DataTable(adgrOptions);
             },
