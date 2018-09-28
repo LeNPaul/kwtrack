@@ -72,7 +72,7 @@ $(document).ready( function () {
 	}
   );
 
-  $(".c_link").click(function(e) {
+  $(".c_link").on("click", function() {
     var campaignName = $(this).text();
     console.log(campaignName);
     //alert('asdfadsfdsfdsf');
@@ -84,7 +84,7 @@ $(document).ready( function () {
         $("#dialog-example").modal('hide');
       }
     });*/
-  } );
+  });
 
 } );
 
