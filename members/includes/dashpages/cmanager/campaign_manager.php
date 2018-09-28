@@ -60,14 +60,13 @@ $(document).ready( function () {
         { title: "ACoS" }
       ],
 	  initComplete: function(settings, json) {
-		  $('.sorting_1 input').bootstrapToggle();
-		  console.log($('.sorting_1 input').html());
+		  //$('.sorting_1 input').bootstrapToggle();
+		  
+			var cm = $('#campaign_manager').DataTable();
+			cm.columns.adjust().draw();
 	  }
 	}
   );
-
-  var cm = $('#campaign_manager').DataTable();
-  cm.columns.adjust().draw();
 
 } );
 
