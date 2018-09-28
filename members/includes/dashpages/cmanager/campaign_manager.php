@@ -68,7 +68,7 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
 		  $('.sorting_1 input').bootstrapToggle();
 		  console.log("done");
-	  }
+	  },
 
 			var cm = $('#campaign_manager').DataTable();
 			cm.columns.adjust().draw();
