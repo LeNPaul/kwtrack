@@ -72,7 +72,7 @@ $(document).ready( function () {
         $(".c_link").on("click", function() {
           var campaignName     = $(this).text();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
-          
+
           $.ajax({
             type: "POST",
 
@@ -115,7 +115,7 @@ $(document).ready( function () {
               };
               console.log('creating new table');
               dt.destroy();
-              dt = $("#adgroup_manager").DataTable(adgrOptions);
+              dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
             },
 
             error: function(msg) {
