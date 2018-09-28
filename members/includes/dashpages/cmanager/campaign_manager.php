@@ -103,7 +103,8 @@ $(document).ready( function () {
                 { title: "Sales" },
                 { title: "ACoS" }
               ],
-              data: dataset
+              data: dataset,
+              destroy: true
             };
 
             var dt = $("#campaign_manager").DataTable(adgrOptions);
