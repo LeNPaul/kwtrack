@@ -128,7 +128,7 @@ $(document).ready( function () {
 
                     var adgroupName     = $(this).text();
                     // backend adgroup data already stored in adgroupDataBack
-                    dt.destroy();
+                    dt_adgroups.destroy();
 
                     $.ajax({
                       type: "POST",
