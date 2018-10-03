@@ -57,7 +57,7 @@ var_dump($result);
 echo '</pre>';
 
 $index = array_search2D($result, 'keywordId', 253);
-echo $index . '<br /><br />';
+var_dump($index);
 
 //
 // echo '<pre>';
