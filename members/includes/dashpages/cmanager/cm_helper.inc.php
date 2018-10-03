@@ -72,7 +72,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
-    $campaignLink = '<a href="#" class="c_link"><b>' . $result[$i]['campaign_name'] . '</b></a>';
+    $campaignLink = '<a href="" class="c_link"><b>' . $result[$i]['campaign_name'] . '</b></a>';
 
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
@@ -131,7 +131,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
-    $adgroupLink = '<a href="#" class="ag_link"><b>' . $result[$i]['ad_group_name'] . '</b></a>';
+    $adgroupLink = '<a href="" class="ag_link"><b>' . $result[$i]['ad_group_name'] . '</b></a>';
 
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
