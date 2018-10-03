@@ -41,13 +41,14 @@ $result2         = json_decode($result['response'], true);
 $reportId        = $result2['reportId'];
 
 // Keep pinging the report until we get a 200 code
-while ($code == 202) {
+while ($status == 'IN_PROGRESS') {
 	$result = $client->getReport($reportId);
+	$result = json_decode($result['response'], true);
 	echo '<pre>';
 	var_dump($result);
 	echo '</pre>';
-	$code   = $result['code'];
-	echo $code.'<br />';
+	$status = $result['status'];
+	echo $status.'<br />';
 }
 
 // Get the report using the report id
