@@ -99,7 +99,8 @@ for ($i = 0; $i < count($userIDs); $i++) {
 
     // foreach diff, find index of extra keywords in the report.
     for ($a = 0; $a < count($diff); $a++) {
-
+      $index = array_search2D($result, 'keywordId', $diff[$a]);
+      
     }
 
   } else {

@@ -56,12 +56,13 @@ echo '<pre>';
 var_dump($result);
 echo '</pre>';
 
-$index = array_search2D($result, 'keywordId', 253505656879259);
+$index = array_search2D($result, 'keywordId', 253);
 echo $index . '<br /><br />';
 
-echo '<pre>';
-var_dump($result[$index]);
-echo '</pre>';
+//
+// echo '<pre>';
+// var_dump($result[$index]);
+// echo '</pre>';
 
 
 ?>
