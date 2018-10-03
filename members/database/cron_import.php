@@ -5,7 +5,7 @@ include 'pdo.inc.php';
 $userIDs = [];
 $sql = "SELECT user_id FROM users WHERE active=5";
 $stmt = $pdo->query($sql);
-$userIDs = $stmt->execute(PDO::FETCH_COLUMN);
+$userIDs = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 echo '<pre>';
 var_dump($userIDs);
