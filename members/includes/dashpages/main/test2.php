@@ -43,8 +43,11 @@ $status = $result2['status'];
 while ($status == 'IN_PROGRESS') {
 	$result = $client->getReport($reportId);
 	$result = json_decode($result['response'], true);
-
+	echo '<pre>';
+	var_dump($result);
+	echo '</pre>';
 	$status = $result['status'];
+	echo $status.'<br />';
 }
 
 // Get the report using the report id
