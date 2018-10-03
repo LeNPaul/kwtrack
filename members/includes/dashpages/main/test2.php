@@ -38,7 +38,7 @@ echo '</pre>';
 $result = json_decode($result['response'], true);
 $reportId = $result['reportId'];
 
-//sleep(10);
+sleep(10);
 
 // Get the report using the report id
 $result = $client->getReport($reportId);
