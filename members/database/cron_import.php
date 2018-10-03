@@ -69,15 +69,17 @@ for ($i = 0; $i < count($userIDs); $i++) {
   // Get the report id so we can use it to get the report
   $result2         = json_decode($result['response'], true);
   $reportId        = $result2['reportId'];
-  // $reportIDs[]     = $reportId;
+  $status = $result2['status'];
 
   // Keep pinging the report until we get a 200 code
-  while ($code == 202) {
-    $result = $client->getReport($reportId);
-    $code   = $result['code'];
+  while ($status == 'IN_PROGRESS') {
+  	$result = $client->getReport($reportId);
+  	$result = json_decode($result['response'], true);
+  	$status = $result['status'];
   }
 
-  // Once the code is NOT 202, we know that we have a valid report. Store it in $result.
+  // Once the status is NOT "IN_PROGRESS", we know that we have the full report
+  $result = $client->getReport($reportId);
   $result = json_decode($result['response'], true);
 
   // Store all keyword IDs from the report in reportKeywordIDs
