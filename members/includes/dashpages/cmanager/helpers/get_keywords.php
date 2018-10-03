@@ -8,6 +8,6 @@ $adgroupDataBack = $_POST['adgroupDataBack'];
 // Get the ad group ID of the adgroup we want to pull keywords for
 $adgroupId = $adgroupDataBack[$adgroupName];
 
-echo json_encode(cmGetKeywordData($pdo, $adGroupId), true);
+echo json_encode(cmGetKeywordData($pdo, $adgroupId), true);
 
 ?>
