@@ -18,7 +18,7 @@ include 'pdo.inc.php';
  */
 
 function array_search2D($array, $key, $value) {
-  return (array_search($value, array_column($array, $key)););
+  return (array_search($value, array_column($array, $key)));
 }
 
 
