@@ -154,15 +154,56 @@ function cmGetAdGroupData($pdo, $campaignId) {
 }
 
 /*
- *  function cmGetKeywordData($pdo, $adgroupId) --> Array(Array $output, Array $keywords)
+ *  function cmGetKeywordData($pdo, $adgroupId) --> Array $keywords ("keywordName" => keywordId)
  *    --> Get keyword metrics from DB to output to campaign manager
  *
  *      --> PDO $pdo        - database handle
- *      --> Int $adgroupId  - adgroup ID to pull ad groups for
- *      --> Array $output   - frontend adgroup data to be shown
- *      --> Array $adgroups - backend adgroup data with ID's - "adgroup name" => adgroup ID
+ *      --> Int $adgroupId  - adgroup ID to pull keywords for
+ *      --> Array $keywords - backend keyword data with ID's - "keyword name" => keyword ID
  */
 
 function cmGetKeywordData($pdo, $adgroupId) {
+  $output   = [];
+  $keywords = [];
+  $sql = "SELECT * FROM ppc_keywords WHERE amz_adgroup_id={$adgroupId}";
+  $stmt = $pdo->query($sql);
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+  for ($i = 0; $i < count($result); $i++) {
+    $ad_spend    = array_sum(unserialize($result[$i]['ad_spend']));
+    $sales       = array_sum(unserialize($result[$i]['sales']));
+    $impressions = array_sum(unserialize($result[$i]['impressions']));
+    $clicks      = array_sum(unserialize($result[$i]['clicks']));
+    $ctr         = round(calculateMetricAvg(unserialize($result[$i]['ctr'])), 2);
+    $avg_cpc     = round(calculateMetricAvg(unserialize($result[$i]['avg_cpc'])), 2);
+    $units_sold  = array_sum(unserialize($result[$i]['units_sold']));
+
+    // Replace any 0's with "-"
+    $acos        = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
+    $ad_spend    = ($ad_spend == 0) ? '-' : '$' . round($ad_spend, 2);
+    $sales       = ($sales == 0) ? '-' : '$' . round($sales, 2);
+    $impressions = ($impressions == 0) ? '-' : $impressions;
+    $clicks      = ($clicks == 0) ? '-' : $clicks;
+    $ctr         = ($ctr == 0) ? '-' : $ctr . '%';
+    $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
+    $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
+
+    $output[] = array(
+	    cmCheckboxState($result[$i]['status']),
+      $result[$i]['keyword_text'],
+	    $result[$i]['status'],
+      $result[$i]['bid'],
+      $impressions,
+      $clicks,
+      $ctr,
+      $ad_spend,
+      $avg_cpc,
+      $units_sold,
+      $sales,
+      $acos
+    );
+
+    $keywords[htmlspecialchars($result[$i]['keyword_text'])] = $result[$i]['amz_kw_id'];
+  }
+  return [$output, $keywords];
 }

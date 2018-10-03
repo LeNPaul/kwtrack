@@ -125,6 +125,7 @@ $(document).ready( function () {
                   $('td input').bootstrapToggle();
 
                   $(".ag_link").on("click", function() {
+
                     var adgroupName     = $(this).text();
                     // backend adgroup data already stored in adgroupDataBack
                     dt.destroy();
@@ -136,17 +137,55 @@ $(document).ready( function () {
                         "adgroupName"     : adgroupName,
                         "adgroupDataBack" : adgroupDataBack
                       },
+
                       dataType: "text",
 
                       url: "includes/dashpages/cmanager/helpers/get_keywords.php",
 
                       success: function(data) {
+                        console.log("running keyword campaign manager section");
+                        data            = JSON.parse(data);
+                        dataset         = data[0];
+                        keywordDataBack =
 
-                      },
+                        var kwOptions = {
+                          scrollX: true,
+                          paging: true,
+                          pagingType: "full_numbers",
+                          lengthMenu: [
+                              [10, 25, 50, 100, -1],
+                              [10, 25, 50, 100, "All"]
+                            ],
+                          data: dataset,
+                          columns: [
+                            { title: "Active" },
+                            { title: "Ad Group Name" },
+                            { title: "Status" },
+                            { title: "Bid" },
+                            { title: "Impressions" },
+                            { title: "Clicks" },
+                            { title: "CTR" },
+                            { title: "Ad Spend" },
+                            { title: "Avg. CPC" },
+                            { title: "Units Sold" },
+                            { title: "Sales" },
+                            { title: "ACoS" }
+                          ],
+
+                          drawCallback: function(settings) {
+                            $('td input').bootstrapToggle();
+
+                          } // drawCallback (keyword manager)
+                        }; // kwOptions
+
+                        console.log("creating keyword table");
+                        dt_adgroups.destroy();
+                        dt_keywords = $("#keyword_manager").DataTable(kwOptions);
+                      }, // success (keyword manager)
 
                       error: function(msg) {
                         alert(msg);
-                      }
+                      } // error (keyword manager)
 
                     });
 
