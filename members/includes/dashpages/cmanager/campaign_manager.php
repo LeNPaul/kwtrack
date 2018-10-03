@@ -146,7 +146,7 @@ $(document).ready( function () {
                         console.log("running keyword campaign manager section");
                         data            = JSON.parse(data);
                         dataset         = data[0];
-                        keywordDataBack =
+                        keywordDataBack = data[1];
 
                         var kwOptions = {
                           scrollX: true,
