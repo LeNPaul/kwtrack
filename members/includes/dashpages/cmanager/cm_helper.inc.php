@@ -182,7 +182,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
     $acos        = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
     $ad_spend    = ($ad_spend == 0) ? '-' : '$' . round($ad_spend, 2);
     $sales       = ($sales == 0) ? '-' : '$' . round($sales, 2);
-    $impressions = ($impressions == 0) ? '-' : $impressions;
+    $impressions = ($impressions == 0) ? '<p class="text-center">-</p>' : $impressions;
     $clicks      = ($clicks == 0) ? '-' : $clicks;
     $ctr         = ($ctr == 0) ? '-' : $ctr . '%';
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;

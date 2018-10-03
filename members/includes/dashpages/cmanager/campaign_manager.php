@@ -188,7 +188,6 @@ $(document).ready( function () {
                           } // drawCallback (keyword manager)
                         }; // kwOptions
 
-                        console.log("creating keyword table");
                         dt_adgroups.destroy();
                         dt_keywords = $("#keyword_manager").DataTable(kwOptions);
                       }, // success (keyword manager)
@@ -205,7 +204,6 @@ $(document).ready( function () {
 
               }; // adgrOptions
 
-              console.log('creating new table');
               dt.destroy();
               dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
             },
@@ -217,6 +215,7 @@ $(document).ready( function () {
         }); //on Click
 	  } //drawCallback
 	}); //DataTable
+
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
