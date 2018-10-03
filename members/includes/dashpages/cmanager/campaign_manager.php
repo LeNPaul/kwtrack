@@ -169,6 +169,7 @@ $(document).ready( function () {
                           columns: [
                             { title: "Active" },
                             { title: "Keyword" },
+                            { title: "Match Type" },
                             { title: "Status" },
                             { title: "Bid" },
                             { title: "Impressions" },
