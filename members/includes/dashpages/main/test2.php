@@ -43,6 +43,9 @@ $reportId        = $result2['reportId'];
 // Keep pinging the report until we get a 200 code
 while ($code == 202) {
 	$result = $client->getReport($reportId);
+	echo '<pre>';
+	var_dump($result);
+	echo '</pre>';
 	$code   = $result['code'];
 	echo $code.'<br />';
 }
