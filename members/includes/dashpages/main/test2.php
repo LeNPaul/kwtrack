@@ -34,11 +34,18 @@ $result = $client->requestReport(
 	)
 );
 
-// Get the report id so we can use it to get the report
-$result = json_decode($result['response'], true);
-$reportId = $result['reportId'];
+$code = $result['code'];
 
-sleep(10);
+// Get the report id so we can use it to get the report
+$result2         = json_decode($result['response'], true);
+$reportId        = $result2['reportId'];
+
+// Keep pinging the report until we get a 200 code
+while ($code == 202) {
+	$result = $client->getReport($reportId);
+	$code   = $result['code'];
+	echo $code.'<br />';
+}
 
 // Get the report using the report id
 $result = $client->getReport($reportId);
