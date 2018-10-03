@@ -131,7 +131,7 @@ $(document).ready( function () {
                     dt.destroy();
 
                     $.ajax({
-                      type: "POST";
+                      type: "POST",
 
                       data: {
                         "adgroupName"     : adgroupName,
