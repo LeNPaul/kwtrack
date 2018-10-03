@@ -144,6 +144,8 @@ $(document).ready( function () {
 
                       success: function(data) {
                         console.log("running keyword campaign manager section");
+                        console.log(data);
+
                         data            = JSON.parse(data);
 
                         console.log(data);
