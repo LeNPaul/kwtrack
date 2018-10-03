@@ -168,7 +168,7 @@ $(document).ready( function () {
                           data: dataset,
                           columns: [
                             { title: "Active" },
-                            { title: "Ad Group Name" },
+                            { title: "Keyword" },
                             { title: "Status" },
                             { title: "Bid" },
                             { title: "Impressions" },
