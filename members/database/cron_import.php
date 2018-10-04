@@ -152,6 +152,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
     }
 
   } else {
+    // If length of reportKeywordIDs == length of dbKeywordIDs, then no new keywords have been added
 
   }
 }
