@@ -124,24 +124,26 @@ for ($i = 0; $i < count($userIDs); $i++) {
          $kw = $client->getBiddableKeyword(178376339592907);
          $kw = json_decode($kw['response'], true);
 
-         $sql = "INSERT INTO ppc_keywords (amz_campaign_id, amz_adgroup_id, amz_kw_id, keyword_text, match_type, status, impressions, bid, clicks, ctr, ad_spend, avg_cpc, units_sold, sales)
-         VALUES (:amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :keyword_text, :match_type, :status, :impressions, :bid, :clicks, :ctr, :ad_spend, :avg_cpc, :units_sold, :sales)";
+         // Serialize and store all new keywords in db
+         $sql = "INSERT INTO ppc_keywords (user_id, amz_campaign_id, amz_adgroup_id, amz_kw_id, keyword_text, match_type, status, impressions, bid, clicks, ctr, ad_spend, avg_cpc, units_sold, sales)
+         VALUES (:user_id, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :keyword_text, :match_type, :status, :impressions, :bid, :clicks, :ctr, :ad_spend, :avg_cpc, :units_sold, :sales)";
          $stmt = $pdo->prepare($sql);
          $stmt->execute(array(
+           ":user_id"         => $user_id,
            ":amz_campaign_id" => $result[$index]['campaignId'],
            ":amz_adgroup_id"  => $result[$index]['adGroupId'],
            ":amz_kw_id"       => $kw_id,
            ":keyword_text"    => $result[$index]['keywordText'],
            ":match_type"      => $result[$index]['matchType'],
            ":status"          => $kw['state'],
-           ":impressions"     => $result[$index]['impressions'],
-           ":bid"             => $result[$index]['bid'],
-           ":clicks"          => 
-           ":ctr"             =>
-           ":ad_spend"        =>
-           ":avg_cpc"         =>
-           ":units_sold"      =>
-           ":sales"           =>
+           ":impressions"     => serialize($impressions),
+           ":bid"             => $kw['bid'],
+           ":clicks"          => serialize($clicks),
+           ":ctr"             => serialize($ctr),
+           ":ad_spend"        => serialize($ad_spend),
+           ":avg_cpc"         => serialize($avg_cpc),
+           ":units_sold"      => serialize($units_sold),
+           ":sales"           => serialize($sales)
          ));
        } else {
          echo 'An error has occurred.';
