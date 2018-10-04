@@ -83,7 +83,8 @@ table.dataTable td {
   background: #4aa2b0 !important;
 }
 
-a span.sidebar-normal {
+a span.sidebar-normal,
+a span.sidebar-mini-icon {
   font-weight: 400;
 }
 
