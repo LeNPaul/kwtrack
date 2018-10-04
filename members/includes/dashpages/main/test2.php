@@ -26,7 +26,9 @@ $client->profileId = $profileId;
 
 $kw = $client->getBiddableKeyword(178376339592907);
 
-var_dump($kw);
+echo '<pre>';
+var_dump($kw['response']);
+echo '</pre>';
 
 /*
 $result = $client->requestReport(
