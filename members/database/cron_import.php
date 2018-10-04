@@ -99,8 +99,30 @@ for ($i = 0; $i < count($userIDs); $i++) {
 
     // foreach diff, find index of extra keywords in the report.
     for ($a = 0; $a < count($diff); $a++) {
-      $index = array_search2D($result, 'keywordId', $diff[$a]);
-      
+      $kw_id = $diff[$a];
+      $index = array_search2D($result, 'keywordId', $kw_id);
+       if ($index) {
+         // Prepare metric arrays to be inserted into db for keyword
+         $impressions = array_fill(0, 59, 0);
+         $clicks      = array_fill(0, 59, 0);
+         $ctr         = array_fill(0, 59, 0);
+         $ad_spend    = array_fill(0, 59, 0);
+         $avg_cpc     = array_fill(0, 59, 0);
+         $units_sold  = array_fill(0, 59, 0);
+         $sales       = array_fill(0, 59, 0);
+
+         // Prepend all metrics to the arrays
+         array_unshift($impressions, $result[$index]['impressions']);
+         array_unshift($clicks, $result[$index]['clicks']);
+         array_unshift($ctr, ($result[$index]['clicks'] == 0) ? 0.0 : ($result[$index]['clicks'] / $result[$index]['impressions']));
+         array_unshift($ad_spend, $result[$index]['cost']);
+         array_unshift($avg_cpc, ($result[$index]['clicks'] == 0) ? 0.0 : ($result[$index]['cost'] / $result[$index]['clicks']));
+         array_unshift($units_sold, $result[$index]['attributedUnitsOrdered1d']);
+         array_unshift($sales, $result[$index]['attributedSales1d']);
+       } else {
+         echo 'An error has occurred.';
+         die;
+       }
     }
 
   } else {
