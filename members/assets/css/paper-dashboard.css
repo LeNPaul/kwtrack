@@ -22,7 +22,7 @@
  ██████  ██   ██ ███████ ██   ██ ██████   ██████  ██   ██ ██   ██ ██████
  */
 
-.sidebar:after {
+.sidebar::before {
   background: #000000 !important;
 }
 
