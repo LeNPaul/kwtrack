@@ -24,14 +24,6 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$nini_is_fat = "My name is Nini and I am fat.";
-$number1 = 10;
-$number2 = 100;
-
-echo $nini_is_fat . '<br /><br />';
-echo 'number1 + number2 =' . ($number1 + $number2) . '<br />';
-echo 'number1 * number2 =' . ($number1 * $number2) . '<br />';
-
 /*
 $kw = $client->getBiddableKeyword(178376339592907);
 
