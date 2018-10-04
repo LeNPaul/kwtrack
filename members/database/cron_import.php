@@ -156,9 +156,16 @@ for ($i = 0; $i < count($userIDs); $i++) {
     // keywords that are already in the db. Remainder keyword ID's will be stoed in $diffRemainderOfKW
     $diffRemainderOfKW = array_diff($reportKeywordIDs, $diff);
 
-    for ($b = 0; $b < count($diffRemainderOfKW); $b++) {
-      
+    if (!empty($diffRemainderOfKW)) {
+      $sql   = "UPDATE ppc_keywords SET
+
+      WHERE kw_id=:kw_id";
+      for ($b = 0; $b < count($diffRemainderOfKW); $b++) {
+        $kw_id = $diffRemainderOfKW[$b];
+
+      }
     }
+
 
   } else {
     // If length of reportKeywordIDs == length of dbKeywordIDs, then no new keywords have been added
