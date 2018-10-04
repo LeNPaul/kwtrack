@@ -22,8 +22,8 @@
  ██████  ██   ██ ███████ ██   ██ ██████   ██████  ██   ██ ██   ██ ██████
  */
 
-.sidebar::before {
-  background: #000000 !important;
+.sidebar, .sidebar-wrapper, .logo {
+  background-color: #d85252 !important;
 }
 
 
