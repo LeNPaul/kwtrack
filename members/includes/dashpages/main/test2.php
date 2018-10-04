@@ -29,8 +29,8 @@ $number1 = 10;
 $number2 = 100;
 
 echo $nini_is_fat . '<br /><br />';
-echo 'number1 + number2 =' . $number1 + $number2 . '<br />';
-echo 'number1 * number2 =' . $number1 * $number2 . '<br />';
+echo 'number1 + number2 =' . ($number1 + $number2) . '<br />';
+echo 'number1 * number2 =' . ($number1 * $number2) . '<br />';
 
 /*
 $kw = $client->getBiddableKeyword(178376339592907);
