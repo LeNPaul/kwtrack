@@ -24,7 +24,11 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
+$kw = $client->getBiddableKeyword(178376339592907);
 
+var_dump($kw);
+
+/*
 $result = $client->requestReport(
 	"keywords",
 	array("reportDate"    => "20180907",
@@ -58,7 +62,7 @@ echo '</pre>';
 
 $index = array_search2D($result, 'keywordId', 253);
 var_dump($index);
-
+*/
 //
 // echo '<pre>';
 // var_dump($result[$index]);
