@@ -9046,7 +9046,8 @@ img {
 */
 
   .sidebar,
-  .sidebar-wrapper {
+  .sidebar-wrapper,
+  .logo {
     background-color: rgba(216, 82, 82, 0.5) !important;
   }
 
