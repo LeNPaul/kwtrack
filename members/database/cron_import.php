@@ -145,6 +145,11 @@ for ($i = 0; $i < count($userIDs); $i++) {
            ":units_sold"      => serialize($units_sold),
            ":sales"           => serialize($sales)
          ));
+
+         // After taking care of all new keywords in the diff array, we need to update the rest of the
+         // keywords that are already in the db. Remainder keyword ID's will be stoed in $diffRemainderOfKW
+
+         $diffRemainderOfKW = array_diff($reportKeywordIDs, $diff);
        } else {
          echo 'An error has occurred.';
          die;

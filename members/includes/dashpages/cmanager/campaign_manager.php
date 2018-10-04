@@ -222,6 +222,7 @@ $(document).ready( function () {
             error: function(msg) {
               alert(msg);
             } //error
+
           }); //ajax
         }); //on Click
 	  } //drawCallback
