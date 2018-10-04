@@ -21,7 +21,7 @@ function outputSideNav($currentPage) {
     $cmExpand2 = 'show';
   }
 
-  echo '<div class="sidebar" data-active-color="danger">
+  echo '<div class="sidebar" data-active-color="white">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
         -->
