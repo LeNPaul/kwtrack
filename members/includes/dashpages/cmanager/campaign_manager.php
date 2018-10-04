@@ -136,6 +136,7 @@ $(document).ready( function () {
                     // backend adgroup data already stored in adgroupDataBack
                     dt_adgroups.destroy();
 
+                    // Breadcrumb text. Edit later to include links that go back.
                     $("#bc").text(function(index, currentText){
                       return currentText + " > " + adgroupName;
                     });

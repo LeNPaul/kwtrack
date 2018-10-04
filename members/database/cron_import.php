@@ -71,7 +71,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
   $reportId        = $result2['reportId'];
   $status = $result2['status'];
 
-  // Keep pinging the report until we get a 200 code
+  // Keep pinging the report until status !== IN_PROGRESS
   while ($status == 'IN_PROGRESS') {
   	$result = $client->getReport($reportId);
   	$result = json_decode($result['response'], true);
@@ -133,10 +133,10 @@ for ($i = 0; $i < count($userIDs); $i++) {
            ":amz_kw_id"       => $kw_id,
            ":keyword_text"    => $result[$index]['keywordText'],
            ":match_type"      => $result[$index]['matchType'],
-           ":status"          =>
-           ":impressions"     =>
-           ":bid"             =>
-           ":clicks"          =>
+           ":status"          => $kw['state'],
+           ":impressions"     => $result[$index]['impressions'],
+           ":bid"             => $result[$index]['bid'],
+           ":clicks"          => 
            ":ctr"             =>
            ":ad_spend"        =>
            ":avg_cpc"         =>

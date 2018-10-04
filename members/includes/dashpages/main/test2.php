@@ -30,7 +30,7 @@ echo '<pre>';
 var_dump(json_decode($kw['response'], true));
 echo '</pre>';
 
-/*
+
 $result = $client->requestReport(
 	"keywords",
 	array("reportDate"    => "20180907",
@@ -64,7 +64,7 @@ echo '</pre>';
 
 $index = array_search2D($result, 'keywordId', 253);
 var_dump($index);
-*/
+
 //
 // echo '<pre>';
 // var_dump($result[$index]);
