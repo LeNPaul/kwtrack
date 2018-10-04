@@ -731,7 +731,7 @@ $_SESSION['active'] = intval($result[0]);
       </div>
 
 
-      <footer class="footer footer-black  footer-white ">
+      <!-- <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
           <div class="row">
             <nav class="footer-nav">
@@ -757,7 +757,7 @@ $_SESSION['active'] = intval($result[0]);
             </div>
           </div>
         </div>
-      </footer>
+      </footer> -->
     </div>
   </div>
 
