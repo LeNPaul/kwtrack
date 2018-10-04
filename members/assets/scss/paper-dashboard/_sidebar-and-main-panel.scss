@@ -330,6 +330,9 @@
     &[data-color="brown"]{
       @include sidebar-color($default-color);
     }
+    &[data-color="red"] {
+      @include sidebar-color(#ea1212);
+    }
 
     // Active color changing
 
