@@ -27,7 +27,7 @@ $client->profileId = $profileId;
 $kw = $client->getBiddableKeyword(178376339592907);
 
 echo '<pre>';
-var_dump($kw['response']);
+var_dump(json_decode($kw['response'], true));
 echo '</pre>';
 
 /*
