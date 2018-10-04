@@ -9036,6 +9036,12 @@ img {
     transition-duration: .2s,.2s, .35s;
     transition-timing-function: linear,linear,ease;
     -webkit-overflow-scrolling: touch; }
+
+  .sidebar,
+  .sidebar-wrapper {
+    background-color: #d85252 !important;
+  }
+  
   .sidebar-mini .visible-on-sidebar-regular {
     display: none !important; }
   .sidebar-mini .visible-on-sidebar-mini {
