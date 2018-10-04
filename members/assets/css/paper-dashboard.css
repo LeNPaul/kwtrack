@@ -22,9 +22,7 @@
  ██████  ██   ██ ███████ ██   ██ ██████   ██████  ██   ██ ██   ██ ██████
  */
 
-.sidebar, .sidebar-wrapper, .logo {
-  background-color: rgba(56, 227, 255, 0.53) !important;
-}
+
 
 
 
@@ -77,8 +75,12 @@ table.dataTable td {
 ██      ██ ██   ██ ██ ██   ████
 */
 
+.sidebar, .sidebar-wrapper, .logo {
+  background-color: rgba(56, 227, 255, 0.53) !important;
+}
+
 #minimizeSidebar {
-  background: #d85252 !important;
+  background: rgba(56, 227, 255, 0.53) !important;
 }
 
 .bootstrap-switch {
