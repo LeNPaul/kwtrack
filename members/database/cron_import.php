@@ -158,7 +158,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
 
     if (!empty($diffRemainderOfKW)) {
       $sql   = "UPDATE ppc_keywords SET
-
+      
       WHERE kw_id=:kw_id";
       for ($b = 0; $b < count($diffRemainderOfKW); $b++) {
         $kw_id = $diffRemainderOfKW[$b];
