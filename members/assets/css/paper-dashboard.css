@@ -77,6 +77,10 @@ table.dataTable td {
 ██      ██ ██   ██ ██ ██   ████
 */
 
+#minimizeSidebar {
+  background: #d85252 !important;
+}
+
 .bootstrap-switch {
   display: inline-block;
   direction: ltr;
