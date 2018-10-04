@@ -9053,7 +9053,8 @@ img {
   .sidebar::after,
   .sidebar-wrapper,
   .logo {
-    background-color: rgba(216, 82, 82, 0.5) !important;
+    /* background-color: rgba(216, 82, 82, 0.5) !important; */
+    background-color: rgba(56, 227, 255, 0.53) !important;
   }
 
   .sidebar-mini .visible-on-sidebar-regular {
