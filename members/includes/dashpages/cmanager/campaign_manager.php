@@ -19,7 +19,8 @@ $campaignDataBack  = $result[1];
 
 ?>
 
-<h2>Campaigns</h2>
+<h2>Campaign Manager</h2>
+<h3 id="bc">All Campaigns</h3>
 
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -73,6 +74,10 @@ $(document).ready( function () {
           var campaignName     = $(this).text();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           dt.destroy();
+
+          $("#bc").text(function(index, currentText){
+            return currentText + " > " + campaignName;
+          });
 
           $.ajax({
             type: "POST",
@@ -130,6 +135,10 @@ $(document).ready( function () {
                     var adgroupName     = $(this).text();
                     // backend adgroup data already stored in adgroupDataBack
                     dt_adgroups.destroy();
+
+                    $("#bc").text(function(index, currentText){
+                      return currentText + " > " + adgroupName;
+                    });
 
                     $.ajax({
                       type: "POST",

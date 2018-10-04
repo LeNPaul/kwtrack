@@ -120,6 +120,10 @@ for ($i = 0; $i < count($userIDs); $i++) {
          array_unshift($units_sold, $result[$index]['attributedUnitsOrdered1d']);
          array_unshift($sales, $result[$index]['attributedSales1d']);
 
+         // Get bid and status of the current keyword
+         $kw = $client->getBiddableKeyword(178376339592907);
+         $kw = json_decode($kw['response'], true);
+
          $sql = "INSERT INTO ppc_keywords (amz_campaign_id, amz_adgroup_id, amz_kw_id, keyword_text, match_type, status, impressions, bid, clicks, ctr, ad_spend, avg_cpc, units_sold, sales)
          VALUES (:amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :keyword_text, :match_type, :status, :impressions, :bid, :clicks, :ctr, :ad_spend, :avg_cpc, :units_sold, :sales)";
          $stmt = $pdo->prepare($sql);
