@@ -9037,11 +9037,19 @@ img {
     transition-timing-function: linear,linear,ease;
     -webkit-overflow-scrolling: touch; }
 
+/*
+    ███████ ██ ██████  ███████ ██████   █████  ██████      ██████   ██████
+    ██      ██ ██   ██ ██      ██   ██ ██   ██ ██   ██     ██   ██ ██
+    ███████ ██ ██   ██ █████   ██████  ███████ ██████      ██████  ██   ███
+         ██ ██ ██   ██ ██      ██   ██ ██   ██ ██   ██     ██   ██ ██    ██
+    ███████ ██ ██████  ███████ ██████  ██   ██ ██   ██     ██████   ██████
+*/
+
   .sidebar,
   .sidebar-wrapper {
-    background-color: #d85252 !important;
+    background-color: rgba(216, 82, 82, 0.5) !important;
   }
-  
+
   .sidebar-mini .visible-on-sidebar-regular {
     display: none !important; }
   .sidebar-mini .visible-on-sidebar-mini {
