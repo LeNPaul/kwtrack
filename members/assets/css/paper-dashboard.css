@@ -22,9 +22,11 @@
  ██████  ██   ██ ███████ ██   ██ ██████   ██████  ██   ██ ██   ██ ██████
  */
 
-.sidebar {
-  background-color: #000000 !important;
+.sidebar:after {
+  background: #000000 !important;
 }
+
+
 
 /*.dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
