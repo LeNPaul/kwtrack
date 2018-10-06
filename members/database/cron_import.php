@@ -1,5 +1,6 @@
 <?php
 include 'pdo.inc.php';
+include '../includes/AmazonAdvertisingApi/Client.php';
 
 /*
 
@@ -213,7 +214,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
         array_pop($units_soldDb);
         array_pop($salesDb);
 
-        $stmt->excecute(array(
+        $stmt->execute(array(
           ":status"      => $status,
           ":impressions" => serialize($impressionsDb),
           ":bid"         => $bid,
