@@ -53,7 +53,7 @@ function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
     $units_sold  = $arrKWReport[$index]['attributedUnitsOrdered1d'];
     $sales       = $arrKWReport[$index]['attributedSales1d'];
     
-    $sql2     = "SELECT * FROM ppc_keywords WHERE kw_id={$kw_id}";
+    $sql2     = "SELECT * FROM ppc_keywords WHERE amz_kw_id={$kw_id}";
     $stmt2    = $pdo->query($sql2);
     $kwDbInfo = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     
@@ -124,7 +124,7 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
     $units_sold  = $arrKWReport[$i]['attributedUnitsOrdered1d'];
     $sales       = $arrKWReport[$i]['attributedSales1d'];
   
-    $sql2     = "SELECT * FROM ppc_keywords WHERE kw_id={$kw_id}";
+    $sql2     = "SELECT * FROM ppc_keywords WHERE amz_kw_id={$kw_id}";
     $stmt2    = $pdo->query($sql2);
     $kwDbInfo = $stmt2->fetchAll(PDO::FETCH_ASSOC);
   
