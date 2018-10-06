@@ -187,7 +187,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
     $ctr         = ($ctr == 0) ? '-' : $ctr . '%';
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
-    
+    $bid         = '$' . round($result[$i]['bid'], 2);
     $kwText = '<b class="name">' . $result[$i]['keyword_text'] . "</b>";
     
     $output[] = array(
