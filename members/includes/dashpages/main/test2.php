@@ -24,7 +24,7 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$sql2     = "SELECT * FROM ppc_keywords WHERE kw_id={$kw_id}";
+$sql2     = "SELECT * FROM ppc_keywords WHERE kw_id=102758096039716";
 $stmt2    = $pdo->query($sql2);
 $kwDbInfo = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
