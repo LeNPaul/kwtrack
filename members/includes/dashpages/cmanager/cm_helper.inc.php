@@ -192,7 +192,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
     
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
-      $result[$i]['keyword_text'],
+      $kwText,
       $result[$i]['match_type'],
 	    $result[$i]['status'],
       $result[$i]['bid'],
