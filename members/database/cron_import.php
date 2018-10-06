@@ -198,6 +198,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
   $client->profileId = $userIDs[$i]['profileId'];
 
   // Request report, then get report ID and append to reportIDs
+  $date = date('Ymd', strtotime('-1 days'));
   $result = $client->requestReport(
     "keywords",
     array("reportDate"    => $date,
