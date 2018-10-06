@@ -24,14 +24,15 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-/*
-$kw = $client->getBiddableKeyword(178376339592907);
+$sql2     = "SELECT * FROM ppc_keywords WHERE kw_id={$kw_id}";
+$stmt2    = $pdo->query($sql2);
+$kwDbInfo = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
 echo '<pre>';
-var_dump(json_decode($kw['response'], true));
+var_dump($kwDbInfo);
 echo '</pre>';
 
-
+/*
 $result = $client->requestReport(
 	"keywords",
 	array("reportDate"    => "20180907",
