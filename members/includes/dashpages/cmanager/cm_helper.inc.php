@@ -195,7 +195,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
       $kwText,
       $result[$i]['match_type'],
 	    $result[$i]['status'],
-      $result[$i]['bid'],
+      $bid,
       $impressions,
       $clicks,
       $ctr,
