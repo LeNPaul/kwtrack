@@ -72,7 +72,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
-    $campaignLink = '<a href="javascript:void(0)" class="c_link"><b>' . $result[$i]['campaign_name'] . '</b></a>';
+    $campaignLink = '<a href="javascript:void(0)" class="name c_link">' . $result[$i]['campaign_name'] . '</a>';
 
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
@@ -131,7 +131,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
-    $adgroupLink = '<a href="javascript:void(0)" class="ag_link"><b>' . $result[$i]['ad_group_name'] . '</b></a>';
+    $adgroupLink = '<a href="javascript:void(0)" class="name ag_link">' . $result[$i]['ad_group_name'] . '</a>';
 
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
@@ -187,7 +187,9 @@ function cmGetKeywordData($pdo, $adgroupId) {
     $ctr         = ($ctr == 0) ? '-' : $ctr . '%';
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
-
+    
+    $kwText = '<b class="name">' . $result[$i]['keyword_text'] . "</b>";
+    
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $result[$i]['keyword_text'],

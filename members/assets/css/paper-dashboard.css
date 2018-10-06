@@ -70,8 +70,12 @@ table.dataTable td {
   font-weight: bold !important;
 }
 
+.dataTables_wrapper .name {
+  font-weight: 400 !important;
+}
+
 .dataTables_wrapper td {
-  font-weight: 600;
+  font-weight: 300;
 }
 
 
