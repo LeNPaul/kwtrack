@@ -71,11 +71,11 @@ table.dataTable td {
 }
 
 .dataTables_wrapper .name {
-  font-weight: 400 !important;
+  font-weight: 600 !important;
 }
 
 .dataTables_wrapper td {
-  font-weight: 300;
+  font-weight: 400;
 }
 
 
