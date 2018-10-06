@@ -8574,7 +8574,8 @@ img {
   .sidebar .sidebar-wrapper,
   .off-canvas-sidebar .sidebar-wrapper {
     position: relative;
-    height: calc(100vh - 75px);
+    /*height: calc(100vh - 75px);*/
+    height: 100% !important;
     overflow: auto;
     width: 260px;
     z-index: 4;
