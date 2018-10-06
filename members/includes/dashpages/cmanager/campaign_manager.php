@@ -20,7 +20,7 @@ $campaignDataBack  = $result[1];
 ?>
 
 <h2 class="text-center">Campaign Manager</h2>
-<b><h6 id="bc">All Campaigns</h6></b>
+<h6 id="bc">All Campaigns</h6>
 
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">

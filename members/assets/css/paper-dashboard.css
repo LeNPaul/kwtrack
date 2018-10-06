@@ -66,6 +66,18 @@ table.dataTable td {
   padding: 0 !important;
 }
 
+#bc {
+  font-weight: bold !important;
+}
+
+.dataTables_wrapper .name {
+  font-weight: 600 !important;
+}
+
+.dataTables_wrapper td {
+  font-weight: 400;
+}
+
 
 /*
 ███    ███  █████  ██ ███    ██
@@ -8562,7 +8574,7 @@ img {
 .off-canvas-sidebar {
   position: fixed;
   top: 0;
-  height: 100%;
+  height: 100% !important;
   bottom: 0;
   width: 260px;
   left: 0;
@@ -8570,7 +8582,8 @@ img {
   .sidebar .sidebar-wrapper,
   .off-canvas-sidebar .sidebar-wrapper {
     position: relative;
-    height: calc(100vh - 75px);
+    /*height: calc(100vh - 75px);*/
+    height: 100% !important;
     overflow: auto;
     width: 260px;
     z-index: 4;
