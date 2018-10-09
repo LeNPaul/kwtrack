@@ -405,8 +405,8 @@ $result = json_decode($result['response'], true);
 
 // Iterate through all ad groups and insert them into database
 
-$sql = "INSERT INTO ad_groups (amz_adgroup_id, ad_group_name, amz_campaign_id, status, user_id)
-				VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id, :status, :user_id)";
+$sql = "INSERT INTO ad_groups (amz_adgroup_id, ad_group_name, amz_campaign_id, status, user_id, default_bid)
+				VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id, :status, :user_id, :default_bid)";
 $stmt = $pdo->prepare($sql);
 
 for ($i = 0; $i < count($result); $i++) {
@@ -415,7 +415,8 @@ for ($i = 0; $i < count($result); $i++) {
 		':ad_group_name'		=> $result[$i]['name'],
 		':amz_campaign_id'	=> $result[$i]['campaignId'],
 		':status'						=> $result[$i]['state'],
-		':user_id'					=> $user_id
+		':user_id'					=> $user_id,
+    ':default_bid'      => $result[$i]['defaultBid']
 	));
 }
 
