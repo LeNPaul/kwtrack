@@ -350,7 +350,7 @@ for ($i = 0; $i < count($userIDs); $i++;){
     "adGroups",
     array("reportDate"    => $date,
           "campaignType"  => "sponsoredProducts",
-          "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+          "metrics"       => "adGroupId,adGroupName,defaultBid,state"
     )
   );
 }
