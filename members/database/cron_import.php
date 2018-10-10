@@ -427,6 +427,12 @@ for ($i = 0; $i < count($userIDs); $i++;){
 
 */
 
+for ($i = 0; $i < count($userIDs); $i++;){
+	$user_id = $userIDs[$i]['user_id'];
 
+  $sql     = "SELECT amz_adgroup_id, status, daily_budget, ad_group_name WHERE user_id={$user_id}";
+  $stmt    = $pdo->query($sql);
+  $dbAdGroup = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $dbAdGroupID = [];
 
 ?>
