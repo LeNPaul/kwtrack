@@ -196,8 +196,6 @@ for ($i = 0; $i < count($userIDs); $i++) {
   );
   $client = new Client($config);
   $client->profileId = $userIDs[$i]['profileId'];
-
-  // Request report, then get report ID and append to reportIDs
   $date = date('Ymd', strtotime('-1 days'));
   $result = $client->requestReport(
     "keywords",
@@ -212,7 +210,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
   // Get the report id so we can use it to get the report
   $result2         = json_decode($result['response'], true);
   $reportId        = $result2['reportId'];
-  $status = $result2['status'];
+  $status          = $result2['status'];
 
   // Keep pinging the report until status !== IN_PROGRESS
   while ($status == 'IN_PROGRESS') {
