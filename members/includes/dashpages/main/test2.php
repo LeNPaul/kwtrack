@@ -27,7 +27,7 @@ $client->profileId = $profileId;
 $result = $client->listCampaigns();
 
 echo "<pre>";
-var_dump($result);
+var_dump(json_decode($result['response']), true);
 echo "</pre>";
 /*
 $result = $client->requestReport(
