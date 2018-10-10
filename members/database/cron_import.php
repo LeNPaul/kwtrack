@@ -35,14 +35,14 @@ function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
                 sales=:sales
                 WHERE kw_id=:kw_id";
   $stmt  = $pdo->prepare($sql);
-  
+
   for ($b = 0; $b < count($arrKWIDs); $b++) {
     $kw_id = $arrKWIDs[$b];
     $index = array_search2D($arrKWReport, 'keywordId', $kw_id);
-    
+
     $kw = $client->getBiddableKeyword($kw_id);
     $kw = json_decode($kw['response'], true);
-    
+
     $status      = $kw['state'];
     $bid         = $kw['bid'];
     $impressions = $arrKWReport[$index]['impressions'];
@@ -52,11 +52,11 @@ function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
     $avg_cpc     = ($clicks == 0) ? 0.0 : round($ad_spend / $clicks, 2);
     $units_sold  = $arrKWReport[$index]['attributedUnitsOrdered1d'];
     $sales       = $arrKWReport[$index]['attributedSales1d'];
-    
+
     $sql2     = "SELECT * FROM ppc_keywords WHERE amz_kw_id={$kw_id}";
     $stmt2    = $pdo->query($sql2);
     $kwDbInfo = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-    
+
     $impressionsDb = unserialize($kwDbInfo[0]['impressions']);
     $clicksDb      = unserialize($kwDbInfo[0]['clicks']);
     $ctrDb         = unserialize($kwDbInfo[0]['ctr']);
@@ -64,7 +64,7 @@ function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
     $avg_cpcDb     = unserialize($kwDbInfo[0]['avg_cpc']);
     $units_soldDb  = unserialize($kwDbInfo[0]['units_sold']);
     $salesDb       = unserialize($kwDbInfo[0]['sales']);
-    
+
     array_unshift($impressionsDb, $impressions);
     array_unshift($clicksDb, $clicks);
     array_unshift($ctrDb, $ctr);
@@ -79,7 +79,7 @@ function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
     array_pop($avg_cpcDb);
     array_pop($units_soldDb);
     array_pop($salesDb);
-    
+
     $stmt->execute(array(
       ":status"      => $status,
       ":impressions" => serialize($impressionsDb),
@@ -107,13 +107,13 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
                 sales=:sales
                 WHERE kw_id=:kw_id";
   $stmt  = $pdo->prepare($sql);
-  
+
   for ($i = 0; $i < count($arrKWReport); $i++) {
     $kw_id = $arrKWReport[$i]['keywordId'];
-  
+
     $kw = $client->getBiddableKeyword($kw_id);
     $kw = json_decode($kw['response'], true);
-  
+
     $status      = $kw['state'];
     $bid         = $kw['bid'];
     $impressions = $arrKWReport[$i]['impressions'];
@@ -123,11 +123,11 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
     $avg_cpc     = ($clicks == 0) ? 0.0 : round($ad_spend / $clicks, 2);
     $units_sold  = $arrKWReport[$i]['attributedUnitsOrdered1d'];
     $sales       = $arrKWReport[$i]['attributedSales1d'];
-  
+
     $sql2     = "SELECT * FROM ppc_keywords WHERE amz_kw_id={$kw_id}";
     $stmt2    = $pdo->query($sql2);
     $kwDbInfo = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-  
+
     $impressionsDb = unserialize($kwDbInfo[0]['impressions']);
     $clicksDb      = unserialize($kwDbInfo[0]['clicks']);
     $ctrDb         = unserialize($kwDbInfo[0]['ctr']);
@@ -135,7 +135,7 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
     $avg_cpcDb     = unserialize($kwDbInfo[0]['avg_cpc']);
     $units_soldDb  = unserialize($kwDbInfo[0]['units_sold']);
     $salesDb       = unserialize($kwDbInfo[0]['sales']);
-  
+
     array_unshift($impressionsDb, $impressions);
     array_unshift($clicksDb, $clicks);
     array_unshift($ctrDb, $ctr);
@@ -150,7 +150,7 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
     array_pop($avg_cpcDb);
     array_pop($units_soldDb);
     array_pop($salesDb);
-  
+
     $stmt->execute(array(
       ":status"      => $status,
       ":impressions" => serialize($impressionsDb),
@@ -302,7 +302,12 @@ for ($i = 0; $i < count($userIDs); $i++) {
   } else {
     // If length of reportKeywordIDs == length of dbKeywordIDs, then no new keywords have been added
     // Continue to update all keywords
+<<<<<<< HEAD
     cron_updateKeywords($pdo, $client, $result);
+=======
+
+
+>>>>>>> b3d43332079418a858cb72df1f7d83c38a36a0d2
   }
 }
 
@@ -329,6 +334,173 @@ for ($j = 0; $j < count($reportIDs); $j++) {
 //
 //
 
+// reuse userIDs array from keyword update for adgroups
+// for each userID, request report for yesterday's adGroups and from report, store all adGroup IDs (reportAdGroupID)
 
+for ($i = 0; $i < count($userIDs); $i++){
+	$user_id = $userIDs[$i]['user_id'];
+  // Instantiate client for advertising API
+  $config = array(
+  	"clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
+  	"clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
+  	"refreshToken" => $userIDs[$i]['refresh_token'],
+  	"region" => "na",
+  	"sandbox" => false,
+  );
+  $client = new Client($config);
+  $client->profileId = $userIDs[$i]['profileId'];
+  $date = date('Ymd', strtotime('-1 days'));
+  $result = $client->requestReport(
+    "adGroups",
+    array("reportDate"    => $date,
+          "campaignType"  => "sponsoredProducts",
+          "metrics"       => "adGroupId,adGroupName,defaultBid,state"
+    )
+  );
 
+  $sql     = "SELECT amz_adgroup_id, status, daily_budget, ad_group_name WHERE user_id={$user_id}";
+  $stmt    = $pdo->query($sql);
+  $dbAdGroup = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $dbAdGroupID = [];
+
+  // Get the report id so we can use it to get the report
+  $result2         = json_decode($result['response'], true);
+  $reportId        = $result2['reportId'];
+  $status          = $result2['status'];
+
+  // Keep pinging the report until status !== IN_PROGRESS
+  while ($status == 'IN_PROGRESS') {
+  	$result = $client->getReport($reportId);
+  	$result = json_decode($result['response'], true);
+  	$status = $result['status'];
+  }
+  $result = $client->getReport($reportId);
+  $result = json_decode($result['response'], true);
+
+  $reportAdGroupID = [];
+
+  for ($y = 0; $y < count($result); $y++) {
+	  $reportAdGroupID[] = $result[$y]['adGroupId'];
+  }
+
+  for ($x = 0; $x < count($dbAdGroup); $x++) {
+	  $dbAdGroupID[] = $dbAdGroup[$x]['amz_adgroup_id'];
+  }
+
+  if (count($reportAdGroupID) > count($dbAdGroupID)) {
+	  $arrayDiff = array_diff($reportAdGroupID, $dbAdGroupID);
+  }
+
+  if (!empty($arrayDiff)) {
+	  $sql = "INSERT INTO ad_groups (amz_campaign_id,amz_adgroup_id,ad_group_name,default_bid,status) VALUES (:amz_campaign_id,:amz_adgroup_id,:ad_group_name,:default_bid,:status)";
+	  $stmt = $pdo->prepare($sql);
+
+	  for ($b = 0; $b < count($arrayDiff); $b++) {
+		$ag_id = $arrayDiff[$b];
+		$index = array_search2D($result, 'adGroupId', $ag_id);
+
+		if ($index){
+		  $daddyFernandyayy = $client->getAdGroup($ag_id);
+		  $daddyFernandyayy = json_decode($daddyFernandyayy, true);
+
+		  $stmt->execute(array(
+		    ":amz_campaign_id" => $daddyFernandyayy['campaignId'],
+			":amz_adgroup_id" => $daddyFernandyayy['adGroupId'],
+			":ad_group_name" => $daddyFernandyayy['adGroupName'],
+			":default_bid" => $daddyFernandyayy['defaultBid'],
+			":status" => $daddyFernandyayy['state']
+		  ));
+		} else {
+			echo "an error has occurred";
+		}
+	  }
+  } else {
+	  for($daddy = 0; $daddy < count($reportAdGroupID); $daddy++) {
+		  importAdGroupMetrics($pdo, $reportAdGroupID[$daddy], 60);
+	  }
+  }
+}
+
+/*
+
+ ██████  █████  ███    ███ ██████   █████  ██  ██████  ███    ██ ███████
+██      ██   ██ ████  ████ ██   ██ ██   ██ ██ ██       ████   ██ ██
+██      ███████ ██ ████ ██ ██████  ███████ ██ ██   ███ ██ ██  ██ ███████
+██      ██   ██ ██  ██  ██ ██      ██   ██ ██ ██    ██ ██  ██ ██      ██
+ ██████ ██   ██ ██      ██ ██      ██   ██ ██  ██████  ██   ████ ███████
+
+*/
+
+for ($i = 0; $i < count($userIDs); $i++){
+	$user_id = $userIDs[$i]['user_id'];
+
+	  // Instantiate client for advertising API
+  $config = array(
+  	"clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
+  	"clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
+  	"refreshToken" => $userIDs[$i]['refresh_token'],
+  	"region" => "na",
+  	"sandbox" => false,
+  );
+  $client = new Client($config);
+  $client->profileId = $userIDs[$i]['profileId'];
+  
+  
+  $daddysCampaigns = $client->listCampaigns();
+  $daddysCampaigns = json_decode($daddysCampaigns, true);
+  
+  //for each userID, request report for yesterday's campaigns and from report, store all campaign IDs (reportCampaignID)
+  $reportCampaignIDs = [];
+  
+  for ($d = 0; $d < count($daddysCampaigns); $d++) {
+	  $reportCampaignIDs[] = $daddysCampaigns[$d]['campaignId'];
+  }
+
+  //create dbCampaignID array from dbCampaign
+  $sql = "SELECT amz_campaign_id,status,daily_budget,campaign_name WHERE user_id={$user_id}";
+  $stmt = $pdo->query($sql);
+  $dbCampaign = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $dbCampaignIDs = [];
+  
+  for ($e = 0; $e < count($dbCampaign); $e++) {
+	  $dbCampaignIDs[] = $dbCampaign[$e]['amz_campaign_id'];
+  }
+  
+  //first check if length of reportCampaignID > dbCampaignID
+  if (count($reportCampaignIDs) > count($dbCampaignIDs)) {
+	  $campaignDiff = array_diff($reportCampaignIDs, $dbCampaignIDs);
+  }
+  
+  if (!empty($campaignDiff)) {
+	$sql = "INSERT INTO campaigns (campaign_name,amz_campaign_id,campaign_type,targeting_type,daily_budget,status) VALUES (:campaign_name,:amz_campaign_id,:campaign_type,:targeting_type,:daily_budget,:status";
+	$stmt = $pdo->prepare($sql);
+	
+	//for each diff, find index of extra campaigns in the report. report[diff]
+	for ($f = 0; $f < count($campaignDiff); $f++) {
+	  $camp_id = $campaignDiff[$f];
+	  $index = array_search2D($daddysCampaigns, 'campaignId', $camp_id);
+		  
+	  if ($index) {
+		$daddyFernand = $client->getCampaign($camp_id);
+		$daddyFernand = json_decode($daddyFernand, true);
+		
+		//insert campaign data into db with serialized metric arrays and append to dbCampaignID (IDs only)
+		$stmt->execute(array(
+		  ":campaign_name" => $daddyFernand['name'],
+		  ":amz_campaign_id" => $daddyFernand['campaignId'],
+		  ":campaign_type" => "sponsoredProducts",
+		  ":targeting_type" => $daddyFernand['targetingType'],
+		  ":daily_budget" => $daddyFernand['dailyBudget'],
+		  ":status" => $daddyFernand['state']
+		)); 
+	  } else {
+		echo "an error has occurred";
+	  }
+	}
+  } else {
+	  for ($dad = 0; $dad < count($reportCampaignIDs); $dad++) {
+		  importCampaignMetrics($pdo, $reportCampaignIDs[$dad], 60);
+	  }
+  }
+}
 ?>
