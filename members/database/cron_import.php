@@ -218,8 +218,6 @@ for ($i = 0; $i < count($userIDs); $i++) {
   	$result = json_decode($result['response'], true);
   	$status = $result['status'];
   }
-
-  // Once the status is NOT "IN_PROGRESS", we know that we have the full report
   $result = $client->getReport($reportId);
   $result = json_decode($result['response'], true);
 
@@ -298,80 +296,9 @@ for ($i = 0; $i < count($userIDs); $i++) {
 
     if (!empty($diffRemainderOfKW)) {
       cron_diffUpdateKeywords($pdo, $client, $result, $diffRemainderOfKW);
-      /*$sql   = "UPDATE ppc_keywords
-                SET status=:status,
-                impressions=:impressions,
-                bid=:bid,
-                clicks=:clicks,
-                ctr=:ctr,
-                ad_spend=:ad_spend,
-                avg_cpc=:avg_cpc,
-                units_sold=:units_sold,
-                sales=:sales
-                WHERE kw_id=:kw_id";
-      $stmt  = $pdo->prepare($sql);
-
-      for ($b = 0; $b < count($diffRemainderOfKW); $b++) {
-        $kw_id = $diffRemainderOfKW[$b];
-        $index = array_search2D($result, 'keywordId', $kw_id);
-
-        $kw = $client->getBiddableKeyword($kw_id);
-        $kw = json_decode($kw['response'], true);
-
-        $status      = $kw['state'];
-        $bid         = $kw['bid'];
-        $impressions = $result[$index]['impressions'];
-        $clicks      = $result[$index]['clicks'];
-        $ctr         = ($impressions == 0) ? 0.0 : round($clicks / $impressions, 2);
-        $ad_spend    = $result[$index]['cost'];
-        $avg_cpc     = ($clicks == 0) ? 0.0 : round($ad_spend / $clicks, 2);
-        $units_sold  = $result[$index]['attributedUnitsOrdered1d'];
-        $sales       = $result[$index]['attributedSales1d'];
-
-        $sql2     = "SELECT * FROM ppc_keywords WHERE kw_id={$kw_id}";
-        $stmt2    = $pdo->query($sql2);
-        $kwDbInfo = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-
-        $impressionsDb = unserialize($kwDbInfo[0]['impressions']);
-        $clicksDb      = unserialize($kwDbInfo[0]['clicks']);
-        $ctrDb         = unserialize($kwDbInfo[0]['ctr']);
-        $ad_spendDb    = unserialize($kwDbInfo[0]['ad_spend']);
-        $avg_cpcDb     = unserialize($kwDbInfo[0]['avg_cpc']);
-        $units_soldDb  = unserialize($kwDbInfo[0]['units_sold']);
-        $salesDb       = unserialize($kwDbInfo[0]['sales']);
-
-        array_unshift($impressionsDb, $impressions);
-        array_unshift($clicksDb, $clicks);
-        array_unshift($ctrDb, $ctr);
-        array_unshift($ad_spendDb, $ad_spend);
-        array_unshift($avg_cpcDb, $avg_cpc);
-        array_unshift($units_soldDb, $units_sold);
-        array_unshift($salesDb, $sales);
-        array_pop($impressionsDb);
-        array_pop($clicksDb);
-        array_pop($ctrDb);
-        array_pop($ad_spendDb);
-        array_pop($avg_cpcDb);
-        array_pop($units_soldDb);
-        array_pop($salesDb);
-
-        $stmt->execute(array(
-          ":status"      => $status,
-          ":impressions" => serialize($impressionsDb),
-          ":bid"         => $bid,
-          ":clicks"      => serialize($clicksDb),
-          ":ctr"         => serialize($ctrDb),
-          ":ad_spend"    => serialize($ad_spendDb),
-          ":avg_cpc"     => serialize($avg_cpcDb),
-          ":units_sold"  => serialize($units_soldDb),
-          ":sales"       => serialize($salesDb)
-        ));
-      }*/
     } else {
       echo "An error has occured: diffRemainderOfKW is empty.";
     }
-
-
   } else {
     // If length of reportKeywordIDs == length of dbKeywordIDs, then no new keywords have been added
     // Continue to update all keywords
