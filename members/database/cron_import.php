@@ -330,6 +330,29 @@ for ($j = 0; $j < count($reportIDs); $j++) {
 //
 //
 
+// reuse userIDs array from keyword update for adgroups
+// for each userID, request report for yesterday's adGroups and from report, store all adGroup IDs (reportAdGroupID)
 
+for ($i = 0; $i < count($userIDs); $i++;){
+	$user_id = $userIDs[$i]['user_id'];
+  // Instantiate client for advertising API
+  $config = array(
+  	"clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
+  	"clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
+  	"refreshToken" => $userIDs[$i]['refresh_token'],
+  	"region" => "na",
+  	"sandbox" => false,
+  );
+  $client = new Client($config);
+  $client->profileId = $userIDs[$i]['profileId'];
+  $date = date('Ymd', strtotime('-1 days'));
+  $result = $client->requestReport(
+    "adGroups",
+    array("reportDate"    => $date,
+          "campaignType"  => "sponsoredProducts",
+          "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+    )
+  );
+}
 
 ?>
