@@ -353,6 +353,68 @@ for ($i = 0; $i < count($userIDs); $i++;){
           "metrics"       => "adGroupId,adGroupName,defaultBid,state"
     )
   );
+
+  $sql     = "SELECT amz_adgroup_id, status, daily_budget, ad_group_name WHERE user_id={$user_id}";
+  $stmt    = $pdo->query($sql);
+  $dbAdGroup = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $dbAdGroupID = [];
+  
+  // Get the report id so we can use it to get the report
+  $result2         = json_decode($result['response'], true);
+  $reportId        = $result2['reportId'];
+  $status          = $result2['status'];
+  
+  // Keep pinging the report until status !== IN_PROGRESS
+  while ($status == 'IN_PROGRESS') {
+  	$result = $client->getReport($reportId);
+  	$result = json_decode($result['response'], true);
+  	$status = $result['status'];
+  }
+  $result = $client->getReport($reportId);
+  $result = json_decode($result['response'], true);
+  
+  $reportAdGroupID = [];
+  
+  for ($y = 0; $y < count($result); $y++) {
+	  $reportAdGroupID[] = $result[$y]['adGroupId'];
+  }
+  
+  for ($x = 0; $x < count($dbAdGroup); $x++) {
+	  $dbAdGroupID[] = $dbAdGroup[$x]['amz_adgroup_id'];
+  }
+  
+  if (count($reportAdGroupID) > count($dbAdGroupID)) {
+	  $arrayDiff = array_diff($reportAdGroupID, $dbAdGroupID);
+  }
+  
+  if (!empty($arrayDiff)) {
+	  $sql = "INSERT INTO ad_groups (amz_campaign_id,amz_adgroup_id,ad_group_name,default_bid,status) VALUES (:amz_campaign_id,:amz_adgroup_id,:ad_group_name,:default_bid,:status)";
+	  $stmt = $pdo->prepare($sql);
+	  
+	  for ($b = 0; $b < count($arrayDiff); $b++) {
+		$ag_id = $arrayDiff[$b];
+		$index = array_search2D($result, 'adGroupId', $ag_id);
+		
+		if ($index){
+		  $daddyFernandyayy = $client->getAdGroup($ag_id);
+		  $daddyFernandyayy = json_decode($daddyFernandyayy, true);
+		  
+		  $stmt->execute(array(
+		    ":amz_campaign_id" => $daddyFernandyayy['campaignId'],
+			":amz_adgroup_id" => $daddyFernandyayy['adGroupId'],
+			":ad_group_name" => $daddyFernandyayy['adGroupName'],
+			":default_bid" => $daddyFernandyayy['defaultBid'],
+			":status" => $daddyFernandyayy['state']
+		  ));
+		} else {
+			echo "an error has occured";
+		}
+	  }
+  } else {
+	  for($daddy = 0; $daddy < count($reportAdGroupID); $daddy++) {
+		  importAdGroupMetrics($pdo, $reportAdGroupID[$daddy], 60);
+	  }
+  }
 }
 
 ?>
