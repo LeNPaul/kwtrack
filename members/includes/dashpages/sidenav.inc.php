@@ -12,6 +12,8 @@ function outputSideNav($currentPage) {
   $active5 = '';
   $active6 = '';
   $active7 = '';
+  
+  $topActive1 = $topActive2 = $topActive3 = false;
 
   if ($currentPage == 'dashboard' && empty($_GET)) {
     $active1 = 'class="active"';
@@ -19,6 +21,8 @@ function outputSideNav($currentPage) {
     $active2   = 'class="active"';
     $cmExpand  = ' aria-expanded="true"';
     $cmExpand2 = 'show';
+  } elseif ($currentPage == 'settings' && $_GET['p'] == 's') {
+    $topActive3 = 'class="acitive"';
   }
 
   echo '<div class="sidebar" data-active-color="#ffffff">
@@ -50,19 +54,19 @@ function outputSideNav($currentPage) {
               <div class="clearfix"></div>
               <div class="collapse" id="collapseExample">
                 <ul class="nav">
-                  <li>
+                  <li ' . $topActive1 . '>
                     <a href="#">
                       <span class="sidebar-mini-icon">MP</span>
                       <span class="sidebar-normal">My Profile</span>
                     </a>
                   </li>
-                  <li>
+                  <li ' . $topActive2 . '>
                     <a href="#">
                       <span class="sidebar-mini-icon">MPR</span>
                       <span class="sidebar-normal">My Products</span>
                     </a>
                   </li>
-                  <li>
+                  <li ' . $topActive3 . '>
                     <a href="dashboard.php?p=s">
                       <span class="sidebar-mini-icon">S</span>
                       <span class="sidebar-normal">Settings</span>
