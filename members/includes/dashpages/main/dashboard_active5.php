@@ -324,4 +324,4 @@ $dateArr = array_reverse($dateArr);
 
 </div>
 
-<script type="text/javascript" src="includes/dashpages/main/assets/js/dashboard_chart.js"></script>
+<script src="includes/dashpages/main/assets/js/dashboard_chart.js"></script>
