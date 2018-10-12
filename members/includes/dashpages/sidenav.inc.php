@@ -63,7 +63,7 @@ function outputSideNav($currentPage) {
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="dashboard.php?p=s">
                       <span class="sidebar-mini-icon">S</span>
                       <span class="sidebar-normal">Settings</span>
                     </a>

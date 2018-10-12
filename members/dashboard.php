@@ -711,7 +711,6 @@ $_SESSION['active'] = intval($result[0]);
 
       <div class="content">
         <?php
-        //echo $_SESSION['active'];
         if ($_SESSION['active'] == 0 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active0.php';
         } elseif ($_SESSION['active'] == 1 && empty($_GET['p'])) {
@@ -726,6 +725,8 @@ $_SESSION['active'] = intval($result[0]);
           include './includes/dashpages/main/dashboard_active5.php';
         } elseif (isset($_GET['p']) && $_GET['p'] == 'cm') {
           include './includes/dashpages/cmanager/campaign_manager.php';
+        } elseif (isset($_GET['p']) && $_GET['p'] == 's') {
+          include './includes/dashpages/profile/settings.php';
         }
         ?>
       </div>
