@@ -13,7 +13,7 @@ function outputSideNav($currentPage) {
   $active6 = '';
   $active7 = '';
   
-  $topActive1 = $topActive2 = $topActive3 = false;
+  $topActive1 = $topActive2 = $topActive3 = '';
 
   if ($currentPage == 'dashboard' && empty($_GET)) {
     $active1 = 'class="active"';
