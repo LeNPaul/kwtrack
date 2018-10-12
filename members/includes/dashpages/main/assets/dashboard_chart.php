@@ -32,7 +32,6 @@
   });
 
   var ctx = document.getElementById("lineChart");
-  var ctx2 = document.getElementById("pieChart");
   var adSpendArr = <?= json_encode($adSpendArr); ?>;
   var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
   var ppcAcosArr = <?= json_encode($acos); ?>;
@@ -90,7 +89,75 @@
       },*/
       tooltips: {
         enabled: false,
-        custom: customTooltipFunction
+        custom: function(tooltipModel) {
+          // Tooltip Element
+          var tooltipEl = document.getElementById('chartjs-tooltip');
+
+          // Create element on first render
+          if (!tooltipEl) {
+            tooltipEl = document.createElement('div');
+            tooltipEl.id = 'chartjs-tooltip';
+            tooltipEl.innerHTML = "<table></table>";
+            document.body.appendChild(tooltipEl);
+          }
+
+          // Hide if no tooltip
+          if (tooltipModel.opacity === 0) {
+            tooltipEl.style.opacity = 0;
+            return;
+          }
+
+          // Set caret Position
+          tooltipEl.classList.remove('above', 'below', 'no-transform');
+          if (tooltipModel.yAlign) {
+            tooltipEl.classList.add(tooltipModel.yAlign);
+          } else {
+            tooltipEl.classList.add('no-transform');
+          }
+
+          function getBody(bodyItem) {
+            return bodyItem.lines;
+          }
+
+          // Set Text
+          if (tooltipModel.body) {
+            var titleLines = tooltipModel.title || [];
+            var bodyLines = tooltipModel.body.map(getBody);
+
+            var innerHtml = '<thead>';
+
+            titleLines.forEach(function(title) {
+              innerHtml += '<tr><th>' + title + '</th></tr>';
+            });
+            innerHtml += '</thead><tbody>';
+
+            bodyLines.forEach(function(body, i) {
+              var colors = tooltipModel.labelColors[i];
+              var style = 'background:' + colors.backgroundColor;
+              style += '; border-color:' + colors.borderColor;
+              style += '; border-width: 2px';
+              var span = '<span style="' + style + '"></span>';
+              innerHtml += '<tr><td>' + span + body + '</td></tr>';
+            });
+            innerHtml += '</tbody>';
+
+            var tableRoot = tooltipEl.querySelector('table');
+            tableRoot.innerHTML = innerHtml;
+          }
+
+          // `this` will be the overall tooltip
+          var position = this._chart.canvas.getBoundingClientRect();
+
+          // Display, position, and set styles for font
+          tooltipEl.style.opacity = 1;
+          tooltipEl.style.position = 'absolute';
+          tooltipEl.style.left = position.left + tooltipModel.caretX + 'px';
+          tooltipEl.style.top = position.top + tooltipModel.caretY + 'px';
+          tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
+          tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
+          tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
+          tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
+        }
       },
       responsive: true,
       elements: {
@@ -151,14 +218,13 @@
       chart_type = chart.config.type;
       if (chart.tooltip._active && chart.tooltip._active.length && chart_type === 'line') {
         var activePoint = chart.tooltip._active[0],
-          ctx = chart.chart.ctx,
-          x_axis = chart.scales['x-axis-0'],
-          y_axis = chart.scales['y-axis-0'],
-          x = activePoint.tooltipPosition().x,
-          topY = y_axis.top,
-          bottomY = y_axis.bottom;
-
-
+        /*ctx = chart.chart.ctx,*/
+        ctx = document.getElementById("lineChart");
+        x_axis = chart.scales['x-axis-0'],
+        y_axis = chart.scales['y-axis-0'],
+        x = activePoint.tooltipPosition().x,
+        topY = y_axis.top,
+        bottomY = y_axis.bottom;
         // draw line
         ctx.save();
         ctx.beginPath();
@@ -188,75 +254,5 @@
     myChart.data.datasets[2].data = subAcos;
 
     myChart.update();
-  };
-  
-  var customTooltipFunction = function(tooltipModel) {
-    // Tooltip Element
-    var tooltipEl = document.getElementById('chartjs-tooltip');
-
-    // Create element on first render
-    if (!tooltipEl) {
-      tooltipEl = document.createElement('div');
-      tooltipEl.id = 'chartjs-tooltip';
-      tooltipEl.innerHTML = "<table></table>";
-      document.body.appendChild(tooltipEl);
-    }
-
-    // Hide if no tooltip
-    if (tooltipModel.opacity === 0) {
-      tooltipEl.style.opacity = 0;
-      return;
-    }
-
-    // Set caret Position
-    tooltipEl.classList.remove('above', 'below', 'no-transform');
-    if (tooltipModel.yAlign) {
-      tooltipEl.classList.add(tooltipModel.yAlign);
-    } else {
-      tooltipEl.classList.add('no-transform');
-    }
-
-    function getBody(bodyItem) {
-      return bodyItem.lines;
-    }
-
-    // Set Text
-    if (tooltipModel.body) {
-      var titleLines = tooltipModel.title || [];
-      var bodyLines = tooltipModel.body.map(getBody);
-
-      var innerHtml = '<thead>';
-
-      titleLines.forEach(function(title) {
-        innerHtml += '<tr><th>' + title + '</th></tr>';
-      });
-      innerHtml += '</thead><tbody>';
-
-      bodyLines.forEach(function(body, i) {
-        var colors = tooltipModel.labelColors[i];
-        var style = 'background:' + colors.backgroundColor;
-        style += '; border-color:' + colors.borderColor;
-        style += '; border-width: 2px';
-        var span = '<span style="' + style + '"></span>';
-        innerHtml += '<tr><td>' + span + body + '</td></tr>';
-      });
-      innerHtml += '</tbody>';
-
-      var tableRoot = tooltipEl.querySelector('table');
-      tableRoot.innerHTML = innerHtml;
-    }
-
-    // `this` will be the overall tooltip
-    var position = this._chart.canvas.getBoundingClientRect();
-
-    // Display, position, and set styles for font
-    tooltipEl.style.opacity = 1;
-    tooltipEl.style.position = 'absolute';
-    tooltipEl.style.left = position.left + tooltipModel.caretX + 'px';
-    tooltipEl.style.top = position.top + tooltipModel.caretY + 'px';
-    tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
-    tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
-    tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
-    tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
   };
 </script>
