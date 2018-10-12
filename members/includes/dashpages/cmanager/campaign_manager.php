@@ -231,13 +231,12 @@ $(document).ready( function () {
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
-	  
 	  rowClasses = $(this).attr("class");
 	  
     if (rowClasses.includes("selected")) {
       $(this).css('background-color', '#fdfdfe');
     } else {
-      $(this).css('background-color', '#c1ebff');
+      $(this).css('background-color', 'rgba(193, 235, 255, 0.4)');
     }
 	  //alert("clicked");
   });
