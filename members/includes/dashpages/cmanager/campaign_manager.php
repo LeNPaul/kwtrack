@@ -230,10 +230,8 @@ $(document).ready( function () {
 
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
-	  var row = $(this);
-    
-    row.toggleClass('selected');
-	  
+	  $(this).toggleClass('selected');
+	  $(this).css('background-color', '#000');
 	  //alert("clicked");
   });
 
