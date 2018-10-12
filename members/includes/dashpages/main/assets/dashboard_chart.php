@@ -90,7 +90,7 @@
       },*/
       tooltips: {
         enabled: false,
-        custom: customTooltipFunction(tooltipModel)
+        custom: customTooltipFunction
       },
       responsive: true,
       elements: {
