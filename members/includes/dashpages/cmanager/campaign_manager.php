@@ -231,9 +231,14 @@ $(document).ready( function () {
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
-	  $(this).css('background-color', '#000');
-   
-	  console.log($(this).attr("class"));
+	  
+	  rowClasses = $(this).attr("class");
+	  
+    if (rowClasses.includes("selected")) {
+      $(this).css('background-color', '#fdfdfe');
+    } else {
+      $(this).css('background-color', '#c1ebff');
+    }
 	  //alert("clicked");
   });
 
