@@ -22,7 +22,7 @@ function outputSideNav($currentPage) {
     $cmExpand  = ' aria-expanded="true"';
     $cmExpand2 = 'show';
   } elseif ($currentPage == 'settings' && $_GET['p'] == 's') {
-    $topActive3 = 'class="acitive"';
+    $topActive3 = 'class="active"';
   }
 
   echo '<div class="sidebar" data-active-color="#ffffff">
