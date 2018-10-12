@@ -2,18 +2,14 @@
 
 function outputSideNav($currentPage) {
   $active1 = '';
-
-  $active2   = '';
+  $active2 = '';
+  
   $cmExpand  = '';
   $cmExpand2 = '';
 
-  $active3 = '';
-  $active4 = '';
-  $active5 = '';
-  $active6 = '';
-  $active7 = '';
+  $active3 = $active4 = $active5 = $active6 = $active7 = '';
   
-  $topActive1 = $topActive2 = $topActive3 = '';
+  $topActive1 = $topActive2 = $topActive3 = $topExpand = $topExpand2 = '';
 
   if ($currentPage == 'dashboard' && empty($_GET)) {
     $active1 = 'class="active"';
@@ -23,6 +19,8 @@ function outputSideNav($currentPage) {
     $cmExpand2 = 'show';
   } elseif ($currentPage == 'dashboard' && $_GET['p'] == 's') {
     $topActive3 = 'class="active"';
+    $topExpand  = 'aria-expanded="true"';
+    $topExpand2 = 'show';
   }
 
   echo '<div class="sidebar" data-active-color="#ffffff">
@@ -45,14 +43,14 @@ function outputSideNav($currentPage) {
         <div class="sidebar-wrapper">
           <div class="user">
             <div class="info">
-              <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+              <a data-toggle="collapse" href="#collapseExample" class="collapsed" ' . $topExpand . '>
                 <span>
                   ' . $_SESSION["first_name"] . ' ' . $_SESSION["last_name"] . '
                   <b class="caret"></b>
                 </span>
               </a>
               <div class="clearfix"></div>
-              <div class="collapse" id="collapseExample">
+              <div class="collapse ' . $topExpand2 . '" id="collapseExample">
                 <ul class="nav">
                   <li ' . $topActive1 . '>
                     <a href="#">
