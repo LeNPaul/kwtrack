@@ -232,6 +232,8 @@ $(document).ready( function () {
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
 	  $(this).css('background-color', '#000');
+   
+	  console.log($(this).attr("class"));
 	  //alert("clicked");
   });
 
