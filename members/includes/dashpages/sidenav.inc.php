@@ -21,7 +21,7 @@ function outputSideNav($currentPage) {
     $active2   = 'class="active"';
     $cmExpand  = ' aria-expanded="true"';
     $cmExpand2 = 'show';
-  } elseif ($currentPage == 'settings' && $_GET['p'] == 's') {
+  } elseif ($currentPage == 'dashboard' && $_GET['p'] == 's') {
     $topActive3 = 'class="active"';
   }
 
