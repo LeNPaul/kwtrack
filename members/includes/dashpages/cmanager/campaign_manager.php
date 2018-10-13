@@ -53,9 +53,9 @@ $(document).ready( function () {
       // },
       data: dataset,
       columns: [
-		{ title: "Active" },
+		    { title: "Active" },
         { title: "Campaign Name"},
-		{ title: "Status" },
+		    { title: "Status" },
         { title: "Budget" },
         { title: "Targeting Type" },
         { title: "Impressions" },
@@ -70,6 +70,14 @@ $(document).ready( function () {
 
 	  drawCallback: function(settings) {
 		    $('td input').bootstrapToggle();
+
+        rowClasses = $(this).attr("class");
+
+        if (rowClasses.includes("selected")) {
+          $(this).css('background-color', 'rgba(193, 235, 255, 0.4)');
+        } else {
+          $(this).css('background-color', '#fdfdfe');
+        }
 
         $(".c_link").on("click", function() {
           var campaignName     = $(this).text();
@@ -247,6 +255,9 @@ $(document).ready( function () {
 
   $('button#select_all').click(function() {
     $('tr.odd, tr.even').toggleClass('selected');
+
+    console.log(dt.rows('.selected').data());
+    dt.draw();
   });
 
 
