@@ -159,7 +159,7 @@
           tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
         }
       },
-      responsive: true,
+      responsive: false,
       elements: {
         line: {
           //fill: '-1'
