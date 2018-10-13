@@ -71,12 +71,12 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
 		    $('td input').bootstrapToggle();
 
-        rowClasses = $(this).attr("class");
+        rowClasses = $('#campaign_manager tbody tr').attr("class");
 
         if (rowClasses.includes("selected")) {
-          $(this).css('background-color', 'rgba(193, 235, 255, 0.4)');
+          $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
         } else {
-          $(this).css('background-color', '#fdfdfe');
+          $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
         }
 
         $(".c_link").on("click", function() {
