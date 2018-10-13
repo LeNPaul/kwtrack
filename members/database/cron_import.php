@@ -1,6 +1,6 @@
 <?php
 include 'pdo.inc.php';
-include '../includes/AmazonAdvertisingApi/Client.php';
+include '../../includes/AmazonAdvertisingApi/Client.php';
 
 /*
 
@@ -384,19 +384,19 @@ for ($i = 0; $i < count($userIDs); $i++){
 
   if (count($reportAdGroupID) > count($dbAdGroupID)) {
 	  $arrayDiff = array_diff($reportAdGroupID, $dbAdGroupID);
-  
+
     if (!empty($arrayDiff)) {
       $sql = "INSERT INTO ad_groups (amz_campaign_id,amz_adgroup_id,ad_group_name,default_bid,status) VALUES (:amz_campaign_id,:amz_adgroup_id,:ad_group_name,:default_bid,:status)";
       $stmt = $pdo->prepare($sql);
-    
+
       for ($b = 0; $b < count($arrayDiff); $b++) {
         $ag_id = $arrayDiff[$b];
         $index = array_search2D($result, 'adGroupId', $ag_id);
-      
+
         if ($index){
           $daddyFernandyayy = $client->getAdGroup($ag_id);
           $daddyFernandyayy = json_decode($daddyFernandyayy, true);
-        
+
           $stmt->execute(array(
             ":amz_campaign_id" => $daddyFernandyayy['campaignId'],
             ":amz_adgroup_id"  => $daddyFernandyayy['adGroupId'],
@@ -428,7 +428,7 @@ for ($i = 0; $i < count($userIDs); $i++){
 
 for ($i = 0; $i < count($userIDs); $i++){
 	$user_id = $userIDs[$i]['user_id'];
-	
+
 	// Instantiate client for advertising API
   $config = array(
   	"clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
@@ -439,13 +439,13 @@ for ($i = 0; $i < count($userIDs); $i++){
   );
   $client = new Client($config);
   $client->profileId = $userIDs[$i]['profileId'];
-  
+
   //for each userID, request report for yesterday's campaigns and from report, store all campaign IDs (reportCampaignID)
   $daddysCampaigns = $client->listCampaigns();
   $daddysCampaigns = json_decode($daddysCampaigns, true);
-  
+
   $reportCampaignIDs = [];
-  
+
   for ($d = 0; $d < count($daddysCampaigns); $d++) {
 	  $reportCampaignIDs[] = $daddysCampaigns[$d]['campaignId'];
   }
@@ -455,28 +455,28 @@ for ($i = 0; $i < count($userIDs); $i++){
   $stmt = $pdo->query($sql);
   $dbCampaign = $stmt->fetchAll(PDO::FETCH_ASSOC);
   $dbCampaignIDs = [];
-  
+
   for ($e = 0; $e < count($dbCampaign); $e++) {
 	  $dbCampaignIDs[] = $dbCampaign[$e]['amz_campaign_id'];
   }
-  
+
   //first check if length of reportCampaignID > dbCampaignID
   if (count($reportCampaignIDs) > count($dbCampaignIDs)) {
 	  $campaignDiff = array_diff($reportCampaignIDs, $dbCampaignIDs);
-  
+
     if (!empty($campaignDiff)) {
       $sql = "INSERT INTO campaigns (campaign_name,amz_campaign_id,campaign_type,targeting_type,daily_budget,status) VALUES (:campaign_name,:amz_campaign_id,:campaign_type,:targeting_type,:daily_budget,:status";
       $stmt = $pdo->prepare($sql);
-    
+
       //for each diff, find index of extra campaigns in the report. report[diff]
       for ($f = 0; $f < count($campaignDiff); $f++) {
         $camp_id = $campaignDiff[$f];
         $index = array_search2D($daddysCampaigns, 'campaignId', $camp_id);
-      
+
         if ($index) {
           $daddyFernand = $client->getCampaign($camp_id);
           $daddyFernand = json_decode($daddyFernand, true);
-        
+
           //insert campaign data into db with serialized metric arrays and append to dbCampaignID (IDs only)
           $stmt->execute(array(
             ":campaign_name"   => $daddyFernand['name'],
