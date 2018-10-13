@@ -256,7 +256,7 @@ $(document).ready( function () {
   $('button#select_all').click(function() {
     $('tr.odd, tr.even').toggleClass('selected');
 
-    asdf = $('tr').attr("class");
+    asdf = $('#campaign_manager tbody tr').attr("class");
     console.log(asdf);
     console.log(dt.rows('.selected').data());
     dt.draw();
