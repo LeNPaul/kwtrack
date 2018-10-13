@@ -103,7 +103,7 @@
 
           // Hide if no tooltip
           if (tooltipModel.opacity === 0) {
-            tooltipEl.style.opacity = 0;
+            tooltipEl.remove();
             return;
           }
 
