@@ -269,10 +269,10 @@ $dateArr = array_reverse($dateArr);
 				<span></span> <i class="fa fa-caret-down"></i>
 			</div>
 			<br>
-			
+
 			<div id="chartWrapper" style="position: relative">
 				<canvas id="lineChart" width="1000" height="400"></canvas>
-				<canvas id="cursor" width="1000" height="400" style="position: relative"></canvas>
+				<canvas id="cursor" width="1000" height="400" style="position: relative; z-index: 999;"></canvas>
 			</div>
 	  </div>
 
