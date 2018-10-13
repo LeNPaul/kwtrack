@@ -426,12 +426,8 @@ $sql = "SELECT amz_adgroup_id FROM ad_groups WHERE user_id=$user_id";
 $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-// echo '<pre>';
-// var_dump($result);
-// echo '<pre>';
-
 for ($i = 0; $i < count($result); $i++) {
-	importAdGroupMetrics($pdo, $result[$i], 59);
+	importAdGroupMetrics($pdo, $result[$i], 59, $client);
 }
 
 

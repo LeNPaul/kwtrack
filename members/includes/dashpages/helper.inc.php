@@ -188,7 +188,7 @@
     // the max number of days of data will always equal $numDays
     $numDays = 1;
 
-    for ($i = 1; $i < $days; $i++) {
+    for ($i = 0; $i < $days; $i++) {
       echo '---- STARTING day #' . $i . '<br />';
       // Each metric array will be storing campaign data like the following in a 2D array:
       //    METRIC ARRAY => [ARRAY1( * all data for metric for each keyword * ), ARRAY2(...), ..., ARRAY60(...)]
@@ -207,7 +207,7 @@
 
       // Only on the very first iteration of this loop, we will iterate through the array
       // and store campaign name and campaign ID in the database
-      if ($i === 1) {
+      if ($i === 0) {
         echo '------ INITIATING 1st iteration import<br />';
 
         $result = $client->requestReport(
@@ -442,9 +442,10 @@
    *      --> PDO $pdo          - database handler
    *      --> String $adGroupId - id of the ad group or campaign
    *      --> Int $days         - number of days to import
+   *      --> Obj $client       - client object for Advertising API
    */
 
-  function importAdGroupMetrics($pdo, $adGroupId, $days) {
+  function importAdGroupMetrics($pdo, $adGroupId, $days, $client) {
     // Query the database for all keywords under the specific ad group and store in $result
     $sql = "SELECT impressions, clicks, ctr, ad_spend, avg_cpc, units_sold, sales
             FROM ppc_keywords WHERE amz_adgroup_id={$adGroupId}";
@@ -529,7 +530,7 @@
     }
 
     // Get default bid
-    $adgBid = $client->getAdGroup(104829275664043);
+    $adgBid = $client->getAdGroup($adGroupId);
     $adgBid = json_decode($adgBid['response'], true);
     $adgBid = $adgBid['defaultBid'];
 
