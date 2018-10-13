@@ -232,20 +232,21 @@ $(document).ready( function () {
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
-	  rowClasses = $(this).attr("class");
-	  
+
+    rowClasses = $(this).attr("class");
+
     if (rowClasses.includes("selected")) {
       $(this).css('background-color', 'rgba(193, 235, 255, 0.4)');
     } else {
       $(this).css('background-color', '#fdfdfe');
     }
-    
+
     console.log( dt.rows('.selected').data() );
 	  //alert("clicked");
   });
-  
-  $('button#select_all').on('click', function(){
-    
+
+  $('button#select_all').click(function() {
+    $('tr.odd, tr.even').toggleClass('selected');
   });
 
 
