@@ -101,9 +101,9 @@
             document.body.appendChild(tooltipEl);
           }
 
-          // Hide if no tooltip
+          // Remove if no tooltip
           if (tooltipModel.opacity === 0) {
-            tooltipEl.style.opacity = 0;
+            tooltipEl.remove();
             return;
           }
 
@@ -237,8 +237,8 @@
 
 	  ctx.clearRect(0, 0, domElement.width, domElement.height),
 	  ctx.beginPath(),
-		ctx.moveTo(clientX, 0),
-		ctx.lineTo(clientX, domElement.height),
+		ctx.moveTo(clientX, 33),
+		ctx.lineTo(clientX, document.getElementById('lineChart').offsetHeight - 53),
 		ctx.strokeStyle = "#07C",
 		ctx.stroke()
 	});
