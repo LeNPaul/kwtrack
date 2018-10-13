@@ -24,7 +24,7 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$adgBid = $client->getAdGroup($status['adGroupId']);
+$adgBid = $client->getAdGroup(104829275664043);
 $adgBid = json_decode($adgBid['response'], true);
 echo '<pre>';
 var_dump($adgBid);
