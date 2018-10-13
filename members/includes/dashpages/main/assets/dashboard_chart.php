@@ -229,7 +229,7 @@
   
   $(document).ready(function(){
 	$("#lineChart").on("mousemove", function(evt) {
-	  var element = $("#cursor"),
+	  var element = $("#lineChart"),
 	    offsetLeft = element.offset().left,
 		domElement = element.get(0),
 		clientX = parseInt(evt.clientX - offsetLeft),
