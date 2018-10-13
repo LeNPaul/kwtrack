@@ -237,7 +237,7 @@
 
 	  ctx.clearRect(0, 0, domElement.width, domElement.height),
 	  ctx.beginPath(),
-		ctx.moveTo(clientX, 100),
+		ctx.moveTo(clientX, 35),
 		ctx.lineTo(clientX, domElement.height),
 		ctx.strokeStyle = "#07C",
 		ctx.stroke()
