@@ -375,13 +375,13 @@
       /* Now we have to do a check if there are any less keywords as we progress
          through the dates. If there are, then we need to append 1 0 to each metric array */
 
-      $impressions = adjustDayOffset($impressions, $numDays);
+      /*$impressions = adjustDayOffset($impressions, $numDays);
       $clicks      = adjustDayOffset($clicks, $numDays);
       $ctr         = adjustDayOffset($ctr, $numDays);
       $avgCpc      = adjustDayOffset($avgCpc, $numDays);
       $adSpend     = adjustDayOffset($adSpend, $numDays);
       $unitsSold   = adjustDayOffset($unitsSold, $numDays);
-      $sales       = adjustDayOffset($sales, $numDays);
+      $sales       = adjustDayOffset($sales, $numDays);*/
 
       $numDays++;
       echo '-------- FINISH day #'.$i.'<br />';
