@@ -24,11 +24,25 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$result = $client->listCampaigns();
+// $result = $client->listCampaigns();
+//
+// echo "<pre>";
+// var_dump(json_decode($result['response']), true);
+// echo "</pre>";
 
-echo "<pre>";
-var_dump(json_decode($result['response']), true);
-echo "</pre>";
+// Get the report id so we can use it to get the report
+$result2         = json_decode($result['response'], true);
+$reportId        = $result2['reportId'];
+$status          = $result2['status'];
+
+// Keep pinging the report until we get a 200 code
+while ($status == 'IN_PROGRESS') {
+	$result = $client->getReport($reportId);
+	$result = json_decode($result['response'], true);
+
+	$status = $result['status'];
+	echo $status.'<br />';
+}
 /*
 $result = $client->requestReport(
 	"keywords",
