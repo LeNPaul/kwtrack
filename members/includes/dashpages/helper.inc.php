@@ -188,7 +188,7 @@
     // the max number of days of data will always equal $numDays
     $numDays = 1;
 
-    for ($i = 0; $i < $days; $i++) {
+    for ($i = 1; $i < $days; $i++) {
       echo '---- STARTING day #' . $i . '<br />';
       // Each metric array will be storing campaign data like the following in a 2D array:
       //    METRIC ARRAY => [ARRAY1( * all data for metric for each keyword * ), ARRAY2(...), ..., ARRAY60(...)]
@@ -207,7 +207,7 @@
 
       // Only on the very first iteration of this loop, we will iterate through the array
       // and store campaign name and campaign ID in the database
-      if ($i === 0) {
+      if ($i === 1) {
         echo '------ INITIATING 1st iteration import<br />';
 
         $result = $client->requestReport(
