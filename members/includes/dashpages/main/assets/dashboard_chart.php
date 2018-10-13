@@ -238,7 +238,7 @@
 	  ctx.clearRect(0, 0, domElement.width, domElement.height),
 	  ctx.beginPath(),
 		ctx.moveTo(clientX, 33),
-		ctx.lineTo(clientX, domElement.height),
+		ctx.lineTo(clientX, document.getElementById('lineChart').offsetHeight),
 		ctx.strokeStyle = "#07C",
 		ctx.stroke()
 	});
