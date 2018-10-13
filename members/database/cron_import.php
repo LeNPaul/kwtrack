@@ -1,6 +1,6 @@
 <?php
 include 'pdo.inc.php';
-include '../../includes/AmazonAdvertisingApi/Client.php';
+include '../includes/AmazonAdvertisingApi/Client.php';
 
 /*
 
