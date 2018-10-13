@@ -101,7 +101,7 @@
             document.body.appendChild(tooltipEl);
           }
 
-          // Hide if no tooltip
+          // Remove if no tooltip
           if (tooltipModel.opacity === 0) {
             tooltipEl.remove();
             return;
