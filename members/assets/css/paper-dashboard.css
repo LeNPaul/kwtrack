@@ -22,7 +22,11 @@
  ██████  ██   ██ ███████ ██   ██ ██████   ██████  ██   ██ ██   ██ ██████
  */
 
-
+ @media only screen and (max-width: 600px) {
+     canvas#lineChart {
+       height: 400px;
+     }
+ }
 
 
 
