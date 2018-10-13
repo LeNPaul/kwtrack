@@ -378,12 +378,7 @@
       echo '-------- FINISH day #'.$i.'<br />';
     }
 
-    echo '<pre>';
-    var_dump($impressions);
-    echo '<pre>';
-
     // Insert all this shit into the database
-
     insertKeywords($pdo, $impressions, 'impressions');
     insertKeywords($pdo, $clicks, 'clicks');
     insertKeywords($pdo, $ctr, 'ctr');
@@ -530,7 +525,19 @@
       */
     }
 
+    // Get default bid
+    $adgBid = $client->getAdGroup(104829275664043);
+    $adgBid = json_decode($adgBid['response'], true);
+    $adgBid = $adgBid['defaultBid'];
+
     // After db prepared arrays are full, insert into the db
+    $sql = "UPDATE ad_groups SET default_bid=:adgBid WHERE amz_adgroup_id=:adGroupId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':adgBid'    => $adgBid,
+      ':adGroupId' => $adGroupId
+    ));
+
     $sql = "UPDATE ad_groups SET impressions=:impressionsDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
