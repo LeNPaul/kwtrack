@@ -162,7 +162,8 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
       ":ad_spend"    => serialize($ad_spendDb),
       ":avg_cpc"     => serialize($avg_cpcDb),
       ":units_sold"  => serialize($units_soldDb),
-      ":sales"       => serialize($salesDb)
+      ":sales"       => serialize($salesDb),
+      ":kw_id"       => $kw_id
     ));
   }
 }
@@ -218,7 +219,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
   while ($status == 'IN_PROGRESS') {
   	$result = $client->getReport($reportId);
   	$result = json_decode($result['response'], true);
-  	$status = $result['status'];
+    $status = (array_key_exists('status', $result)) ? $result['status'] : false;
   }
   $result = $client->getReport($reportId);
   $result = json_decode($result['response'], true);

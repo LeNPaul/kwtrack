@@ -383,7 +383,7 @@ storeAdGroupArrays($pdo, $dbSales, $result, 'sales');
 
 ============================================================================*/
 
-importKeywords($pdo, $client, $user_id, 60);
+importKeywords($pdo, $client, $user_id, 59);
 
 /*==========================================================================
 
@@ -431,7 +431,7 @@ $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 // echo '<pre>';
 
 for ($i = 0; $i < count($result); $i++) {
-	importAdGroupMetrics($pdo, $result[$i], 60);
+	importAdGroupMetrics($pdo, $result[$i], 59);
 }
 
 
@@ -475,7 +475,7 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 for ($i = 0; $i < count($result); $i++) {
-	importCampaignMetrics($pdo, $result[$i], 60);
+	importCampaignMetrics($pdo, $result[$i], 59);
 }
 
 /*================================================================

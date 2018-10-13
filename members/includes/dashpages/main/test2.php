@@ -24,34 +24,18 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
+$adgBid = $client->getAdGroup($status['adGroupId']);
+$adgBid = json_decode($adgBid['response'], true);
+echo '<pre>';
+var_dump($adgBid);
+echo '</pre>';
+$adgBid = $adgBid['defaultBid'];
+echo $adgBid;
 // $result = $client->listCampaigns();
 //
 // echo "<pre>";
 // var_dump(json_decode($result['response']), true);
 // echo "</pre>";
-
-$date = date('Ymd', strtotime('-1 days'));
-$result = $client->requestReport(
-  "keywords",
-  array("reportDate"    => $date,
-        "campaignType"  => "sponsoredProducts",
-        "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
-  )
-);
-
-// Get the report id so we can use it to get the report
-$result2         = json_decode($result['response'], true);
-$reportId        = $result2['reportId'];
-$status          = $result2['status'];
-
-// Keep pinging the report until we get a 200 code
-while ($status == 'IN_PROGRESS') {
-	$result = $client->getReport($reportId);
-	$result = json_decode($result['response'], true);
-
-	$status = (array_key_exists('status', $result)) ? $result['status'] : false;
-	echo $status.'<br />';
-}
 /*
 $result = $client->requestReport(
 	"keywords",

@@ -188,7 +188,7 @@
     // the max number of days of data will always equal $numDays
     $numDays = 1;
 
-    for ($i = 0; $i < $days; $i++) {
+    for ($i = 1; $i < $days; $i++) {
       echo '---- STARTING day #' . $i.'<br />';
       // Each metric array will be storing campaign data like the following in a 2D array:
       //    METRIC ARRAY => [ARRAY1( * all data for metric for each keyword * ), ARRAY2(...), ..., ARRAY60(...)]
@@ -223,9 +223,17 @@
         $result = json_decode($result['response'], true);
         $reportId = $result['reportId'];
 
-        sleep(10);
+        // Get the report id so we can use it to get the report
+        $result2         = json_decode($result['response'], true);
+        $reportId        = $result2['reportId'];
+        $status          = $result2['status'];
 
-        // Get the report using the report id
+        // Keep pinging the report until status !== IN_PROGRESS
+        while ($status == 'IN_PROGRESS') {
+        	$result = $client->getReport($reportId);
+        	$result = json_decode($result['response'], true);
+          $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+        }
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
 
