@@ -228,7 +228,7 @@
   };
 
   $(document).ready(function(){
-	$("#lineChart").on("mousemove", function(evt) {
+	$("#cursor").on("mousemove", function(evt) {
 	  var element = $("#cursor"),
 	  offsetLeft = element.offset().left,
 		domElement = element.get(0),
