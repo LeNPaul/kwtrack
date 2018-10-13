@@ -228,6 +228,7 @@
         	$result = $client->getReport($reportId);
         	$result = json_decode($result['response'], true);
           $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+          echo $status . '<br />';
         }
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
@@ -298,6 +299,7 @@
         	$result = $client->getReport($reportId);
         	$result = json_decode($result['response'], true);
           $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+          echo $status . '<br />';
         }
 
         $result = $client->getReport($reportId);
