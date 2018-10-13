@@ -99,6 +99,18 @@ table.dataTable td {
   background: #4aa2b0 !important;
 }
 
+#chartWrapper {
+  position: relative;
+  width: 1000px;
+  height: 400px;
+}
+
+#lineChart, #cursor {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
 a span.sidebar-normal,
 a span.sidebar-mini-icon {
   font-weight: 400;
