@@ -30,6 +30,15 @@ $client->profileId = $profileId;
 // var_dump(json_decode($result['response']), true);
 // echo "</pre>";
 
+$date = date('Ymd', strtotime('-1 days'));
+$result = $client->requestReport(
+  "keywords",
+  array("reportDate"    => $date,
+        "campaignType"  => "sponsoredProducts",
+        "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+  )
+);
+
 // Get the report id so we can use it to get the report
 $result2         = json_decode($result['response'], true);
 $reportId        = $result2['reportId'];
