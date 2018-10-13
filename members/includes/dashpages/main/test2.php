@@ -24,57 +24,32 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$adgBid = $client->getAdGroup(104829275664043);
-$adgBid = json_decode($adgBid['response'], true);
-echo '<pre>';
-var_dump($adgBid);
-echo '</pre>';
-$adgBid = $adgBid['defaultBid'];
-echo $adgBid;
-// $result = $client->listCampaigns();
-//
-// echo "<pre>";
-// var_dump(json_decode($result['response']), true);
-// echo "</pre>";
-/*
 $result = $client->requestReport(
-	"keywords",
-	array("reportDate"    => "20180907",
-				"campaignType"  => "sponsoredProducts",
-				"metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d",
-				"segment"				=> "query"
-	)
+  "keywords",
+  array("reportDate"    => '20180909',
+        "campaignType"  => "sponsoredProducts",
+        "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+  )
 );
 
 // Get the report id so we can use it to get the report
-$result2         = json_decode($result['response'], true);
-$reportId        = $result2['reportId'];
-$status = $result2['status'];
+$result   = json_decode($result['response'], true);
+$reportId = $result['reportId'];
+$status   = $result['status'];
 
-// Keep pinging the report until we get a 200 code
+// Keep pinging the report until status !== IN_PROGRESS
 while ($status == 'IN_PROGRESS') {
-	$result = $client->getReport($reportId);
-	$result = json_decode($result['response'], true);
-
-	$status = $result['status'];
-	echo $status.'<br />';
+  $result = $client->getReport($reportId);
+  $result = json_decode($result['response'], true);
+  $status = (array_key_exists('status', $result)) ? $result['status'] : false;
 }
 
-// Get the report using the report id
 $result = $client->getReport($reportId);
 $result = json_decode($result['response'], true);
 
 echo '<pre>';
 var_dump($result);
 echo '</pre>';
-
-$index = array_search2D($result, 'keywordId', 253);
-var_dump($index);
-*/
-//
-// echo '<pre>';
-// var_dump($result[$index]);
-// echo '</pre>';
 
 
 ?>
