@@ -302,6 +302,10 @@
 
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
+
+        echo '<pre>';
+        var_dump($result);
+        echo '</pre>';
       }
 
       // Save count of keywords for $date (only starts for "yesterday")
