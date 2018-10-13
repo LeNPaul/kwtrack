@@ -264,14 +264,16 @@ $dateArr = array_reverse($dateArr);
 	  </div> -->
 
       <div class="card-body">
-				<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-					<i class="fa fa-calendar"></i>
-					<span></span> <i class="fa fa-caret-down"></i>
-				</div>
+			<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+				<i class="fa fa-calendar"></i>
+				<span></span> <i class="fa fa-caret-down"></i>
+			</div>
 			<br>
-
-			<canvas id="lineChart" width="1000" height="400"></canvas>
-			<canvas id="cursor" width="1000" height="400"></canvas>
+			
+			<div id="wrapper">
+				<canvas id="lineChart" width="1000" height="400"></canvas>
+				<canvas id="cursor" width="1000" height="400"></canvas>
+			</div>
 	  </div>
 
       <div class="card-footer ">
