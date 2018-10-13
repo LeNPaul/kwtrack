@@ -1,4 +1,5 @@
 <?php
+namespace AmazonAdvertisingApi;
 include 'pdo.inc.php';
 include '../includes/AmazonAdvertisingApi/Client.php';
 
