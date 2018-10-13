@@ -77,7 +77,7 @@
       backgroundColor: "rgba(114, 187, 255, 0.4)",
     }]
   };
-  
+
   var myChart = new Chart(ctx, {
     type: "bar",
     data: lineData,
@@ -226,17 +226,17 @@
 
     myChart.update();
   };
-  
+
   $(document).ready(function(){
-	$("#lineChart").on("mousemove", function(evt) {
+	$("#cursor").on("mousemove", function(evt) {
 	  var element = $("#cursor"),
-	    offsetLeft = element.offset().left,
+	  offsetLeft = element.offset().left,
 		domElement = element.get(0),
 		clientX = parseInt(evt.clientX - offsetLeft),
 		ctx = element.get(0).getContext('2d');
-		
+
 	  ctx.clearRect(0, 0, domElement.width, domElement.height),
-	    ctx.beginPath(),
+	  ctx.beginPath(),
 		ctx.moveTo(clientX, 0),
 		ctx.lineTo(clientX, domElement.height),
 		ctx.strokeStyle = "#07C",
