@@ -271,8 +271,8 @@ $dateArr = array_reverse($dateArr);
 			<br>
 
 			<div id="chartWrapper" style="position: relative">
-				<canvas id="lineChart" width="1000" height="400" style="z-index: 998;"></canvas>
-				<canvas id="cursor" width="1000" height="400" style="position: absolute; top:0; left:0; z-index: 999;"></canvas>
+				<canvas id="lineChart" width="1000" height="400" style="z-index: 999;"></canvas>
+				<canvas id="cursor" width="1000" height="400" style="position: absolute; top:0; left:0; z-index: 998;"></canvas>
 			</div>
 	  </div>
 
