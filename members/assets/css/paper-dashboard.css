@@ -109,6 +109,8 @@ table.dataTable td {
   position: absolute;
   top: 0px;
   left: 0px;
+  width: 1000px;
+  height: 400px;
 }
 
 a span.sidebar-normal,
