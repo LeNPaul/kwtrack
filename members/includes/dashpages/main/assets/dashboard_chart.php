@@ -79,7 +79,7 @@
   };
   
   var myChart = new Chart(ctx, {
-    type: "Bar",
+    type: "bar",
     data: lineData,
 
     options: {
