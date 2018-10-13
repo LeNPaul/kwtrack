@@ -207,7 +207,7 @@
 
       // Only on the very first iteration of this loop, we will iterate through the array
       // and store campaign name and campaign ID in the database
-      if ($i === 0) {
+      if ($i === 1) {
         echo '------ INITIATING 1st iteration import<br />';
         // Request the report from API with campaign name, campaignId, and campaign budget only
         // for the first iteration
@@ -220,13 +220,9 @@
         );
 
         // Get the report id so we can use it to get the report
-        $result = json_decode($result['response'], true);
+        $result   = json_decode($result['response'], true);
         $reportId = $result['reportId'];
-
-        // Get the report id so we can use it to get the report
-        $result2         = json_decode($result['response'], true);
-        $reportId        = $result2['reportId'];
-        $status          = $result2['status'];
+        $status   = $result['status'];
 
         // Keep pinging the report until status !== IN_PROGRESS
         while ($status == 'IN_PROGRESS') {
@@ -291,12 +287,17 @@
         );
 
         // Get the report id so we can use it to get the report
-        $result = json_decode($result['response'], true);
+        $result   = json_decode($result['response'], true);
         $reportId = $result['reportId'];
+        $status   = $result['status'];
 
-        sleep(15);
+        // Keep pinging the report until status !== IN_PROGRESS
+        while ($status == 'IN_PROGRESS') {
+        	$result = $client->getReport($reportId);
+        	$result = json_decode($result['response'], true);
+          $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+        }
 
-        // Get the report using the report id
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
       }
