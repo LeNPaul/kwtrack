@@ -256,7 +256,7 @@ $(document).ready( function () {
   $('button#select_all').click(function() {
     $('tr.odd, tr.even').toggleClass('selected');
 
-    asdf = $('tr.odd, tr.even').attr("class");
+    asdf = $('tr').attr("class");
     console.log(asdf);
     console.log(dt.rows('.selected').data());
     dt.draw();
