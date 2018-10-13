@@ -271,6 +271,7 @@ $dateArr = array_reverse($dateArr);
 			<br>
 
 			<canvas id="lineChart" width="1000" height="400"></canvas>
+			<canvas id="cursor" width="1000" height="400"></canvas>
 		  </div>
 
       <div class="card-footer ">
