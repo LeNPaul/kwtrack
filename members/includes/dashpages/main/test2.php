@@ -28,7 +28,7 @@ $date = date('Ymd', strtotime('-18 days'));
 
 $result = $client->requestReport(
   "keywords",
-  array("reportDate"    => $date,
+  array("reportDate"    => '20170525',
     "campaignType"  => "sponsoredProducts",
     "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
   )
