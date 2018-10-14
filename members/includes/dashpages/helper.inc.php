@@ -156,7 +156,6 @@
  /*
 
  /*
-
       ██   ██ ███████ ██    ██ ██     ██  ██████  ██████  ██████  ███████
       ██  ██  ██       ██  ██  ██     ██ ██    ██ ██   ██ ██   ██ ██
       █████   █████     ████   ██  █  ██ ██    ██ ██████  ██   ██ ███████
@@ -185,7 +184,7 @@
 
     // Keep count of days of data gone through. For each iteration of $i,
     // the max number of days of data will always equal $numDays
-    $numDays = 1;
+    $numDays = 0;
 
     for ($i = 1; $i < $days; $i++) {
       echo '---- STARTING day #' . $i . '<br />';
@@ -309,7 +308,7 @@
       $numCurrentKeywords = count($result);
 
       // Loop to iterate through the report response
-      for ($j = 0; $j < count($result); $j++) {
+      for ($j = 0; $j < 10/*count($result)*/; $j++) {
 
         // Get keyword ID
         $kw_id = $result[$j]['keywordId'];
