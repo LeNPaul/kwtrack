@@ -222,12 +222,12 @@
         $status   = $result['status'];
 
         // Keep pinging the report until status !== IN_PROGRESS
-        while ($status == 'IN_PROGRESS') {
-        	$result = $client->getReport($reportId);
-        	$result = json_decode($result['response'], true);
+        do {
+          $result = $client->getReport($reportId);
+          $result = json_decode($result['response'], true);
           $status = (array_key_exists('status', $result)) ? $result['status'] : false;
           echo $status . '<br />';
-        }
+        } while ($status == 'IN_PROGRESS');
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
 
@@ -293,12 +293,12 @@
         $status   = $result['status'];
 
         // Keep pinging the report until status !== IN_PROGRESS
-        while ($status == 'IN_PROGRESS') {
-        	$result = $client->getReport($reportId);
-        	$result = json_decode($result['response'], true);
+        do {
+          $result = $client->getReport($reportId);
+          $result = json_decode($result['response'], true);
           $status = (array_key_exists('status', $result)) ? $result['status'] : false;
           echo $status . '<br />';
-        }
+        } while ($status == 'IN_PROGRESS');
 
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
