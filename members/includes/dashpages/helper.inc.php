@@ -184,7 +184,7 @@
 
     // Keep count of days of data gone through. For each iteration of $i,
     // the max number of days of data will always equal $numDays
-    $numDays = 0;
+    $numDays = 1;
 
     for ($i = 1; $i < $days; $i++) {
       echo '---- STARTING day #' . $i . '<br />';
@@ -378,7 +378,7 @@
       $sales       = adjustDayOffset($sales, $numDays);
 
       echo '<pre>';
-      var_dump($impressions);
+      var_dump($impressions[82763020309402]);
       echo '</pre>';
 
       $numDays++;

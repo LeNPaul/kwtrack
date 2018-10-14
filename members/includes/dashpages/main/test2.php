@@ -24,11 +24,13 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
+$date = date('Ymd', strtotime('-18 days'));
+
 $result = $client->requestReport(
   "keywords",
-  array("reportDate"    => '20180909',
-        "campaignType"  => "sponsoredProducts",
-        "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+  array("reportDate"    => $date,
+    "campaignType"  => "sponsoredProducts",
+    "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
   )
 );
 
@@ -42,6 +44,7 @@ while ($status == 'IN_PROGRESS') {
   $result = $client->getReport($reportId);
   $result = json_decode($result['response'], true);
   $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+  echo $status . '<br />';
 }
 
 $result = $client->getReport($reportId);
