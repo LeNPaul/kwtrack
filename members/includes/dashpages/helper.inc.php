@@ -226,6 +226,7 @@
           $result = $client->getReport($reportId);
           $result = json_decode($result['response'], true);
           $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+          sleep(0.3);
           echo $status . '<br />';
         } while ($status == 'IN_PROGRESS');
         $result = $client->getReport($reportId);
@@ -297,6 +298,7 @@
           $result = $client->getReport($reportId);
           $result = json_decode($result['response'], true);
           $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+          sleep(0.4);
           echo $status . '<br />';
         } while ($status == 'IN_PROGRESS');
 
