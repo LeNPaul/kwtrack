@@ -25,7 +25,6 @@
   function adjustDayOffset($metricArr, $numDays) {
     foreach ($metricArr as $key => $value) {
       if (count($value) < $numDays) {
-        // Append a 0 to $value
         $value[] = 0;
       }
     }
@@ -254,7 +253,7 @@
           // If it does, set bid to what it is
           // If not, then set it to the ad group's default bid
           if (array_key_exists('bid', $status)) {
-            $bid = $status['bid'];
+            $adgBid = $status['bid'];
           } else {
             // Get default bid from adgroup
             $adgBid = $client->getAdGroup($status['adGroupId']);
@@ -267,7 +266,7 @@
           $stmt->execute(array(
             ':user_id'          => $user_id,
             ':status'           => $status,
-            ':bid'              => $bid,
+            ':bid'              => $adgBid,
             ':keyword_text'     => $result[$x]['keywordText'],
             ':amz_campaign_id'  => $result[$x]['campaignId'],
             ':amz_adgroup_id'   => $result[$x]['adGroupId'],
@@ -370,14 +369,16 @@
 
       /* Now we have to do a check if there are any less keywords as we progress
          through the dates. If there are, then we need to append 1 0 to each metric array */
-
-      /*$impressions = adjustDayOffset($impressions, $numDays);
+      
+      $impressions = adjustDayOffset($impressions, $numDays);
       $clicks      = adjustDayOffset($clicks, $numDays);
       $ctr         = adjustDayOffset($ctr, $numDays);
       $avgCpc      = adjustDayOffset($avgCpc, $numDays);
       $adSpend     = adjustDayOffset($adSpend, $numDays);
       $unitsSold   = adjustDayOffset($unitsSold, $numDays);
-      $sales       = adjustDayOffset($sales, $numDays);*/
+      $sales       = adjustDayOffset($sales, $numDays);
+      
+      var_dump($impressions);
 
       $numDays++;
       echo '-------- FINISH day #'.$i.'<br />';
