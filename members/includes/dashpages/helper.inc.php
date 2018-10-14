@@ -379,6 +379,7 @@
       $sales       = adjustDayOffset($sales, $numDays);
       
       var_dump($impressions);
+      echo '<br />';
 
       $numDays++;
       echo '-------- FINISH day #'.$i.'<br />';
