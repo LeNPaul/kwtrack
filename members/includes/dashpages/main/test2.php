@@ -42,7 +42,7 @@ $status   = $result['status'];
 // Keep pinging the report until status !== IN_PROGRESS
 do {
   $result = $client->getReport($reportId);
-  $result = json_decode($result['response'], true);
+  $result2 = json_decode($result['response'], true);
   $status = (array_key_exists('status', $result)) ? $result['status'] : false;
   echo '<pre>';
   var_dump($result);
