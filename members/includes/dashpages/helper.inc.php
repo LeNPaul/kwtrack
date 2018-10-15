@@ -188,19 +188,7 @@
 
     for ($i = 1; $i < $days; $i++) {
       echo '---- STARTING day #' . $i . '<br />';
-      // Each metric array will be storing campaign data like the following in a 2D array:
-      //    METRIC ARRAY => [ARRAY1( * all data for metric for each keyword * ), ARRAY2(...), ..., ARRAY60(...)]
-      //    METRIC ARRAY INDEX REPRESENTS 1 DAY OF DATA FOR THAT METRIC FOR ALL CAMPAIGNS
 
-      /*$impressions[$i] = [];
-      $clicks[$i] = [];
-      $ctr[$i] = [];
-      $adSpend[$i] = [];
-      $avgCpc[$i] = [];
-      $unitsSold[$i] = [];
-      $sales[$i] = [];*/
-
-      // Get date from $i days before today and format it as YYYYMMDD
       $date = date('Ymd', strtotime('-' . $i . ' days'));
 
       // Only on the very first iteration of this loop, we will iterate through the array
@@ -224,11 +212,11 @@
         // Keep pinging the report until status !== IN_PROGRESS
         do {
           $result = $client->getReport($reportId);
-          $result = json_decode($result['response'], true);
-          $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+          $result2 = json_decode($result['response'], true);
+          $status = (array_key_exists('status', $result2)) ? $result2['status'] : false;
           echo $status . '<br />';
-        } while ($status == 'IN_PROGRESS');
-        sleep(2);
+        } while ($status == 'IN_PROGRESS' && strlen($result['response'] >= 160));
+
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
 
@@ -293,14 +281,13 @@
         $reportId = $result['reportId'];
         $status   = $result['status'];
 
-        // Keep pinging the report until status !== IN_PROGRESS
         do {
           $result = $client->getReport($reportId);
-          $result = json_decode($result['response'], true);
-          $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+          $result2 = json_decode($result['response'], true);
+          $status = (array_key_exists('status', $result2)) ? $result2['status'] : false;
           echo $status . '<br />';
-        } while ($status == 'IN_PROGRESS');
-        sleep(2);
+        } while ($status == 'IN_PROGRESS' && strlen($result['response'] >= 160));
+
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
       }
@@ -369,7 +356,7 @@
 
       /* Now we have to do a check if there are any less keywords as we progress
          through the dates. If there are, then we need to append 1 0 to each metric array */
-      
+
       $impressions = adjustDayOffset($impressions, $numDays);
       $clicks      = adjustDayOffset($clicks, $numDays);
       $ctr         = adjustDayOffset($ctr, $numDays);
