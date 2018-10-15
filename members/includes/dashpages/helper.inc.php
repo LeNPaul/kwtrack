@@ -292,6 +292,7 @@
           } else {
             $status = 'DONE';
             echo 'Length of $result["response"]: ' . strlen($result['response']) . '<br />';
+            echo 'Report ID: ' . $reportId . '<br />';
             if (strlen($result['response']) < 1000) { var_dump($result); }
           }
 
@@ -301,6 +302,7 @@
         echo 'Retrieving report and storing in $result...<br />';
         $result = $client->getReport($reportId);
         echo 'Length of $result["response"]: ' . strlen($result['response']) . '<br />';
+        echo 'Report ID: ' . $reportId . '<br />';
         $result = json_decode($result['response'], true);
       }
 
