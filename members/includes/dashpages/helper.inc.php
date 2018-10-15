@@ -286,6 +286,14 @@
           $result = $client->getReport($reportId);
           $result2 = json_decode($result['response'], true);
           $status = (array_key_exists('status', $result2)) ? $result2['status'] : 'DONE';
+
+          if (array_key_exists('status', $result2)) {
+            $status = $result2['status'];
+          } else {
+            $status = 'DONE';
+            var_dump($result);
+          }
+          
           echo $status . ' in loop <br />';
         } while ($status == 'IN_PROGRESS' && strlen($result['response'] <= 160));
 
