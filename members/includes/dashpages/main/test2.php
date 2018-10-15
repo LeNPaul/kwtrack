@@ -5,6 +5,8 @@ require '../../../database/pdo.inc.php';
 require '../helper.inc.php';
 use PDO;
 
+// delete from ppc_keywords; delete from ad_groups; delete from campaigns; delete from campaign_neg_kw; delete from adgroup_neg_kw;
+
 function array_search2D($array, $key, $value) {
   return (array_search($value, array_column($array, $key)));
 }
