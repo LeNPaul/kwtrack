@@ -291,9 +291,9 @@
             $status = $result2['status'];
           } else {
             $status = 'DONE';
-            var_dump($result);
+            if ($result['response'] < 1000) { var_dump($result); }
           }
-          
+
           echo $status . ' in loop <br />';
         } while ($status == 'IN_PROGRESS' && strlen($result['response'] <= 160));
 
