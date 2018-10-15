@@ -47,11 +47,14 @@ do {
   echo '<pre>';
   var_dump($result);
   echo '</pre>';
+
   echo $status . '<br />';
-} while ($status == 'IN_PROGRESS');
+
+} while ($status == 'IN_PROGRESS' && strlen($result['response']) >= 157);
+
 echo $status . '<br>';
-$result = $client->getReport($reportId);
-$result = json_decode($result['response'], true);
+$result2 = $client->getReport($reportId);
+$result2 = json_decode($result['response'], true);
 
 echo '<pre>';
 var_dump($result);
