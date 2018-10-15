@@ -24,6 +24,39 @@ function array_search2D($array, $key, $value) {
   return (array_search($value, array_column($array, $key)));
 }
 
+/*
+ *  function getReport(Obj $client, Int $reportID) --> Array $report
+ *    --> Gets report from Advertising API with $reportID.
+ *
+ *      --> Obj $client   - Advertisign API client object
+ *      --> Int $reportID - Report ID of the report we are retrieving
+ */
+
+function getReport($client, $reportID) {
+  do {
+    $report = $client->getReport($reportId);
+    $result2 = json_decode($report['response'], true);
+    if (array_key_exists('status', $result2)) {
+      $status = $result2['status'];
+    } else {
+      $status = 'DONE';
+      $report = $result2;
+    }
+  } while ($status == 'IN_PROGRESS');
+  return $result;
+}
+
+/*
+ * function cron_diffUpdateKeywords(PDO $pdo, Obj $client, Array $arrKWReport, Array $arrKWIDs) => void
+ *   --> Finds the keyword ID's in $arrKWID's inside the keyword report ($arrKWReport) and updates
+ *       those keywords.
+ *
+ *    --> PDO $pdo           - database handle
+ *    --> Obj $client        - Advertising API client object
+ *    --> Array $arrKWReport - keyword report generated from Amazon
+ *    --> Array $arrKWIDs    - 1D array of the keyword ID's from the database
+ */
+
 function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
   $sql   = "UPDATE ppc_keywords
                 SET status=:status,
@@ -96,6 +129,15 @@ function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
   }
 }
 
+/*
+ * function cron_diffUpdateKeywords(PDO $pdo, Obj $client, Array $arrKWReport) => void
+ *   --> Updates all keywords inside of $arrKWReport
+ *
+ *    --> PDO $pdo           - database handle
+ *    --> Obj $client        - Advertising API client object
+ *    --> Array $arrKWReport - keyword report generated from Amazon
+ */
+
 function cron_updateKeywords($pdo, $client, $arrKWReport) {
   $sql   = "UPDATE ppc_keywords
                 SET status=:status,
@@ -138,20 +180,36 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
     $units_soldDb  = unserialize($kwDbInfo[0]['units_sold']);
     $salesDb       = unserialize($kwDbInfo[0]['sales']);
 
-    array_unshift($impressionsDb, $impressions);
-    array_unshift($clicksDb, $clicks);
-    array_unshift($ctrDb, $ctr);
-    array_unshift($ad_spendDb, $ad_spend);
-    array_unshift($avg_cpcDb, $avg_cpc);
-    array_unshift($units_soldDb, $units_sold);
-    array_unshift($salesDb, $sales);
-    array_pop($impressionsDb);
-    array_pop($clicksDb);
-    array_pop($ctrDb);
-    array_pop($ad_spendDb);
-    array_pop($avg_cpcDb);
-    array_pop($units_soldDb);
-    array_pop($salesDb);
+    /*
+    First check if length = 59. If yes, that means that $this
+    update is the FIRST update. Only need to check 1 array since
+    all of them will be the same length anyways.
+     */
+
+    if (count($impressionsDb) == 59) {
+      array_unshift($impressionsDb, $impressions);
+      array_unshift($clicksDb, $clicks);
+      array_unshift($ctrDb, $ctr);
+      array_unshift($ad_spendDb, $ad_spend);
+      array_unshift($avg_cpcDb, $avg_cpc);
+      array_unshift($units_soldDb, $units_sold);
+      array_unshift($salesDb, $sales);
+    } else {
+      array_unshift($impressionsDb, $impressions);
+      array_unshift($clicksDb, $clicks);
+      array_unshift($ctrDb, $ctr);
+      array_unshift($ad_spendDb, $ad_spend);
+      array_unshift($avg_cpcDb, $avg_cpc);
+      array_unshift($units_soldDb, $units_sold);
+      array_unshift($salesDb, $sales);
+      array_pop($impressionsDb);
+      array_pop($clicksDb);
+      array_pop($ctrDb);
+      array_pop($ad_spendDb);
+      array_pop($avg_cpcDb);
+      array_pop($units_soldDb);
+      array_pop($salesDb);
+    }
 
     $stmt->execute(array(
       ":status"      => $status,
@@ -208,21 +266,25 @@ for ($i = 0; $i < count($userIDs); $i++) {
     )
   );
 
-  $code = $result['code'];
-
   // Get the report id so we can use it to get the report
   $result2         = json_decode($result['response'], true);
   $reportId        = $result2['reportId'];
   $status          = $result2['status'];
 
   // Keep pinging the report until status !== IN_PROGRESS
-  while ($status == 'IN_PROGRESS') {
-  	$result = $client->getReport($reportId);
-  	$result = json_decode($result['response'], true);
-    $status = (array_key_exists('status', $result)) ? $result['status'] : false;
-  }
-  $result = $client->getReport($reportId);
-  $result = json_decode($result['response'], true);
+  do {
+    $result = $client->getReport($reportId);
+    $result2 = json_decode($result['response'], true);
+    //$status = (array_key_exists('status', $result2)) ? $result2['status'] : 'DONE';
+
+    if (array_key_exists('status', $result2)) {
+      $status = $result2['status'];
+    } else {
+      $status = 'DONE';
+      $result = $result2;
+    }
+    echo $status . ' in loop <br />';
+  } while ($status == 'IN_PROGRESS');
 
   // Store all keyword IDs from the report in reportKeywordIDs
   $reportKeywordIDs = [];
@@ -235,7 +297,8 @@ for ($i = 0; $i < count($userIDs); $i++) {
   $stmt         = $pdo->query($sql);
   $dbKeywordIDs = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-  // First check if length of reportKeywordIDs > length of dbKeywordIDs
+  // First check if length of reportKeywordIDs > length of dbKeywordIDs.
+  // If yes, new keywords were added and we need to insert them in the DB
   if (count($reportKeywordIDs) > count($dbKeywordIDs)) {
     $diff = array_diff($reportKeywordIDs, $dbKeywordIDs);
 
@@ -308,20 +371,6 @@ for ($i = 0; $i < count($userIDs); $i++) {
     cron_updateKeywords($pdo, $client, $result);
   }
 }
-
-/*
-// Iterate through $reportIDs and obtain keyword report. Store in Array kwReports
-$currentReportID = '';
-$code = 202;
-for ($j = 0; $j < count($reportIDs); $j++) {
-  // Keep trying to request the report until we get a "200" code response
-  while ($code == 202) {
-    $result = $client->getReport($reportIDs[$i]);
-    $code   = $result['code'];
-  }
-
-}
-*/
 
 //
 //    _|_|    _|_|_|      _|_|_|  _|_|_|      _|_|    _|    _|  _|_|_|      _|_|_|

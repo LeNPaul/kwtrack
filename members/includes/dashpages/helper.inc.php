@@ -14,6 +14,28 @@
   *
   *----------------------------------------------------------*/
 
+/*
+ *  function getReport(Obj $client, Int $reportID) --> Array $report
+ *    --> Gets report from Advertising API with $reportID.
+ *
+ *      --> Obj $client   - Advertisign API client object
+ *      --> Int $reportID - Report ID of the report we are retrieving
+ */
+
+  function getReport($client, $reportID) {
+    do {
+      $report = $client->getReport($reportId);
+      $result2 = json_decode($report['response'], true);
+      if (array_key_exists('status', $result2)) {
+        $status = $result2['status'];
+      } else {
+        $status = 'DONE';
+        $report = $result2;
+      }
+    } while ($status == 'IN_PROGRESS');
+    return $result;
+  }
+
  /*
   *  function adjustDayOffset(Array $metricArr, Int $numDays) --> Array $output
   *    --> Takes $metricArr and prepends 0's $numDays-1 times for each old keyword that we encounter.
@@ -210,16 +232,25 @@
         $status   = $result['status'];
 
         // Keep pinging the report until status !== IN_PROGRESS
-        do {
+        /*do {
           $result = $client->getReport($reportId);
           $result2 = json_decode($result['response'], true);
-          $status = (array_key_exists('status', $result2)) ? $result2['status'] : 'DONE';
-          echo $status . ' in loop<br />';
-        } while ($status == 'IN_PROGRESS' && strlen($result['response'] <= 160));
+          //$status = (array_key_exists('status', $result2)) ? $result2['status'] : 'DONE';
 
-        echo $status . '<br />';
-        $result = $client->getReport($reportId);
-        $result = json_decode($result['response'], true);
+          if (array_key_exists('status', $result2)) {
+            $status = $result2['status'];
+          } else {
+            $status = 'DONE';
+            echo 'Length of $result["response"]: ' . strlen($result['response']) . '<br />';
+            echo 'Report ID: ' . $reportId . '<br />';
+
+            $result = $result2;
+          }
+
+          echo $status . ' in loop <br />';
+        } while ($status == 'IN_PROGRESS');*/
+
+        $result = getReport($reportID);
 
         // Save count of the number of keywords today (will always be max keywords)
         // so we can use it in the future
@@ -452,13 +483,6 @@
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // For each keyword:
-    // 1) unserialize arrays
-    // 2) pull metrics then sum to 1 value
-    // 3) append the metrics to their respective db prepared array
-    // 3) store db prepared array in db for that ad group
-
-    // Initialize database-ready arrays
     $impressionsDb = array_fill(0, $days, 0.0);
     $clicksDb      = array_fill(0, $days, 0.0);
     $ctrDb         = array_fill(0, $days, 0.0);
@@ -468,7 +492,6 @@
     $salesDb       = array_fill(0, $days, 0.0);
 
     for ($i = 0; $i < count($result); $i++) {
-      // Unserialize the keyword's metric arrays
       $impressions = unserialize($result[$i]['impressions']);
       $clicks = unserialize($result[$i]['clicks']);
       $ad_spend = unserialize($result[$i]['ad_spend']);
