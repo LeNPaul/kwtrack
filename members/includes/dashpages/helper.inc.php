@@ -250,7 +250,7 @@
           echo $status . ' in loop <br />';
         } while ($status == 'IN_PROGRESS');*/
 
-        $result = getReport($client, $reportID);
+        $result = getReport($client, $reportId);
 
         // Save count of the number of keywords today (will always be max keywords)
         // so we can use it in the future
