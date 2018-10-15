@@ -291,7 +291,7 @@
             $status = $result2['status'];
           } else {
             $status = 'DONE';
-            if ($result['response'] < 1000) { var_dump($result); }
+            if (strlen($result['response']) < 1000) { var_dump($result); }
           }
 
           echo $status . ' in loop <br />';
