@@ -297,7 +297,7 @@
           }
 
           echo $status . ' in loop <br />';
-        } while ($status == 'IN_PROGRESS' || strlen($result['response'] <= 160));
+        } while ($status == 'IN_PROGRESS' && strlen($result['response'] <= 160));
       }
 
       // Save count of keywords for $date (only starts for "yesterday")
