@@ -15,14 +15,14 @@
   *----------------------------------------------------------*/
 
 /*
- *  function getReport(Obj $client, Int $reportID) --> Array $report
- *    --> Gets report from Advertising API with $reportID.
+ *  function getReport(Obj $client, Int $reportId) --> Array $report
+ *    --> Gets report from Advertising API with $reportId.
  *
  *      --> Obj $client   - Advertisign API client object
- *      --> Int $reportID - Report ID of the report we are retrieving
+ *      --> Int $reportId - Report ID of the report we are retrieving
  */
 
-  function getReport($client, $reportID) {
+  function getReport($client, $reportId) {
     do {
       $report = $client->getReport($reportId);
       $result2 = json_decode($report['response'], true);
