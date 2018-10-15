@@ -20,6 +20,7 @@
  *
  *      --> Obj $client   - Advertisign API client object
  *      --> Int $reportId - Report ID of the report we are retrieving
+ *      --> Array $report - Completed keywords report generated from Amazon
  */
 
   function getReport($client, $reportId) {
@@ -33,7 +34,7 @@
         $report = $result2;
       }
     } while ($status == 'IN_PROGRESS');
-    return $result;
+    return $report;
   }
 
  /*
