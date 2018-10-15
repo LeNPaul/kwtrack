@@ -43,7 +43,7 @@ $status   = $result['status'];
 do {
   $result = $client->getReport($reportId);
   $result2 = json_decode($result['response'], true);
-  $status = (array_key_exists('status', $result)) ? $result['status'] : false;
+  $status = (array_key_exists('status', $result2)) ? $result2['status'] : false;
   echo '<pre>';
   var_dump($result);
   echo '</pre>';
