@@ -285,7 +285,7 @@
         do {
           $result = $client->getReport($reportId);
           $result2 = json_decode($result['response'], true);
-          $status = (array_key_exists('status', $result2)) ? $result2['status'] : 'DONE';
+          //$status = (array_key_exists('status', $result2)) ? $result2['status'] : 'DONE';
 
           if (array_key_exists('status', $result2)) {
             $status = $result2['status'];
