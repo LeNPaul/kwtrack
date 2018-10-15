@@ -214,9 +214,10 @@
           $result = $client->getReport($reportId);
           $result2 = json_decode($result['response'], true);
           $status = (array_key_exists('status', $result2)) ? $result2['status'] : false;
-          echo $status . '<br />';
+          echo $status . ' in loop<br />';
         } while ($status == 'IN_PROGRESS' && strlen($result['response'] <= 160));
 
+        echo $status . '<br />';
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
 
@@ -285,9 +286,10 @@
           $result = $client->getReport($reportId);
           $result2 = json_decode($result['response'], true);
           $status = (array_key_exists('status', $result2)) ? $result2['status'] : false;
-          echo $status . '<br />';
+          echo $status . ' in loop <br />';
         } while ($status == 'IN_PROGRESS' && strlen($result['response'] <= 160));
 
+        echo $status . '<br />';
         $result = $client->getReport($reportId);
         $result = json_decode($result['response'], true);
       }
