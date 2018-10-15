@@ -293,17 +293,11 @@
             $status = 'DONE';
             echo 'Length of $result["response"]: ' . strlen($result['response']) . '<br />';
             echo 'Report ID: ' . $reportId . '<br />';
-            if (strlen($result['response']) < 1000) { var_dump($result); }
+            $result = $result2;
           }
 
           echo $status . ' in loop <br />';
-        } while ($status == 'IN_PROGRESS' && strlen($result['response'] <= 160));
-
-        echo 'Retrieving report and storing in $result...<br />';
-        $result = $client->getReport($reportId);
-        echo 'Length of $result["response"]: ' . strlen($result['response']) . '<br />';
-        echo 'Report ID: ' . $reportId . '<br />';
-        $result = json_decode($result['response'], true);
+        } while ($status == 'IN_PROGRESS' || strlen($result['response'] <= 160));
       }
 
       // Save count of keywords for $date (only starts for "yesterday")
