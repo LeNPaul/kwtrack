@@ -298,8 +298,9 @@
           echo $status . ' in loop <br />';
         } while ($status == 'IN_PROGRESS' && strlen($result['response'] <= 160));
 
-        echo $status . '<br />';
+        echo 'Retrieving report and storing in $result...<br />';
         $result = $client->getReport($reportId);
+        echo 'Length of $result["response"]: ' . strlen($result['response']) . '<br />';
         $result = json_decode($result['response'], true);
       }
 
