@@ -16,7 +16,7 @@ class Arrays {
 $arr1 = [1,2,3,4,5,6,7,8,9,10];
 $arr2 = [2,3,4,5,11];
 
-$b = Arrays::diff($arr1, $arr2)
+$b = Arrays::diff($arr1, $arr2);
 
 echo '<pre>';
 var_dump($b);
