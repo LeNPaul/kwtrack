@@ -3,7 +3,7 @@
 require '../../../database/pdo.inc.php';
 
 class Arrays {
-  public function diff($b, $a) {
+  function diff($b, $a) {
     $at = array_flip($a);
     $d = array();
     foreach ($b as $i)
@@ -16,8 +16,10 @@ class Arrays {
 $arr1 = [1,2,3,4,5,6,7,8,9,10];
 $arr2 = [2,3,4,5,11];
 
+$b = Arrays::diff($arr1, $arr2)
+
 echo '<pre>';
-var_dump(Arrays->diff($arr1, $arr2));
+var_dump($b);
 echo '</pre>';
 
 ?>
