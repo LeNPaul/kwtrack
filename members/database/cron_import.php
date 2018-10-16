@@ -25,14 +25,15 @@ function array_search2D($array, $key, $value) {
 }
 
 /*
- *  function getReport(Obj $client, Int $reportID) --> Array $report
- *    --> Gets report from Advertising API with $reportID.
+ *  function getReport(Obj $client, Int $reportId) --> Array $report
+ *    --> Gets report from Advertising API with $reportId.
  *
  *      --> Obj $client   - Advertisign API client object
- *      --> Int $reportID - Report ID of the report we are retrieving
+ *      --> Int $reportId - Report ID of the report we are retrieving
+ *      --> Array $report - Report generated from Amazon
  */
 
-function getReport($client, $reportID) {
+function getReport($client, $reportId) {
   do {
     $report = $client->getReport($reportId);
     $result2 = json_decode($report['response'], true);
@@ -43,7 +44,7 @@ function getReport($client, $reportID) {
       $report = $result2;
     }
   } while ($status == 'IN_PROGRESS');
-  return $result;
+  return $report;
 }
 
 /*
