@@ -1,7 +1,7 @@
 <?php
 namespace AmazonAdvertisingApi;
-include 'pdo.inc.php';
-include '../includes/AmazonAdvertisingApi/Client.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/members/database/pdo.inc.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/members/includes/AmazonAdvertisingApi/Client.php';
 use PDO;
 
 /*

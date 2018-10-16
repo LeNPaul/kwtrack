@@ -2,8 +2,17 @@
 <?php
 require '../../../database/pdo.inc.php';
 
-$sql = "INSERT INTO keywords (kw_id) VALUES (:kw_id)";
-$stmt = $pdo->prepare($sql);
-$stmt->execute(array(':kw_id' => 1234));
+function diff($b, $a) {
+  $at = array_flip($a);
+  $d = array();
+  foreach ($b as $i)
+    if (!isset($at[$i]))
+      $d[] = $i;
+  return $d;
+}
 
+$arr1 = [1,2,3,4,5,6,7,8,9,10];
+$arr2 = [2,3,4,5];
+
+var_dump(diff($arr1, $arr2));
 ?>
