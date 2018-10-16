@@ -233,23 +233,6 @@
         $status   = $result['status'];
 
         // Keep pinging the report until status !== IN_PROGRESS
-        /*do {
-          $result = $client->getReport($reportId);
-          $result2 = json_decode($result['response'], true);
-          //$status = (array_key_exists('status', $result2)) ? $result2['status'] : 'DONE';
-
-          if (array_key_exists('status', $result2)) {
-            $status = $result2['status'];
-          } else {
-            $status = 'DONE';
-            echo 'Length of $result["response"]: ' . strlen($result['response']) . '<br />';
-            echo 'Report ID: ' . $reportId . '<br />';
-
-            $result = $result2;
-          }
-
-          echo $status . ' in loop <br />';
-        } while ($status == 'IN_PROGRESS');*/
 
         $result = getReport($client, $reportId);
 
@@ -314,22 +297,7 @@
         $reportId = $result['reportId'];
         $status   = $result['status'];
 
-        do {
-          $result = $client->getReport($reportId);
-          $result2 = json_decode($result['response'], true);
-          //$status = (array_key_exists('status', $result2)) ? $result2['status'] : 'DONE';
-
-          if (array_key_exists('status', $result2)) {
-            $status = $result2['status'];
-          } else {
-            $status = 'DONE';
-            echo 'Length of $result["response"]: ' . strlen($result['response']) . '<br />';
-            echo 'Report ID: ' . $reportId . '<br />';
-            $result = $result2;
-          }
-
-          echo $status . ' in loop <br />';
-        } while ($status == 'IN_PROGRESS');
+        $result = getReport($client, $reportId);
       }
 
       // Save count of keywords for $date (only starts for "yesterday")
