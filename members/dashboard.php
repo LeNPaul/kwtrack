@@ -711,6 +711,7 @@ $_SESSION['active'] = intval($result[0]);
 
       <div class="content">
         <?php
+        echo $_SERVER['DOCUMENT_ROOT'] . '<br>';
         if ($_SESSION['active'] == 0 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active0.php';
         } elseif ($_SESSION['active'] == 1 && empty($_GET['p'])) {

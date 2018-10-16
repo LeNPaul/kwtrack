@@ -24,6 +24,7 @@
  */
 
   function getReport($client, $reportId) {
+    $status = 'IN_PROGRESS';
     do {
       $report = $client->getReport($reportId);
       $result2 = json_decode($report['response'], true);
@@ -231,8 +232,6 @@
         $result   = json_decode($result['response'], true);
         $reportId = $result['reportId'];
         $status   = $result['status'];
-
-        // Keep pinging the report until status !== IN_PROGRESS
 
         $result = getReport($client, $reportId);
 

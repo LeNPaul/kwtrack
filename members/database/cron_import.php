@@ -237,7 +237,6 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
 
 // query all userIDs from ppc_keywords where active = 5 and store in array (userIDs)
 $userIDs   = [];
-// $reportIDs = [];
 
 $sql     = "SELECT user_id, profileId, refresh_token FROM users WHERE active=5";
 $stmt    = $pdo->query($sql);
