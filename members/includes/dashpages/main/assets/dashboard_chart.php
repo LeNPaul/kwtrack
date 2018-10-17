@@ -87,7 +87,7 @@
         mode: 'y',
         intersect: false
       },*/
-      /*tooltips: {
+      tooltips: {
         enabled: false,
         custom: function(tooltipModel) {
           // Tooltip Element
@@ -158,11 +158,11 @@
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
           tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
         }
-      },*/
-	  tooltips: {
+      },
+	  /*tooltips: {
 		  mode: 'x',
 		  intersect: false
-	  },
+	  },*/
       responsive: true,
       elements: {
         line: {
