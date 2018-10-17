@@ -210,7 +210,7 @@
             }*/
           }
         }]
-      }
+      },
 	  
 	  animation: {
 		  onComplete: function() {
@@ -219,7 +219,7 @@
 			  }
 		  }
 	  }
-    }
+    } //options
   });
 
   function chartUpdate(startUpdate, endUpdate) {
