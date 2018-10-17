@@ -167,6 +167,7 @@
 		mode: 'x',
 		intersect: false
 	  },
+	  responsive: true,
       elements: {
         line: {
           //fill: '-1'
@@ -217,9 +218,6 @@
 	  
 	  animation: {
 		  onComplete: function() {
-			  if (flag) {
-				  
-			  }
 		  }
 	  }
     } //options
