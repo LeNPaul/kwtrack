@@ -141,7 +141,11 @@ $dateArr = array_reverse($dateArr);
     </div>
   </div>
 
-	<div class="col-lg-3 col-md-6 col-sm-6">
+	
+</div>
+
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
@@ -159,7 +163,7 @@ $dateArr = array_reverse($dateArr);
           </div>
         </div>
       </div>
-
+      
       <div class="card-footer ">
         <hr>
         <div class="stats">
@@ -168,10 +172,8 @@ $dateArr = array_reverse($dateArr);
       </div>
     </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-12 col-md-12 col-sm-12">
+  
+  <div class="col-lg-6 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
