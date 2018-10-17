@@ -167,6 +167,7 @@
 		mode: 'x',
 		intersect: false
 	  },
+	  responsive: false,
       elements: {
         line: {
           //fill: '-1'
