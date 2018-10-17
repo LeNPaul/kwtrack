@@ -217,9 +217,6 @@
 	  
 	  animation: {
 		  onComplete: function() {
-			  if (flag) {
-				  
-			  }
 		  }
 	  }
     } //options
