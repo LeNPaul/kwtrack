@@ -29,6 +29,8 @@
         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
       }
     }, cb);
+	
+	cb(start, end);
   });
 
   var ctx = document.getElementById("lineChart");
