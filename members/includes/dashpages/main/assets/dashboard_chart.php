@@ -163,10 +163,6 @@
 		mode: 'x',
 		intersect: false
 	  },
-	  hover: {
-		mode: 'x',
-		intersect: false
-	  },
       elements: {
         line: {
           //fill: '-1'
