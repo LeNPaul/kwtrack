@@ -13,34 +13,18 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetch(PDO::FETCH_COLUMN);
 $a = unserialize($result);
 
-if (count($a) == 59) {
   $adSpendArr = array_reverse(
     calculateMetrics(
       multiUnserialize(getMetricData($pdo, 'ad_spend', $_SESSION['user_id'])),
-      59,
+      count($a),
       'ad_spend'));
   
   $ppcSalesArr = array_reverse(
     calculateMetrics(
       multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])),
-      59,
-      'ad_spend'));
-} else {
-  $adSpendArr = array_reverse(
-    calculateMetrics(
-      multiUnserialize(getMetricData($pdo, 'ad_spend', $_SESSION['user_id'])),
-      60,
+      count($a),
       'ad_spend'));
   
-  $ppcSalesArr = array_reverse(
-    calculateMetrics(
-      multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])),
-      60,
-      'ad_spend'));
-}
-
-
-
 $acos 			 = [];
 $displayACoS = 0;
 $adSpend 		 = array_sum($adSpendArr);
@@ -130,7 +114,7 @@ $dateArr = array_reverse($dateArr);
     </div>
   </div>
 
-  <div class="col-lg-2 col-md-6 col-sm-6">
+  <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
