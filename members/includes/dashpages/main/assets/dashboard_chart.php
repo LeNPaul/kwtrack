@@ -160,11 +160,11 @@
         }
       },*/
 	  tooltips: {
-		mode: 'index',
+		mode: 'x',
 	    intersect: false
 	  },
 	  hover: {
-		mode: 'x',
+		mode: 'nearest',
 		intersect: false
 	  },
 	  responsive: true,
