@@ -164,7 +164,7 @@
 	    intersect: false
 	  },
 	  hover: {
-		mode: 'nearest',
+		mode: 'x',
 		intersect: false
 	  },
 	  responsive: true,
