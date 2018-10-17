@@ -160,7 +160,7 @@
         }
       },*/
 	  tooltips: {
-		mode: 'x',
+		mode: 'index',
 	    intersect: false
 	  },
 	  hover: {
