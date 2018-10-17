@@ -15,6 +15,8 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 $_SESSION['active'] = intval($result[0]);
 
+$user_id = $_SESSION['user_id'];
+
 ?>
 
 <!DOCTYPE html>
