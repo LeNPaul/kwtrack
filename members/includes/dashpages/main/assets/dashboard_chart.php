@@ -9,17 +9,17 @@
     var end = moment();
 
     function cb(begin, finish) {
-      start = begin.format('MMM DD');
-      end = finish.format('MMM DD');
-      chartUpdate(start, end);
+      //start = begin.format('MMM DD');
+      //end = finish.format('MMM DD');
+      chartUpdate(begin, finish);
       $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
     }
 
     $('#reportrange').daterangepicker({
       maxDate: moment(),
       minDate: moment().subtract(59, 'days'),
-      startDate: maxDate,
-      endDate: minDate,
+      startDate: begin,
+      endDate: finish,
       ranges: {
         'Today': [moment(), moment()],
         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
