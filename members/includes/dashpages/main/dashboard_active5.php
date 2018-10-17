@@ -8,7 +8,7 @@ require './includes/dashpages/helper.inc.php';
 // Check if user has 59 entries for their metrics
 // If yes, they are on their first day and we need to only retrieve 59 days of data
 
-$sql = "SELECT impressions FROM campaigns WHERE user_id=:user_id";
+$sql = "SELECT impressions FROM campaigns WHERE user_id={$user_id}";
 $stmt = $pdo->query($sql);
 $result = $stmt->fetch(PDO::FETCH_COLUMN);
 $a = unserialize($result);
