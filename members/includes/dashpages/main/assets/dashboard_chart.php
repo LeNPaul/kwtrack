@@ -12,6 +12,7 @@
       //start = begin.format('MMM DD');
       //end = finish.format('MMM DD');
       $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
+	  chartUpdate(begin, finish);
     }
 
     $('#reportrange').daterangepicker({
