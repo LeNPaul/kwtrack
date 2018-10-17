@@ -160,8 +160,12 @@
         }
       },*/
 	  tooltips: {
-		  mode: 'x',
-		  intersect: false
+		mode: 'x',
+	    intersect: false
+	  },
+	  hover: {
+		mode: 'x',
+		intersect: false
 	  },
       responsive: true,
       elements: {
