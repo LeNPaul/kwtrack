@@ -161,7 +161,7 @@
       },*/
 	  tooltips: {
 		mode: 'x',
-	    intersect: false
+	    intersect: true
 	  },
 	  hover: {
 		mode: 'x',
