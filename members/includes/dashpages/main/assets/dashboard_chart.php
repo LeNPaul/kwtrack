@@ -87,7 +87,7 @@
         mode: 'y',
         intersect: false
       },*/
-      tooltips: {
+      /*tooltips: {
         enabled: false,
         custom: function(tooltipModel) {
           // Tooltip Element
@@ -158,8 +158,15 @@
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
           tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
         }
-      },
-      responsive: true,
+      },*/
+	  tooltips: {
+		mode: 'x',
+		intersect: false
+	  },
+	  hover: {
+		mode: 'x',
+		intersect: false
+	  },
       elements: {
         line: {
           //fill: '-1'
@@ -207,6 +214,14 @@
           }
         }]
       }
+	  
+	  animation: {
+		  onComplete: function() {
+			  if (flag) {
+				
+			  }
+		  }
+	  }
     }
   });
 
