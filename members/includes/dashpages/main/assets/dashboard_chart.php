@@ -160,8 +160,8 @@
         }
       },*/
 	  tooltips: {
-		mode: 'x',
-	    intersect: true
+		mode: 'point',
+	    intersect: false
 	  },
 	  hover: {
 		mode: 'x',
