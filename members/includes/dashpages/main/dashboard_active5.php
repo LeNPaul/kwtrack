@@ -54,7 +54,7 @@ $dateArr = array_reverse($dateArr);
 
 <!--  Row for PPC metrics: ad spend, ppc sales, ppc ACoS -->
 <div class="row">
-  <div class="col-lg-3 col-md-6 col-sm-6">
+  <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
@@ -87,7 +87,7 @@ $dateArr = array_reverse($dateArr);
     </div>
   </div>
 
-  <div class="col-lg-3 col-md-6 col-sm-6">
+  <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
@@ -114,7 +114,7 @@ $dateArr = array_reverse($dateArr);
     </div>
   </div>
 
-  <div class="col-lg-3 col-md-6 col-sm-6">
+  <div class="col-lg-4 col-md-12 col-sm-12">
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
