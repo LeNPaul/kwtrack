@@ -160,10 +160,10 @@
         }
       },*/
 	  tooltips: {
-		mode: 'x',
-		intersect: false
+		  mode: 'x',
+		  intersect: false
 	  },
-	  responsive: true,
+      responsive: true,
       elements: {
         line: {
           //fill: '-1'
@@ -215,7 +215,7 @@
 	  animation: {
 		  onComplete: function() {
 			  if (flag) {
-				
+				  
 			  }
 		  }
 	  }
