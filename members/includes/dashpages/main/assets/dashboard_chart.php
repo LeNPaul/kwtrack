@@ -18,8 +18,8 @@
     $('#reportrange').daterangepicker({
       maxDate: moment(),
       minDate: moment().subtract(59, 'days'),
-      startDate: begin,
-      endDate: finish,
+      startDate: start,
+      endDate: end,
       ranges: {
         'Today': [moment(), moment()],
         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
