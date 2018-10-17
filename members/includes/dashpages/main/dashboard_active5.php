@@ -13,17 +13,17 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetch(PDO::FETCH_COLUMN);
 $a = unserialize($result);
 
-  $adSpendArr = array_reverse(
-    calculateMetrics(
-      multiUnserialize(getMetricData($pdo, 'ad_spend', $_SESSION['user_id'])),
-      count($a),
-      'ad_spend'));
-  
-  $ppcSalesArr = array_reverse(
-    calculateMetrics(
-      multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])),
-      count($a),
-      'ad_spend'));
+$adSpendArr = array_reverse(
+  calculateMetrics(
+    multiUnserialize(getMetricData($pdo, 'ad_spend', $_SESSION['user_id'])),
+    count($a),
+    'ad_spend'));
+
+$ppcSalesArr = array_reverse(
+  calculateMetrics(
+    multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])),
+    count($a),
+    'ad_spend'));
   
 $acos 			 = [];
 $displayACoS = 0;
@@ -184,7 +184,7 @@ $dateArr = array_reverse($dateArr);
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">ROAS</p>
+              <p class="card-category">Conversion Rate</p>
               <p class="card-title"><?= '$' . $roas ?>
               <p>
             </div>
