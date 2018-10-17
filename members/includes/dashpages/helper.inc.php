@@ -24,7 +24,6 @@
  */
 
   function getReport($client, $reportId) {
-    $status = 'IN_PROGRESS';
     do {
       $report = $client->getReport($reportId);
       $result2 = json_decode($report['response'], true);
@@ -245,7 +244,7 @@
                 VALUES (:user_id, :status, :bid, :keyword_text, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :match_type)';
         $stmt = $pdo->prepare($sql);
 
-        for ($x = 0; $x < 10/*$numMaxKeywords*/; $x++) {
+        for ($x = 0; $x < $numMaxKeywords; $x++) {
 
           // Get status and bid for each keyword
           $kw_id = $result[$x]['keywordId'];
@@ -303,7 +302,7 @@
       $numCurrentKeywords = count($result);
 
       // Loop to iterate through the report response
-      for ($j = 0; $j < 10/*count($result)*/; $j++) {
+      for ($j = 0; $j < count($result); $j++) {
 
         // Get keyword ID
         $kw_id = $result[$j]['keywordId'];

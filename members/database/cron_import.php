@@ -15,6 +15,20 @@ use PDO;
 */
 
 /*
+ * function fast_array_diff(Array $b, Array $a) --> Array $d
+ *   --> Returns the difference of elements in $a found in $b.
+ */
+
+function fast_array_diff($b, $a) {
+  $at = array_flip($a);
+  $d = array();
+  foreach ($b as $i)
+    if (!isset($at[$i]))
+      $d[] = $i;
+  return $d;
+}
+
+/*
  *  function array_search2D(Array $array, Mixed $key, Mixed $value) --> Array
  *    --> Returns index where $key => $value pair is found in a 2D array formatted like:
  *          [ i => [key1 => value1, key2 => value2, keyN => valueN] ]
@@ -300,7 +314,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
   // First check if length of reportKeywordIDs > length of dbKeywordIDs.
   // If yes, new keywords were added and we need to insert them in the DB
   if (count($reportKeywordIDs) > count($dbKeywordIDs)) {
-    $diff = array_diff($reportKeywordIDs, $dbKeywordIDs);
+    $diff = fast_array_diff($reportKeywordIDs, $dbKeywordIDs);
 
     // foreach diff, find index of extra keywords in the report.
     for ($a = 0; $a < count($diff); $a++) {
@@ -358,7 +372,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
 
     // After taking care of all new keywords in the diff array, we need to update the rest of the
     // keywords that are already in the db. Remainder keyword ID's will be stored in $diffRemainderOfKW
-    $diffRemainderOfKW = array_diff($reportKeywordIDs, $diff);
+    $diffRemainderOfKW = fast_array_diff($reportKeywordIDs, $diff);
 
     if (!empty($diffRemainderOfKW)) {
       cron_diffUpdateKeywords($pdo, $client, $result, $diffRemainderOfKW);
@@ -435,7 +449,7 @@ for ($i = 0; $i < count($userIDs); $i++){
   }
 
   if (count($reportAdGroupID) > count($dbAdGroupID)) {
-	  $arrayDiff = array_diff($reportAdGroupID, $dbAdGroupID);
+	  $arrayDiff = fast_array_diff($reportAdGroupID, $dbAdGroupID);
 
     if (!empty($arrayDiff)) {
       $sql = "INSERT INTO ad_groups (amz_campaign_id,amz_adgroup_id,ad_group_name,default_bid,status) VALUES (:amz_campaign_id,:amz_adgroup_id,:ad_group_name,:default_bid,:status)";
@@ -514,7 +528,7 @@ for ($i = 0; $i < count($userIDs); $i++){
 
   //first check if length of reportCampaignID > dbCampaignID
   if (count($reportCampaignIDs) > count($dbCampaignIDs)) {
-	  $campaignDiff = array_diff($reportCampaignIDs, $dbCampaignIDs);
+	  $campaignDiff = fast_array_diff($reportCampaignIDs, $dbCampaignIDs);
 
     if (!empty($campaignDiff)) {
       $sql = "INSERT INTO campaigns (campaign_name,amz_campaign_id,campaign_type,targeting_type,daily_budget,status) VALUES (:campaign_name,:amz_campaign_id,:campaign_type,:targeting_type,:daily_budget,:status";

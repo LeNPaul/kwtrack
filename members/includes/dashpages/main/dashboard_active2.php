@@ -13,7 +13,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquer
  */
 
 function displayProfiles($profiles) {
-  $output = '';
+  $output = false;
   // Iterate through profiles and append block level buttons to $output
   for ($i = 0; $i < count($profiles); $i++) {
     // Scrape Amazon to grab seller name

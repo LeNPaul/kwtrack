@@ -15,7 +15,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute(array(
   ':profileId' => $profileId,
   ':level'     => 3,
-  ':user_id'    => $_SESSION['user_id']
+  ':user_id'   => $_SESSION['user_id']
 ));
 
 /*

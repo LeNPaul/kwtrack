@@ -3,7 +3,7 @@
 require '../../../database/pdo.inc.php';
 
 class Arrays {
-  function diff($b, $a) {
+  public static function diff($b, $a) {
     $at = array_flip($a);
     $d = array();
     foreach ($b as $i)
