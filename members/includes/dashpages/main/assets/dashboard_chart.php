@@ -11,6 +11,7 @@
     function cb(begin, finish) {
       //start = begin.format('MMM DD');
       //end = finish.format('MMM DD');
+	  chartUpdate(begin, finish);
       $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
     }
 
@@ -29,8 +30,7 @@
       }
     }, cb);
 	
-	cb(start, end);
-	chartUpdate(begin, finish);
+	$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
   });
 
   var ctx = document.getElementById("lineChart");
