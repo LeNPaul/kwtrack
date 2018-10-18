@@ -41,7 +41,7 @@ $client = new Client($config);
 $client->profileId = $profileId;
 
 $adgSnapshot = $client->requestSnapshot(
-  "adgroups",
+  "adGroups",
   array("stateFilter"  => "enabled,paused,archived",
     "campaignType" => "sponsoredProducts"));
 $snapshotId = json_decode($adgSnapshot['response'], true);
