@@ -251,7 +251,7 @@ function getReport($client, $reportId) {
     // Get adgroups snapshot so we can use it to get bids later
   
     $adgSnapshot = $client->requestSnapshot(
-      "adgroups",
+      "adGroups",
       array("stateFilter"  => "enabled,paused,archived",
         "campaignType" => "sponsoredProducts"));
     $snapshotId = json_decode($adgSnapshot['response'], true);
