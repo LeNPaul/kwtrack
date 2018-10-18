@@ -9,8 +9,6 @@
     var end = moment();
 
     function cb(begin, finish) {
-      //start = begin.format('MMM DD');
-      //end = finish.format('MMM DD');
 	  chartUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
       $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
     }
