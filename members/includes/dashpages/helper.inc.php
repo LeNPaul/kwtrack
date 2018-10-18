@@ -589,13 +589,20 @@ function getReport($client, $reportId) {
     $adgBid = $adgBid['defaultBid'];
 
     // After db prepared arrays are full, insert into the db
-    $sql = "UPDATE ad_groups SET default_bid=:adgBid WHERE amz_adgroup_id=:adGroupId";
+    $sql = "UPDATE ad_groups SET default_bid=:adgBid, impressions=:impressionsDb, clicks=:clicksDb, ctr=:ctrDb, ad_spend=:ad_spendDb, avg_cpc=:avg_cpcDb, units_sold=:units_soldDb, sales=:salesDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
-      ':adgBid'    => $adgBid,
-      ':adGroupId' => $adGroupId
+      ':adgBid'    		=> $adgBid,
+	  ':impressionsDb'  => serialize($impressionsDb),
+	  ':clicksDb'  		=> serialize($clicksDb),
+	  ':ctrDb'      	=> serialize($ctrDb),
+	  ':ad_spendDb'  	=> serialize($ad_spendDb),
+	  ':avg_cpcDb'  	=> serialize($avg_cpcDb),
+	  ':units_soldDb'   => serialize($units_soldDb),
+	  ':salesDb'    	=> serialize($salesDb),
+      ':adGroupId' 		=> $adGroupId
     ));
-
+/*
     $sql = "UPDATE ad_groups SET impressions=:impressionsDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
@@ -643,7 +650,7 @@ function getReport($client, $reportId) {
     $stmt->execute(array(
       ':salesDb'    => serialize($salesDb),
       ':adGroupId'  => $adGroupId
-    ));
+    ));*/
   }
 
 /*
