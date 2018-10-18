@@ -3,11 +3,9 @@ namespace AmazonAdvertisingApi;
 
 chdir(dirname(__FILE__));
 
-include $_SERVER['DOCUMENT_ROOT'] . '/members/database/pdo.inc.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/members/includes/AmazonAdvertisingApi/Client.php';
+include dirname(__FILE__) . '/members/database/pdo.inc.php';
+include dirname(__FILE__) . '/members/includes/AmazonAdvertisingApi/Client.php';
 use PDO;
-
-echo $_SERVER['DOCUMENT_ROOT'];
 
 /*
 
