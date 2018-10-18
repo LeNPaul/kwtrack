@@ -712,56 +712,14 @@ function getReport($client, $reportId) {
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
      ':impressionsDb'   => serialize($impressionsDb),
-	 ':clicksDb'  		=> serialize($clicksDb),
-	 ':ctrDb'      		=> serialize($ctrDb),
-	 ':ad_spendDb'  	=> serialize($ad_spendDb),
-	 ':avg_cpcDb'  		=> serialize($avg_cpcDb),
-	 ':units_soldDb'    => serialize($units_soldDb),
-	 ':salesDb'    		=> serialize($salesDb),
+     ':clicksDb'  		  => serialize($clicksDb),
+     ':ctrDb'      		  => serialize($ctrDb),
+     ':ad_spendDb'  	  => serialize($ad_spendDb),
+     ':avg_cpcDb'  		  => serialize($avg_cpcDb),
+     ':units_soldDb'    => serialize($units_soldDb),
+     ':salesDb'    		  => serialize($salesDb),
      ':campaignId'      => $campaignId
    ));
-/*
-   $sql = "UPDATE campaigns SET clicks=:clicksDb WHERE amz_campaign_id=:campaignId";
-   $stmt = $pdo->prepare($sql);
-   $stmt->execute(array(
-     ':clicksDb'  => serialize($clicksDb),
-     ':campaignId' => $campaignId
-   ));
-
-   $sql = "UPDATE campaigns SET ctr=:ctrDb WHERE amz_campaign_id=:campaignId";
-   $stmt = $pdo->prepare($sql);
-   $stmt->execute(array(
-     ':ctrDb'      => serialize($ctrDb),
-     ':campaignId'  => $campaignId
-   ));
-
-   $sql = "UPDATE campaigns SET ad_spend=:ad_spendDb WHERE amz_campaign_id=:campaignId";
-   $stmt = $pdo->prepare($sql);
-   $stmt->execute(array(
-     ':ad_spendDb'  => serialize($ad_spendDb),
-     ':campaignId'   => $campaignId
-   ));
-
-   $sql = "UPDATE campaigns SET avg_cpc=:avg_cpcDb WHERE amz_campaign_id=:campaignId";
-   $stmt = $pdo->prepare($sql);
-   $stmt->execute(array(
-     ':avg_cpcDb'  => serialize($avg_cpcDb),
-     ':campaignId'  => $campaignId
-   ));
-
-   $sql = "UPDATE campaigns SET units_sold=:units_soldDb WHERE amz_campaign_id=:campaignId";
-   $stmt = $pdo->prepare($sql);
-   $stmt->execute(array(
-     ':units_soldDb'    => serialize($units_soldDb),
-     ':campaignId'       => $campaignId
-   ));
-
-   $sql = "UPDATE campaigns SET sales=:salesDb WHERE amz_campaign_id=:campaignId";
-   $stmt = $pdo->prepare($sql);
-   $stmt->execute(array(
-     ':salesDb'    => serialize($salesDb),
-     ':campaignId'  => $campaignId
-   ));*/
  }
 
 
