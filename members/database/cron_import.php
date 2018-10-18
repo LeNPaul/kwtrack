@@ -67,29 +67,6 @@ function array_search2D($array, $key, $value) {
 }
 
 /*
- *  function getReport(Obj $client, Int $reportId) --> Array $report
- *    --> Gets report from Advertising API with $reportId.
- *
- *      --> Obj $client   - Advertisign API client object
- *      --> Int $reportId - Report ID of the report we are retrieving
- *      --> Array $report - Report generated from Amazon
- */
-
-function getReport($client, $reportId) {
-  do {
-    $report = $client->getReport($reportId);
-    $result2 = json_decode($report['response'], true);
-    if (array_key_exists('status', $result2)) {
-      $status = $result2['status'];
-    } else {
-      $status = 'DONE';
-      $report = $result2;
-    }
-  } while ($status == 'IN_PROGRESS');
-  return $report;
-}
-
-/*
  * function cron_diffUpdateKeywords(PDO $pdo, Obj $client, Array $arrKWReport, Array $arrKWIDs) => void
  *   --> Finds the keyword ID's in $arrKWID's inside the keyword report ($arrKWReport) and updates
  *       those keywords.
