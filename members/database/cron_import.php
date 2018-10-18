@@ -481,7 +481,7 @@ for ($i = 0; $i < count($userIDs); $i++){
       }
     } else {
       for($daddy = 0; $daddy < count($reportAdGroupID); $daddy++) {
-        importAdGroupMetrics($pdo, $reportAdGroupID[$daddy], 60);
+        importAdGroupMetrics($pdo, $reportAdGroupID[$daddy], 60, $client);
       }
     }
   }

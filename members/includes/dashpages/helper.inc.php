@@ -18,7 +18,7 @@
  *  function getReport(Obj $client, Int $reportId) --> Array $report
  *    --> Gets report from Advertising API with $reportId.
  *
- *      --> Obj $client   - Advertisign API client object
+ *      --> Obj $client   - Advertising API client object
  *      --> Int $reportId - Report ID of the report we are retrieving
  *      --> Array $report - Completed keywords report generated from Amazon
  */
