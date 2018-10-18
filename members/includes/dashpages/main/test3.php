@@ -2,6 +2,6 @@
 <?php
 require '../../../database/pdo.inc.php';
 
-echo php_info();
+echo phpinfo();
 
 ?>
