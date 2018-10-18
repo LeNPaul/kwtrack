@@ -288,7 +288,7 @@ function getReport($client, $reportId) {
 
         for ($x = 0; $x < $numMaxKeywords; $x++) {
           
-          $kwIndexInSnapshot = array_search2D($result, 'keywordId', $result[$x]['keywordId']);
+          $kwIndexInSnapshot = array_search2D($kwSnapshot, 'keywordId', $result[$x]['keywordId']);
           
           // Get status and bid for each keyword
           /*$kw_id = $result[$x]['keywordId'];
