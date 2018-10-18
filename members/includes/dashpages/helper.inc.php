@@ -248,10 +248,10 @@ function getReport($client, $reportId) {
   
     $kwSnapshot = getSnapshot($client, $snapshotId);
   
-    // Get adghroups snapshot so we can use it to get bids later
+    // Get adgroups snapshot so we can use it to get bids later
   
     $adgSnapshot = $client->requestSnapshot(
-      "keywords",
+      "adgroups",
       array("stateFilter"  => "enabled,paused,archived",
         "campaignType" => "sponsoredProducts"));
     $snapshotId = json_decode($adgSnapshot['response'], true);
@@ -307,7 +307,12 @@ function getReport($client, $reportId) {
           $status = $client->getBiddableKeyword($kw_id);
           $status = json_decode($status['response'], true);*/
           $status = $kwSnapshot[$kwIndexInSnapshot]['state'];
-          $adgBid = (array_key_exists('bid', $status)) ? $kwSnapshot[$kwIndexInSnapshot]['bid'] : ;
+          
+          if (array_key_exists('bid', $kwSnapshot[$kwIndexInSnapshot])) {
+            $adgBid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
+          } else {
+            $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
+          }
           
           // Check if bid index exists in the report
           // If it does, set bid to what it is
