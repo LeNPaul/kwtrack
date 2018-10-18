@@ -592,65 +592,16 @@ function getReport($client, $reportId) {
     $sql = "UPDATE ad_groups SET default_bid=:adgBid, impressions=:impressionsDb, clicks=:clicksDb, ctr=:ctrDb, ad_spend=:ad_spendDb, avg_cpc=:avg_cpcDb, units_sold=:units_soldDb, sales=:salesDb WHERE amz_adgroup_id=:adGroupId";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
-      ':adgBid'    		=> $adgBid,
-	  ':impressionsDb'  => serialize($impressionsDb),
-	  ':clicksDb'  		=> serialize($clicksDb),
-	  ':ctrDb'      	=> serialize($ctrDb),
-	  ':ad_spendDb'  	=> serialize($ad_spendDb),
-	  ':avg_cpcDb'  	=> serialize($avg_cpcDb),
-	  ':units_soldDb'   => serialize($units_soldDb),
-	  ':salesDb'    	=> serialize($salesDb),
-      ':adGroupId' 		=> $adGroupId
-    ));
-/*
-    $sql = "UPDATE ad_groups SET impressions=:impressionsDb WHERE amz_adgroup_id=:adGroupId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
+      ':adgBid'    		  => $adgBid,
       ':impressionsDb'  => serialize($impressionsDb),
-      ':adGroupId'      => $adGroupId
+      ':clicksDb'  		  => serialize($clicksDb),
+      ':ctrDb'      	  => serialize($ctrDb),
+      ':ad_spendDb'  	  => serialize($ad_spendDb),
+      ':avg_cpcDb'  	  => serialize($avg_cpcDb),
+      ':units_soldDb'   => serialize($units_soldDb),
+      ':salesDb'    	  => serialize($salesDb),
+      ':adGroupId' 		  => $adGroupId
     ));
-
-    $sql = "UPDATE ad_groups SET clicks=:clicksDb WHERE amz_adgroup_id=:adGroupId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
-      ':clicksDb'  => serialize($clicksDb),
-      ':adGroupId' => $adGroupId
-    ));
-
-    $sql = "UPDATE ad_groups SET ctr=:ctrDb WHERE amz_adgroup_id=:adGroupId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
-      ':ctrDb'      => serialize($ctrDb),
-      ':adGroupId'  => $adGroupId
-    ));
-
-    $sql = "UPDATE ad_groups SET ad_spend=:ad_spendDb WHERE amz_adgroup_id=:adGroupId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
-      ':ad_spendDb'  => serialize($ad_spendDb),
-      ':adGroupId'   => $adGroupId
-    ));
-
-    $sql = "UPDATE ad_groups SET avg_cpc=:avg_cpcDb WHERE amz_adgroup_id=:adGroupId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
-      ':avg_cpcDb'  => serialize($avg_cpcDb),
-      ':adGroupId'  => $adGroupId
-    ));
-
-    $sql = "UPDATE ad_groups SET units_sold=:units_soldDb WHERE amz_adgroup_id=:adGroupId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
-      ':units_soldDb'    => serialize($units_soldDb),
-      ':adGroupId'       => $adGroupId
-    ));
-
-    $sql = "UPDATE ad_groups SET sales=:salesDb WHERE amz_adgroup_id=:adGroupId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
-      ':salesDb'    => serialize($salesDb),
-      ':adGroupId'  => $adGroupId
-    ));*/
   }
 
 /*
