@@ -15,6 +15,39 @@
   *----------------------------------------------------------*/
 
 /*
+*  function array_search2D(Array $array, Mixed $key, Mixed $value) --> Array
+*    --> Returns index where $key => $value pair is found in a 2D array formatted like:
+*          [ i => [key1 => value1, key2 => value2, keyN => valueN] ]
+*/
+
+function array_search2D($array, $key, $value) {
+  return (array_search($value, array_column($array, $key)));
+}
+
+/*
+*  function getSnapshot(Obj $client, Int $snapshotId) --> Array $report
+*    --> Gets snapshot from Advertising API with $reportId.
+*
+*      --> Obj $client     - Advertising API client object
+*      --> Int $snapshotId - Report ID of the report we are retrieving
+*      --> Array $report   - Snapshot generated from Amazon
+*/
+
+function getSnapshot($client, $snapshotId) {
+  do {
+    $report = $client->getSnapshot($snapshotId);
+    $result2 = json_decode($report['response'], true);
+    if (array_key_exists('status', $result2)) {
+      $status = $result2['status'];
+    } else {
+      $status = 'DONE';
+      $report = $result2;
+    }
+  } while ($status == 'IN_PROGRESS');
+  return $report;
+}
+
+/*
 *  function getReport(Obj $client, Int $reportId) --> Array $report
 *    --> Gets report from Advertising API with $reportId.
 *
@@ -204,7 +237,16 @@ function getReport($client, $reportId) {
     $avgCpc = [];
     $unitsSold = [];
     $sales = [];
-
+  
+    $kwSnapshot = $client->requestSnapshot(
+      "keywords",
+      array("stateFilter"  => "enabled,paused,archived",
+        "campaignType" => "sponsoredProducts"));
+    $snapshotId = json_decode($kwSnapshot['response'], true);
+    $snapshotId = $snapshotId['snapshotId'];
+  
+    $kwSnapshot = getSnapshot($client, $snapshotId);
+    
     // Keep count of days of data gone through. For each iteration of $i,
     // the max number of days of data will always equal $numDays
     $numDays = 1;
@@ -245,16 +287,20 @@ function getReport($client, $reportId) {
         $stmt = $pdo->prepare($sql);
 
         for ($x = 0; $x < $numMaxKeywords; $x++) {
-
+          
+          $kwIndexInSnapshot = array_search2D($result, 'keywordId', $result[$x]['keywordId']);
+          
           // Get status and bid for each keyword
-          $kw_id = $result[$x]['keywordId'];
+          /*$kw_id = $result[$x]['keywordId'];
           $status = $client->getBiddableKeyword($kw_id);
-          $status = json_decode($status['response'], true);
-
+          $status = json_decode($status['response'], true);*/
+          $status = $kwSnapshot[$kwIndexInSnapshot]['state'];
+          $adgBid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
+          
           // Check if bid index exists in the report
           // If it does, set bid to what it is
           // If not, then set it to the ad group's default bid
-          if (array_key_exists('bid', $status)) {
+          /*if (array_key_exists('bid', $status)) {
             $adgBid = $status['bid'];
           } else {
             // Get default bid from adgroup
@@ -263,7 +309,7 @@ function getReport($client, $reportId) {
             $adgBid = $adgBid['defaultBid'];
           }
 
-          $status = $status['state'];
+          $status = $status['state'];*/
 
           $stmt->execute(array(
             ':user_id'          => $user_id,

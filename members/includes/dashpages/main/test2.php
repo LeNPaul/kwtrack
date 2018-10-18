@@ -44,19 +44,9 @@ $kwSnapshot = $client->requestSnapshot(
   "keywords",
   array("stateFilter"  => "enabled,paused,archived",
         "campaignType" => "sponsoredProducts"));
-
-echo '<pre>';
-var_dump($kwSnapshot);
-echo '</pre>';
-
 $snapshotId = json_decode($kwSnapshot['response'], true);
 $snapshotId = $snapshotId['snapshotId'];
 
 $kwSnapshot = getSnapshot($client, $snapshotId);
-
-echo '<pre>';
-var_dump($kwSnapshot);
-echo '</pre>';
-
 
 ?>
