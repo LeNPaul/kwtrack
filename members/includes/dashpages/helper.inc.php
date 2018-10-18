@@ -708,13 +708,19 @@ function getReport($client, $reportId) {
    }
 
    // After db prepared arrays are full, insert into the db
-   $sql = "UPDATE campaigns SET impressions=:impressionsDb WHERE amz_campaign_id=:campaignId";
+   $sql = "UPDATE campaigns SET impressions=:impressionsDb, clicks=:clicksDb, ctr=:ctrDb, ad_spend=:ad_spendDb, avg_cpc=:avg_cpcDb, units_sold=:units_soldDb, sales=:salesDb WHERE amz_campaign_id=:campaignId";
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
-     ':impressionsDb'  => serialize($impressionsDb),
+     ':impressionsDb'   => serialize($impressionsDb),
+	 ':clicksDb'  		=> serialize($clicksDb),
+	 ':ctrDb'      		=> serialize($ctrDb),
+	 ':ad_spendDb'  	=> serialize($ad_spendDb),
+	 ':avg_cpcDb'  		=> serialize($avg_cpcDb),
+	 ':units_soldDb'    => serialize($units_soldDb),
+	 ':salesDb'    		=> serialize($salesDb),
      ':campaignId'      => $campaignId
    ));
-
+/*
    $sql = "UPDATE campaigns SET clicks=:clicksDb WHERE amz_campaign_id=:campaignId";
    $stmt = $pdo->prepare($sql);
    $stmt->execute(array(
@@ -755,7 +761,7 @@ function getReport($client, $reportId) {
    $stmt->execute(array(
      ':salesDb'    => serialize($salesDb),
      ':campaignId'  => $campaignId
-   ));
+   ));*/
  }
 
 
