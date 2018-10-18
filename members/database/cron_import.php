@@ -15,6 +15,29 @@ use PDO;
 */
 
 /*
+ *  function getReport(Obj $client, Int $reportId) --> Array $report
+ *    --> Gets report from Advertising API with $reportId.
+ *
+ *      --> Obj $client   - Advertisign API client object
+ *      --> Int $reportId - Report ID of the report we are retrieving
+ *      --> Array $report - Completed keywords report generated from Amazon
+ */
+
+  function getReport($client, $reportId) {
+    do {
+      $report = $client->getReport($reportId);
+      $result2 = json_decode($report['response'], true);
+      if (array_key_exists('status', $result2)) {
+        $status = $result2['status'];
+      } else {
+        $status = 'DONE';
+        $report = $result2;
+      }
+    } while ($status == 'IN_PROGRESS');
+    return $report;
+  }
+
+/*
  * function fast_array_diff(Array $b, Array $a) --> Array $d
  *   --> Returns the difference of elements in $a found in $b.
  */
@@ -286,24 +309,12 @@ for ($i = 0; $i < count($userIDs); $i++) {
   $status          = $result2['status'];
 
   // Keep pinging the report until status !== IN_PROGRESS
-  do {
-    $result = $client->getReport($reportId);
-    $result2 = json_decode($result['response'], true);
-    //$status = (array_key_exists('status', $result2)) ? $result2['status'] : 'DONE';
-
-    if (array_key_exists('status', $result2)) {
-      $status = $result2['status'];
-    } else {
-      $status = 'DONE';
-      $result = $result2;
-    }
-    echo $status . ' in loop <br />';
-  } while ($status == 'IN_PROGRESS');
+  $result = getReport($client, $reportId);
 
   // Store all keyword IDs from the report in reportKeywordIDs
   $reportKeywordIDs = [];
   for ($j = 0; $j < count($result); $j++) {
-    $reportKeywordIDs[] = $result[$i]['keywordId'];
+    $reportKeywordIDs[] = $result[$j]['keywordId'];
   }
 
   // Fetch and store amz_kw_id for the current user in array (dbKeywordIDs)
@@ -430,13 +441,7 @@ for ($i = 0; $i < count($userIDs); $i++){
   $status          = $result2['status'];
 
   // Keep pinging the report until status !== IN_PROGRESS
-  while ($status == 'IN_PROGRESS') {
-  	$result = $client->getReport($reportId);
-  	$result = json_decode($result['response'], true);
-  	$status = $result['status'];
-  }
-  $result = $client->getReport($reportId);
-  $result = json_decode($result['response'], true);
+  $result = getReport($client, $reportId);
 
   $reportAdGroupID = [];
 
