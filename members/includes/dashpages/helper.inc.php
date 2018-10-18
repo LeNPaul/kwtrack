@@ -251,7 +251,7 @@ function getReport($client, $reportId) {
     // Get adgroups snapshot so we can use it to get bids later
   
     $adgSnapshot = $client->requestSnapshot(
-      "adgroups",
+      "adGroups",
       array("stateFilter"  => "enabled,paused,archived",
         "campaignType" => "sponsoredProducts"));
     $snapshotId = json_decode($adgSnapshot['response'], true);
@@ -312,7 +312,7 @@ function getReport($client, $reportId) {
             $adgBid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
           } else {
             $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
-            $adgBid = $kwSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
+            $adgBid = $adgSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
           }
           
           // Check if bid index exists in the report
