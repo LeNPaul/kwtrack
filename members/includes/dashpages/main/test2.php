@@ -25,5 +25,14 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
+$kwSnapshot = $client->requestSnapshot(
+  "keywords",
+  array("stateFilter"  => "enabled,paused,archived",
+        "campaignType" => "sponsoredProducts"));
+
+echo '<pre>';
+var_dump($kwSnapshot);
+echo '</pre>';
+
 
 ?>
