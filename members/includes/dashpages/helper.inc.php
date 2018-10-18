@@ -14,29 +14,6 @@
   *
   *----------------------------------------------------------*/
 
-/*
- *  function getReport(Obj $client, Int $reportId) --> Array $report
- *    --> Gets report from Advertising API with $reportId.
- *
- *      --> Obj $client   - Advertising API client object
- *      --> Int $reportId - Report ID of the report we are retrieving
- *      --> Array $report - Completed keywords report generated from Amazon
- */
-
-  function getReport($client, $reportId) {
-    do {
-      $report = $client->getReport($reportId);
-      $result2 = json_decode($report['response'], true);
-      if (array_key_exists('status', $result2)) {
-        $status = $result2['status'];
-      } else {
-        $status = 'DONE';
-        $report = $result2;
-      }
-    } while ($status == 'IN_PROGRESS');
-    return $report;
-  }
-
  /*
   *  function adjustDayOffset(Array $metricArr, Int $numDays) --> Array $output
   *    --> Takes $metricArr and prepends 0's $numDays-1 times for each old keyword that we encounter.
