@@ -91,7 +91,7 @@
 		mode: 'x',
 		intersect: false
 	  },
-	  responsive: true,
+	  responsive: false,
       elements: {
         line: {
           //fill: '-1'
