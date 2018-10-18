@@ -14,7 +14,6 @@ function array_search2D($array, $key, $value) {
 $refreshToken = 'Atzr|IwEBID8Cr8D51I4XzWRU5wdohHUoGJRY1rempo6uwgk_niC5AgqZo_SVul0Nt8V5oU1j8P2T08oPjR8gLKSsWnJuAflfBzcMky0NzBoKcSIYH62WJ4I86G6t4jGxU7fitoLO79TJPFjCoHPXyjnvaNLxFaJPxOaW3t4fLBH9-1RGsAaEdrP0-r85iVNgG_pQE2HA7bl_ZMqWoJbXhww-YEsfMH6tBKXG0S0dMreLkEkdx75eABfzKwdDm9jokTL8YZjkqj1ELRFOwK6Pgv1PsYTvdI2Us1fTw-Bu1n_n4am_vlrK4ntseK_dqFHvrV4_h0aup1hoChA5KZD2ID3fG4e4be4iCRC66QdJxmjv_q_o8RxoZR_bG0vhlkU2rSYKnMnZOj7nkRS2Z6JoRPWRLw7nP8nEfHLRkCQnrOn2PHkrKX7MWTIWt1f-_rkr3ocfvgKfcixFvTc6XmNGg0IYbVidw0thS3-AgSpnGaG0O7Q-W9VZPFRFtas1PltUG69LL0ko2EOz6yW-RG9071MfpUMgre2_TUildA68rlcdikXtNfMtyYNwqvQhlSZ_eVXWGclIpk4XQ39a-5eJiB8HVfsAvgdF';
 $profileId = '1215041354659387';
 
-
 // Instantiate client for advertising API
 $config = array(
 	"clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
@@ -25,42 +24,6 @@ $config = array(
 );
 $client = new Client($config);
 $client->profileId = $profileId;
-
-$date = date('Ymd', strtotime('-18 days'));
-
-$result = $client->requestReport(
-  "keywords",
-  array("reportDate"    => '20180908',
-    "campaignType"  => "sponsoredProducts",
-    "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
-  )
-);
-
-// Get the report id so we can use it to get the report
-$result   = json_decode($result['response'], true);
-$reportId = $result['reportId'];
-$status   = $result['status'];
-
-// Keep pinging the report until status !== IN_PROGRESS
-do {
-  $result = $client->getReport($reportId);
-  $result2 = json_decode($result['response'], true);
-  $status = (array_key_exists('status', $result2)) ? $result2['status'] : false;
-  echo '<pre>';
-  var_dump($result);
-  echo '</pre>';
-
-  echo $status . '<br />';
-
-} while ($status == 'IN_PROGRESS' && strlen($result['response']) >= 157);
-
-echo $status . '<br>';
-$result2 = $client->getReport($reportId);
-$result2 = json_decode($result['response'], true);
-
-echo '<pre>';
-var_dump($result);
-echo '</pre>';
 
 
 ?>
