@@ -1,5 +1,8 @@
 <?php
 namespace AmazonAdvertisingApi;
+
+chdir(dirname(__FILE__));
+
 include $_SERVER['DOCUMENT_ROOT'] . '/members/database/pdo.inc.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/members/includes/AmazonAdvertisingApi/Client.php';
 use PDO;
@@ -20,7 +23,7 @@ echo $_SERVER['DOCUMENT_ROOT'];
  *  function getReport(Obj $client, Int $reportId) --> Array $report
  *    --> Gets report from Advertising API with $reportId.
  *
- *      --> Obj $client   - Advertisign API client object
+ *      --> Obj $client   - Advertising API client object
  *      --> Int $reportId - Report ID of the report we are retrieving
  *      --> Array $report - Completed keywords report generated from Amazon
  */
