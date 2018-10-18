@@ -49,7 +49,7 @@ echo '<pre>';
 var_dump($kwSnapshot);
 echo '</pre>';
 
-$snapshotId = json_decode($kwSnapshot, true);
+$snapshotId = json_decode($kwSnapshot['response'], true);
 $snapshotId = $snapshotId['snapshotId'];
 
 $kwSnapshot = getSnapshot($snapshotId);
