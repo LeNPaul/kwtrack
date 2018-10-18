@@ -312,6 +312,7 @@ function getReport($client, $reportId) {
             $adgBid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
           } else {
             $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
+            $adgBid = $kwSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
           }
           
           // Check if bid index exists in the report
