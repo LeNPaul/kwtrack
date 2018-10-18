@@ -237,7 +237,8 @@ function getReport($client, $reportId) {
     $avgCpc = [];
     $unitsSold = [];
     $sales = [];
-  
+    
+    // Get keyword snapshot so we can use it to get states and bids later
     $kwSnapshot = $client->requestSnapshot(
       "keywords",
       array("stateFilter"  => "enabled,paused,archived",
@@ -246,6 +247,17 @@ function getReport($client, $reportId) {
     $snapshotId = $snapshotId['snapshotId'];
   
     $kwSnapshot = getSnapshot($client, $snapshotId);
+  
+    // Get adgroups snapshot so we can use it to get bids later
+  
+    $adgSnapshot = $client->requestSnapshot(
+      "adgroups",
+      array("stateFilter"  => "enabled,paused,archived",
+        "campaignType" => "sponsoredProducts"));
+    $snapshotId = json_decode($adgSnapshot['response'], true);
+    $snapshotId = $snapshotId['snapshotId'];
+    
+    $adgSnapshot = getSnapshot($client, $snapshotId);
     
     // Keep count of days of data gone through. For each iteration of $i,
     // the max number of days of data will always equal $numDays
@@ -295,7 +307,13 @@ function getReport($client, $reportId) {
           $status = $client->getBiddableKeyword($kw_id);
           $status = json_decode($status['response'], true);*/
           $status = $kwSnapshot[$kwIndexInSnapshot]['state'];
-          $adgBid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
+          
+          if (array_key_exists('bid', $kwSnapshot[$kwIndexInSnapshot])) {
+            $adgBid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
+          } else {
+            $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
+            $adgBid = $kwSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
+          }
           
           // Check if bid index exists in the report
           // If it does, set bid to what it is

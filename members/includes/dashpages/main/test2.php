@@ -40,13 +40,22 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$kwSnapshot = $client->requestSnapshot(
-  "keywords",
+$adgSnapshot = $client->requestSnapshot(
+  "adGroups",
   array("stateFilter"  => "enabled,paused,archived",
-        "campaignType" => "sponsoredProducts"));
-$snapshotId = json_decode($kwSnapshot['response'], true);
+    "campaignType" => "sponsoredProducts"));
+$snapshotId = json_decode($adgSnapshot['response'], true);
+echo '<pre>';
+var_dump($adgSnapshot);
+echo '</pre>';
+
 $snapshotId = $snapshotId['snapshotId'];
 
-$kwSnapshot = getSnapshot($client, $snapshotId);
+$adgSnapshot = getSnapshot($client, $snapshotId);
+
+echo '<pre>';
+var_dump($adgSnapshot);
+echo '</pre>';
+
 
 ?>
