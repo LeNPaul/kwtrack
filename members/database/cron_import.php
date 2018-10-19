@@ -1,5 +1,5 @@
 <?php
-namespace AmazonAdvertisingApi;
+//namespace AmazonAdvertisingApi;
 
 echo dirname(__FILE__); die;
 
