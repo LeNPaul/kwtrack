@@ -1,7 +1,7 @@
 <?php
 namespace AmazonAdvertisingApi;
 
-chdir(dirname(__FILE__));
+echo dirname(__FILE__); die;
 
 include dirname(__FILE__) . '/members/database/pdo.inc.php';
 include dirname(__FILE__) . '/members/includes/AmazonAdvertisingApi/Client.php';
