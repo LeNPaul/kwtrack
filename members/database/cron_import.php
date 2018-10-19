@@ -1,11 +1,9 @@
 <?php
-//namespace AmazonAdvertisingApi;
+namespace AmazonAdvertisingApi;
 
-echo dirname(__FILE__); die;
-
-//include dirname(__FILE__) . '/members/database/pdo.inc.php';
-//include dirname(__FILE__) . '/members/includes/AmazonAdvertisingApi/Client.php';
-//use PDO;
+include dirname(__FILE__) . '/pdo.inc.php';
+include dirname(__FILE__) . '../includes/AmazonAdvertisingApi/Client.php';
+use PDO;
 
 /*
 
