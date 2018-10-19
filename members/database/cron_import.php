@@ -2,7 +2,8 @@
 namespace AmazonAdvertisingApi;
 
 include dirname(__FILE__) . '/pdo.inc.php';
-include dirname(__FILE__) . '../includes/AmazonAdvertisingApi/Client.php';
+include dirname(__FILE__) . '/../includes/AmazonAdvertisingApi/Client.php';
+
 use PDO;
 
 /*
