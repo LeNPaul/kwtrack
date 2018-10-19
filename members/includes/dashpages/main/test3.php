@@ -4,4 +4,5 @@ require '../../../database/pdo.inc.php';
 
 echo phpinfo();
 
+echo dirname(__FILE__);
 ?>
