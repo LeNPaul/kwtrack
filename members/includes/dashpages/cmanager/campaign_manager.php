@@ -104,7 +104,7 @@ $(document).ready( function () {
 
       $(".toggle").on("click", function() {
         $(this).toggleClass('toggle-selected');
-        console.log(dt.rows('.toggle-selected').data());
+        console.log(dt.rows('.toggle-selected').data()[1]);
         $(this).toggleClass('toggle-selected');
 
         if ($(this).hasClass("off")) {
