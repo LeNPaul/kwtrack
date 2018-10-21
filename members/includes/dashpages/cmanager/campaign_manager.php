@@ -257,8 +257,12 @@ $(document).ready( function () {
           }); //ajax
         }); //on campaign name click
       
-        $(".toggle-campaign").on("click", function() {
-          alert("hello");
+        $(".toggle").on("click", function() {
+          if ($(this).hasClass("off")) {
+            console.log('turning toggle on');
+          } else {
+            console.log('turning toggle off');
+          }
         });
 	  } //drawCallback
 	}); //DataTable
