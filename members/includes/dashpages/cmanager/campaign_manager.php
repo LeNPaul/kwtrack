@@ -159,6 +159,11 @@ $(document).ready( function () {
         $(this).next().children().hide(1000);
       });
       
+      $(".btn-edit-budget").on("click", function() {
+        // Verify input
+        console.log($(this).value());
+      });
+      
 
       $(".c_link").on("click", function() {
           var campaignName     = $(this).text();
