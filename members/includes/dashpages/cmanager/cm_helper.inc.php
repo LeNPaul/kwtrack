@@ -28,7 +28,7 @@ function cmCheckboxState($status) {
 }
 
 /*
- *  function cmGetCampaignData(PDO $pdo, Int $user_id) --> Array(Array $output, Array $campaigns)
+ *  function cmGetCampaignData(PDO $pdo, Int $user_id) --> Array(Array $output, Array $campaigns, Array $rawData)
  *    --> Gets campaign metrics from DB to output onto campaign manager.
  *
  *      --> PDO $pdo         - database handle
@@ -36,6 +36,7 @@ function cmCheckboxState($status) {
  *      --> Array $output    - frontend data that user sees on Datatables
  *      --> Array $campaigns - server side associative array of "campaign name" => campaign ID
  *                             Use this to make AJAX request to pull ad group data
+ *		--> Array $rawData	 - Unsummed campaign data to be used by date range picker for custom ranges
  */
 function cmGetCampaignData($pdo, $user_id) {
   $output = [];
@@ -59,7 +60,7 @@ function cmGetCampaignData($pdo, $user_id) {
 	unserialize($result[$i]['sales']);
 	unserialize($result[$i]['impressions']);
 	unserialize($result[$i]['clicks']);
-	unserialize($result[$i]['ctr']));
+	unserialize($result[$i]['ctr']);
 	unserialize($result[$i]['avg_cpc']);
 	unserialize($result[$i]['units_sold']);
 	
@@ -88,7 +89,7 @@ function cmGetCampaignData($pdo, $user_id) {
                     <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
                   </div>*/
 
-	$singleAcos = ($result[$i]['sales'] == 0) ? "0" : round(($result[$i]['ad_spend'] / $result[$i]['sales']) * 100, 2) . '%'
+	$singleAcos = ($result[$i]['sales'] == 0) ? "0" : round(($result[$i]['ad_spend'] / $result[$i]['sales']) * 100, 2) . '%';
 	$rawData[] = array(
 		cmCheckboxState($result[$i]['status']),
 		$campaignLink,
