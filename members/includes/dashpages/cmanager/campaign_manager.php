@@ -57,7 +57,9 @@ $campaignDataBack  = $result[1];
 $(document).ready( function () {
 
   var dataset = <?= json_encode($campaignDataFront) ?>;
-  console.log(dataset)
+  var databack = <?= json_encode($campaignDataBack) ?>;
+  console.log(databack);
+  console.log(dataset);
   var dt = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
@@ -91,17 +93,39 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
-		    $('td input').bootstrapToggle();
+      $('td input').bootstrapToggle();
+      rowClasses = $('#campaign_manager tbody tr').attr("class");
 
-        rowClasses = $('#campaign_manager tbody tr').attr("class");
+      if (rowClasses.includes("selected")) {
+        $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
+      } else {
+        $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
+      }
 
-        if (rowClasses.includes("selected")) {
-          $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
+      $(".toggle").on("click", function() {
+        if ($(this).hasClass("off")) {
+          console.log('turning toggle on');
         } else {
-          $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
+          console.log('turning toggle off');
         }
+        
+        toggleActive = $(this).hasClass("off");
 
-        $(".c_link").on("click", function() {
+        $.ajax({
+          type: "POST",
+          url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+          data: { toggle: toggleActive },
+          
+          success: function() {
+            alert("campaign has been toggled");
+          },
+          error: function() {
+          
+          }
+        });
+      });
+
+      $(".c_link").on("click", function() {
           var campaignName     = $(this).text();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           dt.destroy();
@@ -256,14 +280,6 @@ $(document).ready( function () {
 
           }); //ajax
         }); //on campaign name click
-      
-        $(".toggle").on("click", function() {
-          if ($(this).hasClass("off")) {
-            console.log('turning toggle on');
-          } else {
-            console.log('turning toggle off');
-          }
-        });
 	  } //drawCallback
 	}); //DataTable
 
