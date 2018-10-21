@@ -25,6 +25,10 @@ $campaignDataBack  = $result[1];
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
     <button id="select_all" class="btn btn-primary">Select All</button>
+	<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
+		<i class="fa fa-calendar"></i>
+		<span></span> <i class="fa fa-caret-down"></i>
+	</div>
     <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
     <table id="adgroup_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
     <table id="keyword_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
@@ -266,5 +270,31 @@ $(document).ready( function () {
 
 }); //document.ready
 
+  $(function() {
 
+    var start = moment().subtract(59, 'days');
+    var end = moment();
+
+    function cb(begin, finish) {
+	  chartUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
+      $('#campaignRange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
+    }
+
+    $('#campaignRange').daterangepicker({
+      maxDate: moment(),
+      minDate: moment().subtract(59, 'days'),
+      startDate: start,
+      endDate: end,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'Last 60 days': [moment().subtract(59, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      }
+    }, cb);
+	
+	$('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+  });
 </script>
