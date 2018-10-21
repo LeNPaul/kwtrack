@@ -57,6 +57,8 @@ $campaignDataBack  = $result[1];
 $(document).ready( function () {
 
   var dataset = <?= json_encode($campaignDataFront) ?>;
+  databack = <?= json_encode($campaignDataBack) ?>;
+  console.log(databack);
   console.log(dataset)
   var dt = $('#campaign_manager').DataTable(
     {
@@ -91,15 +93,17 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
-		    $('td input').bootstrapToggle();
+      $('td input').bootstrapToggle();
+      
+     
 
-        rowClasses = $('#campaign_manager tbody tr').attr("class");
+      rowClasses = $('#campaign_manager tbody tr').attr("class");
 
-        if (rowClasses.includes("selected")) {
-          $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
-        } else {
-          $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-        }
+      if (rowClasses.includes("selected")) {
+        $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
+      } else {
+        $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
+      }
 
       $(".toggle").on("click", function() {
         if ($(this).hasClass("off")) {
@@ -124,7 +128,7 @@ $(document).ready( function () {
         });
       });
 
-        $(".c_link").on("click", function() {
+      $(".c_link").on("click", function() {
           var campaignName     = $(this).text();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           dt.destroy();
