@@ -163,13 +163,7 @@ $(document).ready( function () {
         var budgetVal = $(this).parent().prev().val();
         // Verify input to check if numeric
         if (!$.isNumeric(budgetVal)) {
-          $(this).parent().prev().popover({
-            html: true,
-            title: "Invalid Budget Value",
-            content: "Please enter a valid value.",
-            placement: "bottom",
-            trigger: "focus"
-          });
+          showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
         }
       });
       
@@ -335,6 +329,7 @@ $(document).ready( function () {
 	}); //DataTable
 
   
+  
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
 
@@ -371,6 +366,21 @@ $(document).ready( function () {
     return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
       return $('input', td).attr('data-value') * 1;
     } );
+  }
+  
+  /* NOTIFICATIONS */
+  function showNotification(from, align, bootstrapColor, message) {
+    $.notify({
+      icon: "nc-icon nc-bell-55",
+      message: message
+    }, {
+      type: bootstrapColor,
+      timer: 4000,
+      placement: {
+        from: from,
+        align: align
+      }
+    });
   }
   
   /* DATA RANGE PICKER */
