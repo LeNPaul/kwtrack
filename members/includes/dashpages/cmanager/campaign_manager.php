@@ -20,15 +20,15 @@ $campaignDataBack  = $result[1];
 ?>
 
 <h2 class="text-center">Campaign Manager</h2>
+<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
+	<i class="fa fa-calendar"></i>
+	<span></span> <i class="fa fa-caret-down"></i>
+</div><br>
 <h6 id="bc">All Campaigns</h6>
 
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
     <button id="select_all" class="btn btn-primary">Select All</button>
-	<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
-		<i class="fa fa-calendar"></i>
-		<span></span> <i class="fa fa-caret-down"></i>
-	</div>
     <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
     <table id="adgroup_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
     <table id="keyword_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
