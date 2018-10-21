@@ -80,7 +80,7 @@ table.dataTable td {
 }
 
 .dataTables_wrapper .input-group-append button{
-  line-height: 2em !important;
+  line-height: 1em !important;
   font-size: 10px;
 }
 
