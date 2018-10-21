@@ -56,21 +56,21 @@ function cmGetCampaignData($pdo, $user_id) {
   		$active = 2;
   	}
 
-	unserialize($result[$i]['ad_spend']);
-	unserialize($result[$i]['sales']);
-	unserialize($result[$i]['impressions']);
-	unserialize($result[$i]['clicks']);
-	unserialize($result[$i]['ctr']);
-	unserialize($result[$i]['avg_cpc']);
-	unserialize($result[$i]['units_sold']);
+	$adSpendArray = unserialize($result[$i]['ad_spend']);
+	$salesArray = unserialize($result[$i]['sales']);
+	$impressionsArray = unserialize($result[$i]['impressions']);
+	$clicksArray = unserialize($result[$i]['clicks']);
+	$ctrArray = unserialize($result[$i]['ctr']);
+	$avgCpcArray = unserialize($result[$i]['avg_cpc']);
+	$unitsSoldArray = unserialize($result[$i]['units_sold']);
 	
-    $ad_spend    = array_sum($result[$i]['ad_spend']);
-    $sales       = array_sum($result[$i]['sales']);
-    $impressions = array_sum($result[$i]['impressions']);
-    $clicks      = array_sum($result[$i]['clicks']);
-    $ctr         = round(calculateMetricAvg($result[$i]['ctr']), 2);
-    $avg_cpc     = round(calculateMetricAvg($result[$i]['avg_cpc']), 2);
-    $units_sold  = array_sum($result[$i]['units_sold']);
+    $ad_spend    = array_sum($adSpendArray);
+    $sales       = array_sum($salesArray);
+    $impressions = array_sum($impressionsArray);
+    $clicks      = array_sum($clicksArray);
+    $ctr         = round(calculateMetricAvg($ctrArray), 2);
+    $avg_cpc     = round(calculateMetricAvg($avgCpcArray), 2);
+    $units_sold  = array_sum($unitsSoldArray);
 
     // Replace any 0's with "-"
     $acos        = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
@@ -89,20 +89,20 @@ function cmGetCampaignData($pdo, $user_id) {
                     <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
                   </div>*/
 
-	$singleAcos = ($result[$i]['sales'] == 0) ? "0" : round(($result[$i]['ad_spend'] / $result[$i]['sales']) * 100, 2) . '%';
+	$singleAcos = ($salesArray[$i] == 0) ? "0" : round(($adSpendArray[$i] / $salesArray[$i]) * 100, 2) . '%';
 	$rawData[] = array(
 		cmCheckboxState($result[$i]['status']),
 		$campaignLink,
 		$result[$i]['status'],
 		$budget,
 		$result[$i]['targeting_type'],
-		$result[$i]['impressions'],
-		$result[$i]['clicks'],
-		$result[$i]['ctr'],
-		$result[$i]['ad_spend'],
-		$result[$i]['avg_cpc'],
-		$result[$i]['units_sold'],
-		$result[$i]['sales'],
+		$impressionsArray[$i],
+		$clicksArray[$i],
+		$ctrArray[$i],
+		$adSpendArray[$i],
+		$avgCpcSrray[$i],
+		$unitsSoldArray[$i],
+		$salesArray[$i],
 		$singleAcos
 	);			  
 				  
