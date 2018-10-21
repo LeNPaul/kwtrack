@@ -93,7 +93,7 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
-      $('td input.edit-budget').bootstrapToggle();
+      $('.toggle-campaign, .toggle-campaign-archive').bootstrapToggle();
       
       rowClasses = $('#campaign_manager tbody tr').attr("class");
 
