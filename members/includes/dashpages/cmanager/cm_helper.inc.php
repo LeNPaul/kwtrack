@@ -23,7 +23,7 @@ function cmCheckboxState($status) {
   } elseif ($status == 'paused') {
     return '<input type="checkbox" data-toggle="toggle" data-size="mini">';
   } else {
-    return '-';
+    return '<input type="checkbox" data-toggle="toggle" data-size="mini" disabled>';
   }
 }
 
