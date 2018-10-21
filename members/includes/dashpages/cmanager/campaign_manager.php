@@ -164,6 +164,17 @@ $(document).ready( function () {
         // Verify input to check if numeric
         if (!$.isNumeric(budgetVal)) {
           showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
+        } else {
+          campaignName = $(this).parent().parent().parent().prev().prev().children().val();
+          console.log(campaignName);
+          /*$.ajax({
+            type: "POST",
+            url: "includes/dashpages/cmanager/helpers/change_budget.php",
+            data: {user_id: user_id, },
+            success: function() {
+            
+            }
+          });*/
         }
       });
       
