@@ -42,4 +42,4 @@ if ($toggle == true) {
   $a = "$campaignName ($campaignId) has been paused";
 }
 
-echo $a;
+echo [$toggle, $a];
