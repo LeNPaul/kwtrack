@@ -92,13 +92,13 @@ $(document).ready( function () {
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
         on: '<i class="fa fa-play"></i>',
-        off: "Paused",
+        off: '<i class="fa fa-pause"></i>',
         size: "small",
         onstyle: "success",
         offstyle: "primary"
       });
       $(".toggle-campaign-archive").bootstrapToggle({
-        off: "Archived",
+        off: '<i class="fa fa-stop"></i>',
         size: "small"
       });
       
