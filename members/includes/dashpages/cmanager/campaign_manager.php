@@ -93,7 +93,8 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
-      $('td input').bootstrapToggle();
+      $('td input.edit-budget').bootstrapToggle();
+      
       rowClasses = $('#campaign_manager tbody tr').attr("class");
 
       if (rowClasses.includes("selected")) {
