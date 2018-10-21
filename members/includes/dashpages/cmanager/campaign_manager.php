@@ -100,7 +100,7 @@ $(document).ready( function () {
       $('.toggle-campaign').bootstrapToggle({
         on: '<i class="fa fa-play"></i>',
         off: "Paused",
-        size: "xs",
+        size: "sm",
         onstyle: "success",
         offstyle: "primary"
       });
