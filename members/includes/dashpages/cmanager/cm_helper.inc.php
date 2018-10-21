@@ -44,9 +44,9 @@ function cmGetCampaignData($pdo, $user_id) {
   $stmt = $pdo->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   
-  console.log($result);
+  echo ($result);
   unserialize($result);
-  console.log($result);
+  echo ($result);
 
   for ($i = 0; $i < count($result); $i++) {
 
