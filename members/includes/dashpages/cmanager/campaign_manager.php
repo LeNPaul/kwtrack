@@ -364,7 +364,7 @@ $(document).ready( function () {
     }, cb);
 	
 	$('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-  };
+  }
   
   function cmUpdate(startIndex, endIndex) {
 	  var dateArr = <?= json_encode($dateArr) ?>;  
@@ -398,7 +398,7 @@ $(document).ready( function () {
 			salesSum += campaignData[11][i];
 		}
 	  });
-  };
+  }
 
 }); //document.ready
 </script>
