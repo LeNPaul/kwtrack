@@ -42,4 +42,4 @@ if ($toggle == true) {
   $a = "$campaignName ($campaignId) has been paused";
 }
 
-echo json_encode([$toggle, $a]);
+echo json_encode([$toggle, gettype($toggle), $a]);
