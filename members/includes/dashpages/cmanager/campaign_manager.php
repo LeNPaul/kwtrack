@@ -168,8 +168,7 @@ $(document).ready( function () {
             title: "Invalid Budget Value"
             content: "Please enter a valid value.",
             placement: "bottom",
-            trigger: "focus",
-            
+            trigger: "focus"
           });
         }
       });
