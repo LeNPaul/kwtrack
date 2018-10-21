@@ -101,6 +101,29 @@ $(document).ready( function () {
           $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
         }
 
+      $(".toggle").on("click", function() {
+        if ($(this).hasClass("off")) {
+          console.log('turning toggle on');
+        } else {
+          console.log('turning toggle off');
+        }
+        
+        toggleActive = $(this).hasClass("off");
+
+        $.ajax({
+          type: "POST",
+          url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+          data: { toggle: toggleActive },
+          
+          success: function() {
+            alert("campaign has been toggled");
+          },
+          error: function() {
+          
+          }
+        });
+      });
+
         $(".c_link").on("click", function() {
           var campaignName     = $(this).text();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
@@ -256,14 +279,6 @@ $(document).ready( function () {
 
           }); //ajax
         }); //on campaign name click
-      
-        $(".toggle").on("click", function() {
-          if ($(this).hasClass("off")) {
-            console.log('turning toggle on');
-          } else {
-            console.log('turning toggle off');
-          }
-        });
 	  } //drawCallback
 	}); //DataTable
 
