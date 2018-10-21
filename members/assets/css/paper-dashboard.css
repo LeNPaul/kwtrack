@@ -65,6 +65,7 @@ table.dataTable td {
 
 .dataTables_wrapper .input-group .form-control {
   font-size: 10px !important;
+  padding: 0 !important;
 }
 
 .dataTables_wrapper .input-group-prepend {
