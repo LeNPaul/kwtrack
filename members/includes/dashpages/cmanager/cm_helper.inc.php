@@ -83,7 +83,17 @@ function cmGetCampaignData($pdo, $user_id) {
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
     $campaignLink = '<a href="javascript:void(0)" class="name c_link">' . $result[$i]['campaign_name'] . '</a>';
-    $budget =  '<input type="text" class="form-control form-control-sm edit-budget" placeholder=" ' . $result[$i]['daily_budget'] . '" />';
+    $budget =  '<div class="input-group cm-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  
+                  <input type="text" class="form-control edit-budget" placeholder=" ' . $result[$i]['daily_budget'] . '" />
+                  
+                  <div class="input-group-append">
+                    <button class="btn btn-success btn-outline-secondary btn-edit-budget" type="button">Save</button>
+                  </div>
+                </div>';
     
     /*<div class="input-group-append">
                     <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>

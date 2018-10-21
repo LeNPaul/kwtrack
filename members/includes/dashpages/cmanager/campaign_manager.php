@@ -28,18 +28,6 @@ $dateArr = array_reverse($dateArr);
 
 ?>
 
-<div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text">$</span>
-  </div>
-  
-  <input type="text" class="form-control edit-budget" placeholder="0.20">
-  
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
-  </div>
-</div>
-
 <h2 class="text-center">Campaign Manager</h2>
 <div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
   <i class="fa fa-calendar"></i>
@@ -104,14 +92,15 @@ $(document).ready( function () {
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
         on: '<i class="fa fa-play"></i>',
-        off: "Paused",
-        size: "small", 
+        off: '<i class="fa fa-pause"></i>',
+        size: "small",
         onstyle: "success",
         offstyle: "primary"
       });
       $(".toggle-campaign-archive").bootstrapToggle({
-        off: "Archived",
-        size: "mini"
+        off: '<i class="fa fa-stop"></i>',
+        offstyle: "default",
+        size: "small"
       });
       
       rowClasses = $('#campaign_manager tbody tr').attr("class");
@@ -305,11 +294,11 @@ $(document).ready( function () {
 
               dt.destroy();
               dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
-            },
+            }, // success (campaign manager)
 
             error: function(msg) {
               alert(msg);
-            } //error
+            } //error (campaign manager)
 
           }); //ajax
         }); //on campaign name click
