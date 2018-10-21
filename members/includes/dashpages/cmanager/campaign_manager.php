@@ -379,7 +379,16 @@ $(document).ready( function () {
 	  
 	  startArr = dateArr.indexOf(startIndex);
 	  endArr = dateArr.indexOf(endIndex);
+	  var impressionsSum = 0;
+	  var clicksSum = 0;
+	  var ctrSum = 0;
+	  var adSpendSum = 0;
+	  var avgCpcSum = 0;
+	  var unitsSoldSum = 0;
+	  var salesSum = 0;
 	  
-	  
+	  for (i = startArr; i <= endArr; i++) {
+		  
+	  }
   };
 </script>
