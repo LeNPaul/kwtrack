@@ -10,9 +10,6 @@ $campaignName     = htmlspecialchars($_POST['campaignName']);
 $campaignDataBack = $_POST['cDataBack'];
 $campaignId       = $campaignDataBack[$campaignName];
 
-$a = [$user_id, $toggle, $campaignName, $campaignId];
-echo json_encode($a);
-/*
 $stmt = $pdo->prepare("SELECT refresh_token, profileId FROM users WHERE user_id=?");
 $stmt->bindParam(1, $user_id);
 $stmt->execute();
@@ -32,7 +29,17 @@ $client = new Client($config);
 $client->profileId = $profileId;
 
 if ($toggle === true) {
-  $client->updateCampaigns();
+  /*$client->updateCampaigns(array(
+    array("campaignId" => $campaignId,
+          "state"      => 'enabled')
+  ));*/
+  $a = "$campaignName ($campaignId) has been enabled";
 } else {
+  /*$client->updateCampaigns(array(
+    array("campaignId" => $campaignId,
+      "state"      => 'paused')
+  ));*/
+  $a = "$campaignName ($campaignId) has been paused";
+}
 
-}*/
+echo $a;
