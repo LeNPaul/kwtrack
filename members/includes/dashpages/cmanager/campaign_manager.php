@@ -160,8 +160,9 @@ $(document).ready( function () {
       });
       
       $(".btn-edit-budget").on("click", function() {
+        var budgetVal = $(this).parent().prev().val();
         // Verify input to check if numeric
-        console.log($(this).val());
+        console.log(budgetVal);
       });
       
 
