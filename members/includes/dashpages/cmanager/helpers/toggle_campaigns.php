@@ -37,7 +37,7 @@ if ($toggle == 'true') {
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
     ":state"  => 'enabled',
-    ":amz_campaign_id"  => $campaignId
+    ":cid"    => $campaignId
   ));
   $alertText = htmlspecialchars_decode($campaignName) . " has been enabled.";
 } else {
@@ -49,7 +49,7 @@ if ($toggle == 'true') {
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
     ":state"  => 'paused',
-    ":amz_campaign_id"  => $campaignId
+    ":cid"    => $campaignId
   ));
   $alertText = htmlspecialchars_decode($campaignName) . " has been paused.";
 }
