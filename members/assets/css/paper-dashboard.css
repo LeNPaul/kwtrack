@@ -45,7 +45,7 @@ table.dataTable td {
   border-radius: 30px 30px 0px 0px !important;
 }
 .dataTables_info, .dataTables_paginate {
-  background-color: #cee3ee;
+  background-color: #cee3ee !important;
   border-radius: 0px 0px 30px 30px !important;
 }
 
