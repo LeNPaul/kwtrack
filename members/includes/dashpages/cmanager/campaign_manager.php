@@ -99,6 +99,7 @@ $(document).ready( function () {
       });
       $(".toggle-campaign-archive").bootstrapToggle({
         off: '<i class="fa fa-stop"></i>',
+        offstyle: "default",
         size: "small"
       });
       
