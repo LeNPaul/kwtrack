@@ -338,7 +338,7 @@ $(document).ready( function () {
     } );
   }
 
-  $(function() {
+  function() {
 
     var start = moment().subtract(59, 'days');
     var end = moment();
@@ -369,17 +369,24 @@ $(document).ready( function () {
   function cmUpdate(startIndex, endIndex) {
 	  var dateArr = <?= json_encode($dateArr) ?>;  
 	  var campaignData = <?= json_encode($rawCampaignData) ?>;
+	  var startArr = dateArr.indexOf(startIndex);
+	  var endArr = dateArr.indexOf(endIndex);
+	  var impressionsSum = 0;
+	  var clicksSum = 0;
+	  var ctrSum = 0;
+	  var adSpendSum = 0;
+	  var avgCpcSum = 0;
+	  var unitsSoldSum = 0;
+	  var salesSum = 0;
 	  
 	  campaignData.foreach(function(element) {
-		startArr = dateArr.indexOf(startIndex);
-		endArr = dateArr.indexOf(endIndex);
-		var impressionsSum = 0;
-		var clicksSum = 0;
-		var ctrSum = 0;
-		var adSpendSum = 0;
-		var avgCpcSum = 0;
-		var unitsSoldSum = 0;
-		var salesSum = 0;
+		  impressionsSum = 0;
+		  clicksSum = 0;
+		  ctrSum = 0;
+		  adSpendSum = 0;
+		  avgCpcSum = 0;
+		  unitsSoldSum = 0;
+		  salesSum = 0;
 	  
 		for (i = startArr; i <= endArr; i++) {
 			impressionsSum += campaignData[5][i];
