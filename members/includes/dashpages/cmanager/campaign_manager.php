@@ -257,7 +257,13 @@ $(document).ready( function () {
           }); //ajax
         }); //on campaign name click
       
-        
+        $(".toggle-campaign").on("click", function() {
+          if ($(".toggle-campaign").is(':checked')) {
+            alert("checked");
+          } else {
+            alert("unchecked");
+          }
+        });
 	  } //drawCallback
 	}); //DataTable
 
