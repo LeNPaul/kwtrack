@@ -259,9 +259,9 @@ $(document).ready( function () {
       
         $(".toggle-campaign").on("click", function() {
           if ($(".toggle-campaign").checked()) {
-            alert("checked");
+            console.log("checked");
           } else {
-            alert("unchecked");
+            console.log("unchecked");
           }
         });
 	  } //drawCallback
