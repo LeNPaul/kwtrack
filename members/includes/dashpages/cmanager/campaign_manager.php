@@ -304,7 +304,7 @@ $(document).ready( function () {
 	  } //drawCallback
 	}); //DataTable
 
-  
+
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
 
@@ -328,7 +328,8 @@ $(document).ready( function () {
     console.log(dt.rows('.selected').data());
     dt.draw();
   });
-
+	
+  function() {
   /* Create an array with the values of all the input boxes in a column */
   $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col )
   {
@@ -337,10 +338,7 @@ $(document).ready( function () {
     } );
   }
 
-
-}); //document.ready
-
-  $(function() {
+  function() {
 
     var start = moment().subtract(59, 'days');
     var end = moment();
@@ -366,14 +364,13 @@ $(document).ready( function () {
     }, cb);
 	
 	$('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-  });
+  };
   
   function cmUpdate(startIndex, endIndex) {
 	  var dateArr = <?= json_encode($dateArr) ?>;  
 	  var campaignData = <?= json_encode($rawCampaignData) ?>;
-	  
-	  startArr = dateArr.indexOf(startIndex);
-	  endArr = dateArr.indexOf(endIndex);
+	  var startArr = dateArr.indexOf(startIndex);
+	  var endArr = dateArr.indexOf(endIndex);
 	  var impressionsSum = 0;
 	  var clicksSum = 0;
 	  var ctrSum = 0;
@@ -382,8 +379,26 @@ $(document).ready( function () {
 	  var unitsSoldSum = 0;
 	  var salesSum = 0;
 	  
-	  for (i = startArr; i <= endArr; i++) {
-		  
-	  }
+	  campaignData.foreach(function(element) {
+		  impressionsSum = 0;
+		  clicksSum = 0;
+		  ctrSum = 0;
+		  adSpendSum = 0;
+		  avgCpcSum = 0;
+		  unitsSoldSum = 0;
+		  salesSum = 0;
+	  
+		for (i = startArr; i <= endArr; i++) {
+			impressionsSum += campaignData[5][i];
+			clicksSum += campaignData[6][i];
+			ctrSum += campaignData[7][i];
+			adSpendSum += campaignData[8][i];
+			avgCpcSum += campaignData[9][i];
+			unitsSoldSum += campaignData[10][i];
+			salesSum += campaignData[11][i];
+		}
+	  });
   };
+
+}); //document.ready
 </script>
