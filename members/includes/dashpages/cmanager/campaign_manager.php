@@ -305,11 +305,11 @@ $(document).ready( function () {
 
               dt.destroy();
               dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
-            },
+            }, // success (campaign manager)
 
             error: function(msg) {
               alert(msg);
-            } //error
+            } //error (campaign manager)
 
           }); //ajax
         }); //on campaign name click

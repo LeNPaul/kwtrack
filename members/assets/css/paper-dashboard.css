@@ -53,7 +53,7 @@ table.dataTable td {
   font-weight: 400;
 }
 
-.dataTables_wrapper td div.toggle.btn {
+.dataTables_wrapper div.toggle.btn {
   line-height: 2em !important;
 }
 
