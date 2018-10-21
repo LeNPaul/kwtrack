@@ -98,8 +98,7 @@ $(document).ready( function () {
         offstyle: "primary"
       });
       $(".toggle-campaign-archive").bootstrapToggle({
-        off: '<i class="fa fa-stop"></i>',
-        offstyle: "default",
+        off: '',
         size: "small"
       });
       
