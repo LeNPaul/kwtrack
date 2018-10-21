@@ -41,7 +41,7 @@ function cmCheckboxState($status) {
 function cmGetCampaignData($pdo, $user_id) {
   $output = [];
   $campaigns = [];
-  $rawData = [];
+  $rawCampaignData = [];
   $sql = "SELECT * FROM campaigns WHERE user_id={$user_id}";
   $stmt = $pdo->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -89,7 +89,7 @@ function cmGetCampaignData($pdo, $user_id) {
                     <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
                   </div>*/
 
-	$rawData[] = array(
+	$rawCampaignData[] = array(
 		cmCheckboxState($result[$i]['status']),
 		$campaignLink,
 		$result[$i]['status'],
@@ -122,7 +122,7 @@ function cmGetCampaignData($pdo, $user_id) {
 
     $campaigns[htmlspecialchars($result[$i]['campaign_name'])] = $result[$i]['amz_campaign_id'];
   }
-  return [$output, $campaigns, $rawData];
+  return [$output, $campaigns, $rawCampaignData];
 }
 
 /*
