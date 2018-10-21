@@ -98,7 +98,7 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
-        on: '<i class="ti-control-play"></i>',
+        on: '<span class="ti-control-play"></span>',
         off: "Paused",
         size: "mini",
         onstyle: "success",
