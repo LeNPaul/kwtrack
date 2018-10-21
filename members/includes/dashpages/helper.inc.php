@@ -201,6 +201,7 @@ function getReport($client, $reportId) {
   function insertKeywords($pdo, $impressions, $clicks, $ctr, $ad_spend, $avg_cpc, $units_sold, $sales) {
     $sql = "UPDATE ppc_keywords SET impressions=:impressions, clicks=:clicks, ad_spend=:ad_spend, avg_cpc=:avg_cpc, units_sold=:units_sold, sales=:sales WHERE amz_kw_id=:kw_id";
     $stmt = $pdo->prepare($sql);
+	foreach ($impressions as $key => $value
     $stmt->execute(array(
         ':impressions' => serialize($impressions),
         ':clicks' => serialize($clicks),
@@ -208,7 +209,8 @@ function getReport($client, $reportId) {
 		':ad_spend' => serialize($ad_spend),
 		':avg_cpc' => serialize($avg_cpc),
 		':units_sold' => serialize($units_sold),
-		':sales' => serialize($sales)
+		':sales' => serialize($sales),
+		':kw_id' => $key
     ));
   }
   
@@ -223,6 +225,7 @@ function getReport($client, $reportId) {
     }
   }*/
 
+  //insertKeywords($pdo, $adSpend, 'ad_spend');
  /*
       ██   ██ ███████ ██    ██ ██     ██  ██████  ██████  ██████  ███████
       ██  ██  ██       ██  ██  ██     ██ ██    ██ ██   ██ ██   ██ ██
@@ -456,7 +459,7 @@ function getReport($client, $reportId) {
     }
 
     // Insert all this shit into the database
-    insertKeywords($pdo, $impressions, 'impressions', 'clicks', 'ctr', 'ad_spend', 'avg_cpc', 'units_sold', 'sales');
+    insertKeywords($pdo, $impressions, $clicks, $ctr, $ad_spend, $avg_cpc, $units_sold, $sales, $kw_id);
     //insertKeywords($pdo, $clicks, 'clicks');
     //insertKeywords($pdo, $ctr, 'ctr');
     //insertKeywords($pdo, $adSpend, 'ad_spend');
