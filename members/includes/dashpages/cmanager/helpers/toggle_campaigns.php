@@ -28,7 +28,7 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-if ($toggle === true) {
+if ($toggle == true) {
   /*$client->updateCampaigns(array(
     array("campaignId" => $campaignId,
           "state"      => 'enabled')
