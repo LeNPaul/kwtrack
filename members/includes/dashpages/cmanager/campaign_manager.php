@@ -360,6 +360,10 @@ $(document).ready( function () {
     }, cb);
 	
 	$('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+<<<<<<< HEAD
+=======
+  }
+>>>>>>> 0424b538539d6c5fba7c9ddc7aa6f86c345f2469
   
   function cmUpdate(startIndex, endIndex) {
 	  var dateArr = <?= json_encode($dateArr) ?>;  
@@ -375,10 +379,35 @@ $(document).ready( function () {
 	  var unitsSoldSum = 0;
 	  var salesSum = 0;
 	  
+<<<<<<< HEAD
 	  for (i = startArr; i <= endArr; i++) {
 		  
 	  }
   }
 });
 
+=======
+	  campaignData.foreach(function(element) {
+		  impressionsSum = 0;
+		  clicksSum = 0;
+		  ctrSum = 0;
+		  adSpendSum = 0;
+		  avgCpcSum = 0;
+		  unitsSoldSum = 0;
+		  salesSum = 0;
+	  
+		for (i = startArr; i <= endArr; i++) {
+			impressionsSum += campaignData[5][i];
+			clicksSum += campaignData[6][i];
+			ctrSum += campaignData[7][i];
+			adSpendSum += campaignData[8][i];
+			avgCpcSum += campaignData[9][i];
+			unitsSoldSum += campaignData[10][i];
+			salesSum += campaignData[11][i];
+		}
+	  });
+  }
+
+}); //document.ready
+>>>>>>> 0424b538539d6c5fba7c9ddc7aa6f86c345f2469
 </script>
