@@ -64,13 +64,13 @@ table.dataTable td {
 }
 
 .dataTables_wrapper .input-group .form-control {
-  font-size: 10px !important;
+  font-size: 11px !important;
   padding: 1px !important;
   margin-left: 0px !important;
 }
 
 .dataTables_wrapper span.input-group-text{
-  font-size: 10px !important;
+  font-size: 11px !important;
   padding-left: 8px !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
@@ -78,15 +78,15 @@ table.dataTable td {
 }
 
 .dataTables_wrapper .input-group-prepend {
-  height: 20px !important;
-  width: 20px !important;
+  height: 30px !important;
+  width: 30px !important;
   background: #eeeeee !important;
 }
 
 .dataTables_wrapper .input-group-append button{
   line-height: 0.5em !important;
   padding: 5px !important;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .toggle-on.btn-sm, .toggle-off.btn-sm {
