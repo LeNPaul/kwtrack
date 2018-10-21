@@ -19,11 +19,11 @@ function calculateMetricAvg($arr) {
  */
 function cmCheckboxState($status) {
   if ($status == 'enabled') {
-    return '<input type="checkbox" checked data-toggle="toggle" data-size="mini">';
+    return '<input type="checkbox" checked data-toggle="toggle" data-size="mini" />';
   } elseif ($status == 'paused') {
-    return '<input type="checkbox" data-toggle="toggle" data-size="mini">';
+    return '<input type="checkbox" data-toggle="toggle" data-size="mini" />';
   } else {
-    return '<input type="checkbox" data-toggle="toggle" data-size="mini" disabled>';
+    return '<input type="checkbox" data-toggle="toggle" data-size="mini" disabled />';
   }
 }
 
