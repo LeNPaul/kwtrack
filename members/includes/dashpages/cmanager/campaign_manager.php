@@ -99,7 +99,7 @@ $(document).ready( function () {
       });
       $(".toggle-campaign-archive").bootstrapToggle({
         off: "Archived",
-        size: "mini"
+        size: "small"
       });
       
       rowClasses = $('#campaign_manager tbody tr').attr("class");
