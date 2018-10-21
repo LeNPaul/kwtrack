@@ -63,6 +63,26 @@ table.dataTable td {
   font-weight: 400;
 }
 
+.dataTables_wrapper .input-group .form-control {
+  font-size: 10px !important;
+}
+
+.dataTables_wrapper .input-group-prepend {
+  height: 20px !important;
+  width: 20px !important;
+  font-size: 10px !important;
+}
+
+.dataTables_wrapper .input-group-append {
+  height: 20px !important;
+  width: 25px !important;
+}
+
+.dataTables_wrapper .input-group-append button{
+  line-height: 2em !important;
+  font-size: 10px;
+}
+
 .toggle-on.btn-sm, .toggle-off.btn-sm {
   line-height: 2em !important;
 }
