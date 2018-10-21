@@ -54,7 +54,7 @@ table.dataTable td {
 }
 
 .dataTables_wrapper td div.toggle.btn {
-  line-height: 2em;
+  line-height: 2em !important;
 }
 
 /*
