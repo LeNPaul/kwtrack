@@ -122,14 +122,12 @@ $(document).ready( function () {
           
           success: function() {
             alert("campaign has been toggled");
+            $(this).toggleClass('toggle-selected');
           },
           error: function() {
           
           }
         });
-
-        $(this).toggleClass('toggle-selected');
-
       });
 
       $(".c_link").on("click", function() {
