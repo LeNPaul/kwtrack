@@ -28,18 +28,18 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-if ($toggle == true) {
-  /*$client->updateCampaigns(array(
+if ($toggle == 'true') {
+  $client->updateCampaigns(array(
     array("campaignId" => $campaignId,
           "state"      => 'enabled')
-  ));*/
-  $a = "$campaignName ($campaignId) has been enabled";
+  ));
+  $alertText = "$campaignName has been enabled";
 } else {
-  /*$client->updateCampaigns(array(
+  $client->updateCampaigns(array(
     array("campaignId" => $campaignId,
-      "state"      => 'paused')
-  ));*/
-  $a = "$campaignName ($campaignId) has been paused";
+          "state"      => 'paused')
+  ));
+  $alertText = "$campaignName has been paused";
 }
 
-echo [$toggle, $a];
+echo $alertText;
