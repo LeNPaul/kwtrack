@@ -73,7 +73,7 @@ $(document).ready( function () {
       // },
       data: dataset,
       columns: [
-		    { title: "Status"},
+		    { title: "Status", "orderDataType": "dom-text-toggle"},
         { title: "Campaign Name"},
 		    { title: "Status" },
         { title: "Budget", "orderDataType": "dom-text"},
@@ -329,10 +329,17 @@ $(document).ready( function () {
     dt.draw();
   });
 
-  /* Create an array with the values of all the input boxes in a column */
+  /* Create an array with the values of all the input boxes in a column. Used for sorting. */
   $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col ) {
     return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
       return parseFloat($('input', td).attr('placeholder'));
+    } );
+  }
+
+  /* Create an array with the values of all the input boxes in a column. Used for sorting. */
+  $.fn.dataTable.ext.order['dom-text-toggle'] = function  ( settings, col ) {
+    return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
+      return $('input', td).attr('data-value') * 1;
     } );
   }
   
