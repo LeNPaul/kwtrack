@@ -147,7 +147,8 @@ $(document).ready( function () {
       });
       
       // Handle budget changes
-      $(".input-group input.form-control").on("click", function() {
+      $(".input-group input.form-control").on("focus", function() {
+        console.log("Asdf");
         $(this).next().children().show();
       });
 
