@@ -41,9 +41,13 @@ table.dataTable td {
   padding: 0 !important;
 }
 
-.dataTables_scroll {
-  border-radius: 5px !important;
+.dataTables_scrollHead {
+  border-radius: 20px 20px 0px 0px !important;
 }
+.dataTables_scrollBody {
+  border-radius: 0px 0px 20px 20px !important;
+}
+
 
 #bc {
   font-weight: bold !important;
@@ -60,6 +64,8 @@ table.dataTable td {
 .toggle-on.btn-sm, .toggle-off.btn-sm {
   line-height: 2em !important;
 }
+
+.
 
 /*
 ███    ███  █████  ██ ███    ██
