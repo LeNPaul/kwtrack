@@ -68,6 +68,10 @@ table.dataTable td {
   padding: 0 !important;
 }
 
+.dataTables_wrapper span.input-group-text{
+  font-size: 10px !important;
+}
+
 .dataTables_wrapper .input-group-prepend {
   height: 20px !important;
   width: 20px !important;
