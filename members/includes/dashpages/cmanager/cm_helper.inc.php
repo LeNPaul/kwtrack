@@ -28,7 +28,7 @@ function cmCheckboxState($status) {
 }
 
 /*
- *  function cmGetCampaignData(PDO $pdo, Int $user_id) --> Array(Array $output, Array $campaigns)
+ *  function cmGetCampaignData(PDO $pdo, Int $user_id) --> Array(Array $output, Array $campaigns, Array $rawData)
  *    --> Gets campaign metrics from DB to output onto campaign manager.
  *
  *      --> PDO $pdo         - database handle
