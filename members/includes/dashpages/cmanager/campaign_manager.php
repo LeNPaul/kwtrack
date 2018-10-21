@@ -104,7 +104,8 @@ $(document).ready( function () {
 
       $(".toggle").on("click", function() {
         $(this).toggleClass('toggle-selected');
-        console.log(dt.rows('.toggle-selected').data()[1]);
+        
+        console.log(dt.rows('.toggle-selected').data());
 
         if ($(this).hasClass("off")) {
           console.log('turning toggle on');
