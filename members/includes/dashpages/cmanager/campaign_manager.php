@@ -58,8 +58,8 @@ $(document).ready( function () {
 
   var dataset = <?= json_encode($campaignDataFront) ?>;
   var databack = <?= json_encode($campaignDataBack) ?>;
-  console.log(databack);
-  console.log(dataset);
+  var user_id = <?= $user_id ?>;
+  console.log(user_id);
   var dt = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
@@ -106,8 +106,7 @@ $(document).ready( function () {
       $(".toggle").on("click", function() {
         // FIND OUT HOW TO PASS CAMPAIGN ID TO THIS FUNCTION
         $(this).toggleClass('toggle-selected');
-        
-        console.log($(this).parent().next().children(".c_link").text());
+        var campaignName = $(this).parent().next().children(".c_link").text();
         
         console.log(dt.rows('.toggle-selected').data());
 
@@ -122,7 +121,7 @@ $(document).ready( function () {
         $.ajax({
           type: "POST",
           url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
-          data: { toggle: toggleActive },
+          data: { toggle: toggleActive, campaignName: campaignName, cDataBack: databack },
           
           success: function() {
             alert("campaign has been toggled");
