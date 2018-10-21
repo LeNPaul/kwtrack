@@ -299,7 +299,7 @@ $(document).ready( function () {
       $(this).css('background-color', '#fdfdfe');
     }
 
-    console.log( dt.rows('.selected').data() );
+    //console.log( dt.rows('.selected').data() );
 	  //alert("clicked");
   });
 
