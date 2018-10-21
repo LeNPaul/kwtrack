@@ -225,7 +225,6 @@ function getReport($client, $reportId) {
     }
   }*/
 
-  //insertKeywords($pdo, $adSpend, 'ad_spend');
  /*
       ██   ██ ███████ ██    ██ ██     ██  ██████  ██████  ██████  ███████
       ██  ██  ██       ██  ██  ██     ██ ██    ██ ██   ██ ██   ██ ██
