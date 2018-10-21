@@ -91,7 +91,7 @@ function cmGetCampaignData($pdo, $user_id) {
                   <input type="text" class="form-control edit-budget" placeholder=" ' . $result[$i]['daily_budget'] . '" />
                   
                   <div class="input-group-append">
-                    <button class="btn btn-success btn-outline-secondary btn-edit-budget" type="button">Save</button>
+                    <button class="btn btn-success btn-outline-secondary btn-edit-budget" type="button" hidden>Save</button>
                   </div>
                 </div>';
     
