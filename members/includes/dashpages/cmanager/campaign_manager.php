@@ -141,7 +141,12 @@ $(document).ready( function () {
             $(this).toggleClass('toggle-selected');
           },
           error: function() {
-          
+            swal({
+              title: "Error",
+              text: "An error has occurred. Please try again in a few moments.",
+              type: "error",
+              confirmButtonText: "Close"
+            });
           }
         });
       });
@@ -151,8 +156,9 @@ $(document).ready( function () {
         $(this).next().children().show();
       });
       $(".input-group input.form-control").on("blur", function() {
-        $(this).next().children().hide();
+        $(this).next().children().hide(500);
       });
+      
 
       $(".c_link").on("click", function() {
           var campaignName     = $(this).text();

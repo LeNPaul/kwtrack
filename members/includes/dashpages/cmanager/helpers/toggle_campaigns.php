@@ -33,11 +33,23 @@ if ($toggle == 'true') {
     array("campaignId" => $campaignId,
           "state"      => 'enabled')
   ));
+  $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ":state"  => 'enabled',
+    ":amz_campaign_id"  => $campaignId
+  ));
   $alertText = htmlspecialchars_decode($campaignName) . " has been enabled.";
 } else {
   $client->updateCampaigns(array(
     array("campaignId" => $campaignId,
           "state"      => 'paused')
+  ));
+  $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ":state"  => 'paused',
+    ":amz_campaign_id"  => $campaignId
   ));
   $alertText = htmlspecialchars_decode($campaignName) . " has been paused.";
 }
