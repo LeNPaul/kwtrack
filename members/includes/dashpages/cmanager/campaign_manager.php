@@ -73,10 +73,10 @@ $(document).ready( function () {
       // },
       data: dataset,
       columns: [
-		    { title: "Active" },
+		    { title: "Status"},
         { title: "Campaign Name"},
 		    { title: "Status" },
-        { title: "Budget" },
+        { title: "Budget", "orderDataType": "dom-text"},
         { title: "Targeting Type" },
         { title: "Impressions" },
         { title: "Clicks" },
@@ -98,8 +98,7 @@ $(document).ready( function () {
         offstyle: "primary"
       });
       $(".toggle-campaign-archive").bootstrapToggle({
-        off: '<i class="fa fa-stop"></i>',
-        offstyle: "default",
+        off: '',
         size: "small"
       });
       
@@ -329,9 +328,17 @@ $(document).ready( function () {
     console.log(dt.rows('.selected').data());
     dt.draw();
   });
-
 	
   function() {
+  /* Create an array with the values of all the input boxes in a column */
+  $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col )
+  {
+    return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
+      return parseFloat($('input', td).attr('placeholder'));
+    } );
+  }
+
+  $(function() {
 
     var start = moment().subtract(59, 'days');
     var end = moment();
