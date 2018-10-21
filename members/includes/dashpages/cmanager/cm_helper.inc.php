@@ -40,6 +40,7 @@ function cmCheckboxState($status) {
 function cmGetCampaignData($pdo, $user_id) {
   $output = [];
   $campaigns = [];
+  $rawData = [];
   $sql = "SELECT * FROM campaigns WHERE user_id={$user_id}";
   $stmt = $pdo->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -54,13 +55,21 @@ function cmGetCampaignData($pdo, $user_id) {
   		$active = 2;
   	}
 
-    $ad_spend    = array_sum(unserialize($result[$i]['ad_spend']));
-    $sales       = array_sum(unserialize($result[$i]['sales']));
-    $impressions = array_sum(unserialize($result[$i]['impressions']));
-    $clicks      = array_sum(unserialize($result[$i]['clicks']));
-    $ctr         = round(calculateMetricAvg(unserialize($result[$i]['ctr'])), 2);
-    $avg_cpc     = round(calculateMetricAvg(unserialize($result[$i]['avg_cpc'])), 2);
-    $units_sold  = array_sum(unserialize($result[$i]['units_sold']));
+	unserialize($result[$i]['ad_spend']);
+	unserialize($result[$i]['sales']);
+	unserialize($result[$i]['impressions']);
+	unserialize($result[$i]['clicks']);
+	unserialize($result[$i]['ctr']));
+	unserialize($result[$i]['avg_cpc']);
+	unserialize($result[$i]['units_sold']);
+	
+    $ad_spend    = array_sum($result[$i]['ad_spend']);
+    $sales       = array_sum($result[$i]['sales']);
+    $impressions = array_sum($result[$i]['impressions']);
+    $clicks      = array_sum($result[$i]['clicks']);
+    $ctr         = round(calculateMetricAvg($result[$i]['ctr']), 2);
+    $avg_cpc     = round(calculateMetricAvg($result[$i]['avg_cpc']), 2);
+    $units_sold  = array_sum($result[$i]['units_sold']);
 
     // Replace any 0's with "-"
     $acos        = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
@@ -79,6 +88,23 @@ function cmGetCampaignData($pdo, $user_id) {
                     <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
                   </div>*/
 
+	$singleAcos = ($result[$i]['sales'] == 0) ? "0" : round(($result[$i]['ad_spend'] / $result[$i]['sales']) * 100, 2) . '%'
+	$rawData[] = array(
+		cmCheckboxState($result[$i]['status']),
+		$campaignLink,
+		$result[$i]['status'],
+		$budget,
+		$result[$i]['targeting_type'],
+		$result[$i]['impressions'],
+		$result[$i]['clicks'],
+		$result[$i]['ctr'],
+		$result[$i]['ad_spend'],
+		$result[$i]['avg_cpc'],
+		$result[$i]['units_sold'],
+		$result[$i]['sales'],
+		$singleAcos
+	);			  
+				  
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $campaignLink,
@@ -97,7 +123,7 @@ function cmGetCampaignData($pdo, $user_id) {
 
     $campaigns[htmlspecialchars($result[$i]['campaign_name'])] = $result[$i]['amz_campaign_id'];
   }
-  return [$output, $campaigns];
+  return [$output, $campaigns, $rawData];
 }
 
 /*

@@ -17,6 +17,7 @@ $cGroupsExist = (count($result) == 0) ? 0 : 1;
 $result = cmGetCampaignData($pdo, $user_id);
 $campaignDataFront = $result[0];
 $campaignDataBack  = $result[1];
+$rawCampaignData = $result[2];
 
 ?>
 
@@ -56,6 +57,8 @@ $campaignDataBack  = $result[1];
 
 <script>
 $(document).ready( function () {
+  
+  var campaignData = <?= json_encode($rawCampaignData) ?>;
   var dataset  = <?= json_encode($campaignDataFront) ?>;
   var databack = <?= json_encode($campaignDataBack) ?>;
   var user_id  = <?= $user_id ?>;
