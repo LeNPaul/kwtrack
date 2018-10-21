@@ -33,13 +33,13 @@ if ($toggle == 'true') {
     array("campaignId" => $campaignId,
           "state"      => 'enabled')
   ));
-  $alertText = "$campaignName has been enabled";
+  $alertText = htmlspecialchars_decode($campaignName) . " has been enabled.";
 } else {
   $client->updateCampaigns(array(
     array("campaignId" => $campaignId,
           "state"      => 'paused')
   ));
-  $alertText = "$campaignName has been paused";
+  $alertText = htmlspecialchars_decode($campaignName) . " has been paused.";
 }
 
 echo $alertText;

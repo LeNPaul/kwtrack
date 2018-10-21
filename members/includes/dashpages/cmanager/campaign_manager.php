@@ -127,7 +127,6 @@ $(document).ready( function () {
           data: { toggle: toggleActive, campaignName: campaignName, cDataBack: databack, user_id: user_id },
           
           success: function(alertText) {
-            
             swal({
               title: "Success!",
               text: alertText,
