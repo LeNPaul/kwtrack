@@ -73,6 +73,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
     $campaignLink = '<a href="javascript:void(0)" class="name c_link">' . $result[$i]['campaign_name'] . '</a>';
+    $budget = '';
 
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),

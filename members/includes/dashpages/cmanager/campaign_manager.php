@@ -24,7 +24,12 @@ $campaignDataBack  = $result[1];
 	<i class="fa fa-calendar"></i>
 	<span></span> <i class="fa fa-caret-down"></i>
 </div><br>
-<h6 id="bc">All Campaigns</h6>
+<nav aria-label="breadcrumb" role="navigation">
+  <ol class="breadcrumb">
+    <h6 id="bc">All Campaigns</h6>
+  </ol>
+</nav>
+
 
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
