@@ -28,7 +28,7 @@ $campaignDataBack  = $result[1];
 	<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
 		<i class="fa fa-calendar"></i>
 		<span></span> <i class="fa fa-caret-down"></i>
-	</div>
+	</div><br>
     <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
     <table id="adgroup_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
     <table id="keyword_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
