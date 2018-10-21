@@ -162,7 +162,16 @@ $(document).ready( function () {
       $(".btn-edit-budget").on("click", function() {
         var budgetVal = $(this).parent().prev().val();
         // Verify input to check if numeric
-        console.log(budgetVal);
+        if (!budgetVal.isNumeric()) {
+          $(this).parent().prev().popover({
+            html: true,
+            title: "Invalid Budget Value"
+            content: "Please enter a valid value.",
+            placement: "bottom",
+            trigger: "focus",
+            
+          });
+        }
       });
       
 
