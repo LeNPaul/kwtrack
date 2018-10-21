@@ -156,7 +156,7 @@ $(document).ready( function () {
         $(this).next().children().show();
       });
       $(".input-group input.form-control").on("blur", function() {
-        $(this).next().children().hide(500);
+        $(this).next().children().hide(1000);
       });
       
 
