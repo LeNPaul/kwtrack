@@ -203,13 +203,13 @@ function getReport($client, $reportId) {
     $stmt = $pdo->prepare($sql);
 	foreach ($impressions as $key => $value
     $stmt->execute(array(
-        ':impressions' => serialize($impressions),
-        ':clicks' => serialize($clicks),
-		':ctr' => serialize($ctr),
-		':ad_spend' => serialize($ad_spend),
-		':avg_cpc' => serialize($avg_cpc),
-		':units_sold' => serialize($units_sold),
-		':sales' => serialize($sales),
+        ':impressions' => serialize($impressions[$key]),
+        ':clicks' => serialize($clicks[$key]),
+		':ctr' => serialize($ctr[$key]),
+		':ad_spend' => serialize($ad_spend[$key]),
+		':avg_cpc' => serialize($avg_cpc[$key]),
+		':units_sold' => serialize($units_sold[$key]),
+		':sales' => serialize($sales[$key]),
 		':kw_id' => $key
     ));
   }
