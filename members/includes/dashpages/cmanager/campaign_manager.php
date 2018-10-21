@@ -139,6 +139,7 @@ $(document).ready( function () {
               confirmButtonText: "Close"
             });
             $(this).toggleClass('toggle-selected');
+            dt.draw();
           },
           error: function() {
             swal({
