@@ -51,9 +51,9 @@ table.dataTable td {
 }
 
 
-#bc {
+/*#bc {
   font-weight: bold !important;
-}
+}*/
 
 .dataTables_wrapper .name {
   font-weight: 600 !important;

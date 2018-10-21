@@ -165,7 +165,8 @@ $(document).ready( function () {
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           console.log(campaignDataBack);
           dt.destroy();
-
+          
+          // Handle breadcrumbs
           $("#bc").text(function(index, currentText) {
             return currentText + " / " + campaignName;
           });
