@@ -243,7 +243,9 @@ $(document).ready( function () {
             } //error
 
           }); //ajax
-        }); //on Click
+        }); //on campaign name click
+      
+        
 	  } //drawCallback
 	}); //DataTable
 
