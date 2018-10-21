@@ -102,16 +102,16 @@ $(document).ready( function () {
         size: "small"
       });
       
+      // Handle selections from the user
       rowClasses = $('#campaign_manager tbody tr').attr("class");
-
       if (rowClasses.includes("selected")) {
         $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
       } else {
         $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
       }
-
+      
+      // Status toggles
       $(".toggle").on("click", function() {
-        // FIND OUT HOW TO PASS CAMPAIGN ID TO THIS FUNCTION
         $(this).toggleClass('toggle-selected');
         var campaignName = $(this).parent().next().children(".c_link").text();
         
@@ -124,7 +124,8 @@ $(document).ready( function () {
         }
         
         toggleActive = $(this).hasClass("off");
-
+        
+        // Toggle campaign w/ AJAX
         $.ajax({
           type: "POST",
           url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
@@ -143,6 +144,11 @@ $(document).ready( function () {
           
           }
         });
+      });
+      
+      // Handle budget changes
+      $(".input-group input.form-control").on("click", function() {
+        $(this).next().children().show();
       });
 
       $(".c_link").on("click", function() {
