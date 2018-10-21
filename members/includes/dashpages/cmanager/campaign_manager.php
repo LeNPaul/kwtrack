@@ -134,6 +134,7 @@ $(document).ready( function () {
       $(".c_link").on("click", function() {
           var campaignName     = $(this).text();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
+          console.log(campaignDataBack);
           dt.destroy();
 
           $("#bc").text(function(index, currentText){
