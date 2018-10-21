@@ -73,7 +73,7 @@ $(document).ready( function () {
       // },
       data: dataset,
       columns: [
-		    { title: "Active" },
+		    { title: "Status" , type: "html"},
         { title: "Campaign Name"},
 		    { title: "Status" },
         { title: "Budget" },
