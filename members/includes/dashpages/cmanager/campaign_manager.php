@@ -103,6 +103,10 @@ $(document).ready( function () {
       }
 
       $(".toggle").on("click", function() {
+        $(this).toggleClass('toggle-selected');
+        console.log(console.log( dt.rows('.selected').data()[1] );
+        $(this).toggleClass('toggle-selected');
+
         if ($(this).hasClass("off")) {
           console.log('turning toggle on');
         } else {
