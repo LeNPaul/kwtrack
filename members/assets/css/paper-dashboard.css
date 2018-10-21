@@ -41,6 +41,10 @@ table.dataTable td {
   padding: 0 !important;
 }
 
+.dataTables_scroll {
+  border-radius: 5px !important;
+}
+
 #bc {
   font-weight: bold !important;
 }
