@@ -370,27 +370,27 @@ $(document).ready( function () {
 	  var dateArr = <?= json_encode($dateArr) ?>;  
 	  var campaignData = <?= json_encode($rawCampaignData) ?>;
 	  
-	  startArr = dateArr.indexOf(startIndex);
-	  endArr = dateArr.indexOf(endIndex);
-	  var impressionsSum = 0;
-	  var clicksSum = 0;
-	  var ctrSum = 0;
-	  var adSpendSum = 0;
-	  var avgCpcSum = 0;
-	  var unitsSoldSum = 0;
-	  var salesSum = 0;
+	  campaignData.foreach(function(element) {
+		startArr = dateArr.indexOf(startIndex);
+		endArr = dateArr.indexOf(endIndex);
+		var impressionsSum = 0;
+		var clicksSum = 0;
+		var ctrSum = 0;
+		var adSpendSum = 0;
+		var avgCpcSum = 0;
+		var unitsSoldSum = 0;
+		var salesSum = 0;
 	  
-	  for (i = startArr; i <= endArr; i++) {
-		  impressionsSum += campaignData[5][i];
-		  clicksSum += campaignData[6][i];
-		  ctrSum += campaignData[7][i];
-		  adSpendSum += campaignData[8][i];
-		  avgCpcSum += campaignData[9][i];
-		  unitsSoldSum += campaignData[10][i];
-		  salesSum += campaignData[11][i];
-	  }
-	  
-	  
+		for (i = startArr; i <= endArr; i++) {
+			impressionsSum += campaignData[5][i];
+			clicksSum += campaignData[6][i];
+			ctrSum += campaignData[7][i];
+			adSpendSum += campaignData[8][i];
+			avgCpcSum += campaignData[9][i];
+			unitsSoldSum += campaignData[10][i];
+			salesSum += campaignData[11][i];
+		}
+	  });
   };
 
 }); //document.ready
