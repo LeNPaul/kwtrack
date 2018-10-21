@@ -333,81 +333,56 @@ $(document).ready( function () {
   $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col ) {
     return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
       return parseFloat($('input', td).attr('placeholder'));
-    });
+    } );
   }
-
-    var start = moment().subtract(59, 'days');
-    var end = moment();
-
-    function cb(begin, finish) {
-	  //cmUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
-      $('#campaignRange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
-    }
-
-    $('#campaignRange').daterangepicker({
-      maxDate: moment(),
-      minDate: moment().subtract(59, 'days'),
-      startDate: start,
-      endDate: end,
-      ranges: {
-        'Today': [moment(), moment()],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'Last 60 days': [moment().subtract(59, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      }
-    }, cb);
-	
-	$('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-<<<<<<< HEAD
-=======
-  }
->>>>>>> 0424b538539d6c5fba7c9ddc7aa6f86c345f2469
   
-  function cmUpdate(startIndex, endIndex) {
-	  var dateArr = <?= json_encode($dateArr) ?>;  
-	  var campaignData = <?= json_encode($rawCampaignData) ?>;
-	  
-	  startArr = dateArr.indexOf(startIndex);
-	  endArr = dateArr.indexOf(endIndex);
-	  var impressionsSum = 0;
-	  var clicksSum = 0;
-	  var ctrSum = 0;
-	  var adSpendSum = 0;
-	  var avgCpcSum = 0;
-	  var unitsSoldSum = 0;
-	  var salesSum = 0;
-	  
-<<<<<<< HEAD
-	  for (i = startArr; i <= endArr; i++) {
-		  
-	  }
+  /* DATA RANGE PICKER */
+
+  var start = moment().subtract(59, 'days');
+  var end = moment();
+
+  function cb(begin, finish) {
+    //cmUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
+    $('#campaignRange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
   }
+
+  $('#campaignRange').daterangepicker({
+    maxDate: moment(),
+    minDate: moment().subtract(59, 'days'),
+    startDate: start,
+    endDate: end,
+    ranges: {
+      'Today': [moment(), moment()],
+      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+      'Last 60 days': [moment().subtract(59, 'days'), moment()],
+      'This Month': [moment().startOf('month'), moment().endOf('month')],
+      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    }
+  }, cb);
+
+  $('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 });
 
-=======
-	  campaignData.foreach(function(element) {
-		  impressionsSum = 0;
-		  clicksSum = 0;
-		  ctrSum = 0;
-		  adSpendSum = 0;
-		  avgCpcSum = 0;
-		  unitsSoldSum = 0;
-		  salesSum = 0;
-	  
-		for (i = startArr; i <= endArr; i++) {
-			impressionsSum += campaignData[5][i];
-			clicksSum += campaignData[6][i];
-			ctrSum += campaignData[7][i];
-			adSpendSum += campaignData[8][i];
-			avgCpcSum += campaignData[9][i];
-			unitsSoldSum += campaignData[10][i];
-			salesSum += campaignData[11][i];
-		}
-	  });
+//TODO: take sums above and make into data table rows, insert them, and then redraw the tables
+function cmUpdate(startIndex, endIndex) {
+  var dateArr = <?= json_encode($dateArr) ?>;
+  var campaignData = <?= json_encode($rawCampaignData) ?>;
+
+  startArr = dateArr.indexOf(startIndex);
+  endArr = dateArr.indexOf(endIndex);
+  var impressionsSum = 0;
+  var clicksSum = 0;
+  var ctrSum = 0;
+  var adSpendSum = 0;
+  var avgCpcSum = 0;
+  var unitsSoldSum = 0;
+  var salesSum = 0;
+
+  for (i = startArr; i <= endArr; i++) {
+
   }
 
 }); //document.ready
->>>>>>> 0424b538539d6c5fba7c9ddc7aa6f86c345f2469
+
 </script>
