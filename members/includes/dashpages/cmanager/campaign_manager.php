@@ -17,11 +17,6 @@ $result = cmGetCampaignData($pdo, $user_id);
 $campaignDataFront = $result[0];
 $campaignDataBack  = $result[1];
 
-
-echo '<pre>';
-var_dump($campaignDataBack);
-echo '</pre>';
-
 ?>
 
 <div class="input-group">
@@ -62,7 +57,7 @@ echo '</pre>';
 $(document).ready( function () {
 
   var dataset = <?= json_encode($campaignDataFront) ?>;
-  var databack = <?= json_encode($campaignDataBack) ?>;
+  var databack = <?= $campaignDataBack ?>;
   console.log(databack);
   console.log(dataset)
   var dt = $('#campaign_manager').DataTable(
@@ -99,9 +94,6 @@ $(document).ready( function () {
 
 	  drawCallback: function(settings) {
       $('td input').bootstrapToggle();
-      
-     
-
       rowClasses = $('#campaign_manager tbody tr').attr("class");
 
       if (rowClasses.includes("selected")) {
