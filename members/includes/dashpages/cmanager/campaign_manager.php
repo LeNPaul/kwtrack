@@ -165,7 +165,7 @@ $(document).ready( function () {
         if (!budgetVal.isNumeric()) {
           $(this).parent().prev().popover({
             html: true,
-            title: "Invalid Budget Value"
+            title: "Invalid Budget Value",
             content: "Please enter a valid value.",
             placement: "bottom",
             trigger: "focus"
