@@ -2,6 +2,7 @@
 <?php
 require '../../../database/pdo.inc.php';
 
+$user_id = 2;
 $stmt = $pdo->prepare("SELECT refresh_token, profileId FROM users WHERE user_id=?");
 $stmt->bindParam(1, $user_id);
 $stmt->execute();
