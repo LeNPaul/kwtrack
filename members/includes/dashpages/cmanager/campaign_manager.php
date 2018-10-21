@@ -96,7 +96,18 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
-      $('.toggle-campaign, .toggle-campaign-archive').bootstrapToggle();
+      // Handle and style toggle buttons
+      $('.toggle-campaign').bootstrapToggle({
+        on: "Enabled",
+        off: "Paused",
+        size: "mini"
+        onstyle: "success",
+        offstyle: "primary"
+      });
+      $(".toggle-campaign-archive").bootstrapToggle({
+        off: "Archived",
+        size: "mini"
+      });
       
       rowClasses = $('#campaign_manager tbody tr').attr("class");
 
