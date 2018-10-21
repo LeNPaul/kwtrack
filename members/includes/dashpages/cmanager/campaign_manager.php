@@ -26,7 +26,7 @@ $campaignDataBack  = $result[1];
 </div><br>
 <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb">
-    <h6 id="bc">All Campaigns</h6>
+    <li class="breadcrumb-item"><h6 id="bc">All Campaigns</h6></li>
   </ol>
 </nav>
 
