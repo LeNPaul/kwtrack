@@ -40,21 +40,13 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$adgSnapshot = $client->requestSnapshot(
-  "adGroups",
-  array("stateFilter"  => "enabled,paused,archived",
-    "campaignType" => "sponsoredProducts"));
-$snapshotId = json_decode($adgSnapshot['response'], true);
-echo '<pre>';
-var_dump($adgSnapshot);
-echo '</pre>';
-
-$snapshotId = $snapshotId['snapshotId'];
-
-$adgSnapshot = getSnapshot($client, $snapshotId);
+$result = $client->updateCampaigns(array(
+  array("campaignId" => 40018060817719,
+    "state"      => 'paused')
+));
 
 echo '<pre>';
-var_dump($adgSnapshot);
+var_dump($result);
 echo '</pre>';
 
 
