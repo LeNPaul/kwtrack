@@ -19,6 +19,13 @@ $campaignDataFront = $result[0];
 $campaignDataBack  = $result[1];
 $rawCampaignData = $result[2];
 
+$dateArr = [];
+$dateArr[] = date("M d");
+for ($j = 1; $j < 60; $j++) {
+	$dateArr[] = date("M d", strtotime("-".$j." days"));
+}
+$dateArr = array_reverse($dateArr);
+
 ?>
 
 <div class="input-group">
@@ -57,8 +64,6 @@ $rawCampaignData = $result[2];
 
 <script>
 $(document).ready( function () {
-  
-  var campaignData = <?= json_encode($rawCampaignData) ?>;
   var dataset  = <?= json_encode($campaignDataFront) ?>;
   var databack = <?= json_encode($campaignDataBack) ?>;
   var user_id  = <?= $user_id ?>;
@@ -346,7 +351,7 @@ $(document).ready( function () {
     var end = moment();
 
     function cb(begin, finish) {
-	  //chartUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
+	  //cmUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
       $('#campaignRange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
     }
 
@@ -367,4 +372,14 @@ $(document).ready( function () {
 	
 	$('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
   });
+  
+  function cmUpdate(startIndex, endIndex) {
+	  var dateArr = <?= json_encode($dateArr) ?>;  
+	  var campaignData = <?= json_encode($rawCampaignData) ?>;
+	  
+	  startArr = dateArr.indexOf(startIndex);
+	  endArr = dateArr.indexOf(endIndex);
+	  
+	  
+  };
 </script>
