@@ -77,8 +77,8 @@ function cmGetCampaignData($pdo, $user_id) {
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
     $campaignLink = '<a href="javascript:void(0)" class="name c_link">' . $result[$i]['campaign_name'] . '</a>';
-    $budget =  '<div class="input-group input-group-sm">
-                  <input type="text" class="edit-budget" placeholder=" ' . $result[$i]['daily_budget'] . '" />
+    $budget =  '<div class="form-group">
+                  <input type="text" class="form-control form-control-sm edit-budget" placeholder=" ' . $result[$i]['daily_budget'] . '" />
                   
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
@@ -90,7 +90,7 @@ function cmGetCampaignData($pdo, $user_id) {
                   </div>*/
 
     $output[] = array(
-	    /*cmCheckboxState($result[$i]['status'])*/ '-',
+	    cmCheckboxState($result[$i]['status']),
       $campaignLink,
 	    $result[$i]['status'],
       $budget,
