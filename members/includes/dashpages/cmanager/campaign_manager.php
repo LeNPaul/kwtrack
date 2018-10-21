@@ -258,7 +258,7 @@ $(document).ready( function () {
         }); //on campaign name click
       
         $(".toggle-campaign").on("click", function() {
-          if ($(".toggle-campaign").checked()) {
+          if ($(this).checked()) {
             console.log("checked");
           } else {
             console.log("unchecked");
