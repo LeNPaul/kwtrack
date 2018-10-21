@@ -100,7 +100,7 @@ function cmGetCampaignData($pdo, $user_id) {
 		$clicksArray[$i],
 		$ctrArray[$i],
 		$adSpendArray[$i],
-		$avgCpcSrray[$i],
+		$avgCpcArray[$i],
 		$unitsSoldArray[$i],
 		$salesArray[$i],
 		$singleAcos
