@@ -103,9 +103,9 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
-        on: "Enabled",
+        on: '<i class="fa fa-play"></i>',
         off: "Paused",
-        size: "mini",
+        size: "small", 
         onstyle: "success",
         offstyle: "primary"
       });

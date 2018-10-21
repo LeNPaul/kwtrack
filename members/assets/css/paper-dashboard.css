@@ -28,35 +28,6 @@
      }
  }
 
-
-
-/*.dataTables_wrapper .dataTables_paginate .paginate_button.current,
-.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-  color: #333333 !important;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
-.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
-.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
-  cursor: default;
-  color: #666 !important;
-  background: transparent !important;
-  box-shadow: none;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-  color: white !important;
-  background: transparent !important;
-}*/
-
-/*table.dataTable thead .sorting_asc {
-  background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center right;
-}
-table.dataTable thead .sorting_desc {
-  background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center right;
-}
-table.dataTable thead .sorting {
-  background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center right;
-}*/
-
 table.dataTable,
 table.dataTable th,
 table.dataTable td {
@@ -82,6 +53,9 @@ table.dataTable td {
   font-weight: 400;
 }
 
+.dataTables_wrapper td div.toggle.btn {
+  line-height: 2em !important;
+}
 
 /*
 ███    ███  █████  ██ ███    ██
