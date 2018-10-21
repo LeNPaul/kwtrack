@@ -73,7 +73,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
     $campaignLink = '<a href="javascript:void(0)" class="name c_link">' . $result[$i]['campaign_name'] . '</a>';
-    $budget = '<div class="input-group">
+    $budget = '<div class="input-group input-group-sm">
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</i></span>
                 </div>
