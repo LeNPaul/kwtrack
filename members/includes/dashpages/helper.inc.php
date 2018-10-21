@@ -201,17 +201,18 @@ function getReport($client, $reportId) {
   function insertKeywords($pdo, $impressions, $clicks, $ctr, $ad_spend, $avg_cpc, $units_sold, $sales) {
     $sql = "UPDATE ppc_keywords SET impressions=:impressions, clicks=:clicks, ad_spend=:ad_spend, avg_cpc=:avg_cpc, units_sold=:units_sold, sales=:sales WHERE amz_kw_id=:kw_id";
     $stmt = $pdo->prepare($sql);
-	foreach ($impressions as $key => $value
-    $stmt->execute(array(
-      ':impressions' => serialize($impressions[$key]),
-      ':clicks' => serialize($clicks[$key]),
-      ':ctr' => serialize($ctr[$key]),
-      ':ad_spend' => serialize($ad_spend[$key]),
-      ':avg_cpc' => serialize($avg_cpc[$key]),
-      ':units_sold' => serialize($units_sold[$key]),
-      ':sales' => serialize($sales[$key]),
-      ':kw_id' => $key
-    ));
+    foreach ($impressions as $key => $value) {
+      $stmt->execute(array(
+        ':impressions' => serialize($impressions[$key]),
+        ':clicks' => serialize($clicks[$key]),
+        ':ctr' => serialize($ctr[$key]),
+        ':ad_spend' => serialize($ad_spend[$key]),
+        ':avg_cpc' => serialize($avg_cpc[$key]),
+        ':units_sold' => serialize($units_sold[$key]),
+        ':sales' => serialize($sales[$key]),
+        ':kw_id' => $key
+      ));
+    }
   }
   
   /*function insertKeywords($pdo, $dataset, $metric) {
