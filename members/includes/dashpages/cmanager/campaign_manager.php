@@ -59,7 +59,7 @@ $(document).ready( function () {
   var dataset = <?= json_encode($campaignDataFront) ?>;
   var databack = <?= json_encode($campaignDataBack) ?>;
   console.log(databack);
-  console.log(dataset)
+  console.log(dataset);
   var dt = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
