@@ -107,7 +107,7 @@ $(document).ready( function () {
         // FIND OUT HOW TO PASS CAMPAIGN ID TO THIS FUNCTION
         $(this).toggleClass('toggle-selected');
         
-        console.log($(this).parent().next());
+        console.log($(this).parent().next().children(".c_link"));
         
         console.log(dt.rows('.toggle-selected').data());
 
