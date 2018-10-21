@@ -96,13 +96,13 @@ function cmGetCampaignData($pdo, $user_id) {
 		$result[$i]['status'],
 		$budget,
 		$result[$i]['targeting_type'],
-		$impressionsArray[$i],
-		$clicksArray[$i],
-		$ctrArray[$i],
-		$adSpendArray[$i],
-		$avgCpcArray[$i],
-		$unitsSoldArray[$i],
-		$salesArray[$i],
+		$impressionsArray,
+		$clicksArray,
+		$ctrArray,
+		$adSpendArray,
+		$avgCpcArray,
+		$unitsSoldArray,
+		$salesArray,
 		$singleAcos
 	);			  
 				  
