@@ -53,7 +53,7 @@ table.dataTable td {
   font-weight: 400;
 }
 
-div.toggle.btn {
+div.toggle-group label.btn {
   line-height: 2em !important;
 }
 
