@@ -330,11 +330,8 @@ $(document).ready( function () {
     dt.draw();
   });
 
-
-
-}); //document.ready
-
-  $(function() {
+	
+  function() {
 
     var start = moment().subtract(59, 'days');
     var end = moment();
@@ -360,7 +357,7 @@ $(document).ready( function () {
     }, cb);
 	
 	$('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-  });
+  };
   
   function cmUpdate(startIndex, endIndex) {
 	  var dateArr = <?= json_encode($dateArr) ?>;  
@@ -377,7 +374,17 @@ $(document).ready( function () {
 	  var salesSum = 0;
 	  
 	  for (i = startArr; i <= endArr; i++) {
-		  
+		  impressionsSum += campaignData[5][i];
+		  clicksSum += campaignData[6][i];
+		  ctrSum += campaignData[7][i];
+		  adSpendSum += campaignData[8][i];
+		  avgCpcSum += campaignData[9][i];
+		  unitsSoldSum += campaignData[10][i];
+		  salesSum += campaignData[11][i];
 	  }
+	  
+	  
   };
+
+}); //document.ready
 </script>
