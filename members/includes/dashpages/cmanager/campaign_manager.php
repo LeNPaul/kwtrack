@@ -103,6 +103,10 @@ $(document).ready( function () {
       }
 
       $(".toggle").on("click", function() {
+        $(this).toggleClass('toggle-selected');
+        
+        console.log(dt.rows('.toggle-selected').data());
+
         if ($(this).hasClass("off")) {
           console.log('turning toggle on');
         } else {
@@ -118,6 +122,7 @@ $(document).ready( function () {
           
           success: function() {
             alert("campaign has been toggled");
+            $(this).toggleClass('toggle-selected');
           },
           error: function() {
           
@@ -295,7 +300,7 @@ $(document).ready( function () {
       $(this).css('background-color', '#fdfdfe');
     }
 
-    console.log( dt.rows('.selected').data() );
+    //console.log( dt.rows('.selected').data() );
 	  //alert("clicked");
   });
 
