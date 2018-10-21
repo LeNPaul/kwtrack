@@ -126,8 +126,8 @@ $(document).ready( function () {
           url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
           data: { toggle: toggleActive, campaignName: campaignName, cDataBack: databack, user_id: user_id },
           
-          success: function() {
-            alert("campaign has been toggled");
+          success: function(data) {
+            console.log(data);
             $(this).toggleClass('toggle-selected');
           },
           error: function() {
