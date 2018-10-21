@@ -76,7 +76,7 @@ $(document).ready( function () {
 		    { title: "Status"},
         { title: "Campaign Name"},
 		    { title: "Status" },
-        { title: "Budget", "orderDataType": "dom-text-numeric"},
+        { title: "Budget", "orderDataType": "dom-text"},
         { title: "Targeting Type" },
         { title: "Impressions" },
         { title: "Clicks" },
