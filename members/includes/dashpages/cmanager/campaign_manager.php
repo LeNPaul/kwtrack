@@ -4,9 +4,10 @@
  *    Allows users to edit and change all their campaigns in PPCOLOGY.
  */
 
- include './includes/dashpages/cmanager/cm_helper.inc.php';
+include './includes/dashpages/cmanager/cm_helper.inc.php';
 
 $user_id = $_SESSION['user_id'];
+
 // Check to see if user has any campaign groups
 $sql = "SELECT * FROM cgroups WHERE user_id={$user_id}";
 $stmt = $pdo->query($sql);
@@ -33,8 +34,8 @@ $campaignDataBack  = $result[1];
 
 <h2 class="text-center">Campaign Manager</h2>
 <div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
-	<i class="fa fa-calendar"></i>
-	<span></span> <i class="fa fa-caret-down"></i>
+  <i class="fa fa-calendar"></i>
+  <span></span> <i class="fa fa-caret-down"></i>
 </div><br>
 
 <nav aria-label="breadcrumb" role="navigation">
@@ -55,11 +56,10 @@ $campaignDataBack  = $result[1];
 
 <script>
 $(document).ready( function () {
-
-  var dataset = <?= json_encode($campaignDataFront) ?>;
+  var dataset  = <?= json_encode($campaignDataFront) ?>;
   var databack = <?= json_encode($campaignDataBack) ?>;
-  var user_id = <?= $user_id ?>;
-  console.log(user_id);
+  var user_id  = <?= $user_id ?>;
+
   var dt = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
@@ -121,7 +121,7 @@ $(document).ready( function () {
         $.ajax({
           type: "POST",
           url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
-          data: { toggle: toggleActive, campaignName: campaignName, cDataBack: databack },
+          data: { toggle: toggleActive, campaignName: campaignName, cDataBack: databack, user_id: user_id },
           
           success: function() {
             alert("campaign has been toggled");
