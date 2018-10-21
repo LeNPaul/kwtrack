@@ -96,7 +96,18 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
-      $('.toggle-campaign, .toggle-campaign-archive').bootstrapToggle();
+      // Handle and style toggle buttons
+      $('.toggle-campaign').bootstrapToggle({
+        on: "Enabled",
+        off: "Paused",
+        size: "large",
+        onstyle: "success",
+        offstyle: "primary"
+      });
+      $(".toggle-campaign-archive").bootstrapToggle({
+        off: "Archived",
+        size: "mini"
+      });
       
       rowClasses = $('#campaign_manager tbody tr').attr("class");
 
@@ -127,7 +138,6 @@ $(document).ready( function () {
           data: { toggle: toggleActive, campaignName: campaignName, cDataBack: databack, user_id: user_id },
           
           success: function(alertText) {
-            
             swal({
               title: "Success!",
               text: alertText,
