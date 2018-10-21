@@ -162,7 +162,7 @@ $(document).ready( function () {
       $(".btn-edit-budget").on("click", function() {
         var budgetVal = $(this).parent().prev().val();
         // Verify input to check if numeric
-        if (!budgetVal.isNumeric()) {
+        if (!$.isNumeric(budgetVal)) {
           $(this).parent().prev().popover({
             html: true,
             title: "Invalid Budget Value",
