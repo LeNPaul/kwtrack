@@ -332,7 +332,7 @@ $(document).ready( function () {
   /* Create an array with the values of all the input boxes in a column. Used for sorting. */
   $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col ) {
     return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
-      return parseFloat($('input', td).attr('placeholder'));
+      return $('input', td).attr('placeholder') * 1;
     } );
   }
 
