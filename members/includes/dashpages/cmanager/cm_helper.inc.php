@@ -78,9 +78,11 @@ function cmGetCampaignData($pdo, $user_id) {
                     <span class="input-group-text">$</span>
                   </div>
                   
-                  <input type="text" class="form-control edit-budget" placeholder=" ' . $result[$i]['daily_budget'] . '">
+                  <input type="text" class="form-control " placeholder=" ' . $result[$i]['daily_budget'] . '">
                   
-                  
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
+                  </div>
                 </div>';
 
     $output[] = array(
