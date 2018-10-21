@@ -105,7 +105,6 @@ $(document).ready( function () {
       $(".toggle").on("click", function() {
         $(this).toggleClass('toggle-selected');
         console.log(dt.rows('.toggle-selected').data()[1]);
-        $(this).toggleClass('toggle-selected');
 
         if ($(this).hasClass("off")) {
           console.log('turning toggle on');
@@ -127,6 +126,9 @@ $(document).ready( function () {
           
           }
         });
+
+        $(this).toggleClass('toggle-selected');
+
       });
 
       $(".c_link").on("click", function() {
