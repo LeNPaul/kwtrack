@@ -24,6 +24,7 @@ $campaignDataBack  = $result[1];
 	<i class="fa fa-calendar"></i>
 	<span></span> <i class="fa fa-caret-down"></i>
 </div><br>
+
 <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><h6 id="bc">All Campaigns</h6></li>
