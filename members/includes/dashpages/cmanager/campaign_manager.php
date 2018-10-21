@@ -362,7 +362,7 @@ $(document).ready( function () {
   }, cb);
 
   $('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-});
+  
 
 //TODO: take sums above and make into data table rows, insert them, and then redraw the tables
 function cmUpdate(startIndex, endIndex) {
@@ -382,6 +382,8 @@ function cmUpdate(startIndex, endIndex) {
   for (i = startArr; i <= endArr; i++) {
 
   }
+
+}
 
 }); //document.ready
 
