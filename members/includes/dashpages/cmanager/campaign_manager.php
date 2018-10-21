@@ -57,7 +57,7 @@ $campaignDataBack  = $result[1];
 $(document).ready( function () {
 
   var dataset = <?= json_encode($campaignDataFront) ?>;
-  databack = <?= json_encode($campaignDataBack) ?>;
+  var databack = <?= json_encode($campaignDataBack) ?>;
   console.log(databack);
   console.log(dataset)
   var dt = $('#campaign_manager').DataTable(
