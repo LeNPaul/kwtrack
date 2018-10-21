@@ -89,7 +89,6 @@ function cmGetCampaignData($pdo, $user_id) {
                     <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
                   </div>*/
 
-	$singleAcos = ($salesArray[$i] == 0) ? "0" : round(($adSpendArray[$i] / $salesArray[$i]) * 100, 2) . '%';
 	$rawData[] = array(
 		cmCheckboxState($result[$i]['status']),
 		$campaignLink,
@@ -103,7 +102,6 @@ function cmGetCampaignData($pdo, $user_id) {
 		$avgCpcArray,
 		$unitsSoldArray,
 		$salesArray,
-		$singleAcos
 	);			  
 				  
     $output[] = array(
