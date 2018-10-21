@@ -257,7 +257,13 @@ $(document).ready( function () {
           }); //ajax
         }); //on campaign name click
       
-        
+        $(".toggle").on("click", function() {
+          if ($(this).hasClass("off")) {
+            console.log('turning toggle on');
+          } else {
+            console.log('turning toggle off');
+          }
+        });
 	  } //drawCallback
 	}); //DataTable
 
