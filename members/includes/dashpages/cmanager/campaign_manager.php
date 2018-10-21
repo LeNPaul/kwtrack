@@ -137,8 +137,8 @@ $(document).ready( function () {
           console.log(campaignDataBack);
           dt.destroy();
 
-          $("#bc").text(function(index, currentText){
-            return currentText + " > " + campaignName;
+          $("#bc").text(function(index, currentText) {
+            return currentText + " / " + campaignName;
           });
 
           $.ajax({
