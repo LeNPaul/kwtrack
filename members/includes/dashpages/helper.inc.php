@@ -198,7 +198,21 @@ function getReport($client, $reportId) {
   *     --> Array $dataset  - Associative array with all keyword data
   *     --> String $metric  - metric to update in the database
   */
-  function insertKeywords($pdo, $dataset, $metric) {
+  function insertKeywords($pdo, $impressions, $clicks, $ctr, $ad_spend, $avg_cpc, $units_sold, $sales) {
+    $sql = "UPDATE ppc_keywords SET impressions=:impressions, clicks=:clicks, ad_spend=:ad_spend, avg_cpc=:avg_cpc, units_sold=:units_sold, sales=:sales WHERE amz_kw_id=:kw_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+        ':impressions' => serialize($impressions),
+        ':clicks' => serialize($clicks),
+		':ctr' => serialize($ctr),
+		':ad_spend' => serialize($ad_spend),
+		':avg_cpc' => serialize($avg_cpc),
+		':units_sold' => serialize($units_sold),
+		':sales' => serialize($sales)
+    ));
+  }
+  
+  /*function insertKeywords($pdo, $dataset, $metric) {
     $sql = "UPDATE ppc_keywords SET {$metric}=:value WHERE amz_kw_id=:kw_id";
     $stmt = $pdo->prepare($sql);
     foreach ($dataset as $key => $value) {
@@ -207,9 +221,7 @@ function getReport($client, $reportId) {
         ':kw_id' => $key
       ));
     }
-  }
-
- /*
+  }*/
 
  /*
       ██   ██ ███████ ██    ██ ██     ██  ██████  ██████  ██████  ███████
@@ -444,13 +456,13 @@ function getReport($client, $reportId) {
     }
 
     // Insert all this shit into the database
-    insertKeywords($pdo, $impressions, 'impressions');
-    insertKeywords($pdo, $clicks, 'clicks');
-    insertKeywords($pdo, $ctr, 'ctr');
-    insertKeywords($pdo, $adSpend, 'ad_spend');
-    insertKeywords($pdo, $avgCpc, 'avg_cpc');
-    insertKeywords($pdo, $unitsSold, 'units_sold');
-    insertKeywords($pdo, $sales, 'sales');
+    insertKeywords($pdo, $impressions, 'impressions', 'clicks', 'ctr', 'ad_spend', 'avg_cpc', 'units_sold', 'sales');
+    //insertKeywords($pdo, $clicks, 'clicks');
+    //insertKeywords($pdo, $ctr, 'ctr');
+    //insertKeywords($pdo, $adSpend, 'ad_spend');
+    //insertKeywords($pdo, $avgCpc, 'avg_cpc');
+    //insertKeywords($pdo, $unitsSold, 'units_sold');
+    //insertKeywords($pdo, $sales, 'sales');
 
     /*
     // Grab array of keywords by their keyword ID
