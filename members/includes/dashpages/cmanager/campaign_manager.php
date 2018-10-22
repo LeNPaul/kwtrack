@@ -170,7 +170,7 @@ $(document).ready( function () {
       });
       $('.input-group input.form-control').keypress(function (e) {
         var key = e.which;
-        console.log($(this).next("button"));
+        console.log($(this).next().children("button"));
         if (key == 13) {
           $(this).next("button").click();
           return false;
