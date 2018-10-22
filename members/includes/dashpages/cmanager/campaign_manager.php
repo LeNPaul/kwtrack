@@ -52,9 +52,11 @@ $dateArr = array_reverse($dateArr);
 
 <script>
 $(document).ready( function () {
-  var dataset  = <?= json_encode($campaignDataFront) ?>;
-  var databack = <?= json_encode($campaignDataBack) ?>;
-  var user_id  = <?= $user_id ?>;
+  var dataset       = <?= json_encode($campaignDataFront) ?>;
+  var databack      = <?= json_encode($campaignDataBack) ?>;
+  var user_id       = <?= $user_id ?>;
+  var refresh_token = <?= $_SESSION['refresh_token'] ?>;
+  var profileId     = <?= $_SESSION['profileId'] ?>;
 
   var dt = $('#campaign_manager').DataTable(
     {
@@ -168,15 +170,14 @@ $(document).ready( function () {
           $(this).parent().prev().val('');
         } else {
           campaignName = $(this).parent().parent().parent().prev().prev().children(".c_link").text();
-          console.log(campaignName);
-          /*$.ajax({
+          $.ajax({
             type: "POST",
             url: "includes/dashpages/cmanager/helpers/change_budget.php",
-            data: {user_id: user_id, },
+            data: {user_id: user_id, campaignName: campaignName, cDataBack: databack, refresh_token: refresh_token, profileId: profileId},
             success: function() {
             
             }
-          });*/
+          });
         }
       });
       

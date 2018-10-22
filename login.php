@@ -29,6 +29,8 @@ if (!empty($_POST['login'])) {
       $_SESSION['last_name'] = $user['last_name'];
       $_SESSION['active'] = $user['active'];
       $_SESSION['user_id'] = $user['user_id'];
+      $_SESSION['refresh_token'] = $user['refresh_token'];
+      $_SESSION['profileId'] = $user['profileId'];
 
       // This is how we'll know the user is logged in
       $_SESSION['logged_in'] = true;
