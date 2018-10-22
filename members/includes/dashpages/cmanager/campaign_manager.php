@@ -163,7 +163,9 @@ $(document).ready( function () {
         var budgetVal = $(this).parent().prev().val();
         // Verify input to check if numeric
         if (!$.isNumeric(budgetVal)) {
+          // Error and clear textbox if not numeric
           showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
+          $(this).parent().prev().val('');
         } else {
           campaignName = $(this).parent().parent().parent().prev().prev().children();
           console.log(campaignName);
