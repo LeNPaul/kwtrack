@@ -55,7 +55,7 @@ $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
   var databack      = <?= json_encode($campaignDataBack) ?>;
   var user_id       = <?= $user_id ?>;
-  var refresh_token = <?= $_SESSION['refresh_token'] ?>;
+  var refresh_token = <?= $_SESSION['refresh_token'] ?>.toString();
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
   var dt = $('#campaign_manager').DataTable(
