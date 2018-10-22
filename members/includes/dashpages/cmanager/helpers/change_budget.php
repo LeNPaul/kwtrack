@@ -10,7 +10,7 @@ $cDataBack     = $_POST['cDataBack'];
 $campaignId    = $cDataBack[$campaignName];
 $refresh_token = $_POST['refresh_token'];
 $profileId     = $_POST['profileId'];
-$newBudget     = $_POST['budgetVal'];
+$newBudget     = $_POST['newBudget'];
 $newBudget     = round($newBudget, 2);
 
 $config = array(

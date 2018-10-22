@@ -172,7 +172,7 @@ $(document).ready( function () {
       $(".btn-edit-budget").on("click", function() {
         var budgetVal = $(this).parent().prev().val();
         // Verify input to check if numeric
-        if (!$.isNumeric(budgetVal)) {
+        if (!$.isNumeric(budgetVal) || budgetVal < 1) {
           // Error and clear textbox if not numeric
           showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
           $(this).parent().prev().val('');
