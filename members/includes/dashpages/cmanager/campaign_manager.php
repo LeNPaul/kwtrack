@@ -192,7 +192,7 @@ $(document).ready( function () {
 
             success: function(alertText) {
               swal({
-                html: true,
+                html: alertText,
                 title: "Success!",
                 text: alertText,
                 type: "success",
