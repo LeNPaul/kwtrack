@@ -167,7 +167,7 @@ $(document).ready( function () {
           showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
           $(this).parent().prev().val('');
         } else {
-          campaignName = $(this).parent().parent().parent().prev().prev().children();
+          campaignName = $(this).parent().parent().parent().prev().prev().children(".c_link").text();
           console.log(campaignName);
           /*$.ajax({
             type: "POST",
