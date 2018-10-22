@@ -168,7 +168,14 @@ $(document).ready( function () {
       $(".input-group input.form-control").on("blur", function() {
         $(this).next().children().hide(1000);
       });
-      
+      $('.input-group input.form-control').keypress(function (e) {
+        var key = e.which;
+        if (key == 13) {
+          $(this).next("button").click();
+          return false;
+        }
+      });
+
       $(".btn-edit-budget").on("click", function() {
         var budgetVal = $(this).parent().prev().val();
         // Verify input to check if numeric

@@ -37,5 +37,5 @@ $stmt->execute(array(
   ":cid"       => $campaignId
 ));
 
-echo htmlspecialchars_decode($campaignName) . ' budget changed to <b>$' . $newBudget . ' per day</b>.';
+echo htmlspecialchars_decode($campaignName) . ' budget changed to $' . $newBudget . ' per day.';
 ?>
