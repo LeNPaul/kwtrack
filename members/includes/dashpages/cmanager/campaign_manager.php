@@ -172,8 +172,7 @@ $(document).ready( function () {
         var key = e.which;
         
         if (key == 13) {
-          console.log($(this).next().children("button"));
-          $(this).next("button").click();
+          $(this).next().children("button").click();
           return false;
         }
       });
