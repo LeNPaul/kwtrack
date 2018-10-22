@@ -132,7 +132,14 @@ $(document).ready( function () {
         $.ajax({
           type: "POST",
           url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
-          data: { toggle: toggleActive, campaignName: campaignName, cDataBack: databack, user_id: user_id },
+          data: {
+            toggle: toggleActive,
+            campaignName: campaignName,
+            cDataBack: databack,
+            user_id: user_id,
+            refresh_token: refresh_token,
+            profileId: profileId
+          },
           
           success: function(alertText) {
             swal({
@@ -174,9 +181,22 @@ $(document).ready( function () {
           $.ajax({
             type: "POST",
             url: "includes/dashpages/cmanager/helpers/change_budget.php",
-            data: {user_id: user_id, campaignName: campaignName, cDataBack: databack, refresh_token: refresh_token, profileId: profileId},
-            success: function() {
-            
+            data: {
+              user_id: user_id,
+              campaignName: campaignName,
+              cDataBack: databack,
+              refresh_token: refresh_token,
+              profileId: profileId,
+              newBudget: budgetVal
+            },
+
+            success: function(alertText) {
+              swal({
+                title: "Success!",
+                text: alertText,
+                type: "success",
+                confirmButtonText: "Close"
+              });
             }
           });
         }

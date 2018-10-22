@@ -9,14 +9,8 @@ $toggle           = $_POST['toggle'];
 $campaignName     = htmlspecialchars($_POST['campaignName']);
 $campaignDataBack = $_POST['cDataBack'];
 $campaignId       = $campaignDataBack[$campaignName];
-
-$stmt = $pdo->prepare("SELECT refresh_token, profileId FROM users WHERE user_id=?");
-$stmt->bindParam(1, $user_id);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$refresh_token = $result[0]['refresh_token'];
-$profileId     = $result[0]['profileId'];
+$refresh_token    = $_POST['refresh_token'];
+$profileId        = $_POST['profileId'];
 
 $config = array(
   "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
