@@ -139,7 +139,6 @@ $(document).ready( function () {
               confirmButtonText: "Close"
             });
             $(this).toggleClass('toggle-selected');
-            dt.draw();
           },
           error: function() {
             swal({
@@ -166,7 +165,7 @@ $(document).ready( function () {
         if (!$.isNumeric(budgetVal)) {
           showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
         } else {
-          campaignName = $(this).parent().parent().parent().prev().prev().children().val();
+          campaignName = $(this).parent().parent().parent().prev().prev().children();
           console.log(campaignName);
           /*$.ajax({
             type: "POST",
