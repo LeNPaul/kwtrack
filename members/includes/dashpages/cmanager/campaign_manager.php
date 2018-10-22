@@ -7,6 +7,7 @@
 include './includes/dashpages/cmanager/cm_helper.inc.php';
 
 $user_id = $_SESSION['user_id'];
+$refresh_token = (string)$_SESSION['refresh_token'];
 
 // Check to see if user has any campaign groups
 $sql = "SELECT * FROM cgroups WHERE user_id={$user_id}";
@@ -55,7 +56,7 @@ $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
   var databack      = <?= json_encode($campaignDataBack) ?>;
   var user_id       = <?= $user_id ?>;
-  var refresh_token = <?= $_SESSION['refresh_token'] ?>.toString();
+  var refresh_token = <?= $refresh_token ?>;
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
   var dt = $('#campaign_manager').DataTable(
