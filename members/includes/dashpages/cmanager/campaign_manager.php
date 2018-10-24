@@ -462,37 +462,62 @@ function cmUpdate(startIndex, endIndex) {
   var newCampaignData = [];
   var dateArr = <?= json_encode($dateArr) ?>;
   var campaignData = <?= json_encode($rawCampaignData) ?>;
+  
+  var round = function(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+  };
+  
+  console.log(campaignData);
 
-  startArr = dateArr.indexOf(startIndex);
-  endArr = dateArr.indexOf(endIndex);
+  var startArr   = dateArr.indexOf(startIndex);
+  var endArr     = dateArr.indexOf(endIndex);
+  var diffOfDays = endArr - startArr;
+  
   var impressionsSum = 0;
-  var clicksSum = 0;
-  var ctrSum = 0;
-  var adSpendSum = 0;
-  var avgCpcSum = 0;
-  var unitsSoldSum = 0;
-  var salesSum = 0;
+  var clicksSum      = 0;
+  var ctrAvg         = 0;
+  var adSpendSum     = 0;
+  var avgCpcSumAvg   = 0;
+  var unitsSoldSum   = 0;
+  var salesSum       = 0;
   
   for (j = 0; j < campaignData.length; j++) {
 	  
-	for (i = startArr; i <= endArr; i++) {
-		impressionsSum += campaignData[j][5][i];
-		clicksSum += campaignData[j][6][i];
-		ctrSum += campaignData[j][7][i];
-		adSpendSum += campaignData[j][8][i];
-		avgCpcSum += campaignData[j][9][i];
-		unitsSoldSum += campaignData[j][10][i];
-		salesSum += campaignData[j][11][i];
-	}
-	
-	newCampaignData.push([campaignData[j][0], campaignData[j][1], campaignData[j][2], campaignData[j][3], campaignData[j][4], impressionsSum, clicksSum, ctrSum, adSpendSum, avgCpcSum, unitsSoldSum, salesSum]);
-  impressionsSum = 0;
-	clicksSum = 0;
-	ctrSum = 0;
-	adSpendSum = 0;
-	avgCpcSum = 0;
-	unitsSoldSum = 0;
-	salesSum = 0;
+    for (i = startArr; i <= endArr; i++) {
+      impressionsSum += campaignData[j][5][i];
+      clicksSum      += campaignData[j][6][i];
+      ctrAvg         += campaignData[j][7][i];
+      adSpendSum     += campaignData[j][8][i];
+      avgCpcSumAvg   += campaignData[j][9][i];
+      unitsSoldSum   += campaignData[j][10][i];
+      salesSum       += campaignData[j][11][i];
+    }
+    
+    var acos = round((adSpendSum / salesSum) * 100, 2);
+    ctrAvg = round(ctrAvg / diffOfDays, 2);
+    avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
+
+    newCampaignData.push([campaignData[j][0],
+      campaignData[j][1],
+      campaignData[j][2],
+      campaignData[j][3],
+      campaignData[j][4],
+      impressionsSum,
+      clicksSum,
+      ctrAvg,
+      adSpendSum,
+      avgCpcSumAvg,
+      unitsSoldSum,
+      salesSum,
+      acos]);
+
+    impressionsSum = 0;
+    clicksSum      = 0;
+    ctrAvg         = 0;
+    adSpendSum     = 0;
+    avgCpcSumAvg   = 0;
+    unitsSoldSum   = 0;
+    salesSum       = 0;
   }
   console.log(newCampaignData);
   //dt.clear().rows.add(newCampaignData).draw();
