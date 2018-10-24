@@ -486,7 +486,7 @@ function cmUpdate(startIndex, endIndex) {
 	}
 	
 	newCampaignData.push([campaignData[j][0], campaignData[j][1], campaignData[j][2], campaignData[j][3], campaignData[j][4], impressionsSum, clicksSum, ctrSum, adSpendSum, avgCpcSum, unitsSoldSum, salesSum]);
-  	impressionsSum = 0;
+  impressionsSum = 0;
 	clicksSum = 0;
 	ctrSum = 0;
 	adSpendSum = 0;
@@ -494,7 +494,8 @@ function cmUpdate(startIndex, endIndex) {
 	unitsSoldSum = 0;
 	salesSum = 0;
   }
-  dt.clear().rows.add(newCampaignData).draw();
+  console.log(newCampaignData);
+  //dt.clear().rows.add(newCampaignData).draw();
 }
 
 }); //document.ready
