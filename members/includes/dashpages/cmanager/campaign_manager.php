@@ -456,7 +456,7 @@ $(document).ready( function () {
 
 //TODO: take sums above and make into data table rows, insert them, and then redraw the tables
 function cmUpdate(startIndex, endIndex) {
-	var newCampaignData = [];
+  var newCampaignData = [];
   var dateArr = <?= json_encode($dateArr) ?>;
   var campaignData = <?= json_encode($rawCampaignData) ?>;
 
@@ -471,6 +471,7 @@ function cmUpdate(startIndex, endIndex) {
   var salesSum = 0;
   
   for (j = 0; j < campaignData.length; j++) {
+	  
 	for (i = startArr; i <= endArr; i++) {
 		impressionsSum += campaignData[j][5][i];
 		clicksSum += campaignData[j][6][i];
@@ -480,7 +481,18 @@ function cmUpdate(startIndex, endIndex) {
 		unitsSoldSum += campaignData[j][10][i];
 		salesSum += campaignData[j][11][i];
 	}
+	
+	newCampaignData.push([campaignData[j][0], campaignData[j][1], campaignData[j][2], campaignData[j][3], campaignData[j][4], impressionsSum, clicksSum, ctrSum, adSpendSum, avgCpcSum, unitsSoldSum, salesSum]);
+  	impressionsSum = 0;
+	clicksSum = 0;
+	ctrSum = 0;
+	adSpendSum = 0;
+	avgCpcSum = 0;
+	unitsSoldSum = 0;
+	salesSum = 0;
   }
+  
+  return newCampaignData;
 }
 
 }); //document.ready
