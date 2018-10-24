@@ -485,6 +485,7 @@ function cmUpdate(startIndex, endIndex) {
 	  
     for (i = startArr; i <= endArr; i++) {
       impressionsSum += campaignData[j][5][i];
+      console.log(campaignData[j][5][i]);
       clicksSum      += campaignData[j][6][i];
       ctrAvg         += campaignData[j][7][i];
       adSpendSum     += campaignData[j][8][i];
@@ -492,8 +493,6 @@ function cmUpdate(startIndex, endIndex) {
       unitsSoldSum   += campaignData[j][10][i];
       salesSum       += campaignData[j][11][i];
     }
-    
-    console.log(impressionsSum, clicksSum);
     
     var acos = round((adSpendSum / salesSum) * 100, 2);
     ctrAvg = round(ctrAvg / diffOfDays, 2);
