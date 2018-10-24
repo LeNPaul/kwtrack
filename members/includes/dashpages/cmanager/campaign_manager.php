@@ -492,7 +492,6 @@ function cmUpdate(startIndex, endIndex) {
 	salesSum = 0;
   }
   
-  return newCampaignData;
 }
 
 }); //document.ready
