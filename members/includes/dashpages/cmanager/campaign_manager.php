@@ -472,6 +472,7 @@ function cmUpdate(startIndex, endIndex) {
   var startArr   = dateArr.indexOf(startIndex);
   var endArr     = dateArr.indexOf(endIndex);
   var diffOfDays = endArr - startArr;
+  console.log(startArr, endArr);
   
   var impressionsSum = 0;
   var clicksSum      = 0;
