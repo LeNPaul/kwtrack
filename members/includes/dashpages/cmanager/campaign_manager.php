@@ -222,7 +222,7 @@ $(document).ready( function () {
           
           // Handle breadcrumbs
           $("#bc").text(function(index, currentText) {
-            return currentText + " / " + campaignName;
+            return currentText + " <b>/</b> " + campaignName;
           });
 
           $.ajax({
