@@ -435,7 +435,7 @@ $(document).ready( function () {
   var end = moment();
 
   function cb(begin, finish) {
-    //cmUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
+    cmUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
     $('#campaignRange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
   }
 
