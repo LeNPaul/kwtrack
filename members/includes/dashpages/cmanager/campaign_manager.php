@@ -456,6 +456,7 @@ $(document).ready( function () {
 
 //TODO: take sums above and make into data table rows, insert them, and then redraw the tables
 function cmUpdate(startIndex, endIndex) {
+	var newCampaignData = [];
   var dateArr = <?= json_encode($dateArr) ?>;
   var campaignData = <?= json_encode($rawCampaignData) ?>;
 
@@ -468,11 +469,18 @@ function cmUpdate(startIndex, endIndex) {
   var avgCpcSum = 0;
   var unitsSoldSum = 0;
   var salesSum = 0;
-
-  for (i = startArr; i <= endArr; i++) {
-
+  
+  for (j = 0; j < campaignData.length; j++) {
+	for (i = startArr; i <= endArr; i++) {
+		impressionsSum += campaignData[j][5][i];
+		clicksSum += campaignData[j][6][i];
+		ctrSum += campaignData[j][7][i];
+		adSpendSum += campaignData[j][8][i];
+		avgCpcSum += campaignData[j][9][i];
+		unitsSoldSum += campaignData[j][10][i];
+		salesSum += campaignData[j][11][i];
+	}
   }
-
 }
 
 }); //document.ready
