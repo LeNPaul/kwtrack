@@ -493,11 +493,14 @@ function cmUpdate(startIndex, endIndex) {
       salesSum       += campaignData[j][11][i];
     }
     
+    console.log(impressionsSum, clicksSum);
+    
     var acos = round((adSpendSum / salesSum) * 100, 2);
     ctrAvg = round(ctrAvg / diffOfDays, 2);
     avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
 
-    newCampaignData.push([campaignData[j][0],
+    newCampaignData.push([
+      campaignData[j][0],
       campaignData[j][1],
       campaignData[j][2],
       campaignData[j][3],
