@@ -494,7 +494,7 @@ function cmUpdate(startIndex, endIndex) {
 	unitsSoldSum = 0;
 	salesSum = 0;
   }
-  
+  dt.draw();
 }
 
 }); //document.ready
