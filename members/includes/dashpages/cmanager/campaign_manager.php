@@ -52,6 +52,9 @@ $dateArr = array_reverse($dateArr);
 </div>
 
 <script>
+//0 for campaign, 1 for adgroup(need campaign), 2 for keyword(need adgroup maybe)
+var dataTableFlag = 0;
+
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
   var databack      = <?= json_encode($campaignDataBack) ?>;
