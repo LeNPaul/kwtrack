@@ -99,20 +99,20 @@ function cmGetCampaignData($pdo, $user_id) {
                     <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
                   </div>*/
 
-	$rawCampaignData[] = array(
-		cmCheckboxState($result[$i]['status']),
-		$campaignLink,
-		$result[$i]['status'],
-		$budget,
-		$result[$i]['targeting_type'],
-		$impressionsArray,
-		$clicksArray,
-		$ctrArray,
-		$adSpendArray,
-		$avgCpcArray,
-		$unitsSoldArray,
-		$salesArray,
-	);			  
+    $rawCampaignData[] = array(
+      cmCheckboxState($result[$i]['status']),
+      $campaignLink,
+      $result[$i]['status'],
+      $budget,
+      $result[$i]['targeting_type'],
+      $impressionsArray,
+      $clicksArray,
+      $ctrArray,
+      $adSpendArray,
+      $avgCpcArray,
+      $unitsSoldArray,
+      $salesArray,
+    );
 				  
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
