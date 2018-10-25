@@ -497,6 +497,8 @@ function cmUpdate(startIndex, endIndex) {
     
     console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
     var acos     = (salesSum === 0) ? 0.00 : round((adSpendSum / salesSum) * 100, 2);
+    adSpendSum   = round(adSpendSum, 2);
+    salesSum     = round(salesSum, 2);
     ctrAvg       = round(ctrAvg / diffOfDays, 2);
     avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
 
@@ -524,7 +526,7 @@ function cmUpdate(startIndex, endIndex) {
     salesSum       = 0;
   }
   console.log(newCampaignData);
-  //dt.clear().rows.add(newCampaignData).draw();
+  dt.clear().rows.add(newCampaignData).draw();
 }
 
 }); //document.ready
