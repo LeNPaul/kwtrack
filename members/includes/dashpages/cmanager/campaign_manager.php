@@ -393,6 +393,8 @@ $(document).ready( function () {
   	//breadcrumbs ALL CAMPAIGNS click
 	$(".all_link").on("click", function() {
 		dt.destroy();
+		dt_adgroups.destroy();
+		dt_keywords.destroy();
 		$('#campaign_manager').empty();
 		dt = redraw;
 		//dt.clear().rows.add(dataset).draw();
