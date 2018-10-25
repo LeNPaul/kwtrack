@@ -492,7 +492,7 @@ function cmUpdate(startIndex, endIndex) {
       avgCpcSumAvg   += campaignData[j][9][i];
       unitsSoldSum   += campaignData[j][10][i];
       salesSum       += campaignData[j][11][i];
-      console.log('campaign #' + j + ' - impressions: ' + campaignData[j][11][i] + ' for day #' + i);
+      console.log('campaign #' + j + ' - sales: ' + campaignData[j][11][i] + ' for day #' + i);
     }
     
     console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
