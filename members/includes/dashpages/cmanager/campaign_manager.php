@@ -219,6 +219,10 @@ $(document).ready( function () {
         }
       });
       
+	  //breadcrumbs ALL CAMPAIGNS click
+	  $(".all_link").on("click", function() {
+		  dt.clear().rows.add(dataset).draw();
+	  });
 
       $(".c_link").on("click", function() {
           currentCampaign     = $(this).html();
@@ -551,8 +555,7 @@ $(document).ready( function () {
         salesSum       = 0;
       }
       console.log(newDtData);
-	  dt.draw();
-      //dt.clear().rows.add(newDtData).draw();
+      dt.clear().rows.add(newDtData).draw();
       
     }
     // If the adgroup table is being drawn
