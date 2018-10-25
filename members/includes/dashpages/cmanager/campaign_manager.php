@@ -509,12 +509,12 @@ function cmUpdate(startIndex, endIndex) {
       campaignData[j][4],
       impressionsSum,
       clicksSum,
-      ctrAvg,
-      adSpendSum,
-      avgCpcSumAvg,
+      ctrAvg + '%',
+      '$' + adSpendSum,
+      '$' + avgCpcSumAvg,
       unitsSoldSum,
-      salesSum,
-      acos]);
+      '$' + salesSum,
+      acos + '%']);
 
     impressionsSum = 0;
     clicksSum      = 0;
