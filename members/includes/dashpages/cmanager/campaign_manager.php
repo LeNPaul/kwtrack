@@ -56,8 +56,7 @@ for ($j = 1; $j < 60; $j++) {
 var dataTableFlag = 1;
 var currentCampaign = "";
 var adGroupName = "";
-var allCampaigns = document.getElementById("bc");
-console.log(allCampaigns);
+var allCampaigns = "<li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="name all_link">All Campaigns</a></h6></li>";
 
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
@@ -229,7 +228,7 @@ $(document).ready( function () {
           
           // Handle breadcrumbs
           $("#bc").html(function(index, currentText) {
-            return currentText + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>";
+            return currentText + " <b>></b> " + currentCampaign;
           });
 
           $.ajax({
@@ -297,7 +296,7 @@ $(document).ready( function () {
                     // Breadcrumb text. Edit later to include links that go back.
                     $("#bc").html(function(index, currentText){
 						          console.log(currentText);
-                      return currentText + "<b>></b> <a href=\"javascript:void(0)\" class=\"name ag_link\">" + adgroupName + "</a>";
+                      return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + "<b>></b>" + adgroupName;
                     });
 
                     $.ajax({
