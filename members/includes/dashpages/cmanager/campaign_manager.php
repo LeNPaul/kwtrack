@@ -282,7 +282,7 @@ $(document).ready( function () {
                     dt_adgroups.destroy();
 
                     // Breadcrumb text. Edit later to include links that go back.
-                    $("#bc").text(function(index, currentText){
+                    $("#bc").html(function(index, currentText){
                       return currentText + " <b>></b> <a href=\"javascript:void(0)\" class=\"name ag_link\">" + adgroupName + "</a>";
                     });
 
