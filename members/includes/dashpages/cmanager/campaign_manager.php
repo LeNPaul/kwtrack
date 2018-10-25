@@ -218,12 +218,6 @@ $(document).ready( function () {
           });
         }
       });
-      
-	  //breadcrumbs ALL CAMPAIGNS click
-	  $(".all_link").on("click", function() {
-		  dt.clear().rows.add(dataset).draw();
-		  console.log("all campaigns clicked");
-	  });
 
       $(".c_link").on("click", function() {
           currentCampaign     = $(this).html();
@@ -394,7 +388,11 @@ $(document).ready( function () {
 	  } //drawCallback
 	}); //DataTable
 
-  
+  	//breadcrumbs ALL CAMPAIGNS click
+	$(".all_link").on("click", function() {
+		dt.clear().rows.add(dataset).draw();
+		console.log("all campaigns clicked");
+	});
   
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
