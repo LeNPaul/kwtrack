@@ -65,7 +65,7 @@ $(document).ready( function () {
   var refresh_token = "<?= $refresh_token ?>";
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
-  var redraw = $('#campaign_manager').DataTable(
+  var dt = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
       // responsive: true,
@@ -387,8 +387,6 @@ $(document).ready( function () {
         }); //on campaign name click
 	  } //drawCallback
 	}); //DataTable
-
-	var dt = redraw;
 	
   	//breadcrumbs ALL CAMPAIGNS click
 	$(".all_link").on("click", function() {
