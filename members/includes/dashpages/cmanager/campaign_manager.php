@@ -395,11 +395,11 @@ $(document).ready( function () {
 			dt.clear().rows.add(dataset).draw();
 		} else if (dataTableFlag === 2) {
 			dt_adgroups.destroy();
-			$('#campaign_manager').empty();
+			$('#adgroup_manager').empty();
 			dt.draw();
 		} else if (dataTableFlag === 3) {
 			dt_keywords.destroy();
-			$('#campaign_manager').empty();
+			$('#keyword_manager').empty();
 			dt.draw();
 		}
 		//dt.clear().rows.add(dataset).draw();
