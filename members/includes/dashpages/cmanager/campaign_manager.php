@@ -473,17 +473,155 @@ $(document).ready( function () {
 
   //TODO: figure out how to import adgroup data from datatable when dataTableFlag == 2
   function cmUpdate(startIndex, endIndex) {
+    
+    var round   = function (value, decimals) {
+      return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+    };
+    
     var dateArr = <?= json_encode($dateArr) ?>;
   
     if (dataTableFlag === 1) {
-      
       var newDtData = [];
       var dtData    = <?= json_encode($rawCampaignData) ?>;
-    
+
+      var startArr   = dateArr.indexOf(startIndex);
+      var endArr     = dateArr.indexOf(endIndex);
+      var diffOfDays = startArr - endArr + 1;
+      console.log('start Arr: ' + startArr, 'end Arr: ' + endArr);
+
+      var impressionsSum = 0;
+      var clicksSum      = 0;
+      var ctrAvg         = 0;
+      var adSpendSum     = 0;
+      var avgCpcSumAvg   = 0;
+      var unitsSoldSum   = 0;
+      var salesSum       = 0;
+
+      for (j = 0; j < dtData.length; j++) {
+
+        for (i = endArr; i <= startArr; i++) {
+          impressionsSum += dtData[j][5][i];
+          clicksSum      += dtData[j][6][i];
+          ctrAvg         += dtData[j][7][i];
+          adSpendSum     += dtData[j][8][i];
+          avgCpcSumAvg   += dtData[j][9][i];
+          unitsSoldSum   += dtData[j][10][i];
+          salesSum       += dtData[j][11][i];
+          console.log('campaign #' + j + ' - sales: ' + dtData[j][11][i] + ' for day #' + i);
+        }
+
+        console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
+        var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
+        adSpendSum   = round(adSpendSum, 2);
+        salesSum     = round(salesSum, 2);
+        ctrAvg       = round(ctrAvg / diffOfDays, 2);
+        avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
+
+        impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
+        clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
+        ctrAvg         = (ctrAvg === 0) ? '-' : ctrAvg + '%';
+        adSpendSum     = (adSpendSum === 0) ? '-' : '$' + adSpendSum;
+        avgCpcSumAvg   = (avgCpcSumAvg === 0) ? '-' : '$' + avgCpcSumAvg;
+        unitsSoldSum   = (unitsSoldSum === 0) ? '-' : unitsSoldSum;
+        salesSum       = (salesSum === 0) ? '-' : '$' + salesSum;
+
+        newDtData.push([
+          dtData[j][0],
+          dtData[j][1],
+          dtData[j][2],
+          dtData[j][3],
+          dtData[j][4],
+          impressionsSum,
+          clicksSum,
+          ctrAvg,
+          adSpendSum,
+          avgCpcSumAvg,
+          unitsSoldSum,
+          salesSum,
+          acos]);
+
+        impressionsSum = 0;
+        clicksSum      = 0;
+        ctrAvg         = 0;
+        adSpendSum     = 0;
+        avgCpcSumAvg   = 0;
+        unitsSoldSum   = 0;
+        salesSum       = 0;
+      }
+      console.log(newDtData);
+      dt.clear().rows.add(newDtData).draw();
+      
     } else if (dataTableFlag === 2) {
       
       var newAdgroupData = [];
-      var adgroupData    = '';
+      var adgroupData    = window.rawAdgroupData;
+
+      var startArr   = dateArr.indexOf(startIndex);
+      var endArr     = dateArr.indexOf(endIndex);
+      var diffOfDays = startArr - endArr + 1;
+      console.log('start Arr: ' + startArr, 'end Arr: ' + endArr);
+
+      var impressionsSum = 0;
+      var clicksSum      = 0;
+      var ctrAvg         = 0;
+      var adSpendSum     = 0;
+      var avgCpcSumAvg   = 0;
+      var unitsSoldSum   = 0;
+      var salesSum       = 0;
+
+      for (j = 0; j < dtData.length; j++) {
+
+        for (i = endArr; i <= startArr; i++) {
+          impressionsSum += dtData[j][5][i];
+          clicksSum      += dtData[j][6][i];
+          ctrAvg         += dtData[j][7][i];
+          adSpendSum     += dtData[j][8][i];
+          avgCpcSumAvg   += dtData[j][9][i];
+          unitsSoldSum   += dtData[j][10][i];
+          salesSum       += dtData[j][11][i];
+          console.log('campaign #' + j + ' - sales: ' + dtData[j][11][i] + ' for day #' + i);
+        }
+
+        console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
+        var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
+        adSpendSum   = round(adSpendSum, 2);
+        salesSum     = round(salesSum, 2);
+        ctrAvg       = round(ctrAvg / diffOfDays, 2);
+        avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
+
+        impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
+        clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
+        ctrAvg         = (ctrAvg === 0) ? '-' : ctrAvg + '%';
+        adSpendSum     = (adSpendSum === 0) ? '-' : '$' + adSpendSum;
+        avgCpcSumAvg   = (avgCpcSumAvg === 0) ? '-' : '$' + avgCpcSumAvg;
+        unitsSoldSum   = (unitsSoldSum === 0) ? '-' : unitsSoldSum;
+        salesSum       = (salesSum === 0) ? '-' : '$' + salesSum;
+
+        newDtData.push([
+          dtData[j][0],
+          dtData[j][1],
+          dtData[j][2],
+          dtData[j][3],
+          dtData[j][4],
+          impressionsSum,
+          clicksSum,
+          ctrAvg,
+          adSpendSum,
+          avgCpcSumAvg,
+          unitsSoldSum,
+          salesSum,
+          acos]);
+
+        impressionsSum = 0;
+        clicksSum      = 0;
+        ctrAvg         = 0;
+        adSpendSum     = 0;
+        avgCpcSumAvg   = 0;
+        unitsSoldSum   = 0;
+        salesSum       = 0;
+      }
+      console.log(newDtData);
+      dt.clear().rows.add(newDtData).draw();
     
     } else if (dataTableFlag === 3) {
       
@@ -491,86 +629,9 @@ $(document).ready( function () {
       var keywordData    = '';
       
     }
+
     
-    var round = function(value, decimals) {
-      return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-    };
     
-    console.log(dtData);
-  
-    var startArr   = dateArr.indexOf(startIndex);
-    var endArr     = dateArr.indexOf(endIndex);
-    var diffOfDays = startArr - endArr + 1;
-    console.log('start Arr: ' + startArr, 'end Arr: ' + endArr);
-    
-    var impressionsSum = 0;
-    var clicksSum      = 0;
-    var ctrAvg         = 0;
-    var adSpendSum     = 0;
-    var avgCpcSumAvg   = 0;
-    var unitsSoldSum   = 0;
-    var salesSum       = 0;
-    
-    for (j = 0; j < dtData.length; j++) {
-      
-      for (i = endArr; i <= startArr; i++) {
-        impressionsSum += dtData[j][5][i];
-        clicksSum      += dtData[j][6][i];
-        ctrAvg         += dtData[j][7][i];
-        adSpendSum     += dtData[j][8][i];
-        avgCpcSumAvg   += dtData[j][9][i];
-        unitsSoldSum   += dtData[j][10][i];
-        salesSum       += dtData[j][11][i];
-        console.log('campaign #' + j + ' - sales: ' + dtData[j][11][i] + ' for day #' + i);
-      }
-      
-      console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
-      var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
-      adSpendSum   = round(adSpendSum, 2);
-      salesSum     = round(salesSum, 2);
-      ctrAvg       = round(ctrAvg / diffOfDays, 2);
-      avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
-  
-      impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
-      clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
-      ctrAvg         = (ctrAvg === 0) ? '-' : ctrAvg + '%';
-      adSpendSum     = (adSpendSum === 0) ? '-' : '$' + adSpendSum;
-      avgCpcSumAvg   = (avgCpcSumAvg === 0) ? '-' : '$' + avgCpcSumAvg;
-      unitsSoldSum   = (unitsSoldSum === 0) ? '-' : unitsSoldSum;
-      salesSum       = (salesSum === 0) ? '-' : '$' + salesSum;
-      
-      newDtData.push([
-        dtData[j][0],
-        dtData[j][1],
-        dtData[j][2],
-        dtData[j][3],
-        dtData[j][4],
-        impressionsSum,
-        clicksSum,
-        ctrAvg,
-        adSpendSum,
-        avgCpcSumAvg,
-        unitsSoldSum,
-        salesSum,
-        acos]);
-  
-      impressionsSum = 0;
-      clicksSum      = 0;
-      ctrAvg         = 0;
-      adSpendSum     = 0;
-      avgCpcSumAvg   = 0;
-      unitsSoldSum   = 0;
-      salesSum       = 0;
-    }
-    console.log(newDtData);
-    
-    if (dataTableFlag === 1) {
-      dt.clear().rows.add(newDtData).draw();
-    } else if (dataTableFlag === 2) {
-      dt_adgroups.clear().rows.add(newDtData).draw();
-    } else if (dataTableFlag === 3) {
-      dt_keywords.clear().rows.add(newDtData).draw();
-    }
   }
 
 }); //document.ready
