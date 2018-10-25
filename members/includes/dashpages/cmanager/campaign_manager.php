@@ -392,9 +392,13 @@ $(document).ready( function () {
 	
   	//breadcrumbs ALL CAMPAIGNS click
 	$(".all_link").on("click", function() {
-		dt.destroy();
-		dt_adgroups.destroy();
-		dt_keywords.destroy();
+		if (dataTableFlag === 1) {
+			dt.destroy();
+		} else if (dataTableFlag === 2) {
+			dt_adgroups.destroy();
+		} else if {dataTableFlag === 3) {
+			dt_keywords.destroy();
+		}
 		$('#campaign_manager').empty();
 		dt = redraw;
 		//dt.clear().rows.add(dataset).draw();
