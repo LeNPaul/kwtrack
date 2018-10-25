@@ -486,13 +486,13 @@ function cmUpdate(startIndex, endIndex) {
 	  
     for (i = endArr; i <= startArr; i++) {
       impressionsSum += campaignData[j][5][i];
-      console.log('campaign #' + j + ' - impressions: ' + campaignData[j][5][i] + ' for day #' + i);
       clicksSum      += campaignData[j][6][i];
       ctrAvg         += campaignData[j][7][i];
       adSpendSum     += campaignData[j][8][i];
       avgCpcSumAvg   += campaignData[j][9][i];
       unitsSoldSum   += campaignData[j][10][i];
       salesSum       += campaignData[j][11][i];
+      console.log('campaign #' + j + ' - impressions: ' + campaignData[j][11][i] + ' for day #' + i);
     }
     
     console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
