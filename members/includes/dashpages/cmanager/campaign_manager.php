@@ -234,7 +234,7 @@ $(document).ready( function () {
             type: "POST",
 
             data: {
-              "campaignName"     : caurrentCampaign,
+              "campaignName"     : currentCampaign,
               "campaignDataBack" : campaignDataBack
             },
             dataType: "text",
