@@ -593,7 +593,7 @@ $(document).ready( function () {
         var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
         adSpendSum   = round(adSpendSum, 2);
         salesSum     = round(salesSum, 2);
-        ctrAvg       = round(ctrAvg / diffOfDays, 2);
+        ctrAvg       = round(ctrAvg / diffOfDays, 2);s
         avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
 
         impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
