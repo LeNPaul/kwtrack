@@ -25,7 +25,7 @@ $dateArr[] = date("M d");
 for ($j = 1; $j < 60; $j++) {
 	$dateArr[] = date("M d", strtotime("-".$j." days"));
 }
-$dateArr = array_reverse($dateArr);
+// $dateArr = array_reverse($dateArr);
 
 ?>
 
@@ -472,7 +472,7 @@ function cmUpdate(startIndex, endIndex) {
   var startArr   = dateArr.indexOf(startIndex);
   var endArr     = dateArr.indexOf(endIndex);
   var diffOfDays = endArr - startArr + 1;
-  console.log(startArr, endArr);
+  console.log('start Arr: ' + startArr, 'end Arr: ' + endArr);
   
   var impressionsSum = 0;
   var clicksSum      = 0;
@@ -493,9 +493,9 @@ function cmUpdate(startIndex, endIndex) {
       unitsSoldSum   += campaignData[j][10][i];
       salesSum       += campaignData[j][11][i];
     }
-    
-    var acos = round((adSpendSum / salesSum) * 100, 2);
-    ctrAvg = round(ctrAvg / diffOfDays, 2);
+
+    var acos     = round((adSpendSum / salesSum) * 100, 2);
+    ctrAvg       = round(ctrAvg / diffOfDays, 2);
     avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
 
     newCampaignData.push([
