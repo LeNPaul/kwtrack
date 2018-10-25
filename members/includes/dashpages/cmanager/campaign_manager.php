@@ -221,9 +221,8 @@ $(document).ready( function () {
           dt.destroy();
           
           // Handle breadcrumbs
-		  console.log($("#bc").html());
-          $("#bc").text(function(index, currentText) {
-            return currentText + " / " + campaignName;
+          $("#bc").html(function(index, currentText) {
+            return currentText + " <b>/</b> " + campaignName;
           });
 
           $.ajax({
