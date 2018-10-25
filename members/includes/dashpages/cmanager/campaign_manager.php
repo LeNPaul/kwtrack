@@ -551,7 +551,8 @@ $(document).ready( function () {
         salesSum       = 0;
       }
       console.log(newDtData);
-      dt.clear().rows.add(newDtData).draw();
+	  dt.clear().draw();
+      //dt.clear().rows.add(newDtData).draw();
       
     }
     // If the adgroup table is being drawn
