@@ -551,7 +551,7 @@ $(document).ready( function () {
         salesSum       = 0;
       }
       console.log(newDtData);
-	  dt.clear().draw();
+	  dt.draw();
       //dt.clear().rows.add(newDtData).draw();
       
     }
