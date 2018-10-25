@@ -238,7 +238,6 @@ $(document).ready( function () {
 
             success: function(data){
               console.log('running...');
-              console.log(data);
               data = JSON.parse(data);
               console.log(data);
 
