@@ -56,7 +56,7 @@ for ($j = 1; $j < 60; $j++) {
 var dataTableFlag = 1;
 var currentCampaign = "";
 var adGroupName = "";
-var allCampaigns = "<li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="name all_link">All Campaigns</a></h6></li>";
+var allCampaigns = "<li class=\"breadcrumb-item\"><h6 id=\"bc\"><a href=\"javascript:void(0)\" class=\"name all_link\">All Campaigns</a></h6></li>";
 
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
