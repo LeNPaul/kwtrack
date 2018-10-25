@@ -221,7 +221,7 @@ $(document).ready( function () {
           dt.destroy();
           
           // Handle breadcrumbs
-		  console.log($("#bc").text());
+		  console.log($("#bc").html());
           $("#bc").text(function(index, currentText) {
             return currentText + " / " + campaignName;
           });
