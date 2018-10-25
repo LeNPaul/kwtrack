@@ -585,7 +585,7 @@ $(document).ready( function () {
           avgCpcSumAvg   += adgroupData[j][8][i];
           unitsSoldSum   += adgroupData[j][9][i];
           salesSum       += adgroupData[j][10][i];
-          console.log('campaign #' + j + ' - sales: ' + adgroupData[j][10][i] + ' for day #' + i);
+          console.log('adgroup #' + j + ' - sales: ' + adgroupData[j][10][i] + ' for day #' + i);
         }
 
         console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
