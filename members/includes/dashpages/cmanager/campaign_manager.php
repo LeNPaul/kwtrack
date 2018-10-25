@@ -65,7 +65,7 @@ $(document).ready( function () {
   var refresh_token = "<?= $refresh_token ?>";
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
-  var redraw  = $('#campaign_manager').DataTable(
+  var dt  = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
       // responsive: true,
@@ -101,6 +101,13 @@ $(document).ready( function () {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
       dataTableFlag = 1;
       
+	    	//breadcrumbs ALL CAMPAIGNS click
+	$(".all_link").on("click", function() {
+		dt.hide();
+		//dt.clear().rows.add(dataset).draw();
+		console.log("all campaigns clicked");
+	});
+	  
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
         on: '<i class="fa fa-play"></i>',
@@ -283,6 +290,13 @@ $(document).ready( function () {
                   // Set dataTableFlag to 2 whenever campaign manager is drawn
                   dataTableFlag = 2;
                   
+				    //breadcrumbs ALL CAMPAIGNS click
+					$(".all_link").on("click", function() {
+						dt_adgroups.destroy();
+						dt.draw()
+						console.log("all campaigns clicked");
+					});
+					
                   $('td input').bootstrapToggle();
 
                   $(".ag_link").on("click", function() {
@@ -387,24 +401,6 @@ $(document).ready( function () {
         }); //on campaign name click
 	  } //drawCallback
 	}); //DataTable
-	
-	var dt = redraw;
-  	//breadcrumbs ALL CAMPAIGNS click
-	$(".all_link").on("click", function() {
-		if (dataTableFlag === 1) {
-			dt.clear().rows.add(dataset).draw();
-		} else if (dataTableFlag === 2) {
-			dt_adgroups.destroy();
-			$('#adgroup_manager').empty();
-			dt.draw();
-		} else if (dataTableFlag === 3) {
-			dt_keywords.destroy();
-			$('#keyword_manager').empty();
-			dt.draw();
-		}
-		//dt.clear().rows.add(dataset).draw();
-		console.log("all campaigns clicked");
-	});
   
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
