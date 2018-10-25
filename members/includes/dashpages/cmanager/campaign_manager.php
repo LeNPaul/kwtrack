@@ -578,13 +578,13 @@ $(document).ready( function () {
       for (j = 0; j < adgroupData.length; j++) {
 
         for (i = endArr; i <= startArr; i++) {
-          impressionsSum += adgroupData[j][5][i];
-          clicksSum      += adgroupData[j][6][i];
-          ctrAvg         += adgroupData[j][7][i];
-          adSpendSum     += adgroupData[j][8][i];
-          avgCpcSumAvg   += adgroupData[j][9][i];
-          unitsSoldSum   += adgroupData[j][10][i];
-          salesSum       += adgroupData[j][11][i];
+          impressionsSum += adgroupData[j][4][i];
+          clicksSum      += adgroupData[j][5][i];
+          ctrAvg         += adgroupData[j][6][i];
+          adSpendSum     += adgroupData[j][7][i];
+          avgCpcSumAvg   += adgroupData[j][8][i];
+          unitsSoldSum   += adgroupData[j][9][i];
+          salesSum       += adgroupData[j][10][i];
           console.log('campaign #' + j + ' - sales: ' + adgroupData[j][11][i] + ' for day #' + i);
         }
 
