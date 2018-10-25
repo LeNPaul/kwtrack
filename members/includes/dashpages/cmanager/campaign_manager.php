@@ -37,7 +37,7 @@ for ($j = 1; $j < 60; $j++) {
 
 <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><h6 id="bc">All Campaigns</h6></li>
+    <li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="name all_link">All Campaigns</a></h6></li>
   </ol>
 </nav>
 
