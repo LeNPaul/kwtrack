@@ -37,7 +37,7 @@ for ($j = 1; $j < 60; $j++) {
 
 <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><h6 id="bc">All Campaigns</h6></li>
+    <li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="name all_link">All Campaigns</a></h6></li>
   </ol>
 </nav>
 
@@ -215,14 +215,14 @@ $(document).ready( function () {
       
 
       $(".c_link").on("click", function() {
-          var campaignName     = $(this).text();
+          var campaignName     = $(this).html();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           console.log(campaignDataBack);
           dt.destroy();
           
           // Handle breadcrumbs
-          $("#bc").text(function(index, currentText) {
-            return currentText + " / " + campaignName;
+          $("#bc").html(function(index, currentText) {
+            return currentText + " <b>/</b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + campaignName + "</a>";
           });
 
           $.ajax({
