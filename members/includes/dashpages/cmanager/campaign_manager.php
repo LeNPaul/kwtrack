@@ -480,7 +480,8 @@ $(document).ready( function () {
     };
     
     var dateArr = <?= json_encode($dateArr) ?>;
-  
+    
+    // If the campaign table is currently drawn
     if (dataTableFlag === 1) {
       var newDtData = [];
       var dtData    = <?= json_encode($rawCampaignData) ?>;
@@ -552,7 +553,9 @@ $(document).ready( function () {
       console.log(newDtData);
       dt.clear().rows.add(newDtData).draw();
       
-    } else if (dataTableFlag === 2) {
+    }
+    // If the adgroup table is being drawn
+    else if (dataTableFlag === 2) {
       
       var newAdgroupData = [];
       var adgroupData    = window.rawAdgroupData;
@@ -570,20 +573,21 @@ $(document).ready( function () {
       var unitsSoldSum   = 0;
       var salesSum       = 0;
 
-      for (j = 0; j < dtData.length; j++) {
+      for (j = 0; j < adgroupData.length; j++) {
 
         for (i = endArr; i <= startArr; i++) {
-          impressionsSum += dtData[j][5][i];
-          clicksSum      += dtData[j][6][i];
-          ctrAvg         += dtData[j][7][i];
-          adSpendSum     += dtData[j][8][i];
-          avgCpcSumAvg   += dtData[j][9][i];
-          unitsSoldSum   += dtData[j][10][i];
-          salesSum       += dtData[j][11][i];
-          console.log('campaign #' + j + ' - sales: ' + dtData[j][11][i] + ' for day #' + i);
+          impressionsSum += adgroupData[j][5][i];
+          clicksSum      += adgroupData[j][6][i];
+          ctrAvg         += adgroupData[j][7][i];
+          adSpendSum     += adgroupData[j][8][i];
+          avgCpcSumAvg   += adgroupData[j][9][i];
+          unitsSoldSum   += adgroupData[j][10][i];
+          salesSum       += adgroupData[j][11][i];
+          console.log('campaign #' + j + ' - sales: ' + adgroupData[j][11][i] + ' for day #' + i);
         }
 
         console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
+        
         var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
         adSpendSum   = round(adSpendSum, 2);
         salesSum     = round(salesSum, 2);
@@ -598,12 +602,11 @@ $(document).ready( function () {
         unitsSoldSum   = (unitsSoldSum === 0) ? '-' : unitsSoldSum;
         salesSum       = (salesSum === 0) ? '-' : '$' + salesSum;
 
-        newDtData.push([
-          dtData[j][0],
-          dtData[j][1],
-          dtData[j][2],
-          dtData[j][3],
-          dtData[j][4],
+        newAdgroupData.push([
+          adgroupData[j][0],
+          adgroupData[j][1],
+          adgroupData[j][2],
+          adgroupData[j][3],
           impressionsSum,
           clicksSum,
           ctrAvg,
@@ -621,10 +624,13 @@ $(document).ready( function () {
         unitsSoldSum   = 0;
         salesSum       = 0;
       }
-      console.log(newDtData);
-      dt.clear().rows.add(newDtData).draw();
+      
+      console.log(newAdgroupData);
+      dt_adgroups.clear().rows.add(newAdgroupData).draw();
     
-    } else if (dataTableFlag === 3) {
+    }
+    // If the keyword table is currently drawn
+    else if (dataTableFlag === 3) {
       
       var newKeywordData = [];
       var keywordData    = '';
