@@ -471,7 +471,7 @@ function cmUpdate(startIndex, endIndex) {
 
   var startArr   = dateArr.indexOf(startIndex);
   var endArr     = dateArr.indexOf(endIndex);
-  var diffOfDays = endArr - startArr;
+  var diffOfDays = endArr - startArr + 1;
   console.log(startArr, endArr);
   
   var impressionsSum = 0;
@@ -486,7 +486,6 @@ function cmUpdate(startIndex, endIndex) {
 	  
     for (i = startArr; i <= endArr; i++) {
       impressionsSum += campaignData[j][5][i];
-      console.log(campaignData[j][5][i]);
       clicksSum      += campaignData[j][6][i];
       ctrAvg         += campaignData[j][7][i];
       adSpendSum     += campaignData[j][8][i];
