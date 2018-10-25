@@ -482,7 +482,7 @@ function cmUpdate(startIndex, endIndex) {
   var unitsSoldSum   = 0;
   var salesSum       = 0;
   
-  for (j = 0; j < campaiagnData.length; j++) {
+  for (j = 0; j < campaignData.length; j++) {
 	  
     for (i = endArr; i <= startArr; i++) {
       impressionsSum += campaignData[j][5][i];
