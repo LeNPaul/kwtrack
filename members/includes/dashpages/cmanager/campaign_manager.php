@@ -390,7 +390,12 @@ $(document).ready( function () {
 
   	//breadcrumbs ALL CAMPAIGNS click
 	$(".all_link").on("click", function() {
-		dt.clear().rows.add(dataset).draw();
+		dt.destroy();
+		$('#campaign_manager').empty();
+		dt = $('#campaign_manager').DataTable( {
+			data: dataset
+		});
+		//dt.clear().rows.add(dataset).draw();
 		console.log("all campaigns clicked");
 	});
   
