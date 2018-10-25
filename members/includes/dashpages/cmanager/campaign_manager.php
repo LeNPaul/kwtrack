@@ -559,6 +559,8 @@ $(document).ready( function () {
       
       var newAdgroupData = [];
       var adgroupData    = window.rawAdgroupData;
+      
+      console.log(adgroupData);
 
       var startArr   = dateArr.indexOf(startIndex);
       var endArr     = dateArr.indexOf(endIndex);
