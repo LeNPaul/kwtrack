@@ -229,7 +229,7 @@ $(document).ready( function () {
           currentCampaign     = $(this).html();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           console.log(campaignDataBack);
-          dt.destroy();
+          dt.clear();
           
           // Handle breadcrumbs
           $("#bc").html(function(index, currentText) {
