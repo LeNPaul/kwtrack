@@ -215,7 +215,7 @@ $(document).ready( function () {
       
 
       $(".c_link").on("click", function() {
-          var campaignName     = $(this).text();
+          var campaignName     = $(this).html();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           console.log(campaignDataBack);
           dt.destroy();
