@@ -495,7 +495,7 @@ function cmUpdate(startIndex, endIndex) {
     }
     
     console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
-    var acos     = (salesSum === 0) ? 0.00 : round((adSpendSum / salesSum) * 100, 2);
+    var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
     adSpendSum   = round(adSpendSum, 2);
     salesSum     = round(salesSum, 2);
     ctrAvg       = round(ctrAvg / diffOfDays, 2);
