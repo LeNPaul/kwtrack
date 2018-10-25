@@ -296,7 +296,7 @@ $(document).ready( function () {
                     // Breadcrumb text. Edit later to include links that go back.
                     $("#bc").html(function(index, currentText){
 						          console.log(currentText);
-                      return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + "<b>></b>" + adgroupName;
+                      return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>></b> " + adgroupName;
                     });
 
                     $.ajax({
