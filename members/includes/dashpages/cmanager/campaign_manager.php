@@ -56,7 +56,7 @@ for ($j = 1; $j < 60; $j++) {
 var dataTableFlag = 1;
 var currentCampaign = "";
 var adGroupName = "";
-var allCampaigns = $(this).html();
+var allCampaigns = document.getElementByID("bc");
 console.log(allCampaigns);
 
 $(document).ready( function () {
