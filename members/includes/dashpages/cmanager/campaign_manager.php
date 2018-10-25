@@ -284,7 +284,7 @@ $(document).ready( function () {
 
                     // Breadcrumb text. Edit later to include links that go back.
                     $("#bc").text(function(index, currentText){
-                      return currentText + " > " + adgroupName;
+                      return currentText + " > <a href=\"javascript:void(0)\" class=\"name all_link\">" + adgroupName + "</a>";
                     });
 
                     $.ajax({
