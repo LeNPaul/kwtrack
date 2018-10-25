@@ -52,8 +52,8 @@ for ($j = 1; $j < 60; $j++) {
 </div>
 
 <script>
-//0 for campaign, 1 for adgroup(need campaign), 2 for keyword(need adgroup maybe)
-var dataTableFlag = 0;
+// 1 for campaign, 2 for adgroup(need campaign), 3 for keyword(need adgroup maybe)
+var dataTableFlag = 1;
 
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
@@ -95,6 +95,9 @@ $(document).ready( function () {
       ],
 
 	  drawCallback: function(settings) {
+      // Set dataTableFlag to 1 whenever campaign manager is drawn
+      dataTableFlag = 1;
+      
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
         on: '<i class="fa fa-play"></i>',
@@ -273,6 +276,9 @@ $(document).ready( function () {
                 ],
 
                 drawCallback: function(settings) {
+                  // Set dataTableFlag to 2 whenever campaign manager is drawn
+                  dataTableFlag = 2;
+                  
                   $('td input').bootstrapToggle();
 
                   $(".ag_link").on("click", function() {
@@ -339,6 +345,9 @@ $(document).ready( function () {
                           ],
 
                           drawCallback: function(settings) {
+                            // Set dataTableFlag to 1 whenever campaign manager is drawn
+                            dataTableFlag = 3;
+                            
                             $('td input').bootstrapToggle();
 
                           } // drawCallback (keyword manager)
@@ -458,9 +467,9 @@ $(document).ready( function () {
 
 //TODO: take sums above and make into data table rows, insert them, and then redraw the tables
 function cmUpdate(startIndex, endIndex) {
+  var dateArr         = <?= json_encode($dateArr) ?>;
   var newCampaignData = [];
-  var dateArr = <?= json_encode($dateArr) ?>;
-  var campaignData = <?= json_encode($rawCampaignData) ?>;
+  var campaignData    = <?= json_encode($rawCampaignData) ?>;
   
   var round = function(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
@@ -470,7 +479,7 @@ function cmUpdate(startIndex, endIndex) {
 
   var startArr   = dateArr.indexOf(startIndex);
   var endArr     = dateArr.indexOf(endIndex);
-  var diffOfDays = endArr - startArr + 1;
+  var diffOfDays = startArr - endArr + 1;
   console.log('start Arr: ' + startArr, 'end Arr: ' + endArr);
   
   var impressionsSum = 0;
@@ -533,9 +542,17 @@ function cmUpdate(startIndex, endIndex) {
     salesSum       = 0;
   }
   console.log(newCampaignData);
-  dt.clear().rows.add(newCampaignData).draw();
+  
+  if (dataTableFlag === 1) {
+    dt.clear().rows.add(newCampaignData).draw();
+  } else if (dataTableFlag === 2) {
+    dt_adgroups.clear().rows.add(newCampaignData).draw();
+  } else if (dataTableFlag === 3) {
+    dt_keywords.clear().rows.add(newCampaignData).draw();
+  }
 }
 
 }); //document.ready
 
 </script>
+
