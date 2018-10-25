@@ -247,7 +247,8 @@ $(document).ready( function () {
               var dataset         = data[0];
               var adgroupDataBack = data[1];
               var rawAdgroupData  = data[2];
-
+              window.rawAdgroupData = rawAdgroupData;
+  
               console.log('DATASET: ');
               console.log(dataset);
               //console.log(adgroupDataBack);
@@ -257,9 +258,9 @@ $(document).ready( function () {
                 paging: true,
                 pagingType: "full_numbers",
                 lengthMenu: [
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "All"]
-                  ],
+                  [10, 25, 50, 100, -1],
+                  [10, 25, 50, 100, "All"]
+                ],
                 data: dataset,
                 columns: [
                   { title: "Active" },
@@ -284,7 +285,7 @@ $(document).ready( function () {
 
                   $(".ag_link").on("click", function() {
 
-                    var adgroupName     = $(this).text();
+                    var adgroupName = $(this).text();
                     // backend adgroup data already stored in adgroupDataBack
                     dt_adgroups.destroy();
 
@@ -486,8 +487,6 @@ $(document).ready( function () {
       var keywordData    = '';
       
     }
-    
-    
     
     var round = function(value, decimals) {
       return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
