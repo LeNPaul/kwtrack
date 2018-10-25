@@ -39,12 +39,12 @@ function cmCheckboxState($status) {
  *		--> Array $rawData	 - Unsummed campaign data to be used by date range picker for custom ranges
  */
 function cmGetCampaignData($pdo, $user_id) {
-  $output = [];
-  $campaigns = [];
+  $output          = [];
+  $campaigns       = [];
   $rawCampaignData = [];
-  $sql = "SELECT * FROM campaigns WHERE user_id={$user_id}";
-  $stmt = $pdo->query($sql);
-  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $sql             = "SELECT * FROM campaigns WHERE user_id={$user_id}";
+  $stmt            = $pdo->query($sql);
+  $result          = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   for ($i = 0; $i < count($result); $i++) {
 
@@ -55,14 +55,14 @@ function cmGetCampaignData($pdo, $user_id) {
   	} else {
   		$active = 2;
   	}
-
-	$adSpendArray = unserialize($result[$i]['ad_spend']);
-	$salesArray = unserialize($result[$i]['sales']);
-	$impressionsArray = unserialize($result[$i]['impressions']);
-	$clicksArray = unserialize($result[$i]['clicks']);
-	$ctrArray = unserialize($result[$i]['ctr']);
-	$avgCpcArray = unserialize($result[$i]['avg_cpc']);
-	$unitsSoldArray = unserialize($result[$i]['units_sold']);
+  
+    $adSpendArray     = unserialize($result[$i]['ad_spend']);
+    $salesArray       = unserialize($result[$i]['sales']);
+    $impressionsArray = unserialize($result[$i]['impressions']);
+    $clicksArray      = unserialize($result[$i]['clicks']);
+    $ctrArray         = unserialize($result[$i]['ctr']);
+    $avgCpcArray      = unserialize($result[$i]['avg_cpc']);
+    $unitsSoldArray   = unserialize($result[$i]['units_sold']);
 	
     $ad_spend    = array_sum($adSpendArray);
     $sales       = array_sum($salesArray);
@@ -111,7 +111,7 @@ function cmGetCampaignData($pdo, $user_id) {
       $adSpendArray,
       $avgCpcArray,
       $unitsSoldArray,
-      $salesArray,
+      $salesArray
     );
 				  
     $output[] = array(
@@ -146,20 +146,30 @@ function cmGetCampaignData($pdo, $user_id) {
  */
 
 function cmGetAdGroupData($pdo, $campaignId) {
-  $output   = [];
-  $adgroups = [];
-  $sql = "SELECT * FROM ad_groups WHERE amz_campaign_id={$campaignId}";
-  $stmt = $pdo->query($sql);
-  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $output         = [];
+  $adgroups       = [];
+  $rawAdgroupData = [];
+  $sql            = "SELECT * FROM ad_groups WHERE amz_campaign_id={$campaignId}";
+  $stmt           = $pdo->query($sql);
+  $result         = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   for ($i = 0; $i < count($result); $i++) {
-    $ad_spend    = array_sum(unserialize($result[$i]['ad_spend']));
-    $sales       = array_sum(unserialize($result[$i]['sales']));
-    $impressions = array_sum(unserialize($result[$i]['impressions']));
-    $clicks      = array_sum(unserialize($result[$i]['clicks']));
-    $ctr         = round(calculateMetricAvg(unserialize($result[$i]['ctr'])), 2);
-    $avg_cpc     = round(calculateMetricAvg(unserialize($result[$i]['avg_cpc'])), 2);
-    $units_sold  = array_sum(unserialize($result[$i]['units_sold']));
+  
+    $adSpendArray     = unserialize($result[$i]['ad_spend']);
+    $salesArray       = unserialize($result[$i]['sales']);
+    $impressionsArray = unserialize($result[$i]['impressions']);
+    $clicksArray      = unserialize($result[$i]['clicks']);
+    $ctrArray         = unserialize($result[$i]['ctr']);
+    $avgCpcArray      = unserialize($result[$i]['avg_cpc']);
+    $unitsSoldArray   = unserialize($result[$i]['units_sold']);
+    
+    $ad_spend    = array_sum($adSpendArray);
+    $sales       = array_sum($salesArray);
+    $impressions = array_sum($impressionsArray);
+    $clicks      = array_sum($clicksArray);
+    $ctr         = round(calculateMetricAvg($ctrArray), 2);
+    $avg_cpc     = round(calculateMetricAvg($avgCpcArray), 2);
+    $units_sold  = array_sum($unitsSoldArray);
 
     // Replace any 0's with "-"
     $acos        = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
@@ -172,6 +182,20 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
     $adgroupLink = '<a href="javascript:void(0)" class="name ag_link">' . $result[$i]['ad_group_name'] . '</a>';
+    
+    $rawAdgroupData[] = array(
+      cmCheckboxState($result[$i]['status']),
+      $adgroupLink,
+      $result[$i]['status'],
+      $result[$i]['default_bid'],
+      $impressionsArray,
+      $clicksArray,
+      $ctrArray,
+      $adSpendArray,
+      $avgCpcArray,
+      $unitsSoldArray,
+      $salesArray
+    );
 
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
@@ -187,10 +211,10 @@ function cmGetAdGroupData($pdo, $campaignId) {
       $sales,
       $acos
     );
-
+    
     $adgroups[htmlspecialchars($result[$i]['ad_group_name'])] = $result[$i]['amz_adgroup_id'];
   }
-  return [$output, $adgroups];
+  return [$output, $adgroups, $rawAdgroupData];
 }
 
 /*
