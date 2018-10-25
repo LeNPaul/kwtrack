@@ -37,7 +37,7 @@ for ($j = 1; $j < 60; $j++) {
 
 <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="name all_link">All Campaigns</a></h6></li>
+    <li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="all_link">All Campaigns</a></h6></li>
   </ol>
 </nav>
 
@@ -56,7 +56,7 @@ for ($j = 1; $j < 60; $j++) {
 var dataTableFlag = 1;
 var currentCampaign = "";
 var adGroupName = "";
-var allCampaigns = "<a href=\"javascript:void(0)\" class=\"name all_link\">All Campaigns</a>";
+var allCampaigns = "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
 
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
