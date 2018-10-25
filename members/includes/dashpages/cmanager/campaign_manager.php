@@ -493,7 +493,8 @@ function cmUpdate(startIndex, endIndex) {
       unitsSoldSum   += campaignData[j][10][i];
       salesSum       += campaignData[j][11][i];
     }
-
+    
+    console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
     var acos     = round((adSpendSum / salesSum) * 100, 2);
     ctrAvg       = round(ctrAvg / diffOfDays, 2);
     avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
