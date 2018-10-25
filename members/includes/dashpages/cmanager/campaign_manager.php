@@ -55,6 +55,7 @@ for ($j = 1; $j < 60; $j++) {
 // 1 for campaign, 2 for adgroup(need campaign), 3 for keyword(need adgroup maybe)
 var dataTableFlag = 1;
 var currentCampaign = "";
+var adGroupName = "";
 
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
@@ -285,13 +286,14 @@ $(document).ready( function () {
 
                   $(".ag_link").on("click", function() {
 
-                    var adgroupName     = $(this).text();
+                    adgroupName     = $(this).text();
                     // backend adgroup data already stored in adgroupDataBack
                     dt_adgroups.destroy();
 
                     // Breadcrumb text. Edit later to include links that go back.
                     $("#bc").html(function(index, currentText){
-                      return currentText + " <b>></b> <a href=\"javascript:void(0)\" class=\"name ag_link\">" + adgroupName + "</a>";
+						console.log(currentText);
+                      return currentText <b>></b> <a href=\"javascript:void(0)\" class=\"name ag_link\">" + adgroupName + "</a>";
                     });
 
                     $.ajax({
