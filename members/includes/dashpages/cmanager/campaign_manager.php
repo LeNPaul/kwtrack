@@ -501,6 +501,14 @@ function cmUpdate(startIndex, endIndex) {
     ctrAvg       = round(ctrAvg / diffOfDays, 2);
     avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
 
+    impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
+    clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
+    ctrAvg         = (ctrAvg === 0) ? '-' : ctrAvg + '%';
+    adSpendSum     = (adSpendSum === 0) ? '-' : '$' + adSpendSum;
+    avgCpcSumAvg   = (avgCpcSumAvg === 0) ? '-' : '$' + avgCpcSumAvg;
+    unitsSoldSum   = (unitsSoldSum === 0) ? '-' : unitsSoldSum;
+    salesSum       = (salesSum === 0) ? '-' : '$' + salesSum;
+    
     newCampaignData.push([
       campaignData[j][0],
       campaignData[j][1],
@@ -509,12 +517,12 @@ function cmUpdate(startIndex, endIndex) {
       campaignData[j][4],
       impressionsSum,
       clicksSum,
-      ctrAvg + '%',
-      '$' + adSpendSum,
-      '$' + avgCpcSumAvg,
+      ctrAvg,
+      adSpendSum,
+      avgCpcSumAvg,
       unitsSoldSum,
-      '$' + salesSum,
-      acos + '%']);
+      salesSum,
+      acos]);
 
     impressionsSum = 0;
     clicksSum      = 0;
