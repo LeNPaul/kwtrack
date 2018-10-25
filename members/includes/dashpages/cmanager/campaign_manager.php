@@ -396,7 +396,7 @@ $(document).ready( function () {
 			dt.destroy();
 		} else if (dataTableFlag === 2) {
 			dt_adgroups.destroy();
-		} else if {dataTableFlag === 3) {
+		} else if (dataTableFlag === 3) {
 			dt_keywords.destroy();
 		}
 		$('#campaign_manager').empty();
