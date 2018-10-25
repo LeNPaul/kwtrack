@@ -222,7 +222,7 @@ $(document).ready( function () {
           
           // Handle breadcrumbs
           $("#bc").html(function(index, currentText) {
-            return currentText + " <b>/</b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + campaignName + "</a>";
+            return currentText + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + campaignName + "</a>";
           });
 
           $.ajax({
@@ -284,7 +284,7 @@ $(document).ready( function () {
 
                     // Breadcrumb text. Edit later to include links that go back.
                     $("#bc").text(function(index, currentText){
-                      return currentText + " > <a href=\"javascript:void(0)\" class=\"name all_link\">" + adgroupName + "</a>";
+                      return currentText + " <b>></b> <a href=\"javascript:void(0)\" class=\"name ag_link\">" + adgroupName + "</a>";
                     });
 
                     $.ajax({
