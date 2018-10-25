@@ -54,6 +54,7 @@ for ($j = 1; $j < 60; $j++) {
 <script>
 // 1 for campaign, 2 for adgroup(need campaign), 3 for keyword(need adgroup maybe)
 var dataTableFlag = 1;
+var currentCampaign = "";
 
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
@@ -218,21 +219,21 @@ $(document).ready( function () {
       
 
       $(".c_link").on("click", function() {
-          var campaignName     = $(this).html();
+          currentCampaign     = $(this).html();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           console.log(campaignDataBack);
           dt.destroy();
           
           // Handle breadcrumbs
           $("#bc").html(function(index, currentText) {
-            return currentText + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + campaignName + "</a>";
+            return currentText + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>";
           });
 
           $.ajax({
             type: "POST",
 
             data: {
-              "campaignName"     : campaignName,
+              "campaignName"     : caurrentCampaign,
               "campaignDataBack" : campaignDataBack
             },
             dataType: "text",
