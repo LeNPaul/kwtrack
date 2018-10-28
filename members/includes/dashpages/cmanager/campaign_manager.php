@@ -37,7 +37,7 @@ for ($j = 1; $j < 60; $j++) {
 
 <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="name all_link">All Campaigns</a></h6></li>
+    <li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="all_link">All Campaigns</a></h6></li>
   </ol>
 </nav>
 
@@ -56,7 +56,7 @@ for ($j = 1; $j < 60; $j++) {
 var dataTableFlag = 1;
 var currentCampaign = "";
 var adGroupName = "";
-var allCampaigns = "<a href=\"javascript:void(0)\" class=\"name all_link\">All Campaigns</a>";
+var allCampaigns = "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
 
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
@@ -65,7 +65,7 @@ $(document).ready( function () {
   var refresh_token = "<?= $refresh_token ?>";
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
-  var dt = $('#campaign_manager').DataTable(
+  var dt  = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
       // responsive: true,
@@ -101,6 +101,12 @@ $(document).ready( function () {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
       dataTableFlag = 1;
       
+	    	//breadcrumbs ALL CAMPAIGNS click
+	$(".all_link").on("click", function() {
+		dt.clear().rows.add(dataset).draw();
+		console.log("all campaigns clicked");
+	});
+	  
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
         on: '<i class="fa fa-play"></i>',
@@ -218,7 +224,6 @@ $(document).ready( function () {
           });
         }
       });
-      
 
       $(".c_link").on("click", function() {
           currentCampaign     = $(this).html();
@@ -284,6 +289,13 @@ $(document).ready( function () {
                   // Set dataTableFlag to 2 whenever campaign manager is drawn
                   dataTableFlag = 2;
                   
+				    //breadcrumbs ALL CAMPAIGNS click
+					$(".all_link").on("click", function() {
+						dt_adgroups.destroy();
+						dt.draw()
+						console.log("all campaigns clicked");
+					});
+					
                   $('td input').bootstrapToggle();
 
                   $(".ag_link").on("click", function() {
@@ -388,8 +400,6 @@ $(document).ready( function () {
         }); //on campaign name click
 	  } //drawCallback
 	}); //DataTable
-
-  
   
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
