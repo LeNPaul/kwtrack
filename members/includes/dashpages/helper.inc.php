@@ -393,8 +393,8 @@ function getReport($client, $reportId) {
         $ctr[$kw_id][]         = ($result[$j]['impressions'] == 0) ? 0.0 : round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
         $avgCpc[$kw_id][]      = ($result[$j]['clicks'] == 0) ? 0.0 : round(($result[$j]['clicks'] / $result[$j]['impressions']), 2);
         $adSpend[$kw_id][]     = round($result[$j]['cost'], 2);
-        $unitsSold[$kw_id][]   = $result[$j]['attributedUnitsOrdered1d'];
-        $sales[$kw_id][]       = $result[$j]['attributedSales1d'];
+        $unitsSold[$kw_id][]   = $result[$j]['attributedUnitsOrdered7d'];
+        $sales[$kw_id][]       = $result[$j]['attributedSales7d'];
         /*
         // Removed the 'archived/paused' check for keywords since their states/status
     		// are not provided in the reports. You can only get their CURRENT states and not
