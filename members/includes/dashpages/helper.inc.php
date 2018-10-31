@@ -469,12 +469,6 @@ function getReport($client, $reportId) {
 
     // Insert all this shit into the database
     insertKeywords($pdo, $impressions, $clicks, $ctr, $adSpend, $avgCpc, $unitsSold, $sales);
-    //insertKeywords($pdo, $clicks, 'clicks');
-    //insertKeywords($pdo, $ctr, 'ctr');
-    //insertKeywords($pdo, $adSpend, 'ad_spend');
-    //insertKeywords($pdo, $avgCpc, 'avg_cpc');
-    //insertKeywords($pdo, $unitsSold, 'units_sold');
-    //insertKeywords($pdo, $sales, 'sales');
 
     /*
     // Grab array of keywords by their keyword ID
