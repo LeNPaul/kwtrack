@@ -214,7 +214,7 @@ function getReport($client, $reportId) {
       ));
     }
   }
-  
+
   /*function insertKeywords($pdo, $dataset, $metric) {
     $sql = "UPDATE ppc_keywords SET {$metric}=:value WHERE amz_kw_id=:kw_id";
     $stmt = $pdo->prepare($sql);
@@ -252,7 +252,7 @@ function getReport($client, $reportId) {
     $avgCpc = [];
     $unitsSold = [];
     $sales = [];
-    
+
     // Get keyword snapshot so we can use it to get states and bids later
     $kwSnapshot = $client->requestSnapshot(
       "keywords",
@@ -260,20 +260,20 @@ function getReport($client, $reportId) {
         "campaignType" => "sponsoredProducts"));
     $snapshotId = json_decode($kwSnapshot['response'], true);
     $snapshotId = $snapshotId['snapshotId'];
-  
+
     $kwSnapshot = getSnapshot($client, $snapshotId);
-  
+
     // Get adgroups snapshot so we can use it to get bids later
-  
+
     $adgSnapshot = $client->requestSnapshot(
       "adGroups",
       array("stateFilter"  => "enabled,paused,archived",
         "campaignType" => "sponsoredProducts"));
     $snapshotId = json_decode($adgSnapshot['response'], true);
     $snapshotId = $snapshotId['snapshotId'];
-    
+
     $adgSnapshot = getSnapshot($client, $snapshotId);
-    
+
     // Keep count of days of data gone through. For each iteration of $i,
     // the max number of days of data will always equal $numDays
     $numDays = 1;
@@ -292,7 +292,7 @@ function getReport($client, $reportId) {
           "keywords",
           array("reportDate"    => $date,
                 "campaignType"  => "sponsoredProducts",
-                "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+                "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered7d,attributedSales7d"
           )
         );
 
@@ -314,22 +314,22 @@ function getReport($client, $reportId) {
         $stmt = $pdo->prepare($sql);
 
         for ($x = 0; $x < $numMaxKeywords; $x++) {
-          
+
           $kwIndexInSnapshot = array_search2D($kwSnapshot, 'keywordId', $result[$x]['keywordId']);
-          
+
           // Get status and bid for each keyword
           /*$kw_id = $result[$x]['keywordId'];
           $status = $client->getBiddableKeyword($kw_id);
           $status = json_decode($status['response'], true);*/
           $status = $kwSnapshot[$kwIndexInSnapshot]['state'];
-          
+
           if (array_key_exists('bid', $kwSnapshot[$kwIndexInSnapshot])) {
             $adgBid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
           } else {
             $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
             $adgBid = $adgSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
           }
-          
+
           // Check if bid index exists in the report
           // If it does, set bid to what it is
           // If not, then set it to the ad group's default bid
@@ -365,7 +365,7 @@ function getReport($client, $reportId) {
           "keywords",
           array("reportDate"    => $date,
                 "campaignType"  => "sponsoredProducts",
-                "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+                "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered7d,attributedSales7d"
           )
         );
 
@@ -741,7 +741,7 @@ function multiUnserialize($arr) {
 function calculateMetrics($metricArr, $numDays, $metric) {
   // Algorithm will pop the end of each array $numDays times and append it to the output array
   // After appending to output array, we use array_reduce to calculate the metric needed
-  
+
   $output = array_fill(0, $numDays, 0);
 
   for ($j = 0; $j < count($metricArr); $j++) {
