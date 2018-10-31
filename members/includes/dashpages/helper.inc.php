@@ -199,7 +199,15 @@ function getReport($client, $reportId) {
   *     --> String $metric  - metric to update in the database
   */
   function insertKeywords($pdo, $impressions, $clicks, $ctr, $ad_spend, $avg_cpc, $units_sold, $sales) {
-    $sql = "UPDATE ppc_keywords SET impressions=:impressions, clicks=:clicks, ad_spend=:ad_spend, avg_cpc=:avg_cpc, units_sold=:units_sold, sales=:sales WHERE amz_kw_id=:kw_id";
+    $sql = "UPDATE ppc_keywords SET
+            impressions=:impressions,
+            clicks=:clicks,
+            ctr=:ctr,
+            ad_spend=:ad_spend,
+            avg_cpc=:avg_cpc,
+            units_sold=:units_sold,
+            sales=:sales WHERE amz_kw_id=:kw_id";
+
     $stmt = $pdo->prepare($sql);
     foreach ($impressions as $key => $value) {
       $stmt->execute(array(
@@ -215,7 +223,8 @@ function getReport($client, $reportId) {
     }
   }
 
-  /*function insertKeywords($pdo, $dataset, $metric) {
+  /*function insertKeywords($pdo,
+  $dataset, $metric) {
     $sql = "UPDATE ppc_keywords SET {$metric}=:value WHERE amz_kw_id=:kw_id";
     $stmt = $pdo->prepare($sql);
     foreach ($dataset as $key => $value) {
@@ -459,7 +468,7 @@ function getReport($client, $reportId) {
     }
 
     // Insert all this shit into the database
-    insertKeywords($pdo, $impressions, $clicks, $ctr, $ad_spend, $avg_cpc, $units_sold, $sales, $kw_id);
+    insertKeywords($pdo, $impressions, $clicks, $ctr, $adSpend, $avgCpc, $unitsSold, $sales);
     //insertKeywords($pdo, $clicks, 'clicks');
     //insertKeywords($pdo, $ctr, 'ctr');
     //insertKeywords($pdo, $adSpend, 'ad_spend');
