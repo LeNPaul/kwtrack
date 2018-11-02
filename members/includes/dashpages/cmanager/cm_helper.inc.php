@@ -4,10 +4,10 @@
  *    - All helper functions used for the campaign manager
  */
 
-function calculateMetricAvg($arr) {
+function calculateMetricAvg($arr, $percent = false) {
   $arr = array_filter($arr);
   $average = (count($arr) == 0) ? 0 : array_sum($arr)/count($arr);
-  return $average;
+  return ($percent) ? $average : $average * 100;
 }
 
 /*
@@ -69,7 +69,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $impressions = array_sum($impressionsArray);
     $clicks      = array_sum($clicksArray);
     $ctr         = round(calculateMetricAvg($ctrArray), 2);
-    $avg_cpc     = round(calculateMetricAvg($avgCpcArray), 2);
+    $avg_cpc     = ($clicks == 0) ? 0 : round($ad_spend / $clicks, 2);
     $units_sold  = array_sum($unitsSoldArray);
 
     // Replace any 0's with "-"
@@ -168,7 +168,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $impressions = array_sum($impressionsArray);
     $clicks      = array_sum($clicksArray);
     $ctr         = round(calculateMetricAvg($ctrArray), 2);
-    $avg_cpc     = round(calculateMetricAvg($avgCpcArray), 2);
+    $avg_cpc     = ($clicks == 0) ? 0 : round($ad_spend / $clicks, 2);
     $units_sold  = array_sum($unitsSoldArray);
 
     // Replace any 0's with "-"
@@ -239,7 +239,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
     $impressions = array_sum(unserialize($result[$i]['impressions']));
     $clicks      = array_sum(unserialize($result[$i]['clicks']));
     $ctr         = round(calculateMetricAvg(unserialize($result[$i]['ctr'])), 2);
-    $avg_cpc     = round(calculateMetricAvg(unserialize($result[$i]['avg_cpc'])), 2);
+    $avg_cpc     = ($clicks == 0) ? 0 : round($ad_spend / $clicks, 2);
     $units_sold  = array_sum(unserialize($result[$i]['units_sold']));
 
     // Replace any 0's with "-"

@@ -65,6 +65,8 @@ $(document).ready( function () {
   var refresh_token = "<?= $refresh_token ?>";
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
+
+
   var dt  = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
@@ -101,11 +103,11 @@ $(document).ready( function () {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
       dataTableFlag = 1;
       
-	    	//breadcrumbs ALL CAMPAIGNS click
-	$(".all_link").on("click", function() {
-		dt.clear().rows.add(dataset).draw();
-		console.log("all campaigns clicked");
-	});
+      //breadcrumbs ALL CAMPAIGNS click
+      $(".all_link").on("click", function() {
+        dt.clear().rows.add(dataset).draw();
+        console.log("all campaigns clicked");
+      });
 	  
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
@@ -178,10 +180,10 @@ $(document).ready( function () {
       
       // Handle budget changes when textbox is clicked
       $(".input-group input.form-control").on("focus", function() {
-        $(this).next().children().show(600);
+        $(this).next().children().show();
       });
       $(".input-group input.form-control").on("blur", function() {
-        $(this).next().children().hide(600);
+        $(this).next().children().hide(200);
       });
       $('.input-group input.form-control').keypress(function (e) {
         var key = e.which;
@@ -599,13 +601,12 @@ $(document).ready( function () {
         }
 
         console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
-        
+
         var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
         adSpendSum   = round(adSpendSum, 2);
         salesSum     = round(salesSum, 2);
-        ctrAvg       = round(ctrAvg / diffOfDays, 2);s
+        ctrAvg       = round(ctrAvg / diffOfDays, 2);
         avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
-
         impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
         clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
         ctrAvg         = (ctrAvg === 0) ? '-' : ctrAvg + '%';
