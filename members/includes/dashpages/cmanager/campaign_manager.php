@@ -105,6 +105,13 @@ $(document).ready( function () {
       
       //breadcrumbs ALL CAMPAIGNS click
       $(".all_link").on("click", function() {
+        // Handle selections from the user
+        rowClasses = $('#campaign_manager tbody tr').attr("class");
+        if (rowClasses.includes("selected")) {
+          $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
+        } else {
+          $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
+        }
         dt.clear().rows.add(dataset).draw();
         console.log("all campaigns clicked");
       });
@@ -122,13 +129,13 @@ $(document).ready( function () {
         size: "small"
       });
       
-      // Handle selections from the user
+      /*// Handle selections from the user
       rowClasses = $('#campaign_manager tbody tr').attr("class");
       if (rowClasses.includes("selected")) {
         $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
       } else {
         $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-      }
+      }*/
       
       // Status toggles
       $(".toggle").on("click", function() {
