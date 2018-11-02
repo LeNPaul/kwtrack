@@ -65,6 +65,14 @@ $(document).ready( function () {
   var refresh_token = "<?= $refresh_token ?>";
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
+  // Handle selections from the user
+  rowClasses = $('#campaign_manager tbody tr').attr("class");
+  if (rowClasses.includes("selected")) {
+    $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
+  } else {
+    $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
+  }
+
   var dt  = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
@@ -101,11 +109,11 @@ $(document).ready( function () {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
       dataTableFlag = 1;
       
-	    	//breadcrumbs ALL CAMPAIGNS click
-	$(".all_link").on("click", function() {
-		dt.clear().rows.add(dataset).draw();
-		console.log("all campaigns clicked");
-	});
+      //breadcrumbs ALL CAMPAIGNS click
+      $(".all_link").on("click", function() {
+        dt.clear().rows.add(dataset).draw();
+        console.log("all campaigns clicked");
+      });
 	  
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
@@ -120,13 +128,13 @@ $(document).ready( function () {
         size: "small"
       });
       
-      // Handle selections from the user
+      /*// Handle selections from the user
       rowClasses = $('#campaign_manager tbody tr').attr("class");
       if (rowClasses.includes("selected")) {
         $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
       } else {
         $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-      }
+      }*/
       
       // Status toggles
       $(".toggle").on("click", function() {
