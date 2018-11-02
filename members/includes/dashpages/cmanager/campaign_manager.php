@@ -247,7 +247,7 @@ $(document).ready( function () {
 
             url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
 
-            success: function(data){
+            successa: function(data){
               console.log('running...');
               data = JSON.parse(data);
               console.log(data);
