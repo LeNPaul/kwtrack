@@ -225,7 +225,7 @@ $(document).ready( function () {
           currentCampaign     = $(this).html();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           console.log(campaignDataBack);
-          dt.destroy();
+          dt.destroy(false);
           
           // Handle breadcrumbs
           $("#bc").html(function(index, currentText) {
@@ -284,13 +284,6 @@ $(document).ready( function () {
                 drawCallback: function(settings) {
                   // Set dataTableFlag to 2 whenever campaign manager is drawn
                   dataTableFlag = 2;
-                  
-				    //breadcrumbs ALL CAMPAIGNS click
-					$(".all_link").on("click", function() {
-						dt_adgroups.destroy();
-						dt.draw()
-						console.log("all campaigns clicked");
-					});
 					
                   $('td input').bootstrapToggle();
 
@@ -368,7 +361,7 @@ $(document).ready( function () {
                           } // drawCallback (keyword manager)
                         }; // kwOptions
 
-                        dt_adgroups.destroy();
+                        dt_adgroups.destroy(false);
                         dt_keywords = $("#keyword_manager").DataTable(kwOptions);
                       }, // success (keyword manager)
 
@@ -384,7 +377,7 @@ $(document).ready( function () {
 
               }; // adgrOptions
 
-              dt.destroy();
+              dt.destroy(false);
               dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
             }, // success (campaign manager)
 
