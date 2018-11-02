@@ -122,7 +122,7 @@ $(document).ready( function () {
         size: "small"
       });
       
-      /*// Handle selections from the user
+      // Handle selections from the user
       rowClasses = $('#campaign_manager tbody tr').attr("class");
       if (rowClasses.includes("selected")) {
         $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
