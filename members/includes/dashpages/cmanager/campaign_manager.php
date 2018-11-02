@@ -128,7 +128,7 @@ $(document).ready( function () {
         $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
       } else {
         $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-      }*/
+      }
       
       // Status toggles
       $(".toggle").on("click", function() {
