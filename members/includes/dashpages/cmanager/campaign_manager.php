@@ -102,12 +102,6 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
       dataTableFlag = 1;
-      
-      //breadcrumbs ALL CAMPAIGNS click
-      $(".all_link").on("click", function() {
-        dt.clear().rows.add(dataset).draw();
-        console.log("all campaigns clicked");
-      });
 	  
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
@@ -402,6 +396,12 @@ $(document).ready( function () {
         }); //on campaign name click
 	  } //drawCallback
 	}); //DataTable
+  
+      //breadcrumbs ALL CAMPAIGNS click
+    $(".all_link").on("click", function() {
+      dt.clear().rows.add(dataset).draw();
+      console.log("all campaigns clicked");
+    });
   
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
