@@ -178,10 +178,10 @@ $(document).ready( function () {
       
       // Handle budget changes when textbox is clicked
       $(".input-group input.form-control").on("focus", function() {
-        $(this).next().children().show(600);
+        $(this).next().children().show();
       });
       $(".input-group input.form-control").on("blur", function() {
-        $(this).next().children().hide(600);
+        $(this).next().children().hide(200);
       });
       $('.input-group input.form-control').keypress(function (e) {
         var key = e.which;
