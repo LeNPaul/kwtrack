@@ -103,14 +103,6 @@ $(document).ready( function () {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
       dataTableFlag = 1;
       
-      // Handle selections from the user
-      rowClasses = $('#campaign_manager tbody tr').attr("class");
-      if (rowClasses.includes("selected")) {
-        $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
-      } else {
-        $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-      }
-      
       // Status toggles
       $(".toggle").on("click", function() {
         $(this).toggleClass('toggle-selected');
@@ -210,7 +202,15 @@ $(document).ready( function () {
 	  } //drawCallback
 	}); //DataTable
   
-	      // Handle and style toggle buttons
+      // Handle selections from the user
+      rowClasses = $('#campaign_manager tbody tr').attr("class");
+      if (rowClasses.includes("selected")) {
+        $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
+      } else {
+        $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
+      }
+  
+	  // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
         on: '<i class="fa fa-play"></i>',
         off: '<i class="fa fa-pause"></i>',
