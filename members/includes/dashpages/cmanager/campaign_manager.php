@@ -150,22 +150,6 @@ $(document).ready( function () {
           }
         });
       });
-      
-      // Handle budget changes when textbox is clicked
-      $(".input-group input.form-control").on("focus", function() {
-        $(this).next().children().show();
-      });
-      $(".input-group input.form-control").on("blur", function() {
-        $(this).next().children().hide(200);
-      });
-      $('.input-group input.form-control').keypress(function (e) {
-        var key = e.which;
-        
-        if (key == 13) {
-          $(this).next().children("button").click();
-          return false;
-        }
-      });
 
       $(".btn-edit-budget").on("click", function() {
         var budgetVal = $(this).parent().prev().val();
@@ -201,6 +185,22 @@ $(document).ready( function () {
       });
 	  } //drawCallback
 	}); //DataTable
+  
+      // Handle budget changes when textbox is clicked
+      $(".input-group input.form-control").on("focus", function() {
+        $(this).next().children().show();
+      });
+      $(".input-group input.form-control").on("blur", function() {
+        $(this).next().children().hide(200);
+      });
+      $('.input-group input.form-control').keypress(function (e) {
+        var key = e.which;
+        
+        if (key == 13) {
+          $(this).next().children("button").click();
+          return false;
+        }
+      });
   
       // Handle selections from the user
       rowClasses = $('#campaign_manager tbody tr').attr("class");
