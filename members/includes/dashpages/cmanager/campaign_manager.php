@@ -102,19 +102,6 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
       dataTableFlag = 1;
-	  
-      // Handle and style toggle buttons
-      $('.toggle-campaign').bootstrapToggle({
-        on: '<i class="fa fa-play"></i>',
-        off: '<i class="fa fa-pause"></i>',
-        size: "small",
-        onstyle: "success",
-        offstyle: "primary"
-      });
-      $(".toggle-campaign-archive").bootstrapToggle({
-        off: '',
-        size: "small"
-      });
       
       // Handle selections from the user
       rowClasses = $('#campaign_manager tbody tr').attr("class");
@@ -223,6 +210,19 @@ $(document).ready( function () {
 	  } //drawCallback
 	}); //DataTable
   
+	      // Handle and style toggle buttons
+      $('.toggle-campaign').bootstrapToggle({
+        on: '<i class="fa fa-play"></i>',
+        off: '<i class="fa fa-pause"></i>',
+        size: "small",
+        onstyle: "success",
+        offstyle: "primary"
+      });
+      $(".toggle-campaign-archive").bootstrapToggle({
+        off: '',
+        size: "small"
+      });
+  
       //breadcrumbs ALL CAMPAIGNS click
     $(".all_link").on("click", function() {
       dt.clear().rows.add(dataset).draw();
@@ -233,7 +233,7 @@ $(document).ready( function () {
           currentCampaign     = $(this).html();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           console.log(campaignDataBack);
-          dt.destroy(false);
+          dt.destroy();
           
           // Handle breadcrumbs
           $("#bc").html(function(index, currentText) {
@@ -369,7 +369,7 @@ $(document).ready( function () {
                           } // drawCallback (keyword manager)
                         }; // kwOptions
 
-                        dt_adgroups.destroy(false);
+                        dt_adgroups.destroy();
                         dt_keywords = $("#keyword_manager").DataTable(kwOptions);
                       }, // success (keyword manager)
 
