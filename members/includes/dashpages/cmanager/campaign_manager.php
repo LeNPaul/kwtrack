@@ -101,9 +101,11 @@ $(document).ready( function () {
 
 	  drawCallback: function(settings) {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
-      dataTableFlag = 1;
-      
-      // Status toggles
+        dataTableFlag = 1;
+	  } //drawCallback
+	}); //DataTable
+  
+        // Status toggles
       $(".toggle").on("click", function() {
         $(this).toggleClass('toggle-selected');
         var campaignName = $(this).parent().next().children(".c_link").text();
@@ -150,8 +152,6 @@ $(document).ready( function () {
           }
         });
       });
-	  } //drawCallback
-	}); //DataTable
   
       // Handle budget changes when textbox is clicked
       $(".input-group input.form-control").on("focus", function() {
