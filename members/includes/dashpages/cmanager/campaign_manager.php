@@ -65,6 +65,8 @@ $(document).ready( function () {
   var refresh_token = "<?= $refresh_token ?>";
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
+
+
   var dt  = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
@@ -99,36 +101,11 @@ $(document).ready( function () {
 
 	  drawCallback: function(settings) {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
-      dataTableFlag = 1;
+        dataTableFlag = 1;
+	  } //drawCallback
+	}); //DataTable
 
-	    	//breadcrumbs ALL CAMPAIGNS click
-	$(".all_link").on("click", function() {
-		dt.clear().rows.add(dataset).draw();
-		console.log("all campaigns clicked");
-	});
-
-      // Handle and style toggle buttons
-      $('.toggle-campaign').bootstrapToggle({
-        on: '<i class="fa fa-play"></i>',
-        off: '<i class="fa fa-pause"></i>',
-        size: "small",
-        onstyle: "success",
-        offstyle: "primary"
-      });
-      $(".toggle-campaign-archive").bootstrapToggle({
-        off: '',
-        size: "small"
-      });
-
-      // Handle selections from the user
-      rowClasses = $('#campaign_manager tbody tr').attr("class");
-      if (rowClasses.includes("selected")) {
-        $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
-      } else {
-        $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-      }
-
-      // Status toggles
+        // Status toggles
       $(".toggle").on("click", function() {
         $(this).toggleClass('toggle-selected');
         var campaignName = $(this).parent().next().children(".c_link").text();
@@ -175,13 +152,13 @@ $(document).ready( function () {
           }
         });
       });
-
+  
       // Handle budget changes when textbox is clicked
       $(".input-group input.form-control").on("focus", function() {
         $(this).next().children().show();
       });
       $(".input-group input.form-control").on("blur", function() {
-        $(this).next().children().hide(600);
+        $(this).next().children().hide(200);
       });
       $('.input-group input.form-control').keypress(function (e) {
         var key = e.which;
@@ -192,6 +169,7 @@ $(document).ready( function () {
         }
       });
 
+	  //Handle budget changes when save button is clicked
       $(".btn-edit-budget").on("click", function() {
         var budgetVal = $(this).parent().prev().val();
         // Verify input to check if numeric
@@ -225,7 +203,34 @@ $(document).ready( function () {
         }
       });
 
-      $(".c_link").on("click", function() {
+      // Handle selections from the user
+      rowClasses = $('#campaign_manager tbody tr').attr("class");
+      if (rowClasses.includes("selected")) {
+        $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
+      } else {
+        $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
+      }
+
+	  // Handle and style toggle buttons
+      $('.toggle-campaign').bootstrapToggle({
+        on: '<i class="fa fa-play"></i>',
+        off: '<i class="fa fa-pause"></i>',
+        size: "small",
+        onstyle: "success",
+        offstyle: "primary"
+      });
+      $(".toggle-campaign-archive").bootstrapToggle({
+        off: '',
+        size: "small"
+      });
+
+      //breadcrumbs ALL CAMPAIGNS click
+    $(".all_link").on("click", function() {
+      dt.clear().rows.add(dataset).draw();
+      console.log("all campaigns clicked");
+    });
+
+  $(".c_link").on("click", function() {
           currentCampaign     = $(this).html();
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           console.log(campaignDataBack);
@@ -288,13 +293,6 @@ $(document).ready( function () {
                 drawCallback: function(settings) {
                   // Set dataTableFlag to 2 whenever campaign manager is drawn
                   dataTableFlag = 2;
-
-				    //breadcrumbs ALL CAMPAIGNS click
-					$(".all_link").on("click", function() {
-						dt_adgroups.destroy();
-						dt.draw()
-						console.log("all campaigns clicked");
-					});
 
                   $('td input').bootstrapToggle();
 
@@ -388,7 +386,7 @@ $(document).ready( function () {
 
               }; // adgrOptions
 
-              dt.destroy();
+              dt.destroy(false);
               dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
             }, // success (campaign manager)
 
@@ -398,8 +396,6 @@ $(document).ready( function () {
 
           }); //ajax
         }); //on campaign name click
-	  } //drawCallback
-	}); //DataTable
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
@@ -603,9 +599,8 @@ $(document).ready( function () {
         var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
         adSpendSum   = round(adSpendSum, 2);
         salesSum     = round(salesSum, 2);
-        ctrAvg       = round(ctrAvg / diffOfDays, 2);s
+        ctrAvg       = round(ctrAvg / diffOfDays, 2);
         avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
-
         impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
         clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
         ctrAvg         = (ctrAvg === 0) ? '-' : ctrAvg + '%';

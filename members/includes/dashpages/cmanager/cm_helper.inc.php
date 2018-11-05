@@ -4,10 +4,10 @@
  *    - All helper functions used for the campaign manager
  */
 
-function calculateMetricAvg($arr) {
+function calculateMetricAvg($arr, $percent = false) {
   $arr = array_filter($arr);
   $average = (count($arr) == 0) ? 0 : array_sum($arr)/count($arr);
-  return $average;
+  return ($percent) ? $average : $average * 100;
 }
 
 /*
@@ -55,7 +55,7 @@ function cmGetCampaignData($pdo, $user_id) {
   	} else {
   		$active = 2;
   	}
-  
+
     $adSpendArray     = unserialize($result[$i]['ad_spend']);
     $salesArray       = unserialize($result[$i]['sales']);
     $impressionsArray = unserialize($result[$i]['impressions']);
@@ -63,13 +63,13 @@ function cmGetCampaignData($pdo, $user_id) {
     $ctrArray         = unserialize($result[$i]['ctr']);
     $avgCpcArray      = unserialize($result[$i]['avg_cpc']);
     $unitsSoldArray   = unserialize($result[$i]['units_sold']);
-	
+
     $ad_spend    = array_sum($adSpendArray);
     $sales       = array_sum($salesArray);
     $impressions = array_sum($impressionsArray);
     $clicks      = array_sum($clicksArray);
     $ctr         = round(calculateMetricAvg($ctrArray), 2);
-    $avg_cpc     = round(calculateMetricAvg($avgCpcArray), 2);
+    $avg_cpc     = ($clicks == 0) ? 0 : round($ad_spend / $clicks, 2);
     $units_sold  = array_sum($unitsSoldArray);
 
     // Replace any 0's with "-"
@@ -87,14 +87,14 @@ function cmGetCampaignData($pdo, $user_id) {
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  
+
                   <input type="text" class="form-control edit-budget" data-color="danger" placeholder=" ' . $result[$i]['daily_budget'] . '" />
-                  
+
                   <div class="input-group-append">
                     <button class="btn btn-success btn-outline-secondary btn-edit-budget" type="button" style="display:none">Save</button>
                   </div>
                 </div>';
-    
+
     /*<div class="input-group-append">
                     <button class="btn btn-outline-secondary btn-edit-budget" type="button">Save</button>
                   </div>*/
@@ -113,7 +113,7 @@ function cmGetCampaignData($pdo, $user_id) {
       $unitsSoldArray,
       $salesArray
     );
-				  
+
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $campaignLink,
@@ -154,7 +154,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
   $result         = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   for ($i = 0; $i < count($result); $i++) {
-  
+
     $adSpendArray     = unserialize($result[$i]['ad_spend']);
     $salesArray       = unserialize($result[$i]['sales']);
     $impressionsArray = unserialize($result[$i]['impressions']);
@@ -162,13 +162,13 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $ctrArray         = unserialize($result[$i]['ctr']);
     $avgCpcArray      = unserialize($result[$i]['avg_cpc']);
     $unitsSoldArray   = unserialize($result[$i]['units_sold']);
-    
+
     $ad_spend    = array_sum($adSpendArray);
     $sales       = array_sum($salesArray);
     $impressions = array_sum($impressionsArray);
     $clicks      = array_sum($clicksArray);
     $ctr         = round(calculateMetricAvg($ctrArray), 2);
-    $avg_cpc     = round(calculateMetricAvg($avgCpcArray), 2);
+    $avg_cpc     = ($clicks == 0) ? 0 : round($ad_spend / $clicks, 2);
     $units_sold  = array_sum($unitsSoldArray);
 
     // Replace any 0's with "-"
@@ -182,7 +182,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
     $adgroupLink = '<a href="javascript:void(0)" class="name ag_link">' . $result[$i]['ad_group_name'] . '</a>';
-    
+
     $rawAdgroupData[] = array(
       cmCheckboxState($result[$i]['status']),
       $adgroupLink,
@@ -211,7 +211,7 @@ function cmGetAdGroupData($pdo, $campaignId) {
       $sales,
       $acos
     );
-    
+
     $adgroups[htmlspecialchars($result[$i]['ad_group_name'])] = $result[$i]['amz_adgroup_id'];
   }
   return [$output, $adgroups, $rawAdgroupData];
@@ -239,7 +239,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
     $impressions = array_sum(unserialize($result[$i]['impressions']));
     $clicks      = array_sum(unserialize($result[$i]['clicks']));
     $ctr         = round(calculateMetricAvg(unserialize($result[$i]['ctr'])), 2);
-    $avg_cpc     = round(calculateMetricAvg(unserialize($result[$i]['avg_cpc'])), 2);
+    $avg_cpc     = ($clicks == 0) ? 0 : round($ad_spend / $clicks, 2);
     $units_sold  = array_sum(unserialize($result[$i]['units_sold']));
 
     // Replace any 0's with "-"
@@ -253,7 +253,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
     $bid         = '$' . round($result[$i]['bid'], 2);
     $kwText      = '<b class="name">' . $result[$i]['keyword_text'] . "</b>";
-    
+
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $kwText,
