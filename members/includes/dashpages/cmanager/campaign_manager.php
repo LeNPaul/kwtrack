@@ -100,13 +100,13 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
       dataTableFlag = 1;
-      
+
 	    	//breadcrumbs ALL CAMPAIGNS click
 	$(".all_link").on("click", function() {
 		dt.clear().rows.add(dataset).draw();
 		console.log("all campaigns clicked");
 	});
-	  
+
       // Handle and style toggle buttons
       $('.toggle-campaign').bootstrapToggle({
         on: '<i class="fa fa-play"></i>',
@@ -119,7 +119,7 @@ $(document).ready( function () {
         off: '',
         size: "small"
       });
-      
+
       // Handle selections from the user
       rowClasses = $('#campaign_manager tbody tr').attr("class");
       if (rowClasses.includes("selected")) {
@@ -127,12 +127,12 @@ $(document).ready( function () {
       } else {
         $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
       }
-      
+
       // Status toggles
       $(".toggle").on("click", function() {
         $(this).toggleClass('toggle-selected');
         var campaignName = $(this).parent().next().children(".c_link").text();
-        
+
         console.log(dt.rows('.toggle-selected').data());
 
         if ($(this).hasClass("off")) {
@@ -140,9 +140,9 @@ $(document).ready( function () {
         } else {
           console.log('turning toggle off');
         }
-        
+
         toggleActive = $(this).hasClass("off");
-        
+
         // Toggle campaign w/ AJAX
         $.ajax({
           type: "POST",
@@ -155,7 +155,7 @@ $(document).ready( function () {
             refresh_token: refresh_token,
             profileId: profileId
           },
-          
+
           success: function(alertText) {
             swal({
               title: "Success!",
@@ -175,17 +175,17 @@ $(document).ready( function () {
           }
         });
       });
-      
+
       // Handle budget changes when textbox is clicked
       $(".input-group input.form-control").on("focus", function() {
-        $(this).next().children().show(600);
+        $(this).next().children().show();
       });
       $(".input-group input.form-control").on("blur", function() {
         $(this).next().children().hide(600);
       });
       $('.input-group input.form-control').keypress(function (e) {
         var key = e.which;
-        
+
         if (key == 13) {
           $(this).next().children("button").click();
           return false;
@@ -230,7 +230,7 @@ $(document).ready( function () {
           var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
           console.log(campaignDataBack);
           dt.destroy();
-          
+
           // Handle breadcrumbs
           $("#bc").html(function(index, currentText) {
             return currentText + " <b>></b> " + currentCampaign;
@@ -256,7 +256,7 @@ $(document).ready( function () {
               var adgroupDataBack = data[1];
               var rawAdgroupData  = data[2];
               window.rawAdgroupData = rawAdgroupData;
-  
+
               console.log('DATASET: ');
               console.log(dataset);
               //console.log(adgroupDataBack);
@@ -288,14 +288,14 @@ $(document).ready( function () {
                 drawCallback: function(settings) {
                   // Set dataTableFlag to 2 whenever campaign manager is drawn
                   dataTableFlag = 2;
-                  
+
 				    //breadcrumbs ALL CAMPAIGNS click
 					$(".all_link").on("click", function() {
 						dt_adgroups.destroy();
 						dt.draw()
 						console.log("all campaigns clicked");
 					});
-					
+
                   $('td input').bootstrapToggle();
 
                   $(".ag_link").on("click", function() {
@@ -366,7 +366,7 @@ $(document).ready( function () {
                           drawCallback: function(settings) {
                             // Set dataTableFlag to 1 whenever campaign manager is drawn
                             dataTableFlag = 3;
-                            
+
                             $('td input').bootstrapToggle();
 
                           } // drawCallback (keyword manager)
@@ -400,7 +400,7 @@ $(document).ready( function () {
         }); //on campaign name click
 	  } //drawCallback
 	}); //DataTable
-  
+
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
 
@@ -438,7 +438,7 @@ $(document).ready( function () {
       return $('input', td).attr('data-value') * 1;
     } );
   }
-  
+
   /* NOTIFICATIONS */
   function showNotification(from, align, bootstrapColor, message) {
     $.notify({
@@ -453,7 +453,7 @@ $(document).ready( function () {
       }
     });
   }
-  
+
   /* DATA RANGE PICKER */
 
   var start = moment().subtract(59, 'days');
@@ -480,17 +480,17 @@ $(document).ready( function () {
   }, cb);
 
   $('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-  
+
 
   //TODO: figure out how to import adgroup data from datatable when dataTableFlag == 2
   function cmUpdate(startIndex, endIndex) {
-    
+
     var round   = function (value, decimals) {
       return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
     };
-    
+
     var dateArr = <?= json_encode($dateArr) ?>;
-    
+
     // If the campaign table is currently drawn
     if (dataTableFlag === 1) {
       var newDtData = [];
@@ -562,14 +562,14 @@ $(document).ready( function () {
       }
       console.log(newDtData);
       dt.clear().rows.add(newDtData).draw();
-      
+
     }
     // If the adgroup table is being drawn
     else if (dataTableFlag === 2) {
-      
+
       var newAdgroupData = [];
       var adgroupData    = window.rawAdgroupData;
-      
+
       console.log(adgroupData);
 
       var startArr   = dateArr.indexOf(startIndex);
@@ -599,7 +599,7 @@ $(document).ready( function () {
         }
 
         console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
-        
+
         var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
         adSpendSum   = round(adSpendSum, 2);
         salesSum     = round(salesSum, 2);
@@ -636,24 +636,23 @@ $(document).ready( function () {
         unitsSoldSum   = 0;
         salesSum       = 0;
       }
-      
+
       console.log(newAdgroupData);
       dt_adgroups.clear().rows.add(newAdgroupData).draw();
-    
+
     }
     // If the keyword table is currently drawn
     else if (dataTableFlag === 3) {
-      
+
       var newKeywordData = [];
       var keywordData    = '';
-      
+
     }
 
-    
-    
+
+
   }
 
 }); //document.ready
 
 </script>
-
