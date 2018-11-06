@@ -230,7 +230,7 @@ $(document).ready( function () {
   });
 
   //breadcrumbs ALL CAMPAIGNS click
-  $(".all_link").on("click", function() {
+  $(".breadcrumb").on("click", ".all_link", function() {
     dt.clear().rows.add(dataset).draw();
     console.log("all campaigns clicked");
   });
