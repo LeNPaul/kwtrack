@@ -43,7 +43,7 @@
       label: "Ad Spend ($)",
       yAxisID: 'A',
       data: adSpendArr,
-      // fill: 'origin',
+      fill: false,
       pointRadius: 0,
       hoverRadius: 4,
       pointBorderColor: '#ffffff',
@@ -58,7 +58,7 @@
       label: "PPC Sales ($)",
       yAxisID: 'A',
       data: ppcSalesArr,
-      // fill: true,
+      fill: false,
       pointRadius: 0,
       hoverRadius: 4,
       pointBorderColor: '#ffffff',
@@ -88,41 +88,37 @@
       intersect: false
 	  },
 	  hover: {
-		mode: 'x',
-		intersect: false
+      mode: 'x',
+      intersect: false
 	  },
 	  responsive: false,
-      elements: {
-        line: {
-          //fill: '-1'
-        }
-      },
-      scales: {
-        // Remove grid lines
-        xAxes: [{
-          gridLines: {
-            color: "rgba(0, 0, 0, 0)",
-          },
+    elements: {
+      line: {
+        //fill: '-1'
+      }
+    },
+    scales: {
+      // Remove grid lines
+      xAxes: [{
+        gridLines: {
+          color: "rgba(0, 0, 0, 0)",
+        },
 
-          scaleLabel: {
-            show: true,
-            labelString: 'Value'
+        scaleLabel: {
+          show: true,
+          labelString: 'Value'
+        }
+      }],
+      yAxes: [{
+        id: 'A',
+        type: 'linear',
+        position: 'left',
+        gridLines: {
+          color: "#eeeeee"
           }
-        }],
-        yAxes: [{
-          id: 'A',
-          type: 'linear',
-          position: 'left',
-          gridLines: {
-            color: "rgba(0, 0, 0, 0)",
-          },
-          /*ticks: {
-            callback: function(value, index, values) {
-              return '$' + value;
-            }
-          }*/
-          //stacked: true
-        }, {
+        },
+        
+        {
           id: 'B',
           type: 'linear',
           position: 'right',
@@ -137,8 +133,8 @@
               return value + '%';
             }*/
           }
-        }]
-      },
+      }]
+    },
 	  
 	  animation: {
 		  onComplete: function() {
