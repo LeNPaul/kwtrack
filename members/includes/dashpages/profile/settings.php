@@ -60,7 +60,7 @@
                     <div class="form-group">
                       <label class="user-settings">Bid Adjustment Threshold</label>
                       <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="" aria-label="BAT" aria-describedby="basic-addon2" />
+                        <input type="text" class="form-control" placeholder="" aria-label="basic-addon2" aria-describedby="basic-addon2" />
                         <div class="input-group-append">
                           <span class="input-group-text" id="basic-addon2">%</span>
                         </div>
@@ -69,8 +69,17 @@
 
                     <h5>Negative Keyword Parameters</h5>
                     <hr />
+                    <p>If a search term has 0 sales and falls under any of these parameters, PPCOLOGY will suggest that you add it as a negative keyword.</p>
 
+                    <div class="form-group">
+                      <label class="user-settings">Clicks Greater Than</label>
+                      <input type="text" class="form-control" placeholder="" />
+                    </div>
 
+                    <div class="form-group">
+                      <label class="user-settings">CTR Less Than</label>
+                      <input type="text" class="form-control" placeholder="" />
+                    </div>
 
                 </div>
 
