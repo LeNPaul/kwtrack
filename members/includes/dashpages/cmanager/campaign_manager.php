@@ -282,7 +282,7 @@ $(document).ready( function () {
 	          [10, 25, 50, 100, -1],
 	          [10, 25, 50, 100, "All"]
 	        ],
-	        data: dataset,
+	        data: adGroupDataset,
 	        columns: [
 	          { title: "Active" },
 	          { title: "Ad Group Name" },
@@ -367,7 +367,7 @@ $(document).ready( function () {
 	                      [10, 25, 50, 100, -1],
 	                      [10, 25, 50, 100, "All"]
 	                    ],
-	                  data: dataset,
+	                  data: keywordDataset,
 	                  columns: [
 	                    { title: "Active" },
 	                    { title: "Keyword" },
