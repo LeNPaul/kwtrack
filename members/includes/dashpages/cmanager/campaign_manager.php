@@ -67,6 +67,8 @@ $(document).ready( function () {
   var adgroupDataBack = null;
   var rawAdgroupData  = null;
   var adGroupDataset = null;
+  var keywordDataset = null;
+  var keywordDataBack = null;
 
 	//var window.dataset = dataset;
 
@@ -350,7 +352,7 @@ $(document).ready( function () {
 
 	                console.log(data);
 
-	                dataset         = data[0];
+	                keywordDataset  = data[0];
 	                keywordDataBack = data[1];
 
 	                console.log('DATASET: ');
