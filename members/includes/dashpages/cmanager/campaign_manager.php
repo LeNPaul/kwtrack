@@ -110,7 +110,7 @@ $(document).ready( function () {
 	}); //DataTable
 
   // Status toggles
-  $(".toggle").on("click", function() {
+  $("#campaign_manager").on("click", ".toggle", function() {
     $(this).toggleClass('toggle-selected');
     var campaignName = $(this).parent().next().children(".c_link").text();
 
@@ -232,7 +232,7 @@ $(document).ready( function () {
   //breadcrumbs ALL CAMPAIGNS click
   $(".breadcrumb").on("click", ".all_link", function() {
     dt.clear().rows.add(dataset).draw();
-    console.log("all campaigns clicked");
+	
   });
 
   $("#campaign_manager").on("click", ".c_link", function() {
