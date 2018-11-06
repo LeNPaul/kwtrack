@@ -47,7 +47,7 @@
       pointRadius: 0,
       hoverRadius: 4,
       pointBorderColor: '#ffffff',
-      pointBorderWidth: 1,
+      pointBorderWidth: 1.5,
       pointBackgroundColor: "rgb(244, 72, 66)",
       hoverBorderWidth: 3,
       // backgroundColor: "rgba(244, 72, 66, 0.1)",
@@ -62,7 +62,7 @@
       pointRadius: 0,
       hoverRadius: 4,
       pointBorderColor: '#ffffff',
-      pointBorderWidth: 1,
+      pointBorderWidth: 1.5,
       pointBackgroundColor: "rgb(89, 255, 152)",
       hoverBorderWidth: 3,
       // backgroundColor: "rgba(89, 255, 152, 0.1)",
@@ -101,7 +101,7 @@
       // Remove grid lines
       xAxes: [{
         gridLines: {
-          color: "rgba(0, 0, 0, 0)",
+          color: "rgba(0, 0, 0, 0)"
         },
 
         scaleLabel: {
@@ -109,12 +109,13 @@
           labelString: 'Value'
         }
       }],
+      
       yAxes: [{
         id: 'A',
         type: 'linear',
         position: 'left',
         gridLines: {
-          color: "#eeeeee"
+          color: "#dbdbdb"
           }
         },
         
@@ -123,12 +124,12 @@
           type: 'linear',
           position: 'right',
           gridLines: {
-            color: "rgba(0, 0, 0, 0)",
+            color: "rgba(0, 0, 0, 0)"
           },
           ticks: {
             beginAtZero: true,
             display: false,
-            max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2,
+            max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2
             /*callback: function(value, index, values) {
               return value + '%';
             }*/
