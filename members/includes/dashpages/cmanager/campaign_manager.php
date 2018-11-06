@@ -307,7 +307,9 @@ $(document).ready( function () {
 	        } // drawCallback
 
 	      }; // adgrOptions
+       
 	      dt = $('#campaign_manager').DataTable(adgrOptions);
+	      
 	    }, // success (campaign manager)
 
 	    error: function(msg) {
@@ -318,89 +320,89 @@ $(document).ready( function () {
 	}); //on campaign name click
 	
 	$("#campaign_manager").on("click", ".ag_link",  function() {
-	            adgroupName     = $(this).text();
+    adgroupName     = $(this).text();
 
-	            // backend adgroup data already stored in adgroupDataBack
-	            dt.destroy();
-				$("#campaign_manager").empty();
+    // backend adgroup data already stored in adgroupDataBack
+    dt.destroy();
+    $("#campaign_manager").empty();
 
-	            // Breadcrumb text. Edit later to include links that go back.
-	            $("#bc").html(function(index, currentText){
-			          console.log(currentText);
-	              return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>></b> " + adgroupName;
-	            });
-
-	            $.ajax({
-	              type: "POST",
-
-	              data: {
-	                "adgroupName"     : adgroupName,
-	                "adgroupDataBack" : adgroupDataBack
-	              },
-
-	              dataType: "text",
-
-	              url: "includes/dashpages/cmanager/helpers/get_keywords.php",
-
-	              success: function(data) {
-	                console.log("running keyword campaign manager section");
-	                console.log(data);
-
-	                data            = JSON.parse(data);
-
-	                console.log(data);
-
-	                keywordDataset  = data[0];
-	                keywordDataBack = data[1];
-
-	                console.log('DATASET: ');
-	                console.log(keywordDataset);
-	                console.log(keywordDataBack);
-
-	                var kwOptions = {
-	                  scrollX: true,
-	                  paging: true,
-	                  pagingType: "full_numbers",
-	                  lengthMenu: [
-	                      [10, 25, 50, 100, -1],
-	                      [10, 25, 50, 100, "All"]
-	                    ],
-	                  data: keywordDataset,
-	                  columns: [
-	                    { title: "Active" },
-	                    { title: "Keyword" },
-	                    { title: "Match Type" },
-	                    { title: "Status" },
-	                    { title: "Bid" },
-	                    { title: "Impressions" },
-	                    { title: "Clicks" },
-	                    { title: "CTR" },
-	                    { title: "Ad Spend" },
-	                    { title: "Avg. CPC" },
-	                    { title: "Units Sold" },
-	                    { title: "Sales" },
-	                    { title: "ACoS" }
-	                  ],
-
-	                  drawCallback: function(settings) {
-	                    // Set dataTableFlag to 1 whenever campaign manager is drawn
-	                    dataTableFlag = 3;
-
-	                    $('td input').bootstrapToggle();
-
-	                  } // drawCallback (keyword manager)
-	                }; // kwOptions
-
-	                dt = $("#campaign_manager").DataTable(kwOptions);
-	              }, // success (keyword manager)
-
-	              error: function(msg) {
-	                alert(msg);
-	              } // error (keyword manager)
-
-	            });
-
-	          }); // .ag_link on click
+    // Breadcrumb text. Edit later to include links that go back.
+    $("#bc").html(function(index, currentText){
+      console.log(currentText);
+      return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>></b> " + adgroupName;
+    });
+  
+    $.ajax({
+      type: "POST",
+  
+      data: {
+        "adgroupName"     : adgroupName,
+        "adgroupDataBack" : adgroupDataBack
+      },
+  
+      dataType: "text",
+  
+      url: "includes/dashpages/cmanager/helpers/get_keywords.php",
+  
+      success: function(data) {
+        console.log("running keyword campaign manager section");
+        console.log(data);
+  
+        data            = JSON.parse(data);
+  
+        console.log(data);
+  
+        keywordDataset  = data[0];
+        keywordDataBack = data[1];
+  
+        console.log('DATASET: ');
+        console.log(keywordDataset);
+        console.log(keywordDataBack);
+  
+        var kwOptions = {
+          scrollX: true,
+          paging: true,
+          pagingType: "full_numbers",
+          lengthMenu: [
+              [10, 25, 50, 100, -1],
+              [10, 25, 50, 100, "All"]
+            ],
+          data: keywordDataset,
+          columns: [
+            { title: "Active" },
+            { title: "Keyword" },
+            { title: "Match Type" },
+            { title: "Status" },
+            { title: "Bid" },
+            { title: "Impressions" },
+            { title: "Clicks" },
+            { title: "CTR" },
+            { title: "Ad Spend" },
+            { title: "Avg. CPC" },
+            { title: "Units Sold" },
+            { title: "Sales" },
+            { title: "ACoS" }
+          ],
+  
+          drawCallback: function(settings) {
+            // Set dataTableFlag to 1 whenever campaign manager is drawn
+            dataTableFlag = 3;
+  
+            $('td input').bootstrapToggle();
+  
+          } // drawCallback (keyword manager)
+        }; // kwOptions
+  
+        dt = $("#campaign_manager").DataTable(kwOptions);
+      }, // success (keyword manager)
+  
+      error: function(msg) {
+        alert(msg);
+      } // error (keyword manager)
+  
+    });
+  
+  }); // .ag_link on click
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
