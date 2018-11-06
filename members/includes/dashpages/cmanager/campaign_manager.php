@@ -320,7 +320,7 @@ $(document).ready( function () {
 
 	            // backend adgroup data already stored in adgroupDataBack
 	            dt.destroy();
-				$('#campaign_manager').empty();
+				$("#campaign_manager").empty();
 
 	            // Breadcrumb text. Edit later to include links that go back.
 	            $("#bc").html(function(index, currentText){
@@ -389,7 +389,7 @@ $(document).ready( function () {
 	                  } // drawCallback (keyword manager)
 	                }; // kwOptions
 
-	                dt = $('#campaign_manager').DataTable(kwOptions);
+	                dt = $("#campaign_manager").DataTable(kwOptions);
 	              }, // success (keyword manager)
 
 	              error: function(msg) {
