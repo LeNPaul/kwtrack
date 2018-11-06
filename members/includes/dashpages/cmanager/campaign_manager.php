@@ -234,7 +234,7 @@ $(document).ready( function () {
     console.log("all campaigns clicked");
   });
 
-  $(".c_link").on("click", function() {
+  $("#campaign_manager").on("click", ".c_link", function() {
 	  currentCampaign     = $(this).html();
 	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
 	  console.log(campaignDataBack);
