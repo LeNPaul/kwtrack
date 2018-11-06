@@ -315,7 +315,6 @@ $(document).ready( function () {
 	}); //on campaign name click
 	
 	$(".ag_link").on("click", function() {
-				console.log("click");
 	            adgroupName     = $(this).text();
 
 	            // backend adgroup data already stored in adgroupDataBack
