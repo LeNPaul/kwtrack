@@ -51,7 +51,7 @@
                 <div class="col-12">
                   <div class="form-group">
                     <label>Spyder Campaign Structure</label>
-                    <input type="checkbox" class="toggle-spyder-campaigns" checked data-toggle="toggle" data-size="mini" />
+                    <input type="checkbox" class="toggle-spyder-campaigns" checked data-toggle="toggle" data-size="small" />
                   </div>
                 </div>
 
