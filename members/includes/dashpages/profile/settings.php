@@ -60,9 +60,9 @@
                     <div class="form-group">
                       <label>Bid Adjustment Threshold</label>
                       <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="" aria-label="BAT" />
+                        <input type="text" class="form-control" placeholder="" aria-label="BAT" aria-describedby="basic-addon2" />
                         <div class="input-group-append">
-                          <span class="input-group-text" id="basic-addon2">@example.com</span>
+                          <span class="input-group-text" id="basic-addon2">%</span>
                         </div>
                       </div>
                     </div>
