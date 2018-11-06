@@ -271,7 +271,7 @@ $(document).ready( function () {
 	      window.rawAdgroupData = rawAdgroupData;
 
 	      console.log('DATASET: ');
-	      console.log(dataset);
+	      console.log(adGroupDataset);
 	      //console.log(adgroupDataBack);
 
 	      var adgrOptions = {
@@ -356,7 +356,7 @@ $(document).ready( function () {
 	                keywordDataBack = data[1];
 
 	                console.log('DATASET: ');
-	                console.log(dataset);
+	                console.log(keywordDataset);
 	                console.log(keywordDataBack);
 
 	                var kwOptions = {
