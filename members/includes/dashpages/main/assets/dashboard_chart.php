@@ -44,14 +44,14 @@
       yAxisID: 'A',
       data: adSpendArr,
       fill: 'origin',
-      pointRadius: 2.5,
+      pointRadius: 0,
       hoverRadius: 4,
       pointBorderColor: '#ffffff',
       pointBorderWidth: 1,
       pointBackgroundColor: "rgb(244, 72, 66)",
       hoverBorderWidth: 3,
-      backgroundColor: "rgba(244, 72, 66, 0.1)",
-      borderWidth: 1.5,
+      // backgroundColor: "rgba(244, 72, 66, 0.1)",
+      borderWidth: 2.5,
       borderColor: "rgba(244, 72, 66, 0.7)",
       type: 'line'
     }, {
@@ -59,14 +59,14 @@
       yAxisID: 'A',
       data: ppcSalesArr,
       fill: true,
-      pointRadius: 2.5,
+      pointRadius: 0,
       hoverRadius: 4,
       pointBorderColor: '#ffffff',
       pointBorderWidth: 1,
       pointBackgroundColor: "rgb(89, 255, 152)",
       hoverBorderWidth: 3,
-      backgroundColor: "rgba(89, 255, 152, 0.1)",
-      borderWidth: 1.2,
+      // backgroundColor: "rgba(89, 255, 152, 0.1)",
+      borderWidth: 2.5,
       borderColor: "rgba(89, 255, 152, 0.7)",
       type: 'line'
     }, {
@@ -84,8 +84,8 @@
 
     options: {
 	  tooltips: {
-		mode: 'x',
-	    intersect: false
+      mode: 'x',
+      intersect: false
 	  },
 	  hover: {
 		mode: 'x',
