@@ -66,6 +66,7 @@ $(document).ready( function () {
   var profileId     = <?= $_SESSION['profileId'] ?>;
   var adgroupDataBack = null;
   var rawAdgroupData  = null;
+  var adGroupDataset = null;
 
 	//var window.dataset = dataset;
 
@@ -262,7 +263,7 @@ $(document).ready( function () {
 	      data = JSON.parse(data);
 	      console.log(data);
 
-	      dataset         = data[0];
+	      adGroupDataset         = data[0];
 	      adgroupDataBack = data[1];
 	      rawAdgroupData  = data[2];
 	      window.rawAdgroupData = rawAdgroupData;
