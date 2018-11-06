@@ -47,8 +47,14 @@
               </div>
 
               <div class="tab-pane" id="description">
-                <p>The first thing you notice when you hold the phone is how great it feels in your hand. The cover glass curves down around the sides to meet the anodized aluminum enclosure in a remarkable, simplified design. </p>
-                <p>There are no distinct edges. No gaps. Just a smooth, seamless bond of metal and glass that feels like one continuous surface.</p>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <p>Spyder Campaign Structure</p>
+                    <input type="checkbox" class="toggle-spyder-campaigns" checked data-toggle="toggle" data-size="mini" />
+                  </div>
+                </div>
+
               </div>
 
               <!-- <div class="tab-pane" id="concept">
