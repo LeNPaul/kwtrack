@@ -304,7 +304,7 @@ $(document).ready( function () {
 	        } // drawCallback
 
 	      }; // adgrOptions
-	      dt = $("#campaign_manager").DataTable(adgrOptions);
+	      dt = $('#campaign_manager').DataTable(adgrOptions);
 	    }, // success (campaign manager)
 
 	    error: function(msg) {
@@ -319,7 +319,8 @@ $(document).ready( function () {
 	            adgroupName     = $(this).text();
 
 	            // backend adgroup data already stored in adgroupDataBack
-	            dt_adgroups.destroy();
+	            dt.destroy();
+				$('#campaign_manager').empty();
 
 	            // Breadcrumb text. Edit later to include links that go back.
 	            $("#bc").html(function(index, currentText){
@@ -388,8 +389,7 @@ $(document).ready( function () {
 	                  } // drawCallback (keyword manager)
 	                }; // kwOptions
 
-	                dt_adgroups.destroy();
-	                dt_keywords = $("#keyword_manager").DataTable(kwOptions);
+	                dt = $('#campaign_manager').DataTable(kwOptions);
 	              }, // success (keyword manager)
 
 	              error: function(msg) {
