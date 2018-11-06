@@ -104,299 +104,299 @@ $(document).ready( function () {
         dataTableFlag = 1;
 	  } //drawCallback
 	}); //DataTable
-  
-        // Status toggles
-      $(".toggle").on("click", function() {
-        $(this).toggleClass('toggle-selected');
-        var campaignName = $(this).parent().next().children(".c_link").text();
-        
-        console.log(dt.rows('.toggle-selected').data());
 
-        if ($(this).hasClass("off")) {
-          console.log('turning toggle on');
-        } else {
-          console.log('turning toggle off');
-        }
-        
-        toggleActive = $(this).hasClass("off");
-        
-        // Toggle campaign w/ AJAX
-        $.ajax({
-          type: "POST",
-          url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
-          data: {
-            toggle: toggleActive,
-            campaignName: campaignName,
-            cDataBack: databack,
-            user_id: user_id,
-            refresh_token: refresh_token,
-            profileId: profileId
-          },
-          
-          success: function(alertText) {
-            swal({
-              title: "Success!",
-              text: alertText,
-              type: "success",
-              confirmButtonText: "Close"
-            });
-            $(this).toggleClass('toggle-selected');
-          },
-          error: function() {
-            swal({
-              title: "Error",
-              text: "An error has occurred. Please try again in a few moments.",
-              type: "error",
-              confirmButtonText: "Close"
-            });
-          }
+  // Status toggles
+  $(".toggle").on("click", function() {
+    $(this).toggleClass('toggle-selected');
+    var campaignName = $(this).parent().next().children(".c_link").text();
+
+    console.log(dt.rows('.toggle-selected').data());
+
+    if ($(this).hasClass("off")) {
+      console.log('turning toggle on');
+    } else {
+      console.log('turning toggle off');
+    }
+
+    toggleActive = $(this).hasClass("off");
+
+    // Toggle campaign w/ AJAX
+    $.ajax({
+      type: "POST",
+      url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+      data: {
+        toggle: toggleActive,
+        campaignName: campaignName,
+        cDataBack: databack,
+        user_id: user_id,
+        refresh_token: refresh_token,
+        profileId: profileId
+      },
+
+      success: function(alertText) {
+        swal({
+          title: "Success!",
+          text: alertText,
+          type: "success",
+          confirmButtonText: "Close"
         });
-      });
-  
-      // Handle budget changes when textbox is clicked
-      $(".input-group input.form-control").on("focus", function() {
-        $(this).next().children().show();
-      });
-      $(".input-group input.form-control").on("blur", function() {
-        $(this).next().children().hide(200);
-      });
-      $('.input-group input.form-control').keypress(function (e) {
-        var key = e.which;
-        
-        if (key == 13) {
-          $(this).next().children("button").click();
-          return false;
-        }
-      });
-
-	  //Handle budget changes when save button is clicked
-      $(".btn-edit-budget").on("click", function() {
-        var budgetVal = $(this).parent().prev().val();
-        // Verify input to check if numeric
-        if (!$.isNumeric(budgetVal) || budgetVal < 1) {
-          // Error and clear textbox if not numeric
-          showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
-          $(this).parent().prev().val('');
-        } else {
-          campaignName = $(this).parent().parent().parent().prev().prev().children(".c_link").text();
-          $.ajax({
-            type: "POST",
-            url: "includes/dashpages/cmanager/helpers/change_budget.php",
-            data: {
-              user_id: user_id,
-              campaignName: campaignName,
-              cDataBack: databack,
-              refresh_token: refresh_token,
-              profileId: profileId,
-              newBudget: budgetVal
-            },
-
-            success: function(alertText) {
-              swal({
-                title: "Success!",
-                text: alertText,
-                type: "success",
-                confirmButtonText: "Close"
-              });
-            }
-          });
-        }
-      });
-  
-      // Handle selections from the user
-      rowClasses = $('#campaign_manager tbody tr').attr("class");
-      if (rowClasses.includes("selected")) {
-        $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
-      } else {
-        $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
+        $(this).toggleClass('toggle-selected');
+      },
+      error: function() {
+        swal({
+          title: "Error",
+          text: "An error has occurred. Please try again in a few moments.",
+          type: "error",
+          confirmButtonText: "Close"
+        });
       }
-  
-	  // Handle and style toggle buttons
-      $('.toggle-campaign').bootstrapToggle({
-        on: '<i class="fa fa-play"></i>',
-        off: '<i class="fa fa-pause"></i>',
-        size: "small",
-        onstyle: "success",
-        offstyle: "primary"
-      });
-      $(".toggle-campaign-archive").bootstrapToggle({
-        off: '',
-        size: "small"
-      });
-  
-      //breadcrumbs ALL CAMPAIGNS click
-    $(".all_link").on("click", function() {
-      dt.clear().rows.add(dataset).draw();
-      console.log("all campaigns clicked");
     });
-  
-  $(".c_link").on("click", function() {
-          currentCampaign     = $(this).html();
-          var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
-          console.log(campaignDataBack);
-          dt.destroy();
-          
-          // Handle breadcrumbs
-          $("#bc").html(function(index, currentText) {
-            return currentText + " <b>></b> " + currentCampaign;
+  });
+
+  // Handle budget changes when textbox is clicked
+  $(".input-group input.form-control").on("focus", function() {
+    $(this).next().children().show();
+  });
+  $(".input-group input.form-control").on("blur", function() {
+    $(this).next().children().hide(200);
+  });
+  $('.input-group input.form-control').keypress(function (e) {
+    var key = e.which;
+
+    if (key == 13) {
+      $(this).next().children("button").click();
+      return false;
+    }
+  });
+
+	//Handle budget changes when save button is clicked
+  $(".btn-edit-budget").on("click", function() {
+    var budgetVal = $(this).parent().prev().val();
+    // Verify input to check if numeric
+    if (!$.isNumeric(budgetVal) || budgetVal < 1) {
+      // Error and clear textbox if not numeric
+      showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
+      $(this).parent().prev().val('');
+    } else {
+      campaignName = $(this).parent().parent().parent().prev().prev().children(".c_link").text();
+      $.ajax({
+        type: "POST",
+        url: "includes/dashpages/cmanager/helpers/change_budget.php",
+        data: {
+          user_id: user_id,
+          campaignName: campaignName,
+          cDataBack: databack,
+          refresh_token: refresh_token,
+          profileId: profileId,
+          newBudget: budgetVal
+        },
+
+        success: function(alertText) {
+          swal({
+            title: "Success!",
+            text: alertText,
+            type: "success",
+            confirmButtonText: "Close"
           });
+        }
+      });
+    }
+  });
 
-          $.ajax({
-            type: "POST",
+  // Handle selections from the user
+  rowClasses = $('#campaign_manager tbody tr').attr("class");
+  if (rowClasses.includes("selected")) {
+    $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
+  } else {
+    $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
+  }
 
-            data: {
-              "campaignName"     : currentCampaign,
-              "campaignDataBack" : campaignDataBack
-            },
-            dataType: "text",
+	// Handle and style toggle buttons
+  $('.toggle-campaign').bootstrapToggle({
+    on: '<i class="fa fa-play"></i>',
+    off: '<i class="fa fa-pause"></i>',
+    size: "small",
+    onstyle: "success",
+    offstyle: "primary"
+  });
+  $(".toggle-campaign-archive").bootstrapToggle({
+    off: '',
+    size: "small"
+  });
 
-            url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
+  //breadcrumbs ALL CAMPAIGNS click
+  $(".all_link").on("click", function() {
+    dt.clear().rows.add(dataset).draw();
+    console.log("all campaigns clicked");
+  });
 
-            success: function(data){
-              console.log('running...');
-              data = JSON.parse(data);
-              console.log(data);
+  $(".c_link").on("click", function() {
+	  currentCampaign     = $(this).html();
+	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
+	  console.log(campaignDataBack);
+	  dt.destroy();
 
-              var dataset         = data[0];
-              var adgroupDataBack = data[1];
-              var rawAdgroupData  = data[2];
-              window.rawAdgroupData = rawAdgroupData;
-  
-              console.log('DATASET: ');
-              console.log(dataset);
-              //console.log(adgroupDataBack);
+	  // Handle breadcrumbs
+	  $("#bc").html(function(index, currentText) {
+	    return currentText + " <b>></b> " + currentCampaign;
+	  });
 
-              var adgrOptions = {
-                scrollX: true,
-                paging: true,
-                pagingType: "full_numbers",
-                lengthMenu: [
-                  [10, 25, 50, 100, -1],
-                  [10, 25, 50, 100, "All"]
-                ],
-                data: dataset,
-                columns: [
-                  { title: "Active" },
-                  { title: "Ad Group Name" },
-                  { title: "Status" },
-                  { title: "Default Bid" },
-                  { title: "Impressions" },
-                  { title: "Clicks" },
-                  { title: "CTR" },
-                  { title: "Ad Spend" },
-                  { title: "Avg. CPC" },
-                  { title: "Units Sold" },
-                  { title: "Sales" },
-                  { title: "ACoS" }
-                ],
+	  $.ajax({
+	    type: "POST",
 
-                drawCallback: function(settings) {
-                  // Set dataTableFlag to 2 whenever campaign manager is drawn
-                  dataTableFlag = 2;
-					
-                  $('td input').bootstrapToggle();
+	    data: {
+	      "campaignName"     : currentCampaign,
+	      "campaignDataBack" : campaignDataBack
+	    },
+	    dataType: "text",
 
-                  $(".ag_link").on("click", function() {
+	    url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
 
-                    adgroupName     = $(this).text();
+	    success: function(data){
+	      console.log('running...');
+	      data = JSON.parse(data);
+	      console.log(data);
 
-                    // backend adgroup data already stored in adgroupDataBack
-                    dt_adgroups.destroy();
+	      var dataset         = data[0];
+	      var adgroupDataBack = data[1];
+	      var rawAdgroupData  = data[2];
+	      window.rawAdgroupData = rawAdgroupData;
 
-                    // Breadcrumb text. Edit later to include links that go back.
-                    $("#bc").html(function(index, currentText){
-						          console.log(currentText);
-                      return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>></b> " + adgroupName;
-                    });
+	      console.log('DATASET: ');
+	      console.log(dataset);
+	      //console.log(adgroupDataBack);
 
-                    $.ajax({
-                      type: "POST",
+	      var adgrOptions = {
+	        scrollX: true,
+	        paging: true,
+	        pagingType: "full_numbers",
+	        lengthMenu: [
+	          [10, 25, 50, 100, -1],
+	          [10, 25, 50, 100, "All"]
+	        ],
+	        data: dataset,
+	        columns: [
+	          { title: "Active" },
+	          { title: "Ad Group Name" },
+	          { title: "Status" },
+	          { title: "Default Bid" },
+	          { title: "Impressions" },
+	          { title: "Clicks" },
+	          { title: "CTR" },
+	          { title: "Ad Spend" },
+	          { title: "Avg. CPC" },
+	          { title: "Units Sold" },
+	          { title: "Sales" },
+	          { title: "ACoS" }
+	        ],
 
-                      data: {
-                        "adgroupName"     : adgroupName,
-                        "adgroupDataBack" : adgroupDataBack
-                      },
+	        drawCallback: function(settings) {
+	          // Set dataTableFlag to 2 whenever campaign manager is drawn
+	          dataTableFlag = 2;
 
-                      dataType: "text",
+	          $('td input').bootstrapToggle();
 
-                      url: "includes/dashpages/cmanager/helpers/get_keywords.php",
+	          $(".ag_link").on("click", function() {
 
-                      success: function(data) {
-                        console.log("running keyword campaign manager section");
-                        console.log(data);
+	            adgroupName     = $(this).text();
 
-                        data            = JSON.parse(data);
+	            // backend adgroup data already stored in adgroupDataBack
+	            dt_adgroups.destroy();
 
-                        console.log(data);
+	            // Breadcrumb text. Edit later to include links that go back.
+	            $("#bc").html(function(index, currentText){
+			          console.log(currentText);
+	              return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>></b> " + adgroupName;
+	            });
 
-                        dataset         = data[0];
-                        keywordDataBack = data[1];
+	            $.ajax({
+	              type: "POST",
 
-                        console.log('DATASET: ');
-                        console.log(dataset);
-                        console.log(keywordDataBack);
+	              data: {
+	                "adgroupName"     : adgroupName,
+	                "adgroupDataBack" : adgroupDataBack
+	              },
 
-                        var kwOptions = {
-                          scrollX: true,
-                          paging: true,
-                          pagingType: "full_numbers",
-                          lengthMenu: [
-                              [10, 25, 50, 100, -1],
-                              [10, 25, 50, 100, "All"]
-                            ],
-                          data: dataset,
-                          columns: [
-                            { title: "Active" },
-                            { title: "Keyword" },
-                            { title: "Match Type" },
-                            { title: "Status" },
-                            { title: "Bid" },
-                            { title: "Impressions" },
-                            { title: "Clicks" },
-                            { title: "CTR" },
-                            { title: "Ad Spend" },
-                            { title: "Avg. CPC" },
-                            { title: "Units Sold" },
-                            { title: "Sales" },
-                            { title: "ACoS" }
-                          ],
+	              dataType: "text",
 
-                          drawCallback: function(settings) {
-                            // Set dataTableFlag to 1 whenever campaign manager is drawn
-                            dataTableFlag = 3;
-                            
-                            $('td input').bootstrapToggle();
+	              url: "includes/dashpages/cmanager/helpers/get_keywords.php",
 
-                          } // drawCallback (keyword manager)
-                        }; // kwOptions
+	              success: function(data) {
+	                console.log("running keyword campaign manager section");
+	                console.log(data);
 
-                        dt_adgroups.destroy();
-                        dt_keywords = $("#keyword_manager").DataTable(kwOptions);
-                      }, // success (keyword manager)
+	                data            = JSON.parse(data);
 
-                      error: function(msg) {
-                        alert(msg);
-                      } // error (keyword manager)
+	                console.log(data);
 
-                    });
+	                dataset         = data[0];
+	                keywordDataBack = data[1];
 
-                  }); // .ag_link on click
+	                console.log('DATASET: ');
+	                console.log(dataset);
+	                console.log(keywordDataBack);
 
-                } // drawCallback
+	                var kwOptions = {
+	                  scrollX: true,
+	                  paging: true,
+	                  pagingType: "full_numbers",
+	                  lengthMenu: [
+	                      [10, 25, 50, 100, -1],
+	                      [10, 25, 50, 100, "All"]
+	                    ],
+	                  data: dataset,
+	                  columns: [
+	                    { title: "Active" },
+	                    { title: "Keyword" },
+	                    { title: "Match Type" },
+	                    { title: "Status" },
+	                    { title: "Bid" },
+	                    { title: "Impressions" },
+	                    { title: "Clicks" },
+	                    { title: "CTR" },
+	                    { title: "Ad Spend" },
+	                    { title: "Avg. CPC" },
+	                    { title: "Units Sold" },
+	                    { title: "Sales" },
+	                    { title: "ACoS" }
+	                  ],
 
-              }; // adgrOptions
+	                  drawCallback: function(settings) {
+	                    // Set dataTableFlag to 1 whenever campaign manager is drawn
+	                    dataTableFlag = 3;
 
-              dt.destroy(false);
-              dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
-            }, // success (campaign manager)
+	                    $('td input').bootstrapToggle();
 
-            error: function(msg) {
-              alert(msg);
-            } //error (campaign manager)
+	                  } // drawCallback (keyword manager)
+	                }; // kwOptions
 
-          }); //ajax
-        }); //on campaign name click
-	  
+	                dt_adgroups.destroy();
+	                dt_keywords = $("#keyword_manager").DataTable(kwOptions);
+	              }, // success (keyword manager)
+
+	              error: function(msg) {
+	                alert(msg);
+	              } // error (keyword manager)
+
+	            });
+
+	          }); // .ag_link on click
+
+	        } // drawCallback
+
+	      }; // adgrOptions
+
+	      dt.destroy(false);
+	      dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
+	    }, // success (campaign manager)
+
+	    error: function(msg) {
+	      alert(msg);
+	    } //error (campaign manager)
+
+	  }); //ajax
+	}); //on campaign name click
+
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
 
@@ -434,7 +434,7 @@ $(document).ready( function () {
       return $('input', td).attr('data-value') * 1;
     } );
   }
-  
+
   /* NOTIFICATIONS */
   function showNotification(from, align, bootstrapColor, message) {
     $.notify({
@@ -449,7 +449,7 @@ $(document).ready( function () {
       }
     });
   }
-  
+
   /* DATA RANGE PICKER */
 
   var start = moment().subtract(59, 'days');
@@ -476,17 +476,17 @@ $(document).ready( function () {
   }, cb);
 
   $('#campaignRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-  
+
 
   //TODO: figure out how to import adgroup data from datatable when dataTableFlag == 2
   function cmUpdate(startIndex, endIndex) {
-    
+
     var round   = function (value, decimals) {
       return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
     };
-    
+
     var dateArr = <?= json_encode($dateArr) ?>;
-    
+
     // If the campaign table is currently drawn
     if (dataTableFlag === 1) {
       var newDtData = [];
@@ -558,14 +558,14 @@ $(document).ready( function () {
       }
       console.log(newDtData);
       dt.clear().rows.add(newDtData).draw();
-      
+
     }
     // If the adgroup table is being drawn
     else if (dataTableFlag === 2) {
-      
+
       var newAdgroupData = [];
       var adgroupData    = window.rawAdgroupData;
-      
+
       console.log(adgroupData);
 
       var startArr   = dateArr.indexOf(startIndex);
@@ -631,24 +631,23 @@ $(document).ready( function () {
         unitsSoldSum   = 0;
         salesSum       = 0;
       }
-      
+
       console.log(newAdgroupData);
       dt_adgroups.clear().rows.add(newAdgroupData).draw();
-    
+
     }
     // If the keyword table is currently drawn
     else if (dataTableFlag === 3) {
-      
+
       var newKeywordData = [];
       var keywordData    = '';
-      
+
     }
 
-    
-    
+
+
   }
 
 }); //document.ready
 
 </script>
-
