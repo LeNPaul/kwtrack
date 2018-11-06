@@ -40,13 +40,27 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$result = $client->updateCampaigns(array(
-  array("campaignId" => 40018060817719,
-    "state"      => 'paused')
-));
+$kwSnapshot = $client->requestSnapshot(
+  "keywords",
+  array(
+    "stateFilter"  => "enabled,paused,archived",
+    "campaignType" => "sponsoredProducts"));
+$snapshotId = json_decode($kwSnapshot['response'], true);
+$snapshotId = $snapshotId['snapshotId'];
+
+do {
+  $report = $client->getSnapshot($snapshotId);
+  $result2 = json_decode($report['response'], true);
+  if (array_key_exists('status', $result2)) {
+    $status = $result2['status'];
+  } else {
+    $status = 'DONE';
+    $report = $result2;
+  }
+} while ($status == 'IN_PROGRESS');
 
 echo '<pre>';
-var_dump($result);
+var_dump($report);
 echo '</pre>';
 
 

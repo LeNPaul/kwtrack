@@ -64,6 +64,7 @@ function getReport($client, $reportId) {
       $status = $result2['status'];
     } else {
       $status = 'DONE';
+      $status = 'DONE';
       $report = $result2;
     }
   } while ($status == 'IN_PROGRESS');
@@ -265,7 +266,8 @@ function getReport($client, $reportId) {
     // Get keyword snapshot so we can use it to get states and bids later
     $kwSnapshot = $client->requestSnapshot(
       "keywords",
-      array("stateFilter"  => "enabled,paused,archived",
+      array(
+        "stateFilter"  => "enabled,paused,archived",
         "campaignType" => "sponsoredProducts"));
     $snapshotId = json_decode($kwSnapshot['response'], true);
     $snapshotId = $snapshotId['snapshotId'];

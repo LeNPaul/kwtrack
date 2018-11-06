@@ -40,6 +40,29 @@ use PDO;
   }
 
 /*
+*  function getSnapshot(Obj $client, Int $snapshotId) --> Array $report
+*    --> Gets snapshot from Advertising API with $reportId.
+*
+*      --> Obj $client     - Advertising API client object
+*      --> Int $snapshotId - Report ID of the report we are retrieving
+*      --> Array $report   - Snapshot generated from Amazon
+*/
+
+function getSnapshot($client, $snapshotId) {
+  do {
+    $report = $client->getSnapshot($snapshotId);
+    $result2 = json_decode($report['response'], true);
+    if (array_key_exists('status', $result2)) {
+      $status = $result2['status'];
+    } else {
+      $status = 'DONE';
+      $report = $result2;
+    }
+  } while ($status == 'IN_PROGRESS');
+  return $report;
+}
+
+/*
  * function fast_array_diff(Array $b, Array $a) --> Array $d
  *   --> Returns the difference of elements in $a found in $b.
  */
@@ -102,8 +125,8 @@ function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
     $ctr         = ($impressions == 0) ? 0.0 : round($clicks / $impressions, 2);
     $ad_spend    = $arrKWReport[$index]['cost'];
     $avg_cpc     = ($clicks == 0) ? 0.0 : round($ad_spend / $clicks, 2);
-    $units_sold  = $arrKWReport[$index]['attributedUnitsOrdered1d'];
-    $sales       = $arrKWReport[$index]['attributedSales1d'];
+    $units_sold  = $arrKWReport[$index]['attributedUnitsOrdered7d'];
+    $sales       = $arrKWReport[$index]['attributedSales7d'];
 
     $sql2     = "SELECT * FROM ppc_keywords WHERE amz_kw_id={$kw_id}";
     $stmt2    = $pdo->query($sql2);
@@ -168,6 +191,8 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
                 sales=:sales
                 WHERE kw_id=:kw_id";
   $stmt  = $pdo->prepare($sql);
+  
+  // Request snapshot for keywords
 
   for ($i = 0; $i < count($arrKWReport); $i++) {
     $kw_id = $arrKWReport[$i]['keywordId'];
@@ -182,8 +207,8 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
     $ctr         = ($impressions == 0) ? 0.0 : round($clicks / $impressions, 2);
     $ad_spend    = $arrKWReport[$i]['cost'];
     $avg_cpc     = ($clicks == 0) ? 0.0 : round($ad_spend / $clicks, 2);
-    $units_sold  = $arrKWReport[$i]['attributedUnitsOrdered1d'];
-    $sales       = $arrKWReport[$i]['attributedSales1d'];
+    $units_sold  = $arrKWReport[$i]['attributedUnitsOrdered7d'];
+    $sales       = $arrKWReport[$i]['attributedSales7d'];
 
     $sql2     = "SELECT * FROM ppc_keywords WHERE amz_kw_id={$kw_id}";
     $stmt2    = $pdo->query($sql2);
@@ -201,7 +226,7 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
     First check if length = 59. If yes, that means that $this
     update is the FIRST update. Only need to check 1 array since
     all of them will be the same length anyways.
-     */
+    */
 
     if (count($impressionsDb) == 59) {
       array_unshift($impressionsDb, $impressions);
@@ -274,11 +299,13 @@ for ($i = 0; $i < count($userIDs); $i++) {
   $client = new Client($config);
   $client->profileId = $userIDs[$i]['profileId'];
   $date = date('Ymd', strtotime('-1 days'));
+  
+  
   $result = $client->requestReport(
     "keywords",
     array("reportDate"    => $date,
           "campaignType"  => "sponsoredProducts",
-          "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered1d,attributedSales1d"
+          "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered7d,attributedSales7d"
     )
   );
 
@@ -325,8 +352,8 @@ for ($i = 0; $i < count($userIDs); $i++) {
          array_unshift($ctr, ($result[$index]['clicks'] == 0) ? 0.0 : ($result[$index]['clicks'] / $result[$index]['impressions']));
          array_unshift($ad_spend, $result[$index]['cost']);
          array_unshift($avg_cpc, ($result[$index]['clicks'] == 0) ? 0.0 : ($result[$index]['cost'] / $result[$index]['clicks']));
-         array_unshift($units_sold, $result[$index]['attributedUnitsOrdered1d']);
-         array_unshift($sales, $result[$index]['attributedSales1d']);
+         array_unshift($units_sold, $result[$index]['attributedUnitsOrdered7d']);
+         array_unshift($sales, $result[$index]['attributedSales7d']);
 
          // Get bid and status of the current keyword
          $kw = $client->getBiddableKeyword($kw_id);
