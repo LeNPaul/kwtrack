@@ -314,7 +314,7 @@ $(document).ready( function () {
 	  }); //ajax
 	}); //on campaign name click
 	
-	$(".ag_link").on("click", function() {
+	$("#ag_link").on("click", function() {
 
 	            adgroupName     = $(this).text();
 
