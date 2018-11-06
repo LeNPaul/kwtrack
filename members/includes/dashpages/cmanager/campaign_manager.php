@@ -237,6 +237,7 @@ $(document).ready( function () {
 	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
 	  console.log(campaignDataBack);
 	  dt.destroy();
+	  $('#campaign_manager').empty();
 
 	  // Handle breadcrumbs
 	  $("#bc").html(function(index, currentText) {
@@ -303,9 +304,7 @@ $(document).ready( function () {
 	        } // drawCallback
 
 	      }; // adgrOptions
-
-	      dt.destroy(false);
-	      dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
+	      dt = $("#campaign_manager").DataTable(adgrOptions);
 	    }, // success (campaign manager)
 
 	    error: function(msg) {
