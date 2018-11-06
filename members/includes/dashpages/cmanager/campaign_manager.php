@@ -298,7 +298,24 @@ $(document).ready( function () {
 
 	          $('td input').bootstrapToggle();
 
-	          $(".ag_link").on("click", function() {
+	          
+
+	        } // drawCallback
+
+	      }; // adgrOptions
+
+	      dt.destroy(false);
+	      dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
+	    }, // success (campaign manager)
+
+	    error: function(msg) {
+	      alert(msg);
+	    } //error (campaign manager)
+
+	  }); //ajax
+	}); //on campaign name click
+	
+	$(".ag_link").on("click", function() {
 
 	            adgroupName     = $(this).text();
 
@@ -383,21 +400,6 @@ $(document).ready( function () {
 	            });
 
 	          }); // .ag_link on click
-
-	        } // drawCallback
-
-	      }; // adgrOptions
-
-	      dt.destroy(false);
-	      dt_adgroups = $("#adgroup_manager").DataTable(adgrOptions);
-	    }, // success (campaign manager)
-
-	    error: function(msg) {
-	      alert(msg);
-	    } //error (campaign manager)
-
-	  }); //ajax
-	}); //on campaign name click
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
