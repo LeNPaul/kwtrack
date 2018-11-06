@@ -314,7 +314,7 @@ $(document).ready( function () {
 	  }); //ajax
 	}); //on campaign name click
 	
-	$(".ag_link").on("click", function() {
+	$("#campaign_manager").on("click", ".ag_link",  function() {
 	            adgroupName     = $(this).text();
 
 	            // backend adgroup data already stored in adgroupDataBack
