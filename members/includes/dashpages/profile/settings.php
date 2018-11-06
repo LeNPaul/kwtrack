@@ -53,12 +53,12 @@
                     <hr />
 
                     <div class="form-group">
-                      <label>Spyder Campaign Structure</label>
+                      <label class="user-settings">Spyder Campaign Structure</label>
                       <input type="checkbox" class="toggle-spyder-campaigns" checked data-toggle="toggle" data-size="small" />
                     </div>
 
                     <div class="form-group">
-                      <label>Bid Adjustment Threshold</label>
+                      <label class="user-settings">Bid Adjustment Threshold</label>
                       <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="" aria-label="BAT" aria-describedby="basic-addon2" />
                         <div class="input-group-append">
@@ -67,7 +67,7 @@
                       </div>
                     </div>
 
-                    <h5>Negative Keyword Rules</h5>
+                    <h5>Negative Keyword Parameters</h5>
                     <hr />
 
 
