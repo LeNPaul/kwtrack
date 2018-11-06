@@ -104,6 +104,7 @@ table.dataTable td {
 
 label.user-settings {
   font-size: 1em !important;
+  display: block;
 }
 
 
