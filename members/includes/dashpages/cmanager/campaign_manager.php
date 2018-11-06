@@ -65,7 +65,7 @@ $(document).ready( function () {
   var refresh_token = "<?= $refresh_token ?>";
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
-
+	var window.dataset = dataset;
 
   var dt  = $('#campaign_manager').DataTable(
     {
@@ -103,6 +103,7 @@ $(document).ready( function () {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
         dataTableFlag = 1;
 	  } //drawCallback
+
 	}); //DataTable
 
   // Status toggles
@@ -205,6 +206,7 @@ $(document).ready( function () {
 
   // Handle selections from the user
   rowClasses = $('#campaign_manager tbody tr').attr("class");
+
   if (rowClasses.includes("selected")) {
     $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
   } else {
@@ -516,7 +518,8 @@ $(document).ready( function () {
           unitsSoldSum   += dtData[j][10][i];
           salesSum       += dtData[j][11][i];
           console.log('campaign #' + j + ' - sales: ' + dtData[j][11][i] + ' for day #' + i);
-        }
+
+				}
 
         console.log("ad spend sum: " + adSpendSum, "sales sum: " + salesSum);
         var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
