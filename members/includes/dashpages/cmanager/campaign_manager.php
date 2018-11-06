@@ -65,7 +65,7 @@ $(document).ready( function () {
   var refresh_token = "<?= $refresh_token ?>";
   var profileId     = <?= $_SESSION['profileId'] ?>;
 
-	var window.dataset = dataset;
+	//var window.dataset = dataset;
 
   var dt  = $('#campaign_manager').DataTable(
     {
