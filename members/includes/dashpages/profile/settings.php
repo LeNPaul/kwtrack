@@ -50,8 +50,26 @@
 
                 <div class="col-12">
                   <div class="form-group">
-                    <p>Spyder Campaign Structure</p>
+
+                    <h5>General</h5>
+                    <hr />
+
+                    <label>Spyder Campaign Structure</label>
                     <input type="checkbox" class="toggle-spyder-campaigns" checked data-toggle="toggle" data-size="small" />
+
+                    <label>Bid Adjustment Threshold</label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="" aria-label="BAT" />
+                      <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2">@example.com</span>
+                      </div>
+                    </div>
+
+                    <h5>Negative Keyword Rules</h5>
+                    <hr />
+
+
+
                   </div>
                 </div>
 
