@@ -131,7 +131,7 @@
         return e.length > 0
       });
 
-      a=e.flatMap(function(e) {
+      var a = e.flatMap(function(e) {
         return [{
           key: e[1],
           matchType: "EXACT"
