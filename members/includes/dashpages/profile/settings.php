@@ -5,7 +5,7 @@
 
 <div class="row">
   
-  <input type="text" id="keyword" name="keyword" />
+  <textarea class="form-control" id="keywords" placeholder="Separate your keywords with a new line (200 lines maximum)" rows="6"></textarea>
   <button id="search-btn">Get Volume</button>
   
   <p id="exact_volume"></p>
@@ -119,6 +119,24 @@
 
   $(function() {
 
+    e = $("#keywords").val().split(/\n/).map(function(e) {
+      return e.trim()
+    }).filter(function(e) {
+      return e.length > 0
+    });
+
+    a=e.flatMap(function(e) {
+      return [{
+        key: e[1],
+        matchType: "EXACT"
+      }, {
+        key: e[1],
+        matchType: "BROAD"
+      }]
+    });
+
+    console.log(a);
+    
     $("#search-btn").on("click", function() {
       console.log("Asdfasdfasdf");
       var kw = $("#keyword").text();
