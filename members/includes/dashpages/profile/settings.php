@@ -121,7 +121,7 @@
 
     
 
-    console.log(a);
+ 
     
     $("#search-btn").on("click", function() {
 
@@ -140,8 +140,9 @@
           matchType: "BROAD"
         }]
       });
-      
 
+      console.log(a);
+      
       var kw = $("#keyword").text();
       $.ajax({
         type: "POST",
