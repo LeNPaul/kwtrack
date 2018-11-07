@@ -5,7 +5,7 @@
 
 <div class="row">
   
-  <input type="text" name="keyword" />
+  <input type="text" id="keyword" name="keyword" />
   <button id="#search-btn">Get Volume</button>
   
   <p id="exact_volume"></p>

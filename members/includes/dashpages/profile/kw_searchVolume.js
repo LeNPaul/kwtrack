@@ -7,18 +7,20 @@ $(function() {
       contentType: "application/json",
       data: JSON.stringify({
         pageId: "https://www.amazon.com/HSA/pages/default",
-        keywordList: e.flatMap(function(e) {
-          return [{
-            key: e[1],
+        keywordList: [
+          {
+            key: $("#keyword").text(),
             matchType: "EXACT"
           }, {
-            key: e[1],
+            key: $("#keyword").text(),
             matchType: "BROAD"
-          }]
-        })
+          }
+          ]
+
       }),
       success: function(r) {
         console.log(r);
+
         "object" === ("undefined" == typeof r ? "undefined" : _typeof(r)) && 0 !== r.length || alert("Please sign into your SellerCentral to get the Search Volume data.");
         var a = !0,
             i = !1,
