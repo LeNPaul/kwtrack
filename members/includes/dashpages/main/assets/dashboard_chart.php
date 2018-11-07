@@ -115,6 +115,12 @@
         backgroundColor: 'rgba(0, 119, 204, 0.8)',
         borderColor: 'rgba(0, 119, 204, 0.3)',
         fill: false
+      }, {
+        label: 'asdfasdf',
+        data: [1,2,3,4,5,6,7],
+        backgroundColor: 'rgba(0, 119, 204, 0.8)',
+        borderColor: 'rgba(0, 119, 204, 0.3)',
+        fill: false
       }]
     },
     options: {
