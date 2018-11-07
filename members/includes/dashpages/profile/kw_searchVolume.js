@@ -1,6 +1,7 @@
 $(function() {
 
   $("#search-btn").on("click", function() {
+    console.log("Asdfasdfasdf");
     var kw = $("#keyword").text();
     $.ajax({
       type: "POST",
