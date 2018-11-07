@@ -5,6 +5,31 @@
 <script type="text/javascript">
   $(function() {
 
+    Chart.defaults.LineWithLine = Chart.defaults.line;
+    Chart.controllers.LineWithLine = Chart.controllers.line.extend({
+      draw: function(ease) {
+        Chart.controllers.line.prototype.draw.call(this, ease);
+
+        if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
+          var activePoint = this.chart.tooltip._active[0],
+              ctx = this.chart.ctx,
+              x = activePoint.tooltipPosition().x,
+              topY = this.chart.scales['y-axis-0'].top,
+              bottomY = this.chart.scales['y-axis-0'].bottom;
+
+          // draw line
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(x, topY);
+          ctx.lineTo(x, bottomY);
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = '#07C';
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+    });
+
     var start = moment().subtract(59, 'days');
     var end = moment();
 
@@ -47,7 +72,7 @@
       pointRadius: 0,
       hoverRadius: 4,
       pointBorderColor: '#ffffff',
-      pointBorderWidth: 1.5,
+      pointBorderWidth: 2,
       pointBackgroundColor: "rgb(244, 72, 66)",
       hoverBorderWidth: 3,
       // backgroundColor: "rgba(244, 72, 66, 0.1)",
@@ -62,7 +87,7 @@
       pointRadius: 0,
       hoverRadius: 4,
       pointBorderColor: '#ffffff',
-      pointBorderWidth: 1.5,
+      pointBorderWidth: 2,
       pointBackgroundColor: "rgb(89, 255, 152)",
       hoverBorderWidth: 3,
       // backgroundColor: "rgba(89, 255, 152, 0.1)",
@@ -79,7 +104,7 @@
   };
 
   var myChart = new Chart(ctx, {
-    type: "bar",
+    type: "LineWithLine",
     data: lineData,
 
     options: {
@@ -160,22 +185,22 @@
     myChart.data.datasets[2].data = subAcos;
 
     myChart.update();
-  };
+  }
 
-  $(document).ready(function(){
-	$("#lineChart").on("mousemove", function(evt) {
-	  var element = $("#cursor"),
-	  offsetLeft = element.offset().left,
-		domElement = element.get(0),
-		clientX = parseInt(evt.clientX - offsetLeft),
-		ctx = element.get(0).getContext('2d');
+  
+  /*$("#lineChart").on("mousemove", function(evt) {
+    var element = $("#cursor"),
+    offsetLeft = element.offset().left,
+    domElement = element.get(0),
+    clientX = parseInt(evt.clientX - offsetLeft),
+    ctx = element.get(0).getContext('2d');
 
-	  ctx.clearRect(0, 0, domElement.width, domElement.height),
-	  ctx.beginPath(),
-		ctx.moveTo(clientX, 33),
-		ctx.lineTo(clientX, document.getElementById('lineChart').offsetHeight - 53),
-		ctx.strokeStyle = "#07C",
-		ctx.stroke()
-	});
-  });
+    ctx.clearRect(0, 0, domElement.width, domElement.height),
+    ctx.beginPath(),
+    ctx.moveTo(clientX, 33),
+    ctx.lineTo(clientX, document.getElementById('lineChart').offsetHeight - 53),
+    ctx.strokeStyle = "#07C",
+    ctx.stroke()
+  });*/
+  
 </script>
