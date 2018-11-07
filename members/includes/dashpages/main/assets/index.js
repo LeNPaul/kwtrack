@@ -409,12 +409,12 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
     $("#asin").val(""), $("#keywords").val("")
   }),
 
-    $("#search-btn").click(function() {
+    $("#search-btn").click(function() { console.log("asdfasdfasdf");
     i = {}, a(!1)
   });
   var s = function(e, o) {
         if ($("#check-volume").is(":checked"))
-
+          console.log("Asdf");
           $.ajax({
           type: "POST",
           url: "https://sellercentral.amazon." + $("#country").val() + "/sspa/hsa/cm/keywords/power",
@@ -432,6 +432,7 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
             })
           }),
           success: function(r) {
+            console.log(r);
             "object" === ("undefined" == typeof r ? "undefined" : _typeof(r)) && 0 !== r.length || alert("Please sign into your SellerCentral to get the Search Volume data.");
             var a = !0,
                 i = !1,
