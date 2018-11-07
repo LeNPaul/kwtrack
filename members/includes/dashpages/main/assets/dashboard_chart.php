@@ -154,7 +154,7 @@
           gridLines: {
             color: "#dbdbdb"
           }
-        },
+        }/*,
         
         {
           id: 'B',
@@ -167,11 +167,11 @@
             beginAtZero: true,
             display: false,
             max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2
-            /*callback: function(value, index, values) {
+            /!*callback: function(value, index, values) {
               return value + '%';
-            }*/
+            }*!/
           }
-        }]
+        }*/]
       }
     } //options
   });
