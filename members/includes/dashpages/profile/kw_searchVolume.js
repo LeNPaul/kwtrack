@@ -1,22 +1,21 @@
 $(function() {
 
   $("#search-btn").on("click", function() {
+    var kw = $("#keyword").text();
     $.ajax({
       type: "POST",
       url: "https://sellercentral.amazon.com/sspa/hsa/cm/keywords/power",
       contentType: "application/json",
       data: JSON.stringify({
         pageId: "https://www.amazon.com/HSA/pages/default",
-        keywordList: [
-          {
-            key: $("#keyword").text(),
+        keywordList:
+          [{
+            key: kw,
             matchType: "EXACT"
           }, {
-            key: $("#keyword").text(),
+            key: kw,
             matchType: "BROAD"
-          }
-          ]
-
+          }]
       }),
       success: function(r) {
         console.log(r);
@@ -49,6 +48,9 @@ $(function() {
           }
         }
         $("#search-btn").prop("disabled", !1), $("#search-btn").html("Check Now"), $("#kw-btn").prop("disabled", !1), $("#kw-btn").html("Relevant KW"), "1" !== localStorage.getItem("amz_isSubscriber") && $(".amz_notSubscribe_table_data").show(), n.width("100%"), t.html("Finished!"), l(e, o)
+      },
+      error: function(d) {
+        console.log(d);
       }
     });
   });
