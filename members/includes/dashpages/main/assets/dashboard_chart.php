@@ -106,7 +106,7 @@
   });
 
   var myChart = new Chart(ctx, {
-    type: "line",
+    type: "LineWithLine",
     data: lineData,
 
     options: {
@@ -153,10 +153,10 @@
           type: 'linear',
           position: 'right',
           gridLines: {
-            color: "#dbdbdb" //"rgba(0, 0, 0, 0)"
+            color: "rgba(0, 0, 0, 0)"
           },
           ticks: {
-            //beginAtZero: true,
+            beginAtZero: true,
             display: false,
             max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2
             /*callback: function(value, index, values) {
