@@ -105,7 +105,7 @@
     }
   });
 
-  var chart = new Chart(ctx, {
+  /*var chart = new Chart(ctx, {
     type: 'LineWithLine',
     data: {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
@@ -137,14 +137,14 @@
         }]
       }
     }
-  });
+  });*/
 
-  /*var myChart = new Chart(ctx, {
+  var myChart = new Chart(ctx, {
     type: "line",
     data: lineData,
 
     options: {
-      /!*elements: {
+      /*elements: {
         line: {
           fill: '-1'
         }
@@ -152,7 +152,7 @@
       hover: {
         mode: 'x',
         intersect: false
-      },*!/
+      },*/
       tooltips: {
         //mode: 'x',
         intersect: false
@@ -165,12 +165,12 @@
         xAxes: [{
           gridLines: {
             color: "rgba(0, 0, 0, 0)"
-          },
+          }/*,
   
           scaleLabel: {
             show: true,
             labelString: 'Value'
-          }
+          }*/
         }],
         
         yAxes: [{
@@ -193,19 +193,14 @@
             beginAtZero: true,
             display: false,
             max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2
-            /!*callback: function(value, index, values) {
+            /*callback: function(value, index, values) {
               return value + '%';
-            }*!/
+            }*/
           }
         }]
-      },
-      
-      animation: {
-        onComplete: function() {
-        }
       }
     } //options
-  });*/
+  });
 
   function chartUpdate(startUpdate, endUpdate) {
     startArr = dateArr.indexOf(startUpdate);
