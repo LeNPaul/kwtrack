@@ -64,6 +64,33 @@
     }
   });
 
+  var chart = new Chart(ctx, {
+    type: 'LineWithLine',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      datasets: [{
+        label: 'Statistics',
+        data: [3, 1, 2, 5, 4, 7, 6],
+        backgroundColor: 'rgba(0, 119, 204, 0.8)',
+        borderColor: 'rgba(0, 119, 204, 0.3)',
+        fill: false
+      }]
+    },
+    options: {
+      responsive: false,
+      tooltips: {
+        intersect: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+
   var lineData = {
     labels: dateArr,
     datasets: [{
