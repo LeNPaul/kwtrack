@@ -361,10 +361,23 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
     window.open(BASE_SERVER + "/user/signup")
   }),
 
+    //
+    //    _|_|_|  _|_|_|      _|_|    _|_|_|          _|_|_|    _|_|      _|_|    _|    _|  _|_|_|  _|_|_|_|    _|_|_|
+    //  _|        _|    _|  _|    _|  _|    _|      _|        _|    _|  _|    _|  _|  _|      _|    _|        _|
+    //  _|  _|_|  _|_|_|    _|_|_|_|  _|_|_|        _|        _|    _|  _|    _|  _|_|        _|    _|_|_|      _|_|
+    //  _|    _|  _|    _|  _|    _|  _|    _|      _|        _|    _|  _|    _|  _|  _|      _|    _|              _|
+    //    _|_|_|  _|    _|  _|    _|  _|_|_|          _|_|_|    _|_|      _|_|    _|    _|  _|_|_|  _|_|_|_|  _|_|_|
+    //
+    //
+
     $("#kw-btn").click(function() {
+
     return $("#asin").val().length < 10 ? void alert("Please input a valid ASIN") : void chrome.cookies.getAll({
-      domain: ".amazon." + $("#country").val()
-    }, function(e, n) {
+
+        domain: ".amazon." + $("#country").val()
+    },
+
+    function(e, n) {
       var t = e.map(function(e) {
             if (e.domain == ".amazon." + $("#country").val()) return e.name + "=" + e.value
           }),
@@ -372,9 +385,10 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
           r = $("#asin").val(),
           s = $("#country").val();
 
-      console.log(o);
 
-      $("#keywords").val(""), $.ajax({
+      $("#keywords").val(""),
+
+        $.ajax({
         type: "POST",
         url: URL_CONFIG.KWSUGGEST,
         contentType: "application/json",
@@ -395,11 +409,24 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
           }
         },
         error: function(e) {
-          $("#loginTipsModal").modal("show")
+
+          (n.forEach(function(e) {
+            i[e.keyword] = e.score
+          }), $("#keywords").val(n.map(function(e) {
+            return e.keyword
+          }).join("\n")), a(!0))
+
         }
       })
+
     })
-  }), $("#show-reversekw-tips").click(function(e) {
+  }),
+
+
+
+
+
+    $("#show-reversekw-tips").click(function(e) {
     $("#reversekwTipsModal").modal("show")
   }), $("#show-sponsor-tips").click(function(e) {
     $("#sponsorTipsModal").modal("show")
