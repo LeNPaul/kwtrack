@@ -68,7 +68,7 @@
     labels: dateArr,
     datasets: [{
       label: "Ad Spend ($)",
-      yAxisID: 'A',
+      //yAxisID: 'A',
       data: adSpendArr,
       fill: false,
       pointRadius: 0,
@@ -83,7 +83,7 @@
       //type: 'line'
     }, {
       label: "PPC Sales ($)",
-      yAxisID: 'A',
+      //yAxisID: 'A',
       data: ppcSalesArr,
       fill: false,
       pointRadius: 0,
@@ -148,7 +148,7 @@
         }],
         
         yAxes: [{
-          id: 'A',
+          //id: 'A',
           type: 'linear',
           position: 'left',
           gridLines: {
