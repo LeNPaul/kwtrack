@@ -137,14 +137,14 @@
       scales: {
         // Remove grid lines
         xAxes: [{
-          /*gridLines: {
+          gridLines: {
             color: "rgba(0, 0, 0, 0)"
           },
   
           scaleLabel: {
             show: true,
             labelString: 'Value'
-          }*/
+          }
         }],
         
         yAxes: [{
