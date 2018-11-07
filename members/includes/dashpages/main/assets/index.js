@@ -407,11 +407,15 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
     $("#loginTipsModal").modal("hide"), $("#reversekwTipsModal").modal("hide"), $("#sponsorTipsModal").modal("hide"), $("#loginModal").modal("show")
   }), $("#reset-btn").click(function() {
     $("#asin").val(""), $("#keywords").val("")
-  }), $("#search-btn").click(function() {
+  }),
+
+    $("#search-btn").click(function() {
     i = {}, a(!1)
   });
   var s = function(e, o) {
-        if ($("#check-volume").is(":checked")) $.ajax({
+        if ($("#check-volume").is(":checked"))
+
+          $.ajax({
           type: "POST",
           url: "https://sellercentral.amazon." + $("#country").val() + "/sspa/hsa/cm/keywords/power",
           contentType: "application/json",

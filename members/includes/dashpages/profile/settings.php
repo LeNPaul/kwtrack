@@ -4,6 +4,13 @@
 ?>
 
 <div class="row">
+  
+  <input type="text" name="keyword" />
+  <button id="#search-btn">Get Volume</button>
+  
+  <p id="exact_volume"></p>
+  <p id="broad_volume"></p>
+  
   <h1>Settings</h1>
 
   <div class="col-12">
