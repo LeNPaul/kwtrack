@@ -126,6 +126,7 @@
     options: {
       responsive: true,
       tooltips: {
+        mode: 'x',
         intersect: false
       },
       scales: {
