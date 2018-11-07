@@ -409,7 +409,7 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
     $("#asin").val(""), $("#keywords").val("")
   }),
 
-    $("#search-btn").click(function() { console.log("asdfasdfasdf");
+    $("#search-btn").click(function() {
     i = {}, a(!1)
   });
   var s = function(e, o) {

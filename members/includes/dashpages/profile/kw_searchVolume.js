@@ -7,17 +7,7 @@ $(function() {
       type: "POST",
       url: "https://sellercentral.amazon.com/sspa/hsa/cm/keywords/power",
       contentType: "application/json",
-      data: JSON.stringify({
-        pageId: "https://www.amazon.com/HSA/pages/default",
-        keywordList:
-          [{
-            key: "violin",
-            matchType: "EXACT"
-          }, {
-            key: "violin",
-            matchType: "BROAD"
-          }]
-      }),
+      data: {"pageId":"https://www.amazon.com/HSA/pages/default","keywordList":[{"key":"violin bow","matchType":"EXACT"},{"key":"violin bow","matchType":"BROAD"}]},
       success: function(r) {
         console.log(r);
 
