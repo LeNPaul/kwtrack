@@ -92,6 +92,7 @@
       intersect: false
 	  },
 	  responsive: true,
+    maintainAspectRatio: false,
     elements: {
       line: {
         //fill: '-1'
