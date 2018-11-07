@@ -142,12 +142,12 @@
     }*/]
   };
 
-  /*var myChart = new Chart(ctx, {
+  var myChart = new Chart(ctx, {
     type: "LineWithLine",
     data: lineData,
 
     options: {
-      /!*elements: {
+      /*elements: {
         line: {
           fill: '-1'
         }
@@ -155,7 +155,7 @@
       hover: {
         mode: 'x',
         intersect: false
-      },*!/
+      },*/
       tooltips: {
         //mode: 'x',
         intersect: false
@@ -166,14 +166,14 @@
       scales: {
         // Remove grid lines
         xAxes: [{
-          gridLines: {
+          /*gridLines: {
             color: "rgba(0, 0, 0, 0)"
-          }/!*,
+          },
   
           scaleLabel: {
             show: true,
             labelString: 'Value'
-          }*!/
+          }*/
         }],
         
         yAxes: [{
@@ -183,7 +183,8 @@
           gridLines: {
             color: "#dbdbdb"
           }
-        }/!*,
+        }
+        /*,
         
         {
           id: 'B',
@@ -200,10 +201,10 @@
               return value + '%';
             }*!/
           }
-        }*!/]
+        }*/]
       }
     } //options
-  });*/
+  });
 
   function chartUpdate(startUpdate, endUpdate) {
     startArr = dateArr.indexOf(startUpdate);
