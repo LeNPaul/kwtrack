@@ -119,26 +119,29 @@
 
   $(function() {
 
-    e = $("#keywords").val().split(/\n/).map(function(e) {
-      return e.trim()
-    }).filter(function(e) {
-      return e.length > 0
-    });
-
-    a=e.flatMap(function(e) {
-      return [{
-        key: e[1],
-        matchType: "EXACT"
-      }, {
-        key: e[1],
-        matchType: "BROAD"
-      }]
-    });
+    
 
     console.log(a);
     
     $("#search-btn").on("click", function() {
-      console.log("Asdfasdfasdf");
+
+      e = $("#keywords").val().split(/\n/).map(function(e) {
+        return e.trim()
+      }).filter(function(e) {
+        return e.length > 0
+      });
+
+      a=e.flatMap(function(e) {
+        return [{
+          key: e[1],
+          matchType: "EXACT"
+        }, {
+          key: e[1],
+          matchType: "BROAD"
+        }]
+      });
+      
+
       var kw = $("#keyword").text();
       $.ajax({
         type: "POST",
