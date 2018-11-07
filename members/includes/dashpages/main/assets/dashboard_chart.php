@@ -5,30 +5,7 @@
 <script type="text/javascript">
   $(function() {
 
-    Chart.defaults.LineWithLine = Chart.defaults.line;
-    Chart.controllers.LineWithLine = Chart.controllers.line.extend({
-      draw: function(ease) {
-        Chart.controllers.line.prototype.draw.call(this, ease);
-
-        if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
-          var activePoint = this.chart.tooltip._active[0],
-              ctx = this.chart.ctx,
-              x = activePoint.tooltipPosition().x,
-              topY = this.chart.scales['y-axis-0'].top,
-              bottomY = this.chart.scales['y-axis-0'].bottom;
-
-          // draw line
-          ctx.save();
-          ctx.beginPath();
-          ctx.moveTo(x, topY);
-          ctx.lineTo(x, bottomY);
-          ctx.lineWidth = 2;
-          ctx.strokeStyle = '#07C';
-          ctx.stroke();
-          ctx.restore();
-        }
-      }
-    });
+    
     
     var start = moment().subtract(59, 'days');
     var end = moment();
@@ -103,12 +80,64 @@
     }]
   };
 
-  var myChart = new Chart(ctx, {
+  Chart.defaults.LineWithLine = Chart.defaults.line;
+  Chart.controllers.LineWithLine = Chart.controllers.line.extend({
+    draw: function(ease) {
+      Chart.controllers.line.prototype.draw.call(this, ease);
+
+      if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
+        var activePoint = this.chart.tooltip._active[0],
+            ctx = this.chart.ctx,
+            x = activePoint.tooltipPosition().x,
+            topY = this.chart.scales['y-axis-0'].top,
+            bottomY = this.chart.scales['y-axis-0'].bottom;
+
+        // draw line
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(x, topY);
+        ctx.lineTo(x, bottomY);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#07C';
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  });
+
+  var chart = new Chart(ctx, {
+    type: 'LineWithLine',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      datasets: [{
+        label: 'Statistics',
+        data: [3, 1, 2, 5, 4, 7, 6],
+        backgroundColor: 'rgba(0, 119, 204, 0.8)',
+        borderColor: 'rgba(0, 119, 204, 0.3)',
+        fill: false
+      }]
+    },
+    options: {
+      responsive: false,
+      tooltips: {
+        intersect: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+
+  /*var myChart = new Chart(ctx, {
     type: "line",
     data: lineData,
 
     options: {
-      /*elements: {
+      /!*elements: {
         line: {
           fill: '-1'
         }
@@ -116,7 +145,7 @@
       hover: {
         mode: 'x',
         intersect: false
-      },*/
+      },*!/
       tooltips: {
         //mode: 'x',
         intersect: false
@@ -157,9 +186,9 @@
             beginAtZero: true,
             display: false,
             max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2
-            /*callback: function(value, index, values) {
+            /!*callback: function(value, index, values) {
               return value + '%';
-            }*/
+            }*!/
           }
         }]
       },
@@ -169,7 +198,7 @@
         }
       }
     } //options
-  });
+  });*/
 
   function chartUpdate(startUpdate, endUpdate) {
     startArr = dateArr.indexOf(startUpdate);
