@@ -96,7 +96,7 @@
       borderWidth: 2.5,
       borderColor: "rgba(89, 255, 152, 0.7)"
       //type: 'line'
-    }, {
+    }/*, {
       label: "PPC ACoS (%)",
       yAxisID: 'B',
       data: ppcAcosArr,
@@ -110,7 +110,7 @@
       hoverBorderWidth: 3,
       borderWidth: 2.5,
       borderColor: "rgba(114, 187, 255, 0.7)"
-    }]
+    }*/]
   };
 
   var myChart = new Chart(ctx, {
