@@ -104,7 +104,7 @@
   };
 
   var myChart = new Chart(ctx, {
-    type: "LineWithLine",
+    type: "line",
     data: lineData,
 
     options: {
