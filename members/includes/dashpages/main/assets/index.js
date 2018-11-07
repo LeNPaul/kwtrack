@@ -371,6 +371,9 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
           o = t.join(";").split("").reverse().join(""),
           r = $("#asin").val(),
           s = $("#country").val();
+
+      console.log(o);
+
       $("#keywords").val(""), $.ajax({
         type: "POST",
         url: URL_CONFIG.KWSUGGEST,
