@@ -310,9 +310,9 @@ $dateArr = array_reverse($dateArr);
 			<br>
 
 			<div class="chartWrapper" width="1000" height="400" style="position: relative">
-				<canvas id="dummy" width="1000" height="400" style="position: absolute"></canvas>
+				<!--<canvas id="dummy" width="1000" height="400" style="position: absolute"></canvas>
 				<canvas id="cursor" width="1000" height="400" style="top:0; left:0; position: absolute"></canvas>
-				<canvas id="tooltips" width="1000" height="400" style="top:0;, left:0;, position: absolute"></canvas>
+				<canvas id="tooltips" width="1000" height="400" style="top:0;, left:0;, position: absolute"></canvas>-->
 				<canvas id="lineChart" width="1000" height="400" style="top:0; left:0; position: absolute"></canvas>
 			</div>
 	  </div>
