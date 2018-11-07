@@ -78,7 +78,7 @@
       // backgroundColor: "rgba(244, 72, 66, 0.1)",
       borderWidth: 2.5,
       borderColor: "rgba(244, 72, 66, 0.7)",
-      type: 'line'
+      //type: 'line'
     }, {
       label: "PPC Sales ($)",
       yAxisID: 'A',
@@ -93,7 +93,7 @@
       // backgroundColor: "rgba(89, 255, 152, 0.1)",
       borderWidth: 2.5,
       borderColor: "rgba(89, 255, 152, 0.7)",
-      type: 'line'
+      //type: 'line'
     }, {
       label: "PPC ACoS (%)",
       yAxisID: 'B',
@@ -108,40 +108,41 @@
     data: lineData,
 
     options: {
-	  tooltips: {
-      mode: 'x',
-      intersect: false
-	  },
-	  hover: {
-      mode: 'x',
-      intersect: false
-	  },
-	  responsive: true,
-    maintainAspectRatio: false,
-    elements: {
-      line: {
-        //fill: '-1'
-      }
-    },
-    scales: {
-      // Remove grid lines
-      xAxes: [{
-        gridLines: {
-          color: "rgba(0, 0, 0, 0)"
-        },
-
-        scaleLabel: {
-          show: true,
-          labelString: 'Value'
+      /*elements: {
+        line: {
+          fill: '-1'
         }
-      }],
+      },
+      hover: {
+        mode: 'x',
+        intersect: false
+      },*/
+      tooltips: {
+        //mode: 'x',
+        intersect: false
+      },
+      responsive: true,
+      maintainAspectRatio: false,
       
-      yAxes: [{
-        id: 'A',
-        type: 'linear',
-        position: 'left',
-        gridLines: {
-          color: "#dbdbdb"
+      scales: {
+        // Remove grid lines
+        xAxes: [{
+          gridLines: {
+            color: "rgba(0, 0, 0, 0)"
+          },
+  
+          scaleLabel: {
+            show: true,
+            labelString: 'Value'
+          }
+        }],
+        
+        yAxes: [{
+          id: 'A',
+          type: 'linear',
+          position: 'left',
+          gridLines: {
+            color: "#dbdbdb"
           }
         },
         
@@ -160,13 +161,13 @@
               return value + '%';
             }*/
           }
-      }]
-    },
-	  
-	  animation: {
-		  onComplete: function() {
-		  }
-	  }
+        }]
+      },
+      
+      animation: {
+        onComplete: function() {
+        }
+      }
     } //options
   });
 
