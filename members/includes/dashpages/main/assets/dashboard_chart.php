@@ -124,7 +124,7 @@
       }]
     },
     options: {
-      responsive: false,
+      responsive: true,
       tooltips: {
         intersect: false
       },
