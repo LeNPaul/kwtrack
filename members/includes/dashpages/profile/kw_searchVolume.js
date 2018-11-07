@@ -11,10 +11,10 @@ $(function() {
         pageId: "https://www.amazon.com/HSA/pages/default",
         keywordList:
           [{
-            key: kw,
+            key: "violin",
             matchType: "EXACT"
           }, {
-            key: kw,
+            key: "violin",
             matchType: "BROAD"
           }]
       }),
