@@ -130,7 +130,9 @@
       }).filter(function(e) {
         return e.length > 0
       });
-
+      
+      console.log(e);
+      
       var a = e.flatMap(function(e) {
         return [{
           key: e[1],
