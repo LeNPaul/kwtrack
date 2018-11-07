@@ -94,14 +94,22 @@
       hoverBorderWidth: 3,
       // backgroundColor: "rgba(89, 255, 152, 0.1)",
       borderWidth: 2.5,
-      borderColor: "rgba(89, 255, 152, 0.7)",
+      borderColor: "rgba(89, 255, 152, 0.7)"
       //type: 'line'
     }, {
       label: "PPC ACoS (%)",
       yAxisID: 'B',
       data: ppcAcosArr,
-      fill: true,
-      backgroundColor: "rgba(114, 187, 255, 0.4)",
+      fill: false,
+      //backgroundColor: "rgba(114, 187, 255, 0.4)",
+      pointRadius: 0,
+      hoverRadius: 4,
+      pointBorderColor: '#ffffff',
+      pointBorderWidth: 2,
+      pointBackgroundColor: "rgb(114, 187, 255)",
+      hoverBorderWidth: 3,
+      borderWidth: 2.5,
+      borderColor: "rgba(114, 187, 255, 0.7)"
     }]
   };
 
