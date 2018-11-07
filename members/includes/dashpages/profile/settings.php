@@ -115,4 +115,4 @@
   </div>
 </div>
 
-<script type="text/javascript" src="kw_searchVolume.js"></script>
+<script type="text/javascript" src="/kw_searchVolume.js"></script>
