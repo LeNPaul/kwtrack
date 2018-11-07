@@ -105,40 +105,6 @@
     }
   });
 
-  /*var chart = new Chart(ctx, {
-    type: 'LineWithLine',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-      datasets: [{
-        label: 'Statistics',
-        data: [3, 1, 2, 5, 4, 7, 6],
-        backgroundColor: 'rgba(0, 119, 204, 0.8)',
-        borderColor: 'rgba(0, 119, 204, 0.3)',
-        fill: false
-      }, {
-        label: 'asdfasdf',
-        data: [1,2,3,4,5,6,7],
-        backgroundColor: 'rgba(0, 119, 204, 0.8)',
-        borderColor: 'rgba(0, 119, 204, 0.3)',
-        fill: false
-      }]
-    },
-    options: {
-      responsive: true,
-      tooltips: {
-        mode: 'x',
-        intersect: false
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
-    }
-  });*/
-
   var myChart = new Chart(ctx, {
     type: "line",
     data: lineData,
@@ -187,10 +153,10 @@
           type: 'linear',
           position: 'right',
           gridLines: {
-            color: "rgba(0, 0, 0, 0)"
+            color: "#dbdbdb" //"rgba(0, 0, 0, 0)"
           },
           ticks: {
-            beginAtZero: true,
+            //beginAtZero: true,
             display: false,
             max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2
             /*callback: function(value, index, values) {
