@@ -236,6 +236,7 @@ $(document).ready( function () {
 	
 	dt = $("#campaign_manager").DataTable(campaignOptions);
 	$("#bc").html(allCampaigns);
+	$('td input').bootstrapToggle();
   });
 
   $("#campaign_manager").on("click", ".c_link", function() {
