@@ -236,7 +236,13 @@ $(document).ready( function () {
 	
 	dt = $("#campaign_manager").DataTable(campaignOptions);
 	$("#bc").html(allCampaigns);
-	$('td input').bootstrapToggle();
+  $('.toggle-campaign').bootstrapToggle({
+    on: '<i class="fa fa-play"></i>',
+    off: '<i class="fa fa-pause"></i>',
+    size: "small",
+    onstyle: "success",
+    offstyle: "primary"
+  });
   });
 
   $("#campaign_manager").on("click", ".c_link", function() {
