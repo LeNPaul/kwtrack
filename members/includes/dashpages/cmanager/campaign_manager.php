@@ -68,8 +68,6 @@ $(document).ready( function () {
   var keywordDataset = null;
   var keywordDataBack = null;
 
-	//var window.dataset = dataset;
-
   var dt  = $('#campaign_manager').DataTable(
     {
       // buttons: ['copy'],
