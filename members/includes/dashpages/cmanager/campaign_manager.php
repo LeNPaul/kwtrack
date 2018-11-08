@@ -67,6 +67,7 @@ $(document).ready( function () {
   var adGroupDataset = null;
   var keywordDataset = null;
   var keywordDataBack = null;
+  var adgrOptions = null;
 
   //var dt  = $('#campaign_manager').DataTable(
   var campaignOptions = 
@@ -239,6 +240,13 @@ $(document).ready( function () {
 
   });
 
+  $(".breadcrumb").on("click", ".c_link", function() {
+	dt.destroy();
+	$("#campaign_manager").empty();
+	
+	dt = $("#campaign_manager").DataTable(adgrOptions);
+  });
+  
   //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
 	  currentCampaign     = $(this).html();
@@ -277,7 +285,7 @@ $(document).ready( function () {
 	      console.log(adGroupDataset);
 	      //console.log(adgroupDataBack);
 
-	      var adgrOptions = {
+	      adgrOptions = {
 	        scrollX: true,
 	        paging: true,
 	        pagingType: "full_numbers",
