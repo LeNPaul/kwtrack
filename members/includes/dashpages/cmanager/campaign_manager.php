@@ -245,6 +245,7 @@ $(document).ready( function () {
 	$("#campaign_manager").empty();
 	
 	dt = $("#campaign_manager").DataTable(adgrOptions);
+	$("#bc").html(allCampaigns + " <b>></b> " + currentCampaign);
   });
   
   //when user clicks on a campaign link
