@@ -239,6 +239,7 @@ $(document).ready( function () {
 
   });
 
+  //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
 	  currentCampaign     = $(this).html();
 	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
