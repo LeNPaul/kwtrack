@@ -235,7 +235,7 @@ $(document).ready( function () {
 	$("#campaign_manager").empty();
 	
 	dt = $("#campaign_manager").DataTable(campaignOptions);
-	$("#bc").html(allCampaigns);)
+	$("#bc").html(allCampaigns);
   });
 
   $("#campaign_manager").on("click", ".c_link", function() {
