@@ -106,7 +106,7 @@ $(document).ready( function () {
         dataTableFlag = 1;
 	  } //drawCallback
 
-  }; //DataTable
+  }; //campaignOptions
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
 	
   // Status toggles
@@ -231,8 +231,11 @@ $(document).ready( function () {
 
   //breadcrumbs ALL CAMPAIGNS click
   $(".breadcrumb").on("click", ".all_link", function() {
-    dt.clear().rows.add(dataset).draw();
+    dt.destroy();
+	$("#campaign_manager").empty();
 	
+	dt = $("#campaign_manager").DataTable(campaignOptions);
+	$("#bc").html(allCampaigns);)
   });
 
   $("#campaign_manager").on("click", ".c_link", function() {
