@@ -110,16 +110,48 @@ function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
                 sales=:sales
                 WHERE kw_id=:kw_id";
   $stmt  = $pdo->prepare($sql);
+  
+  // Get keyword snapshot so we can use it to get states and bids later
+  $kwSnapshot = $client->requestSnapshot(
+    "keywords",
+    array(
+      "stateFilter"  => "enabled,paused,archived",
+      "campaignType" => "sponsoredProducts"));
+  
+  $snapshotId = json_decode($kwSnapshot['response'], true);
+  $snapshotId = $snapshotId['snapshotId'];
+  
+  $kwSnapshot = getSnapshot($client, $snapshotId);
+  
+  // Get adgroups snapshot so we can use it to get bids later
+  
+  $adgSnapshot = $client->requestSnapshot(
+    "adGroups",
+    array(
+      "stateFilter"  => "enabled,paused,archived",
+      "campaignType" => "sponsoredProducts"));
+  
+  $snapshotId = json_decode($adgSnapshot['response'], true);
+  $snapshotId = $snapshotId['snapshotId'];
+  
+  $adgSnapshot = getSnapshot($client, $snapshotId);
 
   for ($b = 0; $b < count($arrKWIDs); $b++) {
     $kw_id = $arrKWIDs[$b];
-    $index = array_search2D($arrKWReport, 'keywordId', $kw_id);
-
-    $kw = $client->getBiddableKeyword($kw_id);
-    $kw = json_decode($kw['response'], true);
+    $kwIndexInSnapshot = array_search2D($kwSnapshot, 'keywordId', $kw_id);
+    $kw = $kwSnapshot[$kwIndexInSnapshot];
+  
+    /*$kw = $client->getBiddableKeyword($kw_id);
+    $kw = json_decode($kw['response'], true);*/
+  
+    if (array_key_exists('bid', $kwSnapshot[$kwIndexInSnapshot])) {
+      $bid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
+    } else {
+      $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
+      $bid = $adgSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
+    }
 
     $status      = $kw['state'];
-    $bid         = $kw['bid'];
     $impressions = $arrKWReport[$index]['impressions'];
     $clicks      = $arrKWReport[$index]['clicks'];
     $ctr         = ($impressions == 0) ? 0.0 : round($clicks / $impressions, 2);
@@ -192,16 +224,47 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
                 WHERE kw_id=:kw_id";
   $stmt  = $pdo->prepare($sql);
   
-  // Request snapshot for keywords
+  // Get keyword snapshot so we can use it to get states and bids later
+  $kwSnapshot = $client->requestSnapshot(
+    "keywords",
+    array(
+      "stateFilter"  => "enabled,paused,archived",
+      "campaignType" => "sponsoredProducts"));
+  
+  $snapshotId = json_decode($kwSnapshot['response'], true);
+  $snapshotId = $snapshotId['snapshotId'];
+  
+  $kwSnapshot = getSnapshot($client, $snapshotId);
+  
+  // Get adgroups snapshot so we can use it to get bids later
+  
+  $adgSnapshot = $client->requestSnapshot(
+    "adGroups",
+    array(
+      "stateFilter"  => "enabled,paused,archived",
+      "campaignType" => "sponsoredProducts"));
+  
+  $snapshotId = json_decode($adgSnapshot['response'], true);
+  $snapshotId = $snapshotId['snapshotId'];
+  
+  $adgSnapshot = getSnapshot($client, $snapshotId);
 
   for ($i = 0; $i < count($arrKWReport); $i++) {
     $kw_id = $arrKWReport[$i]['keywordId'];
-
-    $kw = $client->getBiddableKeyword($kw_id);
-    $kw = json_decode($kw['response'], true);
-
+    $kwIndexInSnapshot = array_search2D($kwSnapshot, 'keywordId', $kw_id);
+    $kw = $kwSnapshot[$kwIndexInSnapshot];
+    
+    /*$kw = $client->getBiddableKeyword($kw_id);
+    $kw = json_decode($kw['response'], true);*/
+  
+    if (array_key_exists('bid', $kwSnapshot[$kwIndexInSnapshot])) {
+      $bid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
+    } else {
+      $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
+      $bid = $adgSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
+    }
+    
     $status      = $kw['state'];
-    $bid         = $kw['bid'];
     $impressions = $arrKWReport[$i]['impressions'];
     $clicks      = $arrKWReport[$i]['clicks'];
     $ctr         = ($impressions == 0) ? 0.0 : round($clicks / $impressions, 2);
