@@ -68,8 +68,9 @@ $(document).ready( function () {
   var keywordDataset = null;
   var keywordDataBack = null;
 
-  var dt  = $('#campaign_manager').DataTable(
-    {
+  //var dt  = $('#campaign_manager').DataTable(
+  var campaignOptions = 
+    (
       // buttons: ['copy'],
       // responsive: true,
       // autoWidth: true,
@@ -105,8 +106,9 @@ $(document).ready( function () {
         dataTableFlag = 1;
 	  } //drawCallback
 
-	}); //DataTable
-
+	); //DataTable
+	var dt  = $('#campaign_manager').DataTable(campaignOptions);
+	
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
     $(this).toggleClass('toggle-selected');
