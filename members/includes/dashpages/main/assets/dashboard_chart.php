@@ -139,7 +139,7 @@
         xAxes: [{
           gridLines: {
             borderDash: [8, 4],
-            color: "#ddd"
+            color: "rgba(209, 209, 209, 0.2)"
           },
 
           scaleLabel: {
