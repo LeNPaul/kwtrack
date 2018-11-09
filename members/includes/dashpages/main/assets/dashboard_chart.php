@@ -128,7 +128,7 @@
         intersect: false
       },*/
       tooltips: {
-        mode: 'index',
+        mode: 'x',
         intersect: false
       },
       responsive: true,
