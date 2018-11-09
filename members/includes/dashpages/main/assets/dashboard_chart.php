@@ -50,8 +50,6 @@
             x = activePoint.tooltipPosition().x,
             axisAtopY = this.chart.scales['A'].top,
             axisAbottomY = this.chart.scales['A'].bottom,
-            axisBtopY = this.chart.scales['B'].top,
-            axisBbottomY = this.chart.scales['B'].bottom;
 
         // draw line
         ctx.save();
@@ -130,7 +128,7 @@
         intersect: false
       },*/
       tooltips: {
-        mode: 'x',
+        mode: 'index',
         intersect: false
       },
       responsive: true,
