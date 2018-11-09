@@ -149,7 +149,7 @@
         }],
 
         yAxes: [{
-          //id: 'A',
+          id: 'A',
           type: 'linear',
           position: 'left',
           gridLines: {
