@@ -138,7 +138,7 @@
         // Remove grid lines
         xAxes: [{
           gridLines: {
-            borderDash: [8, 4];
+            borderDash: [8, 4],
             color: "#dbdbdb"
           },
 
@@ -153,8 +153,8 @@
           type: 'linear',
           position: 'left',
           gridLines: {
-            borderDash: [8, 4];
-
+            borderDash: [8, 4],
+            color: "#dbdbdb"
           }
         }
         /*,
