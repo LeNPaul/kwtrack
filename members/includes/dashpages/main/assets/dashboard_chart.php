@@ -78,7 +78,7 @@
       pointBackgroundColor: "rgb(244, 72, 66)",
       hoverBorderWidth: 3,
       // backgroundColor: "rgba(244, 72, 66, 0.1)",
-      borderWidth: 2.5,
+      borderWidth: 1,
       borderColor: "rgba(244, 72, 66, 0.7)",
       //type: 'line'
     }, {
@@ -139,7 +139,7 @@
         xAxes: [{
           gridLines: {
             borderDash: [8, 4],
-            color: "#dbdbdb"
+            color: "#ddd"
           },
 
           scaleLabel: {
@@ -154,7 +154,7 @@
           position: 'left',
           gridLines: {
             borderDash: [8, 4],
-            color: "#dbdbdb"
+            color: "#ddd"
           }
         }, {
           id: 'B',
