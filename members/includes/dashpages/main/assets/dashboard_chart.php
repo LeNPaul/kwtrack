@@ -5,8 +5,8 @@
 <script type="text/javascript">
   $(function() {
 
-    
-    
+
+
     var start = moment().subtract(59, 'days');
     var end = moment();
 
@@ -29,7 +29,7 @@
         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
       }
     }, cb);
-	
+
 	$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
   });
 
@@ -133,30 +133,32 @@
       },
       responsive: true,
       maintainAspectRatio: false,
-      
+
       scales: {
         // Remove grid lines
         xAxes: [{
           gridLines: {
-            color: "rgba(0, 0, 0, 0)"
+            borderDash: [8, 4];
+            color: "#dbdbdb"
           },
-  
+
           scaleLabel: {
             show: true,
             labelString: 'Value'
           }
         }],
-        
+
         yAxes: [{
           //id: 'A',
           type: 'linear',
           position: 'left',
           gridLines: {
-            color: "#dbdbdb"
+            borderDash: [8, 4];
+
           }
         }
         /*,
-        
+
         {
           id: 'B',
           type: 'linear',
@@ -194,7 +196,7 @@
     myChart.update();
   }
 
-  
+
   /*$("#lineChart").on("mousemove", function(evt) {
     var element = $("#cursor"),
     offsetLeft = element.offset().left,
@@ -209,5 +211,5 @@
     ctx.strokeStyle = "#07C",
     ctx.stroke()
   });*/
-  
+
 </script>
