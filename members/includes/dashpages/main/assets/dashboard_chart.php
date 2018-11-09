@@ -154,14 +154,14 @@
           position: 'left',
           gridLines: {
             borderDash: [8, 4],
-            color: "#ddd"
+            color: "rgba(209, 209, 209, 0.5)"
           }
         }, {
           id: 'B',
           type: 'linear',
           position: 'right',
           gridLines: {
-            color: "rgba(0, 0, 0, 0)"
+            color: "rgba(209, 209, 209, 0.5)"
           },
           ticks: {
             beginAtZero: true,
