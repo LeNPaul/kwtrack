@@ -68,7 +68,7 @@
     labels: dateArr,
     datasets: [{
       label: "Ad Spend ($)",
-      //yAxisID: 'A',
+      yAxisID: 'A',
       data: adSpendArr,
       fill: false,
       pointRadius: 0,
@@ -78,12 +78,12 @@
       pointBackgroundColor: "rgb(244, 72, 66)",
       hoverBorderWidth: 3,
       // backgroundColor: "rgba(244, 72, 66, 0.1)",
-      borderWidth: 2,
+      borderWidth: 1,
       borderColor: "rgba(244, 72, 66, 0.7)",
       //type: 'line'
     }, {
       label: "PPC Sales ($)",
-      //yAxisID: 'A',
+      yAxisID: 'A',
       data: ppcSalesArr,
       fill: false,
       pointRadius: 0,
@@ -122,11 +122,11 @@
         line: {
           fill: '-1'
         }
-      },
-      hover: {
-        mode: 'x',
-        intersect: false
       },*/
+      hover: {
+        mode: 'index',
+        intersect: false
+      },
       tooltips: {
         mode: 'index',
         intersect: false
