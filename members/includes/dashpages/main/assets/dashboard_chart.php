@@ -130,7 +130,7 @@
         intersect: false
       },*/
       tooltips: {
-        //mode: 'x',
+        mode: 'x',
         intersect: false
       },
       responsive: true,
