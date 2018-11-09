@@ -48,14 +48,16 @@
         var activePoint = this.chart.tooltip._active[0],
             ctx = this.chart.ctx,
             x = activePoint.tooltipPosition().x,
-            topY = this.chart.scales['y-axis-0'].top,
-            bottomY = this.chart.scales['y-axis-0'].bottom;
+            axisAtopY = this.chart.scales['A'].top,
+            axisAbottomY = this.chart.scales['A'].bottom,
+            axisBtopY = this.chart.scales['B'].top,
+            axisBbottomY = this.chart.scales['B'].bottom;
 
         // draw line
         ctx.save();
         ctx.beginPath();
-        ctx.moveTo(x, topY);
-        ctx.lineTo(x, bottomY);
+        ctx.moveTo(x, axisAtopY);
+        ctx.lineTo(x, axisAbottomY);
         ctx.lineWidth = 2;
         ctx.strokeStyle = '#07C';
         ctx.stroke();
@@ -96,7 +98,7 @@
       borderWidth: 2.5,
       borderColor: "rgba(89, 255, 152, 0.7)"
       //type: 'line'
-    }/*, {
+    }, {
       label: "PPC ACoS (%)",
       yAxisID: 'B',
       data: ppcAcosArr,
@@ -110,7 +112,7 @@
       hoverBorderWidth: 3,
       borderWidth: 2.5,
       borderColor: "rgba(114, 187, 255, 0.7)"
-    }*/]
+    }]
   };
 
   var chart = new Chart(ctx, {
@@ -156,10 +158,7 @@
             borderDash: [8, 4],
             color: "#dbdbdb"
           }
-        }
-        /*,
-
-        {
+        }, {
           id: 'B',
           type: 'linear',
           position: 'right',
@@ -170,11 +169,8 @@
             beginAtZero: true,
             display: false,
             max: Math.round(Math.max.apply(null, ppcSalesArr)) * 2
-            /!*callback: function(value, index, values) {
-              return value + '%';
-            }*!/
           }
-        }*/]
+        }]
       }
     } //options
   });
