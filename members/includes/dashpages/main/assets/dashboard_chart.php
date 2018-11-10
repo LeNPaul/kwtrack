@@ -139,11 +139,11 @@
         titleMarginBottom: 10,
 
         bodyFontSize: 14,
-        bodySpacing: 4,
+        bodySpacing: 8,
         bodyFontColor: '#000000',
 
-        xPadding: 10,
-        yPadding: 10,
+        xPadding: 20,
+        yPadding: 20,
 
         caretPadding: 5,
         caretSize: 7,
@@ -153,8 +153,8 @@
         borderColor: "#000000",
 
         callbacks: {
-          label: function(item) {
-            return '$' + item.yLabel;
+          label: function(item, data) {
+            return data + '$' + item.yLabel;
           },
           title: function(item) {
             return "Stats for " + item.xLabel;
