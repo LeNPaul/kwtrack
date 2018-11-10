@@ -110,7 +110,7 @@
       hoverBorderWidth: 3,
 
       borderWidth: 2,
-      borderColor: "rgb(114, 187, 255)"
+      borderColor: "#a442f4"
     }]
   };
 
