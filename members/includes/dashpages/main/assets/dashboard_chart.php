@@ -155,7 +155,7 @@
             return '$' + item.yLabel;
           },
           title: function(item) {
-
+            return "Stats for " + item.xLabel;
           }
         }
       },
