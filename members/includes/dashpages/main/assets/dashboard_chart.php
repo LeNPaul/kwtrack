@@ -76,7 +76,7 @@
       pointBorderColor: '#ffffff',
       pointBackgroundColor: "rgb(244, 72, 66)",
       hoverBorderWidth: 3,
-      borderColor: "rgba(244, 72, 66, 0.7)",
+      borderColor: "#ffffff",
     }, {
       label: "PPC Sales ($)",
       yAxisID: 'A',
