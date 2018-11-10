@@ -110,7 +110,7 @@
       hoverBorderWidth: 3,
 
       borderWidth: 2,
-      borderColor: "#a442f4"
+      borderColor: "#b62b69"
     }]
   };
 
