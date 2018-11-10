@@ -129,11 +129,33 @@
         intersect: false
       },
       tooltips: {
-        mode: 'average',
+        mode: 'index',
         intersect: false,
+        backgroundColor: "rgba(255,255,255,0.7)",
+
+        titleFontSize: 16,
+        titleFontStyle: 'bold',
+        titleFontColor: '#303030',
+        titleMarginBottom: 10,
+
+        bodyFontSize: 14,
+        bodySpacing: 4,
+
+        xPadding: 10,
+        yPadding: 10,
+
+        caretPadding: 5,
+        caretSize: 7,
+        cornerRadius: 0,
+        displayColors: false,
+        borderWidth: 1,
+
         callbacks: {
           label: function(item) {
             return '$' + item.yLabel;
+          },
+          title: function(item) {
+
           }
         }
       },
