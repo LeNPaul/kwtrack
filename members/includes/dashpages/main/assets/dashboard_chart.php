@@ -130,7 +130,10 @@
       },
       tooltips: {
         mode: 'index',
-        intersect: false
+        intersect: false,
+        callbacks: {
+          label: (item) => '${item.yLabel} GB'
+        }
       },
       responsive: true,
       maintainAspectRatio: false,
