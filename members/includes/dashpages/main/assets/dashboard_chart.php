@@ -135,7 +135,7 @@
 
         titleFontSize: 16,
         titleFontStyle: 'bold',
-        titleFontColor: '#303030',
+        titleFontColor: '#444444',
         titleMarginBottom: 10,
 
         bodyFontSize: 14,
