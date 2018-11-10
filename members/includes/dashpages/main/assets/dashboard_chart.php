@@ -147,10 +147,10 @@
 
         caretPadding: 5,
         caretSize: 7,
-        cornerRadius: 0,
+        cornerRadius: 2,
         displayColors: false,
         borderWidth: 1,
-        borderColor: "#000000",
+        borderColor: "#cccccc",
 
         callbacks: {
           label: function(item, data) {
@@ -161,6 +161,7 @@
           }
         }
       },
+
       responsive: true,
       maintainAspectRatio: false,
 
