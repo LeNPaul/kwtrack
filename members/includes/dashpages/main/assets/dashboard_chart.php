@@ -73,8 +73,9 @@
       fill: false,
 
       pointRadius: 0,
-      hoverRadius: 5,
+      hoverRadius: 6,
       pointBorderColor: '#ffffff',
+      pointHoverBorderColor: '#ffffff';
       pointBackgroundColor: "rgb(244, 72, 66)",
       hoverBorderWidth: 3,
 
@@ -87,8 +88,9 @@
       fill: false,
 
       pointRadius: 0,
-      hoverRadius: 5,
+      hoverRadius: 6,
       pointBorderColor: '#ffffff',
+      pointHoverBorderColor: '#ffffff';
       pointBackgroundColor: "rgb(89, 255, 152)",
       hoverBorderWidth: 3,
 
@@ -101,12 +103,13 @@
       fill: false,
 
       pointRadius: 0,
-      hoverRadius: 5,
+      hoverRadius: 6,
       pointBorderColor: '#ffffff',
+      pointHoverBorderColor: '#ffffff';
       pointBackgroundColor: "rgb(114, 187, 255)",
       hoverBorderWidth: 3,
 
-      borderWidth: 3,
+      borderWidth: 2,
       borderColor: "rgb(114, 187, 255)"
     }]
   };
