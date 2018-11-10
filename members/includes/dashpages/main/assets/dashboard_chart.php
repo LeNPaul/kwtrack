@@ -72,30 +72,22 @@
       data: adSpendArr,
       fill: false,
       pointRadius: 0,
-      hoverRadius: 5,
+      hoverRadius: 6,
       pointBorderColor: '#ffffff',
-      pointBorderWidth: 2,
       pointBackgroundColor: "rgb(244, 72, 66)",
       hoverBorderWidth: 3,
-      // backgroundColor: "rgba(244, 72, 66, 0.1)",
-      borderWidth: 1,
       borderColor: "rgba(244, 72, 66, 0.7)",
-      //type: 'line'
     }, {
       label: "PPC Sales ($)",
       yAxisID: 'A',
       data: ppcSalesArr,
       fill: false,
       pointRadius: 0,
-      hoverRadius: 5,
+      hoverRadius: 6,
       pointBorderColor: '#ffffff',
-      pointBorderWidth: 0,
       pointBackgroundColor: "rgb(89, 255, 152)",
       hoverBorderWidth: 3,
-      // backgroundColor: "rgba(89, 255, 152, 0.1)",
-      borderWidth: 2.5,
-      borderColor: "rgba(89, 255, 152, 0.7)"
-      //type: 'line'
+      borderColor: "#ffffff"
     }, {
       label: "PPC ACoS (%)",
       yAxisID: 'B',
@@ -103,13 +95,11 @@
       fill: false,
       //backgroundColor: "rgba(114, 187, 255, 0.4)",
       pointRadius: 0,
-      hoverRadius: 5,
+      hoverRadius: 6,
       pointBorderColor: '#ffffff',
-      pointBorderWidth: 2,
       pointBackgroundColor: "rgb(114, 187, 255)",
       hoverBorderWidth: 3,
-      borderWidth: 2.5,
-      borderColor: "rgba(114, 187, 255, 0.7)"
+      borderColor: "#ffffff"
     }]
   };
 
