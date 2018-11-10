@@ -149,6 +149,7 @@
         cornerRadius: 0,
         displayColors: false,
         borderWidth: 1,
+        borderColor: "#000000",
 
         callbacks: {
           label: function(item) {
