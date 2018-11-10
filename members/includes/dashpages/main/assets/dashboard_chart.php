@@ -109,7 +109,7 @@
       pointBackgroundColor: "rgb(114, 187, 255)",
       hoverBorderWidth: 3,
 
-      borderWidth: 2,
+      borderWidth: 1.4,
       borderColor: "#b62b69"
     }]
   };
