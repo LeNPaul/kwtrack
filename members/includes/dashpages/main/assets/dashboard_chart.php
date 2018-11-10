@@ -129,7 +129,7 @@
         intersect: false
       },
       tooltips: {
-        yAlign: 'top',
+        yAlign: 'below',
         mode: 'index',
         intersect: false,
         backgroundColor: "rgba(255,255,255,0.8)",
