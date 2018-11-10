@@ -129,7 +129,7 @@
         intersect: false
       },
       tooltips: {
-        mode: 'nearest',
+        mode: 'average',
         intersect: false,
         callbacks: {
           label: function(item) {
