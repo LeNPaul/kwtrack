@@ -140,6 +140,7 @@
 
         bodyFontSize: 14,
         bodySpacing: 4,
+        bodyFontColor: '#000000',
 
         xPadding: 10,
         yPadding: 10,
