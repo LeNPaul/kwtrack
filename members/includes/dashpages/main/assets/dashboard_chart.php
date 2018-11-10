@@ -132,7 +132,9 @@
         mode: 'index',
         intersect: false,
         callbacks: {
-          label: (item) => '${item.yLabel} GB'
+          label: function(item) {
+            return '$' + item.yLabel;
+          }
         }
       },
       responsive: true,
