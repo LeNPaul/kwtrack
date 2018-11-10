@@ -105,7 +105,7 @@
       pointBorderColor: '#ffffff',
       pointBackgroundColor: "rgb(114, 187, 255)",
       hoverBorderWidth: 3,
-      
+
       borderWidth: 3,
       borderColor: "rgb(114, 187, 255)"
     }]
@@ -151,7 +151,7 @@
           type: 'linear',
           position: 'left',
           gridLines: {
-            borderDash: [8, 4],
+            borderDash: [5, 5],
             color: "rgba(209, 209, 209, 0.3)"
           }
         }, {
