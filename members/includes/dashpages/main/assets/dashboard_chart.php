@@ -110,7 +110,7 @@
       hoverBorderWidth: 3,
 
       borderWidth: 1.4,
-      borderColor: "#b62b69"
+      borderColor: "#d14785"
     }]
   };
 
@@ -129,7 +129,7 @@
         intersect: false
       },
       tooltips: {
-        mode: 'index',
+        mode: 'nearest',
         intersect: false,
         callbacks: {
           label: function(item) {
