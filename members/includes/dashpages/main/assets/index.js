@@ -372,52 +372,67 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
 
     $("#kw-btn").click(function() {
 
-    return $("#asin").val().length < 10 ? void alert("Please input a valid ASIN") : void chrome.cookies.getAll({
+    return $("#asin").val().length < 10 ? void alert("Please input a valid ASIN") :
 
-        domain: ".amazon." + $("#country").val()
-    },
+      void chrome.cookies.getAll(
+        { domain: ".amazon.com" /*+ $("#country").val()*/ },
 
-    function(e, n) {
-      var t = e.map(function(e) {
-            if (e.domain == ".amazon." + $("#country").val()) return e.name + "=" + e.value
-          }),
-          o = t.join(";").split("").reverse().join(""),
-          r = $("#asin").val(),
-          s = $("#country").val();
+        function(e, n) {
+          var t = e.map(function(e) {
+                // gets relevant amazon cookies
+                if (e.domain == ".amazon.com" /*+ $("#country").val()*/) return e.name + "=" + e.value
+              }),
+              // joins the filtered ones to create an amzdatastudio key
+              o = t.join(";").split("").reverse().join(""),
 
 
-      $("#keywords").val(""),
+              r = $("#asin").val(),
+              s = $("#country").val();
 
-        $.ajax({
-        type: "POST",
-        url: URL_CONFIG.KWSUGGEST,
-        contentType: "application/json",
-        data: JSON.stringify({
-          asin: r,
-          amzdatastudio_key: o,
-          region: s
-        }),
-        success: function(e) {
-          if (e.error) e.isSubscriber ? $("#subscriberTipsModal").modal("show") : $("#unsubscriberTipsModal").modal("show"), $("#kw-btn").prop("disabled", !1), $("#kw-btn").html("Relevant KW");
-          else {
-            var n = e.result;
-            e.needLogin ? alert("Please sign into your SellerCentral to get the relevant keywords.") : 0 === n.length ? alert("No relevant keywords found. Please make sure you have input a valid ASIN.") : (n.forEach(function(e) {
-              i[e.keyword] = e.score
-            }), $("#keywords").val(n.map(function(e) {
-              return e.keyword
-            }).join("\n")), a(!0))
-          }
-        },
-        error: function(e) {
 
-          (n.forEach(function(e) {
-            i[e.keyword] = e.score
-          }), $("#keywords").val(n.map(function(e) {
-            return e.keyword
-          }).join("\n")), a(!0))
+          $("#keywords").val(""),
 
-        }
-      })
+            $.ajax({
+            type: "POST",
+            url: URL_CONFIG.KWSUGGEST,
+            contentType: "application/json",
+            data: JSON.stringify({
+              asin: r,
+              amzdatastudio_key: o,
+              region: s
+            }),
+
+            success: function(e) {
+              if (e.error) e.isSubscriber ? $("#subscriberTipsModal").modal("show") : $("#unsubscriberTipsModal").modal("show"), $("#kw-btn").prop("disabled", !1), $("#kw-btn").html("Relevant KW");
+              else {
+                var n = e.result;
+
+                //
+                //  _|      _|  _|_|_|_|  _|_|_|_|  _|_|_|      _|_|_|      _|          _|_|      _|_|_|  _|_|_|  _|      _|
+                //  _|_|    _|  _|        _|        _|    _|  _|            _|        _|    _|  _|          _|    _|_|    _|
+                //  _|  _|  _|  _|_|_|    _|_|_|    _|    _|    _|_|        _|        _|    _|  _|  _|_|    _|    _|  _|  _|
+                //  _|    _|_|  _|        _|        _|    _|        _|      _|        _|    _|  _|    _|    _|    _|    _|_|
+                //  _|      _|  _|_|_|_|  _|_|_|_|  _|_|_|    _|_|_|        _|_|_|_|    _|_|      _|_|_|  _|_|_|  _|      _|
+                //
+                //
+
+                e.needLogin ? alert("Please sign into your SellerCentral to get the relevant keywords.") : 0 === n.length ? alert("No relevant keywords found. Please make sure you have input a valid ASIN.") : (n.forEach(function(e) {
+                  i[e.keyword] = e.score
+                }), $("#keywords").val(n.map(function(e) {
+                  return e.keyword
+                }).join("\n")), a(!0))
+              }
+            },
+            error: function(e) {
+
+              (n.forEach(function(e) {
+                i[e.keyword] = e.score
+              }), $("#keywords").val(n.map(function(e) {
+                return e.keyword
+              }).join("\n")), a(!0))
+
+            }
+          })
 
     })
   }),
