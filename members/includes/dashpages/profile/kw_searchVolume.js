@@ -6,8 +6,12 @@ $(function() {
     $.ajax({
       type: "POST",
       url: "https://sellercentral.amazon.com/sspa/hsa/cm/keywords/power",
-      contentType: "text/plain", //application/json
+      contentType: "application/json", //application/json
       data: {"pageId":"https://www.amazon.com/HSA/pages/default","keywordList":[{"key":"violin bow","matchType":"EXACT"},{"key":"violin bow","matchType":"BROAD"}]},
+      xhrFields: {
+        withCredentials: true
+      },
+
 
       success: function(r) {
         console.log(r);
