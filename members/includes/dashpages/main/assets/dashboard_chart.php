@@ -202,11 +202,11 @@
                 tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
                 tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
                 tooltipEl.style.pointerEvents = 'none';
-            },
+            }
 
 
         ///////////////////////////////////////////////
-        mode: 'index',
+        /*mode: 'index',
         intersect: false,
         backgroundColor: "rgba(255,255,255,0.8)",
 
@@ -237,7 +237,7 @@
           title: function(item, data) {
             return "Stats for " + item[0].xLabel;
           }
-        }
+        }*/
       },
 
       responsive: true,
