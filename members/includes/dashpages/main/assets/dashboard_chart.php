@@ -97,7 +97,7 @@
       borderWidth: 2,
       borderColor: "rgb(89, 255, 152)"
     }, {
-      label: "PPC ACoS (%)",
+      label: "<b>PPC ACoS</b>",
       yAxisID: 'B',
       data: ppcAcosArr,
       fill: false,
