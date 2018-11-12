@@ -4,7 +4,7 @@ $(function(){
 
   $.ajax({
     type: "POST",
-    url: "/includes/dashpages/scheduler/assets/api/__get_campaign_list.php",
+    url: "includes/dashpages/scheduler/assets/api/__get_campaign_list.php",
     data: {
       user_id: user_id
     },
