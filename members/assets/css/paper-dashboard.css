@@ -29,7 +29,8 @@
  }
 
 #chartjs-tooltip {
-	opacity: 1;
+  border-color: #cccccc !important;
+  border-width: 2px !important;
 	position: absolute;
 	background: rgba(255, 255, 255, .5);
 	color: #000000;
@@ -40,8 +41,6 @@
 	-webkit-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
   padding: 25px;
-  border-color: #cccccc;
-  border-width: 2px;
 }
 
 #tooltip_title {
