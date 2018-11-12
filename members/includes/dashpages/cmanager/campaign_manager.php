@@ -118,7 +118,7 @@ $(document).ready( function () {
 			    off: '',
 			    size: "small"
 			  });
-				
+
 	  } //drawCallback
 
   }; //campaignOptions

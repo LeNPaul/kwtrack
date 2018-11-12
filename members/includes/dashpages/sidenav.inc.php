@@ -3,12 +3,11 @@
 function outputSideNav($currentPage) {
   $active1 = '';
   $active2 = '';
-  
+
   $cmExpand  = '';
   $cmExpand2 = '';
 
-  $active3 = $active4 = $active5 = $active6 = $active7 = '';
-  
+  $active3 = $active4 = $active5 = $active6 = $active7 = $active8 = '';
   $topActive1 = $topActive2 = $topActive3 = $topExpand = $topExpand2 = '';
 
   if ($currentPage == 'dashboard' && empty($_GET)) {
@@ -124,7 +123,15 @@ function outputSideNav($currentPage) {
                 </ul>
               </div>
             </li>
+
             <li ' . $active7 . '>
+              <a href="#">
+                <i class="nc-icon nc-calendar-60"></i>
+                <p>Ad Scheduling</p>
+              </a>
+            </li>
+
+            <li ' . $active8 . '>
               <a href="#">
                 <i class="nc-icon nc-bank"></i>
                 <p>Keyword Rank Tracker</p>
