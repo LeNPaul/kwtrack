@@ -118,6 +118,35 @@
     type: "LineWithLine",
     data: lineData,
 
+    customTooltips: function(tooltip) {
+        var tooltipEl = $('#chartjs-tooltip');
+
+        if (!tooltip) {
+            tooltipEl.css({
+                opacity: 0
+            });
+            return;
+        }
+
+        tooltipEl.removeClass('above below');
+        tooltipEl.addClass(tooltip.yAlign);
+
+        // split out the label and value and make your own tooltip here
+        var parts = tooltip.text.split(":");
+        console.log(tooltip.text);
+        var innerHtml = '<span>' + parts[0].trim() + '</span> : <span><b>' + parts[1].trim() + '</b></span>';
+        tooltipEl.html(innerHtml);
+
+        tooltipEl.css({
+            opacity: 1,
+            left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
+            top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
+            fontFamily: tooltip.fontFamily,
+            fontSize: tooltip.fontSize,
+            fontStyle: tooltip.fontStyle,
+        });
+    },
+
     options: {
       /*elements: {
         line: {
@@ -128,7 +157,7 @@
         mode: 'index',
         intersect: false
       },
-      multiTooltipTemplate: "<b><%=datasetLabel%></b> : <%= $ value %>",
+      multiTooltipTemplate: "<b><%=datasetLabel%></b> : <%= value %>",
       tooltips: {
         mode: 'index',
         intersect: false,
