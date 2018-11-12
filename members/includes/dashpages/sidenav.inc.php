@@ -77,7 +77,7 @@ function outputSideNav($currentPage) {
           </div>
           <ul class="nav">
             <li ' . $active1 . '>
-              <a href="dashboard.php">
+              <a href="dashboard">
                 <i class="nc-icon nc-bank"></i>
                 <p>Dashboard</p>
               </a>
@@ -93,7 +93,7 @@ function outputSideNav($currentPage) {
               <div class="collapse ' . $cmExpand2 . '" id="cm">
                 <ul class="nav">
                   <li ' . $active2 . '>
-                    <a href="dashboard.php?p=cm">
+                    <a href="dashboard?p=cm">
                       <span class="sidebar-mini-icon">VEC</span>
                       <span class="sidebar-normal"> View and Edit Campaigns </span>
                     </a>
@@ -127,7 +127,7 @@ function outputSideNav($currentPage) {
             </li>
 
             <li ' . $active7 . '>
-              <a href="#">
+              <a href="dashboard?p=as">
                 <i class="nc-icon nc-calendar-60"></i>
                 <p>Ad Scheduling</p>
               </a>
