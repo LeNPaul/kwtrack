@@ -42,6 +42,10 @@
   padding: 25px;
 }
 
+#tooltip_title {
+  padding-bottom: 20px;
+}
+
 table.dataTable,
 table.dataTable th,
 table.dataTable td {
