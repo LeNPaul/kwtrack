@@ -119,9 +119,26 @@ $(document).ready( function () {
 			    size: "small"
 			  });
 
+				// Handle budget changes when textbox is clicked
+				$(".input-group input.form-control").on("focus", function() {
+					$(this).next().children().show();
+				});
+				$(".input-group input.form-control").on("blur", function() {
+					$(this).next().children().hide(200);
+				});
+				$('.input-group input.form-control').keypress(function (e) {
+					var key = e.which;
+
+					if (key == 13) {
+						$(this).next().children("button").click();
+						return false;
+					}
+				});
+
 	  } //drawCallback
 
   }; //campaignOptions
+
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
 
   // Status toggles
@@ -172,21 +189,7 @@ $(document).ready( function () {
     });
   });
 
-  // Handle budget changes when textbox is clicked
-  $(".input-group input.form-control").on("focus", function() {
-    $(this).next().children().show();
-  });
-  $(".input-group input.form-control").on("blur", function() {
-    $(this).next().children().hide(200);
-  });
-  $('.input-group input.form-control').keypress(function (e) {
-    var key = e.which;
 
-    if (key == 13) {
-      $(this).next().children("button").click();
-      return false;
-    }
-  });
 
 	//Handle budget changes when save button is clicked
   $(".btn-edit-budget").on("click", function() {
