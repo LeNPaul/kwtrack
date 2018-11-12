@@ -154,9 +154,13 @@
 
         callbacks: {
           label: function(item, data) {
+            console.log(item);
+            console.log(data);
             return data + '$' + item.yLabel;
           },
-          title: function(item) {
+          title: function(item, data) {
+            console.log(item);
+            console.log(data);
             return "Stats for " + item.xLabel;
           }
         }
