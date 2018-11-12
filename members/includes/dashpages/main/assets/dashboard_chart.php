@@ -201,7 +201,7 @@
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
-            if (current - chartWidth > 200) {
+            if (current - chartWidth > 400) {
               tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX - 80 + 'px';
             } else {
               tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 80 + 'px';
