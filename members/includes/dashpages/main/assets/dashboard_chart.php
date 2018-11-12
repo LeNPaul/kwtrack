@@ -199,7 +199,7 @@
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
             tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
-            tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+            tooltipEl.style.top = position.top + tooltipModel.caretY + 'px';
             tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
             tooltipEl.style.fontSize = '14 px';
             tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
