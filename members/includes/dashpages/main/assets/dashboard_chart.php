@@ -142,10 +142,10 @@
         bodySpacing: 8,
         bodyFontColor: '#000000',
 
-        xPadding: 20,
-        yPadding: 20,
+        xPadding: 100,
+        yPadding: 100,
 
-        caretPadding: 5,
+        caretPadding: 10,
         caretSize: 7,
         cornerRadius: 2,
         displayColors: false,
