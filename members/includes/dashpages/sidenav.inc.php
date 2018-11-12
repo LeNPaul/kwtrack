@@ -20,6 +20,8 @@ function outputSideNav($currentPage) {
     $topActive3 = 'class="active"';
     $topExpand  = 'aria-expanded="true"';
     $topExpand2 = 'show';
+  } elseif ($currentPage == 'dashboard' && $_GET['p'] == 'as') {
+    $active7 = 'class="active"';
   }
 
   echo '<div class="sidebar" data-active-color="#ffffff">
