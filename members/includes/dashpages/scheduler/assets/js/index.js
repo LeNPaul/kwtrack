@@ -1,4 +1,23 @@
 $(function(){
+  var data;
+  var user_id = $("#uid").val();
+
+  $.ajax({
+    type: "POST",
+    url: "/includes/dashpages/scheduler/assets/api/__get_campaign_list.php",
+    data: {
+      user_id: user_id
+    },
+
+    success: function(campaignList) {
+      console.log(campaignList);
+    },
+
+    error: function(err) {
+      console.log(err);
+    }
+  });
+
   var campaignTableOptions = {
     scrollX: true,
     paging: true,

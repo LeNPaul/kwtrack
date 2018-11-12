@@ -9,8 +9,6 @@ $stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-echo '<pre>';
-var_dump($result);
-echo '</pre>';
+echo json_encode($result, true);
 
 ?>
