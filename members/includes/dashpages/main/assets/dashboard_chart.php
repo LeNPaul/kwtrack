@@ -195,7 +195,7 @@
             var chartWidth = $("#lineChart").width();
             var current = tooltipEl.style.left.replace(/[^\d.]/g, '');
 
-            console.log(chartWidth + ' + ' parseInt(current));
+            console.log(chartWidth + ' + ' + parseInt(current));
             console.log(current - chartWidth);
 
             // Display, position, and set styles for font
