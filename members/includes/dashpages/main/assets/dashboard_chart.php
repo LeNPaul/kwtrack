@@ -210,7 +210,11 @@
         bodyFontSize: 14,
         bodySpacing: 16,
         caretPadding: 10,
-        caretSize: 7
+        caretSize: 7,
+        titleFontSize: 16,
+        titleFontStyle: 'bold',
+        titleFontColor: '#444444',
+        titleMarginBottom: 20,
 
 
         ///////////////////////////////////////////////
