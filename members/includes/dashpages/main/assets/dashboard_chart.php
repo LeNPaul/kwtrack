@@ -142,8 +142,8 @@
         bodySpacing: 8,
         bodyFontColor: '#000000',
 
-        xPadding: 100,
-        yPadding: 100,
+        xPadding: 25,
+        yPadding: 25,
 
         caretPadding: 10,
         caretSize: 7,
