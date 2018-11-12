@@ -193,13 +193,15 @@
             // `this` will be the overall tooltip
             var position = this._chart.canvas.getBoundingClientRect();
             var chartWidth = $("#lineChart").width();
-            console.log(chartWidth + ' + ' tooltipEl.style.left);
-            console.log(tooltipEl.style.left - chartWidth);
+            var current = tooltipEl.style.left.replace(/[^\d.]/g, '');
+
+            console.log(chartWidth + ' + ' parseInt(current));
+            console.log(current - chartWidth);
 
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
-            if (tooltipEl.style.left - chartWidth > 200) {
+            if (current - chartWidth > 200) {
               tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX - 80 + 'px';
             } else {
               tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 80 + 'px';
