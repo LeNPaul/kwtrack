@@ -130,7 +130,7 @@
       },
       tooltips: {
         yAlign: 'top',
-        xAlign: 'left'
+        xAlign: 'left',
         mode: 'index',
         intersect: false,
         backgroundColor: "rgba(255,255,255,0.8)",
