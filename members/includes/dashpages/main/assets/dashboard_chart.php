@@ -128,6 +128,7 @@
         mode: 'index',
         intersect: false
       },
+      multiTooltipTemplate: "<%=datasetLabel%> : <%= value %>",
       tooltips: {
         mode: 'index',
         intersect: false,
@@ -136,7 +137,7 @@
         titleFontSize: 16,
         titleFontStyle: 'bold',
         titleFontColor: '#444444',
-        titleMarginBottom: 10,
+        titleMarginBottom: 20,
 
         bodyFontSize: 14,
         bodySpacing: 8,
