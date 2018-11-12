@@ -154,10 +154,10 @@
         borderColor: "#cccccc",
 
         callbacks: {
-          label: function(item, data) {
-            console.log(item);
-            return data + '$' + item.yLabel;
-          },
+          // label: function(item, data) {
+          //   console.log(item);
+          //   return data + '$' + item.yLabel;
+          // },
           title: function(item, data) {
             return "Stats for " + item[0].xLabel;
           }
