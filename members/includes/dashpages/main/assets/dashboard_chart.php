@@ -206,7 +206,11 @@
             tooltipEl.style.pointerEvents = 'none';
         },
         mode: 'index',
-        intersect: false
+        intersect: false,
+        bodyFontSize: 14,
+        bodySpacing: 16,
+        caretPadding: 10,
+        caretSize: 7
 
 
         ///////////////////////////////////////////////
