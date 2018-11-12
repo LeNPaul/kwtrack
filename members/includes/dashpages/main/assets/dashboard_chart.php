@@ -166,13 +166,13 @@
 
             // Set Text
             if (tooltipModel.body) {
-              var titleLines = 'Stats on ' + tooltipModel.title || [];
+              var titleLines = tooltipModel.title || [];
               var bodyLines = tooltipModel.body.map(getBody);
 
               var innerHtml = '<thead>';
 
               titleLines.forEach(function(title) {
-                  innerHtml += '<tr><th>' + title + '</th></tr>';
+                  innerHtml += '<tr id="tooltip_title"><th>Stats on ' + title + '</th></tr>';
               });
               innerHtml += '</thead><tbody>';
 
@@ -192,7 +192,6 @@
 
             // `this` will be the overall tooltip
             var position = this._chart.canvas.getBoundingClientRect();
-
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
