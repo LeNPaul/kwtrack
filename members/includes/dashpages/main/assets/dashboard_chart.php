@@ -195,10 +195,15 @@
             var chartWidth = $("#lineChart").width();
             console.log(chartWidth);
             console.log(tooltipEl.style.left);
+
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
-            tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 80 + 'px';
+            if (tooltipEl.style.left - chartWidth > 200) {
+              tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX - 80 + 'px';
+            } else {
+              tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 80 + 'px';
+            }
             tooltipEl.style.top = window.pageYOffset + 100 + 'px';
             tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
             tooltipEl.style.fontSize = '14 px';
