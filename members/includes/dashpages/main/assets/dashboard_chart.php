@@ -129,7 +129,7 @@
         intersect: false
       },
       tooltips: {
-        yAlign: 'top',
+        yAlign: 'bottom',
         xAlign: 'left',
         mode: 'index',
         intersect: false,
