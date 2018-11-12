@@ -197,6 +197,7 @@
 
             console.log(chartWidth + ' + ' + parseInt(current));
             console.log(current - chartWidth);
+            console.log(position.left);
 
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
