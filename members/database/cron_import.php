@@ -110,40 +110,40 @@ function cron_diffUpdateKeywords($pdo, $client, $arrKWReport, $arrKWIDs) {
                 sales=:sales
                 WHERE kw_id=:kw_id";
   $stmt  = $pdo->prepare($sql);
-  
+
   // Get keyword snapshot so we can use it to get states and bids later
   $kwSnapshot = $client->requestSnapshot(
     "keywords",
     array(
       "stateFilter"  => "enabled,paused,archived",
       "campaignType" => "sponsoredProducts"));
-  
+
   $snapshotId = json_decode($kwSnapshot['response'], true);
   $snapshotId = $snapshotId['snapshotId'];
-  
+
   $kwSnapshot = getSnapshot($client, $snapshotId);
-  
+
   // Get adgroups snapshot so we can use it to get bids later
-  
+
   $adgSnapshot = $client->requestSnapshot(
     "adGroups",
     array(
       "stateFilter"  => "enabled,paused,archived",
       "campaignType" => "sponsoredProducts"));
-  
+
   $snapshotId = json_decode($adgSnapshot['response'], true);
   $snapshotId = $snapshotId['snapshotId'];
-  
+
   $adgSnapshot = getSnapshot($client, $snapshotId);
 
   for ($b = 0; $b < count($arrKWIDs); $b++) {
     $kw_id = $arrKWIDs[$b];
     $kwIndexInSnapshot = array_search2D($kwSnapshot, 'keywordId', $kw_id);
     $kw = $kwSnapshot[$kwIndexInSnapshot];
-  
+
     /*$kw = $client->getBiddableKeyword($kw_id);
     $kw = json_decode($kw['response'], true);*/
-  
+
     if (array_key_exists('bid', $kwSnapshot[$kwIndexInSnapshot])) {
       $bid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
     } else {
@@ -223,47 +223,47 @@ function cron_updateKeywords($pdo, $client, $arrKWReport) {
                 sales=:sales
                 WHERE kw_id=:kw_id";
   $stmt  = $pdo->prepare($sql);
-  
+
   // Get keyword snapshot so we can use it to get states and bids later
   $kwSnapshot = $client->requestSnapshot(
     "keywords",
     array(
       "stateFilter"  => "enabled,paused,archived",
       "campaignType" => "sponsoredProducts"));
-  
+
   $snapshotId = json_decode($kwSnapshot['response'], true);
   $snapshotId = $snapshotId['snapshotId'];
-  
+
   $kwSnapshot = getSnapshot($client, $snapshotId);
-  
+
   // Get adgroups snapshot so we can use it to get bids later
-  
+
   $adgSnapshot = $client->requestSnapshot(
     "adGroups",
     array(
       "stateFilter"  => "enabled,paused,archived",
       "campaignType" => "sponsoredProducts"));
-  
+
   $snapshotId = json_decode($adgSnapshot['response'], true);
   $snapshotId = $snapshotId['snapshotId'];
-  
+
   $adgSnapshot = getSnapshot($client, $snapshotId);
 
   for ($i = 0; $i < count($arrKWReport); $i++) {
     $kw_id = $arrKWReport[$i]['keywordId'];
     $kwIndexInSnapshot = array_search2D($kwSnapshot, 'keywordId', $kw_id);
     $kw = $kwSnapshot[$kwIndexInSnapshot];
-    
+
     /*$kw = $client->getBiddableKeyword($kw_id);
     $kw = json_decode($kw['response'], true);*/
-  
+
     if (array_key_exists('bid', $kwSnapshot[$kwIndexInSnapshot])) {
       $bid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
     } else {
       $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
       $bid = $adgSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
     }
-    
+
     $status      = $kw['state'];
     $impressions = $arrKWReport[$i]['impressions'];
     $clicks      = $arrKWReport[$i]['clicks'];
@@ -362,8 +362,8 @@ for ($i = 0; $i < count($userIDs); $i++) {
   $client = new Client($config);
   $client->profileId = $userIDs[$i]['profileId'];
   $date = date('Ymd', strtotime('-1 days'));
-  
-  
+
+
   $result = $client->requestReport(
     "keywords",
     array("reportDate"    => $date,
@@ -396,10 +396,37 @@ for ($i = 0; $i < count($userIDs); $i++) {
   if (count($reportKeywordIDs) > count($dbKeywordIDs)) {
     $diff = fast_array_diff($reportKeywordIDs, $dbKeywordIDs);
 
-    // foreach diff, find index of extra keywords in the report.
+    // Get adgroups snapshot so we can use it to get bids later
+    $adgSnapshot = $client->requestSnapshot(
+      "adgroups",
+      array(
+        "stateFilter"  => "enabled,paused,archived",
+        "campaignType" => "sponsoredProducts"));
+
+    $snapshotId = json_decode($adgSnapshot['response'], true);
+    $snapshotId = $snapshotId['snapshotId'];
+
+    $adgSnapshot = getSnapshot($client, $snapshotId);
+
+    // Get keyword snapshot so we can use it to get states and bids later
+    $kwSnapshot = $client->requestSnapshot(
+      "keywords",
+      array(
+        "stateFilter"  => "enabled,paused,archived",
+        "campaignType" => "sponsoredProducts"));
+
+    $snapshotId = json_decode($kwSnapshot['response'], true);
+    $snapshotId = $snapshotId['snapshotId'];
+
+    $kwSnapshot = getSnapshot($client, $snapshotId);
+
+    // foreach diff, find index of extra keywords in the report so we can use it to
+    // udpate all metrics
     for ($a = 0; $a < count($diff); $a++) {
       $kw_id = $diff[$a];
       $index = array_search2D($result, 'keywordId', $kw_id);
+      $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'keywordId', $kw_id);
+
        if ($index) {
          // Prepare metric arrays to be inserted into db for keyword
          $impressions = array_fill(0, 59, 0);
@@ -422,6 +449,13 @@ for ($i = 0; $i < count($userIDs); $i++) {
          $kw = $client->getBiddableKeyword($kw_id);
          $kw = json_decode($kw['response'], true);
 
+         if (array_key_exists('bid', $kwSnapshot[$kwIndexInSnapshot])) {
+           $bid = $kwSnapshot[$kwIndexInSnapshot]['bid'];
+         } else {
+           $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
+           $bid = $adgSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
+         }
+
          // Serialize and store all new keywords in db
          $sql = "INSERT INTO ppc_keywords (user_id, amz_campaign_id, amz_adgroup_id, amz_kw_id, keyword_text, match_type, status, impressions, bid, clicks, ctr, ad_spend, avg_cpc, units_sold, sales)
          VALUES (:user_id, :amz_campaign_id, :amz_adgroup_id, :amz_kw_id, :keyword_text, :match_type, :status, :impressions, :bid, :clicks, :ctr, :ad_spend, :avg_cpc, :units_sold, :sales)";
@@ -435,7 +469,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
            ":match_type"      => $result[$index]['matchType'],
            ":status"          => $kw['state'],
            ":impressions"     => serialize($impressions),
-           ":bid"             => $kw['bid'],
+           ":bid"             => $bid,
            ":clicks"          => serialize($clicks),
            ":ctr"             => serialize($ctr),
            ":ad_spend"        => serialize($ad_spend),
