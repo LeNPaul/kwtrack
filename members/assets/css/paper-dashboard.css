@@ -31,7 +31,7 @@
 #chartjs-tooltip {
 	opacity: 1;
 	position: absolute;
-	background: rgba(255, 255, 255, .7);
+	background: rgba(255, 255, 255, .5);
 	color: #000000;
 	border-radius: 2px;
 	-webkit-transition: all .5s ease;
@@ -40,6 +40,8 @@
 	-webkit-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
   padding: 25px;
+  border-color: #cccccc;
+  border-width: 2px;
 }
 
 #tooltip_title {
