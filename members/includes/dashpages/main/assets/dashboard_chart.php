@@ -157,7 +157,9 @@
         mode: 'index',
         intersect: false
       },
-      multiTooltipTemplate: "<b><%=datasetLabel%></b> : <%= value %>",
+
+      /*multiTooltipTemplate: "<b><%=datasetLabel%></b> : <%= value %>",
+
       tooltips: {
         mode: 'index',
         intersect: false,
@@ -191,7 +193,7 @@
             return "Stats for " + item[0].xLabel;
           }
         }
-      },
+      },*/
 
       responsive: true,
       maintainAspectRatio: false,
