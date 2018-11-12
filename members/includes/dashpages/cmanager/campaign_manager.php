@@ -70,7 +70,7 @@ $(document).ready( function () {
   var adgrOptions = null;
 
   //var dt  = $('#campaign_manager').DataTable(
-  var campaignOptions = 
+  var campaignOptions =
   {
       // buttons: ['copy'],
       // responsive: true,
@@ -105,11 +105,25 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
         dataTableFlag = 1;
+
+				// Handle and style toggle buttons
+			  $('.toggle-campaign').bootstrapToggle({
+			    on: '<i class="fa fa-play"></i>',
+			    off: '<i class="fa fa-pause"></i>',
+			    size: "small",
+			    onstyle: "success",
+			    offstyle: "primary"
+			  });
+			  $(".toggle-campaign-archive").bootstrapToggle({
+			    off: '',
+			    size: "small"
+			  });
+				
 	  } //drawCallback
 
   }; //campaignOptions
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
-	
+
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
     $(this).toggleClass('toggle-selected');
@@ -217,24 +231,13 @@ $(document).ready( function () {
     $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
   }
 
-	// Handle and style toggle buttons
-  $('.toggle-campaign').bootstrapToggle({
-    on: '<i class="fa fa-play"></i>',
-    off: '<i class="fa fa-pause"></i>',
-    size: "small",
-    onstyle: "success",
-    offstyle: "primary"
-  });
-  $(".toggle-campaign-archive").bootstrapToggle({
-    off: '',
-    size: "small"
-  });
+
 
   //breadcrumbs ALL CAMPAIGNS click
   $(".breadcrumb").on("click", ".all_link", function() {
     dt.destroy();
 	$("#campaign_manager").empty();
-	
+
 	dt = $("#campaign_manager").DataTable(campaignOptions);
 	$("#bc").html(allCampaigns);
 
@@ -243,11 +246,11 @@ $(document).ready( function () {
   $(".breadcrumb").on("click", ".c_link", function() {
 	dt.destroy();
 	$("#campaign_manager").empty();
-	
+
 	dt = $("#campaign_manager").DataTable(adgrOptions);
 	$("#bc").html(allCampaigns + " <b>></b> " + currentCampaign);
   });
-  
+
   //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
 	  currentCampaign     = $(this).html();
@@ -316,14 +319,14 @@ $(document).ready( function () {
 
 	          $('td input').bootstrapToggle();
 
-	          
+
 
 	        } // drawCallback
 
 	      }; // adgrOptions
-       
+
 	      dt = $('#campaign_manager').DataTable(adgrOptions);
-	      
+
 	    }, // success (campaign manager)
 
 	    error: function(msg) {
@@ -332,7 +335,7 @@ $(document).ready( function () {
 
 	  }); //ajax
 	}); //on campaign name click
-	
+
 	$("#campaign_manager").on("click", ".ag_link",  function() {
     adgroupName     = $(this).text();
 
@@ -345,34 +348,34 @@ $(document).ready( function () {
       console.log(currentText);
       return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>></b> " + adgroupName;
     });
-  
+
     $.ajax({
       type: "POST",
-  
+
       data: {
         "adgroupName"     : adgroupName,
         "adgroupDataBack" : adgroupDataBack
       },
-  
+
       dataType: "text",
-  
+
       url: "includes/dashpages/cmanager/helpers/get_keywords.php",
-  
+
       success: function(data) {
         console.log("running keyword campaign manager section");
         console.log(data);
-  
+
         data            = JSON.parse(data);
-  
+
         console.log(data);
-  
+
         keywordDataset  = data[0];
         keywordDataBack = data[1];
-  
+
         console.log('DATASET: ');
         console.log(keywordDataset);
         console.log(keywordDataBack);
-  
+
         var kwOptions = {
           scrollX: true,
           paging: true,
@@ -397,25 +400,25 @@ $(document).ready( function () {
             { title: "Sales" },
             { title: "ACoS" }
           ],
-  
+
           drawCallback: function(settings) {
             // Set dataTableFlag to 1 whenever campaign manager is drawn
             dataTableFlag = 3;
-  
+
             $('td input').bootstrapToggle();
-  
+
           } // drawCallback (keyword manager)
         }; // kwOptions
-  
+
         dt = $("#campaign_manager").DataTable(kwOptions);
       }, // success (keyword manager)
-  
+
       error: function(msg) {
         alert(msg);
       } // error (keyword manager)
-  
+
     });
-  
+
   }); // .ag_link on click
 
   $('#campaign_manager tbody').on('click', 'tr', function() {
