@@ -166,7 +166,7 @@
 
             // Set Text
             if (tooltipModel.body) {
-              var titleLines = '<div id="tooltip_title">Stats on ' + tooltipModel.title || [] + '</div>';
+              var titleLines = 'Stats on ' + tooltipModel.title || [];
               var bodyLines = tooltipModel.body.map(getBody);
 
               var innerHtml = '<thead>';
