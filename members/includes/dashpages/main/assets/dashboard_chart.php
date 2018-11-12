@@ -195,6 +195,7 @@
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
+            console.log(window.pageXOffset);
             tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 80 + 'px';
             tooltipEl.style.top = window.pageYOffset + 100 + 'px';
             tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
