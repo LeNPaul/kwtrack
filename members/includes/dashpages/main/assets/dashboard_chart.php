@@ -194,6 +194,7 @@
             // `this` will be the overall tooltip
             var position = this._chart.canvas.getBoundingClientRect();
 
+            console.log(position);
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
@@ -206,15 +207,7 @@
             tooltipEl.style.pointerEvents = 'none';
         },
         mode: 'index',
-        intersect: false,
-        bodyFontSize: 14,
-        bodySpacing: 16,
-        caretPadding: 10,
-        caretSize: 7,
-        titleFontSize: 16,
-        titleFontStyle: 'bold',
-        titleFontColor: '#444444',
-        titleMarginBottom: 20,
+        intersect: false
 
 
         ///////////////////////////////////////////////
