@@ -194,6 +194,7 @@
             var position = this._chart.canvas.getBoundingClientRect();
             var chartWidth = $("#lineChart").width();
             console.log(chartWidth);
+            console.log(tooltipEl.style.left);
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
