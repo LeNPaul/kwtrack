@@ -169,10 +169,10 @@
               var titleLines = tooltipModel.title || [];
               var bodyLines = tooltipModel.body.map(getBody);
 
-              var innerHtml = '<thead>';
+              var innerHtml = '<thead id="tooltip_title">';
 
               titleLines.forEach(function(title) {
-                  innerHtml += '<tr id="tooltip_title"><th>Stats on ' + title + '</th></tr>';
+                  innerHtml += '<tr><th>Stats on ' + title + '</th></tr>';
               });
               innerHtml += '</thead><tbody>';
 
