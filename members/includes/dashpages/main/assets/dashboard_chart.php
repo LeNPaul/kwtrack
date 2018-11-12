@@ -67,7 +67,7 @@
   var lineData = {
     labels: dateArr,
     datasets: [{
-      label: "Ad Spend ($)",
+      label: "Ad Spend",
       yAxisID: 'A',
       data: adSpendArr,
       fill: false,
@@ -82,7 +82,7 @@
       borderWidth: 1,
       borderColor: "rgba(244, 72, 66, 0.7)",
     }, {
-      label: "PPC Sales ($)",
+      label: "PPC Sales",
       yAxisID: 'A',
       data: ppcSalesArr,
       fill: false,
@@ -97,7 +97,7 @@
       borderWidth: 2,
       borderColor: "rgb(89, 255, 152)"
     }, {
-      label: "<b>PPC ACoS</b>",
+      label: "PPC ACoS",
       yAxisID: 'B',
       data: ppcAcosArr,
       fill: false,
@@ -128,7 +128,7 @@
         mode: 'index',
         intersect: false
       },
-      multiTooltipTemplate: "<%=datasetLabel%> : <%= value %>",
+      multiTooltipTemplate: "<b></b><%=datasetLabel%></b> : $<%= value %>",
       tooltips: {
         mode: 'index',
         intersect: false,
