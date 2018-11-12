@@ -166,7 +166,6 @@
 
             // Set Text
             if (tooltipModel.body) {
-              console.log(tooltipModel.body);
               var titleLines = tooltipModel.title || [];
               var bodyLines = tooltipModel.body.map(getBody);
 
@@ -193,13 +192,13 @@
 
             // `this` will be the overall tooltip
             var position = this._chart.canvas.getBoundingClientRect();
-
+            console.log(tooltipEl);
             console.log(position);
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
             tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
-            tooltipEl.style.top = window.pageYOffset + tooltipModel.caretY + 'px';
+            tooltipEl.style.top = window.pageYOffset + 'px';
             tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
             tooltipEl.style.fontSize = '14 px';
             tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
