@@ -166,7 +166,7 @@
 
             // Set Text
             if (tooltipModel.body) {
-              var titleLines = tooltipModel.title || [];
+              var titleLines = 'Stats on ' + tooltipModel.title || [];
               var bodyLines = tooltipModel.body.map(getBody);
 
               var innerHtml = '<thead>';
@@ -179,7 +179,7 @@
               bodyLines.forEach(function(body, i) {
                 var colors = tooltipModel.labelColors[i];
                 var style = 'background:' + colors.backgroundColor;
-                style += '; border-color:' + colors.borderColor;
+                style += '; border-color: #cccccc';
                 style += '; border-width: 2px';
                 var span = '<span style="' + style + '"></span>';
                 innerHtml += '<tr><td>' + span + body + '</td></tr>';
@@ -192,12 +192,11 @@
 
             // `this` will be the overall tooltip
             var position = this._chart.canvas.getBoundingClientRect();
-            console.log(tooltipEl);
-            console.log(position);
+            
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
-            tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX - 180 + 'px';
+            tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 80 + 'px';
             tooltipEl.style.top = window.pageYOffset + 100 + 'px';
             tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
             tooltipEl.style.fontSize = '14 px';
