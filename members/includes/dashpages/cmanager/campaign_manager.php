@@ -424,7 +424,7 @@ $(document).ready( function () {
 
   }); // .ag_link on click
 
-  $('#campaign_manager tbody').on('click', 'tr', function() {
+  $('#campaign_manager').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
 
     rowClasses = $(this).attr("class");
