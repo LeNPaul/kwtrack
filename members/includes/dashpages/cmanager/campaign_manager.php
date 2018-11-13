@@ -439,7 +439,7 @@ $(document).ready( function () {
 	  //alert("clicked");
   });
 
-  $('button#select_all').click(function() {
+  $('#select_all').click(function() {
     $('tr.odd, tr.even').toggleClass('selected');
 
     asdf = $('#campaign_manager tbody tr').attr("class");
