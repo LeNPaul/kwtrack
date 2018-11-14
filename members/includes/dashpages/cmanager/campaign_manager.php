@@ -446,9 +446,9 @@ $(document).ready( function () {
     console.log(asdf);
     console.log(dt.rows('.selected').data());
 	    if (asdf.includes("selected")) {
-      $(this).css('background-color', 'rgba(193, 235, 255, 0.4)');
+      $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
     } else {
-      $(this).css('background-color', '#fdfdfe');
+      $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
     }
     dt.draw();
   });
