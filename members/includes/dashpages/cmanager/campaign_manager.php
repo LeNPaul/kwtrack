@@ -445,6 +445,11 @@ $(document).ready( function () {
     asdf = $('#campaign_manager tbody tr').attr("class");
     console.log(asdf);
     console.log(dt.rows('.selected').data());
+	    if (asdf.includes("selected")) {
+      $(this).css('background-color', 'rgba(193, 235, 255, 0.4)');
+    } else {
+      $(this).css('background-color', '#fdfdfe');
+    }
     dt.draw();
   });
 
