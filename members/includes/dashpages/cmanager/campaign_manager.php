@@ -75,7 +75,7 @@ $(document).ready( function () {
       // buttons: ['copy'],
       // responsive: true,
       // autoWidth: true,
-	  order: [[ 1, "asc" ]]
+	  order: [[ 1, "asc" ]],
       scrollX: true,
       paging: true,
       pagingType: "full_numbers",
