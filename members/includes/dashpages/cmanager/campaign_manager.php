@@ -451,7 +451,9 @@ $(document).ready( function () {
     } else {
       $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
     }
-    dt.draw();
+    dt.draw('page');
+	
+	
   });
 
   /* Create an array with the values of all the input boxes in a column. Used for sorting. */
