@@ -75,6 +75,7 @@ $(document).ready( function () {
       // buttons: ['copy'],
       // responsive: true,
       // autoWidth: true,
+	  dom: '<"col-sm-6 col-md-4"l><"selectedCampaigns col-sm-6 col-md-4"><"col-sm-12 col-md-4"f>tip',
 	  order: [[ 1, "asc" ]],
       scrollX: true,
       paging: true,
