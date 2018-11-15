@@ -220,7 +220,7 @@
           tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
           tooltipEl.style.fontSize = '14 px';
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
-          tooltipEl.style.padding = '15 px ' + '15 px';
+          tooltipEl.style.padding = '10 px 15px 5px' + '15 px';
           tooltipEl.style.pointerEvents = 'none';
         },
         mode: 'index',
