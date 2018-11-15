@@ -129,6 +129,7 @@
       },
       
       onHover: function(evt) {
+        console.log(chart.scales);
         //console.log(evt.offsetX + "," + evt.offsetY);
         var ytop = chart.chartArea.top;
         var ybottom = chart.chartArea.bottom;
