@@ -129,7 +129,6 @@
       },
       
       onHover: function(evt) {
-        console.log(chart.scales);
         //console.log(evt.offsetX + "," + evt.offsetY);
         var ytop = chart.chartArea.top;
         var ybottom = chart.chartArea.bottom;
@@ -145,8 +144,8 @@
         }
         var xtop = chart.chartArea.left;
         var xbottom = chart.chartArea.right;
-        var xmin = chart.scales['x-axis-1'].min;
-        var xmax = chart.scales['x-axis-1'].max;
+        var xmin = chart.scales['x-axis-0'].min;
+        var xmax = chart.scales['x-axis-0'].max;
         window.newx = '';
         if (evt.offsetX <= xbottom && evt.offsetX >= xtop && showstuff == 1) {
           newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
