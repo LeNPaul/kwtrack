@@ -14,7 +14,7 @@ $outputList = [];
 function drawCheckbox($campaignId) {
   return
   '<div class="form-check">
-    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="' . $campaignId . '">
+    <input class="form-check-input" type="checkbox" value="' . $campaignId . '">
   </div>';
 }
 
