@@ -143,6 +143,8 @@ $(document).ready( function () {
 
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
 
+	$("div.selectedCampaigns").html(dt.rows('.selected').count() + ' of ' + dataset.length + ' selected');
+	
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
     $(this).toggleClass('toggle-selected');
@@ -341,7 +343,8 @@ $(document).ready( function () {
 	  }); //ajax
 	}); //on campaign name click
 
-	$("#campaign_manager").on("click", ".ag_link",  function() {
+  //when user clicks on an adgroup link
+  $("#campaign_manager").on("click", ".ag_link",  function() {
     adgroupName     = $(this).text();
 
     // backend adgroup data already stored in adgroupDataBack
@@ -437,6 +440,7 @@ $(document).ready( function () {
       $(this).css('background-color', '#fdfdfe');
     }
 
+	$("div.selectedCampaigns").html(dt.rows('.selected').count() + ' of ' + dataset.length + ' selected');
     //console.log( dt.rows('.selected').data() );
 	  //alert("clicked");
   });
@@ -454,7 +458,7 @@ $(document).ready( function () {
     }
     dt.draw('page');
 	
-	
+	$("div.selectedCampaigns").html(dt.rows('.selected').count() + ' of ' + dataset.length + ' selected');
   });
 
   /* Create an array with the values of all the input boxes in a column. Used for sorting. */
