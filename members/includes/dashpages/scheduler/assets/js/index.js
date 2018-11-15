@@ -34,5 +34,5 @@ $(function(){
     ]
   };
 
-  var campaignTable = $("#campaign_list").DataTable(campaignOptions);
+  var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
 });
