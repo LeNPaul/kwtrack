@@ -112,11 +112,11 @@ table.dataTable td {
   line-height: 2em !important;
 }
 
-#campaign_manager_length {
+#campaign_manager_length, #campaign_manager_info {
   float: left !important;
 }
 
-#campaign_manager_filter {
+#campaign_manager_filter, #campaign_manager_paginate {
   float: right !important;
 }
 
