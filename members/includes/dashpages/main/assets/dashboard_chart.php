@@ -211,6 +211,9 @@
             newPos = position.left + window.pageXOffset + tooltipModel.caretX + 95;
             tooltipEl.style.left = newPos + 'px';
           }
+          console.log(tooltipEl.style);
+          tooltipEl.style.border = '2px #1E1E1E solid';
+          tooltipEl.style.borderradius = '5px';
           tooltipEl.style.opacity = 1;
           tooltipEl.style.position = 'absolute';
           tooltipEl.style.top = window.pageYOffset + 100 + 'px';
