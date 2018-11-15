@@ -440,7 +440,7 @@ $(document).ready( function () {
       $(this).css('background-color', '#fdfdfe');
     }
 
-	$("div.selectedCampaigns").html(dt.rows('.selected').count() + ' of ' + dataset.length + ' selected');
+	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
     //console.log( dt.rows('.selected').data() );
 	  //alert("clicked");
   });
