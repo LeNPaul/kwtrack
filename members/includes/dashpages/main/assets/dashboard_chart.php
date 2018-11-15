@@ -130,10 +130,10 @@
       
       onHover: function(evt) {
         //console.log(evt.offsetX + "," + evt.offsetY);
-        var ytop = myChart.chartArea.top;
-        var ybottom = myChart.chartArea.bottom;
-        var ymin = myChart.scales['A'].min;
-        var ymax = myChart.scales['A'].max;
+        var ytop = chart.chartArea.top;
+        var ybottom = chart.chartArea.bottom;
+        var ymin = chart.scales['A'].min;
+        var ymax = chart.scales['A'].max;
         var newy = '';
         var showstuff = 0;
         if (evt.offsetY <= ybottom && evt.offsetY >= ytop) {
@@ -142,10 +142,10 @@
           newy = newy * (Math.abs(ymax - ymin)) + ymin;
           showstuff = 1;
         }
-        var xtop = myChart.chartArea.left;
-        var xbottom = myChart.chartArea.right;
-        var xmin = myChart.scales['x-axis-1'].min;
-        var xmax = myChart.scales['x-axis-1'].max;
+        var xtop = chart.chartArea.left;
+        var xbottom = chart.chartArea.right;
+        var xmin = chart.scales['x-axis-1'].min;
+        var xmax = chart.scales['x-axis-1'].max;
         window.newx = '';
         if (evt.offsetX <= xbottom && evt.offsetX >= xtop && showstuff == 1) {
           newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
