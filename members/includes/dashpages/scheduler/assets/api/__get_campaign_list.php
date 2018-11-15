@@ -3,15 +3,33 @@ include '../../../../../database/pdo.inc.php';
 
 $user_id = 2/*$_POST['user_id']*/;
 
-$sql = 'SELECT campaign_name, amz_campaign_id FROM campaigns WHERE user_id = ?';
+$sql = 'SELECT campaign_name, amz_campaign_id, schedule FROM campaigns WHERE user_id = ?';
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 $stmt->execute();
-$campaignNameList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$campaignList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$dummy = array_fill(0, 7, array_fill(0, 24, 24));
+$outputList = [];
 
-echo serialize($dummy);
+function drawCheckbox($campaignId) {
+  return
+  '<div class="form-check">
+    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="' . $campaignId . '">
+  </div>';
+}
+
+
+for ($i = 0; $i < count($campaignList); $i++) {
+  if ($campaignList[$i]['schedule'] === 0) {
+    $outputList[] = array(
+      drawCheckbox($campaignList[$i]['amz_campaign_id']),
+      $campaignList[$i]['campaign_name'],
+      '<span class="circle_on"></span>'
+    );
+  } else {
+
+  }
+}
 
 echo json_encode($campaignNameList, true);
 
