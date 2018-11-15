@@ -4,6 +4,7 @@
 
 <script type="text/javascript">
   window.newx  = !0;
+  console.log(newx);
   
   $(function() {
 
