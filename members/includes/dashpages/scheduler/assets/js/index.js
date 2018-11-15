@@ -1,5 +1,5 @@
 $(function(){
-  var campaignList;
+  var campaignTableList;
   var user_id = $("#uid").val();
 
   $.ajax({
@@ -9,9 +9,8 @@ $(function(){
       user_id: user_id
     },
 
-    success: function(campaignList) {
-      campaignList = JSON.parse(campaignList);
-      console.log(campaignList);
+    success: function(campaignTableList) {
+      campaignTableList = JSON.parse(campaignList);
     },
 
     error: function(err) {
@@ -27,7 +26,7 @@ $(function(){
         [10, 25, 50, 100, -1],
         [10, 25, 50, 100, "All"]
       ],
-    data: campaignList,
+    data: campaignTableList,
     columns: [
       { title: "Select"},
       { title: "Campaign Name"},
@@ -35,5 +34,6 @@ $(function(){
     ]
   };
 
+  console.log(campaignTableList);
   var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
 });
