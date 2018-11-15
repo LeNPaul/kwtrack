@@ -126,36 +126,6 @@
         mode: 'index',
         intersect: false
       },
-      
-      onHover: function(evt) {
-        console.log(chart);
-        //console.log(evt.offsetX + "," + evt.offsetY);
-        var ytop = chart.chartArea.top;
-        var ybottom = chart.chartArea.bottom;
-        var ymin = chart.scales['A'].min;
-        var ymax = chart.scales['A'].max;
-        var newy = '';
-        var showstuff = 0;
-        if (evt.offsetY <= ybottom && evt.offsetY >= ytop) {
-          newy = Math.abs((evt.offsetY - ytop) / (ybottom - ytop));
-          newy = (newy - 1) * -1;
-          newy = newy * (Math.abs(ymax - ymin)) + ymin;
-          showstuff = 1;
-        }
-        var xtop = chart.chartArea.left;
-        var xbottom = chart.chartArea.right;
-        var xmin = 0/*chart.scales['x-axis-0'].min*/;
-        var xmax = 59/*chart.scales['x-axis-0'].max*/;
-        newx = '';
-        if (evt.offsetX <= xbottom && evt.offsetX >= xtop && showstuff == 1) {
-          newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
-          newx = newx * (Math.abs(xmax - xmin)) + xmin;
-        }
-        if (newy != '' && newx != '') {
-          console.log(newx);
-          //$("#graph_coords").html('Mouse Coordinates: ' + newx.toFixed(2) + ',' + newy.toFixed(2));
-        }
-      },
 
       //multiTooltipTemplate: "<b><%=datasetLabel%></b> : <%= value %>",
 
@@ -225,12 +195,13 @@
 
             console.log(parseInt(current) + ' - ' + chartWidth);
             console.log(current - chartWidth);
-            console.log(current);
+            
             var newPos = !1;
 
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
+            
             if (current - chartWidth > 100) {
               newPos = position.left + window.pageXOffset + tooltipModel.caretX - 95;
               tooltipEl.style.left = newPos + 'px';
@@ -238,6 +209,7 @@
               newPos = position.left + window.pageXOffset + tooltipModel.caretX + 95;
               tooltipEl.style.left = newPos + 'px';
             }
+            
             tooltipEl.style.top = window.pageYOffset + 100 + 'px';
             tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
             tooltipEl.style.fontSize = '14 px';

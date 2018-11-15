@@ -112,6 +112,13 @@ table.dataTable td {
   line-height: 2em !important;
 }
 
+#campaign_manager_length {
+  float: left !important;
+}
+
+#campaign_manager_filter {
+  float: right !important;
+}
 
 /*
 ███████ ███████ ████████ ████████ ██ ███    ██  ██████  ███████
