@@ -9,7 +9,7 @@ $(function(){
     },
 
     success: function(campaignList) {
-      var campaignTableList = JSON.parse(campaignList);
+
       var campaignTableOptions = {
         scrollX: true,
         paging: true,
@@ -18,11 +18,11 @@ $(function(){
             [10, 25, 50, 100, -1],
             [10, 25, 50, 100, "All"]
           ],
-        data: campaignTableList,
+        data: campaignist,
         columns: [
-          { title: "Select"},
+          { title: "Select", width: 40},
           { title: "Campaign Name"},
-          { title: "Scheduled"}
+          { title: "Scheduled", width: 40}
         ]
       };
 
