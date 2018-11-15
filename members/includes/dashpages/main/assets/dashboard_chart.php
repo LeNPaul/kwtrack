@@ -193,9 +193,8 @@
             var chartWidth = $("#lineChart").width();
             var current = tooltipEl.style.left.replace(/[^\d.]/g, '');
 
-            console.log(chartWidth + ' + ' + parseInt(current));
+            console.log(parseInt(current) + ' - ' + chartWidth);
             console.log(current - chartWidth);
-            console.log(position.left);
 
             var newPos = !1;
 
@@ -207,7 +206,7 @@
               tooltipEl.style.left = newPos + 'px';
             } else {
               newPos = position.left + window.pageXOffset + tooltipModel.caretX + 80;
-              tooltipEl.style.left = newPos + 80 + 'px';
+              tooltipEl.style.left = newPos + 'px';
             }
             tooltipEl.style.top = window.pageYOffset + 100 + 'px';
             tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
