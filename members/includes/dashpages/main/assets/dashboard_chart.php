@@ -4,9 +4,7 @@
 
 <script type="text/javascript">
   $(function() {
-
-
-
+    
     var start = moment().subtract(59, 'days');
     var end = moment();
 
@@ -199,13 +197,17 @@
             console.log(current - chartWidth);
             console.log(position.left);
 
+            var newPos = !1;
+
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
-            if (current - chartWidth > 400) {
-              tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX - 80 + 'px';
+            if (current - chartWidth > 100) {
+              newPos = position.left + window.pageXOffset + tooltipModel.caretX - 80;
+              tooltipEl.style.left = newPos + 'px';
             } else {
-              tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 80 + 'px';
+              newPos = position.left + window.pageXOffset + tooltipModel.caretX + 80;
+              tooltipEl.style.left = newPos + 80 + 'px';
             }
             tooltipEl.style.top = window.pageYOffset + 100 + 'px';
             tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
