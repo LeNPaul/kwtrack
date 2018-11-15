@@ -11,7 +11,23 @@ $(function(){
 
     success: function(campaignList) {
       campaignTableList = JSON.parse(campaignList);
-      console.log(campaignTableList);
+      var campaignTableOptions = {
+        scrollX: true,
+        paging: true,
+        pagingType: "full_numbers",
+        lengthMenu: [
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, "All"]
+          ],
+        data: campaignTableList,
+        columns: [
+          { title: "Select"},
+          { title: "Campaign Name"},
+          { title: "Scheduled"}
+        ]
+      };
+
+      var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
     },
 
     error: function(err) {
@@ -19,24 +35,4 @@ $(function(){
     }
   });
 
-  console.log(campaignTableList);
-
-  var campaignTableOptions = {
-    scrollX: true,
-    paging: true,
-    pagingType: "full_numbers",
-    lengthMenu: [
-        [10, 25, 50, 100, -1],
-        [10, 25, 50, 100, "All"]
-      ],
-    data: campaignTableList,
-    columns: [
-      { title: "Select"},
-      { title: "Campaign Name"},
-      { title: "Scheduled"}
-    ]
-  };
-
-  console.log(campaignTableList);
-  var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
 });
