@@ -180,7 +180,7 @@
               style += '; border-color: #cccccc';
               style += '; border-width: 2px';
               var span = '<span style="' + style + '"></span>';
-              innerHtml += '<tr><td>' + span + body + '</td></tr>';
+              innerHtml += '<tr><td>' + span + body + '</td></tr><hr />';
             });
             innerHtml += '</tbody>';
 
