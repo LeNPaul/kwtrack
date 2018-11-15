@@ -24,13 +24,17 @@ for ($i = 0; $i < count($campaignList); $i++) {
     $outputList[] = array(
       drawCheckbox($campaignList[$i]['amz_campaign_id']),
       $campaignList[$i]['campaign_name'],
-      '<span class="circle_on"></span>'
-    );
+      '<span class="circle_on"></span>');
   } else {
-
+    $outputList[] = array(
+      drawCheckbox($campaignList[$i]['amz_campaign_id']),
+      $campaignList[$i]['campaign_name'],
+      '<span class="circle_off"></span>');
   }
 }
-
-echo json_encode($campaignNameList, true);
+echo '<pre>';
+var_dump($outputList);
+echo '</pre>';
+echo json_encode($outputList, true);
 
 ?>
