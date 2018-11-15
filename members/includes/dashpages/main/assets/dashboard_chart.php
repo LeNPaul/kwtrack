@@ -212,15 +212,15 @@
             tooltipEl.style.left = newPos + 'px';
           }
           console.log(tooltipEl.style);
-          tooltipEl.style.border = '2px #1E1E1E solid';
-          tooltipEl.style.borderradius = '5px';
+          tooltipEl.style.border = '1px #55555 solid';
+          tooltipEl.style.borderRadius = '5px';
           tooltipEl.style.opacity = 1;
           tooltipEl.style.position = 'absolute';
           tooltipEl.style.top = window.pageYOffset + 100 + 'px';
           tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
           tooltipEl.style.fontSize = '14 px';
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
-          tooltipEl.style.padding = '25 px ' + '25 px';
+          tooltipEl.style.padding = '15 px ' + '15 px';
           tooltipEl.style.pointerEvents = 'none';
         },
         mode: 'index',
