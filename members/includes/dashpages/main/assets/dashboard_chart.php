@@ -3,7 +3,7 @@
 ?>
 
 <script type="text/javascript">
-  var newx  = !0;
+  window.newx  = !0;
   
   $(function() {
 
