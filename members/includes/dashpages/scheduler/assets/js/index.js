@@ -11,6 +11,7 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
+        select: true,
         scrollX: true,
         paging: true,
         pagingType: "full_numbers",
