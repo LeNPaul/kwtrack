@@ -11,6 +11,7 @@ $(function(){
 
     success: function(campaignList) {
       campaignList = JSON.parse(campaignList);
+      console.log(campaignList);
     },
 
     error: function(err) {
