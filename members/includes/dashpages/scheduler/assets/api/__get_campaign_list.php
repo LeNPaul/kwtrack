@@ -9,8 +9,10 @@ $stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 $stmt->execute();
 $campaignNameList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$dummy = array_fill(0, 7, array_fill(0, 24, 24));
+
 echo '<pre>';
-var_dump($campaignNameList);
+var_dump($dummy);
 echo '</pre>';
 
 echo json_encode($campaignNameList, true);
