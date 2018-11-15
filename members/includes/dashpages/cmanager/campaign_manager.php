@@ -75,6 +75,7 @@ $(document).ready( function () {
       // buttons: ['copy'],
       // responsive: true,
       // autoWidth: true,
+	  dom: 'l<>ftip',
 	  order: [[ 1, "asc" ]],
       scrollX: true,
       paging: true,
