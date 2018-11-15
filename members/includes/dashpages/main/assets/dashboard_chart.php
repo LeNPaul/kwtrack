@@ -213,7 +213,7 @@
             tooltipEl.style.left = newPos + 'px';
           }
           console.log(tooltipEl.style);
-          tooltipEl.style.border = '1px #eeeeee solid';
+          tooltipEl.style.border = '1px rgba(85, 85, 85, 0.4) solid';
           tooltipEl.style.borderRadius = '5px';
           tooltipEl.style.opacity = 1;
           tooltipEl.style.position = 'absolute';
