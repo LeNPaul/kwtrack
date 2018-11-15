@@ -451,11 +451,11 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
     $("#asin").val(""), $("#keywords").val("")
   }),
 
-    $("#search-btn").click(function() {
+    $("#").click(function() {
     i = {}, a(!1)
   });
   var s = function(e, o) {
-        if ($("#check-volume").is(":checked"))
+        if ($("#check-volume").is(":checked")) {
           console.log("Asdf");
           $.ajax({
           type: "POST",
@@ -504,7 +504,7 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
             }
             $("#search-btn").prop("disabled", !1), $("#search-btn").html("Check Now"), $("#kw-btn").prop("disabled", !1), $("#kw-btn").html("Relevant KW"), "1" !== localStorage.getItem("amz_isSubscriber") && $(".amz_notSubscribe_table_data").show(), n.width("100%"), t.html("Finished!"), l(e, o)
           }
-        });
+        })}
         else {
           var r = !0,
               a = !1,

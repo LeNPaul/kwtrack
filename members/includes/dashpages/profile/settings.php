@@ -118,10 +118,6 @@
 <script>
 
   $(function() {
-
-    
-
- 
     
     $("#search-btn").on("click", function() {
 
