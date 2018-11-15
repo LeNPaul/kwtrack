@@ -162,6 +162,10 @@
                 return bodyItem.lines;
             }
 
+            console.log(tooltipEl);
+            console.log(bodyItem);
+          
+
             // Set Text
             if (tooltipModel.body) {
               var titleLines = tooltipModel.title || [];
