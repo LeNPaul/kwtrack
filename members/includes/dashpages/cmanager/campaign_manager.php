@@ -143,7 +143,7 @@ $(document).ready( function () {
 
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
 
-	$("div.selectedCampaigns").html(dt.rows('.selected').count() + ' of ' + dataset.length + ' selected');
+	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
 	
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
@@ -458,7 +458,7 @@ $(document).ready( function () {
     }
     dt.draw('page');
 	
-	$("div.selectedCampaigns").html(dt.rows('.selected').count() + ' of ' + dataset.length + ' selected');
+	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
   });
 
   /* Create an array with the values of all the input boxes in a column. Used for sorting. */
