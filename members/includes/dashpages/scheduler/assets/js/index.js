@@ -22,7 +22,7 @@ $(function(){
         columns: [
           { title: "Select", width: 40},
           { title: "Campaign Name"},
-          { title: "Scheduled", width: 40}
+          { title: "Scheduled", width: 50}
         ]
       };
 

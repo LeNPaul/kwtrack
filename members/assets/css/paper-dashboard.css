@@ -131,6 +131,7 @@ table.dataTable td {
   display: inline-block;
   background: #40d633;
   border-radius: 50%;
+  margin: 0 auto;
 }
 
 .circle_off {
@@ -139,6 +140,7 @@ table.dataTable td {
   display: inline-block;
   background: #d82000;
   border-radius: 50%;
+  margin: 0 auto;
 }
 
 /*
