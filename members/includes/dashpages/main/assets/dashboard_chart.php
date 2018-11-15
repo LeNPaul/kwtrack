@@ -162,8 +162,6 @@
             return bodyItem.lines;
           }
 
-          
-
           // Set Text
           if (tooltipModel.body) {
             var titleLines = tooltipModel.title || [];
@@ -195,12 +193,13 @@
           var chartWidth = $("#lineChart").width();
           var current = tooltipEl.style.left.replace(/[^\d.]/g, '');
 
-          console.log(parseInt(current) + ' - ' + chartWidth);
-          console.log(current - chartWidth);
+          // console.log(parseInt(current) + ' - ' + chartWidth);
+          // console.log(current - chartWidth);
           
           var newPos = !1;
 
           // Styles, display, position, and set styles for font
+          console.log(tooltipModel);
           tooltipModel.bodySpacing = 10;
           tooltipModel.cornerRadius = 5;
           tooltipModel.titleMarginBottom = 25;
