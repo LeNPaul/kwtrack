@@ -1,5 +1,5 @@
 $(function(){
-  var campaignTableList;
+  var campaignTableList = 0;
   var user_id = $("#uid").val();
 
   $.ajax({
@@ -11,12 +11,15 @@ $(function(){
 
     success: function(campaignList) {
       campaignTableList = JSON.parse(campaignList);
+      console.log(campaignTableList);
     },
 
     error: function(err) {
       console.log(err);
     }
   });
+
+  console.log(campaignTableList);
 
   var campaignTableOptions = {
     scrollX: true,
