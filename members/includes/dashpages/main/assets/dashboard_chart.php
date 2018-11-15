@@ -3,12 +3,13 @@
 ?>
 
 <script type="text/javascript">
+  window.newx  = !0;
+  
   $(function() {
 
     var start = moment().subtract(59, 'days');
     var end   = moment();
-    var newx  = !0;
-
+    
     function cb(begin, finish) {
 	  chartUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
       $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
@@ -129,7 +130,6 @@
       },
       
       onHover: function(evt) {
-        console.log(chart.scales);
         //console.log(evt.offsetX + "," + evt.offsetY);
         var ytop = chart.chartArea.top;
         var ybottom = chart.chartArea.bottom;
@@ -145,12 +145,12 @@
         }
         var xtop = chart.chartArea.left;
         var xbottom = chart.chartArea.right;
-        var xmin = chart.scales['x-axis-1'].min;
-        var xmax = chart.scales['x-axis-1'].max;
+        var xmin = chart.scales['x-axis-0'].min;
+        var xmax = chart.scales['x-axis-0'].max;
         window.newx = '';
         if (evt.offsetX <= xbottom && evt.offsetX >= xtop && showstuff == 1) {
-          newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
-          newx = newx * (Math.abs(xmax - xmin)) + xmin;
+          window.newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
+          window.newx = window.newx * (Math.abs(xmax - xmin)) + xmin;
         }
         if (newy != '' && window.newx != '') {
           console.log(window.newx + ',' + newy);
