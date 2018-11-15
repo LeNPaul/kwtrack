@@ -148,8 +148,8 @@
         var xmax = chart.scales['x-axis-0'].max;
         window.newx = '';
         if (evt.offsetX <= xbottom && evt.offsetX >= xtop && showstuff == 1) {
-          newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
-          newx = newx * (Math.abs(xmax - xmin)) + xmin;
+          window.newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
+          window.newx = window.newx * (Math.abs(xmax - xmin)) + xmin;
         }
         if (newy != '' && window.newx != '') {
           console.log(window.newx + ',' + newy);
