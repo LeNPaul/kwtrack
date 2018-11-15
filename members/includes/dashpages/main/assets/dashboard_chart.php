@@ -213,7 +213,7 @@
           tooltipEl.style.borderRadius = '5px';
           tooltipEl.style.opacity = 1;
           tooltipEl.style.position = 'absolute';
-          tooltipEl.style.top = /*window.scrollY + 100*/ -184 + 'px';
+          tooltipEl.style.top = 216 + 'px';
           tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
           tooltipEl.style.fontSize = '15 px';
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
