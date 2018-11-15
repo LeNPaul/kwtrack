@@ -7,7 +7,7 @@
 
     var start = moment().subtract(59, 'days');
     var end   = moment();
-    var window.newx  = !0;
+    var newx  = !0;
 
     function cb(begin, finish) {
 	  chartUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
