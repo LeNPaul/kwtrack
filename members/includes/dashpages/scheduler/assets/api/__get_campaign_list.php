@@ -1,7 +1,7 @@
 <?php
 include '../../../../../database/pdo.inc.php';
 
-$user_id = 2/*$_POST['user_id']*/;
+$user_id = $_POST['user_id'];
 
 $sql = 'SELECT campaign_name, amz_campaign_id, schedule FROM campaigns WHERE user_id = ?';
 $stmt = $pdo->prepare($sql);
@@ -32,9 +32,6 @@ for ($i = 0; $i < count($campaignList); $i++) {
       '<span class="circle_off"></span>');
   }
 }
-echo '<pre>';
-var_dump($outputList);
-echo '</pre>';
-echo json_encode($outputList, true);
 
+echo json_encode($outputList, true);
 ?>

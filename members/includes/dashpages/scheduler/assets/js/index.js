@@ -1,5 +1,5 @@
 $(function(){
-  var data;
+  var campaignList;
   var user_id = $("#uid").val();
 
   $.ajax({
@@ -10,7 +10,7 @@ $(function(){
     },
 
     success: function(campaignList) {
-      console.log(JSON.parse(campaignList));
+      campaignList = JSON.parse(campaignList);
     },
 
     error: function(err) {
@@ -26,7 +26,7 @@ $(function(){
         [10, 25, 50, 100, -1],
         [10, 25, 50, 100, "All"]
       ],
-    data: dataset,
+    data: campaignList,
     columns: [
       { title: "Select"},
       { title: "Campaign Name"},
