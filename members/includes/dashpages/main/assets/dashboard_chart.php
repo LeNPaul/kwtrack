@@ -3,12 +3,13 @@
 ?>
 
 <script type="text/javascript">
+  var newx  = !0;
+  
   $(function() {
 
     var start = moment().subtract(59, 'days');
     var end   = moment();
-    var newx  = !0;
-
+    
     function cb(begin, finish) {
 	  chartUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
       $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
