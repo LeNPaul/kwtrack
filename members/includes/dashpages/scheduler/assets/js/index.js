@@ -18,7 +18,7 @@ $(function(){
             [10, 25, 50, 100, -1],
             [10, 25, 50, 100, "All"]
           ],
-        data: campaignist,
+        data: campaignList,
         columns: [
           { title: "Select", width: 40},
           { title: "Campaign Name"},
