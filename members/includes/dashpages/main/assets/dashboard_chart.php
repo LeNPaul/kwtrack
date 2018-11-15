@@ -180,7 +180,8 @@
               style += '; border-color: #cccccc';
               style += '; border-width: 2px';
               var span = '<span style="' + style + '"></span>';
-              innerHtml += '<tr><td>' + span + body + '</td></tr><hr />';
+              // Set body line text
+              innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + body + '</p></td></tr><hr />';
             });
             innerHtml += '</tbody>';
 
