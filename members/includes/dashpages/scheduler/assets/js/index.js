@@ -9,7 +9,7 @@ $(function(){
       user_id: user_id
     },
 
-    success: function(campaignTableList) {
+    success: function(campaignList) {
       campaignTableList = JSON.parse(campaignList);
     },
 
