@@ -18,7 +18,7 @@ $(function(){
             [10, 25, 50, 100, -1],
             [10, 25, 50, 100, "All"]
           ],
-        data: campaignList,
+        data: JSON.parse(campaignList),
         columns: [
           { title: "Select", width: 40},
           { title: "Campaign Name"},
