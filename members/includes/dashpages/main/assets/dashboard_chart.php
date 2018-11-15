@@ -4,9 +4,10 @@
 
 <script type="text/javascript">
   $(function() {
-    
+
     var start = moment().subtract(59, 'days');
-    var end = moment();
+    var end   = moment();
+    var newx  = !0;
 
     function cb(begin, finish) {
 	  chartUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
@@ -195,17 +196,17 @@
 
             console.log(parseInt(current) + ' - ' + chartWidth);
             console.log(current - chartWidth);
-
+            console.log(current);
             var newPos = !1;
 
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 1;
             tooltipEl.style.position = 'absolute';
             if (current - chartWidth > 100) {
-              newPos = position.left + window.pageXOffset + tooltipModel.caretX - 80;
+              newPos = position.left + window.pageXOffset + tooltipModel.caretX - 95;
               tooltipEl.style.left = newPos + 'px';
             } else {
-              newPos = position.left + window.pageXOffset + tooltipModel.caretX + 80;
+              newPos = position.left + window.pageXOffset + tooltipModel.caretX + 95;
               tooltipEl.style.left = newPos + 'px';
             }
             tooltipEl.style.top = window.pageYOffset + 100 + 'px';
@@ -294,6 +295,38 @@
         }]
       }
     } //options
+  });
+  
+  /**
+   *  Function to detect mouse co-ords in chart
+   */
+  ctx.mousemove(function(evt) {
+    //console.log(evt.offsetX + "," + evt.offsetY);
+    var ytop = myChart.chartArea.top;
+    var ybottom = myChart.chartArea.bottom;
+    var ymin = myChart.scales['A'].min;
+    var ymax = myChart.scales['A'].max;
+    var newy = '';
+    var showstuff = 0;
+    if (evt.offsetY <= ybottom && evt.offsetY >= ytop) {
+      newy = Math.abs((evt.offsetY - ytop) / (ybottom - ytop));
+      newy = (newy - 1) * -1;
+      newy = newy * (Math.abs(ymax - ymin)) + ymin;
+      showstuff = 1;
+    }
+    var xtop = myChart.chartArea.left;
+    var xbottom = myChart.chartArea.right;
+    var xmin = myChart.scales['x-axis-1'].min;
+    var xmax = myChart.scales['x-axis-1'].max;
+    newx = '';
+    if (evt.offsetX <= xbottom && evt.offsetX >= xtop && showstuff == 1) {
+      newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
+      newx = newx * (Math.abs(xmax - xmin)) + xmin;
+    }
+    if (newy != '' && newx != '') {
+      console.log(newx + ',' + newy);
+      //$("#graph_coords").html('Mouse Coordinates: ' + newx.toFixed(2) + ',' + newy.toFixed(2));
+    }
   });
 
   function chartUpdate(startUpdate, endUpdate) {
