@@ -144,8 +144,8 @@
         }
         var xtop = chart.chartArea.left;
         var xbottom = chart.chartArea.right;
-        var xmin = chart.scales['x-axis-0'].min;
-        var xmax = chart.scales['x-axis-0'].max;
+        var xmin = 0/*chart.scales['x-axis-0'].min*/;
+        var xmax = 59/*chart.scales['x-axis-0'].max*/;
         newx = '';
         if (evt.offsetX <= xbottom && evt.offsetX >= xtop && showstuff == 1) {
           newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
