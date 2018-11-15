@@ -3,11 +3,8 @@
 ?>
 
 <script type="text/javascript">
-  window.newx  = !0;
-  console.log(newx);
-  
   $(function() {
-
+    var newx;
     var start = moment().subtract(59, 'days');
     var end   = moment();
     
@@ -148,13 +145,13 @@
         var xbottom = chart.chartArea.right;
         var xmin = chart.scales['x-axis-0'].min;
         var xmax = chart.scales['x-axis-0'].max;
-        //window.newx = '';
+        newx = '';
         if (evt.offsetX <= xbottom && evt.offsetX >= xtop && showstuff == 1) {
-          window.newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
-          window.newx = window.newx * (Math.abs(xmax - xmin)) + xmin;
+          newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
+          newx = newx * (Math.abs(xmax - xmin)) + xmin;
         }
-        if (newy != '' && window.newx != '') {
-          console.log(window.newx);
+        if (newy != '' && newx != '') {
+          console.log(newx);
           //$("#graph_coords").html('Mouse Coordinates: ' + newx.toFixed(2) + ',' + newy.toFixed(2));
         }
       },
