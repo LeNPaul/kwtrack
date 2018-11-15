@@ -29,9 +29,8 @@
  }
 
 #chartjs-tooltip {
-  border-color: #cccccc !important;
+  border-color: #1E1E1E !important;
   border-width: 2px !important;
-	position: absolute;
 	background: rgba(255, 255, 255, .5);
 	color: #000000;
 	border-radius: 2px;
