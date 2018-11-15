@@ -10,7 +10,7 @@ $(function(){
     },
 
     success: function(campaignList) {
-      console.log(JSON.encode(campaignList));
+      console.log(JSON.parse(campaignList));
     },
 
     error: function(err) {
