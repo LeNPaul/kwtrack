@@ -811,7 +811,7 @@ $user_id = $_SESSION['user_id'];
   <script src="assets/js/plugins/jquery-jvectormap.js"></script>
   <!--  Plugin for the Bootstrap Table -->
   <script src="assets/js/plugins/nouislider.min.js"></script>
-  <!--  Google Maps Plugin    -->
+  <!--  Google Maps Plugin  -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chart JS -->
   <!--  <script src="assets/js/plugins/chartjs.min.js"></script>-->

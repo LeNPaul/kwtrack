@@ -35,8 +35,8 @@
 	background: rgba(255, 255, 255, .5);
 	color: #000000;
 	border-radius: 2px;
-	-webkit-transition: all .5s ease;
-	transition: all .5s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
 	pointer-events: none;
 	-webkit-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
