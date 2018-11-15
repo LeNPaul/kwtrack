@@ -128,7 +128,7 @@
       },
       
       onHover: function(evt) {
-        console.log(chart['x-axis-0']);
+        console.log(chart);
         //console.log(evt.offsetX + "," + evt.offsetY);
         var ytop = chart.chartArea.top;
         var ybottom = chart.chartArea.bottom;
