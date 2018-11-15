@@ -200,11 +200,6 @@
           var newPos = !1;
 
           // Styles, display, position, and set styles for font
-          console.log(tooltipModel);
-          tooltipModel.bodySpacing = 10;
-          tooltipModel.cornerRadius = 5;
-          tooltipModel.titleMarginBottom = 25;
-          
           if (current - chartWidth > 100) {
             newPos = position.left + window.pageXOffset + tooltipModel.caretX - 95;
             tooltipEl.style.left = newPos + 'px';
@@ -212,7 +207,8 @@
             newPos = position.left + window.pageXOffset + tooltipModel.caretX + 95;
             tooltipEl.style.left = newPos + 'px';
           }
-          console.log(tooltipEl.style);
+          
+          console.log(position);
           tooltipEl.style.border = '1px rgba(85, 85, 85, 0.4) solid';
           tooltipEl.style.borderRadius = '5px';
           tooltipEl.style.opacity = 1;
