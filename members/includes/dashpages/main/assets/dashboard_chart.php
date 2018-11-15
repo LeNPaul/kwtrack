@@ -212,13 +212,13 @@
             tooltipEl.style.left = newPos + 'px';
           }
           console.log(tooltipEl.style);
-          tooltipEl.style.border = '1px #55555 solid';
+          tooltipEl.style.border = '1px #555555 solid';
           tooltipEl.style.borderRadius = '5px';
           tooltipEl.style.opacity = 1;
           tooltipEl.style.position = 'absolute';
           tooltipEl.style.top = window.pageYOffset + 100 + 'px';
           tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
-          tooltipEl.style.fontSize = '14 px';
+          tooltipEl.style.fontSize = '15 px';
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
           tooltipEl.style.padding = '10 px 15px 5px' + '15 px';
           tooltipEl.style.pointerEvents = 'none';
