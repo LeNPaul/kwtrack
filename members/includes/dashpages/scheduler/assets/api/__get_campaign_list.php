@@ -1,7 +1,7 @@
 <?php
 include '../../../../../database/pdo.inc.php';
 
-$user_id = $_POST['user_id'];
+$user_id = 2/*$_POST['user_id']*/;
 
 $sql = 'SELECT campaign_name, amz_campaign_id, schedule FROM campaigns WHERE user_id = ?';
 $stmt = $pdo->prepare($sql);
