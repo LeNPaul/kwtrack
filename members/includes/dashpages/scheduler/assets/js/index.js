@@ -28,7 +28,7 @@ $(function(){
       };
 
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
-      campaignTable.rows().invalidate().draw();
+      
     },
 
     error: function(err) {
