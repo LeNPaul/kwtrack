@@ -119,6 +119,7 @@ table.dataTable td {
 
 .dataTables_wrapper tr.selected {
   background-color: rgba(193, 235, 255, 0.4) !important;
+  color: #2c2c2c !important;
 }
 
 /*

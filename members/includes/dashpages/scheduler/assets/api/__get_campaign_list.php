@@ -11,25 +11,15 @@ $campaignList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $outputList = [];
 
-function drawCheckbox($campaignId) {
-  return
-  '<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="' . $campaignId . '">
-  </div>';
-}
-
-
 for ($i = 0; $i < count($campaignList); $i++) {
   if ($campaignList[$i]['schedule'] === 0) {
     $outputList[] = array(
-      drawCheckbox($campaignList[$i]['amz_campaign_id']),
       $campaignList[$i]['campaign_name'],
       '<span class="circle_on"></span>');
   } else {
     $outputList[] = array(
-      drawCheckbox($campaignList[$i]['amz_campaign_id']),
       $campaignList[$i]['campaign_name'],
-      '<span class="circle_off"></span>');
+      '<span class="circle_off" id="' .  $campaignId . '"></span>');
   }
 }
 
