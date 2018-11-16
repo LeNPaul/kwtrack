@@ -48,7 +48,7 @@ $(function(){
   $("#ad_scheduler").on("click", function(){
     var campaignTable = $("campaign_list").DataTable();
 
-    console.log(campaignTable.rows().selected());
+    console.log(campaignTable.rows( { selected: true } ));
   });
 
 });
