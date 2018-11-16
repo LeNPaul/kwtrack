@@ -11,14 +11,14 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
-        columnDefs: [
+        /*columnDefs: [
           {
             targets: 0,
             checkboxes: {
               seletRow: true
             }
           }
-        ],
+        ],*/
         select: {
           style: 'multi'
         },
