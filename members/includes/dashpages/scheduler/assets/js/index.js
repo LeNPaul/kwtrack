@@ -11,7 +11,9 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
-        select: true,
+        select: {
+          style: 'multi'
+        },
         scrollX: true,
         paging: true,
         pagingType: "full_numbers",
@@ -28,7 +30,7 @@ $(function(){
       };
 
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
-      
+
     },
 
     error: function(err) {
