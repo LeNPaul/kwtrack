@@ -19,6 +19,18 @@ $(function(){
             }
           }
         ],
+
+        buttons: [
+          {
+            extend: 'selected',
+            action: function ( e, dt, node, config ) {
+              var rows = dt.rows( { selected: true } ).count();
+
+              alert( 'There are '+rows+'(s) selected in the table' );
+            }
+          }
+        ],
+
         select: {
           style: 'multi'
         },
@@ -46,6 +58,10 @@ $(function(){
     }
   });
 
+  $("#ad_scheduler").on("click", function(){
+    var campaignTable = $("campaign_list").DataTable();
 
+    console.log(campaignTable.rows().selected());
+  });
 
 });
