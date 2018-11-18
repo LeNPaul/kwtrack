@@ -17,7 +17,7 @@ $(function(){
           'selectNone',
           {
             text: "Edit Ad Schedule",
-            className: "btn-success hide",
+            className: "btn-success btn-scheduler",
             action: function ( e, dt, node, config ) {
               console.log(dt);
               console.log(dt.rows( '.selected' ).any());
@@ -43,6 +43,8 @@ $(function(){
 
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
 
+      $(".btn-scheduler").css("display", "none");
+
     },
 
     error: function(err) {
@@ -51,6 +53,7 @@ $(function(){
   });
 
   $("#campaign_list_wrapper").on("click", function(){
-
+    var dt = $("#campaign_list").dataTable();
+    console.log(dt);
   });
 });
