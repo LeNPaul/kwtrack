@@ -52,7 +52,7 @@ $(function(){
     }
   });
 
-  $("#campaign_list_wrapper").on("click", function(){
+  $("#campaign_list").on("click", "tbody", function(){
     var dt = $("#campaign_list").dataTable();
     console.log(dt);
   });
