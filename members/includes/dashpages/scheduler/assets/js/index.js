@@ -15,7 +15,7 @@ $(function(){
         buttons: [
           'selectAll',
           {
-            extend: 'copy',
+            extend: 'selectNone',
             text: 'Deselect All',
             className: 'btn-deselect'
           },
