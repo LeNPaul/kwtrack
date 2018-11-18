@@ -69,7 +69,7 @@ $(function(){
     };
     sleep(50).then(function() {
       var dt = $("#campaign_list").DataTable();
-      console.log(dt.rows('.selected'));
+      console.log(dt.rows('.selected').any());
     });
 
   });
