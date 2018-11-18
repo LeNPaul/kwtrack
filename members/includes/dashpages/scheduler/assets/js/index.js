@@ -81,10 +81,10 @@ $(function(){
         $(".btn-scheduler").css("visibility", "visible");
         $(".btn-deselect").css("visibility", "visible");
 
-        if (campaignsSelected === 1) {
-          $("#info_selected").text(campaignsSelected.length + " campaign selected");
+        if (campaignsSelected[0].length === 1) {
+          $("#info_selected").text(campaignsSelected[0].length + " campaign selected");
         } else {
-          $("#info_selected").text(campaignsSelected.length + " campaigns selected");
+          $("#info_selected").text(campaignsSelected[0].length + " campaigns selected");
         }
       } else {
         $(".btn-scheduler").css("visibility", "hidden");
