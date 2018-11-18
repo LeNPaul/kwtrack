@@ -126,8 +126,8 @@ table.dataTable td {
   justify-content: flex-start;
 }
 
-#campaign_list_length { max-width: 50%; }
-#campaign_list_filter { max-width: 50%; }
+#campaign_list_length { max-width: 50%; height: 39px !important; }
+#campaign_list_filter { max-width: 50%; height: 39px !important; }
 
 .dataTables_wrapper tr.selected {
   background-color: rgba(193, 235, 255, 0.4) !important;
