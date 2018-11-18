@@ -25,6 +25,11 @@ $(function(){
             action: function ( e, dt, node, config ) {
               console.log(dt);
               console.log(dt.rows( '.selected' ).data());
+              var selectedCampaigns = dt.rows( '.selected' ).data();
+              for (i = 0; i < selectedCampaigns.length; i++) {
+                console.log(selectedCampaigns[i]);
+              }
+
             }
           }
         ],
