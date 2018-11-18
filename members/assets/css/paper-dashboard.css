@@ -106,7 +106,6 @@ table.dataTable td {
 }
 
 .toggle-on.btn-sm, .toggle-off.btn-sm {
-
   line-height: 2em !important;
 }
 
@@ -124,6 +123,7 @@ table.dataTable td {
   display: flex;
   display: -webkit-flex;
   display: -ms-flex;
+  align-items: center;
   justify-content: inherit;
 }
 
