@@ -76,7 +76,7 @@ $(function(){
     sleep(50).then(function() {
       var dt = $("#campaign_list").DataTable();
       var campaignsSelected = dt.rows( '.selected' );
-      console.log(campaignsSelected);
+      console.log(campaignsSelected[0]);
       if (dt.rows( '.selected' ).any()) {
         $(".btn-scheduler").css("visibility", "visible");
         $(".btn-deselect").css("visibility", "visible");
