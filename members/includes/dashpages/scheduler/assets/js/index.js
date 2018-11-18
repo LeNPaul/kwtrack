@@ -43,7 +43,7 @@ $(function(){
 
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
 
-      $(".btn-scheduler").css("display", "none");
+      //$(".btn-scheduler").css("display", "none");
 
     },
 
@@ -55,7 +55,8 @@ $(function(){
   // Show/hide "Edit Ad Schedule" button if there is anything selected
   $("#campaign_list").on("click", "tbody", function(){
     var dt = $("#campaign_list").dataTable();
-    if (dt[0].rows( '.selected' ).any()) {
+    console.log(dt);
+    if (dt.rows( '.selected' ).any()) {
       $(".btn-scheduler").css("display", "inline-block");
     } else {
       $(".btn-scheduler").css("display", "none");
