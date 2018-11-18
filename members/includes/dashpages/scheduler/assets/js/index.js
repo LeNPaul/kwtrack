@@ -35,7 +35,7 @@ $(function(){
         data: JSON.parse(campaignList),
         columns: [
           { title: "Campaign Name"},
-          { title: "Scheduled", width: 70}
+          { title: "Scheduled", width: 100}
         ]
       };
 
@@ -48,10 +48,5 @@ $(function(){
     }
   });
 
-  $("#ad_scheduler").on("click", function(){
-    var campaignTable = $("campaign_list").DataTable();
-
-    console.log(campaignTable.rows( { selected: true } ));
-  });
 
 });
