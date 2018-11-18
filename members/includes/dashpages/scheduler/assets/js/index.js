@@ -14,7 +14,11 @@ $(function(){
         dom: '<"#dt_topBar.row"<"col-md-7"B><"col-md-2"l><"col-md-3"f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
         buttons: [
           'selectAll',
-          'selectNone',
+          {
+            extend: 'copy',
+            text: 'Deselect All',
+            className: 'btn-deselect'
+          },
           {
             text: "Edit Ad Schedule",
             className: "btn-success btn-scheduler",
@@ -61,8 +65,10 @@ $(function(){
       var dt = $("#campaign_list").DataTable();
       if (dt.rows( '.selected' ).any()) {
         $(".btn-scheduler").css("display", "inline-block");
+        $(".btn-deselect").css("display", "inline-block");
       } else {
         $(".btn-scheduler").css("display", "none");
+        $(".btn-deselect").css("display", "none");
       }
     });
 
