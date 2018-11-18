@@ -48,8 +48,8 @@ $(function(){
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
 
       // Hide topBar buttons when nothing selected
-      $(".btn-scheduler").css("display", "none");
-      $(".btn-deselect").css("display", "none");
+      $(".btn-scheduler").css("visibility", "hidden");
+      $(".btn-deselect").css("visibility", "hidden");
     },
 
     error: function(err) {
@@ -65,11 +65,11 @@ $(function(){
     sleep(50).then(function() {
       var dt = $("#campaign_list").DataTable();
       if (dt.rows( '.selected' ).any()) {
-        $(".btn-scheduler").css("display", "inline-block");
-        $(".btn-deselect").css("display", "inline-block");
+        $(".btn-scheduler").css("visibility", "visible");
+        $(".btn-deselect").css("visibility", "visible");
       } else {
-        $(".btn-scheduler").css("display", "none");
-        $(".btn-deselect").css("display", "none");
+        $(".btn-scheduler").css("visibility", "hidden");
+        $(".btn-deselect").css("visibility", "hidden");
       }
     });
 
