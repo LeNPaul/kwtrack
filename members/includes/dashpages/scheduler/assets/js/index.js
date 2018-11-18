@@ -64,7 +64,13 @@ $(function(){
   });
 
   $("body").on("mouseup", function() {
-    var dt = $("#campaign_list").DataTable();
-    console.log(dt.rows('.selected'));
+    var sleep = function (time) {
+      return new Promise((resolve) => setTimeout(resolve, time));
+    };
+    sleep(50).then(function() {
+      var dt = $("#campaign_list").DataTable();
+      console.log(dt.rows('.selected'));
+    });
+
   });
 });
