@@ -176,12 +176,12 @@ table.dataTable td {
     _|      _|  _|_|_|_|  _|      _|    _|_|        _|      _|    _|_|    _|_|_|    _|_|_|
 */
 
-div.sidebar-wrapper.ps-container.ps-theme-default.ps-active-x > ul > li > a {
+div.sidebar-wrapper.ps-container.ps-theme-default.ps-active-x > ul > li {
   -webkit-transition: all ease-in-out 0.2s; /* Safari */
   transition: all ease-in-out 0.2s;
 }
 
-div.sidebar-wrapper.ps-container.ps-theme-default.ps-active-x > ul > li > a:hover {
+div.sidebar-wrapper.ps-container.ps-theme-default.ps-active-x > ul > li:hover {
   background-color: rgba(10, 189, 227, 0.4) !important;
 }
 
