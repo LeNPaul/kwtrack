@@ -19,8 +19,8 @@ $(function(){
             text: "Edit Ad Schedule",
             className: "btn-success",
             action: function ( e, dt, node, config ) {
-              console.log(node);
-              console.log(config);
+              console.log(dt);
+              console.log(dt.rows( '.selected' ).any());
             }
           }
         ],
