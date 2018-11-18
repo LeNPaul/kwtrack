@@ -11,6 +11,10 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
+        dom: 'Bfrtip',
+        buttons: [
+          'copy', 'excel', 'pdf'
+        ],
         select: {
           style: 'multi'
         },
