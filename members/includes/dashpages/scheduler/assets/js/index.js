@@ -13,15 +13,16 @@ $(function(){
       var campaignTableOptions = {
         dom: '<"#dt_topBar.row"<"col-md-7"B><"col-md-2"l><"col-md-3"f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
         buttons: [
+          'selectAll',
+          'selectNone',
           {
             text: "Edit Ad Schedule",
+            className: "btn-success",
             action: function ( e, dt, node, config ) {
               console.log(node);
               console.log(config);
             }
-          },
-          'selectAll',
-          'selectNone'
+          }
         ],
         select: {
           style: 'multi'
