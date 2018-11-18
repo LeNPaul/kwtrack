@@ -29,7 +29,9 @@ $(function(){
               var campaignIdArr = [];
               // Populate list of campaign ID's
               for (i = 0; i < selectedCampaigns.length; i++) {
-                campaignIdArr.push(selectedCampaigns[i][1]);
+                var rx         = selectedCampaigns[i][1].match(/id="\d+/g);
+                var campaignId = rx[0].replace("id=\"", "");
+                campaignIdArr.push(campaignId);
               }
               console.log(campaignIdArr);
             }
