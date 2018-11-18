@@ -47,8 +47,9 @@ $(function(){
 
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
 
+      // Hide topBar buttons when nothing selected
       $(".btn-scheduler").css("display", "none");
-
+      $(".btn-deselect").css("display", "none");
     },
 
     error: function(err) {
