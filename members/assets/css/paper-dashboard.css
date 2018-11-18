@@ -123,7 +123,7 @@ table.dataTable td {
   display: flex;
   display: -webkit-flex;
   display: -ms-flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .dataTables_wrapper tr.selected {
