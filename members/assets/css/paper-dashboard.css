@@ -182,7 +182,7 @@ div.sidebar-wrapper.ps-container.ps-theme-default.ps-active-x > ul > li > a {
 }
 
 div.sidebar-wrapper.ps-container.ps-theme-default.ps-active-x > ul > li > a:hover {
-  background-color: rgba(10, 189, 227, 0.4);
+  background-color: rgba(10, 189, 227, 0.4) !important;
 }
 
 /*
