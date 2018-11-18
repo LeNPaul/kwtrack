@@ -11,9 +11,9 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
-        dom: 'Bftpi',
+        dom: 'Bfrtpi',
         buttons: [
-          'copy', 'excel', 'pdf'
+          'selectAll', 'selectNone'
         ],
         select: {
           style: 'multi'
