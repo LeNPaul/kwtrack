@@ -16,7 +16,8 @@ $(function(){
           {
             text: "Edit Ad Schedule",
             action: function ( e, dt, node, config ) {
-              console.log(e);
+              console.log(node);
+              console.log(config);
             }
           },
           'selectAll',
