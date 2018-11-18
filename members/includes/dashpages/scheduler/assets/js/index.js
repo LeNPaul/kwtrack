@@ -55,7 +55,7 @@ $(function(){
   // Show/hide "Edit Ad Schedule" button if there is anything selected
   $("#campaign_list").on("click", "tbody", function(){
     var dt = $("#campaign_list").dataTable();
-    if (dt.rows( '.selected' ).any()) {
+    if (dt[0].rows( '.selected' ).any()) {
       $(".btn-scheduler").css("display", "inline-block");
     } else {
       $(".btn-scheduler").css("display", "none");
