@@ -24,7 +24,7 @@ $(function(){
             className: "btn-success btn-scheduler",
             action: function ( e, dt, node, config ) {
               console.log(dt);
-              console.log(dt.rows( '.selected' ).any());
+              console.log(dt.rows( '.selected' ).data());
             }
           }
         ],
