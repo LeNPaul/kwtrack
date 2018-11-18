@@ -65,7 +65,7 @@ $(function(){
 
   $("body").on("mouseup", function() {
     var sleep = function (time) {
-      return new Promise((resolve) => setTimeout(resolve, time));
+      return new Promise( function(resolve){ return setTimeout(resolve, time); } );
     };
     sleep(50).then(function() {
       var dt = $("#campaign_list").DataTable();
