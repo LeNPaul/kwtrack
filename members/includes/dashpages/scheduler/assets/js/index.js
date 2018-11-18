@@ -26,6 +26,7 @@ $(function(){
               console.log(dt);
               console.log(dt.rows( '.selected' ).data());
               var selectedCampaigns = dt.rows( '.selected' ).data();
+              var campaignIdArr = [];
               for (i = 0; i < selectedCampaigns.length; i++) {
                 console.log(selectedCampaigns[i]);
               }
@@ -34,7 +35,12 @@ $(function(){
           }
         ],
         select: {
-          style: 'multi'
+          style: 'multi',
+        },
+        language: {
+          select: {
+            rows: ""
+          }
         },
         scrollX: true,
         paging: true,
