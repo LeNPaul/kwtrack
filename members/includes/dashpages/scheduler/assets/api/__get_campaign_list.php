@@ -15,11 +15,11 @@ for ($i = 0; $i < count($campaignList); $i++) {
   if ($campaignList[$i]['schedule'] === 0) {
     $outputList[] = array(
       $campaignList[$i]['campaign_name'],
-      '<span class="circle_on" id="' .  $campaignList[$i]['amz_campaign_id'] . '"></span>');
+      '<span class="circle_off" id="' .  $campaignList[$i]['amz_campaign_id'] . '"></span>');
   } else {
     $outputList[] = array(
       $campaignList[$i]['campaign_name'],
-      '<span class="circle_off" id="' .  $campaignList[$i]['amz_campaign_id'] . '"></span>');
+      '<span class="circle_on" id="' .  $campaignList[$i]['amz_campaign_id'] . '"></span>');
   }
 }
 
