@@ -17,7 +17,7 @@ $(function(){
           'selectNone',
           {
             text: "Edit Ad Schedule",
-            className: "btn-success",
+            className: "btn-success hide",
             action: function ( e, dt, node, config ) {
               console.log(dt);
               console.log(dt.rows( '.selected' ).any());
@@ -50,5 +50,7 @@ $(function(){
     }
   });
 
+  $("#campaign_list_wrapper").on("click", function(){
 
+  });
 });
