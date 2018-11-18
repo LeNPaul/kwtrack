@@ -164,6 +164,7 @@ table.dataTable td {
   justify-content: inherit;
 }
 
+#info_selected { font-weight: bold; }
 #campaign_list_length { max-width: 50%; height: 39px !important; }
 #campaign_list_filter { max-width: 50%; height: 39px !important; }
 #dt_topBar label { margin-bottom: 0; }

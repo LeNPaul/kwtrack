@@ -11,7 +11,7 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
-        dom: '<"#dt_topBar.row"<"col-md-7"B<"#info_selected">><"col-md-2"l><"col-md-3"f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+        dom: '<"#dt_topBar.row"<"col-md-5"B<"col-md-2"<"#info_selected">>><"col-md-2"l><"col-md-3"f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
         buttons: [
           'selectAll',
           {
@@ -76,7 +76,6 @@ $(function(){
     sleep(50).then(function() {
       var dt = $("#campaign_list").DataTable();
       var campaignsSelected = dt.rows( '.selected' );
-      console.log(campaignsSelected[0]);
       if (dt.rows( '.selected' ).any()) {
         $(".btn-scheduler").css("visibility", "visible");
         $(".btn-deselect").css("visibility", "visible");
