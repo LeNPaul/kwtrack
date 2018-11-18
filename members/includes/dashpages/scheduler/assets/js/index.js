@@ -35,7 +35,7 @@ $(function(){
         data: JSON.parse(campaignList),
         columns: [
           { title: "Campaign Name"},
-          { title: "Scheduled", width: 50}
+          { title: "Scheduled", width: 70}
         ]
       };
 
