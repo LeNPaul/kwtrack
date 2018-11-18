@@ -53,13 +53,18 @@ $(function(){
   });
 
   // Show/hide "Edit Ad Schedule" button if there is anything selected
-  $("body").on("mouseup", "tbody", function(){
+  $("body").on("mousedown", function(){
     var dt = $("#campaign_list").DataTable();
     console.log(dt.rows( '.selected' ));
-    if (dt.rows( '.selected' ).any()) {
+    /*if (dt.rows( '.selected' ).any()) {
       $(".btn-scheduler").css("display", "inline-block");
     } else {
       $(".btn-scheduler").css("display", "none");
-    }
+    }*/
+  });
+
+  $("body").on("mouseup", function() {
+    var dt = $("#campaign_list").DataTable();
+    console.log(dt.rows('.selected'));
   });
 });
