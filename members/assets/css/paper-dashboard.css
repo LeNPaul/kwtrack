@@ -119,6 +119,13 @@ table.dataTable td {
   display: inline-block;
 }
 
+#dt_topBar {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  justify-content: space-between;
+}
+
 .dataTables_wrapper tr.selected {
   background-color: rgba(193, 235, 255, 0.4) !important;
   color: #2c2c2c !important;
