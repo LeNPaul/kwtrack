@@ -111,10 +111,12 @@ table.dataTable td {
 
 #campaign_manager_length, #campaign_manager_info {
   float: left !important;
+  display: inline-block;
 }
 
 #campaign_manager_filter, #campaign_manager_paginate {
   float: right !important;
+  display: inline-block;
 }
 
 .dataTables_wrapper tr.selected {
