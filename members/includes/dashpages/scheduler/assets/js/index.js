@@ -58,7 +58,7 @@ $(function(){
     if (dt.rows( '.selected' ).any()) {
       $(".btn-scheduler").css("display", "inline-block");
     } else {
-      $(".btn-scheduler").css("display", "none);
+      $(".btn-scheduler").css("display", "none");
     }
   });
 });
