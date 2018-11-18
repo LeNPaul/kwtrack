@@ -43,7 +43,7 @@ $(function(){
 
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
 
-      //$(".btn-scheduler").css("display", "none");
+      $(".btn-scheduler").css("display", "none");
 
     },
 
@@ -53,23 +53,17 @@ $(function(){
   });
 
   // Show/hide "Edit Ad Schedule" button if there is anything selected
-  $("body").on("mousedown", function(){
-    var dt = $("#campaign_list").DataTable();
-    console.log(dt.rows( '.selected' ));
-    /*if (dt.rows( '.selected' ).any()) {
-      $(".btn-scheduler").css("display", "inline-block");
-    } else {
-      $(".btn-scheduler").css("display", "none");
-    }*/
-  });
-
   $("body").on("mouseup", function() {
     var sleep = function (time) {
       return new Promise( function(resolve){ return setTimeout(resolve, time); } );
     };
     sleep(50).then(function() {
       var dt = $("#campaign_list").DataTable();
-      console.log(dt.rows('.selected').any());
+      if (dt.rows( '.selected' ).any()) {
+        $(".btn-scheduler").css("display", "inline-block");
+      } else {
+        $(".btn-scheduler").css("display", "none");
+      }
     });
 
   });
