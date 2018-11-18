@@ -11,7 +11,7 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
-        dom: 'Biftp',
+        dom: 'Bftpi',
         buttons: [
           'copy', 'excel', 'pdf'
         ],
