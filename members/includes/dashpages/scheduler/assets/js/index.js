@@ -33,7 +33,15 @@ $(function(){
                 var campaignId = rx[0].replace("id=\"", "");
                 campaignIdArr.push(campaignId);
               }
-              console.log(campaignIdArr);
+              $("#campaignIdList").val(campaignIdArr);
+
+              swal({
+                html: true,
+                title: 'Confirm Editing of Schedules',
+                confirmButtonText: 'Yes'
+              }).then(function (result) {
+                $('#goToEdit').submit();
+              });
             }
           }
         ],

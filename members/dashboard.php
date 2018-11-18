@@ -732,6 +732,8 @@ $user_id = $_SESSION['user_id'];
           include './includes/dashpages/profile/settings.php';
         } elseif (isset($_GET['p']) && $_GET['p'] == 'as') {
           include './includes/dashpages/scheduler/scheduler.php';
+        } elseif (isset($_GET['p']) && $_GET['p'] == 'as' && $_GET['sp'] == 'e') {
+          include './includes/dashpages/scheduler/edit_schedule.php';
         }
         ?>
       </div>
