@@ -75,15 +75,16 @@ $(function(){
     };
     sleep(50).then(function() {
       var dt = $("#campaign_list").DataTable();
-      var campaignsSelected = dt.rows( '.selected' ).length;
+      var campaignsSelected = dt.rows( '.selected' );
+      console.log(campaignsSelected);
       if (dt.rows( '.selected' ).any()) {
         $(".btn-scheduler").css("visibility", "visible");
         $(".btn-deselect").css("visibility", "visible");
 
         if (campaignsSelected === 1) {
-          $("#info_selected").text(campaignsSelected + " campaign selected");
+          $("#info_selected").text(campaignsSelected.length + " campaign selected");
         } else {
-          $("#info_selected").text(campaignsSelected + " campaigns selected");
+          $("#info_selected").text(campaignsSelected.length + " campaigns selected");
         }
       } else {
         $(".btn-scheduler").css("visibility", "hidden");
