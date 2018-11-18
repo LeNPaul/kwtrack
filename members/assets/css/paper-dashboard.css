@@ -106,6 +106,7 @@ table.dataTable td {
 }
 
 .toggle-on.btn-sm, .toggle-off.btn-sm {
+
   line-height: 2em !important;
 }
 
@@ -123,7 +124,7 @@ table.dataTable td {
   display: flex;
   display: -webkit-flex;
   display: -ms-flex;
-  justify-content: flex-start;
+  justify-content: inherit;
 }
 
 #campaign_list_length { max-width: 50%; height: 39px !important; }
