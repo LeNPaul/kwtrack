@@ -11,7 +11,7 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
-        dom: '<"row"<"col-md-3"B><"col-md-3"l><"col-md-6"f>>rtpi',
+        dom: '<"row"<"col-md-3"B><"col-md-3"l><"col-md-6"f>>rt<"row"<"col-md-3"p><"col-md-9"i>>',
         buttons: [
           'selectAll', 'selectNone'
         ],
