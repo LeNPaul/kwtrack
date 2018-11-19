@@ -11,6 +11,15 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
+        buttons: [
+        {
+            extend: 'selected',
+            text: 'Count selected rows',
+            action: function ( e, dt, button, config ) {
+                alert( dt.rows( { selected: true } ).indexes().length +' row(s) selected' );
+            }
+        }
+    ],
         select: {
           style: 'multi'
         },
