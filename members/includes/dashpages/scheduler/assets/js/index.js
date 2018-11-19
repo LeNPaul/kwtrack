@@ -38,27 +38,29 @@ $(function(){
               }
               $("#campaignIdList").val(campaignIdArr);
 
-              swal({
+              Swal({
                 title: 'Confirm Editing of Schedules',
                 text: 'Are you sure you want to edit ad schedules for all selected campaigns?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",
                 cancelButtonClass: "btn-secondary"
-              },
-              function(inputValue) {
-                // Set cookie to get campaign id's during ad scheduling (l = list, cid = campaign id)
-                var l_cidCookie = "l_cid=";
+              }.then(
+              function(result) {
+                if (result.value) {
+                  // Set cookie to get campaign id's during ad scheduling (l = list, cid = campaign id)
+                  var l_cidCookie = "l_cid=";
 
-                for (i = 0; i < campaignIdArr.length; i++) {
-                  l_cidCookie += campaignIdArr + " ";
+                  for (i = 0; i < campaignIdArr.length; i++) {
+                    l_cidCookie += campaignIdArr + " ";
+                  }
+
+                  console.log(l_cidCookie);
+
+                  document.cookie = l_cidCookie + ";path=/";
                 }
-
-                console.log(l_cidCookie);
-
-                document.cookie = l_cidCookie + ";path=/";
                 // $("#campaignIdList").click();
-              });
+              }));
             }
           }
         ],

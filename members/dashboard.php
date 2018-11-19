@@ -777,6 +777,7 @@ $user_id = $_SESSION['user_id'];
   <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
   <script src="assets/js/plugins/bootstrap-switch.js"></script>
   <!--  Plugin for Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
   <script src="assets/js/plugins/sweetalert2.min.js"></script>
   <!-- Forms Validations Plugin -->
   <script src="assets/js/plugins/jquery.validate.min.js"></script>
