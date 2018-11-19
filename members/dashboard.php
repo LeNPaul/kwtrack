@@ -16,7 +16,6 @@ $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 $_SESSION['active'] = intval($result[0]);
 
 $user_id = $_SESSION['user_id'];
-
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +49,7 @@ $user_id = $_SESSION['user_id'];
 <!--  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.2.5/css/fixedColumns.bootstrap4.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css" />-->
-  
+
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/fc-3.2.5/datatables.min.css"/>
 
   <!-- Date Range Picker CSS File -->
@@ -65,7 +64,7 @@ $user_id = $_SESSION['user_id'];
 
   <div class="wrapper ">
 
-    <?php include './includes/dashpages/sidenav.inc.php'; ?>
+    <?php include './includes/dashpages/sidenav.inc.php'?>
 
     <div class="main-panel">
       <!-- Navbar -->
