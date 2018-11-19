@@ -13,7 +13,10 @@ $(function(){
       var campaignTableOptions = {
         dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
         buttons: [
-          'selectAll',
+          {
+            extend: 'selectAll',
+            className: 'btn-primary'
+          },
           {
             extend: 'selectNone',
             text: 'Deselect All',
@@ -69,7 +72,7 @@ $(function(){
       };
 
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
-
+      $("").removeClass();
       // Hide topBar buttons when nothing selected
       $(".btn-scheduler").css("visibility", "hidden");
       $(".btn-deselect").css("visibility", "hidden");
