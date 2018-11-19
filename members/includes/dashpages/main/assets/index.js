@@ -459,10 +459,10 @@ $("#userinfo-box-username").attr("href", BASE_SERVER + "/user"), $("a.amz-subscr
           console.log("Asdf");
           $.ajax({
           type: "POST",
-          url: "https://sellercentral.amazon." + $("#country").val() + "/sspa/hsa/cm/keywords/power",
+          url: "https://sellercentral.amazon.com/sspa/hsa/cm/keywords/power",
           contentType: "application/json",
           data: JSON.stringify({
-            pageId: "https://www.amazon." + $("#country").val() + "/HSA/pages/default",
+            pageId: "https://www.amazon.com/HSA/pages/default",
             keywordList: e.flatMap(function(e) {
               return [{
                 key: e[1],

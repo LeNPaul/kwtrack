@@ -111,12 +111,13 @@ table.dataTable td {
 
 #campaign_manager_length, #campaign_manager_info {
   float: left !important;
+  display: inline-block;
 }
 
 #campaign_manager_filter, #campaign_manager_paginate {
   float: right !important;
+  display: inline-block;
 }
-
 .dataTables_wrapper tr.selected {
   background-color: rgba(193, 235, 255, 0.4) !important;
   color: #2c2c2c !important;
@@ -133,19 +134,58 @@ table.dataTable td {
 .circle_on {
   height: 15px;
   width: 15px;
-  display: inline-block;
+  display: block;
   background: #40d633;
   border-radius: 50%;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .circle_off {
   height: 15px;
   width: 15px;
-  display: inline-block;
+  display: block;
   background: #d82000;
   border-radius: 50%;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+tr.selected > td { font-weight: bold !important; }
+
+.btn-scheduler, .btn-deselect {
+  -webkit-transition: all ease-in-out 0.5s; /* Safari */
+  transition: all ease-in-out 0.5s;
+}
+
+#dt_topBar {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  align-items: center;
+  justify-content: inherit;
+}
+
+#info_selected { font-weight: bold; }
+#campaign_list_length { max-width: 50%; height: 39px !important; }
+#campaign_list_filter { max-width: 50%; height: 39px !important; }
+#dt_topBar label { margin-bottom: 0; }
+
+/*
+    _|      _|  _|_|_|_|  _|      _|  _|    _|      _|      _|    _|_|    _|_|_|      _|_|_|
+    _|_|  _|_|  _|        _|_|    _|  _|    _|      _|_|  _|_|  _|    _|  _|    _|  _|
+    _|  _|  _|  _|_|_|    _|  _|  _|  _|    _|      _|  _|  _|  _|    _|  _|    _|    _|_|
+    _|      _|  _|        _|    _|_|  _|    _|      _|      _|  _|    _|  _|    _|        _|
+    _|      _|  _|_|_|_|  _|      _|    _|_|        _|      _|    _|_|    _|_|_|    _|_|_|
+*/
+
+div.sidebar-wrapper.ps-container.ps-theme-default.ps-active-x > ul > li {
+  -webkit-transition: all ease-in-out 0.2s; /* Safari */
+  transition: all ease-in-out 0.2s;
+}
+
+div.sidebar-wrapper.ps-container.ps-theme-default.ps-active-x > ul > li:hover {
+  /*background-color: rgba(19, 37, 74, 0.7) !important;*/
 }
 
 /*

@@ -11,6 +11,7 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
+<<<<<<< HEAD
         buttons: [
         {
             extend: 'selected',
@@ -20,8 +21,53 @@ $(function(){
             }
         }
     ],
+=======
+        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+        buttons: [
+          {
+            extend: 'selectAll',
+            className: 'btn-primary'
+          },
+          {
+            extend: 'selectNone',
+            text: 'Deselect All',
+            className: 'btn-deselect'
+          },
+          {
+            text: "Edit Ad Schedule",
+            className: "btn-success btn-scheduler",
+            action: function ( e, dt, node, config ) {
+              console.log(dt.rows( '.selected' ).data());
+
+              var selectedCampaigns = dt.rows( '.selected' ).data();
+              var campaignIdArr = [];
+              // Populate list of campaign ID's
+              for (i = 0; i < selectedCampaigns.length; i++) {
+                var rx         = selectedCampaigns[i][1].match(/id="\d+/g);
+                var campaignId = rx[0].replace("id=\"", "");
+                campaignIdArr.push(campaignId);
+              }
+              $("#campaignIdList").val(campaignIdArr);
+
+              swal({
+                title: 'Confirm Editing of Schedules',
+                text: 'Are you sure you want to edit ad schedules for all selected campaigns?',
+                type: 'warning'
+              }).then(function (result) {
+                //$('#goToEdit').submit();
+                $("#campaignIdList").click();
+              });
+            }
+          }
+        ],
+>>>>>>> 98067cf9cd6fabc2cdc457287e6ac9226f5433b2
         select: {
           style: 'multi'
+        },
+        language: {
+          select: {
+            rows: ""
+          }
         },
         scrollX: true,
         paging: true,
@@ -33,12 +79,15 @@ $(function(){
         data: JSON.parse(campaignList),
         columns: [
           { title: "Campaign Name"},
-          { title: "Scheduled", width: 50}
+          { title: "Scheduled", width: 100}
         ]
       };
 
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
-
+      $("").removeClass();
+      // Hide topBar buttons when nothing selected
+      $(".btn-scheduler").css("visibility", "hidden");
+      $(".btn-deselect").css("visibility", "hidden");
     },
 
     error: function(err) {
@@ -46,10 +95,30 @@ $(function(){
     }
   });
 
-  $("#ad_scheduler").on("click", function(){
-    var campaignTable = $("campaign_list").DataTable();
+  // Show/hide "Edit Ad Schedule" button if there is anything selected
+  $("body").on("mouseup", function() {
+    var sleep = function (time) {
+      return new Promise( function(resolve){ return setTimeout(resolve, time); } );
+    };
+    sleep(50).then(function() {
+      var dt = $("#campaign_list").DataTable();
+      var campaignsSelected = dt.rows( '.selected' );
+      if (dt.rows( '.selected' ).any()) {
+        $(".btn-scheduler").css("visibility", "visible");
+        $(".btn-deselect").css("visibility", "visible");
 
-    console.log(campaignTable.rows( { selected: true } ));
+        if (campaignsSelected[0].length === 1) {
+          $("#info_selected").text(campaignsSelected[0].length + " campaign selected");
+        } else {
+          $("#info_selected").text(campaignsSelected[0].length + " campaigns selected");
+        }
+      } else {
+        $(".btn-scheduler").css("visibility", "hidden");
+        $(".btn-deselect").css("visibility", "hidden");
+
+        $("#info_selected").text("");
+      }
+    });
+
   });
-
 });
