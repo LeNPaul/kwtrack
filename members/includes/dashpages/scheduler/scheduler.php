@@ -1,5 +1,4 @@
 <?php
-
 if (!empty($_POST['campaignIdList'])) {
   $_SESSION['campaignIdList'] = $_POST['campaignIdList'];
   header("Location: dashboard?p=as&sp=e");
@@ -9,8 +8,6 @@ if (!empty($_POST['campaignIdList'])) {
 echo '<pre>';
 var_dump($_POST);
 echo '</pre>';
-
-
 ?>
 <input id="uid" type="hidden" value="<?= $_SESSION['user_id'] ?>" />
 <h1>Ad Scheduling</h1>
