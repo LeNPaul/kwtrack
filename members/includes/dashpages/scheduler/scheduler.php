@@ -6,6 +6,11 @@ if (!empty($_POST['campaignIdList'])) {
   exit();
 }
 
+echo '<pre>';
+var_dump($_POST);
+echo '</pre>';
+
+
 ?>
 <input id="uid" type="hidden" value="<?= $_SESSION['user_id'] ?>" />
 <h1>Ad Scheduling</h1>
