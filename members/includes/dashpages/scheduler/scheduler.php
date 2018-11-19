@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST['campaignIdList'])) {
+if (!empty($_POST['campaignIdList'])) {
   $_SESSION['campaignIdList'] = $_POST['campaignIdList'];
   header("Location: dashboard?p=as&sp=e");
   exit();
