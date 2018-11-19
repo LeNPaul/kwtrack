@@ -730,7 +730,7 @@ $user_id = $_SESSION['user_id'];
           include './includes/dashpages/cmanager/campaign_manager.php';
         } elseif (isset($_GET['p']) && $_GET['p'] == 's') {
           include './includes/dashpages/profile/settings.php';
-        } elseif (isset($_GET['p']) && $_GET['p'] == 'as' && $_GET['sp'] == 'e') {
+        } elseif (isset($_GET['p']) && $_GET['p'] == 'as' && isset($_GET['sp'])) {
           include './includes/dashpages/scheduler/edit_schedule.php';
         } elseif (isset($_GET['p']) && $_GET['p'] == 'as') {
           include './includes/dashpages/scheduler/scheduler.php';
