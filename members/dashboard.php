@@ -64,7 +64,7 @@ $user_id = $_SESSION['user_id'];
 
   <div class="wrapper ">
 
-    <?php include './includes/dashpages/sidenav.inc.php'?>
+    <?php require './includes/dashpages/sidenav.inc.php'?>
 
     <div class="main-panel">
       <!-- Navbar -->
