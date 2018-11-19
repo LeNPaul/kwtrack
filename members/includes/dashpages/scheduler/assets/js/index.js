@@ -45,7 +45,7 @@ $(function(){
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",
                 cancelButtonClass: "btn-secondary"
-              }
+              })
               .then(function(result) {
                 if (result.value) {
                   // Set cookie to get campaign id's during ad scheduling (l = list, cid = campaign id)
@@ -60,7 +60,7 @@ $(function(){
                   document.cookie = l_cidCookie + ";path=/";
                 }
                 // $("#campaignIdList").click();
-              }));
+              });
             }
           }
         ],
