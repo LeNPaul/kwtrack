@@ -11,17 +11,6 @@ $(function(){
     success: function(campaignList) {
 
       var campaignTableOptions = {
-<<<<<<< HEAD
-        buttons: [
-        {
-            extend: 'selected',
-            text: 'Count selected rows',
-            action: function ( e, dt, button, config ) {
-                alert( dt.rows( { selected: true } ).indexes().length +' row(s) selected' );
-            }
-        }
-    ],
-=======
         dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
         buttons: [
           {
@@ -60,7 +49,6 @@ $(function(){
             }
           }
         ],
->>>>>>> 98067cf9cd6fabc2cdc457287e6ac9226f5433b2
         select: {
           style: 'multi'
         },
