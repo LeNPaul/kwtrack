@@ -46,7 +46,7 @@ $(function(){
                 confirmButtonClass: "btn-success",
                 cancelButtonClass: "btn-secondary"
               },
-              function() {
+              function(inputValue) {
                 // Set cookie to get campaign id's during ad scheduling (l = list, cid = campaign id)
                 var l_cidCookie = "l_cid=";
 
