@@ -38,7 +38,7 @@ $(function(){
               }
               $("#campaignIdList").val(campaignIdArr);
 
-              Swal({
+              swal({
                 title: 'Confirm Editing of Schedules',
                 text: 'Are you sure you want to edit ad schedules for all selected campaigns?',
                 type: 'warning',
