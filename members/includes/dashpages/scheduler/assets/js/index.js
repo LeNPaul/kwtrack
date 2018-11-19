@@ -54,6 +54,7 @@ $(function(){
                   // Set cookie to get campaign id's during ad scheduling (l = list, cid = campaign id)
                   createCookie("l_cid", campaignIdArr, 1);
                   console.log("cookie has been created");
+                  window.location.href = 'dashboard?p=as&sp=e';
                 }
                 // $("#campaignIdList").click();
               });
