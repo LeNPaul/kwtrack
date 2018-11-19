@@ -41,9 +41,12 @@ $(function(){
               swal({
                 title: 'Confirm Editing of Schedules',
                 text: 'Are you sure you want to edit ad schedules for all selected campaigns?',
-                type: 'warning'
-              })
-              .then(function (result) {
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonClass: "btn-success",
+                cancelButtonClass: "btn-secondary"
+              },
+              function() {
                 // Set cookie to get campaign id's during ad scheduling (l = list, cid = campaign id)
                 var l_cidCookie = "l_cid=";
 
