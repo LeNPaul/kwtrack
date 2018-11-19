@@ -1,5 +1,4 @@
 <?php
-
 function outputSideNav($currentPage) {
   $active1 = '';
   $active2 = '';
