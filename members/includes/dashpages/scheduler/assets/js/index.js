@@ -54,7 +54,7 @@ $(function(){
                 console.log(l_cidCookie);
 
                 document.cookie = l_cidCookie + ";path=/";
-                $("#campaignIdList").click();
+                // $("#campaignIdList").click();
               });
             }
           }
