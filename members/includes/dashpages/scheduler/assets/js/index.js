@@ -47,7 +47,7 @@ $(function(){
           }
         ],
         select: {
-          style: 'multi',
+          style: 'multi'
         },
         language: {
           select: {
