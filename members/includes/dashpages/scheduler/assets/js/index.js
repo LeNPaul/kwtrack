@@ -38,7 +38,8 @@ $(function(){
               swal({
                 html: true,
                 title: 'Confirm Editing of Schedules',
-                confirmButtonText: 'Yes'
+                text: 'Are you sure you want to edit ad schedules for all selected campaigns?',
+                buttons: ["Cancel", "Yes"]
               }).then(function (result) {
                 $('#goToEdit').submit();
               });
