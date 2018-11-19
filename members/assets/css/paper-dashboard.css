@@ -151,6 +151,8 @@ table.dataTable td {
   margin-right: auto;
 }
 
+tr.selected { font-weight: bold !important; }
+
 .btn-scheduler, .btn-deselect {
   -webkit-transition: all ease-in-out 0.5s; /* Safari */
   transition: all ease-in-out 0.5s;
