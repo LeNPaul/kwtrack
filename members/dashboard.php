@@ -55,6 +55,8 @@ $user_id = $_SESSION['user_id'];
   <!-- Date Range Picker CSS File -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
+  <!--  SweetAlert2 CSS File -->
+  <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.min.css" />
 </head>
 
 <body class="">
