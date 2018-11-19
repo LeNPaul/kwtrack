@@ -36,6 +36,9 @@ $(function(){
                 var campaignId = rx[0].replace("id=\"", "");
                 campaignIdArr.push(campaignId);
               }
+
+              console.log(campaignIdArr);
+
               $("#campaignIdList").val(campaignIdArr);
 
               swal({
