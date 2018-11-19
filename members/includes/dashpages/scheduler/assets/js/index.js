@@ -42,8 +42,18 @@ $(function(){
                 title: 'Confirm Editing of Schedules',
                 text: 'Are you sure you want to edit ad schedules for all selected campaigns?',
                 type: 'warning'
-              }).then(function (result) {
-                //$('#goToEdit').submit();
+              })
+              .then(function (result) {
+                // Set cookie to get campaign id's during ad scheduling (l = list, cid = campaign id)
+                var l_cidCookie = "l_cid=";
+
+                for (i = 0; i < campaignIdArr.length; i++) {
+                  l_cidCookie += campaignIdArr + " ";
+                }
+
+                console.log(l_cidCookie);
+
+                document.cookie = l_cidCookie + ";path=/";
                 $("#campaignIdList").click();
               });
             }
@@ -72,7 +82,6 @@ $(function(){
       };
 
       var campaignTable = $("#campaign_list").DataTable(campaignTableOptions);
-      $("").removeClass();
       // Hide topBar buttons when nothing selected
       $(".btn-scheduler").css("visibility", "hidden");
       $(".btn-deselect").css("visibility", "hidden");
