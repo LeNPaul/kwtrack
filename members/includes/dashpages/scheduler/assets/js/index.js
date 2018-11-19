@@ -40,7 +40,8 @@ $(function(){
                 text: 'Are you sure you want to edit ad schedules for all selected campaigns?',
                 type: 'warning'
               }).then(function (result) {
-                $('#goToEdit').submit();
+                //$('#goToEdit').submit();
+                $("#campaignIdList").click();
               });
             }
           }
