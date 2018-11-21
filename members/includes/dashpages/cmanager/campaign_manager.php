@@ -164,7 +164,7 @@ $(document).ready( function () {
 
 	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
 	
-	$("body").on("mouseup", function() {
+	$("#campaign_manager").on("mouseup", function() {
     var sleep = function (time) {
       return new Promise( function(resolve){ return setTimeout(resolve, time); } );
     };
