@@ -79,7 +79,7 @@ $(document).ready( function () {
 	  buttons: [
 		{
 			extend: 'selectAll',
-			className: 'btnPrimary'
+			className: 'btn-Primary'
 		},
 		{
             extend: 'selectNone',
@@ -87,6 +87,14 @@ $(document).ready( function () {
             className: 'btn-deselect'
         },
 	  ],
+	  select: {
+          style: 'multi'
+        },
+        language: {
+          select: {
+            rows: ""
+          }
+        },
 	  order: [[ 1, "asc" ]],
       scrollX: true,
       paging: true,
@@ -239,17 +247,6 @@ $(document).ready( function () {
       });
     }
   });
-
-  // Handle selections from the user
-  rowClasses = $('#campaign_manager tbody tr').attr("class");
-
-  if (rowClasses.includes("selected")) {
-    $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
-  } else {
-    $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-  }
-
-
 
   //breadcrumbs ALL CAMPAIGNS click
   $(".breadcrumb").on("click", ".all_link", function() {
