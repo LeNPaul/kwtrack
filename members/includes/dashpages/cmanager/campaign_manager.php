@@ -126,7 +126,7 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
         dataTableFlag = 1;
-
+		$(".btn-deselect").css("visibility", "hidden");
 				// Handle and style toggle buttons
 			  $('.toggle-campaign').bootstrapToggle({
 			    on: '<i class="fa fa-play"></i>',
