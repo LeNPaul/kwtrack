@@ -162,9 +162,7 @@ $(document).ready( function () {
 
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
 	
-	$(".btn-deselect").css("visibility", "hidden");
-
-	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
+	//$(".btn-deselect").css("visibility", "hidden");
 	
 	$("#campaign_manager").on("mouseup", function() {
     var sleep = function (time) {
