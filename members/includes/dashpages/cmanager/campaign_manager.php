@@ -75,7 +75,18 @@ $(document).ready( function () {
       // buttons: ['copy'],
       // responsive: true,
       // autoWidth: true,
-	  dom: '<l<"selectedCampaigns">f>tip',
+	  dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+	  buttons: [
+		{
+			extend: 'selectAll',
+			className: 'btnPrimary'
+		},
+		{
+            extend: 'selectNone',
+            text: 'Deselect All',
+            className: 'btn-deselect'
+        },
+	  ],
 	  order: [[ 1, "asc" ]],
       scrollX: true,
       paging: true,
