@@ -85,7 +85,7 @@ $(document).ready( function () {
             extend: 'selectNone',
             text: 'Deselect All',
             className: 'btn-deselect'
-        },
+        }
 	  ],
 	  select: {
           style: 'multi'
