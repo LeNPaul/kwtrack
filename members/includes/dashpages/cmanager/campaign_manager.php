@@ -164,12 +164,12 @@ $(document).ready( function () {
 	
 	//$(".btn-deselect").css("visibility", "hidden");
 	
-	$("#campaign_manager").on("mouseup", function() {
+	$("body").on("mouseup", function() {
     var sleep = function (time) {
       return new Promise( function(resolve){ return setTimeout(resolve, time); } );
     };
     sleep(50).then(function() {
-      var dt = $("#campaign_list").DataTable();
+      var dt = $("#campaign_manager").DataTable();
       var campaignsSelected = dt.rows( '.selected' );
       if (dt.rows( '.selected' ).any()) {
         //$(".btn-scheduler").css("visibility", "visible");
