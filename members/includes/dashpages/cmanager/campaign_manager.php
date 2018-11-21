@@ -44,7 +44,6 @@ for ($j = 1; $j < 60; $j++) {
 
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-    <button id="select_all" class="btn btn-primary">Select All</button>
     <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
   </div>
 </div>
@@ -164,6 +163,7 @@ $(document).ready( function () {
 	
 	$(".btn-deselect").css("visibility", "hidden");
 	
+	//handle select all and deselect all
 	$("body").on("mouseup", function() {
     var sleep = function (time) {
       return new Promise( function(resolve){ return setTimeout(resolve, time); } );
@@ -237,8 +237,6 @@ $(document).ready( function () {
       }
     });
   });
-
-
 
 	//Handle budget changes when save button is clicked
   $(".btn-edit-budget").on("click", function() {
@@ -477,22 +475,6 @@ $(document).ready( function () {
 	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
     //console.log( dt.rows('.selected').data() );
 	  //alert("clicked");
-  });
-
-  $('#select_all').click(function() {
-    $('tr.odd, tr.even').toggleClass('selected');
-
-    asdf = $('#campaign_manager tbody tr').attr("class");
-    console.log(asdf);
-    console.log(dt.rows('.selected').data());
-	    if (asdf.includes("selected")) {
-      $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
-    } else {
-      $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-    }
-    dt.draw('page');
-	
-	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
   });
 
   /* Create an array with the values of all the input boxes in a column. Used for sorting. */
