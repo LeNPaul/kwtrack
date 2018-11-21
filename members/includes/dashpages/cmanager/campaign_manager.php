@@ -164,6 +164,32 @@ $(document).ready( function () {
 
 	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
 	
+	$("body").on("mouseup", function() {
+    var sleep = function (time) {
+      return new Promise( function(resolve){ return setTimeout(resolve, time); } );
+    };
+    sleep(50).then(function() {
+      var dt = $("#campaign_list").DataTable();
+      var campaignsSelected = dt.rows( '.selected' );
+      if (dt.rows( '.selected' ).any()) {
+        //$(".btn-scheduler").css("visibility", "visible");
+        $(".btn-deselect").css("visibility", "visible");
+
+        if (campaignsSelected[0].length === 1) {
+          $("#info_selected").text(campaignsSelected[0].length + " campaign selected");
+        } else {
+          $("#info_selected").text(campaignsSelected[0].length + " campaigns selected");
+        }
+      } else {
+        //$(".btn-scheduler").css("visibility", "hidden");
+        $(".btn-deselect").css("visibility", "hidden");
+
+        $("#info_selected").text("");
+      }
+    });
+
+  });
+	
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
     $(this).toggleClass('toggle-selected');
