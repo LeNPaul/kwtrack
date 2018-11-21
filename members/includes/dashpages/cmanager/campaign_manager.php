@@ -460,7 +460,7 @@ $(document).ready( function () {
     });
 
   }); // .ag_link on click
-
+/*
   $('#campaign_manager').on('click', 'tr', function() {
 	  $(this).toggleClass('selected');
 
@@ -476,7 +476,7 @@ $(document).ready( function () {
     //console.log( dt.rows('.selected').data() );
 	  //alert("clicked");
   });
-
+*/
   /* Create an array with the values of all the input boxes in a column. Used for sorting. */
   $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col ) {
     return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
