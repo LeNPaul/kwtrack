@@ -169,7 +169,6 @@ $(document).ready( function () {
       return new Promise( function(resolve){ return setTimeout(resolve, time); } );
     };
     sleep(50).then(function() {
-      var dt = $("#campaign_manager").DataTable();
       var campaignsSelected = dt.rows( '.selected' );
       if (dt.rows( '.selected' ).any()) {
         //$(".btn-scheduler").css("visibility", "visible");
