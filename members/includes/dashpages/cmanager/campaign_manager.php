@@ -460,23 +460,7 @@ $(document).ready( function () {
     });
 
   }); // .ag_link on click
-/*
-  $('#campaign_manager').on('click', 'tr', function() {
-	  $(this).toggleClass('selected');
 
-    rowClasses = $(this).attr("class");
-
-    if (rowClasses.includes("selected")) {
-      $(this).css('background-color', 'rgba(193, 235, 255, 0.4)');
-    } else {
-      $(this).css('background-color', '#fdfdfe');
-    }
-
-	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
-    //console.log( dt.rows('.selected').data() );
-	  //alert("clicked");
-  });
-*/
   /* Create an array with the values of all the input boxes in a column. Used for sorting. */
   $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col ) {
     return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
