@@ -21,10 +21,10 @@
     <tr>
       <td>00:00</td>
       <td>
-        <label class="form-check-label">
-          <input id="sun0000" class="form-check-input" type="checkbox" value="0">
-          <span class="form-check-sign"></span>
-        </label>
+        <div class="pretty p-pulse">
+          <input id="sun0000" type="checkbox" value="0" />
+          <div class="state p-success"></div>
+        </div>
       </td>
       <td><input id="mon0000" class="form-check-input" type="checkbox" value="0"></td>
       <td><input id="tue0000" class="form-check-input" type="checkbox" value="0"></td>
