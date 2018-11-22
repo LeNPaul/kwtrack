@@ -21,9 +21,12 @@
     <tr>
       <td>00:00</td>
       <td>
-        <div class="pretty p-round p-default">
+        <div class="pretty p-icon p-round p-pulse">
           <input id="sun0000" type="checkbox" value="0" />
-          <div class="state p-success"></div>
+          <div class="state p-success">
+            <i class="icon mdi mdi-check"></i>
+            <label>Allow</label>
+          </div>
         </div>
       </td>
       <td><input id="mon0000" class="form-check-input" type="checkbox" value="0"></td>
