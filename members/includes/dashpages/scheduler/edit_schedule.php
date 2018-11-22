@@ -21,7 +21,7 @@
     <tr>
       <td>00:00</td>
       <td>
-        <div class="pretty p-round p-pulse">
+        <div class="pretty p-round p-default">
           <input id="sun0000" type="checkbox" value="0" />
           <div class="state p-success"></div>
         </div>
