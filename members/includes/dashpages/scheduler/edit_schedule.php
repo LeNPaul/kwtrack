@@ -25,7 +25,6 @@
           <input id="sun0000" type="checkbox" value="0" />
           <div class="state p-success">
             <i class="icon mdi mdi-check"></i>
-            <label>Allow</label>
           </div>
         </div>
       </td>
