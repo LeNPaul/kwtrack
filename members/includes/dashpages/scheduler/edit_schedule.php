@@ -20,7 +20,12 @@
   <tbody>
     <tr>
       <td>00:00</td>
-      <td><input id="sun0000" class="form-check-input" type="checkbox" value="0"></td>
+      <td>
+        <label class="form-check-label">
+          <input id="sun0000" class="form-check-input" type="checkbox" value="0">
+          <span class="form-check-sign"></span>
+        </label>
+      </td>
       <td><input id="mon0000" class="form-check-input" type="checkbox" value="0"></td>
       <td><input id="tue0000" class="form-check-input" type="checkbox" value="0"></td>
       <td><input id="wed0000" class="form-check-input" type="checkbox" value="0"></td>
