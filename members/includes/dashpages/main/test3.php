@@ -2,13 +2,8 @@
 <?php
 require '../../../database/pdo.inc.php';
 
-$user_id = 2;
-$stmt = $pdo->prepare("SELECT refresh_token, profileId FROM users WHERE user_id=?");
-$stmt->bindParam(1, $user_id);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$schedJSON = array_fill(0, 7, array_fill(0, 24, 0));
 echo '<pre>';
-var_dump($result);
+var_dump($schedJSON);
 echo '</pre>';
-
 ?>
