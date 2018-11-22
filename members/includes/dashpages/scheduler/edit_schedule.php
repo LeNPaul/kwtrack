@@ -1,4 +1,11 @@
 <?php
+$user_id = $_SESSION['user_id'];
+
+$sql = "SELECT schedule FROM users WHERE user_id=?";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(1, $user_id, PDO::PARAM_INT);
+$stmt->execute();
+$schedJSON = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <h1>Edit Ad Schedules</h1>
