@@ -22,7 +22,7 @@ function createScheduleTable($input) {
         $row_temp .= '
         <td>
           <div class="pretty p-icon p-round p-pulse">
-            <input id="' . $cb_id . '" type="checkbox" value="0" />
+            <input id="' . $cb_id . '" type="checkbox" value="0" checked />
             <div class="state p-success">
               <i class="icon mdi mdi-check"></i>
               <label></label>
