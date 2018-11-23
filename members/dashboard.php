@@ -146,12 +146,6 @@ $user_id = $_SESSION['user_id'];
         </div>
       </nav>
       <!-- End Navbar -->
-      <!-- <div class="panel-header">
-
-  <canvas id="bigDashboardChart"></canvas>
-
-
-</div> -->
 
       <!--   ORIGINAL CONTENT. EDIT THIS AFTER FINISHING DASHBOARD_ACTIVE1.PHP   -->
       <!--<div class="content">
@@ -717,7 +711,7 @@ $user_id = $_SESSION['user_id'];
 
       <div class="content">
         <?php
-        echo $_SERVER['DOCUMENT_ROOT'] . '<br>';
+        //echo $_SERVER['DOCUMENT_ROOT'] . '<br>';
         if ($_SESSION['active'] == 0 && empty($_GET['p'])) {
           include './includes/dashpages/main/dashboard_active0.php';
         } elseif ($_SESSION['active'] == 1 && empty($_GET['p'])) {
