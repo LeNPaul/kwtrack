@@ -29,6 +29,9 @@ function createScheduleTable($input) {
             </div>
           </div>
         </td>';
+        echo '<pre>';
+        var_dump($row_temp);
+        echo '</pre>';
       } else {
         echo "check passed <br />";
         $row_temp += '
