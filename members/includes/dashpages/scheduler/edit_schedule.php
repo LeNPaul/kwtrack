@@ -12,11 +12,11 @@
 function createScheduleTable($input) {
   $rows = '';
   for ($i = 0; $i < count($input); $i++) {
-
+    echo "creating timestamp";
     $row_temp = '<tr><td>' . formatTime($i) . '</td>';
 
     for ($j = 0; $j < count($input[$i]); $j++) {
-
+      echo "checking";
       if ($input[$i][$j] == 0) {
         $row_temp += '
         <td>
