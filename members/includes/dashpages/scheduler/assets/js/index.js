@@ -42,7 +42,7 @@ $(function(){
 
               swal({
                 title: 'Confirm Editing of Schedules',
-                text: 'Are you sure you want to edit ad schedules for all selected campaigns?',
+                html: '<p>Are you sure you want to edit ad schedules for all selected campaigns?</p><p>All schedules for your selected campaigns will be overwritten.</p><p>Continue?</p>',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",

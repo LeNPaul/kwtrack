@@ -48,7 +48,7 @@ function createScheduleTable($input) {
   }
 
   $tableBase = '
-  <table class="table table-bordered table-hover table-striped">
+  <table class="table table-light table-bordered table-hover table-striped">
     <thead>
       <tr>
         <th style="width:12.5%;">Time</th>
