@@ -47,10 +47,6 @@ function createScheduleTable($input) {
     $rows     .= $row_temp;
   }
 
-  echo '<pre>';
-  var_dump($rows);
-  echo '</pre>';
-
   $tableBase = '
   <table class="table table-striped">
     <thead>
