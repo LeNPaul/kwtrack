@@ -19,7 +19,7 @@ function createScheduleTable($input) {
     for ($j = 0; $j < count($input[$i]); $j++) {
       if ($input[$i][$j] == 0) {
         $cb_id     = renderCheckboxID($j, $i);
-        $row_temp += '
+        $row_temp .= '
         <td>
           <div class="pretty p-icon p-round p-pulse">
             <input id="' . $cb_id . '" type="checkbox" value="0" />
@@ -32,7 +32,7 @@ function createScheduleTable($input) {
         echo $row_temp;
       } else {
         $cb_id     = renderCheckboxID($j, $i);
-        $row_temp += '
+        $row_temp .= '
         <td>
           <div class="pretty p-icon p-round p-pulse">
             <input id="' . $cb_id . '" type="checkbox" value="0" checked />
