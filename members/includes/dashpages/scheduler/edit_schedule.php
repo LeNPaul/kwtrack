@@ -13,12 +13,12 @@ function createScheduleTable($input) {
   $rows = '';
 
   for ($i = 0; $i < count($input); $i++) {
-    echo "creating timestamp";
     $row_temp = '<tr><td>' . formatTime($i) . '</td>';
 
     for ($j = 0; $j < count($input[$i]); $j++) {
-      echo "checking";
+      echo "checking<br />";
       if ($input[$i][$j] == 0) {
+        echo "check passed <br />";
         $row_temp += '
         <td>
           <div class="pretty p-icon p-round p-pulse">
@@ -30,6 +30,7 @@ function createScheduleTable($input) {
           </div>
         </td>';
       } else {
+        echo "check passed <br />";
         $row_temp += '
         <td>
           <div class="pretty p-icon p-round p-pulse">
@@ -46,7 +47,9 @@ function createScheduleTable($input) {
     $rows     += $row_temp;
   }
 
-  echo $rows;
+  echo '<pre>';
+  var_dump($rows);
+  echo '</pre>';
 
   $tableBase = '
   <table class="table table-striped">
