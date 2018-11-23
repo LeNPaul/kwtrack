@@ -51,14 +51,14 @@ function createScheduleTable($input) {
   <table class="table table-bordered table-hover table-striped">
     <thead>
       <tr>
-        <th>Time</th>
-        <th>Sun</th>
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
+        <th style="width:12.5%;">Time</th>
+        <th style="width:12.5%;">Sun</th>
+        <th style="width:12.5%;">Mon</th>
+        <th style="width:12.5%;">Tue</th>
+        <th style="width:12.5%;">Wed</th>
+        <th style="width:12.5%;">Thu</th>
+        <th style="width:12.5%;">Fri</th>
+        <th style="width:12.5%;">Sat</th>
       </tr>
     </thead>
 
