@@ -11,9 +11,12 @@
 
 function createScheduleTable($input) {
   $rows = '';
-  for ($i = 0; $i < 24; $i++) {
+  for ($i = 0; $i < count($input); $i++) {
+
     $row_temp = '<tr><td>' . formatTime($i) . '</td>';
-    for ($j = 0; $j < 7; $j++) {
+
+    for ($j = 0; $j < count($input[$i]); $j++) {
+
       if ($input[$j] == 0) {
         $row_temp += '
         <td>
@@ -117,7 +120,7 @@ $schedJSON = $stmt->fetchAll(PDO::FETCH_COLUMN);
 $schedJSON = $schedJSON[0];
 
 if ($schedJSON == 0) {
-  $schedJSON = array_fill(0, 7, array_fill(0, 24, 0));
+  $schedJSON = array_fill(0, 24, array_fill(0, 7, 0));
 } else {
   $schedJSON = json_decode($schedJSON);
 }
