@@ -124,11 +124,6 @@ if ($schedJSON == 0) {
 } else {
   $schedJSON = json_decode($schedJSON);
 }
-
-echo '<pre>';
-var_dump($schedJSON);
-echo '</pre>';
-
 ?>
 
 <h1>Edit Ad Schedules</h1>
