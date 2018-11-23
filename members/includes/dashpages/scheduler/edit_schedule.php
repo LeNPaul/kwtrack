@@ -113,6 +113,10 @@ $stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 $stmt->execute();
 $schedJSON = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
+echo '<pre>';
+var_dump($schedJSON);
+echo '</pre>';
+
 if ($schedJSON == 0) {
   $schedJSON = array_fill(0, 7, array_fill(0, 24, 0));
 } else {
