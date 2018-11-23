@@ -171,6 +171,12 @@ tr.selected > td { font-weight: bold !important; }
 #campaign_list_filter { max-width: 50%; height: 39px !important; }
 #dt_topBar label { margin-bottom: 0; }
 
+table div.pretty {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /*
     _|      _|  _|_|_|_|  _|      _|  _|    _|      _|      _|    _|_|    _|_|_|      _|_|_|
     _|_|  _|_|  _|        _|_|    _|  _|    _|      _|_|  _|_|  _|    _|  _|    _|  _|

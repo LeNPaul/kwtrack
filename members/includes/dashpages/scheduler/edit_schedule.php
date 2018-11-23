@@ -48,7 +48,7 @@ function createScheduleTable($input) {
   }
 
   $tableBase = '
-  <table class="table table-striped">
+  <table class="table table-bordered table-hover table-striped">
     <thead>
       <tr>
         <th>Time</th>
@@ -58,7 +58,7 @@ function createScheduleTable($input) {
         <th>Wednesday</th>
         <th>Thursday</th>
         <th>Friday</th>
-        <th>Satday</th>
+        <th>Saturday</th>
       </tr>
     </thead>
 
