@@ -11,6 +11,7 @@
 
 function createScheduleTable($input) {
   $rows = '';
+
   for ($i = 0; $i < count($input); $i++) {
     echo "creating timestamp";
     $row_temp = '<tr><td>' . formatTime($i) . '</td>';
@@ -44,6 +45,8 @@ function createScheduleTable($input) {
     $row_temp += '</tr>';
     $rows     += $row_temp;
   }
+
+  echo $rows;
 
   $tableBase = '
   <table class="table table-striped">
