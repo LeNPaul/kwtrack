@@ -13,14 +13,16 @@ function createScheduleTable($input) {
   $rows = '';
 
   for ($i = 0; $i < count($input); $i++) {
-    $row_temp = '<tr><td>' . formatTime($i) . '</td>';
+    $time = formatTime($i);
+    $row_temp = '<tr><td>' . $time . '</td>';
 
     for ($j = 0; $j < count($input[$i]); $j++) {
       if ($input[$i][$j] == 0) {
+        $cb_id     = renderCheckboxID($j, $i);
         $row_temp += '
         <td>
           <div class="pretty p-icon p-round p-pulse">
-            <input id="' . renderCheckboxID($j, $i) . '" type="checkbox" value="0" />
+            <input id="' . $cb_id . '" type="checkbox" value="0" />
             <div class="state p-success">
               <i class="icon mdi mdi-check"></i>
               <label></label>
@@ -31,10 +33,11 @@ function createScheduleTable($input) {
         var_dump($row_temp);
         echo '</pre>';
       } else {
+        $cb_id     = renderCheckboxID($j, $i);
         $row_temp += '
         <td>
           <div class="pretty p-icon p-round p-pulse">
-            <input id="' . renderCheckboxID($j, $i) . '" type="checkbox" value="0" checked />
+            <input id="' . $cb_id . '" type="checkbox" value="0" checked />
             <div class="state p-success">
               <i class="icon mdi mdi-check"></i>
               <label></label>
