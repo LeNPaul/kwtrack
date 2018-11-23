@@ -29,7 +29,6 @@ function createScheduleTable($input) {
             </div>
           </div>
         </td>';
-        echo $row_temp;
       } else {
         $cb_id     = renderCheckboxID($j, $i);
         $row_temp .= '
@@ -44,8 +43,8 @@ function createScheduleTable($input) {
         </td>';
       }
     }
-    $row_temp += '</tr>';
-    $rows     += $row_temp;
+    $row_temp .= '</tr>';
+    $rows     .= $row_temp;
   }
 
   echo '<pre>';
