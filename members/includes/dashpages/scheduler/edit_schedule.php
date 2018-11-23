@@ -16,9 +16,7 @@ function createScheduleTable($input) {
     $row_temp = '<tr><td>' . formatTime($i) . '</td>';
 
     for ($j = 0; $j < count($input[$i]); $j++) {
-      echo "checking<br />";
       if ($input[$i][$j] == 0) {
-        echo "check passed <br />";
         $row_temp += '
         <td>
           <div class="pretty p-icon p-round p-pulse">
@@ -33,7 +31,6 @@ function createScheduleTable($input) {
         var_dump($row_temp);
         echo '</pre>';
       } else {
-        echo "check passed <br />";
         $row_temp += '
         <td>
           <div class="pretty p-icon p-round p-pulse">
@@ -86,9 +83,9 @@ function createScheduleTable($input) {
 
 function formatTime($input) {
   if ($input < 10) {
-    return '0' . $input . ':00';
+    return '0' . strval($input) . ':00';
   } else {
-    return $input . ':00';
+    return strval($input) . ':00';
   }
 }
 
