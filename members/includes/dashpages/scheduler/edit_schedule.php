@@ -17,7 +17,7 @@ function createScheduleTable($input) {
 
     for ($j = 0; $j < count($input[$i]); $j++) {
 
-      if ($input[$j] == 0) {
+      if ($input[$i][$j] == 0) {
         $row_temp += '
         <td>
           <div class="pretty p-icon p-round p-pulse">
