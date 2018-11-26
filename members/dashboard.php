@@ -57,6 +57,9 @@ $user_id = $_SESSION['user_id'];
 
   <!--  SweetAlert2 CSS File -->
   <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.min.css" />
+
+  <!--  Pretty Checkbox -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" />
 </head>
 
 <body class="">
@@ -143,12 +146,6 @@ $user_id = $_SESSION['user_id'];
         </div>
       </nav>
       <!-- End Navbar -->
-      <!-- <div class="panel-header">
-
-  <canvas id="bigDashboardChart"></canvas>
-
-
-</div> -->
 
       <!--   ORIGINAL CONTENT. EDIT THIS AFTER FINISHING DASHBOARD_ACTIVE1.PHP   -->
       <!--<div class="content">

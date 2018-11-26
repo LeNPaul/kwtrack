@@ -25,9 +25,8 @@ $(function(){
           {
             text: "Edit Ad Schedule",
             className: "btn-success btn-scheduler",
-            action: function ( e, dt, node, config ) {
-              console.log(dt.rows( '.selected' ).data());
 
+            action: function ( e, dt, node, config ) {
               var selectedCampaigns = dt.rows( '.selected' ).data();
               var campaignIdArr = [];
               // Populate list of campaign ID's
@@ -43,7 +42,7 @@ $(function(){
 
               swal({
                 title: 'Confirm Editing of Schedules',
-                text: 'Are you sure you want to edit ad schedules for all selected campaigns?',
+                html: '<p>Are you sure you want to edit ad schedules for all selected campaigns?</p><p>All schedules for your selected campaigns will be overwritten.</p><p>Continue?</p>',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",
@@ -53,7 +52,7 @@ $(function(){
                 if (result.value) {
                   // Set cookie to get campaign id's during ad scheduling (l = list, cid = campaign id)
                   createCookie("l_cid", campaignIdArr, 1);
-                  console.log("cookie has been created");
+                  // Redirect to ad schedule editor
                   window.location.href = 'dashboard?p=as&sp=e';
                 }
                 // $("#campaignIdList").click();

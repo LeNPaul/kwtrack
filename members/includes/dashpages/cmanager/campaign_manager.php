@@ -44,7 +44,6 @@ for ($j = 1; $j < 60; $j++) {
 
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-    <button id="select_all" class="btn btn-primary">Select All</button>
     <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
   </div>
 </div>
@@ -75,7 +74,26 @@ $(document).ready( function () {
       // buttons: ['copy'],
       // responsive: true,
       // autoWidth: true,
-	  dom: '<l<"selectedCampaigns">f>tip',
+	  dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+	  buttons: [
+		{
+			extend: 'selectAll',
+			className: 'btn-Primary'
+		},
+		{
+            extend: 'selectNone',
+            text: 'Deselect All',
+            className: 'btn-deselect'
+        }
+	  ],
+	  select: {
+          style: 'multi'
+        },
+        language: {
+          select: {
+            rows: ""
+          }
+        },
 	  order: [[ 1, "asc" ]],
       scrollX: true,
       paging: true,
@@ -107,7 +125,7 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
         dataTableFlag = 1;
-
+		
 				// Handle and style toggle buttons
 			  $('.toggle-campaign').bootstrapToggle({
 			    on: '<i class="fa fa-play"></i>',
@@ -142,8 +160,34 @@ $(document).ready( function () {
   }; //campaignOptions
 
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
+	
+	$(".btn-deselect").css("visibility", "hidden");
+	
+	//handle select all and deselect all
+	$("body").on("mouseup", function() {
+    var sleep = function (time) {
+      return new Promise( function(resolve){ return setTimeout(resolve, time); } );
+    };
+    sleep(50).then(function() {
+      var campaignsSelected = dt.rows( '.selected' );
+      if (dt.rows( '.selected' ).any()) {
+        //$(".btn-scheduler").css("visibility", "visible");
+        $(".btn-deselect").css("visibility", "visible");
 
-	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
+        if (campaignsSelected[0].length === 1) {
+          $("#info_selected").text(campaignsSelected[0].length + " campaign selected");
+        } else {
+          $("#info_selected").text(campaignsSelected[0].length + " campaigns selected");
+        }
+      } else {
+        //$(".btn-scheduler").css("visibility", "hidden");
+        $(".btn-deselect").css("visibility", "hidden");
+
+        $("#info_selected").text("");
+      }
+    });
+
+  });
 	
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
@@ -193,8 +237,6 @@ $(document).ready( function () {
     });
   });
 
-
-
 	//Handle budget changes when save button is clicked
   $(".btn-edit-budget").on("click", function() {
     var budgetVal = $(this).parent().prev().val();
@@ -228,17 +270,6 @@ $(document).ready( function () {
       });
     }
   });
-
-  // Handle selections from the user
-  rowClasses = $('#campaign_manager tbody tr').attr("class");
-
-  if (rowClasses.includes("selected")) {
-    $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
-  } else {
-    $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-  }
-
-
 
   //breadcrumbs ALL CAMPAIGNS click
   $(".breadcrumb").on("click", ".all_link", function() {
@@ -428,38 +459,6 @@ $(document).ready( function () {
     });
 
   }); // .ag_link on click
-
-  $('#campaign_manager').on('click', 'tr', function() {
-	  $(this).toggleClass('selected');
-
-    rowClasses = $(this).attr("class");
-
-    if (rowClasses.includes("selected")) {
-      $(this).css('background-color', 'rgba(193, 235, 255, 0.4)');
-    } else {
-      $(this).css('background-color', '#fdfdfe');
-    }
-
-	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
-    //console.log( dt.rows('.selected').data() );
-	  //alert("clicked");
-  });
-
-  $('#select_all').click(function() {
-    $('tr.odd, tr.even').toggleClass('selected');
-
-    asdf = $('#campaign_manager tbody tr').attr("class");
-    console.log(asdf);
-    console.log(dt.rows('.selected').data());
-	    if (asdf.includes("selected")) {
-      $('#campaign_manager tbody tr').css('background-color', 'rgba(193, 235, 255, 0.4)');
-    } else {
-      $('#campaign_manager tbody tr').css('background-color', '#fdfdfe');
-    }
-    dt.draw('page');
-	
-	$("div.selectedCampaigns").html('<label>' + dt.rows('.selected').count() + ' of ' + dataset.length + ' selected' + '</label>');
-  });
 
   /* Create an array with the values of all the input boxes in a column. Used for sorting. */
   $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col ) {
