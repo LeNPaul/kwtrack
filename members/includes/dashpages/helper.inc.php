@@ -541,7 +541,7 @@ function getReport($client, $reportId) {
     $avg_cpcDb     = array_fill(0, $days, 0.0);
     $units_soldDb  = array_fill(0, $days, 0.0);
     $salesDb       = array_fill(0, $days, 0.0);
-
+    
     for ($i = 0; $i < count($result); $i++) {
       $impressions = unserialize($result[$i]['impressions']);
       $clicks = unserialize($result[$i]['clicks']);
