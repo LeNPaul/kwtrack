@@ -1,4 +1,9 @@
 <?php
+
+echo '<pre>';
+var_dump($_POST);
+echo '</pre>';
+
 /**
  * Renders the table where the user can select
  *
@@ -22,7 +27,7 @@ function createScheduleTable($input) {
         $row_temp .= '
         <td>
           <div class="pretty p-icon p-round p-pulse">
-            <input id="' . $cb_id . '" type="checkbox" value="0" />
+            <input id="' . $cb_id . '" type="checkbox" />
             <div class="state p-success">
               <i class="icon mdi mdi-check"></i>
               <label></label>
@@ -93,17 +98,19 @@ function formatTime($input) {
  *
  * @author Ya boi Fernand
  * @return String
+ *
+ *  0 = Sunday, 1 = Monday, ..., 6 = Saturday
  */
 
 function renderCheckboxID($dayInt, $timeInt) {
   $day;
-  if ($dayInt === 0) $day = 'sun';
-  if ($dayInt === 1) $day = 'mon';
-  if ($dayInt === 2) $day = 'tue';
-  if ($dayInt === 3) $day = 'wed';
-  if ($dayInt === 4) $day = 'thu';
-  if ($dayInt === 5) $day = 'fri';
-  if ($dayInt === 6) $day = 'sat';
+  if ($dayInt === 0) $day = '0,';
+  if ($dayInt === 1) $day = '1,';
+  if ($dayInt === 2) $day = '2,';
+  if ($dayInt === 3) $day = '3,';
+  if ($dayInt === 4) $day = '4,';
+  if ($dayInt === 5) $day = '5,';
+  if ($dayInt === 6) $day = '6,';
 
   return $day . strval($timeInt);
  }
@@ -130,51 +137,8 @@ if ($schedJSON == 0) {
 
 <h1>Edit Ad Schedules</h1>
 
-<!-- <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Time</th>
-      <th>Sunday</th>
-      <th>Monday</th>
-      <th>Tuesday</th>
-      <th>Wednesday</th>
-      <th>Thursday</th>
-      <th>Friday</th>
-      <th>Satday</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td>00:00</td>
-      <td>
-        <div class="pretty p-icon p-round p-pulse">
-          <input id="sun0000" type="checkbox" value="0" />
-          <div class="state p-success">
-            <i class="icon mdi mdi-check"></i>
-            <label></label>
-          </div>
-        </div>
-      </td>
-      <td><input id="mon0000" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="tue0000" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="wed0000" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="thu0000" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="fri0000" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="sat0000" class="form-check-input" type="checkbox" value="0"></td>
-    </tr>
-
-    <tr>
-      <td>01:00</td>
-      <td><input id="sun0100" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="mon0100" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="tue0100" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="wed0100" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="thu0100" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="fri0100" class="form-check-input" type="checkbox" value="0"></td>
-      <td><input id="sat0100" class="form-check-input" type="checkbox" value="0"></td>
-    </tr>
-  </tbody>
-</table> -->
-
 <?= createScheduleTable($schedJSON) ?>
+
+<button type="submit" id="ad_schedule" class="btn btn-lg btn-primary">Save New Schedule</button>
+
+<script src="includes/dashpages/scheduler/assets/js/edit_schedule.js"></script>
