@@ -114,9 +114,7 @@ function renderCheckboxID($dayInt, $timeInt) {
 
   return $day . strval($timeInt);
  }
-
-
-
+ 
 $user_id = $_SESSION['user_id'];
 
 $sql = "SELECT schedule FROM campaigns WHERE user_id=?";
