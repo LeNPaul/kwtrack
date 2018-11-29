@@ -84,7 +84,44 @@ $(document).ready( function () {
             extend: 'selectNone',
             text: 'Deselect All',
             className: 'btn-deselect'
-        }
+        },
+		{
+			text: 'Bulk Actions',
+			className: 'btn-bulk-action',
+			
+			action: function (e, dt, node, config) {
+			  var selectedCampaigns = dt.rows( '.selected' ).data();
+			  console.log(selectedCampaigns);
+              var campaignIdArr = [];
+              // Populate list of campaign ID's
+              for (i = 0; i < selectedCampaigns.length; i++) {
+                var rx         = selectedCampaigns[i][1].match(/id="\d+/g);
+                var campaignId = rx[0].replace("id=\"", "");
+                campaignIdArr.push(campaignId);
+              }
+			  
+			  swal({
+				  title: 'Bulk Actions',
+				  html: '',
+				  input: 'select',
+				  inputOptions: {
+					'addCampaigns' : 'Add To Campaign Group',
+					'addKw' : 'Add Keywords',
+					'addNegKw' : 'Add Negative Keywords',
+					'pauseCampaign' : 'Pause Campaigns',
+					'enableCampaign' : 'Enable Campaigns',
+					'archiveCampaign' : 'Archive Campaigns'
+				  },
+				  inputPlaceholder: 'Select a bulk action',
+				  confirmButtonClass: "btn-success",
+                  cancelButtonClass: "btn-secondary",
+				  showCancelButton: true,
+				  allowOutsideClick: false,
+				  allowEnterKey: false,
+				  allowEscapeKey: false,
+			  });
+			}
+		}
 	  ],
 	  select: {
           style: 'multi'
@@ -162,6 +199,7 @@ $(document).ready( function () {
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
 	
 	$(".btn-deselect").css("visibility", "hidden");
+	$(".btn-bulk-action").css("visibility", "hidden");
 	
 	//handle select all and deselect all
 	$("body").on("mouseup", function() {
@@ -173,6 +211,7 @@ $(document).ready( function () {
       if (dt.rows( '.selected' ).any()) {
         //$(".btn-scheduler").css("visibility", "visible");
         $(".btn-deselect").css("visibility", "visible");
+		$(".btn-bulk-action").css("visibility", "visible");
 
         if (campaignsSelected[0].length === 1) {
           $("#info_selected").text(campaignsSelected[0].length + " campaign selected");
@@ -182,6 +221,7 @@ $(document).ready( function () {
       } else {
         //$(".btn-scheduler").css("visibility", "hidden");
         $(".btn-deselect").css("visibility", "hidden");
+		$(".btn-bulk-action").css("visibility", "hidden");
 
         $("#info_selected").text("");
       }

@@ -82,7 +82,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 
-    $campaignLink = '<a href="javascript:void(0)" class="name c_link">' . $result[$i]['campaign_name'] . '</a>';
+    $campaignLink = '<a href="javascript:void(0)" class="name c_link" id="' . $result[$i]['amz_campaign_id'] . '">' . $result[$i]['campaign_name'] . '</a>';
     $budget =  '<div class="input-group cm-input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
