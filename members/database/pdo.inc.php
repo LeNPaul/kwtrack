@@ -32,9 +32,9 @@ function createAlert($contextual, $alertMsg) {
  */
 function checkLoggedIn() {
   if (!isset($_SESSION['logged_in'])) {
-    header("location: https://ppcology.io/login.php");
+    header("location: ../login.php");
   } elseif ($_SESSION['logged_in'] == false) {
-    header("location: https://ppcology.io/login.php");
+    header("location: ../login.php");
   }
 }
 
