@@ -1,3 +1,9 @@
+/*
+
+  Stylesheets for dashboard_active5.php module
+
+*/
+
 #reportrange {
   background: #fff;
   cursor: pointer;
@@ -6,3 +12,6 @@
   width: 33%
 }
 
+div.chartWrapper {
+  position: relative
+}
