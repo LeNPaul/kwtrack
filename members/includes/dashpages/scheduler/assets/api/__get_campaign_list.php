@@ -3,7 +3,7 @@ include '../../../../../database/pdo.inc.php';
 
 $user_id = $_POST['user_id'];
 
-$sql = 'SELECT campaign_name, amz_campaign_id, schedule FROM campaigns WHERE user_id = ?';
+$sql = 'SELECT campaign_name, amz_campaign_id, schedule FROM campaigns WHERE user_id = ? AND status<>"archived"';
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 $stmt->execute();

@@ -4,8 +4,32 @@ include 'pdo.inc.php';
 include dirname(__FILE__) . '/../includes/AmazonAdvertisingApi/Client.php';
 use PDO;
 
-function newAdClient() {
+function newAdClient(&$client, $refreshToken, $profileId) {
+  $config = array(
+    "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
+    "clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
+    "refreshToken" => $refreshToken,
+    "region" => "na",
+    "sandbox" => false,
+  );
+  $client = new Client($config);
+  $client->profileId = $profileId;
+}
 
+function toggleCampaign(&$client, &$fp, $state, $uid, $campaignList, $currentHour, $currentDay, $i) {
+  $r = $client->updateCampaigns(array(
+    array(
+      "campaignId" => (float)$campaignList[$i]['amz_campaign_id'],
+      "state"      => $state
+    )));
+  
+  $log =
+    ($r['code'] != 207)
+      ? "------ Error occurred for campaign (ID: {$campaignList[$i]['amz_campaign_id']})" . "\n"
+      . "    |________ Error Response: " . $r['response'] . "\n"
+      : "-- Client instantiated for user {$uid} Campaign (ID {$campaignList[$i]['amz_campaign_id']}) successfully {$state} at {$currentHour}:00 on day #{$currentDay}" . "\n";
+  
+  fwrite($fp, $log);
 }
 
 date_default_timezone_set('America/Los_Angeles');
@@ -13,6 +37,8 @@ date_default_timezone_set('America/Los_Angeles');
 // date('w') returns 1 = Sun, 2 = Mon, ..., 7 = Sat
 $currentDay  = date('w');
 $currentHour = date('H');
+$client      = null;
+$fp          = fopen('scheduler_log', 'w');
 
 //if ($currentHour === 23) {
   /*
@@ -29,7 +55,7 @@ $currentHour = date('H');
 for ($i = 0; $i < count($campaignList); $i++) $campaignList[$i]['schedule'] = json_decode($campaignList[$i]['schedule'], false);
 
 /*
- * Iterate thru each campaign and user. All campaigns for each user are sorted in ascending order.
+ * Iterate through each campaign and user. All campaigns for each user are sorted in ascending order.
  * Store the user_id in a var for each iteration. If it changes, then instantiate a new client.
  *
  * */
@@ -37,6 +63,12 @@ $old_uid = null;
 for ($i = 0;  $i < count($campaignList); $i++) {
   $uid = $campaignList[$i]['user_id'];
   if ($uid === $old_uid) {
+  
+    if ($campaignList[$i]['schedule'][$currentDay][$currentHour] === 0) {
+      toggleCampaign($client, $fp, 'paused', $uid, $campaignList, $currentHour, $currentDay, $i);
+    } else {
+      toggleCampaign($client, $fp, 'enabled', $uid, $campaignList, $currentHour, $currentDay, $i);
+    }
   
   } else {
     $old_uid = $uid;
@@ -50,27 +82,22 @@ for ($i = 0;  $i < count($campaignList); $i++) {
     
     try {
       // Instantiate client for advertising API
-      $config = array(
-        "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
-        "clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
-        "refreshToken" => $rt,
-        "region" => "na",
-        "sandbox" => false,
-      );
-      $client = new Client($config);
-      $client->profileId = $pid;
+      newAdClient($client, $rt, $pid);
   
       if ($campaignList[$i]['schedule'][$currentDay][$currentHour] === 0) {
-        echo 'client instantiated for user ' . $uid . ', campaign id ' . $campaignList[$i]['amz_campaign_id'] . ' is being paused.<br>';
+        toggleCampaign($client, $fp, 'paused', $uid, $campaignList, $currentHour, $currentDay, $i);
       } else {
-        echo 'client instantiated for user ' . $uid . ', campaign id ' . $campaignList[$i]['amz_campaign_id'] . ' is being enabled.<br />';
+        toggleCampaign($client, $fp, 'enabled', $uid, $campaignList, $currentHour, $currentDay, $i);
       }
       
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       echo "Message: " . $e->getMessage() . '<br>';
       echo 'Error on line ' . $e->getLine() . '<br>';
+      echo 'In file: ' . $e->getFile() . '<br>';
       echo 'Trace: ' . $e->getTrace();
     }
   }
 }
+
+fclose($fp);
 ?>

@@ -3,7 +3,7 @@ error_reporting(E_ALL); ini_set('display_errors', TRUE);
 //require $_SERVER['DOCUMENT_ROOT'] . '/members/node_modules/hquery.php/hquery.php';
 
 // Set the cache path
-//hQuery::$cache_path = "./cache";
+// hQuery::$cache_path = "./cache";
 
 try {
   $pdo = new PDO('mysql:host=localhost;port=3306;dbname=ppcology_ppcology', 'ppcology_root', 'kA#3q5T}(|X70IcUl');
