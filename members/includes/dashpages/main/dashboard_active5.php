@@ -41,6 +41,9 @@ for ($i = 0; $i < count($adSpendArr); $i++) {
 
 $displayACoS = ($ppcSales == 0) ? 0.00 : round((double)($adSpend / $ppcSales) * 100, 2);
 
+// Set the time zone to Pacific Time Zone (PT)
+date_default_timezone_set('America/Los_Angeles');
+
 $dateArr = [];
 $dateArr[] = date("M d");
 
