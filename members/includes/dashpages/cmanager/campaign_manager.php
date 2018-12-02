@@ -138,7 +138,7 @@ $(document).ready( function () {
 									
 									success: function(successAlert) {
 										swal ({
-											title: 'Success!',
+											title: 'Campaign(s) successfully paused!',
 											type: 'success',
 											confirmButtonText: 'Close'
 										})
@@ -155,15 +155,56 @@ $(document).ready( function () {
 								//dt.row(campaignIndexes[j])[0].toggleClass('toggle-selected');
 								//TODO: dont enable paused campaigns
 								console.log(selectedCampaigns[j]);
-								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('toggle-selected off');
+								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off btn-success btn-primary');
+								$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("paused");
+								selectedCampaigns[j][2] = "paused";
 							}
 						}
 					}
-					else if (
+					else if (result.value == 'enableCampaign') {
+						for (j = 0; j < selectedCampaigns.length; j++) {
+							if (selectedCampaigns[j][2] == 'paused') {
+								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+								$.ajax({
+									type: "POST",
+									url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+									data: {
+										toggle: true,
+										campaignName: campaignName,
+										cDataBack: databack,
+										user_id: user_id,
+										refresh_token: refresh_token,
+										profileId: profileId
+									},
+									
+									success: function(successAlert) {
+										swal ({
+											title: 'Campaign(s) successfully enabled!',
+											type: 'success',
+											confirmButtonText: 'Close'
+										})
+									},
+									
+									error: function() {
+										swal({
+											title: 'Error!',
+											type: 'error',
+											confirmButtonText: 'Close'
+										})
+									}
+								});
+								
+								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off btn-success btn-primary');
+								$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("enabled");
+								selectedCampaigns[j][2] = "enabled";
+							}
+						}
+					}
 				})
 			}
 		}
 	  ],
+	  //TODO: dont make this muti, use row().select() and trigger when row clicked
 	  select: {
           style: 'multi'
         },
@@ -272,7 +313,7 @@ $(document).ready( function () {
 	
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
-    $(this).toggleClass('toggle-selected');
+    //$(this).toggleClass('toggle-selected');
     var campaignName = $(this).parent().next().children(".c_link").text();
 
     console.log(dt.rows('.toggle-selected').data());
@@ -305,7 +346,7 @@ $(document).ready( function () {
           type: "success",
           confirmButtonText: "Close"
         });
-        $(this).toggleClass('toggle-selected');
+		
       },
       error: function() {
         swal({
