@@ -91,9 +91,12 @@ $(document).ready( function () {
 			
 			action: function (e, dt, node, config) {
 				//1 = paused, 2 = enable
-			  var selectedCampaigns = dt.rows ( '.selected' ).data();
-			  var campaignIndexes = dt.rows('.selected').indexes();
-              var campaignIdArr = [];
+        var selectedCampaigns = dt.rows('.selected').data();
+        var campaignIndexes   = dt.rows('.selected').indexes();
+        var campaignIdArr     = [];
+        
+        console.log(selectedCampaigns);
+        
 			  console.log(selectedCampaigns[0][0]);
 			  console.log(selectedCampaigns[0][0].includes('data-value="2"'));
               // Populate list of campaign ID's
@@ -158,8 +161,9 @@ $(document).ready( function () {
 								});
 								//dt.row(campaignIndexes[j])[0].toggleClass('toggle-selected');
 								//TODO: dont enable paused campaigns
-								console.log(selectedCampaigns[j]);
+								//console.log(selectedCampaigns[j]);
 								//$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off');
+                console.log($($(dt.row(campaignIndexes[j]).node()).find("div")[0]));
 								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
 								$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("paused");
 								selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="2"', 'data-value="1"');
@@ -168,7 +172,8 @@ $(document).ready( function () {
 					}
 					else if (result.value == 'enableCampaign') {
 						for (j = 0; j < selectedCampaigns.length; j++) {
-							if (selectedCampaigns[0][0].includes('data-value="1"')) {
+							
+						  if (selectedCampaigns[0][0].includes('data-value="1"')) {
 								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
 								$.ajax({
 									type: "POST",
@@ -203,6 +208,7 @@ $(document).ready( function () {
 								$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("enabled");
 								selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="1"', 'data-value="2"');
 							}
+							
 						}
 					}
 				})
@@ -329,7 +335,9 @@ $(document).ready( function () {
     }*/
 
     toggleActive = $(this).hasClass("off");
-    console.log(toggleActive);
+    
+    console.log($(this).children("input"));
+    (toggleActive) ? $(this).children("input").attr("data-value", 2) : $(this).children("input").attr("data-value", 1);
 
     // Toggle campaign w/ AJAX
     $.ajax({
@@ -345,12 +353,17 @@ $(document).ready( function () {
       },
 
       success: function(alertText) {
-        swal({
-          title: "Success!",
-          text: alertText,
-          type: "success",
-          confirmButtonText: "Close"
-        });
+        /*$.notify({
+          icon: "nc-icon nc-bell-55",
+          message: alertText
+        },{
+          type: 'success',
+          timer: 2000,
+          placement: {
+            from: 'bottom',
+            align: 'right'
+          }
+        });*/
       },
       error: function() {
         swal({
