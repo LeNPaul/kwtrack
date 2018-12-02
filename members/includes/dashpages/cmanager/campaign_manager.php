@@ -158,10 +158,8 @@ $(document).ready( function () {
 								});
 								//dt.row(campaignIndexes[j])[0].toggleClass('toggle-selected');
 								//TODO: dont enable paused campaigns
-								console.log(selectedCampaigns[j]);
 								//$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off');
 								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
-								$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("paused");
 								selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="2"', 'data-value="1"');
 							}
 						}
@@ -200,7 +198,6 @@ $(document).ready( function () {
 								});
 								
 								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
-								$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("enabled");
 								selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="1"', 'data-value="2"');
 							}
 						}
@@ -476,6 +473,7 @@ $(document).ready( function () {
 						var adgroupIdArr = [];
 						// Populate list of campaign ID's
 						for (i = 0; i < selectedAdgroups.length; i++) {
+							console.log(selectedAdgroups[i][1]);
 							var rx         = selectedAdgroups[i][1].match(/id="\d+/g);
 							var adgroupId = rx[0].replace("id=\"", "");
 							adgroupIdArr.push(adgroupId);
@@ -503,15 +501,15 @@ $(document).ready( function () {
 						.then(function(result) {
 							if (result.value == 'pauseAdgroup') {
 								for (j = 0; j < selectedAdgroups.length; j++) {
-									if (selectedAdgroups[j][2] == 'enabled') {
+									if (selectedAdgroups[j][0].includes('data-value="2"')) {
 										var adgroupName = selectedAdgroups[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-										/*$.ajax({
+										$.ajax({
 											type: "POST",
-											url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+											url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
 											data: {
 												toggle: false,
-												campaignName: campaignName,
-												cDataBack: databack,
+												adgroupName: adgroupName,
+												adgroupDataBack: databack,
 												user_id: user_id,
 												refresh_token: refresh_token,
 												profileId: profileId
@@ -519,7 +517,7 @@ $(document).ready( function () {
 									
 											success: function(successAlert) {
 												swal ({
-													title: 'Campaign(s) successfully paused!',
+													title: 'Adgroup(s) successfully paused!',
 													type: 'success',
 													confirmButtonText: 'Close'
 												})
@@ -535,24 +533,22 @@ $(document).ready( function () {
 										});
 										//dt.row(campaignIndexes[j])[0].toggleClass('toggle-selected');
 										//TODO: dont enable paused campaigns
-										console.log(selectedCampaigns[j]);
-										$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off btn-success btn-primary');
-										$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("paused");
-										selectedCampaigns[j][2] = "paused";*/
+										$($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
+										selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="2"', 'data-value="1"');
 									}
 								}
 							}
 							else if (result.value == 'enableAdgroup') {
 								for (j = 0; j < selectedAdgroups.length; j++) {
-									if (selectedAdgroups[j][2] == 'paused') {
+									if (selectedAdgroups[j][0].includes('data-value="1"')) {
 										var adgroupName = selectedAdgroups[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-										/*$.ajax({
+										$.ajax({
 											type: "POST",
 											url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
 											data: {
 												toggle: true,
-												campaignName: campaignName,
-												cDataBack: databack,
+												adgroupName: adgroupName,
+												adgroupDataBack: databack,
 												user_id: user_id,
 												refresh_token: refresh_token,
 												profileId: profileId
@@ -560,7 +556,7 @@ $(document).ready( function () {
 									
 											success: function(successAlert) {
 												swal ({
-													title: 'Campaign(s) successfully enabled!',
+													title: 'Adgroup(s) successfully enabled!',
 													type: 'success',
 													confirmButtonText: 'Close'
 												})
@@ -575,9 +571,8 @@ $(document).ready( function () {
 											}
 										});
 								
-										$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off btn-success btn-primary');
-										$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("enabled");
-										selectedCampaigns[j][2] = "enabled";*/
+										$($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
+										selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="1"', 'data-value="2"');
 									}
 								}
 							}
