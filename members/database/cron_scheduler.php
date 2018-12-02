@@ -27,7 +27,7 @@ function toggleCampaign(&$client, &$fp, $state, $uid, $campaignList, $currentHou
     ($r['code'] != 207)
       ? "------ Error occurred for campaign (ID: {$campaignList[$i]['amz_campaign_id']})" . "\n"
       . "    |________ Error Response: " . $r['response'] . "\n"
-      : "-- Client instantiated for user {$uid} Campaign (ID {$campaignList[$i]['amz_campaign_id']}) successfully {$state} at {$currentHour}:00 on day #{$currentDay}" . "\n";
+      : "-- Client instantiated for user {$uid}. Campaign (ID {$campaignList[$i]['amz_campaign_id']}) successfully {$state} at {$currentHour}:00 on day #{$currentDay}" . "\n";
   
   fwrite($fp, $log);
 }

@@ -95,7 +95,7 @@ $(document).ready( function () {
         var campaignIndexes   = dt.rows('.selected').indexes();
         var campaignIdArr     = [];
         
-        console.log(selectedCampaigns);
+        console.log("SELECTED CAMPAIGNS:", selectedCampaigns);
         
 			  console.log(selectedCampaigns[0][0]);
 			  console.log(selectedCampaigns[0][0].includes('data-value="2"'));
@@ -128,7 +128,7 @@ $(document).ready( function () {
 				.then(function(result) {
 					if (result.value == 'pauseCampaign') {
 						for (j = 0; j < selectedCampaigns.length; j++) {
-							if (selectedCampaigns[0][0].includes('data-value="2"')) {
+							if (selectedCampaigns[j][0].includes('data-value="2"')) {
 								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
 								
 								$.ajax({
@@ -175,7 +175,7 @@ $(document).ready( function () {
 					else if (result.value == 'enableCampaign') {
 						for (j = 0; j < selectedCampaigns.length; j++) {
 							
-						  if (selectedCampaigns[0][0].includes('data-value="1"')) {
+						  if (selectedCampaigns[j][0].includes('data-value="1"')) {
 								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
 								$.ajax({
 									type: "POST",
@@ -336,8 +336,6 @@ $(document).ready( function () {
     }*/
 
     toggleActive = $(this).hasClass("off");
-    
-    console.log($(this).children("input"));
     (toggleActive) ? $(this).children("input").attr("data-value", 2) : $(this).children("input").attr("data-value", 1);
 
     // Toggle campaign w/ AJAX
@@ -354,7 +352,7 @@ $(document).ready( function () {
       },
 
       success: function(alertText) {
-        /*$.notify({
+        $.notify({
           icon: "nc-icon nc-bell-55",
           message: alertText
         },{
@@ -364,7 +362,7 @@ $(document).ready( function () {
             from: 'bottom',
             align: 'right'
           }
-        });*/
+        });
       },
       error: function() {
         swal({
