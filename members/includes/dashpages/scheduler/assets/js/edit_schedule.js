@@ -61,7 +61,6 @@ $(function() {
      url: "includes/dashpages/scheduler/assets/api/__save_sched.php",
      data: { s:o, c:l_cid },
      success: function(data) {
-       console.log(data);
        eraseCookie("l_cid");
 
        swal({
@@ -69,9 +68,11 @@ $(function() {
          text: 'All schedules updated for the selected campaigns.',
          type: 'success',
          showCancelButton: false,
-         confirmButtonClass: "btn-success"
+         confirmButtonClass: "btn-success",
+         onClose: function() {window.location.href = 'dashboard?p=as';}
        })
        .then(function(result) {
+         window.location.href = 'dashboard?p=as';
          if (result.value) {
            window.location.href = 'dashboard?p=as';
          }
