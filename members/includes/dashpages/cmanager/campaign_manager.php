@@ -91,6 +91,7 @@ $(document).ready( function () {
 			
 			action: function (e, dt, node, config) {
 			  var selectedCampaigns = dt.rows ( '.selected' ).data();
+			  console.log(selectedCampaigns);
 			  var campaignIndexes = dt.rows('.selected').indexes();
               var campaignIdArr = [];
               // Populate list of campaign ID's
