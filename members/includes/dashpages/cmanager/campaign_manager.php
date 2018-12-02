@@ -90,10 +90,12 @@ $(document).ready( function () {
 			className: 'btn-bulk-action',
 			
 			action: function (e, dt, node, config) {
+				//1 = paused, 2 = enable
 			  var selectedCampaigns = dt.rows ( '.selected' ).data();
-			  console.log(selectedCampaigns);
 			  var campaignIndexes = dt.rows('.selected').indexes();
               var campaignIdArr = [];
+			  console.log(selectedCampaigns[0][0]);
+			  console.log(selectedCampaigns[0][0].includes('data-value="2"'));
               // Populate list of campaign ID's
               for (i = 0; i < selectedCampaigns.length; i++) {
                 var rx         = selectedCampaigns[i][1].match(/id="\d+/g);
@@ -123,7 +125,7 @@ $(document).ready( function () {
 				.then(function(result) {
 					if (result.value == 'pauseCampaign') {
 						for (j = 0; j < selectedCampaigns.length; j++) {
-							if (selectedCampaigns[j][2] == 'enabled') {
+							if (selectedCampaigns[0][0].includes('data-value="2"')) {
 								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
 								
 								$.ajax({
@@ -158,15 +160,15 @@ $(document).ready( function () {
 								//TODO: dont enable paused campaigns
 								console.log(selectedCampaigns[j]);
 								//$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off');
-                $($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
+								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
 								$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("paused");
-								selectedCampaigns[j][2] = "paused";
+								selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="2"', 'data-value="1"');
 							}
 						}
 					}
 					else if (result.value == 'enableCampaign') {
 						for (j = 0; j < selectedCampaigns.length; j++) {
-							if (selectedCampaigns[j][2] == 'paused') {
+							if (selectedCampaigns[0][0].includes('data-value="1"')) {
 								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
 								$.ajax({
 									type: "POST",
@@ -197,9 +199,9 @@ $(document).ready( function () {
 									}
 								});
 								
-								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off btn-success btn-primary');
+								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
 								$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("enabled");
-								selectedCampaigns[j][2] = "enabled";
+								selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="1"', 'data-value="2"');
 							}
 						}
 					}
@@ -349,7 +351,6 @@ $(document).ready( function () {
           type: "success",
           confirmButtonText: "Close"
         });
-		$(this).parent().next().next().children().text("paused");
       },
       error: function() {
         swal({
