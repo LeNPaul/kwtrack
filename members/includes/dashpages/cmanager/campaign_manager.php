@@ -124,6 +124,7 @@ $(document).ready( function () {
 						for (j = 0; j < selectedCampaigns.length; j++) {
 							if (selectedCampaigns[j][2] == 'enabled') {
 								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+								
 								$.ajax({
 									type: "POST",
 									url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
@@ -155,7 +156,8 @@ $(document).ready( function () {
 								//dt.row(campaignIndexes[j])[0].toggleClass('toggle-selected');
 								//TODO: dont enable paused campaigns
 								console.log(selectedCampaigns[j]);
-								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off btn-success btn-primary');
+								//$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off');
+                $($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
 								$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("paused");
 								selectedCampaigns[j][2] = "paused";
 							}
@@ -313,18 +315,19 @@ $(document).ready( function () {
 	
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
-    //$(this).toggleClass('toggle-selected');
+    //$(this).toggleClass('off');
     var campaignName = $(this).parent().next().children(".c_link").text();
 
-    console.log(dt.rows('.toggle-selected').data());
+    //console.log(dt.rows('.toggle-selected').data());
 
-    if ($(this).hasClass("off")) {
+    /*if ($(this).hasClass("off")) {
       console.log('turning toggle on');
     } else {
       console.log('turning toggle off');
-    }
+    }*/
 
     toggleActive = $(this).hasClass("off");
+    console.log(toggleActive);
 
     // Toggle campaign w/ AJAX
     $.ajax({
