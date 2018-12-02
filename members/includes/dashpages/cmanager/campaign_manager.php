@@ -67,7 +67,7 @@ $(document).ready( function () {
   var keywordDataset = null;
   var keywordDataBack = null;
   var adgrOptions = null;
-
+  
   //var dt  = $('#campaign_manager').DataTable(
   var campaignOptions =
   {
@@ -107,9 +107,9 @@ $(document).ready( function () {
 					'addCampaigns' : 'Add To Campaign Group',
 					'addKw' : 'Add Keywords',
 					'addNegKw' : 'Add Negative Keywords',
-					'pauseCampaign' : 'Pause Campaigns',
-					'enableCampaign' : 'Enable Campaigns',
-					'archiveCampaign' : 'Archive Campaigns'
+					'pauseCampaign' : 'Pause Campaign(s)',
+					'enableCampaign' : 'Enable Campaign(s)',
+					'archiveCampaign' : 'Archive Campaign(s)'
 				  },
 				  inputPlaceholder: 'Select a bulk action',
 				  confirmButtonClass: "btn-success",
@@ -204,7 +204,7 @@ $(document).ready( function () {
 			}
 		}
 	  ],
-	  //TODO: dont make this muti, use row().select() and trigger when row clicked
+	  //TODO: dont make this multi, use row().select() and trigger when row clicked
 	  select: {
           style: 'multi'
         },
@@ -279,7 +279,6 @@ $(document).ready( function () {
   }; //campaignOptions
 
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
-	
 	$(".btn-deselect").css("visibility", "hidden");
 	$(".btn-bulk-action").css("visibility", "hidden");
 	
@@ -346,7 +345,7 @@ $(document).ready( function () {
           type: "success",
           confirmButtonText: "Close"
         });
-		
+		$(this).parent().next().next().children().text("paused");
       },
       error: function() {
         swal({
@@ -450,6 +449,139 @@ $(document).ready( function () {
 	      //console.log(adgroupDataBack);
 
 	      adgrOptions = {
+			dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+			buttons: [
+				{
+					extend: 'selectAll',
+					className: 'btn-Primary'
+				},
+				{
+					extend: 'selectNone',
+					text: 'Deselect All',
+					className: 'btn-deselect'
+				},
+				{
+					text: 'Bulk Actions',
+					className: 'btn-bulk-action',
+			
+					action: function (e, dt, node, config) {
+						var selectedAdgroups = dt.rows ( '.selected' ).data();
+						var adgroupIndexes = dt.rows('.selected').indexes();
+						var adgroupIdArr = [];
+						// Populate list of campaign ID's
+						for (i = 0; i < selectedAdgroups.length; i++) {
+							var rx         = selectedAdgroups[i][1].match(/id="\d+/g);
+							var adgroupId = rx[0].replace("id=\"", "");
+							adgroupIdArr.push(adgroupId);
+						}
+			  
+						const {value : bulkAction} = swal({
+							title: 'Bulk Actions',
+							input: 'select',
+							inputOptions: {
+								'addAdgroup' : 'Add To Campaign Group',
+								'addKw' : 'Add Keywords',
+								'addNegKw' : 'Add Negative Keywords',
+								'pauseAdgroup' : 'Pause Adgroup(s)',
+								'enableAdgroup' : 'Enable Adgroups(s)',
+								'archiveAdgroup' : 'Archive Adgroups(s)'
+							},
+							inputPlaceholder: 'Select a bulk action',
+							confirmButtonClass: "btn-success",
+							cancelButtonClass: "btn-secondary",
+							showCancelButton: true,
+							allowOutsideClick: false,
+							allowEnterKey: false,
+							allowEscapeKey: false,
+						})
+						.then(function(result) {
+							if (result.value == 'pauseAdgroup') {
+								for (j = 0; j < selectedAdgroups.length; j++) {
+									if (selectedAdgroups[j][2] == 'enabled') {
+										var adgroupName = selectedAdgroups[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+										/*$.ajax({
+											type: "POST",
+											url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+											data: {
+												toggle: false,
+												campaignName: campaignName,
+												cDataBack: databack,
+												user_id: user_id,
+												refresh_token: refresh_token,
+												profileId: profileId
+											},
+									
+											success: function(successAlert) {
+												swal ({
+													title: 'Campaign(s) successfully paused!',
+													type: 'success',
+													confirmButtonText: 'Close'
+												})
+											},
+									
+											error: function() {
+												swal({
+													title: 'Error!',
+													type: 'error',
+													confirmButtonText: 'Close'
+												})
+											}
+										});
+										//dt.row(campaignIndexes[j])[0].toggleClass('toggle-selected');
+										//TODO: dont enable paused campaigns
+										console.log(selectedCampaigns[j]);
+										$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off btn-success btn-primary');
+										$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("paused");
+										selectedCampaigns[j][2] = "paused";*/
+									}
+								}
+							}
+							else if (result.value == 'enableAdgroup') {
+								for (j = 0; j < selectedAdgroups.length; j++) {
+									if (selectedAdgroups[j][2] == 'paused') {
+										var adgroupName = selectedAdgroups[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+										/*$.ajax({
+											type: "POST",
+											url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+											data: {
+												toggle: true,
+												campaignName: campaignName,
+												cDataBack: databack,
+												user_id: user_id,
+												refresh_token: refresh_token,
+												profileId: profileId
+											},
+									
+											success: function(successAlert) {
+												swal ({
+													title: 'Campaign(s) successfully enabled!',
+													type: 'success',
+													confirmButtonText: 'Close'
+												})
+											},
+									
+											error: function() {
+												swal({
+													title: 'Error!',
+													type: 'error',
+													confirmButtonText: 'Close'
+												})
+											}
+										});
+								
+										$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off btn-success btn-primary');
+										$($(dt.row(campaignIndexes[j]).node()).find("td")[2]).html("enabled");
+										selectedCampaigns[j][2] = "enabled";*/
+									}
+								}
+							}
+						})
+					}
+				}
+			],
+			select: {
+				style: 'multi'
+			},
 	        scrollX: true,
 	        paging: true,
 	        pagingType: "full_numbers",
@@ -477,8 +609,17 @@ $(document).ready( function () {
 	          // Set dataTableFlag to 2 whenever campaign manager is drawn
 	          dataTableFlag = 2;
 
-	          $('td input').bootstrapToggle();
-
+	          $('.toggle-campaign').bootstrapToggle({
+			    on: '<i class="fa fa-play"></i>',
+			    off: '<i class="fa fa-pause"></i>',
+			    size: "small",
+			    onstyle: "success",
+			    offstyle: "primary"
+			  });
+			  $(".toggle-campaign-archive").bootstrapToggle({
+			    off: '',
+			    size: "small"
+			  });
 
 
 	        } // drawCallback
@@ -486,6 +627,8 @@ $(document).ready( function () {
 	      }; // adgrOptions
 
 	      dt = $('#campaign_manager').DataTable(adgrOptions);
+		  $(".btn-deselect").css("visibility", "hidden");
+		  $(".btn-bulk-action").css("visibility", "hidden");
 
 	    }, // success (campaign manager)
 
@@ -538,6 +681,18 @@ $(document).ready( function () {
         console.log(keywordDataBack);
 
         var kwOptions = {
+		  dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+		  buttons: [
+			{
+				extend: 'selectAll',
+				className: 'btn-Primary'
+			},
+			{
+				extend: 'selectNone',
+				text: 'Deselect All',
+				className: 'btn-deselect'
+			},
+		  ],
           scrollX: true,
           paging: true,
           pagingType: "full_numbers",
@@ -566,8 +721,18 @@ $(document).ready( function () {
             // Set dataTableFlag to 1 whenever campaign manager is drawn
             dataTableFlag = 3;
 
-            $('td input').bootstrapToggle();
-
+            $('.toggle-campaign').bootstrapToggle({
+			    on: '<i class="fa fa-play"></i>',
+			    off: '<i class="fa fa-pause"></i>',
+			    size: "small",
+			    onstyle: "success",
+			    offstyle: "primary"
+			  });
+			  $(".toggle-campaign-archive").bootstrapToggle({
+			    off: '',
+			    size: "small"
+			  });
+			  
           } // drawCallback (keyword manager)
         }; // kwOptions
 
