@@ -90,8 +90,8 @@ $(document).ready( function () {
 			className: 'btn-bulk-action',
 			
 			action: function (e, dt, node, config) {
-			  var selectedCampaigns = dt.rows( '.selected' ).data();
-			  console.log(selectedCampaigns);
+			  var selectedCampaigns = dt.rows ( '.selected' ).data();
+			  var campaignIndexes = dt.rows('.selected').indexes();
               var campaignIdArr = [];
               // Populate list of campaign ID's
               for (i = 0; i < selectedCampaigns.length; i++) {
@@ -100,9 +100,8 @@ $(document).ready( function () {
                 campaignIdArr.push(campaignId);
               }
 			  
-			  swal({
+			  const {value : bulkAction} = swal({
 				  title: 'Bulk Actions',
-				  html: '',
 				  input: 'select',
 				  inputOptions: {
 					'addCampaigns' : 'Add To Campaign Group',
@@ -119,7 +118,49 @@ $(document).ready( function () {
 				  allowOutsideClick: false,
 				  allowEnterKey: false,
 				  allowEscapeKey: false,
-			  });
+				})
+				.then(function(result) {
+					if (result.value == 'pauseCampaign') {
+						for (j = 0; j < selectedCampaigns.length; j++) {
+							if (selectedCampaigns[j][2] == 'enabled') {
+								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+								$.ajax({
+									type: "POST",
+									url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+									data: {
+										toggle: false,
+										campaignName: campaignName,
+										cDataBack: databack,
+										user_id: user_id,
+										refresh_token: refresh_token,
+										profileId: profileId
+									},
+									
+									success: function(successAlert) {
+										swal ({
+											title: 'Success!',
+											type: 'success',
+											confirmButtonText: 'Close'
+										})
+									},
+									
+									error: function() {
+										swal({
+											title: 'Error!',
+											type: 'error',
+											confirmButtonText: 'Close'
+										})
+									}
+								});
+								//dt.row(campaignIndexes[j])[0].toggleClass('toggle-selected');
+								//TODO: dont enable paused campaigns
+								console.log(selectedCampaigns[j]);
+								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('toggle-selected off');
+							}
+						}
+					}
+					else if (
+				})
 			}
 		}
 	  ],
