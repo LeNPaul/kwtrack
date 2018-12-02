@@ -416,9 +416,11 @@ $(document).ready( function () {
 
   //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
+   
 	  currentCampaign     = $(this).html();
 	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
 	  console.log(campaignDataBack);
+	  
 	  dt.destroy();
 	  $('#campaign_manager').empty();
 
@@ -439,7 +441,6 @@ $(document).ready( function () {
 	    url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
 
 	    success: function(data){
-	      console.log('running...');
 	      data = JSON.parse(data);
 	      console.log(data);
 
