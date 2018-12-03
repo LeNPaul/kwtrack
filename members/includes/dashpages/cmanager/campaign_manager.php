@@ -54,6 +54,9 @@ var dataTableFlag = 1;
 var currentCampaign = "";
 var adGroupName = "";
 var allCampaigns = "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
+var sleep = function (time) {
+  return new Promise( function(resolve){ return setTimeout(resolve, time); } );
+};
 
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
@@ -78,7 +81,7 @@ $(document).ready( function () {
 	  buttons: [
 		{
 			extend: 'selectAll',
-			className: 'btn-Primary'
+			className: 'btn-primary'
 		},
 		{
             extend: 'selectNone',
@@ -144,11 +147,13 @@ $(document).ready( function () {
 									},
 									
 									success: function(successAlert) {
-										swal ({
-											title: 'Campaign(s) successfully paused!',
-											type: 'success',
-											confirmButtonText: 'Close'
-										})
+									  sleep(1000).then(function () {
+                      swal ({
+                        title: 'Campaign(s) successfully paused!',
+                        type: 'success',
+                        confirmButtonText: 'Close'
+                      })
+                    });
 									},
 									
 									error: function() {
@@ -172,6 +177,7 @@ $(document).ready( function () {
 							}
 						}
 					}
+					
 					else if (result.value == 'enableCampaign') {
 						for (j = 0; j < selectedCampaigns.length; j++) {
 							
@@ -190,11 +196,13 @@ $(document).ready( function () {
 									},
 									
 									success: function(successAlert) {
-										swal ({
-											title: 'Campaign(s) successfully enabled!',
-											type: 'success',
-											confirmButtonText: 'Close'
-										})
+										sleep(1000).then(function() {
+                      swal ({
+                        title: 'Campaign(s) successfully enabled!',
+                        type: 'success',
+                        confirmButtonText: 'Close'
+                      })
+                    });
 									},
 									
 									error: function() {
@@ -212,6 +220,37 @@ $(document).ready( function () {
 							
 						}
 					}
+					
+					else if (result.value == 'addNegKw') {
+            $('#c_addNegKw').modal('show');
+            
+					  for (i = 0; i < selectedCampaigns.length; i++) {
+              var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+              
+              $.ajax({
+                type: "POST",
+                url: "includes/dashpages/cmanager/helpers/bulk_add_neg_keywords.php",
+                
+                data: {
+                  campaignName: campaignName,
+                  cDataBack: databack,
+                  user_id: user_id,
+                  refresh_token: refresh_token,
+                  profileId: profileId,
+                  negKeywordList: negKeywordList
+                },
+                
+                success: function(data) {
+                
+                },
+                
+                error: function(data) {
+                
+                }
+              });
+              
+            }
+          }
 				})
 			}
 		}
@@ -296,15 +335,13 @@ $(document).ready( function () {
 	
 	//handle select all and deselect all
 	$("body").on("mouseup", function() {
-    var sleep = function (time) {
-      return new Promise( function(resolve){ return setTimeout(resolve, time); } );
-    };
+    
     sleep(50).then(function() {
       var campaignsSelected = dt.rows( '.selected' );
       if (dt.rows( '.selected' ).any()) {
         //$(".btn-scheduler").css("visibility", "visible");
         $(".btn-deselect").css("visibility", "visible");
-		$(".btn-bulk-action").css("visibility", "visible");
+		    $(".btn-bulk-action").css("visibility", "visible");
 
         if (campaignsSelected[0].length === 1) {
           $("#info_selected").text(campaignsSelected[0].length + " campaign selected");
@@ -314,7 +351,7 @@ $(document).ready( function () {
       } else {
         //$(".btn-scheduler").css("visibility", "hidden");
         $(".btn-deselect").css("visibility", "hidden");
-		$(".btn-bulk-action").css("visibility", "hidden");
+		    $(".btn-bulk-action").css("visibility", "hidden");
 
         $("#info_selected").text("");
       }
@@ -439,7 +476,7 @@ $(document).ready( function () {
 
 	  // Handle breadcrumbs
 	  $("#bc").html(function(index, currentText) {
-	    return currentText + " <b>></b> " + currentCampaign;
+	    return currentText + " <b>/</b> " + currentCampaign;
 	  });
 
 	  $.ajax({
@@ -471,7 +508,7 @@ $(document).ready( function () {
 			buttons: [
 				{
 					extend: 'selectAll',
-					className: 'btn-Primary'
+					className: 'btn-primary'
 				},
 				{
 					extend: 'selectNone',
@@ -664,9 +701,9 @@ $(document).ready( function () {
     $("#campaign_manager").empty();
 
     // Breadcrumb text. Edit later to include links that go back.
-    $("#bc").html(function(index, currentText){
+    $("#bc").html(function(index, currentText) {
       console.log(currentText);
-      return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>></b> " + adgroupName;
+      return allCampaigns + " <b>/</b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>/</b> " + adgroupName;
     });
 
     $.ajax({
@@ -701,7 +738,7 @@ $(document).ready( function () {
 		  buttons: [
 			{
 				extend: 'selectAll',
-				className: 'btn-Primary'
+				className: 'btn-primary'
 			},
 			{
 				extend: 'selectNone',
@@ -994,3 +1031,23 @@ $(document).ready( function () {
 }); //document.ready
 
 </script>
+
+<div class="modal fade" id="c_addNegKw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
