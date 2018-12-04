@@ -37,7 +37,7 @@
 	pointer-events: none;
 	-webkit-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
-  padding: 25px;
+  padding: 15px;
 }
 
 #tooltip_title {
@@ -67,9 +67,9 @@ table.dataTable td {
 }
 
 
-/*#bc {
+#bc {
   font-weight: bold !important;
-}*/
+}
 
 .dataTables_wrapper .name {
   font-weight: 600 !important;
@@ -166,6 +166,7 @@ tr.selected > td { font-weight: bold !important; }
   justify-content: inherit;
 }
 
+.time, .dayOfWeek { cursor: pointer; }
 #info_selected { font-weight: bold; }
 #campaign_list_length { max-width: 50%; height: 39px !important; }
 #campaign_list_filter { max-width: 50%; height: 39px !important; }

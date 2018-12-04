@@ -48,13 +48,13 @@ function cmGetCampaignData($pdo, $user_id) {
 
   for ($i = 0; $i < count($result); $i++) {
 
-  	if ($result[$i]['status'] == 'enabled') {
+  	/*if ($result[$i]['status'] == 'enabled') {
   		$active = 0;
   	} else if ($result[$i]['status'] == 'paused') {
   		$active = 1;
   	} else {
   		$active = 2;
-  	}
+  	}*/
 
     $adSpendArray     = unserialize($result[$i]['ad_spend']);
     $salesArray       = unserialize($result[$i]['sales']);
