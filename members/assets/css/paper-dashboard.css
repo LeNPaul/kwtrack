@@ -37,7 +37,7 @@
 	pointer-events: none;
 	-webkit-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
-  padding: 25px;
+  padding: 15px;
 }
 
 #tooltip_title {
