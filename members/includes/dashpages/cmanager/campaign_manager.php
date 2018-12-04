@@ -146,27 +146,7 @@ $(document).ready( function () {
 										refresh_token: refresh_token,
 										profileId: profileId
 									},
-									
-									success: function(successAlert) {
-									  sleep(1000).then(function () {
-                      swal ({
-                        title: 'Campaign(s) successfully paused!',
-                        type: 'success',
-                        confirmButtonText: 'Close'
-                      })
-                    });
-									},
-									
-									error: function() {
-										swal({
-											title: 'Error!',
-											type: 'error',
-											confirmButtonText: 'Close'
-										})
-									}
 								});
-								//dt.row(campaignIndexes[j])[0].toggleClass('toggle-selected');
-								//TODO: dont enable paused campaigns
 
 								console.log(selectedCampaigns[j]);
 
@@ -195,24 +175,6 @@ $(document).ready( function () {
 										refresh_token: refresh_token,
 										profileId: profileId
 									},
-									
-									success: function(successAlert) {
-										sleep(1000).then(function() {
-                      swal ({
-                        title: 'Campaign(s) successfully enabled!',
-                        type: 'success',
-                        confirmButtonText: 'Close'
-                      })
-                    });
-									},
-									
-									error: function() {
-										swal({
-											title: 'Error!',
-											type: 'error',
-											confirmButtonText: 'Close'
-										})
-									}
 								});
 								
 								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
@@ -566,25 +528,8 @@ $(document).ready( function () {
 												refresh_token: refresh_token,
 												profileId: profileId
 											},
-									
-											success: function(successAlert) {
-												swal ({
-													title: 'Adgroup(s) successfully paused!',
-													type: 'success',
-													confirmButtonText: 'Close'
-												})
-											},
-									
-											error: function() {
-												swal({
-													title: 'Error!',
-													type: 'error',
-													confirmButtonText: 'Close'
-												})
-											}
 										});
-										//dt.row(campaignIndexes[j])[0].toggleClass('toggle-selected');
-										//TODO: dont enable paused campaigns
+										
 										$($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
 										selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="2"', 'data-value="1"');
 									}
@@ -605,22 +550,6 @@ $(document).ready( function () {
 												refresh_token: refresh_token,
 												profileId: profileId
 											},
-									
-											success: function(successAlert) {
-												swal ({
-													title: 'Adgroup(s) successfully enabled!',
-													type: 'success',
-													confirmButtonText: 'Close'
-												})
-											},
-									
-											error: function() {
-												swal({
-													title: 'Error!',
-													type: 'error',
-													confirmButtonText: 'Close'
-												})
-											}
 										});
 								
 										$($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
