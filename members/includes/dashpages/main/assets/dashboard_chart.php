@@ -181,7 +181,7 @@
               style += '; border-width: 2px';
               var span = '<span style="' + style + '"></span>';
               // Set body line text
-              innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + body + '</p></td></tr><hr />';
+              innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + body + '</p></td></tr>';
             });
             innerHtml += '</tbody>';
 
