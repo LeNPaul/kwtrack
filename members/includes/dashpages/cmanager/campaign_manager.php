@@ -646,7 +646,6 @@ $(document).ready( function () {
 	        columns: [
 	          { title: "Active" },
 	          { title: "Ad Group Name" },
-	          { title: "Status" },
 	          { title: "Default Bid" },
 	          { title: "Impressions" },
 	          { title: "Clicks" },
@@ -758,7 +757,6 @@ $(document).ready( function () {
             { title: "Active" },
             { title: "Keyword" },
             { title: "Match Type" },
-            { title: "Status" },
             { title: "Bid" },
             { title: "Impressions" },
             { title: "Clicks" },

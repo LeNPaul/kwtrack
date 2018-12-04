@@ -199,7 +199,6 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $adgroupLink,
-	    $result[$i]['status'],
       $result[$i]['default_bid'],
       $impressions,
       $clicks,
@@ -257,7 +256,6 @@ function cmGetKeywordData($pdo, $adgroupId) {
 	    cmCheckboxState($result[$i]['status']),
       $kwText,
       $result[$i]['match_type'],
-	    $result[$i]['status'],
       $bid,
       $impressions,
       $clicks,
