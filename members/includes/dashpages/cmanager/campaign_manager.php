@@ -115,7 +115,8 @@ $(document).ready( function () {
 					'addNegKw' : 'Add Negative Keywords',
 					'pauseCampaign' : 'Pause Campaign(s)',
 					'enableCampaign' : 'Enable Campaign(s)',
-					'archiveCampaign' : 'Archive Campaign(s)'
+					'archiveCampaign' : 'Archive Campaign(s)',
+					'changeBudget' : 'Change Budget'
 				  },
 				  inputPlaceholder: 'Select a bulk action',
 				  confirmButtonClass: "btn-success",
@@ -240,7 +241,6 @@ $(document).ready( function () {
       columns: [
 		    { title: "Status", "orderDataType": "dom-text-toggle"},
         { title: "Campaign Name"},
-		    { title: "Status" },
         { title: "Budget", "orderDataType": "dom-text"},
         { title: "Targeting Type" },
         { title: "Impressions" },
@@ -498,7 +498,7 @@ $(document).ready( function () {
 							title: 'Bulk Actions',
 							input: 'select',
 							inputOptions: {
-								'addAdgroup' : 'Add To Campaign Group',
+								'changeDefaultBid' : 'Change Default Bid',
 								'addKw' : 'Add Keywords',
 								'addNegKw' : 'Add Negative Keywords',
 								'pauseAdgroup' : 'Pause Adgroup(s)',

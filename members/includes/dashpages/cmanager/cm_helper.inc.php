@@ -117,7 +117,6 @@ function cmGetCampaignData($pdo, $user_id) {
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $campaignLink,
-	    $result[$i]['status'],
       $budget,
       $result[$i]['targeting_type'],
       $impressions,
