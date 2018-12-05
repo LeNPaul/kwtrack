@@ -54,6 +54,9 @@ var dataTableFlag = 1;
 var currentCampaign = "";
 var adGroupName = "";
 var allCampaigns = "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
+var sleep = function (time) {
+  return new Promise( function(resolve){ return setTimeout(resolve, time); } );
+};
 
 $(document).ready( function () {
   var dataset       = <?= json_encode($campaignDataFront) ?>;
@@ -67,7 +70,7 @@ $(document).ready( function () {
   var keywordDataset = null;
   var keywordDataBack = null;
   var adgrOptions = null;
-
+  
   //var dt  = $('#campaign_manager').DataTable(
   var campaignOptions =
   {
@@ -78,7 +81,7 @@ $(document).ready( function () {
 	  buttons: [
 		{
 			extend: 'selectAll',
-			className: 'btn-Primary'
+			className: 'btn-primary'
 		},
 		{
             extend: 'selectNone',
@@ -90,9 +93,15 @@ $(document).ready( function () {
 			className: 'btn-bulk-action',
 			
 			action: function (e, dt, node, config) {
-			  var selectedCampaigns = dt.rows( '.selected' ).data();
-			  console.log(selectedCampaigns);
-              var campaignIdArr = [];
+				//1 = paused, 2 = enable
+        var selectedCampaigns = dt.rows('.selected').data();
+        var campaignIndexes   = dt.rows('.selected').indexes();
+        var campaignIdArr     = [];
+        
+        console.log("SELECTED CAMPAIGNS:", selectedCampaigns);
+        
+			  console.log(selectedCampaigns[0][0]);
+			  console.log(selectedCampaigns[0][0].includes('data-value="2"'));
               // Populate list of campaign ID's
               for (i = 0; i < selectedCampaigns.length; i++) {
                 var rx         = selectedCampaigns[i][1].match(/id="\d+/g);
@@ -100,29 +109,155 @@ $(document).ready( function () {
                 campaignIdArr.push(campaignId);
               }
 			  
-			  swal({
+			  const {value : bulkAction} = swal({
 				  title: 'Bulk Actions',
-				  html: '',
 				  input: 'select',
 				  inputOptions: {
 					'addCampaigns' : 'Add To Campaign Group',
 					'addKw' : 'Add Keywords',
 					'addNegKw' : 'Add Negative Keywords',
-					'pauseCampaign' : 'Pause Campaigns',
-					'enableCampaign' : 'Enable Campaigns',
-					'archiveCampaign' : 'Archive Campaigns'
+					'pauseCampaign' : 'Pause Campaign(s)',
+					'enableCampaign' : 'Enable Campaign(s)',
+					'archiveCampaign' : 'Archive Campaign(s)',
+					'changeBudget' : 'Change Budget'
 				  },
 				  inputPlaceholder: 'Select a bulk action',
 				  confirmButtonClass: "btn-success",
                   cancelButtonClass: "btn-secondary",
+				  confirmButtonColor: '#009925',
+				  cancelButtonColor: '#d33',
 				  showCancelButton: true,
 				  allowOutsideClick: false,
 				  allowEnterKey: false,
 				  allowEscapeKey: false,
-			  });
-			}
+				})
+				.then(function(result) {
+					if (result.value == 'pauseCampaign') {
+						for (j = 0; j < selectedCampaigns.length; j++) {
+							if (selectedCampaigns[j][0].includes('data-value="2"')) {
+								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+								
+								$.ajax({
+									type: "POST",
+									url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+									data: {
+										toggle: false,
+										campaignName: campaignName,
+										cDataBack: databack,
+										user_id: user_id,
+										refresh_token: refresh_token,
+										profileId: profileId
+									}
+								});
+
+								console.log(selectedCampaigns[j]);
+
+
+								//$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off');
+                console.log($($(dt.row(campaignIndexes[j]).node()).find("div")[0]));
+								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
+								selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="2"', 'data-value="1"');
+							}
+						}
+					}
+					
+					else if (result.value == 'enableCampaign') {
+						for (j = 0; j < selectedCampaigns.length; j++) {
+							
+						  if (selectedCampaigns[j][0].includes('data-value="1"')) {
+								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+								$.ajax({
+									type: "POST",
+									url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+									data: {
+										toggle: true,
+										campaignName: campaignName,
+										cDataBack: databack,
+										user_id: user_id,
+										refresh_token: refresh_token,
+										profileId: profileId
+									}
+								});
+								
+								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
+								selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="1"', 'data-value="2"');
+							}
+							
+						}
+					}
+					
+					else if (result.value == 'addNegKw') {
+            $('#c_addNegKw').modal('show');
+            
+					  for (i = 0; i < selectedCampaigns.length; i++) {
+              var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+              
+              $.ajax({
+                type: "POST",
+                url: "includes/dashpages/cmanager/helpers/bulk_add_neg_keywords.php",
+                
+                data: {
+                  campaignName: campaignName,
+                  cDataBack: databack,
+                  user_id: user_id,
+                  refresh_token: refresh_token,
+                  profileId: profileId,
+                  negKeywordList: negKeywordList
+                },
+                
+                success: function(data) {
+                
+                },
+                
+                error: function(data) {
+                
+                }
+              });
+              
+            }
+          }
+		  
+		  else if (result.value == 'archiveCampaign') {
+			  swal({
+				  title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
+				  type: 'warning',
+				  confirmButtonText: 'Yes!',
+				  confirmButtonColor: '#009925',
+				  cancelButtonColor: '#d33',
+				  showCancelButton: true,
+				  allowOutsideClick: false,
+				  allowEnterKey: false,
+				  allowEscapeKey: false,
+			  })
+			  .then(function(result) {
+				  if (result) {
+					  for (x = 0; x < selectedCampaigns.length; x++) {
+						  var campaignName = selectedCampaigns[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+								
+						  $.ajax({
+							type: "POST",
+							url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+							data: {
+								toggle: 'archive',
+								campaignName: campaignName,
+								cDataBack: databack,
+								user_id: user_id,
+								refresh_token: refresh_token,
+								profileId: profileId
+							}
+						  });
+						  
+						  //code to make the status toggle button greyed out
+						  //add notif to notify user it went through
+					  }
+				  }
+			  })
+		  }
+				}) //.then
+			} //action
 		}
 	  ],
+	  //TODO: dont make this multi, use row().select() and trigger when row clicked
 	  select: {
           style: 'multi'
         },
@@ -146,7 +281,6 @@ $(document).ready( function () {
       columns: [
 		    { title: "Status", "orderDataType": "dom-text-toggle"},
         { title: "Campaign Name"},
-		    { title: "Status" },
         { title: "Budget", "orderDataType": "dom-text"},
         { title: "Targeting Type" },
         { title: "Impressions" },
@@ -156,6 +290,7 @@ $(document).ready( function () {
         { title: "CPC" },
         { title: "Units Sold" },
         { title: "Sales" },
+		{ title: "CR" },
         { title: "ACoS" }
       ],
 
@@ -197,21 +332,18 @@ $(document).ready( function () {
   }; //campaignOptions
 
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
-	
 	$(".btn-deselect").css("visibility", "hidden");
 	$(".btn-bulk-action").css("visibility", "hidden");
 	
 	//handle select all and deselect all
 	$("body").on("mouseup", function() {
-    var sleep = function (time) {
-      return new Promise( function(resolve){ return setTimeout(resolve, time); } );
-    };
+    
     sleep(50).then(function() {
       var campaignsSelected = dt.rows( '.selected' );
       if (dt.rows( '.selected' ).any()) {
         //$(".btn-scheduler").css("visibility", "visible");
         $(".btn-deselect").css("visibility", "visible");
-		$(".btn-bulk-action").css("visibility", "visible");
+		    $(".btn-bulk-action").css("visibility", "visible");
 
         if (campaignsSelected[0].length === 1) {
           $("#info_selected").text(campaignsSelected[0].length + " campaign selected");
@@ -221,7 +353,7 @@ $(document).ready( function () {
       } else {
         //$(".btn-scheduler").css("visibility", "hidden");
         $(".btn-deselect").css("visibility", "hidden");
-		$(".btn-bulk-action").css("visibility", "hidden");
+		    $(".btn-bulk-action").css("visibility", "hidden");
 
         $("#info_selected").text("");
       }
@@ -231,18 +363,10 @@ $(document).ready( function () {
 	
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
-    $(this).toggleClass('toggle-selected');
     var campaignName = $(this).parent().next().children(".c_link").text();
 
-    console.log(dt.rows('.toggle-selected').data());
-
-    if ($(this).hasClass("off")) {
-      console.log('turning toggle on');
-    } else {
-      console.log('turning toggle off');
-    }
-
     toggleActive = $(this).hasClass("off");
+    (toggleActive) ? $(this).children("input").attr("data-value", 2) : $(this).children("input").attr("data-value", 1);
 
     // Toggle campaign w/ AJAX
     $.ajax({
@@ -258,13 +382,17 @@ $(document).ready( function () {
       },
 
       success: function(alertText) {
-        swal({
-          title: "Success!",
-          text: alertText,
-          type: "success",
-          confirmButtonText: "Close"
+        $.notify({
+          icon: "nc-icon nc-bell-55",
+          message: alertText
+        },{
+          type: 'success',
+          timer: 2000,
+          placement: {
+            from: 'bottom',
+            align: 'right'
+          }
         });
-        $(this).toggleClass('toggle-selected');
       },
       error: function() {
         swal({
@@ -331,15 +459,17 @@ $(document).ready( function () {
 
   //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
+   
 	  currentCampaign     = $(this).html();
 	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
 	  console.log(campaignDataBack);
+	  
 	  dt.destroy();
 	  $('#campaign_manager').empty();
 
 	  // Handle breadcrumbs
 	  $("#bc").html(function(index, currentText) {
-	    return currentText + " <b>></b> " + currentCampaign;
+	    return currentText + " <b>/</b> " + currentCampaign;
 	  });
 
 	  $.ajax({
@@ -354,7 +484,6 @@ $(document).ready( function () {
 	    url: "includes/dashpages/cmanager/helpers/get_adgroups.php",
 
 	    success: function(data){
-	      console.log('running...');
 	      data = JSON.parse(data);
 	      console.log(data);
 
@@ -368,6 +497,141 @@ $(document).ready( function () {
 	      //console.log(adgroupDataBack);
 
 	      adgrOptions = {
+			dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+			buttons: [
+				{
+					extend: 'selectAll',
+					className: 'btn-primary'
+				},
+				{
+					extend: 'selectNone',
+					text: 'Deselect All',
+					className: 'btn-deselect'
+				},
+				{
+					text: 'Bulk Actions',
+					className: 'btn-bulk-action',
+			
+					action: function (e, dt, node, config) {
+						var selectedAdgroups = dt.rows ( '.selected' ).data();
+						var adgroupIndexes = dt.rows('.selected').indexes();
+						var adgroupIdArr = [];
+						// Populate list of campaign ID's
+						for (i = 0; i < selectedAdgroups.length; i++) {
+							console.log(selectedAdgroups[i][1]);
+							var rx         = selectedAdgroups[i][1].match(/id="\d+/g);
+							var adgroupId = rx[0].replace("id=\"", "");
+							adgroupIdArr.push(adgroupId);
+						}
+			  
+						const {value : bulkAction} = swal({
+							title: 'Bulk Actions',
+							input: 'select',
+							inputOptions: {
+								'changeDefaultBid' : 'Change Default Bid',
+								'addKw' : 'Add Keywords',
+								'addNegKw' : 'Add Negative Keywords',
+								'pauseAdgroup' : 'Pause Adgroup(s)',
+								'enableAdgroup' : 'Enable Adgroups(s)',
+								'archiveAdgroup' : 'Archive Adgroups(s)'
+							},
+							inputPlaceholder: 'Select a bulk action',
+							confirmButtonClass: "btn-success",
+							cancelButtonClass: "btn-secondary",
+							confirmButtonColor: '#009925',
+							cancelButtonColor: '#d33',
+							showCancelButton: true,
+							allowOutsideClick: false,
+							allowEnterKey: false,
+							allowEscapeKey: false,
+						})
+						.then(function(result) {
+							if (result.value == 'pauseAdgroup') {
+								for (j = 0; j < selectedAdgroups.length; j++) {
+									if (selectedAdgroups[j][0].includes('data-value="2"')) {
+										var adgroupName = selectedAdgroups[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+										$.ajax({
+											type: "POST",
+											url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
+											data: {
+												toggle: false,
+												adgroupName: adgroupName,
+												adgroupDataBack: databack,
+												user_id: user_id,
+												refresh_token: refresh_token,
+												profileId: profileId
+											},
+										});
+										
+										$($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
+										selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="2"', 'data-value="1"');
+									}
+								}
+							}
+							else if (result.value == 'enableAdgroup') {
+								for (j = 0; j < selectedAdgroups.length; j++) {
+									if (selectedAdgroups[j][0].includes('data-value="1"')) {
+										var adgroupName = selectedAdgroups[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+										$.ajax({
+											type: "POST",
+											url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
+											data: {
+												toggle: true,
+												adgroupName: adgroupName,
+												adgroupDataBack: databack,
+												user_id: user_id,
+												refresh_token: refresh_token,
+												profileId: profileId
+											},
+										});
+								
+										$($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
+										selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="1"', 'data-value="2"');
+									}
+								}
+							}
+							else if (result.value == 'archiveAdgroup') {
+								swal({
+									title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
+									type: 'warning',
+									confirmButtonText: 'Yes!',
+									confirmButtonColor: '#009925',
+									cancelButtonColor: '#d33',
+									showCancelButton: true,
+									allowOutsideClick: false,
+									allowEnterKey: false,
+									allowEscapeKey: false,
+								})
+								.then(function(result) {
+									if (result) {
+										for (x = 0; x < selectedAdgroups.length; x++) {
+											var adgroupName = selectedAdgroups[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+											$.ajax({
+												type: "POST",
+												url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
+												data: {
+													toggle: 'archive',
+													adgroupName: adgroupName,
+													adgroupDataBack: databack,
+													user_id: user_id,
+													refresh_token: refresh_token,
+													profileId: profileId
+												},
+											});
+											
+											//code to make status toggle button greyed out
+											//add notif to notify user it went through
+										}
+									}
+								})
+							}
+						})
+					}
+				}
+			],
+			select: {
+				style: 'multi'
+			},
 	        scrollX: true,
 	        paging: true,
 	        pagingType: "full_numbers",
@@ -379,7 +643,6 @@ $(document).ready( function () {
 	        columns: [
 	          { title: "Active" },
 	          { title: "Ad Group Name" },
-	          { title: "Status" },
 	          { title: "Default Bid" },
 	          { title: "Impressions" },
 	          { title: "Clicks" },
@@ -388,6 +651,7 @@ $(document).ready( function () {
 	          { title: "Avg. CPC" },
 	          { title: "Units Sold" },
 	          { title: "Sales" },
+			  { title: "CR" },
 	          { title: "ACoS" }
 	        ],
 
@@ -395,8 +659,17 @@ $(document).ready( function () {
 	          // Set dataTableFlag to 2 whenever campaign manager is drawn
 	          dataTableFlag = 2;
 
-	          $('td input').bootstrapToggle();
-
+	          $('.toggle-campaign').bootstrapToggle({
+			    on: '<i class="fa fa-play"></i>',
+			    off: '<i class="fa fa-pause"></i>',
+			    size: "small",
+			    onstyle: "success",
+			    offstyle: "primary"
+			  });
+			  $(".toggle-campaign-archive").bootstrapToggle({
+			    off: '',
+			    size: "small"
+			  });
 
 
 	        } // drawCallback
@@ -404,6 +677,8 @@ $(document).ready( function () {
 	      }; // adgrOptions
 
 	      dt = $('#campaign_manager').DataTable(adgrOptions);
+		  $(".btn-deselect").css("visibility", "hidden");
+		  $(".btn-bulk-action").css("visibility", "hidden");
 
 	    }, // success (campaign manager)
 
@@ -423,9 +698,9 @@ $(document).ready( function () {
     $("#campaign_manager").empty();
 
     // Breadcrumb text. Edit later to include links that go back.
-    $("#bc").html(function(index, currentText){
+    $("#bc").html(function(index, currentText) {
       console.log(currentText);
-      return allCampaigns + " <b>></b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>></b> " + adgroupName;
+      return allCampaigns + " <b>/</b> <a href=\"javascript:void(0)\" class=\"name c_link\">" + currentCampaign + "</a>" + " <b>/</b> " + adgroupName;
     });
 
     $.ajax({
@@ -456,6 +731,140 @@ $(document).ready( function () {
         console.log(keywordDataBack);
 
         var kwOptions = {
+		  dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+		  buttons: [
+			{
+				extend: 'selectAll',
+				className: 'btn-primary'
+			},
+			{
+				extend: 'selectNone',
+				text: 'Deselect All',
+				className: 'btn-deselect'
+			},
+			{
+				text: 'Bulk Actions',
+				className: 'btn-bulk-action',
+		
+				action: function (e, dt, node, config) {
+					var selectedKeywords = dt.rows ( '.selected' ).data();
+					var keywordIndexes = dt.rows('.selected').indexes();
+					var keywordIdArr = [];
+					// Populate list of campaign ID's
+					for (i = 0; i < selectedKeywords.length; i++) {
+						console.log(selectedKeywords[i][1]);
+						var rx         = selectedKeywords[i][1].match(/id="\d+/g);
+						var keywordId = rx[0].replace("id=\"", "");
+						keywordIdArr.push(keywordId);
+					}
+			  
+					const {value : bulkAction} = swal({
+						title: 'Bulk Actions',
+						input: 'select',
+						inputOptions: {
+							'addKw' : 'Add Keywords',
+							'addNegKw' : 'Add Negative Keywords',
+							'pauseKeyword' : 'Pause Keyword(s)',
+							'enableKeyword' : 'Enable Keyword(s)',
+							'archiveKeyword' : 'Archive Keyword(s)'
+						},
+						inputPlaceholder: 'Select a bulk action',
+						confirmButtonClass: "btn-success",
+						cancelButtonClass: "btn-secondary",
+						confirmButtonColor: '#009925',
+						cancelButtonColor: '#d33',
+						showCancelButton: true,
+						allowOutsideClick: false,
+						allowEnterKey: false,
+						allowEscapeKey: false,
+					})
+					.then(function(result) {
+						if (result.value == 'pauseKeyword') {
+							for (j = 0; j < selectedKeywords.length; j++) {
+								if (selectedKeywords[j][0].includes('data-value="2"')) {
+									var keywordName = selectedKeywords[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+									$.ajax({
+										type: "POST",
+										url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
+										data: {
+											toggle: false,
+											keywordName: keywordName,
+											keywordDataBack: keywordDataBack,
+											user_id: user_id,
+											refresh_token: refresh_token,
+											profileId: profileId
+										},
+									});
+									
+									$($(dt.row(keywordIndexes[j]).node()).find("div")[0]).click();
+									selectedKeywords[j][0] = selectedKeywords[j][0].replace('data-value="2"', 'data-value="1"');
+								}
+							}
+						}
+						else if (result.value == 'enableKeyword') {
+							for (j = 0; j < selectedKeywords.length; j++) {
+								if (selectedKeywords[j][0].includes('data-value="1"')) {
+									var keywordName = selectedKeywords[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+									$.ajax({
+										type: "POST",
+										url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
+										data: {
+											toggle: true,
+											keywordName: keywordName,
+											keywordDataBack: keywordDataBack,
+											user_id: user_id,
+											refresh_token: refresh_token,
+											profileId: profileId
+										},
+									});
+							
+									$($(dt.row(keywordIndexes[j]).node()).find("div")[0]).click();
+									selectedKeywords[j][0] = selectedKeywords[j][0].replace('data-value="1"', 'data-value="2"');
+								}
+							}
+						}
+						else if (result.value == 'archiveKeyword') {
+						  swal({
+							  title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
+							  type: 'warning',
+							  confirmButtonText: 'Yes!',
+							  confirmButtonColor: '#009925',
+							  cancelButtonColor: '#d33',
+							  showCancelButton: true,
+							  allowOutsideClick: false,
+							  allowEnterKey: false,
+							  allowEscapeKey: false,
+						  })
+						  .then(function(result) {
+							  if (result) {
+								  for (x = 0; x < selectedKeywords.length; x++) {
+									  var keywordName = selectedKeywords[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+									  $.ajax({
+										type: "POST",
+										url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
+										data: {
+											toggle: 'archive',
+											keywordName: keywordName,
+											keywordDataBack: keywordDataBack,
+											user_id: user_id,
+											refresh_token: refresh_token,
+											profileId: profileId
+										}
+									  });
+									
+									//code to make status toggle button greyed out
+									//add notif to notify user it went through
+								  }
+							  }
+						  })
+		  }
+					})
+				}
+			}
+		  ],
+		  select: {
+			  style: "multi"
+		  },
           scrollX: true,
           paging: true,
           pagingType: "full_numbers",
@@ -468,7 +877,6 @@ $(document).ready( function () {
             { title: "Active" },
             { title: "Keyword" },
             { title: "Match Type" },
-            { title: "Status" },
             { title: "Bid" },
             { title: "Impressions" },
             { title: "Clicks" },
@@ -477,6 +885,7 @@ $(document).ready( function () {
             { title: "Avg. CPC" },
             { title: "Units Sold" },
             { title: "Sales" },
+			{ title: "CR" },
             { title: "ACoS" }
           ],
 
@@ -484,8 +893,18 @@ $(document).ready( function () {
             // Set dataTableFlag to 1 whenever campaign manager is drawn
             dataTableFlag = 3;
 
-            $('td input').bootstrapToggle();
-
+            $('.toggle-campaign').bootstrapToggle({
+			    on: '<i class="fa fa-play"></i>',
+			    off: '<i class="fa fa-pause"></i>',
+			    size: "small",
+			    onstyle: "success",
+			    offstyle: "primary"
+			  });
+			  $(".toggle-campaign-archive").bootstrapToggle({
+			    off: '',
+			    size: "small"
+			  });
+			  
           } // drawCallback (keyword manager)
         }; // kwOptions
 
@@ -731,3 +1150,23 @@ $(document).ready( function () {
 }); //document.ready
 
 </script>
+
+<div class="modal fade" id="c_addNegKw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

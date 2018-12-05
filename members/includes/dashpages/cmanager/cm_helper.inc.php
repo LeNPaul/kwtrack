@@ -48,13 +48,13 @@ function cmGetCampaignData($pdo, $user_id) {
 
   for ($i = 0; $i < count($result); $i++) {
 
-  	if ($result[$i]['status'] == 'enabled') {
+  	/*if ($result[$i]['status'] == 'enabled') {
   		$active = 0;
   	} else if ($result[$i]['status'] == 'paused') {
   		$active = 1;
   	} else {
   		$active = 2;
-  	}
+  	}*/
 
     $adSpendArray     = unserialize($result[$i]['ad_spend']);
     $salesArray       = unserialize($result[$i]['sales']);
@@ -81,6 +81,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $ctr         = ($ctr == 0) ? '-' : $ctr . '%';
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
+	$conversion  = ($clicks == 0) ? '-' : round(($units_sold / $clicks) * 100, 2) . '%';
 
     $campaignLink = '<a href="javascript:void(0)" class="name c_link" id="' . $result[$i]['amz_campaign_id'] . '">' . $result[$i]['campaign_name'] . '</a>';
     $budget =  '<div class="input-group cm-input-group">
@@ -117,7 +118,6 @@ function cmGetCampaignData($pdo, $user_id) {
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $campaignLink,
-	    $result[$i]['status'],
       $budget,
       $result[$i]['targeting_type'],
       $impressions,
@@ -127,6 +127,7 @@ function cmGetCampaignData($pdo, $user_id) {
       $avg_cpc,
       $units_sold,
       $sales,
+	  $conversion,
       $acos
     );
 
@@ -180,9 +181,10 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $ctr         = ($ctr == 0) ? '-' : $ctr . '%';
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
-
-    $adgroupLink = '<a href="javascript:void(0)" class="name ag_link">' . $result[$i]['ad_group_name'] . '</a>';
-
+//<a href="javascript:void(0)" class="name c_link" id="' . $result[$i]['amz_campaign_id'] . '">' . $result[$i]['campaign_name'] . '</a>';
+    $adgroupLink = '<a href="javascript:void(0)" class="name ag_link" id="' . $result[$i]['amz_adgroup_id'] . '">' . $result[$i]['ad_group_name'] . '</a>';
+	$conversion  = ($clicks == 0) ? '-' : round(($units_sold / $clicks) * 100, 2) . '%';
+	
     $rawAdgroupData[] = array(
       cmCheckboxState($result[$i]['status']),
       $adgroupLink,
@@ -200,7 +202,6 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $adgroupLink,
-	    $result[$i]['status'],
       $result[$i]['default_bid'],
       $impressions,
       $clicks,
@@ -209,7 +210,8 @@ function cmGetAdGroupData($pdo, $campaignId) {
       $avg_cpc,
       $units_sold,
       $sales,
-      $acos
+	  $conversion,
+	  $acos
     );
 
     $adgroups[htmlspecialchars($result[$i]['ad_group_name'])] = $result[$i]['amz_adgroup_id'];
@@ -252,13 +254,13 @@ function cmGetKeywordData($pdo, $adgroupId) {
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
     $bid         = '$' . round($result[$i]['bid'], 2);
-    $kwText      = '<b class="name">' . $result[$i]['keyword_text'] . "</b>";
+    $kwText      = '<b class="name" id="' . $result[$i]['amz_kw_id'] . '">' . $result[$i]['keyword_text'] . "</b>";
+	$conversion  = ($clicks == 0) ? '-' : round(($units_sold / $clicks) * 100, 2) . '%';
 
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $kwText,
       $result[$i]['match_type'],
-	    $result[$i]['status'],
       $bid,
       $impressions,
       $clicks,
@@ -267,6 +269,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
       $avg_cpc,
       $units_sold,
       $sales,
+	  $conversion,
       $acos
     );
 

@@ -1,14 +1,14 @@
 <?php
 namespace AmazonAdvertisingApi;
+use PDO;
 require_once '../../../AmazonAdvertisingApi/Client.php';
 include '../../../../database/pdo.inc.php';
-use PDO;
 
 $user_id          = $_POST['user_id'];
 $toggle           = $_POST['toggle'];
-$campaignName     = htmlspecialchars($_POST['campaignName']);
-$campaignDataBack = $_POST['cDataBack'];
-$campaignId       = $campaignDataBack[$campaignName];
+$keywordName      = htmlspecialchars($_POST['keywordName']);
+$keywordDataBack  = $_POST['keywordDataBack'];
+$keywordId        = $keywordDataBack[$keywordName];
 $refresh_token    = $_POST['refresh_token'];
 $profileId        = $_POST['profileId'];
 
@@ -23,44 +23,44 @@ $client = new Client($config);
 $client->profileId = $profileId;
 
 if ($toggle == 'true') {
-  $client->updateCampaigns(array(
-    array("campaignId" => $campaignId,
-          "state"      => 'enabled')
+  $client->updateBiddableKeywords(array(
+    array("keywordId" => $keywordId,
+      "state"      => 'enabled')
   ));
   
-  $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
+  $sql = "UPDATE ppc_keywords SET status=:state WHERE amz_kw_id=:kwid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
     ":state"  => 'enabled',
-    ":cid"    => $campaignId
+    ":kwid"    => $keywordId
   ));
-  $alertText = htmlspecialchars_decode($campaignName) . " has been enabled.";
+  $alertText = htmlspecialchars_decode($keywordName) . " has been enabled.";
 } else if ($toggle == 'false') {
-  $client->updateCampaigns(array(
-    array("campaignId" => $campaignId,
-          "state"      => 'paused')
+  $client->updateBiddableKeywords(array(
+    array("keywordId" => $keywordId,
+      "state"      => 'paused')
   ));
   
-  $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
+  $sql = "UPDATE ppc_keywords SET status=:state WHERE amz_kw_id=:kwid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
     ":state"  => 'paused',
-    ":cid"    => $campaignId
+    ":kwid"    => $keywordId
   ));
-  $alertText = htmlspecialchars_decode($campaignName) . " has been paused.";
+  $alertText = htmlspecialchars_decode($keywordName) . " has been paused.";
 } else {
-  $client->updateCampaigns(array(
-    array("campaignId" => $campaignId,
+  $client->updateBiddableKeywords(array(
+    array("keywordId" => $keywordId,
 		  "state"	   => 'archived')
   ));
   
-  $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
+  $sql = "UPDATE ppc_keywords SET status=:state WHERE amz_kw_id=:kwid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
     ":state"  => 'archived',
-	":cid"	  => $campaignId
+	":kwid"	  => $keywordId
   ));
-  $alertText = htmlspecialchars_decode($campaignName) . " has been archived.";
+  $alertText = htmlspecialchars_decode($keywordName) . " has been archived.";
 }
 
 echo $alertText;

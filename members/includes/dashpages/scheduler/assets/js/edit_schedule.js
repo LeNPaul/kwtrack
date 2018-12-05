@@ -38,6 +38,43 @@ if (getCookie("l_cid") === 0) window.location.href = 'dashboard?p=as';
 
 $(function() {
 
+  // Select all days for time when clicked
+  $(".time").on("click", function() {
+    var timeID = $(this).attr("id");
+    // day, time
+
+    // Get all checkboxes
+    checkboxes = $("input[type=checkbox]");
+
+    // Iterate thru each checkbox and filter the specified checkboxes with the proper time value
+    for (i = 0; i < checkboxes.length; i++) {
+      var currentTimeID = $(checkboxes[i]).attr("id").split(",")[1];
+      var checkbox      = $(checkboxes[i]);
+
+      if (currentTimeID == timeID) {
+        checkbox.prop("checked", !checkbox.prop("checked"));
+      }
+    }
+  });
+
+  // Select all times for day when clicked
+  $(".dayOfWeek").on("click", function() {
+    var dayID = $(this).attr("id");
+
+    // Get all checkboxes
+    checkboxes = $("input[type=checkbox]");
+
+    // Iterate thru each checkbox and filter the specified checkboxes with the proper time value
+    for (i = 0; i < checkboxes.length; i++) {
+      var currentDayID = $(checkboxes[i]).attr("id").split(",")[0];
+      var checkbox     = $(checkboxes[i]);
+
+      if (currentDayID == dayID) {
+        checkbox.prop("checked", !checkbox.prop("checked"));
+      }
+    }
+  });
+
   $("#ad_schedule").on("click", function() {
     var selectedCheckboxes = $('input[type=checkbox]:checkbox:checked');
 
@@ -61,7 +98,6 @@ $(function() {
      url: "includes/dashpages/scheduler/assets/api/__save_sched.php",
      data: { s:o, c:l_cid },
      success: function(data) {
-       console.log(data);
        eraseCookie("l_cid");
 
        swal({
@@ -69,9 +105,11 @@ $(function() {
          text: 'All schedules updated for the selected campaigns.',
          type: 'success',
          showCancelButton: false,
-         confirmButtonClass: "btn-success"
+         confirmButtonClass: "btn-success",
+         allowOutsideClick: false
        })
        .then(function(result) {
+         window.location.href = 'dashboard?p=as';
          if (result.value) {
            window.location.href = 'dashboard?p=as';
          }

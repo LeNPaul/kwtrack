@@ -47,9 +47,17 @@ $(function(){
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",
                 cancelButtonClass: "btn-secondary",
+<<<<<<< HEAD
         				allowOutsideClick: false,
         				allowEnterKey: false,
         				allowEscapeKey: false
+=======
+				confirmButtonColor: '#009925',
+				cancelButtonColor: '#d33',
+				allowOutsideClick: false,
+				allowEnterKey: false,
+				allowEscapeKey: false
+>>>>>>> 740cd26d2684576d632e1223b96b83964f1d9132
               })
               .then(function(result) {
                 if (result.value) {

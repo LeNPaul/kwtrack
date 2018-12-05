@@ -7,7 +7,7 @@
     var newx;
     var start = moment().subtract(59, 'days');
     var end   = moment();
-    
+
     function cb(begin, finish) {
 	  chartUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
       $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
@@ -167,23 +167,22 @@
             var titleLines = tooltipModel.title || [];
             var bodyLines = tooltipModel.body.map(getBody);
 
-            var innerHtml = '<thead id="tooltip_title">';
-
+            // Set the tooltip table header
+            var innerHtml = '<table>';
             titleLines.forEach(function(title) {
-                innerHtml += '<tr><th>Stats on ' + title + '</th></tr>';
+                innerHtml += '<th id="tooltip_title">Stats on ' + title + '</th>';
             });
-            innerHtml += '</thead><tbody>';
+            innerHtml += '</tr></thead>';
 
+            // Set the tooltip table body
             bodyLines.forEach(function(body, i) {
               var colors = tooltipModel.labelColors[i];
-              var style = 'background:' + colors.backgroundColor;
-              style += '; border-color: #cccccc';
-              style += '; border-width: 2px';
-              var span = '<span style="' + style + '"></span>';
-              // Set body line text
-              innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + body + '</p></td></tr><hr />';
+  	          // Split the body into two table elements
+	            var splitBody = body[0].split(": ");
+              innerHtml += '<tbody><tr id="tooltip_row"><td style="color:' + colors.backgroundColor + '">' + splitBody[0] + '</td><td>$' + splitBody[1] + '</td></tr>';
             });
-            innerHtml += '</tbody>';
+            // Style for the table is inline for now, will change this to better practice later
+            innerHtml += '</tbody></table><style>#tooltip_title{padding-bottom:.5rem}tr#tooltip_row>td{padding-top:1em}</style>';
 
             var tableRoot = tooltipEl.querySelector('table');
             tableRoot.innerHTML = innerHtml;
@@ -196,7 +195,7 @@
 
           // console.log(parseInt(current) + ' - ' + chartWidth);
           // console.log(current - chartWidth);
-          
+
           var newPos = !1;
 
           // Styles, display, position, and set styles for font
@@ -207,7 +206,7 @@
             newPos = position.left + window.pageXOffset + tooltipModel.caretX + 95;
             tooltipEl.style.left = newPos + 'px';
           }
-          
+
           console.log(position);
           tooltipEl.style.border = '1px rgba(85, 85, 85, 0.4) solid';
           tooltipEl.style.borderRadius = '5px';
