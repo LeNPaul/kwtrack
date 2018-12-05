@@ -1,7 +1,7 @@
 <?php
 namespace AmazonAdvertisingApi;
 include 'pdo.inc.php';
-include dirname(__FILE__) . '/../includes/AmazonAdvertisingApi/Client.php';
+require_once dirname(__FILE__) . '/../includes/AmazonAdvertisingApi/Client.php';
 use PDO;
 
 function newAdClient(&$client, $refreshToken, $profileId) {
@@ -22,13 +22,13 @@ function toggleCampaign(&$client, &$fp, $state, $uid, $campaignList, $currentHou
       "campaignId" => (float)$campaignList[$i]['amz_campaign_id'],
       "state"      => $state
     )));
-  
+
   $log =
     ($r['code'] != 207)
       ? "------ Error occurred for campaign (ID: {$campaignList[$i]['amz_campaign_id']})" . "\n"
       . "    |________ Error Response: " . $r['response'] . "\n"
       : "-- Client instantiated for user {$uid} Campaign (ID {$campaignList[$i]['amz_campaign_id']}) successfully {$state} at {$currentHour}:00 on day #{$currentDay}" . "\n";
-  
+
   fwrite($fp, $log);
 }
 
@@ -45,7 +45,7 @@ $fp          = fopen('scheduler_log', 'w');
    *  Get all campaigns w/ schedules
    *      [  [ c_id, [ schedule ] ]  ]
    * */
-  
+
   $sql          = "SELECT user_id, amz_campaign_id, schedule FROM campaigns WHERE schedule <> '0' ORDER BY user_id ASC;";
   $stmt         = $pdo->query($sql);
   $campaignList = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -63,38 +63,38 @@ $old_uid = null;
 for ($i = 0;  $i < count($campaignList); $i++) {
   $uid = $campaignList[$i]['user_id'];
   if ($uid === $old_uid) {
-  
+
     if ($campaignList[$i]['schedule'][$currentDay][$currentHour] === 0) {
       toggleCampaign($client, $fp, 'paused', $uid, $campaignList, $currentHour, $currentDay, $i);
     } else {
       toggleCampaign($client, $fp, 'enabled', $uid, $campaignList, $currentHour, $currentDay, $i);
     }
-  
+
   } else {
     $old_uid = $uid;
-    
+
     // Get profile ID & refresh token so we can instantiate the client later
     $sql      = "SELECT refresh_token, profileId FROM users WHERE user_id={$uid}";
     $stmt     = $pdo->query($sql);
     $userInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $pid      = $userInfo[0]['profileId'];
     $rt       = $userInfo[0]['refresh_token'];
-    
+
     try {
       // Instantiate client for advertising API
       newAdClient($client, $rt, $pid);
-  
+
       if ($campaignList[$i]['schedule'][$currentDay][$currentHour] === 0) {
         toggleCampaign($client, $fp, 'paused', $uid, $campaignList, $currentHour, $currentDay, $i);
       } else {
         toggleCampaign($client, $fp, 'enabled', $uid, $campaignList, $currentHour, $currentDay, $i);
       }
-      
+
     } catch (\Exception $e) {
-      echo "Message: " . $e->getMessage() . '<br>';
-      echo 'Error on line ' . $e->getLine() . '<br>';
-      echo 'In file: ' . $e->getFile() . '<br>';
-      echo 'Trace: ' . $e->getTrace();
+      echo "<b>Message: </b>" . $e->getMessage() . '<br>';
+      echo '<b>Error on line </b>' . $e->getLine() . '<br>';
+      echo '<b>In file: </b>' . $e->getFile() . '<br>';
+      echo '<b>Trace: </b>' . $e->getTrace();
     }
   }
 }

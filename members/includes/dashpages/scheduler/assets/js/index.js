@@ -47,9 +47,9 @@ $(function(){
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",
                 cancelButtonClass: "btn-secondary",
-				allowOutsideClick: false,
-				allowEnterKey: false,
-				allowEscapeKey: false
+        				allowOutsideClick: false,
+        				allowEnterKey: false,
+        				allowEscapeKey: false
               })
               .then(function(result) {
                 if (result.value) {
