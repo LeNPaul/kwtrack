@@ -7,7 +7,7 @@
     var newx;
     var start = moment().subtract(59, 'days');
     var end   = moment();
-    
+
     function cb(begin, finish) {
 	  chartUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
       $('#reportrange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
@@ -167,12 +167,13 @@
             var titleLines = tooltipModel.title || [];
             var bodyLines = tooltipModel.body.map(getBody);
 
-            var innerHtml = '<thead id="tooltip_title">';
+            // The old CSS ID is tooltip_title
+            var innerHtml = '<table id=""><tr>';
 
             titleLines.forEach(function(title) {
-                innerHtml += '<tr><th>Stats on ' + title + '</th></tr>';
+                innerHtml += '<th>Stats on ' + title + '</th>';
             });
-            innerHtml += '</thead><tbody>';
+            innerHtml += '</tr>';
 
             bodyLines.forEach(function(body, i) {
               var colors = tooltipModel.labelColors[i];
@@ -180,10 +181,10 @@
               style += '; border-color: #cccccc';
               style += '; border-width: 2px';
               var span = '<span style="' + style + '"></span>';
-	      
-	      // Split the body into two table elements
-	      var splitBody = body[0].split(": ");
-              
+
+  	        // Split the body into two table elements
+	          var splitBody = body[0].split(": ");
+
 	      innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + splitBody[0] + '</p></td></tr>';
             });
             innerHtml += '</tbody>';
@@ -199,7 +200,7 @@
 
           // console.log(parseInt(current) + ' - ' + chartWidth);
           // console.log(current - chartWidth);
-          
+
           var newPos = !1;
 
           // Styles, display, position, and set styles for font
@@ -210,7 +211,7 @@
             newPos = position.left + window.pageXOffset + tooltipModel.caretX + 95;
             tooltipEl.style.left = newPos + 'px';
           }
-          
+
           console.log(position);
           tooltipEl.style.border = '1px rgba(85, 85, 85, 0.4) solid';
           tooltipEl.style.borderRadius = '5px';
