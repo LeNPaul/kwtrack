@@ -81,6 +81,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $ctr         = ($ctr == 0) ? '-' : $ctr . '%';
     $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
+	$conversion  = ($clicks == 0) ? '-' : round(($units_sold / $clicks) * 100, 2) . '%';
 
     $campaignLink = '<a href="javascript:void(0)" class="name c_link" id="' . $result[$i]['amz_campaign_id'] . '">' . $result[$i]['campaign_name'] . '</a>';
     $budget =  '<div class="input-group cm-input-group">
@@ -126,6 +127,7 @@ function cmGetCampaignData($pdo, $user_id) {
       $avg_cpc,
       $units_sold,
       $sales,
+	  $conversion,
       $acos
     );
 
@@ -181,7 +183,8 @@ function cmGetAdGroupData($pdo, $campaignId) {
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
 //<a href="javascript:void(0)" class="name c_link" id="' . $result[$i]['amz_campaign_id'] . '">' . $result[$i]['campaign_name'] . '</a>';
     $adgroupLink = '<a href="javascript:void(0)" class="name ag_link" id="' . $result[$i]['amz_adgroup_id'] . '">' . $result[$i]['ad_group_name'] . '</a>';
-
+	$conversion  = ($clicks == 0) ? '-' : round(($units_sold / $clicks) * 100, 2) . '%';
+	
     $rawAdgroupData[] = array(
       cmCheckboxState($result[$i]['status']),
       $adgroupLink,
@@ -207,7 +210,8 @@ function cmGetAdGroupData($pdo, $campaignId) {
       $avg_cpc,
       $units_sold,
       $sales,
-      $acos
+	  $conversion,
+	  $acos
     );
 
     $adgroups[htmlspecialchars($result[$i]['ad_group_name'])] = $result[$i]['amz_adgroup_id'];
@@ -251,6 +255,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
     $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
     $bid         = '$' . round($result[$i]['bid'], 2);
     $kwText      = '<b class="name" id="' . $result[$i]['amz_kw_id'] . '">' . $result[$i]['keyword_text'] . "</b>";
+	$conversion  = ($clicks == 0) ? '-' : round(($units_sold / $clicks) * 100, 2) . '%';
 
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
@@ -264,6 +269,7 @@ function cmGetKeywordData($pdo, $adgroupId) {
       $avg_cpc,
       $units_sold,
       $sales,
+	  $conversion,
       $acos
     );
 

@@ -251,6 +251,7 @@ $(document).ready( function () {
         { title: "CPC" },
         { title: "Units Sold" },
         { title: "Sales" },
+		{ title: "CR" },
         { title: "ACoS" }
       ],
 
@@ -583,6 +584,7 @@ $(document).ready( function () {
 	          { title: "Avg. CPC" },
 	          { title: "Units Sold" },
 	          { title: "Sales" },
+			  { title: "CR" },
 	          { title: "ACoS" }
 	        ],
 
@@ -779,6 +781,7 @@ $(document).ready( function () {
             { title: "Avg. CPC" },
             { title: "Units Sold" },
             { title: "Sales" },
+			{ title: "CR" },
             { title: "ACoS" }
           ],
 
