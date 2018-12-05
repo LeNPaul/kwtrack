@@ -183,7 +183,7 @@
               var span = '<span style="' + style + '"></span>';
   	          // Split the body into two table elements
 	            var splitBody = body[0].split(": ");
-              innerHtml += '<tbody><tr id="tooltip_row"><td>' + splitBody[0] + '</td><td>$' + splitBody[1] + '</td></tr>'
+              innerHtml += '<tbody><tr id="tooltip_row"><td style="color:' + colors.backgroundColor + '">' + splitBody[0] + '</td><td>$' + splitBody[1] + '</td></tr>'
               //innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + splitBody[0] + '</p></td></tr>';
             });
             // Style for the table is inline for now, will change this to better practice later
