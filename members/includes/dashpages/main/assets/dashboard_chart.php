@@ -180,8 +180,11 @@
               style += '; border-color: #cccccc';
               style += '; border-width: 2px';
               var span = '<span style="' + style + '"></span>';
-              // Set body line text
-              innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + body + '</p></td></tr>';
+	      
+	      // Split the body into two table elements
+	      var splitBody = body[0].split(": ");
+              
+	      innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + splitBody[0] + '</p></td></tr>';
             });
             innerHtml += '</tbody>';
 
