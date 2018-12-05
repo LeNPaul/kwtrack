@@ -168,7 +168,7 @@
             var bodyLines = tooltipModel.body.map(getBody);
 
             // Set the tooltip table header
-            var innerHtml = '<table id="tooltip_title"><thead><tr>';
+            var innerHtml = '<table>';
             titleLines.forEach(function(title) {
                 innerHtml += '<th id="tooltip_title">Stats on ' + title + '</th>';
             });
@@ -186,7 +186,8 @@
               innerHtml += '<tbody><tr id="tooltip_row"><td>' + splitBody[0] + '</td><td>$' + splitBody[1] + '</td></tr>'
               //innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + splitBody[0] + '</p></td></tr>';
             });
-            innerHtml += '</tbody></table>';
+            // Style for the table is inline for now, will change this to better practice later
+            innerHtml += '</tbody></table><style>#tooltip_title{padding-bottom:.5rem}tr#tooltip_row>td{padding-top:1em}</style>';
 
             var tableRoot = tooltipEl.querySelector('table');
             tableRoot.innerHTML = innerHtml;
