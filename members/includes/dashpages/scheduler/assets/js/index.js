@@ -47,6 +47,8 @@ $(function(){
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",
                 cancelButtonClass: "btn-secondary",
+				confirmButtonColor: '#009925',
+				cancelButtonColor: '#d33',
 				allowOutsideClick: false,
 				allowEnterKey: false,
 				allowEscapeKey: false

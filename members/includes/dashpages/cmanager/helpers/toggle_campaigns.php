@@ -27,6 +27,7 @@ if ($toggle == 'true') {
     array("campaignId" => $campaignId,
           "state"      => 'enabled')
   ));
+  
   $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
@@ -34,11 +35,12 @@ if ($toggle == 'true') {
     ":cid"    => $campaignId
   ));
   $alertText = htmlspecialchars_decode($campaignName) . " has been enabled.";
-} else {
+} else if ($toggle == 'false') {
   $client->updateCampaigns(array(
     array("campaignId" => $campaignId,
           "state"      => 'paused')
   ));
+  
   $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
@@ -46,6 +48,19 @@ if ($toggle == 'true') {
     ":cid"    => $campaignId
   ));
   $alertText = htmlspecialchars_decode($campaignName) . " has been paused.";
+} else {
+  $client->updateCampaigns(array(
+    array("campaignId" => $campaignId,
+		  "state"	   => 'archived')
+  ));
+  
+  $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ":state"  => 'archived',
+	":cid"	  => $campaignId
+  ));
+  $alertText = htmlspecialchars_decode($campaignName) . " has been archived.";
 }
 
 echo $alertText;

@@ -124,6 +124,8 @@ $(document).ready( function () {
 				  inputPlaceholder: 'Select a bulk action',
 				  confirmButtonClass: "btn-success",
                   cancelButtonClass: "btn-secondary",
+				  confirmButtonColor: '#009925',
+				  cancelButtonColor: '#d33',
 				  showCancelButton: true,
 				  allowOutsideClick: false,
 				  allowEnterKey: false,
@@ -145,7 +147,7 @@ $(document).ready( function () {
 										user_id: user_id,
 										refresh_token: refresh_token,
 										profileId: profileId
-									},
+									}
 								});
 
 								console.log(selectedCampaigns[j]);
@@ -174,7 +176,7 @@ $(document).ready( function () {
 										user_id: user_id,
 										refresh_token: refresh_token,
 										profileId: profileId
-									},
+									}
 								});
 								
 								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
@@ -214,8 +216,45 @@ $(document).ready( function () {
               
             }
           }
-				})
-			}
+		  
+		  else if (result.value == 'archiveCampaign') {
+			  swal({
+				  title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
+				  type: 'warning',
+				  confirmButtonText: 'Yes!',
+				  confirmButtonColor: '#009925',
+				  cancelButtonColor: '#d33',
+				  showCancelButton: true,
+				  allowOutsideClick: false,
+				  allowEnterKey: false,
+				  allowEscapeKey: false,
+			  })
+			  .then(function(result) {
+				  if (result) {
+					  for (x = 0; x < selectedCampaigns.length; x++) {
+						  var campaignName = selectedCampaigns[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+								
+						  $.ajax({
+							type: "POST",
+							url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+							data: {
+								toggle: 'archive',
+								campaignName: campaignName,
+								cDataBack: databack,
+								user_id: user_id,
+								refresh_token: refresh_token,
+								profileId: profileId
+							}
+						  });
+						  
+						  //code to make the status toggle button greyed out
+						  //add notif to notify user it went through
+					  }
+				  }
+			  })
+		  }
+				}) //.then
+			} //action
 		}
 	  ],
 	  //TODO: dont make this multi, use row().select() and trigger when row clicked
@@ -324,16 +363,7 @@ $(document).ready( function () {
 	
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
-    //$(this).toggleClass('off');
     var campaignName = $(this).parent().next().children(".c_link").text();
-
-    //console.log(dt.rows('.toggle-selected').data());
-
-    /*if ($(this).hasClass("off")) {
-      console.log('turning toggle on');
-    } else {
-      console.log('turning toggle off');
-    }*/
 
     toggleActive = $(this).hasClass("off");
     (toggleActive) ? $(this).children("input").attr("data-value", 2) : $(this).children("input").attr("data-value", 1);
@@ -508,6 +538,8 @@ $(document).ready( function () {
 							inputPlaceholder: 'Select a bulk action',
 							confirmButtonClass: "btn-success",
 							cancelButtonClass: "btn-secondary",
+							confirmButtonColor: '#009925',
+							cancelButtonColor: '#d33',
 							showCancelButton: true,
 							allowOutsideClick: false,
 							allowEnterKey: false,
@@ -557,6 +589,41 @@ $(document).ready( function () {
 										selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="1"', 'data-value="2"');
 									}
 								}
+							}
+							else if (result.value == 'archiveAdgroup') {
+								swal({
+									title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
+									type: 'warning',
+									confirmButtonText: 'Yes!',
+									confirmButtonColor: '#009925',
+									cancelButtonColor: '#d33',
+									showCancelButton: true,
+									allowOutsideClick: false,
+									allowEnterKey: false,
+									allowEscapeKey: false,
+								})
+								.then(function(result) {
+									if (result) {
+										for (x = 0; x < selectedAdgroups.length; x++) {
+											var adgroupName = selectedAdgroups[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+											$.ajax({
+												type: "POST",
+												url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
+												data: {
+													toggle: 'archive',
+													adgroupName: adgroupName,
+													adgroupDataBack: databack,
+													user_id: user_id,
+													refresh_token: refresh_token,
+													profileId: profileId
+												},
+											});
+											
+											//code to make status toggle button greyed out
+											//add notif to notify user it went through
+										}
+									}
+								})
 							}
 						})
 					}
@@ -704,6 +771,8 @@ $(document).ready( function () {
 						inputPlaceholder: 'Select a bulk action',
 						confirmButtonClass: "btn-success",
 						cancelButtonClass: "btn-secondary",
+						confirmButtonColor: '#009925',
+						cancelButtonColor: '#d33',
 						showCancelButton: true,
 						allowOutsideClick: false,
 						allowEnterKey: false,
@@ -754,6 +823,41 @@ $(document).ready( function () {
 								}
 							}
 						}
+						else if (result.value == 'archiveKeyword') {
+						  swal({
+							  title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
+							  type: 'warning',
+							  confirmButtonText: 'Yes!',
+							  confirmButtonColor: '#009925',
+							  cancelButtonColor: '#d33',
+							  showCancelButton: true,
+							  allowOutsideClick: false,
+							  allowEnterKey: false,
+							  allowEscapeKey: false,
+						  })
+						  .then(function(result) {
+							  if (result) {
+								  for (x = 0; x < selectedKeywords.length; x++) {
+									  var keywordName = selectedKeywords[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+									  $.ajax({
+										type: "POST",
+										url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
+										data: {
+											toggle: 'archive',
+											keywordName: keywordName,
+											keywordDataBack: keywordDataBack,
+											user_id: user_id,
+											refresh_token: refresh_token,
+											profileId: profileId
+										}
+									  });
+									
+									//code to make status toggle button greyed out
+									//add notif to notify user it went through
+								  }
+							  }
+						  })
+		  }
 					})
 				}
 			}

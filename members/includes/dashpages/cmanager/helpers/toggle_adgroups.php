@@ -1,7 +1,6 @@
 <?php
 namespace AmazonAdvertisingApi;
 use PDO;
-
 require_once '../../../AmazonAdvertisingApi/Client.php';
 include '../../../../database/pdo.inc.php';
 
@@ -29,26 +28,39 @@ if ($toggle == 'true') {
       "state"      => 'enabled')
   ));
   
-  $sql = "UPDATE ad_groups SET status=:state WHERE amz_campaign_id=:agid";
+  $sql = "UPDATE ad_groups SET status=:state WHERE amz_adgroup_id=:agid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
     ":state"  => 'enabled',
     ":agid"    => $adgroupId
   ));
   $alertText = htmlspecialchars_decode($adgroupName) . " has been enabled.";
-} else {
+} else if ($toggle == 'false') {
   $client->updateAdGroups(array(
     array("adGroupId" => $adgroupId,
       "state"      => 'paused')
   ));
   
-  $sql = "UPDATE ad_groups SET status=:state WHERE amz_campaign_id=:agid";
+  $sql = "UPDATE ad_groups SET status=:state WHERE amz_adgroup_id=:agid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
     ":state"  => 'paused',
     ":agid"    => $adgroupId
   ));
   $alertText = htmlspecialchars_decode($adgroupName) . " has been paused.";
+} else {
+  $client->updateAdGroups(array(
+    array("adGroupId" => $adGroupId,
+		  "state"	   => 'archived')
+  ));
+  
+  $sql = "UPDATE ad_groups SET status=:state WHERE amz_adgroup_id=:agid";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ":state"  => 'archived',
+	":agid"	  => $adgroupId
+  ));
+  $alertText = htmlspecialchars_decode($adgroupName) . " has been archived.";
 }
 
 echo $alertText;
