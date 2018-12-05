@@ -167,27 +167,26 @@
             var titleLines = tooltipModel.title || [];
             var bodyLines = tooltipModel.body.map(getBody);
 
-            // The old CSS ID is tooltip_title
+            // Set the tooltip table header; the old CSS ID is tooltip_title
             var innerHtml = '<table id=""><tr>';
-
             titleLines.forEach(function(title) {
                 innerHtml += '<th>Stats on ' + title + '</th>';
             });
             innerHtml += '</tr>';
 
+            // Set the tooltip table body
             bodyLines.forEach(function(body, i) {
               var colors = tooltipModel.labelColors[i];
               var style = 'background:' + colors.backgroundColor;
               style += '; border-color: #cccccc';
               style += '; border-width: 2px';
               var span = '<span style="' + style + '"></span>';
-
-  	        // Split the body into two table elements
-	          var splitBody = body[0].split(": ");
-
-	      innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + splitBody[0] + '</p></td></tr>';
+  	          // Split the body into two table elements
+	            var splitBody = body[0].split(": ");
+              innerHtml += '<tr><td>' + splitBody[0] + '</td><td>' + splitBody[1] + '</td></tr>'
+              //innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + splitBody[0] + '</p></td></tr>';
             });
-            innerHtml += '</tbody>';
+            innerHtml += '</table>';
 
             var tableRoot = tooltipEl.querySelector('table');
             tableRoot.innerHTML = innerHtml;
