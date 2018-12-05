@@ -541,7 +541,7 @@ $(document).ready( function () {
 										var adgroupName = selectedAdgroups[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
 										$.ajax({
 											type: "POST",
-											url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+											url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
 											data: {
 												toggle: true,
 												adgroupName: adgroupName,
@@ -673,7 +673,92 @@ $(document).ready( function () {
 				text: 'Deselect All',
 				className: 'btn-deselect'
 			},
+			{
+				text: 'Bulk Actions',
+				className: 'btn-bulk-action',
+		
+				action: function (e, dt, node, config) {
+					var selectedKeywords = dt.rows ( '.selected' ).data();
+					var keywordIndexes = dt.rows('.selected').indexes();
+					var keywordIdArr = [];
+					// Populate list of campaign ID's
+					for (i = 0; i < selectedKeywords.length; i++) {
+						console.log(selectedKeywords[i][1]);
+						var rx         = selectedKeywords[i][1].match(/id="\d+/g);
+						var keywordId = rx[0].replace("id=\"", "");
+						keywordIdArr.push(keywordId);
+					}
+			  
+					const {value : bulkAction} = swal({
+						title: 'Bulk Actions',
+						input: 'select',
+						inputOptions: {
+							'addKw' : 'Add Keywords',
+							'addNegKw' : 'Add Negative Keywords',
+							'pauseKeyword' : 'Pause Keyword(s)',
+							'enableKeyword' : 'Enable Keyword(s)',
+							'archiveKeyword' : 'Archive Keyword(s)'
+						},
+						inputPlaceholder: 'Select a bulk action',
+						confirmButtonClass: "btn-success",
+						cancelButtonClass: "btn-secondary",
+						showCancelButton: true,
+						allowOutsideClick: false,
+						allowEnterKey: false,
+						allowEscapeKey: false,
+					})
+					.then(function(result) {
+						if (result.value == 'pauseKeyword') {
+							for (j = 0; j < selectedKeywords.length; j++) {
+								if (selectedKeywords[j][0].includes('data-value="2"')) {
+									var keywordName = selectedKeywords[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+									$.ajax({
+										type: "POST",
+										url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
+										data: {
+											toggle: false,
+											keywordName: keywordName,
+											keywordDataBack: keywordDataBack,
+											user_id: user_id,
+											refresh_token: refresh_token,
+											profileId: profileId
+										},
+									});
+									
+									$($(dt.row(keywordIndexes[j]).node()).find("div")[0]).click();
+									selectedKeywords[j][0] = selectedKeywords[j][0].replace('data-value="2"', 'data-value="1"');
+								}
+							}
+						}
+						else if (result.value == 'enableKeyword') {
+							for (j = 0; j < selectedKeywords.length; j++) {
+								if (selectedKeywords[j][0].includes('data-value="1"')) {
+									var keywordName = selectedKeywords[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+									$.ajax({
+										type: "POST",
+										url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
+										data: {
+											toggle: true,
+											keywordName: keywordName,
+											keywordDataBack: keywordDataBack,
+											user_id: user_id,
+											refresh_token: refresh_token,
+											profileId: profileId
+										},
+									});
+							
+									$($(dt.row(keywordIndexes[j]).node()).find("div")[0]).click();
+									selectedKeywords[j][0] = selectedKeywords[j][0].replace('data-value="1"', 'data-value="2"');
+								}
+							}
+						}
+					})
+				}
+			}
 		  ],
+		  select: {
+			  style: "multi"
+		  },
           scrollX: true,
           paging: true,
           pagingType: "full_numbers",

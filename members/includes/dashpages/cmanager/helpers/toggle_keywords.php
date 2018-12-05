@@ -8,7 +8,7 @@ include '../../../../database/pdo.inc.php';
 $user_id          = $_POST['user_id'];
 $toggle           = $_POST['toggle'];
 $keywordName      = htmlspecialchars($_POST['keywordName']);
-$keywordDataBack  = $_POST['adgroupDataBack'];
+$keywordDataBack  = $_POST['keywordDataBack'];
 $keywordId        = $keywordDataBack[$keywordName];
 $refresh_token    = $_POST['refresh_token'];
 $profileId        = $_POST['profileId'];
