@@ -183,7 +183,7 @@
               var span = '<span style="' + style + '"></span>';
   	          // Split the body into two table elements
 	            var splitBody = body[0].split(": ");
-              innerHtml += '<tr><td>' + splitBody[0] + '</td><td>' + splitBody[1] + '</td></tr>'
+              innerHtml += '<tr><td>' + splitBody[0] + '</td><td>$' + splitBody[1] + '</td></tr>'
               //innerHtml += '<tr><td>' + span + '<p class="tt_bodyText" style="color:' + colors.backgroundColor + '">' + splitBody[0] + '</p></td></tr>';
             });
             innerHtml += '</table>';
