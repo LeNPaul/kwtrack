@@ -248,7 +248,6 @@ $(document).ready( function () {
 						  });
 						  
 						  //code to make the status toggle button greyed out
-						  $($(dt.row(campaignIndexes[x]).node()).find("div")[0]).attr('disabled', 'disabled');
 						  //add notif to notify user it went through
 					  }
 				  }
@@ -763,8 +762,7 @@ $(document).ready( function () {
 						title: 'Bulk Actions',
 						input: 'select',
 						inputOptions: {
-							'addKw' : 'Add Keywords',
-							'addNegKw' : 'Add Negative Keywords',
+							'changeBid' : 'Change Bid',
 							'pauseKeyword' : 'Pause Keyword(s)',
 							'enableKeyword' : 'Enable Keyword(s)',
 							'archiveKeyword' : 'Archive Keyword(s)'
