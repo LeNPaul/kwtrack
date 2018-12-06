@@ -50,10 +50,12 @@ for ($j = 1; $j < 60; $j++) {
 
 <script>
 // 1 for campaign, 2 for adgroup(need campaign), 3 for keyword(need adgroup maybe)
-var dataTableFlag = 1;
+var dataTableFlag 	= 1;
 var currentCampaign = "";
-var adGroupName = "";
-var allCampaigns = "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
+var adGroupName 		= "";
+var allCampaigns 		= "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
+
+
 var sleep = function (time) {
   return new Promise( function(resolve){ return setTimeout(resolve, time); } );
 };
@@ -97,6 +99,14 @@ $(document).ready( function () {
         var selectedCampaigns = dt.rows('.selected').data();
         var campaignIndexes   = dt.rows('.selected').indexes();
         var campaignIdArr     = [];
+				var c_list 						= [];
+
+				// Populate list of campaign names
+				for (i = 0; i < selectedCampaigns.length; i++) {
+					c_list.push(selectedCampaigns[i][1].match(/(?<=\>)(.*)(?=\<)/)[0]);
+				}
+
+				console.log(c_list);
 
         console.log("SELECTED CAMPAIGNS:", selectedCampaigns);
 
@@ -187,17 +197,24 @@ $(document).ready( function () {
 					}
 
 					else if (result.value == 'addNegKw') {
-            $('#c_addNegKw').modal('show');
+            $('#c_addNegKw').modal({
+							backdrop: 'static',
+							keyboard: false
+						});
 
-					  for (i = 0; i < selectedCampaigns.length; i++) {
-              var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+						$("#c_addNegKw_submit").on("click", function() {
+							// TODO: Format negKeywordList as specified in bulk_add_neg_keywords.php comments
+							//    	 from textarea input.
 
-              $.ajax({
+							//var negKeywordList =
+
+
+							$.ajax({
                 type: "POST",
                 url: "includes/dashpages/cmanager/helpers/bulk_add_neg_keywords.php",
 
                 data: {
-                  campaignName: campaignName,
+                  campaignList: c_list,
                   cDataBack: databack,
                   user_id: user_id,
                   refresh_token: refresh_token,
@@ -213,8 +230,7 @@ $(document).ready( function () {
 
                 }
               });
-
-            }
+						});
           }
 
 		  else if (result.value == 'archiveCampaign') {
@@ -235,16 +251,16 @@ $(document).ready( function () {
 						  var campaignName = selectedCampaigns[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
 
 						  $.ajax({
-							type: "POST",
-							url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
-							data: {
-								toggle: 'archive',
-								campaignName: campaignName,
-								cDataBack: databack,
-								user_id: user_id,
-								refresh_token: refresh_token,
-								profileId: profileId
-							}
+								type: "POST",
+								url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+								data: {
+									toggle: 'archive',
+									campaignName: campaignName,
+									cDataBack: databack,
+									user_id: user_id,
+									refresh_token: refresh_token,
+									profileId: profileId
+								}
 						  });
 
 						  //code to make the status toggle button greyed out
@@ -1159,14 +1175,21 @@ $(document).ready( function () {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Negative Keywords</h5>
       </div>
       <div class="modal-body">
-        ...
+				<label for="c_addNegKw_matchType">Match Type</label>
+				<select class="form-control" id="c_addNegKw_matchType">
+		      <option>Negative Exact</option>
+		      <option>Negative Phrase</option>
+		    </select>
+				<hr />
+				<label for="c_addnegKw_text">Negative Keyword List</label>
+        <textarea class="form-control neg_kw" id="c_addnegKw_text" placeholder="Enter negative keywords separated by a new line" rows="15"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id="c_addNegKw_submit" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

@@ -44,7 +44,7 @@ $user_id = $_SESSION['user_id'];
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!--  <link href="assets/demo/demo.css" rel="stylesheet" />-->
 
-  <link href="node_modules/flag-icon-cssassets/docs.css" rel="stylesheet">
+  <link href="node_modules/flag-icon-css/assets/docs.css" rel="stylesheet">
   <link href="node_modules/flag-icon-css/css/flag-icon.css" rel="stylesheet">
 
   <!--  Datatables CSS Files -->
