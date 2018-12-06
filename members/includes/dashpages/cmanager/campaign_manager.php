@@ -248,6 +248,7 @@ $(document).ready( function () {
 						  });
 
 						  //code to make the status toggle button greyed out
+						  $($(dt.row(campaignIndexes[x]).node()).find("div")[0]).attr('disabled', 'disabled');
 						  //add notif to notify user it went through
 					  }
 				  }
