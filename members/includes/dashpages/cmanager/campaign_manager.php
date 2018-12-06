@@ -105,7 +105,6 @@ $(document).ready( function () {
 				for (i = 0; i < selectedCampaigns.length; i++) {
 					c_list.push(selectedCampaigns[i][1].match(/(?<=\>)(.*)(?=\<)/)[0]);
 				}
-
 				console.log(c_list);
 
         console.log("SELECTED CAMPAIGNS:", selectedCampaigns);
