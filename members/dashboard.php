@@ -26,6 +26,7 @@ $user_id = $_SESSION['user_id'];
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
   <title>
     PPCOLOGY
   </title>
@@ -43,7 +44,7 @@ $user_id = $_SESSION['user_id'];
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!--  <link href="assets/demo/demo.css" rel="stylesheet" />-->
 
-  <link href="node_modules/flag-icon-css/assets/docs.css" rel="stylesheet">
+  <link href="node_modules/flag-icon-cssassets/docs.css" rel="stylesheet">
   <link href="node_modules/flag-icon-css/css/flag-icon.css" rel="stylesheet">
 
   <!--  Datatables CSS Files -->

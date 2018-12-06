@@ -31,7 +31,7 @@ $(function(){
               var campaignIdArr = [];
               // Populate list of campaign ID's
               for (i = 0; i < selectedCampaigns.length; i++) {
-                var rx         = selectedCampaigns[i][1].match(/id="\d+/g);
+                var rx         = selectedCampaigns[i][2].match(/id="\d+/g);
                 var campaignId = rx[0].replace("id=\"", "");
                 campaignIdArr.push(campaignId);
               }
@@ -47,17 +47,11 @@ $(function(){
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",
                 cancelButtonClass: "btn-secondary",
-<<<<<<< HEAD
+        				confirmButtonColor: '#009925',
+        				cancelButtonColor: '#d33',
         				allowOutsideClick: false,
         				allowEnterKey: false,
         				allowEscapeKey: false
-=======
-				confirmButtonColor: '#009925',
-				cancelButtonColor: '#d33',
-				allowOutsideClick: false,
-				allowEnterKey: false,
-				allowEscapeKey: false
->>>>>>> 740cd26d2684576d632e1223b96b83964f1d9132
               })
               .then(function(result) {
                 if (result.value) {
@@ -88,8 +82,9 @@ $(function(){
           ],
         data: JSON.parse(campaignList),
         columns: [
-          { title: "Campaign Name"},
-          { title: "Scheduled", width: 100}
+          { title: "Campaign Name" },
+          { title: "Status", width: 100 },
+          { title: "Scheduled", width: 100 }
         ]
       };
 
