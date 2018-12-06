@@ -27,7 +27,7 @@ if ($toggle == 'true') {
     array("campaignId" => $campaignId,
           "state"      => 'enabled')
   ));
-  
+
   $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
@@ -40,7 +40,7 @@ if ($toggle == 'true') {
     array("campaignId" => $campaignId,
           "state"      => 'paused')
   ));
-  
+
   $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(
@@ -53,7 +53,7 @@ if ($toggle == 'true') {
     array("campaignId" => $campaignId,
 		  "state"	   => 'archived')
   ));
-  
+
   $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:cid";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(

@@ -50,10 +50,12 @@ for ($j = 1; $j < 60; $j++) {
 
 <script>
 // 1 for campaign, 2 for adgroup(need campaign), 3 for keyword(need adgroup maybe)
-var dataTableFlag = 1;
+var dataTableFlag 	= 1;
 var currentCampaign = "";
-var adGroupName = "";
-var allCampaigns = "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
+var adGroupName 		= "";
+var allCampaigns 		= "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
+
+
 var sleep = function (time) {
   return new Promise( function(resolve){ return setTimeout(resolve, time); } );
 };
@@ -70,7 +72,7 @@ $(document).ready( function () {
   var keywordDataset = null;
   var keywordDataBack = null;
   var adgrOptions = null;
-  
+
   //var dt  = $('#campaign_manager').DataTable(
   var campaignOptions =
   {
@@ -91,15 +93,22 @@ $(document).ready( function () {
 		{
 			text: 'Bulk Actions',
 			className: 'btn-bulk-action',
-			
+
 			action: function (e, dt, node, config) {
 				//1 = paused, 2 = enable
         var selectedCampaigns = dt.rows('.selected').data();
         var campaignIndexes   = dt.rows('.selected').indexes();
         var campaignIdArr     = [];
-        
+				var c_list 						= [];
+
+				// Populate list of campaign names
+				for (i = 0; i < selectedCampaigns.length; i++) {
+					c_list.push(selectedCampaigns[i][1].match(/(?<=\>)(.*)(?=\<)/)[0]);
+				}
+				console.log(c_list);
+
         console.log("SELECTED CAMPAIGNS:", selectedCampaigns);
-        
+
 			  console.log(selectedCampaigns[0][0]);
 			  console.log(selectedCampaigns[0][0].includes('data-value="2"'));
               // Populate list of campaign ID's
@@ -108,7 +117,7 @@ $(document).ready( function () {
                 var campaignId = rx[0].replace("id=\"", "");
                 campaignIdArr.push(campaignId);
               }
-			  
+
 			  const {value : bulkAction} = swal({
 				  title: 'Bulk Actions',
 				  input: 'select',
@@ -136,7 +145,7 @@ $(document).ready( function () {
 						for (j = 0; j < selectedCampaigns.length; j++) {
 							if (selectedCampaigns[j][0].includes('data-value="2"')) {
 								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-								
+
 								$.ajax({
 									type: "POST",
 									url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
@@ -160,10 +169,10 @@ $(document).ready( function () {
 							}
 						}
 					}
-					
+
 					else if (result.value == 'enableCampaign') {
 						for (j = 0; j < selectedCampaigns.length; j++) {
-							
+
 						  if (selectedCampaigns[j][0].includes('data-value="1"')) {
 								var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
 								$.ajax({
@@ -178,45 +187,51 @@ $(document).ready( function () {
 										profileId: profileId
 									}
 								});
-								
+
 								$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
 								selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="1"', 'data-value="2"');
 							}
-							
+
 						}
 					}
-					
+
 					else if (result.value == 'addNegKw') {
-            $('#c_addNegKw').modal('show');
-            
-					  for (i = 0; i < selectedCampaigns.length; i++) {
-              var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-              
-              $.ajax({
+            $('#c_addNegKw').modal({
+							backdrop: 'static',
+							keyboard: false
+						});
+
+						$("#c_addNegKw_submit").on("click", function() {
+							// TODO: Format negKeywordList as specified in bulk_add_neg_keywords.php comments
+							//    	 from textarea input.
+
+							//var negKeywordList =
+
+
+							$.ajax({
                 type: "POST",
                 url: "includes/dashpages/cmanager/helpers/bulk_add_neg_keywords.php",
-                
+
                 data: {
-                  campaignName: campaignName,
+                  campaignList: c_list,
                   cDataBack: databack,
                   user_id: user_id,
                   refresh_token: refresh_token,
                   profileId: profileId,
                   negKeywordList: negKeywordList
                 },
-                
+
                 success: function(data) {
-                
+
                 },
-                
+
                 error: function(data) {
-                
+
                 }
               });
-              
-            }
+						});
           }
-		  
+
 		  else if (result.value == 'archiveCampaign') {
 			  swal({
 				  title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
@@ -233,20 +248,20 @@ $(document).ready( function () {
 				  if (result) {
 					  for (x = 0; x < selectedCampaigns.length; x++) {
 						  var campaignName = selectedCampaigns[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-								
+
 						  $.ajax({
-							type: "POST",
-							url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
-							data: {
-								toggle: 'archive',
-								campaignName: campaignName,
-								cDataBack: databack,
-								user_id: user_id,
-								refresh_token: refresh_token,
-								profileId: profileId
-							}
+								type: "POST",
+								url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+								data: {
+									toggle: 'archive',
+									campaignName: campaignName,
+									cDataBack: databack,
+									user_id: user_id,
+									refresh_token: refresh_token,
+									profileId: profileId
+								}
 						  });
-						  
+
 						  //code to make the status toggle button greyed out
 						  //add notif to notify user it went through
 					  }
@@ -297,7 +312,7 @@ $(document).ready( function () {
 	  drawCallback: function(settings) {
       // Set dataTableFlag to 1 whenever campaign manager is drawn
         dataTableFlag = 1;
-		
+
 				// Handle and style toggle buttons
 			  $('.toggle-campaign').bootstrapToggle({
 			    on: '<i class="fa fa-play"></i>',
@@ -334,10 +349,10 @@ $(document).ready( function () {
 	var dt  = $('#campaign_manager').DataTable(campaignOptions);
 	$(".btn-deselect").css("visibility", "hidden");
 	$(".btn-bulk-action").css("visibility", "hidden");
-	
+
 	//handle select all and deselect all
 	$("body").on("mouseup", function() {
-    
+
     sleep(50).then(function() {
       var campaignsSelected = dt.rows( '.selected' );
       if (dt.rows( '.selected' ).any()) {
@@ -360,7 +375,7 @@ $(document).ready( function () {
     });
 
   });
-	
+
   // Status toggles
   $("#campaign_manager").on("click", ".toggle", function() {
     var campaignName = $(this).parent().next().children(".c_link").text();
@@ -459,11 +474,11 @@ $(document).ready( function () {
 
   //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
-   
+
 	  currentCampaign     = $(this).html();
 	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
 	  console.log(campaignDataBack);
-	  
+
 	  dt.destroy();
 	  $('#campaign_manager').empty();
 
@@ -511,7 +526,7 @@ $(document).ready( function () {
 				{
 					text: 'Bulk Actions',
 					className: 'btn-bulk-action',
-			
+
 					action: function (e, dt, node, config) {
 						var selectedAdgroups = dt.rows ( '.selected' ).data();
 						var adgroupIndexes = dt.rows('.selected').indexes();
@@ -523,7 +538,7 @@ $(document).ready( function () {
 							var adgroupId = rx[0].replace("id=\"", "");
 							adgroupIdArr.push(adgroupId);
 						}
-			  
+
 						const {value : bulkAction} = swal({
 							title: 'Bulk Actions',
 							input: 'select',
@@ -562,7 +577,7 @@ $(document).ready( function () {
 												profileId: profileId
 											},
 										});
-										
+
 										$($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
 										selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="2"', 'data-value="1"');
 									}
@@ -584,7 +599,7 @@ $(document).ready( function () {
 												profileId: profileId
 											},
 										});
-								
+
 										$($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
 										selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="1"', 'data-value="2"');
 									}
@@ -618,7 +633,7 @@ $(document).ready( function () {
 													profileId: profileId
 												},
 											});
-											
+
 											//code to make status toggle button greyed out
 											//add notif to notify user it went through
 										}
@@ -745,7 +760,7 @@ $(document).ready( function () {
 			{
 				text: 'Bulk Actions',
 				className: 'btn-bulk-action',
-		
+
 				action: function (e, dt, node, config) {
 					var selectedKeywords = dt.rows ( '.selected' ).data();
 					var keywordIndexes = dt.rows('.selected').indexes();
@@ -757,7 +772,7 @@ $(document).ready( function () {
 						var keywordId = rx[0].replace("id=\"", "");
 						keywordIdArr.push(keywordId);
 					}
-			  
+
 					const {value : bulkAction} = swal({
 						title: 'Bulk Actions',
 						input: 'select',
@@ -794,7 +809,7 @@ $(document).ready( function () {
 											profileId: profileId
 										},
 									});
-									
+
 									$($(dt.row(keywordIndexes[j]).node()).find("div")[0]).click();
 									selectedKeywords[j][0] = selectedKeywords[j][0].replace('data-value="2"', 'data-value="1"');
 								}
@@ -816,7 +831,7 @@ $(document).ready( function () {
 											profileId: profileId
 										},
 									});
-							
+
 									$($(dt.row(keywordIndexes[j]).node()).find("div")[0]).click();
 									selectedKeywords[j][0] = selectedKeywords[j][0].replace('data-value="1"', 'data-value="2"');
 								}
@@ -850,7 +865,7 @@ $(document).ready( function () {
 											profileId: profileId
 										}
 									  });
-									
+
 									//code to make status toggle button greyed out
 									//add notif to notify user it went through
 								  }
@@ -903,7 +918,7 @@ $(document).ready( function () {
 			    off: '',
 			    size: "small"
 			  });
-			  
+
           } // drawCallback (keyword manager)
         }; // kwOptions
 
@@ -1157,14 +1172,21 @@ $(document).ready( function () {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Negative Keywords</h5>
       </div>
       <div class="modal-body">
-        ...
+				<label for="c_addNegKw_matchType">Match Type</label>
+				<select class="form-control" id="c_addNegKw_matchType">
+		      <option>Negative Exact</option>
+		      <option>Negative Phrase</option>
+		    </select>
+				<hr />
+				<label for="c_addnegKw_text">Negative Keyword List</label>
+        <textarea class="form-control neg_kw" id="c_addnegKw_text" placeholder="Enter negative keywords separated by a new line" rows="15"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id="c_addNegKw_submit" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

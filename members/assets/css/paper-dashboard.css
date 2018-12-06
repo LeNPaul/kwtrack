@@ -127,6 +127,12 @@ table.dataTable td {
   color: #2c2c2c !important;
 }
 
+.modal-body label { font-weight: bold !important; }
+textarea.neg_kw {
+  padding: 10px !important;
+  max-height: 400px !important;
+}
+
 /*
 ███████  ██████ ██   ██ ███████ ██████  ██    ██ ██      ███████ ██████
 ██      ██      ██   ██ ██      ██   ██ ██    ██ ██      ██      ██   ██
