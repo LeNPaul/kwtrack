@@ -200,10 +200,10 @@
 
           // Styles, display, position, and set styles for font
           if (chartWidth - current < 270) {
-            newPos = position.left + window.pageXOffset + tooltipModel.caretX - 95;
+            newPos = position.left + window.pageXOffset + tooltipModel.caretX - 100;
             tooltipEl.style.left = newPos + 'px';
           } else {
-            newPos = position.left + window.pageXOffset + tooltipModel.caretX + 95;
+            newPos = position.left + window.pageXOffset + tooltipModel.caretX + 100;
             tooltipEl.style.left = newPos + 'px';
           }
 
