@@ -79,7 +79,12 @@ class Client
 
         $response = $this->_executeRequest($request);
 
+        echo '<pre>';
+        var_dump($response);
+        echo '</pre>';
+
         $response_array = json_decode($response["response"], true);
+
         if (array_key_exists("access_token", $response_array)) {
             $this->config["accessToken"] = $response_array["access_token"];
         } else {

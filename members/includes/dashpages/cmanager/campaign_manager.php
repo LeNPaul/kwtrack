@@ -131,10 +131,10 @@ $(document).ready( function () {
 					'changeBudget' : 'Change Budget'
 				  },
 				  inputPlaceholder: 'Select a bulk action',
-				  confirmButtonClass: "btn-success",
-                  cancelButtonClass: "btn-secondary",
-				  confirmButtonColor: '#009925',
-				  cancelButtonColor: '#d33',
+				  confirmButtonClass: "btn-primary",
+          cancelButtonClass: "btn-default",
+				  confirmButtonColor: '#51cbce',
+				  //cancelButtonColor: '#d33',
 				  showCancelButton: true,
 				  allowOutsideClick: false,
 				  allowEnterKey: false,
@@ -204,31 +204,70 @@ $(document).ready( function () {
 						$("#c_addNegKw_submit").on("click", function() {
 							// TODO: Format negKeywordList as specified in bulk_add_neg_keywords.php comments
 							//    	 from textarea input.
+							var isText				 = ($("#c_addnegKw_text").val()) ? true : false;
 
-							//var negKeywordList =
+							if (isText) {
+								var negKeywordList = [];
+								var lines					 = $("#c_addnegKw_text").val().split('\n');
+								var matchType		 	 = $("#c_addNegKw_matchType").val();
 
+								for (i = 0; i < lines.length; i++) {
+									// TODO: Sanitate input with RegEx
+									var arr = {
+										"campaignId"  : null,
+										"keywordText" : lines[i],
+										"matchType"   : matchType,
+										"state"       : "enabled"
+									};
+									negKeywordList.push(arr);
+								}
 
-							$.ajax({
-                type: "POST",
-                url: "includes/dashpages/cmanager/helpers/bulk_add_neg_keywords.php",
+								$.ajax({
+								  type: "POST",
+								  url: "includes/dashpages/cmanager/helpers/bulk_add_neg_keywords.php",
 
-                data: {
-                  campaignList: c_list,
-                  cDataBack: databack,
-                  user_id: user_id,
-                  refresh_token: refresh_token,
-                  profileId: profileId,
-                  negKeywordList: negKeywordList
-                },
+								  data: {
+								    campaignList: c_list,
+								    cDataBack: databack,
+								    user_id: user_id,
+								    refresh_token: refresh_token,
+								    profileId: profileId,
+								    negKeywordList: negKeywordList
+								  },
 
-                success: function(data) {
+								  success: function(data) {
+										console.log(data);
+										$.notify({
+						          icon: "nc-icon nc-bell-55",
+						          message: "Negative keywords have successfully been added to all selected campaigns. Your negative keyword list on PPCOLOGY will update at 1AM tomorrow."
+						        },{
+						          type: 'success',
+						          timer: 2000,
+						          placement: {
+						            from: 'bottom',
+						            align: 'right'
+						          }
+						        });
+								  },
 
-                },
+								  error: function(data) {
 
-                error: function(data) {
+								  }
+								});
+							} else {
+								$.notify({
+				          icon: "nc-icon nc-bell-55",
+				          message: "Please enter your new negative keywords."
+				        },{
+				          type: 'danger',
+				          timer: 2000,
+				          placement: {
+				            from: 'top',
+				            align: 'right'
+				          }
+				        });
+							}
 
-                }
-              });
 						});
           }
 
@@ -1177,8 +1216,8 @@ $(document).ready( function () {
       <div class="modal-body">
 				<label for="c_addNegKw_matchType">Match Type</label>
 				<select class="form-control" id="c_addNegKw_matchType">
-		      <option>Negative Exact</option>
-		      <option>Negative Phrase</option>
+		      <option value="negativeExact">Negative Exact</option>
+		      <option value="negativePhrase">Negative Phrase</option>
 		    </select>
 				<hr />
 				<label for="c_addnegKw_text">Negative Keyword List</label>

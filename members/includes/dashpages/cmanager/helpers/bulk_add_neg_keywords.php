@@ -27,12 +27,12 @@ function fillCampaignID($inputArr, $campaignID) {
  *
  */
 
-$campaignList     = json_decode($_POST['campaignList'], false);
-$campaignDataBack = json_decode($_POST['cDataBack'], true);
+$campaignList     = $_POST['campaignList'];
+$campaignDataBack = $_POST['cDataBack'];
 $user_id          = $_POST['user_id'];
 $refresh_token    = $_POST['refresh_token'];
 $profileId        = $_POST['profileId'];
-$negKeywordList   = $_post['negKwList'];
+$negKeywordList   = $_POST['negKeywordList'];
 
 $config = array(
   "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
@@ -44,8 +44,9 @@ $config = array(
 $client            = new Client($config);
 $client->profileId = $profileId;
 
+
+
 try {
-  $sql = "";
   for ($i = 0; $i < count($campaignList); $i++) {
     $currentCampaignID    = $campaignDataBack[$campaignList[$i]];
     $modifiedCampaignList = fillCampaignID($campaignList, $currentCampaignID);
@@ -60,5 +61,7 @@ try {
 
 
 } catch (\Exception $e) {
-
+  echo "Error:" . $e->getMessage() . "\n"
+      ."Trace: " . $e->getTrace() . "\n"
+      ."On Line: " . $e->getLine() . "\n";
 }
