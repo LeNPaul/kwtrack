@@ -191,7 +191,7 @@
           // `this` will be the overall tooltip
           var position = this._chart.canvas.getBoundingClientRect();
           var chartWidth = $("#lineChart").width();
-          var current = tooltipEl.style.left.replace(/[^\d.]/g, '');
+          var current = tooltipModel.caretX;
 
           // console.log(parseInt(current) + ' - ' + chartWidth);
           // console.log(current - chartWidth);
@@ -199,11 +199,11 @@
           var newPos = !1;
 
           // Styles, display, position, and set styles for font
-          if (current - chartWidth > 100) {
-            newPos = position.left + window.pageXOffset + tooltipModel.caretX - 95;
+          if (chartWidth - current < 270) {
+            newPos = position.left + window.pageXOffset + tooltipModel.caretX - 110;
             tooltipEl.style.left = newPos + 'px';
           } else {
-            newPos = position.left + window.pageXOffset + tooltipModel.caretX + 95;
+            newPos = position.left + window.pageXOffset + tooltipModel.caretX + 110;
             tooltipEl.style.left = newPos + 'px';
           }
 
@@ -218,6 +218,7 @@
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
           tooltipEl.style.padding = '10 px 15px 5px' + '15 px';
           tooltipEl.style.pointerEvents = 'none';
+	  tooltipEl.style.width = '200px';
         },
         mode: 'index',
         intersect: false
