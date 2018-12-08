@@ -191,7 +191,7 @@
           // `this` will be the overall tooltip
           var position = this._chart.canvas.getBoundingClientRect();
           var chartWidth = $("#lineChart").width();
-          var current = tooltipEl.style.left.replace(/[^\d.]/g, '');
+          var current = tooltipModel.caretX;
 
           // console.log(parseInt(current) + ' - ' + chartWidth);
           // console.log(current - chartWidth);
@@ -199,7 +199,7 @@
           var newPos = !1;
 
           // Styles, display, position, and set styles for font
-          if (current - chartWidth > 100) {
+          if (chartWidth - current < 270) {
             newPos = position.left + window.pageXOffset + tooltipModel.caretX - 95;
             tooltipEl.style.left = newPos + 'px';
           } else {
