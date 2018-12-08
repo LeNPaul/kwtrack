@@ -200,10 +200,10 @@
 
           // Styles, display, position, and set styles for font
           if (chartWidth - current < 270) {
-            newPos = position.left + window.pageXOffset + tooltipModel.caretX - 100;
+            newPos = position.left + window.pageXOffset + tooltipModel.caretX - 110;
             tooltipEl.style.left = newPos + 'px';
           } else {
-            newPos = position.left + window.pageXOffset + tooltipModel.caretX + 100;
+            newPos = position.left + window.pageXOffset + tooltipModel.caretX + 110;
             tooltipEl.style.left = newPos + 'px';
           }
 
@@ -218,6 +218,7 @@
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
           tooltipEl.style.padding = '10 px 15px 5px' + '15 px';
           tooltipEl.style.pointerEvents = 'none';
+	  tooltipEl.style.width = '200px';
         },
         mode: 'index',
         intersect: false
