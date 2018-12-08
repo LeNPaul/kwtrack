@@ -208,11 +208,11 @@
           }
 
           console.log(position);
-          tooltipEl.style.border = '1px rgba(85, 85, 85, 0.4) solid';
+          tooltipEl.style.border = '1px rgba(85, 85, 85, 0.15) solid';
           tooltipEl.style.borderRadius = '5px';
           tooltipEl.style.opacity = 1;
           tooltipEl.style.position = 'absolute';
-          tooltipEl.style.top = position.y + 'px';
+          tooltipEl.style.top = position.y + window.scrollY + 45 + 'px';
           tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
           tooltipEl.style.fontSize = '15 px';
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
