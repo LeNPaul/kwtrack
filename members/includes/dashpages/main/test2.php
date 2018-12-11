@@ -35,33 +35,29 @@ $config = array(
 	"clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
 	"refreshToken" => $refreshToken,
 	"region" => "na",
-	"sandbox" => false,
+	"sandbox" => true,
 );
 $client = new Client($config);
-$client->profileId = $profileId;
+$client->profileId = "2120126684554622";
 
-$kwSnapshot = $client->requestSnapshot(
-  "keywords",
-  array(
-    "stateFilter"  => "enabled,paused,archived",
-    "campaignType" => "sponsoredProducts"));
-$snapshotId = json_decode($kwSnapshot['response'], true);
-$snapshotId = $snapshotId['snapshotId'];
+var_dump($client->completeGetReport("amzn1.clicksAPI.v1.m1.5C0F0ADA.115ff67d-d7c3-494d-88a2-78ab943358fd"));
 
-do {
-  $report = $client->getSnapshot($snapshotId);
-  $result2 = json_decode($report['response'], true);
-  if (array_key_exists('status', $result2)) {
-    $status = $result2['status'];
-  } else {
-    $status = 'DONE';
-    $report = $result2;
-  }
-} while ($status == 'IN_PROGRESS');
+$r = $client->listCampaigns();
+var_dump($r);
+$r = json_decode($r["response"], true);
 
-echo '<pre>';
-var_dump($report);
-echo '</pre>';
+var_dump($r);
 
-
+for ($i = 0; $i < count($r); $i++) {
+  $campaignId = $r[$i]["campaignId"];
+  
+  $a = $client->createAdGroups(array(
+    "campaignId" => (float)$campaignId,
+    "name"       => "AdGroup ".$i,
+    "state"      => "enabled",
+    "defaultBid" => 2.0
+  ));
+  
+  var_dump($a);
+}
 ?>

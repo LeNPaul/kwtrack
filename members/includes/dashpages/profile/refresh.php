@@ -7,7 +7,7 @@ require_once '../../AmazonAdvertisingApi/Client.php';
 $curl = curl_init();
 
 // Redirect if someone goes to this link directly
-if (empty($_GET['code']) || !isset($_SESSION['logged_in']) || $_SESSION['active'] > 1) {
+if (/*empty($_GET['code']) ||*/ !isset($_SESSION['logged_in']) || $_SESSION['active'] > 1) {
   $_SESSION['message'] = createAlert('danger', 'An error has occurred. Please try again.');
   header('location: ../../../dashboard.php');
   exit();

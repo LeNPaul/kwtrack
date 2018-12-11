@@ -479,8 +479,7 @@ for ($i = 0; $i < count($userIDs); $i++) {
          ));
 
        } else {
-         echo 'An error has occurred.';
-         die;
+         echo 'Keyword ID was not found in keyword report for user #' . $user_id;
        }
     }
 
