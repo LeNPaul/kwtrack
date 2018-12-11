@@ -77,7 +77,7 @@
       pointBackgroundColor: "rgb(244, 72, 66)",
       hoverBorderWidth: 3,
 
-      borderWidth: 1,
+      borderWidth: 1.5,
       borderColor: "rgba(244, 72, 66, 0.7)",
     }, {
       label: "PPC Sales",
@@ -89,11 +89,11 @@
       hoverRadius: 6,
       pointBorderColor: '#ffffff',
       pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: "rgb(89, 255, 152)",
+      pointBackgroundColor: "rgb(209, 71, 133)",
       hoverBorderWidth: 3,
 
-      borderWidth: 2,
-      borderColor: "rgb(89, 255, 152)"
+      borderWidth: 1.5,
+      borderColor: "rgb(209, 71, 133)"
     }, {
       label: "PPC ACoS",
       yAxisID: 'B',
@@ -107,8 +107,9 @@
       pointBackgroundColor: "rgb(114, 187, 255)",
       hoverBorderWidth: 3,
 
-      borderWidth: 1.4,
-      borderColor: "#d14785"
+      borderWidth: 1.5,
+      borderColor: "rgb(114, 187, 255)"
+      //borderColor: "#d14785"
     }]
   };
 
