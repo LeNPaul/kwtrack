@@ -74,11 +74,11 @@
       hoverRadius: 6,
       pointBorderColor: '#ffffff',
       pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: "rgb(244, 72, 66)",
+      pointBackgroundColor: "#df6e21",
       hoverBorderWidth: 3,
 
       borderWidth: 1.5,
-      borderColor: "rgba(244, 72, 66, 0.7)",
+      borderColor: "#df6e21",
     }, {
       label: "PPC Sales",
       yAxisID: 'A',
@@ -89,11 +89,11 @@
       hoverRadius: 6,
       pointBorderColor: '#ffffff',
       pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: "rgb(209, 71, 133)",
+      pointBackgroundColor: "#be70c0",
       hoverBorderWidth: 3,
 
       borderWidth: 1.5,
-      borderColor: "rgb(209, 71, 133)"
+      borderColor: "#be70c0"
     }, {
       label: "PPC ACoS",
       yAxisID: 'B',
@@ -104,11 +104,11 @@
       hoverRadius: 6,
       pointBorderColor: '#ffffff',
       pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: "rgb(114, 187, 255)",
+      pointBackgroundColor: "#2096BA",
       hoverBorderWidth: 3,
 
       borderWidth: 1.5,
-      borderColor: "rgb(114, 187, 255)"
+      borderColor: "#2096BA"
       //borderColor: "#d14785"
     }]
   };
@@ -336,3 +336,4 @@
   });*/
 
 </script>
+
