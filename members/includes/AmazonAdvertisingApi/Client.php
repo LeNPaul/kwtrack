@@ -136,6 +136,7 @@ class Client
           "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered7d,attributedSales7d"
         )
       );
+      
   
       // Get the report id so we can use it to get the report
       $result         = json_decode($result['response'], true);
