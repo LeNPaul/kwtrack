@@ -54,8 +54,8 @@
         ctx.beginPath();
         ctx.moveTo(x, axisAtopY);
         ctx.lineTo(x, axisAbottomY);
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#07C';
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#828282';
         ctx.stroke();
         ctx.restore();
       }
