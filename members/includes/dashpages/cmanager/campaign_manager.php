@@ -30,23 +30,62 @@ for ($j = 1; $j < 60; $j++) {
 ?>
 
 <h2 class="text-center">Campaign Manager</h2>
-<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
-  <i class="fa fa-calendar"></i>
-  <span></span> <i class="fa fa-caret-down"></i>
-</div><br>
 
-<nav aria-label="breadcrumb" role="navigation">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="all_link">All Campaigns</a></h6></li>
-  </ol>
-</nav>
+<!-- Top nav bar for adgroups + keywords -->
+<ul class="nav nav-pills nav-pills-primary nav-pills-icons justify-content-center" id="cmanager_top_nav" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active show" data-toggle="tab" href="#adgroups" role="tablist">
+      <i class="now-ui-icons objects_umbrella-13"></i>Ad Groups
+    </a>
+  </li>
 
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#negKeywords" role="tablist">
+      <i class="now-ui-icons shopping_shop"></i> Negative Keywords
+    </a>
+  </li>
+</ul>
 
-<div class="row">
-  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-    <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
+<!--  Top nav bar contents for each tab -->
+<div class="tab-content tab-space tab-subcategories">
+  <div class="tab-pane active show" id="adgroups">
+
+		<div class="row">
+			<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
+				<i class="fa fa-calendar"></i>
+				<span></span> <i class="fa fa-caret-down"></i>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<nav aria-label="breadcrumb" id="cmanager_breadcrumbs" role="navigation">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="all_link">All Campaigns</a></h6></li>
+				</ol>
+			</nav>
+		</div>
+
+		<div class="row">
+		  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+		    <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
+		  </div>
+		</div>
+
   </div>
+
+  <div class="tab-pane" id="negKeywords">
+    Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
+    <br>
+    <br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
+  </div>
+
+
 </div>
+
+
+
+
+
 
 <script>
 // 1 for campaign, 2 for adgroup(need campaign), 3 for keyword(need adgroup maybe)
@@ -79,7 +118,7 @@ $(document).ready( function () {
       // buttons: ['copy'],
       // responsive: true,
       // autoWidth: true,
-	  dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+	  dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
 	  buttons: [
 		{
 			extend: 'selectAll',

@@ -80,11 +80,11 @@ try {
   $result = json_decode($result['response'], true);
 
 // Iterate through all ad groups and insert them into database
-  
+
   $sql = "INSERT INTO ad_groups (amz_adgroup_id, ad_group_name, amz_campaign_id, status, user_id, default_bid)
 				VALUES (:amz_adgroup_id, :ad_group_name, :amz_campaign_id, :status, :user_id, :default_bid)";
   $stmt = $pdo->prepare($sql);
-  
+
   for ($i = 0; $i < count($result); $i++) {
     $stmt->execute(array(
       ':amz_adgroup_id'		=> $result[$i]['adGroupId'],
@@ -101,7 +101,7 @@ try {
   $sql = "SELECT amz_adgroup_id FROM ad_groups WHERE user_id=$user_id";
   $stmt = $pdo->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-  
+
   for ($i = 0; $i < count($result); $i++) {
     importAdGroupMetrics($pdo, $result[$i], 59, $client);
   }
@@ -132,11 +132,11 @@ try {
   $result = json_decode($result['response'], true);
 
 // Iterate through all ad groups and insert them into database
-  
+
   $sql = "INSERT INTO campaigns (campaign_name, amz_campaign_id, user_id, campaign_type, targeting_type, status, daily_budget)
 				VALUES (:camapign_name, :amz_campaign_id, :user_id, :campaign_type, :targeting_type, :status, :daily_budget)";
   $stmt = $pdo->prepare($sql);
-  
+
   for ($i = 0; $i < count($result); $i++) {
     $targetingType = ($result[$i]['targetingType'] == 'manual') ? 'Manual' : 'Automatic';
     $stmt->execute(array(
@@ -154,7 +154,7 @@ try {
   $sql = "SELECT amz_campaign_id FROM campaigns WHERE user_id=$user_id";
   $stmt = $pdo->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-  
+
   for ($i = 0; $i < count($result); $i++) {
     importCampaignMetrics($pdo, $result[$i], 59);
   }
@@ -238,4 +238,3 @@ for ($i = 0; $i < count($result); $i++) {
 $sql = "UPDATE users SET active=4 WHERE user_id=:user_id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array(':user_id' => $user_id));
-

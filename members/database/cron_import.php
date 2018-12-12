@@ -638,7 +638,7 @@ for ($i = 0; $i < count($userIDs); $i++){
 	  $campaignDiff = fast_array_diff($reportCampaignIDs, $dbCampaignIDs);
 
     if (!empty($campaignDiff)) {
-      $sql = "INSERT INTO campaigns (campaign_name,amz_campaign_id,campaign_type,targeting_type,daily_budget,status) VALUES (:campaign_name,:amz_campaign_id,:campaign_type,:targeting_type,:daily_budget,:status";
+      $sql = "INSERT INTO campaigns (campaign_name,amz_campaign_id,campaign_type,targeting_type,daily_budget,status) VALUES (:campaign_name,:amz_campaign_id,:campaign_type,:targeting_type,:daily_budget,:status)";
       $stmt = $pdo->prepare($sql);
 
       //for each diff, find index of extra campaigns in the report. report[diff]

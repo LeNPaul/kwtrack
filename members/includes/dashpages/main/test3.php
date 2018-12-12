@@ -1,9 +1,11 @@
-#!/usr/bin/env php
 <?php
 require '../../../database/pdo.inc.php';
 
-$schedJSON = array_fill(0, 7, array_fill(0, 24, 0));
-echo '<pre>';
-var_dump($schedJSON);
-echo '</pre>';
+if  (in_array  ('curl', get_loaded_extensions())) {
+
+        echo "CURL is available on your web server";
+
+    }  else {
+        echo "CURL is not available on your web server";
+    }
 ?>

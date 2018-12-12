@@ -50,14 +50,14 @@ var_dump($r);
 
 for ($i = 0; $i < count($r); $i++) {
   $campaignId = $r[$i]["campaignId"];
-  
+
   $a = $client->createAdGroups(array(
     "campaignId" => (float)$campaignId,
     "name"       => "AdGroup ".$i,
     "state"      => "enabled",
     "defaultBid" => 2.0
   ));
-  
+
   var_dump($a);
 }
 ?>

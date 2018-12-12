@@ -23,7 +23,7 @@ class Client
     private $requestId = null;
     private $endpoints = null;
     private $versionStrings = null;
-    
+
     private $snapshotId = null;
     private $reportId   = null;
 
@@ -92,7 +92,7 @@ class Client
 
         return $response;
     }
-    
+
     public function completeGetReport()
     {
       do {
@@ -108,7 +108,7 @@ class Client
       $this->reportId = null;
       return $report;
     }
-    
+
     public function completeGetSnapshot()
     {
       do {
@@ -124,7 +124,7 @@ class Client
       $this->snapshotId = null;
       return $report;
     }
-    
+
     public function completeRequestReport($date)
     {
       echo "DATE VARIABE: " . $date;
@@ -136,13 +136,13 @@ class Client
           "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered7d,attributedSales7d"
         )
       );
-      
-  
+
+
       // Get the report id so we can use it to get the report
       $result         = json_decode($result['response'], true);
       $this->reportId = $result['reportId'];
     }
-    
+
     public function completeRequestSnapshot($type)
     {
       $kwSnapshot = $this->requestSnapshot(
