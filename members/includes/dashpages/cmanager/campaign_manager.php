@@ -1094,6 +1094,7 @@ $(document).ready( function () {
       var avgCpcSumAvg   = 0;
       var unitsSoldSum   = 0;
       var salesSum       = 0;
+	  var conversionRate = 0;
 
       for (j = 0; j < dtData.length; j++) {
 
@@ -1115,6 +1116,7 @@ $(document).ready( function () {
         salesSum     = round(salesSum, 2);
         ctrAvg       = round(ctrAvg / diffOfDays, 2);
         avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
+		conversionRate = (clicksSum === 0) ? '-' : round((unitsSoldSum / clicksSum) * 100, 2);
 
         impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
         clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
@@ -1123,11 +1125,11 @@ $(document).ready( function () {
         avgCpcSumAvg   = (avgCpcSumAvg === 0) ? '-' : '$' + avgCpcSumAvg;
         unitsSoldSum   = (unitsSoldSum === 0) ? '-' : unitsSoldSum;
         salesSum       = (salesSum === 0) ? '-' : '$' + salesSum;
+		conversionRate = (conversionRate === 0) ? '-' : conversionRate;
 
         newDtData.push([
           dtData[j][0],
           dtData[j][1],
-          dtData[j][2],
           dtData[j][3],
           dtData[j][4],
           impressionsSum,
@@ -1137,6 +1139,7 @@ $(document).ready( function () {
           avgCpcSumAvg,
           unitsSoldSum,
           salesSum,
+		  conversionRate,
           acos]);
 
         impressionsSum = 0;
@@ -1146,6 +1149,7 @@ $(document).ready( function () {
         avgCpcSumAvg   = 0;
         unitsSoldSum   = 0;
         salesSum       = 0;
+		conversionRate = 0;
       }
       console.log(newDtData);
       dt.clear().rows.add(newDtData).draw();
@@ -1171,6 +1175,7 @@ $(document).ready( function () {
       var avgCpcSumAvg   = 0;
       var unitsSoldSum   = 0;
       var salesSum       = 0;
+	  var conversionRate = 0;
 
       for (j = 0; j < adgroupData.length; j++) {
 
@@ -1192,6 +1197,8 @@ $(document).ready( function () {
         salesSum     = round(salesSum, 2);
         ctrAvg       = round(ctrAvg / diffOfDays, 2);
         avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
+		conversionRate = (clicksSum === 0) ? '-' : round((unitsSoldSum / clicksSum) * 100, 2);
+		
         impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
         clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
         ctrAvg         = (ctrAvg === 0) ? '-' : ctrAvg + '%';
@@ -1199,11 +1206,11 @@ $(document).ready( function () {
         avgCpcSumAvg   = (avgCpcSumAvg === 0) ? '-' : '$' + avgCpcSumAvg;
         unitsSoldSum   = (unitsSoldSum === 0) ? '-' : unitsSoldSum;
         salesSum       = (salesSum === 0) ? '-' : '$' + salesSum;
+		conversionRate = (clicksSum === 0) ? '-' : conversionRate;
 
         newAdgroupData.push([
           adgroupData[j][0],
           adgroupData[j][1],
-          adgroupData[j][2],
           adgroupData[j][3],
           impressionsSum,
           clicksSum,
@@ -1212,6 +1219,7 @@ $(document).ready( function () {
           avgCpcSumAvg,
           unitsSoldSum,
           salesSum,
+		  conversionRate,
           acos]);
 
         impressionsSum = 0;
@@ -1221,11 +1229,11 @@ $(document).ready( function () {
         avgCpcSumAvg   = 0;
         unitsSoldSum   = 0;
         salesSum       = 0;
+		conversionRate = 0;
       }
 
       console.log(newAdgroupData);
-      dt_adgroups.clear().rows.add(newAdgroupData).draw();
-
+	  dt.clear().rows.add(newAdgroupData).draw();
     }
     // If the keyword table is currently drawn
     else if (dataTableFlag === 3) {
