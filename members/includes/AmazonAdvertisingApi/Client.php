@@ -127,7 +127,6 @@ class Client
 
     public function completeRequestReport($date)
     {
-      echo "DATE VARIABE: " . $date;
       $result = $this->requestReport(
         "keywords",
         array(

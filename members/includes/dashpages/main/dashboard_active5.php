@@ -3,7 +3,10 @@
  *  Final step for dashboard pages
  *  User will see this after all preliminary importing has been completed.
  */
+require_once './includes/dashpages/main/assets/Metric.php';
 require './includes/dashpages/helper.inc.php';
+
+$user_id = $_SESSION['user_id'];
 
 // Check if user has 59 entries for their metrics
 // If yes, they are on their first day and we need to only retrieve 59 days of data
@@ -13,18 +16,41 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetch(PDO::FETCH_COLUMN);
 $a = unserialize($result);
 
-$adSpendArr = array_reverse(
+/*$adSpendArr = array_reverse(
   calculateMetrics(
-    multiUnserialize(getMetricData($pdo, 'ad_spend', $_SESSION['user_id'])),
+    multiUnserialize(getMetricData($pdo, 'ad_spend', $user_id)),
     count($a),
     'ad_spend'));
 
 $ppcSalesArr = array_reverse(
   calculateMetrics(
-    multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])),
+    multiUnserialize(getMetricData($pdo, 'sales', $user_id)),
     count($a),
     'ad_spend'));
-  
+
+$impressionsArr = array_reverse(
+    calculateMetrics(
+        multiUnserialize(getMetricData($pdo, 'impressions', $user_id)),
+        count($a),
+        'impressions'
+    ));*/
+
+$adSpend     = new Metric($user_id, 'ad_spend', count($a), $pdo);
+$ppcSales    = new Metric($user_id, 'sales', count($a), $pdo);
+$impressions = new Metric($user_id, 'impressions', count($a), $pdo);
+$unitsSold   = new Metric($user_id, 'units_sold', count($a), $pdo);
+$clicks      = new Metric($user_id, 'clicks', count($a), $pdo);
+$ctr         = new Metric($user_id, 'ctr', count($a), $pdo);
+$avgCpc      = new Metric($user_id, 'avg_cpc', count($a), $pdo);
+
+$adSpendArr     = $adSpend->getMetricArr();
+$ppcSalesArr    = $ppcSales->getMetricArr();
+$impressionsArr = $impressions->getMetricArr();
+$unitsSoldArr   = $unitsSold->getMetricArr();
+$clicksArr      = $clicks->getMetricArr();
+$ctrArr         = $ctr->getMetricArr();
+$avgCpc         = $avgCpc->getMetricArr();
+
 $acos 			 = [];
 $displayACoS = 0;
 $adSpend 		 = array_sum($adSpendArr);

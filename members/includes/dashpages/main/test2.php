@@ -60,4 +60,7 @@ for ($i = 0; $i < count($r); $i++) {
 
   var_dump($a);
 }
+
+$asd              = 1;
+$asdfasdfadsfadsf = 2;
 ?>

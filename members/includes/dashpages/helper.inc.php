@@ -165,7 +165,9 @@ function array_search2D($array, $key, $value) {
             sales=:sales WHERE amz_kw_id=:kw_id";
 
     $stmt = $pdo->prepare($sql);
+    
     foreach ($impressions as $key => $value) {
+      echo "----------> Writing metrics for campaign ID " . $key . "<br />"; // campaign ID gets fucked
       $stmt->execute(array(
         ':impressions' => serialize($impressions[$key]),
         ':clicks' => serialize($clicks[$key]),
@@ -178,18 +180,6 @@ function array_search2D($array, $key, $value) {
       ));
     }
   }
-
-  /*function insertKeywords($pdo,
-  $dataset, $metric) {
-    $sql = "UPDATE ppc_keywords SET {$metric}=:value WHERE amz_kw_id=:kw_id";
-    $stmt = $pdo->prepare($sql);
-    foreach ($dataset as $key => $value) {
-      $stmt->execute(array(
-        ':value' => serialize($value),
-        ':kw_id' => $key
-      ));
-    }
-  }*/
 
  /*
       ██   ██ ███████ ██    ██ ██     ██  ██████  ██████  ██████  ███████
@@ -288,13 +278,9 @@ function array_search2D($array, $key, $value) {
         $result = $client->completeGetReport();
       }
 
-      // Save count of keywords for $date (only starts for 2 days behind current date)
-      $numCurrentKeywords = count($result);
-
       for ($j = 0; $j < count($result); $j++) {
         // Get keyword ID
         $kw_id = $result[$j]['keywordId'];
-
         // Append day's data of the keyword to the
         // key's (keyword ID) value (array of metric data) in the metric array
         $impressions[$kw_id][] = $result[$j]['impressions'];
@@ -350,6 +336,8 @@ function array_search2D($array, $key, $value) {
 
       /* Now we have to do a check if there are any less keywords as we progress
          through the dates. If there are, then we need to append 1 0 to each metric array */
+      
+      var_dump($impressions);
 
       $impressions = adjustDayOffset($impressions, $numDays);
       $clicks      = adjustDayOffset($clicks, $numDays);
@@ -358,6 +346,8 @@ function array_search2D($array, $key, $value) {
       $adSpend     = adjustDayOffset($adSpend, $numDays);
       $unitsSold   = adjustDayOffset($unitsSold, $numDays);
       $sales       = adjustDayOffset($sales, $numDays);
+      
+      var_dump($impressions);
       
       $numDays++;
       echo '-------- FINISH day #'.$i.'<br />';
@@ -600,9 +590,6 @@ function multiUnserialize($arr) {
  *      --> String $metric      - String that represents which metric we are calculating
  */
 function calculateMetrics($metricArr, $numDays, $metric) {
-  // Algorithm will pop the end of each array $numDays times and append it to the output array
-  // After appending to output array, we use array_reduce to calculate the metric needed
-
   $output = array_fill(0, $numDays, 0);
 
   for ($j = 0; $j < count($metricArr); $j++) {
@@ -610,21 +597,6 @@ function calculateMetrics($metricArr, $numDays, $metric) {
 			$output[$i] += $metricArr[$j][$i];
 		}
   }
-
-  /*
-  for ($i = 0; $i < count($metricArr); $i++) {
-    // If the output array has the required length (number of days x number of campaigns), then break the loop
-    if (count($output) == ($numDays * count($metricArr))) { break; }
-    $output[] = array_pop($metricArr[$i]);
-  }
-
-  if ($metric == 'adSpend' || $metric == 'ppcSales') {
-    // If the metric being calculated is ad spend or PPC sales, then all we need to do is
-    // get the sum of the array
-    $output = array_reduce($output, function($carry, $element) { return $carry += $element; });
-  }
-  */
-
   return $output;
 }
 

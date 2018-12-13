@@ -51,7 +51,7 @@ $client->profileId = $profileId;
 ============================================================================*/
 
 try {
-  importKeywords($pdo, $client, $user_id, 58);
+  importKeywords($pdo, $client, $user_id, 60);
 } catch (\Exception $e) {
   echo "Error on file: " . $e->getFile() . "\n<br>";
   echo "Message: " . $e->getMessage() . "\n<br>";
@@ -103,7 +103,7 @@ try {
   $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
   for ($i = 0; $i < count($result); $i++) {
-    importAdGroupMetrics($pdo, $result[$i], 59, $client);
+    importAdGroupMetrics($pdo, $result[$i], 58, $client);
   }
 } catch (\Exception $e) {
   echo "Error on file: " . $e->getFile() . "\n<br>";
@@ -156,7 +156,7 @@ try {
   $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
   for ($i = 0; $i < count($result); $i++) {
-    importCampaignMetrics($pdo, $result[$i], 59);
+    importCampaignMetrics($pdo, $result[$i], 58);
   }
 } catch (\Exception $e) {
   echo "Error on file: " . $e->getFile() . "\n<br>";
