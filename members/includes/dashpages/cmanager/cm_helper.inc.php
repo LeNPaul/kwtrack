@@ -231,18 +231,27 @@ function cmGetAdGroupData($pdo, $campaignId) {
 function cmGetKeywordData($pdo, $adgroupId) {
   $output   = [];
   $keywords = [];
+  $rawKwData = [];
   $sql = "SELECT * FROM ppc_keywords WHERE amz_adgroup_id={$adgroupId}";
   $stmt = $pdo->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   for ($i = 0; $i < count($result); $i++) {
-    $ad_spend    = array_sum(unserialize($result[$i]['ad_spend']));
-    $sales       = array_sum(unserialize($result[$i]['sales']));
-    $impressions = array_sum(unserialize($result[$i]['impressions']));
-    $clicks      = array_sum(unserialize($result[$i]['clicks']));
-    $ctr         = round(calculateMetricAvg(unserialize($result[$i]['ctr'])), 2);
+	$adSpendArray     = unserialize($result[$i]['ad_spend']);
+    $salesArray       = unserialize($result[$i]['sales']);
+    $impressionsArray = unserialize($result[$i]['impressions']);
+    $clicksArray      = unserialize($result[$i]['clicks']);
+    $ctrArray         = unserialize($result[$i]['ctr']);
+    $avgCpcArray      = unserialize($result[$i]['avg_cpc']);
+    $unitsSoldArray   = unserialize($result[$i]['units_sold']);
+	
+    $ad_spend    = array_sum($adSpendArray);
+    $sales       = array_sum($salesArray);
+    $impressions = array_sum($impressionsArray);
+    $clicks      = array_sum($clicksArray);
+    $ctr         = round(calculateMetricAvg($ctrArray), 2);
     $avg_cpc     = ($clicks == 0) ? 0 : round($ad_spend / $clicks, 2);
-    $units_sold  = array_sum(unserialize($result[$i]['units_sold']));
+    $units_sold  = array_sum($unitsSoldArray);
 
     // Replace any 0's with "-"
     $acos        = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
@@ -256,7 +265,24 @@ function cmGetKeywordData($pdo, $adgroupId) {
     $bid         = '$' . round($result[$i]['bid'], 2);
     $kwText      = '<b class="name" id="' . $result[$i]['amz_kw_id'] . '">' . $result[$i]['keyword_text'] . "</b>";
 	$conversion  = ($clicks == 0) ? '-' : round(($units_sold / $clicks) * 100, 2) . '%';
-
+	
+	$rawKwData[] = array(
+		cmCheckboxState($result[$i]['status']),
+		$kwText,
+		$result[$i]['status'],
+		$result[$i]['match_type'],
+		$bid,
+		$impressionsArray,
+		$clicksArray,
+		$ctrArray,
+		$adSpendArray,
+		$avgCpcArray,
+		$unitsSoldArray,
+		$salesArray,
+		$conversion,
+		$acos
+	);
+	
     $output[] = array(
 	    cmCheckboxState($result[$i]['status']),
       $kwText,
@@ -275,5 +301,5 @@ function cmGetKeywordData($pdo, $adgroupId) {
 
     $keywords[htmlspecialchars($result[$i]['keyword_text'])] = $result[$i]['amz_kw_id'];
   }
-  return [$output, $keywords];
+  return [$output, $keywords, $rawKwData];
 }
