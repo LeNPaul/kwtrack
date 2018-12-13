@@ -62,6 +62,12 @@
     }
   });
 
+  // Line colors to be used for the chart line colour
+  var lineColors = ["#df6e21", "#be70c0", "#2096BA"]
+
+  // Array containing label and corresponding data
+  var chartData = [["Ad Spend", adSpendArr],["PPC Sales", ppcSalesArr],["PPC ACoS", ppcAcosArr]]
+
   var lineData = {
     labels: dateArr,
     datasets: [{
@@ -74,11 +80,11 @@
       hoverRadius: 6,
       pointBorderColor: '#ffffff',
       pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: "#df6e21",
+      pointBackgroundColor: lineColors[0],
       hoverBorderWidth: 3,
 
       borderWidth: 1.5,
-      borderColor: "#df6e21",
+      borderColor: lineColors[0]
     }, {
       label: "PPC Sales",
       yAxisID: 'A',
@@ -89,11 +95,11 @@
       hoverRadius: 6,
       pointBorderColor: '#ffffff',
       pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: "#be70c0",
+      pointBackgroundColor: lineColors[1],
       hoverBorderWidth: 3,
 
       borderWidth: 1.5,
-      borderColor: "#be70c0"
+      borderColor: lineColors[1]
     }, {
       label: "PPC ACoS",
       yAxisID: 'B',
@@ -104,11 +110,11 @@
       hoverRadius: 6,
       pointBorderColor: '#ffffff',
       pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: "#2096BA",
+      pointBackgroundColor: lineColors[2],
       hoverBorderWidth: 3,
 
       borderWidth: 1.5,
-      borderColor: "#2096BA"
+      borderColor: lineColors[2]
       //borderColor: "#d14785"
     }]
   };
