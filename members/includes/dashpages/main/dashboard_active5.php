@@ -69,20 +69,44 @@ $dateArr = array_reverse($dateArr);
 			<div class="card-body ">
 				<div class="row">
 
-					<div class="col-5 col-md-4">
+					<div class="col-3 col-md-2">
 						<div class="icon-big text-center icon-danger">
 							<i class="nc-icon nc-tag-content text-danger"></i>
 						</div>
 					</div>
 
-					<div class="col-7 col-md-8">
+					<div class="col-9 col-md-10">
 						<div class="numbers">
 							<h6 class="card-subtitle">
 								Advertising Performance
 							</h6>
-							<p class="card-title"><?= '$' . $adSpend ?>
-							<p>
 						</div>
+            
+            <div style="overflow: hidden;">
+              <p class="metric-name">Advertising Sales</p>
+              <p class="metric"><?= array_sum($ppcSalesArr) ?></p>
+            </div>
+            <hr style="border-top: dashed 1px rgb(196,194,187);" />
+            <div style="overflow: hidden;">
+              <p class="metric-name">Advertising Spend</p>
+              <p class="metric"><?= array_sum($adSpendArr) ?></p>
+            </div>
+            <hr style="border-top: dashed 1px rgb(196,194,187);" />
+            <div style="overflow: hidden;">
+              <p class="metric-name">Conversion Rate</p>
+              <p class="metric"><?= round((count($unitsSoldArr) / array_sum($clicksArr)) * 100, 2) . '%' ?></p>
+            </div>
+            <hr style="border-top: dashed 1px rgb(196,194,187);" />
+            <div style="overflow: hidden;">
+              <p class="metric-name">ROAS</p>
+              <p class="metric"><?= '$' . $roas ?></p>
+            </div>
+            <hr style="border-top: dashed 1px rgb(196,194,187);" />
+            <div style="overflow: hidden;">
+              <p class="metric-name">ACOS</p>
+              <p class="metric"><?= $displayACoS . "%" ?></p>
+            </div>
+            
 					</div>
 
 				</div>
@@ -118,21 +142,25 @@ $dateArr = array_reverse($dateArr);
 							<p class="metric-name">Impressions</p>
 							<p class="metric"><?= array_sum($impressionsArr) ?></p>
 						</div>
-						<hr style="border-top: dashed 1px #e8e8e8;" />
+      
+						<hr style="border-top: dashed 1px rgb(196,194,187);" />
 						<div style="overflow: hidden;">
 							<p class="metric-name">Clicks</p>
 							<p class="metric"><?= array_sum($clicksArr) ?></p>
 						</div>
-						<hr style="border-top: dashed 1px #e8e8e8;" />
+      
+						<hr style="border-top: dashed 1px rgb(196,194,187);" />
 						<div style="overflow: hidden;">
 							<p class="metric-name">Click-Thru Rate</p>
 							<p class="metric"><?= round((array_sum($ctrArr) / count($ctrArr)) * 100, 2) . '%' ?></p>
 						</div>
-						<hr style="border-top: dashed 1px #e8e8e8;" />
+      
+						<hr style="border-top: dashed 1px rgb(196,194,187);" />
 						<div style="overflow: hidden;">
 							<p class="metric-name">Average CPC</p>
 							<p class="metric"><?= '$' . round((array_sum($avgCpc) / count($avgCpc)), 2) ?></p>
 						</div>
+      
 					</div>
 
 				</div>

@@ -35,7 +35,7 @@
   margin-bottom: 30px;
 }
 
-.card-body .metric-name { float: left; display: inline;}
+.card-body .metric-name { float: left; display: inline; font-weight: 500;}
 .card-body .metric { float: right; display: inline; }
 .card-body hr { margin: 5px 0 5px 0; }
 .card-body p { margin: 0; text-align: right; }
