@@ -22,11 +22,23 @@
  ██████  ██   ██ ███████ ██   ██ ██████   ██████  ██   ██ ██   ██ ██████
  */
 
- @media only screen and (max-width: 600px) {
-     canvas#lineChart {
-       height: 400px;
-     }
- }
+@media only screen and (max-width: 600px) {
+   canvas#lineChart {
+     height: 400px;
+   }
+}
+
+.card-subtitle {
+  font-weight: bold;
+  font-size: 0.5em;
+  color: #6c6c6c;
+  margin-bottom: 30px;
+}
+
+.card-body .metric-name { float: left; display: inline;}
+.card-body .metric { float: right; display: inline; }
+.card-body hr { margin: 5px 0 5px 0; }
+.card-body p { margin: 0; text-align: right; }
 
 #chartjs-tooltip {
   border-width: 2px !important;
@@ -71,19 +83,18 @@ table.dataTable td {
 }
 
 #campaignRange {
-  border-radius: 15px !important;
-  float: right;
-  display: block !important;
+  border-radius: 10px !important;
+  /* display: block !important; */
 }
 
 .breadcrumb {
-  border-radius: 30px !important;
-  display: block !important;
-  width: 100% !important;
+  border-radius: 15px !important;
+  /* display: block !important; */
 }
 
 #bc {
   font-weight: bold !important;
+  margin: 5px 0 5px 0;
 }
 
 .dataTables_wrapper .name {

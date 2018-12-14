@@ -50,14 +50,14 @@ for ($j = 1; $j < 60; $j++) {
 <div class="tab-content tab-space tab-subcategories">
   <div class="tab-pane active show" id="adgroups">
 
-		<div class="row">
+		<div>
 			<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
 				<i class="fa fa-calendar"></i>
 				<span></span> <i class="fa fa-caret-down"></i>
 			</div>
 		</div>
 		<br />
-		<div class="row">
+		<div>
 			<nav aria-label="breadcrumb" id="cmanager_breadcrumbs" role="navigation">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="all_link">All Campaigns</a></h6></li>
@@ -126,10 +126,10 @@ $(document).ready( function () {
 			className: 'btn-primary'
 		},
 		{
-            extend: 'selectNone',
-            text: 'Deselect All',
-            className: 'btn-deselect'
-        },
+      extend: 'selectNone',
+      text: 'Deselect All',
+      className: 'btn-deselect'
+    },
 		{
 			text: 'Bulk Actions',
 			className: 'btn-bulk-action',
@@ -1191,7 +1191,7 @@ $(document).ready( function () {
         ctrAvg       = round(ctrAvg / diffOfDays, 2);
         avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
 		conversionRate = (clicksSum === 0) ? '-' : round((unitsSoldSum / clicksSum) * 100, 2);
-		
+
         impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
         clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
         ctrAvg         = (ctrAvg === 0) ? '-' : ctrAvg + '%';
@@ -1237,7 +1237,7 @@ $(document).ready( function () {
 	  var endArr = dateArr.indexOf(endIndex);
 	  var diffOfDays = startArr - endArr + 1;
       console.log('start Arr: ' + startArr, 'end Arr: ' + endArr);
-	  
+
 	  var impressionsSum = 0;
       var clicksSum      = 0;
       var ctrAvg         = 0;
@@ -1246,7 +1246,7 @@ $(document).ready( function () {
       var unitsSoldSum   = 0;
       var salesSum       = 0;
 	  var conversionRate = 0;
-	  
+
 	  for (x = 0; x < keywordData.length; x++) {
 		  for (y = endArr; y <= startArr; y++) {
 			  impressionsSum += keywordData[x][5][y];
@@ -1255,16 +1255,16 @@ $(document).ready( function () {
 			  adSpendSum 	 += keywordData[x][8][y];
 			  avgCpcSumAvg 	 += keywordData[x][9][y];
 			  unitsSoldSum 	 += keywordData[x][10][y];
-			  salesSum 		 += keywordData[x][11][y];  
+			  salesSum 		 += keywordData[x][11][y];
 		  }
-			  
+
 		var acos     = (salesSum === 0) ? '-' : round((adSpendSum / salesSum) * 100, 2);
 		adSpendSum   = round(adSpendSum, 2);
 		salesSum     = round(salesSum, 2);
 		ctrAvg       = round(ctrAvg / diffOfDays, 2);
 		avgCpcSumAvg = round(avgCpcSumAvg / diffOfDays, 2);
 		conversionRate = (clicksSum === 0) ? '-' : round((unitsSoldSum / clicksSum) * 100, 2);
-		
+
 		impressionsSum = (impressionsSum === 0) ? '-' : impressionsSum;
         clicksSum      = (clicksSum === 0) ? '-' : clicksSum;
         ctrAvg         = (ctrAvg === 0) ? '-' : ctrAvg + '%';
@@ -1273,7 +1273,7 @@ $(document).ready( function () {
         unitsSoldSum   = (unitsSoldSum === 0) ? '-' : unitsSoldSum;
         salesSum       = (salesSum === 0) ? '-' : '$' + salesSum;
 		conversionRate = (clicksSum === 0) ? '-' : conversionRate;
-		
+
 		newKeywordData.push([
 			keywordData[x][0],
 			keywordData[x][1],
@@ -1289,7 +1289,7 @@ $(document).ready( function () {
 			conversionRate,
 			acos
 		]);
-		
+
 		impressionsSum = 0;
         clicksSum      = 0;
         ctrAvg         = 0;
@@ -1299,7 +1299,7 @@ $(document).ready( function () {
         salesSum       = 0;
 		conversionRate = 0;
 	  }
-	  
+
 	  dt.clear().rows.add(newKeywordData).draw();
     }
 

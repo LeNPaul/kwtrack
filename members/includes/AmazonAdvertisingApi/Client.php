@@ -79,8 +79,11 @@ class Client
         $request->setOption(CURLOPT_USERAGENT, $this->userAgent);
         $request->setOption(CURLOPT_POST, true);
         $request->setOption(CURLOPT_POSTFIELDS, rtrim($data, "&"));
+        $request->setOption(CURLOPT_VERBOSE, true);
+
 
         $response = $this->_executeRequest($request);
+        echo $request->getError();
 
         $response_array = json_decode($response["response"], true);
 

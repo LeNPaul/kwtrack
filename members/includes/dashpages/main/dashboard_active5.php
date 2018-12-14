@@ -16,25 +16,6 @@ $stmt = $pdo->query($sql);
 $result = $stmt->fetch(PDO::FETCH_COLUMN);
 $a = unserialize($result);
 
-/*$adSpendArr = array_reverse(
-  calculateMetrics(
-    multiUnserialize(getMetricData($pdo, 'ad_spend', $user_id)),
-    count($a),
-    'ad_spend'));
-
-$ppcSalesArr = array_reverse(
-  calculateMetrics(
-    multiUnserialize(getMetricData($pdo, 'sales', $user_id)),
-    count($a),
-    'ad_spend'));
-
-$impressionsArr = array_reverse(
-    calculateMetrics(
-        multiUnserialize(getMetricData($pdo, 'impressions', $user_id)),
-        count($a),
-        'impressions'
-    ));*/
-
 $adSpend     = new Metric($user_id, 'ad_spend', count($a), $pdo);
 $ppcSales    = new Metric($user_id, 'sales', count($a), $pdo);
 $impressions = new Metric($user_id, 'impressions', count($a), $pdo);
@@ -83,6 +64,92 @@ $dateArr = array_reverse($dateArr);
 
 <!--  Row for PPC metrics: ad spend, ppc sales, ppc ACoS -->
 <div class="row">
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<div class="card card-stats">
+			<div class="card-body ">
+				<div class="row">
+
+					<div class="col-5 col-md-4">
+						<div class="icon-big text-center icon-danger">
+							<i class="nc-icon nc-tag-content text-danger"></i>
+						</div>
+					</div>
+
+					<div class="col-7 col-md-8">
+						<div class="numbers">
+							<h6 class="card-subtitle">
+								Advertising Performance
+							</h6>
+							<p class="card-title"><?= '$' . $adSpend ?>
+							<p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="card-footer ">
+				<hr>
+				<div class="stats">
+					<i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<div class="card card-stats">
+			<div class="card-body ">
+				<div class="row">
+
+					<div class="col-3 col-md-2">
+						<div class="icon-big text-center icon-danger">
+							<i class="nc-icon nc-tag-content text-danger"></i>
+						</div>
+					</div>
+
+					<div class="col-9 col-md-10">
+						<div class="numbers">
+							<h6 class="card-subtitle">
+								Advertising Analytics
+							</h6>
+						</div>
+
+						<div style="overflow: hidden;">
+							<p class="metric-name">Impressions</p>
+							<p class="metric"><?= array_sum($impressionsArr) ?></p>
+						</div>
+						<hr style="border-top: dashed 1px #e8e8e8;" />
+						<div style="overflow: hidden;">
+							<p class="metric-name">Clicks</p>
+							<p class="metric"><?= array_sum($clicksArr) ?></p>
+						</div>
+						<hr style="border-top: dashed 1px #e8e8e8;" />
+						<div style="overflow: hidden;">
+							<p class="metric-name">Click-Thru Rate</p>
+							<p class="metric"><?= round((array_sum($ctrArr) / count($ctrArr)) * 100, 2) . '%' ?></p>
+						</div>
+						<hr style="border-top: dashed 1px #e8e8e8;" />
+						<div style="overflow: hidden;">
+							<p class="metric-name">Average CPC</p>
+							<p class="metric"><?= '$' . round((array_sum($avgCpc) / count($avgCpc)), 2) ?></p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="card-footer ">
+				<hr>
+				<div class="stats">
+					<i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- <div class="row">
   <div class="col-lg-4 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
@@ -170,7 +237,7 @@ $dateArr = array_reverse($dateArr);
     </div>
   </div>
 
-	
+
 </div>
 
 <div class="row">
@@ -192,7 +259,7 @@ $dateArr = array_reverse($dateArr);
           </div>
         </div>
       </div>
-      
+
       <div class="card-footer ">
         <hr>
         <div class="stats">
@@ -201,7 +268,7 @@ $dateArr = array_reverse($dateArr);
       </div>
     </div>
   </div>
-  
+
   <div class="col-lg-6 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
@@ -220,7 +287,7 @@ $dateArr = array_reverse($dateArr);
           </div>
         </div>
       </div>
-      
+
       <div class="card-footer ">
         <hr>
         <div class="stats">
@@ -229,7 +296,7 @@ $dateArr = array_reverse($dateArr);
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!--  Row for organic metrics: true ACoS, total sales, organic sales -->
 <!--
