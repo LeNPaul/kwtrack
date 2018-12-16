@@ -3,6 +3,8 @@
  * Helper functions for campaign data manipulation
  */
 
+date_default_timezone_set('America/Los_Angeles');
+
  /*----------------------------------------------------------
   *
   *
@@ -22,53 +24,6 @@
 
 function array_search2D($array, $key, $value) {
   return (array_search($value, array_column($array, $key)));
-}
-
-/*
-*  function getSnapshot(Obj $client, Int $snapshotId) --> Array $report
-*    --> Gets snapshot from Advertising API with $reportId.
-*
-*      --> Obj $client     - Advertising API client object
-*      --> Int $snapshotId - Report ID of the report we are retrieving
-*      --> Array $report   - Snapshot generated from Amazon
-*/
-
-function getSnapshot($client, $snapshotId) {
-  do {
-    $report = $client->getSnapshot($snapshotId);
-    $result2 = json_decode($report['response'], true);
-    if (array_key_exists('status', $result2)) {
-      $status = $result2['status'];
-    } else {
-      $status = 'DONE';
-      $report = $result2;
-    }
-  } while ($status == 'IN_PROGRESS');
-  return $report;
-}
-
-/*
-*  function getReport(Obj $client, Int $reportId) --> Array $report
-*    --> Gets report from Advertising API with $reportId.
-*
-*      --> Obj $client   - Advertisign API client object
-*      --> Int $reportId - Report ID of the report we are retrieving
-*      --> Array $report - Report generated from Amazon
-*/
-
-function getReport($client, $reportId) {
-  do {
-    $report = $client->getReport($reportId);
-    $result2 = json_decode($report['response'], true);
-    if (array_key_exists('status', $result2)) {
-      $status = $result2['status'];
-    } else {
-      $status = 'DONE';
-      $status = 'DONE';
-      $report = $result2;
-    }
-  } while ($status == 'IN_PROGRESS');
-  return $report;
 }
 
  /*
@@ -210,7 +165,9 @@ function getReport($client, $reportId) {
             sales=:sales WHERE amz_kw_id=:kw_id";
 
     $stmt = $pdo->prepare($sql);
+    
     foreach ($impressions as $key => $value) {
+      echo "----------> Writing metrics for campaign ID " . $key . "<br />"; // campaign ID gets fucked
       $stmt->execute(array(
         ':impressions' => serialize($impressions[$key]),
         ':clicks' => serialize($clicks[$key]),
@@ -223,18 +180,6 @@ function getReport($client, $reportId) {
       ));
     }
   }
-
-  /*function insertKeywords($pdo,
-  $dataset, $metric) {
-    $sql = "UPDATE ppc_keywords SET {$metric}=:value WHERE amz_kw_id=:kw_id";
-    $stmt = $pdo->prepare($sql);
-    foreach ($dataset as $key => $value) {
-      $stmt->execute(array(
-        ':value' => serialize($value),
-        ':kw_id' => $key
-      ));
-    }
-  }*/
 
  /*
       ██   ██ ███████ ██    ██ ██     ██  ██████  ██████  ██████  ███████
@@ -264,55 +209,29 @@ function getReport($client, $reportId) {
     $sales = [];
 
     // Get keyword snapshot so we can use it to get states and bids later
-    $kwSnapshot = $client->requestSnapshot(
-      "keywords",
-      array(
-        "stateFilter"  => "enabled,paused,archived",
-        "campaignType" => "sponsoredProducts"));
-    $snapshotId = json_decode($kwSnapshot['response'], true);
-    $snapshotId = $snapshotId['snapshotId'];
-
-    $kwSnapshot = getSnapshot($client, $snapshotId);
+    $kwSnapshot = $client->completeRequestSnapshot("keywords");
+    $kwSnapshot = $client->completeGetSnapshot();
 
     // Get adgroups snapshot so we can use it to get bids later
-
-    $adgSnapshot = $client->requestSnapshot(
-      "adGroups",
-      array("stateFilter"  => "enabled,paused,archived",
-        "campaignType" => "sponsoredProducts"));
-    $snapshotId = json_decode($adgSnapshot['response'], true);
-    $snapshotId = $snapshotId['snapshotId'];
-
-    $adgSnapshot = getSnapshot($client, $snapshotId);
+    $adgSnapshot = $client->completeRequestSnapshot("adGroups");
+    $adgSnapshot = $client->completeGetSnapshot();
 
     // Keep count of days of data gone through. For each iteration of $i,
     // the max number of days of data will always equal $numDays
-    $numDays = 1;
+    $numDays = 2;
 
-    for ($i = 1; $i < $days; $i++) {
+    for ($i = 2; $i < $days; $i++) {
       echo '---- STARTING day #' . $i . '<br />';
 
       $date = date('Ymd', strtotime('-' . $i . ' days'));
 
       // Only on the very first iteration of this loop, we will iterate through the array
       // and store campaign name and campaign ID in the database
-      if ($i === 1) {
+      if ($i === 2) {
         echo '------ INITIATING 1st iteration import<br />';
-
-        $result = $client->requestReport(
-          "keywords",
-          array("reportDate"    => $date,
-                "campaignType"  => "sponsoredProducts",
-                "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered7d,attributedSales7d"
-          )
-        );
-
-        // Get the report id so we can use it to get the report
-        $result   = json_decode($result['response'], true);
-        $reportId = $result['reportId'];
-        $status   = $result['status'];
-
-        $result = getReport($client, $reportId);
+        
+        $result = $client->completeRequestReport($date);
+        $result = $client->completeGetReport();
 
         // Save count of the number of keywords today (will always be max keywords)
         // so we can use it in the future
@@ -329,9 +248,6 @@ function getReport($client, $reportId) {
           $kwIndexInSnapshot = array_search2D($kwSnapshot, 'keywordId', $result[$x]['keywordId']);
 
           // Get status and bid for each keyword
-          /*$kw_id = $result[$x]['keywordId'];
-          $status = $client->getBiddableKeyword($kw_id);
-          $status = json_decode($status['response'], true);*/
           $status = $kwSnapshot[$kwIndexInSnapshot]['state'];
 
           if (array_key_exists('bid', $kwSnapshot[$kwIndexInSnapshot])) {
@@ -340,20 +256,8 @@ function getReport($client, $reportId) {
             $kwIndexInADGSnapshot = array_search2D($adgSnapshot, 'adGroupId', $kwSnapshot[$kwIndexInSnapshot]['adGroupId']);
             $adgBid = $adgSnapshot[$kwIndexInADGSnapshot]['defaultBid'];
           }
-
-          // Check if bid index exists in the report
-          // If it does, set bid to what it is
-          // If not, then set it to the ad group's default bid
-          /*if (array_key_exists('bid', $status)) {
-            $adgBid = $status['bid'];
-          } else {
-            // Get default bid from adgroup
-            $adgBid = $client->getAdGroup($status['adGroupId']);
-            $adgBid = json_decode($adgBid['response'], true);
-            $adgBid = $adgBid['defaultBid'];
-          }
-
-          $status = $status['state'];*/
+          
+          if ($adgBid == null) { $adgBid = 0; }
 
           $stmt->execute(array(
             ':user_id'          => $user_id,
@@ -370,33 +274,13 @@ function getReport($client, $reportId) {
         echo '------ COMPLETING 1st iteration import<br />';
 
       } else {
-
-        // All other iterations, we request this report to optimize time
-        $result = $client->requestReport(
-          "keywords",
-          array("reportDate"    => $date,
-                "campaignType"  => "sponsoredProducts",
-                "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered7d,attributedSales7d"
-          )
-        );
-
-        // Get the report id so we can use it to get the report
-        $result   = json_decode($result['response'], true);
-        $reportId = $result['reportId'];
-        $status   = $result['status'];
-
-        $result = getReport($client, $reportId);
+        $result = $client->completeRequestReport($date);
+        $result = $client->completeGetReport();
       }
 
-      // Save count of keywords for $date (only starts for "yesterday")
-      $numCurrentKeywords = count($result);
-
-      // Loop to iterate through the report response
       for ($j = 0; $j < count($result); $j++) {
-
         // Get keyword ID
         $kw_id = $result[$j]['keywordId'];
-
         // Append day's data of the keyword to the
         // key's (keyword ID) value (array of metric data) in the metric array
         $impressions[$kw_id][] = $result[$j]['impressions'];
@@ -452,6 +336,8 @@ function getReport($client, $reportId) {
 
       /* Now we have to do a check if there are any less keywords as we progress
          through the dates. If there are, then we need to append 1 0 to each metric array */
+      
+      var_dump($impressions);
 
       $impressions = adjustDayOffset($impressions, $numDays);
       $clicks      = adjustDayOffset($clicks, $numDays);
@@ -460,55 +346,15 @@ function getReport($client, $reportId) {
       $adSpend     = adjustDayOffset($adSpend, $numDays);
       $unitsSold   = adjustDayOffset($unitsSold, $numDays);
       $sales       = adjustDayOffset($sales, $numDays);
-
-      echo '<pre>';
-      var_dump($impressions[82763020309402]);
-      echo '</pre>';
-
+      
+      var_dump($impressions);
+      
       $numDays++;
       echo '-------- FINISH day #'.$i.'<br />';
     }
 
     // Insert all this shit into the database
     insertKeywords($pdo, $impressions, $clicks, $ctr, $adSpend, $avgCpc, $unitsSold, $sales);
-
-    /*
-    // Grab array of keywords by their keyword ID
-    $sql = 'SELECT amz_kw_id FROM ppc_keywords WHERE user_id=' . htmlspecialchars($user_id);
-    $stmt = $pdo->query($sql);
-    $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-    // Declare arrays that we will serialize and store in the database
-    $dbImpressions = [];
-    $dbClicks = [];
-    $dbCtr = [];
-    $dbAdSpend = [];
-    $dbAvgCpc = [];
-    $dbUnitsSold = [];
-    $dbSales = [];
-
-    // Grab impression data from array and store in their respective campaigns
-    $dbImpressions = prepareDbArrays($impressions, $dbImpressions);
-    storeKeywordArrays($pdo, $dbImpressions, $result, 'impressions');
-    // Grab clicks data from array and store in their respective campaigns
-    $dbClicks = prepareDbArrays($clicks, $dbClicks);
-    storeKeywordArrays($pdo, $dbClicks, $result, 'clicks');
-    // Grab ctr data from array and store in their respective campaigns
-    $dbCtr = prepareDbArrays($ctr, $dbCtr);
-    storeKeywordArrays($pdo, $dbCtr, $result, 'ctr');
-    // Grab ad spend data from array and store in their respective campaigns
-    $dbAdSpend = prepareDbArrays($adSpend, $dbAdSpend);
-    storeKeywordArrays($pdo, $dbAdSpend, $result, 'ad_spend');
-    // Grab average cpc data from array and store in their respective campaigns
-    $dbAvgCpc = prepareDbArrays($avgCpc, $dbAvgCpc);
-    storeKeywordArrays($pdo, $dbAvgCpc, $result, 'avg_cpc');
-    // Grab units sold data from array and store in their respective campaigns
-    $dbUnitsSold = prepareDbArrays($unitsSold, $dbUnitsSold);
-    storeKeywordArrays($pdo, $dbUnitsSold, $result, 'units_sold');
-    // Grab sales data from array and store in their respective campaigns
-    $dbSales = prepareDbArrays($sales, $dbSales);
-    storeKeywordArrays($pdo, $dbSales, $result, 'sales');
-    */
   }
 
   /*
@@ -744,9 +590,6 @@ function multiUnserialize($arr) {
  *      --> String $metric      - String that represents which metric we are calculating
  */
 function calculateMetrics($metricArr, $numDays, $metric) {
-  // Algorithm will pop the end of each array $numDays times and append it to the output array
-  // After appending to output array, we use array_reduce to calculate the metric needed
-
   $output = array_fill(0, $numDays, 0);
 
   for ($j = 0; $j < count($metricArr); $j++) {
@@ -754,21 +597,6 @@ function calculateMetrics($metricArr, $numDays, $metric) {
 			$output[$i] += $metricArr[$j][$i];
 		}
   }
-
-  /*
-  for ($i = 0; $i < count($metricArr); $i++) {
-    // If the output array has the required length (number of days x number of campaigns), then break the loop
-    if (count($output) == ($numDays * count($metricArr))) { break; }
-    $output[] = array_pop($metricArr[$i]);
-  }
-
-  if ($metric == 'adSpend' || $metric == 'ppcSales') {
-    // If the metric being calculated is ad spend or PPC sales, then all we need to do is
-    // get the sum of the array
-    $output = array_reduce($output, function($carry, $element) { return $carry += $element; });
-  }
-  */
-
   return $output;
 }
 

@@ -24,6 +24,9 @@ class Client
     private $endpoints = null;
     private $versionStrings = null;
 
+    private $snapshotId = null;
+    private $reportId   = null;
+
     public $profileId = null;
 
     public function __construct($config)
@@ -76,10 +79,14 @@ class Client
         $request->setOption(CURLOPT_USERAGENT, $this->userAgent);
         $request->setOption(CURLOPT_POST, true);
         $request->setOption(CURLOPT_POSTFIELDS, rtrim($data, "&"));
+        $request->setOption(CURLOPT_VERBOSE, true);
+
 
         $response = $this->_executeRequest($request);
+        echo $request->getError();
 
         $response_array = json_decode($response["response"], true);
+
         if (array_key_exists("access_token", $response_array)) {
             $this->config["accessToken"] = $response_array["access_token"];
         } else {
@@ -87,6 +94,66 @@ class Client
         }
 
         return $response;
+    }
+
+    public function completeGetReport()
+    {
+      do {
+        $report = $this->getReport($this->reportId);
+        $result2 = json_decode($report['response'], true);
+        if (array_key_exists('status', $result2)) {
+          $status = $result2['status'];
+        } else {
+          $status = 'DONE';
+          $report = $result2;
+        }
+      } while ($status == 'IN_PROGRESS');
+      $this->reportId = null;
+      return $report;
+    }
+
+    public function completeGetSnapshot()
+    {
+      do {
+        $report = $this->getSnapshot($this->snapshotId);
+        $result2 = json_decode($report['response'], true);
+        if (array_key_exists('status', $result2)) {
+          $status = $result2['status'];
+        } else {
+          $status = 'DONE';
+          $report = $result2;
+        }
+      } while ($status == 'IN_PROGRESS');
+      $this->snapshotId = null;
+      return $report;
+    }
+
+    public function completeRequestReport($date)
+    {
+      $result = $this->requestReport(
+        "keywords",
+        array(
+          "reportDate"    => $date,
+          "campaignType"  => "sponsoredProducts",
+          "metrics"       => "adGroupId,campaignId,keywordId,keywordText,matchType,impressions,clicks,cost,campaignBudget,attributedUnitsOrdered7d,attributedSales7d"
+        )
+      );
+
+
+      // Get the report id so we can use it to get the report
+      $result         = json_decode($result['response'], true);
+      $this->reportId = $result['reportId'];
+    }
+
+    public function completeRequestSnapshot($type)
+    {
+      $kwSnapshot = $this->requestSnapshot(
+        $type,
+        array(
+          "stateFilter"  => "enabled,paused,archived",
+          "campaignType" => "sponsoredProducts"));
+      $snapshotId = json_decode($kwSnapshot['response'], true);
+      $this->snapshotId = $snapshotId['snapshotId'];
     }
 
     public function listProfiles()
