@@ -81,15 +81,15 @@ $dateArr = array_reverse($dateArr);
 								Advertising Performance
 							</h6>
 						</div>
-            
+
             <div style="overflow: hidden;">
               <p class="metric-name">Advertising Sales</p>
-              <p class="metric"><?= array_sum($ppcSalesArr) ?></p>
+              <p class="metric"><?= '$' . array_sum($ppcSalesArr) ?></p>
             </div>
             <hr style="border-top: dashed 1px rgb(196,194,187);" />
             <div style="overflow: hidden;">
               <p class="metric-name">Advertising Spend</p>
-              <p class="metric"><?= array_sum($adSpendArr) ?></p>
+              <p class="metric"><?= '$' . array_sum($adSpendArr) ?></p>
             </div>
             <hr style="border-top: dashed 1px rgb(196,194,187);" />
             <div style="overflow: hidden;">
@@ -106,7 +106,7 @@ $dateArr = array_reverse($dateArr);
               <p class="metric-name">ACOS</p>
               <p class="metric"><?= $displayACoS . "%" ?></p>
             </div>
-            
+
 					</div>
 
 				</div>
@@ -142,25 +142,25 @@ $dateArr = array_reverse($dateArr);
 							<p class="metric-name">Impressions</p>
 							<p class="metric"><?= array_sum($impressionsArr) ?></p>
 						</div>
-      
+
 						<hr style="border-top: dashed 1px rgb(196,194,187);" />
 						<div style="overflow: hidden;">
 							<p class="metric-name">Clicks</p>
 							<p class="metric"><?= array_sum($clicksArr) ?></p>
 						</div>
-      
+
 						<hr style="border-top: dashed 1px rgb(196,194,187);" />
 						<div style="overflow: hidden;">
 							<p class="metric-name">Click-Thru Rate</p>
 							<p class="metric"><?= round((array_sum($ctrArr) / count($ctrArr)) * 100, 2) . '%' ?></p>
 						</div>
-      
+
 						<hr style="border-top: dashed 1px rgb(196,194,187);" />
 						<div style="overflow: hidden;">
 							<p class="metric-name">Average CPC</p>
 							<p class="metric"><?= '$' . round((array_sum($avgCpc) / count($avgCpc)), 2) ?></p>
 						</div>
-      
+
 					</div>
 
 				</div>
@@ -177,240 +177,6 @@ $dateArr = array_reverse($dateArr);
 
 </div>
 
-<!-- <div class="row">
-  <div class="col-lg-4 col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-danger">
-              <i class="nc-icon nc-tag-content text-danger"></i>
-            </div>
-          </div>
-
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">
-								Ad Spend
-
-							</p>
-              <p class="card-title"><?= '$' . $adSpend ?>
-              <p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4 col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-success">
-              <i class="nc-icon nc-money-coins text-success"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">PPC Sales</p>
-              <p class="card-title"><?= '$' . $ppcSales ?>
-              <p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4 col-md-12 col-sm-12">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center">
-              <i class="fa fa-money text-primary"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">PPC ACoS</p>
-              <p class="card-title"><?=  $displayACoS . '%' ?>
-              <p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-</div>
-
-<div class="row">
-  <div class="col-lg-6 col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center">
-              <i class="fa fa-money text-success"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">ROAS</p>
-              <p class="card-title"><?= '$' . $roas ?>
-              <p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-6 col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center">
-              <i class="fa fa-money text-success"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">Conversion Rate</p>
-              <p class="card-title"><?= '$' . $roas ?>
-              <p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!--  Row for organic metrics: true ACoS, total sales, organic sales -->
-<!--
-<div class="row">
-  <div class="col-lg-4 col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-globe text-warning"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">True ACoS</p>
-              <p class="card-title">test
-              <p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on ..date..
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4 col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-globe text-warning"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">Total Sales</p>
-              <p class="card-title">test
-              <p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on ..date..
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4 col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-globe text-warning"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">Organic Sales</p>
-              <p class="card-title">test
-              <p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-refresh"></i> Last updated on ..date..
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 
 <div class="row">
@@ -418,8 +184,8 @@ $dateArr = array_reverse($dateArr);
 		<div class="card ">
 
       <div class="card-header text-center">
-        <h4 class="card-title">PPC Analytics</h4>
-        <p class="card-category">Ad Spend, PPC Sales, and PPC ACoS</p>
+        <h4 class="card-title">Advertising Analytics</h4>
+        <p class="card-category">Ad Spend, Advertising Sales, and ACoS</p>
       </div>
 
 	  <!-- <div class="card-body">
@@ -453,8 +219,35 @@ $dateArr = array_reverse($dateArr);
 
 <!--  Row for pie chart (PPC Sales vs Total Sales) and Top Performing CSTs  -->
 <div class="row">
-	<!--  Pie Chart -->
+	<!--  Pie Chart for Ad Spend for all campaigns -->
 	<div class="col-lg-6 col-md-12 col-sm-12">
+		<div class="card">
+      <div class="card-body ">
+        <div class="row">
+					<div class="col-12 col-md-12">
+						<div class="numbers text-center">
+							<p class="card-title">Ad Spend Breakdown<p>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<p>
+						placeholder for pie chart
+					</p>
+				</div>
+
+			</div>
+
+			<div class="card-footer ">
+				<hr>
+				<div class="stats">
+					<i class="fa fa-refresh"></i> Last updated on <?= date("d/m/y") ?>
+				</div>
+			</div>
+
+		</div>
+
 
 	</div>
 

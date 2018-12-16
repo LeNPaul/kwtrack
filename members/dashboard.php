@@ -40,6 +40,8 @@ $user_id = $_SESSION['user_id'];
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   <link href="assets/css/dashboard_active5.css" rel="stylesheet" />
+  <link href="assets/css/tabs.css" rel="stylesheet" />
+
 
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!--  <link href="assets/demo/demo.css" rel="stylesheet" />-->
