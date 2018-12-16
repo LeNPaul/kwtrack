@@ -24,7 +24,7 @@ $ppcSalesArr = array_reverse(
     multiUnserialize(getMetricData($pdo, 'sales', $_SESSION['user_id'])),
     count($a),
     'ad_spend'));
-  
+
 $acos 			 = [];
 $displayACoS = 0;
 $adSpend 		 = array_sum($adSpendArr);
@@ -144,7 +144,7 @@ $dateArr = array_reverse($dateArr);
     </div>
   </div>
 
-	
+
 </div>
 
 <div class="row">
@@ -166,7 +166,7 @@ $dateArr = array_reverse($dateArr);
           </div>
         </div>
       </div>
-      
+
       <div class="card-footer ">
         <hr>
         <div class="stats">
@@ -175,7 +175,7 @@ $dateArr = array_reverse($dateArr);
       </div>
     </div>
   </div>
-  
+
   <div class="col-lg-6 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
@@ -194,7 +194,7 @@ $dateArr = array_reverse($dateArr);
           </div>
         </div>
       </div>
-      
+
       <div class="card-footer ">
         <hr>
         <div class="stats">
@@ -306,11 +306,24 @@ $dateArr = array_reverse($dateArr);
 	  </div> -->
 
       <div class="card-body">
-			<div id="reportrange">
-				<i class="fa fa-calendar"></i>
-				<span></span> <i class="fa fa-caret-down"></i>
-			</div>
-			<br>
+
+      <div class="row">
+        <div class="col-3">
+          <div id="reportrange">
+    				<i class="fa fa-calendar"></i>
+    				<span></span> <i class="fa fa-caret-down"></i>
+    			</div>
+    			<br>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+          <div id="reportrange">
+    				<i class="fa fa-calendar"></i>
+    				<span></span> <i class="fa fa-caret-down"></i>
+    			</div>
+    			<br>
+        </div>
+      </div>
 
 			<div class="chartWrapper" width="1000" height="400">
 				<!--<canvas id="dummy" width="1000" height="400" style="position: absolute"></canvas>
@@ -372,3 +385,4 @@ $dateArr = array_reverse($dateArr);
 </div>
 
 <?php include './includes/dashpages/main/assets/dashboard_chart.php'; ?>
+
