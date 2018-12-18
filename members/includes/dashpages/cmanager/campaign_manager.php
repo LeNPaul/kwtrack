@@ -29,22 +29,6 @@ for ($j = 1; $j < 60; $j++) {
 
 ?>
 
-<!--
-
-  Radio version of tabs.
-
-  Requirements:
-  - not rely on specific IDs for CSS (the CSS shouldn't need to know specific IDs)
-  - flexible for any number of unkown tabs [2-6]
-  - accessible
-
-  Caveats:
-  - since these are checkboxes the tabs not tab-able, need to use arrow keys
-
-  Also worth reading:
-  http://simplyaccessible.com/article/danger-aria-tabs/
--->
-
 <div class="tabset">
   <!-- Tab 1 -->
   <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>

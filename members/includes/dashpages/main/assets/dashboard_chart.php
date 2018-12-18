@@ -34,7 +34,7 @@
   var ctx = document.getElementById("lineChart");
   var adSpendArr = <?= json_encode($adSpendArr); ?>;
   var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
-  var ppcAcosArr = <?= json_encode($acos); ?>;
+  var ppcAcosArr = <?= json_encode($acosArr); ?>;
   var dateArr = <?= json_encode($dateArr); ?>;
 
   Chart.defaults.LineWithLine = Chart.defaults.line;
@@ -342,4 +342,3 @@
   });*/
 
 </script>
-
