@@ -192,12 +192,7 @@ $dateArr = array_reverse($dateArr);
 		<canvas id="pieChart" width="1000" height="400"></canvas>
 	  </div> -->
 
-      <div class="card-body">
-			<div id="reportrange">
-				<i class="fa fa-calendar"></i>
-				<span></span> <i class="fa fa-caret-down"></i>
-			</div>
-			<br>
+    <div class="card-body">
 
 			<div class="chartWrapper" width="1000" height="400">
 				<!--<canvas id="dummy" width="1000" height="400" style="position: absolute"></canvas>
@@ -205,6 +200,13 @@ $dateArr = array_reverse($dateArr);
 				<canvas id="tooltips" width="1000" height="400" style="top:0;, left:0;, position: absolute"></canvas>-->
 				<canvas id="lineChart" width="1000" height="400" ></canvas>
 			</div>
+
+			<br>
+			<div id="reportrange">
+				<i class="fa fa-calendar"></i>
+				<span></span> <i class="fa fa-caret-down"></i>
+			</div>
+
 	  </div>
 
       <div class="card-footer ">
