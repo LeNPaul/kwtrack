@@ -71,7 +71,7 @@
   var lineData = {
     labels: dateArr,
     datasets: [{
-      label: "Ad Spend",
+      label: chartData[0][0],
       yAxisID: 'A',
       data: adSpendArr,
       fill: false,
@@ -86,7 +86,7 @@
       borderWidth: 1.5,
       borderColor: lineColors[0]
     }, {
-      label: "PPC Sales",
+      label: chartData[1][0],
       yAxisID: 'A',
       data: ppcSalesArr,
       fill: false,
@@ -101,7 +101,7 @@
       borderWidth: 1.5,
       borderColor: lineColors[1]
     }, {
-      label: "PPC ACoS",
+      label: chartData[2][0],
       yAxisID: 'B',
       data: ppcAcosArr,
       fill: false,
@@ -342,4 +342,3 @@
   });*/
 
 </script>
-
