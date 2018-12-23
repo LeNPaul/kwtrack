@@ -31,10 +31,22 @@
 	$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
   });
 
+  // Dashboard chart object
   var ctx = document.getElementById("lineChart");
-  var adSpendArr = <?= json_encode($adSpendArr); ?>;
-  var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
-  var ppcAcosArr = <?= json_encode($acos); ?>;
+
+  // Other
+  var ppcAcosArr     = <?= json_encode($acos); ?>;
+
+  // Data for dashboard chart
+  var adSpendArr     = <?= json_encode($adSpendArr); ?>;
+  var ppcSalesArr    = <?= json_encode($ppcSalesArr); ?>;
+  var impressionsArr = <?= json_encode($impressionsArr); ?>;
+  var unitsSoldArr   = <?= json_encode($unitsSoldArr); ?>;
+  var clicksArr      = <?= json_encode($clicksArr); ?>;
+  var ctrArr         = <?= json_encode($ctrArr); ?>;
+  var avgCpc         = <?= json_encode($avgCpc); ?>;
+
+  // Date array
   var dateArr = <?= json_encode($dateArr); ?>;
 
   Chart.defaults.LineWithLine = Chart.defaults.line;
@@ -324,6 +336,19 @@
 
     myChart.update();
   }
+
+
+
+  function change() {
+
+    chart.data.datasets[0].data = impressionsArr;
+    chart.data.datasets[1].data = unitsSoldArr;
+    chart.data.datasets[2].data = clicksArr;
+
+		chart.update();
+
+	}
+
 
 
   /*$("#lineChart").on("mousemove", function(evt) {

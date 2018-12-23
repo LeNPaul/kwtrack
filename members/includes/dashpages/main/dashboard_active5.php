@@ -207,6 +207,8 @@ $dateArr = array_reverse($dateArr);
 				<span></span> <i class="fa fa-caret-down"></i>
 			</div>
 
+			<button type="button" class="btn btn-secondary" onclick="change()">Change</button>
+
 	  </div>
 
       <div class="card-footer ">
