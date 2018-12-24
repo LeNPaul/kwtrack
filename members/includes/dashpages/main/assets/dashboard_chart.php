@@ -76,10 +76,10 @@
   });
 
   // Line colors to be used for the chart line colour
-  var lineColors = ["#be70c0", "#2096BA", "#df6e21"]
+  var lineColors = ["#be70c0", "#2096BA", "#df6e21", "#d14785"]
 
   // Array containing label and corresponding data
-  var chartData = [["Ad Spend", adSpendArr],["PPC Sales", ppcSalesArr],["PPC ACoS", ppcAcosArr]]
+  var chartData = [["Ad Spend", adSpendArr],["PPC Sales", ppcSalesArr]]
 
   var lineData = {
     labels: dateArr,
@@ -113,9 +113,7 @@
 
       borderWidth: 1.5,
       borderColor: lineColors[1]
-    }/*, {
-      //borderColor: "#d14785"
-    }*/]
+    }]
   };
 
   var chart = new Chart(ctx, {
