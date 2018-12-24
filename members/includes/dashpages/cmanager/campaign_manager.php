@@ -29,118 +29,57 @@ for ($j = 1; $j < 60; $j++) {
 
 ?>
 
-<!--
+<h2 class="text-center">Campaign Manager</h2>
 
-  Radio version of tabs.
-
-  Requirements:
-  - not rely on specific IDs for CSS (the CSS shouldn't need to know specific IDs)
-  - flexible for any number of unkown tabs [2-6]
-  - accessible
-
-  Caveats:
-  - since these are checkboxes the tabs not tab-able, need to use arrow keys
-
-  Also worth reading:
-  http://simplyaccessible.com/article/danger-aria-tabs/
--->
+<div>
+	<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
+		<i class="fa fa-calendar"></i>
+		<span></span> <i class="fa fa-caret-down"></i>
+	</div>
+</div>
+<br />
+<div>
+	<nav aria-label="breadcrumb" id="cmanager_breadcrumbs" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="all_link">All Campaigns</a></h6></li>
+		</ol>
+	</nav>
+</div>
 
 <div class="tabset">
   <!-- Tab 1 -->
-  <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
-  <label for="tab1">Märzen</label>
-  <!-- Tab 2 -->
-  <input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
-  <label for="tab2">Rauchbier</label>
-  <!-- Tab 3 -->
-  <input type="radio" name="tabset" id="tab3" aria-controls="dunkles">
-  <label for="tab3">Dunkles Bock</label>
+  <input type="radio" name="tabset" id="tab1" aria-controls="cmanager" checked>
+  <label for="tab1">Ad Groups</label>
+  <!-- Tab 2 -- TODO: FIX BUG WHERE ARROW KEY CAN NAVIGATE TO HIDDEN TAB -->
+  <input type="radio" name="tabset" id="tab2" aria-controls="neg_keywords">
+  <label id="neg_keywords_tab" for="tab2" style="visibility:hidden;">Negative Keywords</label>
 
   <div class="tab-panels">
-    <section id="marzen" class="tab-panel">
-      <h2>6A. Märzen</h2>
-      <p><strong>Overall Impression:</strong> An elegant, malty German amber lager with a clean, rich, toasty and bready malt flavor, restrained bitterness, and a dry finish that encourages another drink. The overall malt impression is soft, elegant, and complex, with a rich aftertaste that is never cloying or heavy.</p>
-      <p><strong>History:</strong> As the name suggests, brewed as a stronger “March beer” in March and lagered in cold caves over the summer. Modern versions trace back to the lager developed by Spaten in 1841, contemporaneous to the development of Vienna lager. However, the Märzen name is much older than 1841; the early ones were dark brown, and in Austria the name implied a strength band (14 °P) rather than a style. The German amber lager version (in the Viennese style of the time) was first served at Oktoberfest in 1872, a tradition that lasted until 1990 when the golden Festbier was adopted as the standard festival beer.</p>
-  </section>
-    <section id="rauchbier" class="tab-panel">
-      <h2>6B. Rauchbier</h2>
-      <p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
-      <p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
-    </section>
-    <section id="dunkles" class="tab-panel">
-      <h2>6C. Dunkles Bock</h2>
-      <p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
-      <p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
-    </section>
-  </div>
-
-</div>
-
-<h2 class="text-center">Campaign Manager</h2>
-
-<!-- Top nav bar for adgroups + keywords -->
-<ul class="nav nav-pills nav-pills-primary nav-pills-icons justify-content-center" id="cmanager_top_nav" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active show" data-toggle="tab" href="#adgroups" role="tablist">
-      <i class="now-ui-icons objects_umbrella-13"></i>Ad Groups
-    </a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#negKeywords" role="tablist">
-      <i class="now-ui-icons shopping_shop"></i> Negative Keywords
-    </a>
-  </li>
-</ul>
-
-<!--  Top nav bar contents for each tab -->
-<div class="tab-content tab-space tab-subcategories">
-  <div class="tab-pane active show" id="adgroups">
-
-		<div>
-			<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
-				<i class="fa fa-calendar"></i>
-				<span></span> <i class="fa fa-caret-down"></i>
+    <section id="cmanager" class="tab-panel">
+			<div class="row">
+			  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+			    <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
+			  </div>
 			</div>
-		</div>
-		<br />
-		<div>
-			<nav aria-label="breadcrumb" id="cmanager_breadcrumbs" role="navigation">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="all_link">All Campaigns</a></h6></li>
-				</ol>
-			</nav>
-		</div>
+  	</section>
 
-		<div class="row">
-		  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-		    <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
-		  </div>
-		</div>
-
+    <section id="neg_keywords" class="tab-panel">
+			<div class="row">
+			  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+			    <table id="neg_keyword_table" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
+			  </div>
+			</div>
+		</section>
   </div>
-
-  <div class="tab-pane" id="negKeywords">
-    Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
-    <br>
-    <br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
-  </div>
-
-
 </div>
-
-
-
-
-
 
 <script>
 // 1 for campaign, 2 for adgroup(need campaign), 3 for keyword(need adgroup maybe)
 var dataTableFlag 	= 1;
+var negKwTableFlag	= 0;
 var currentCampaign = "";
 var adGroupName 		= "";
 var allCampaigns 		= "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
-
 
 var sleep = function (time) {
   return new Promise( function(resolve){ return setTimeout(resolve, time); } );
@@ -582,11 +521,14 @@ $(document).ready( function () {
 
   //breadcrumbs ALL CAMPAIGNS click
   $(".breadcrumb").on("click", ".all_link", function() {
-    dt.destroy();
-	$("#campaign_manager").empty();
+		// Hide negative keywords tab
+		$("#neg_keywords_tab").attr("style", "visibility: hidden");
 
-	dt = $("#campaign_manager").DataTable(campaignOptions);
-	$("#bc").html(allCampaigns);
+		dt.destroy();
+		$("#campaign_manager").empty();
+
+		dt = $("#campaign_manager").DataTable(campaignOptions);
+		$("#bc").html(allCampaigns);
 
   });
 
@@ -600,6 +542,8 @@ $(document).ready( function () {
 
   //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
+		// Show negative keywords tab when user is in an ad group
+		$("#neg_keywords_tab").attr("style", "");
 
 	  currentCampaign     = $(this).html();
 	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;

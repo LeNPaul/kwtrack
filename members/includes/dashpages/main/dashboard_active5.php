@@ -23,6 +23,8 @@ $unitsSold   = new Metric($user_id, 'units_sold', count($a), $pdo);
 $clicks      = new Metric($user_id, 'clicks', count($a), $pdo);
 $ctr         = new Metric($user_id, 'ctr', count($a), $pdo);
 $avgCpc      = new Metric($user_id, 'avg_cpc', count($a), $pdo);
+$acos 			 = new Metric($user_id, 'acos', count($a), $pdo);
+$roas 			 = new Metric($user_id, 'roas', count($a), $pdo);
 
 $adSpendArr     = $adSpend->getMetricArr();
 $ppcSalesArr    = $ppcSales->getMetricArr();
@@ -31,22 +33,15 @@ $unitsSoldArr   = $unitsSold->getMetricArr();
 $clicksArr      = $clicks->getMetricArr();
 $ctrArr         = $ctr->getMetricArr();
 $avgCpc         = $avgCpc->getMetricArr();
+$acosArr 				= $acos->getAcosArr();
 
 $acos 			 = [];
 $displayACoS = 0;
 $adSpend 		 = array_sum($adSpendArr);
-$ppcSales 	 = array_sum($ppcSalesArr);
-$roas 			 = ($adSpend == 0) ? 0.00 : round($ppcSales / $adSpend, 2);
+$adSales 	 	 = $ppcSales->getMetric();
 
-for ($i = 0; $i < count($adSpendArr); $i++) {
-	if ($ppcSalesArr[$i] == 0) {
-		$acos[] = 0;
-	} else {
-		$acos[] = round((double)($adSpendArr[$i] / $ppcSalesArr[$i]) * 100, 2);
-	}
-}
-
-$displayACoS = ($ppcSales == 0) ? 0.00 : round((double)($adSpend / $ppcSales) * 100, 2);
+$displayACoS = ($adSales == 0) ? 0.00 : round((double)($adSpend / $adSales) * 100, 2);
+$displayRoas = ($adSpend == 0) ? 0.00 : round($adSales / $adSpend, 2);
 
 // Set the time zone to Pacific Time Zone (PT)
 date_default_timezone_set('America/Los_Angeles');
@@ -84,7 +79,7 @@ $dateArr = array_reverse($dateArr);
 
             <div style="overflow: hidden;">
               <p class="metric-name">Advertising Sales</p>
-              <p class="metric"><?= '$' . array_sum($ppcSalesArr) ?></p>
+              <p class="metric"><?= '$' . $adSales ?></p>
             </div>
             <hr style="border-top: dashed 1px rgb(196,194,187);" />
             <div style="overflow: hidden;">
@@ -99,7 +94,7 @@ $dateArr = array_reverse($dateArr);
             <hr style="border-top: dashed 1px rgb(196,194,187);" />
             <div style="overflow: hidden;">
               <p class="metric-name">ROAS</p>
-              <p class="metric"><?= '$' . $roas ?></p>
+              <p class="metric"><?= '$' . $displayRoas ?></p>
             </div>
             <hr style="border-top: dashed 1px rgb(196,194,187);" />
             <div style="overflow: hidden;">
