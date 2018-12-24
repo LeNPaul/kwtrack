@@ -31,10 +31,22 @@
 	$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
   });
 
+  // Dashboard chart object
   var ctx = document.getElementById("lineChart");
-  var adSpendArr = <?= json_encode($adSpendArr); ?>;
-  var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
-  var ppcAcosArr = <?= json_encode($acosArr); ?>;
+
+  // Other
+  var ppcAcosArr     = <?= json_encode($acos); ?>;
+
+  // Data for dashboard chart
+  var adSpendArr     = <?= json_encode($adSpendArr); ?>;
+  var ppcSalesArr    = <?= json_encode($ppcSalesArr); ?>;
+  var impressionsArr = <?= json_encode($impressionsArr); ?>;
+  var unitsSoldArr   = <?= json_encode($unitsSoldArr); ?>;
+  var clicksArr      = <?= json_encode($clicksArr); ?>;
+  var ctrArr         = <?= json_encode($ctrArr); ?>;
+  var avgCpc         = <?= json_encode($avgCpc); ?>;
+
+  // Date array
   var dateArr = <?= json_encode($dateArr); ?>;
 
   Chart.defaults.LineWithLine = Chart.defaults.line;
@@ -63,7 +75,7 @@
   });
 
   // Line colors to be used for the chart line colour
-  var lineColors = ["#df6e21", "#be70c0", "#2096BA"]
+  var lineColors = ["#be70c0", "#2096BA", "#df6e21"]
 
   // Array containing label and corresponding data
   var chartData = [["Ad Spend", adSpendArr],["PPC Sales", ppcSalesArr],["PPC ACoS", ppcAcosArr]]
@@ -87,7 +99,7 @@
       borderColor: lineColors[0]
     }, {
       label: chartData[1][0],
-      yAxisID: 'A',
+      yAxisID: 'B',
       data: ppcSalesArr,
       fill: false,
 
@@ -100,23 +112,9 @@
 
       borderWidth: 1.5,
       borderColor: lineColors[1]
-    }, {
-      label: chartData[2][0],
-      yAxisID: 'B',
-      data: ppcAcosArr,
-      fill: false,
-
-      pointRadius: 0,
-      hoverRadius: 6,
-      pointBorderColor: '#ffffff',
-      pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: lineColors[2],
-      hoverBorderWidth: 3,
-
-      borderWidth: 1.5,
-      borderColor: lineColors[2]
+    }/*, {
       //borderColor: "#d14785"
-    }]
+    }*/]
   };
 
   var chart = new Chart(ctx, {
@@ -214,7 +212,7 @@
             tooltipEl.style.left = newPos + 'px';
           }
 
-          console.log(position);
+          //console.log(position);
           tooltipEl.style.border = '1px rgba(85, 85, 85, 0.15) solid';
           tooltipEl.style.borderRadius = '5px';
           tooltipEl.style.opacity = 1;
@@ -225,7 +223,7 @@
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
           tooltipEl.style.padding = '10 px 15px 5px' + '15 px';
           tooltipEl.style.pointerEvents = 'none';
-	  tooltipEl.style.width = '200px';
+	        tooltipEl.style.width = '200px';
         },
         mode: 'index',
         intersect: false
@@ -325,6 +323,36 @@
     myChart.update();
   }
 
+  function change(event) {
+
+    var value = this.options[this.selectedIndex].value;
+
+    if (value == "adSpendArr") {
+      chart.data.datasets[0].data = adSpendArr;
+      chart.data.datasets[0].label = "Ad Spend";
+    } else if (value == "impressionsArr") {
+      chart.data.datasets[0].data = impressionsArr;
+      chart.data.datasets[0].label = "Impressions";
+    } else if (value == "unitsSoldArr") {
+      chart.data.datasets[0].data = unitsSoldArr;
+      chart.data.datasets[0].label = "Units Sold";
+    } else if (value == "ppcSalesArr") {
+      chart.data.datasets[1].data = ppcSalesArr;
+      chart.data.datasets[1].label = "PPC Sales";
+    } else if (value == "clicksArr") {
+      chart.data.datasets[1].data = clicksArr;
+      chart.data.datasets[1].label = "Clicks";
+    } else if (value == "ctrArr") {
+      chart.data.datasets[1].data = ctrArr;
+      chart.data.datasets[1].label = "CTR";
+    } else if (value == "avgCpc") {
+      chart.data.datasets[1].data = avgCpc;
+      chart.data.datasets[1].label = "Average CPC";
+    }
+
+		chart.update();
+
+	}
 
   /*$("#lineChart").on("mousemove", function(evt) {
     var element = $("#cursor"),

@@ -187,12 +187,25 @@ $dateArr = array_reverse($dateArr);
 		<canvas id="pieChart" width="1000" height="400"></canvas>
 	  </div> -->
 
-      <div class="card-body">
-			<div id="reportrange">
-				<i class="fa fa-calendar"></i>
-				<span></span> <i class="fa fa-caret-down"></i>
+    <div class="card-body">
+
+		<div class="row">
+			<div class="col-sm-6">
+				<select class="custom-select" onchange="change.call(this, event)">
+					<option selected value="adSpendArr">Ad Spend</option>
+					<option value="impressionsArr">Impressions</option>
+					<option value="unitsSoldArr">Units Sold</option>
+				</select>
 			</div>
-			<br>
+			<div class="col-sm-6">
+				<select class="custom-select" onchange="change.call(this, event)">
+					<option selected value="ppcSalesArr">PPC Sales</option>
+				  <option value="clicksArr">Clicks</option>
+				  <option value="ctrArr">CTR</option>
+				  <option value="avgCpc">Average CPC</option>
+				</select>
+			</div>
+		</div>
 
 			<div class="chartWrapper" width="1000" height="400">
 				<!--<canvas id="dummy" width="1000" height="400" style="position: absolute"></canvas>
@@ -200,6 +213,13 @@ $dateArr = array_reverse($dateArr);
 				<canvas id="tooltips" width="1000" height="400" style="top:0;, left:0;, position: absolute"></canvas>-->
 				<canvas id="lineChart" width="1000" height="400" ></canvas>
 			</div>
+
+			<br>
+			<div id="reportrange">
+				<i class="fa fa-calendar"></i>
+				<span></span> <i class="fa fa-caret-down"></i>
+			</div>
+
 	  </div>
 
       <div class="card-footer ">
