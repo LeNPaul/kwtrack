@@ -198,14 +198,14 @@ $dateArr = array_reverse($dateArr);
 			<div class="col-sm-6">
 				<select class="custom-select" onchange="change.call(this, event)">
 					<option selected value="adSpendArr">Ad Spend</option>
-					<option value="ppcSalesArr">PPC Sales</option>
 					<option value="impressionsArr">Impressions</option>
 					<option value="unitsSoldArr">Units Sold</option>
 				</select>
 			</div>
 			<div class="col-sm-6">
 				<select class="custom-select" onchange="change.call(this, event)">
-				  <option selected value="clicksArr">Clicks</option>
+					<option selected value="ppcSalesArr">PPC Sales</option>
+				  <option value="clicksArr">Clicks</option>
 				  <option value="ctrArr">CTR</option>
 				  <option value="avgCpc">Average CPC</option>
 				</select>

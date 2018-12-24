@@ -75,7 +75,7 @@
   });
 
   // Line colors to be used for the chart line colour
-  var lineColors = ["#df6e21", "#be70c0", "#2096BA"]
+  var lineColors = ["#be70c0", "#2096BA", "#df6e21"]
 
   // Array containing label and corresponding data
   var chartData = [["Ad Spend", adSpendArr],["PPC Sales", ppcSalesArr],["PPC ACoS", ppcAcosArr]]
@@ -99,7 +99,7 @@
       borderColor: lineColors[0]
     }, {
       label: chartData[1][0],
-      yAxisID: 'A',
+      yAxisID: 'B',
       data: ppcSalesArr,
       fill: false,
 
@@ -113,20 +113,6 @@
       borderWidth: 1.5,
       borderColor: lineColors[1]
     }/*, {
-      label: chartData[2][0],
-      yAxisID: 'B',
-      data: ppcAcosArr,
-      fill: false,
-
-      pointRadius: 0,
-      hoverRadius: 6,
-      pointBorderColor: '#ffffff',
-      pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: lineColors[2],
-      hoverBorderWidth: 3,
-
-      borderWidth: 1.5,
-      borderColor: lineColors[2]
       //borderColor: "#d14785"
     }*/]
   };
@@ -237,7 +223,7 @@
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
           tooltipEl.style.padding = '10 px 15px 5px' + '15 px';
           tooltipEl.style.pointerEvents = 'none';
-	  tooltipEl.style.width = '200px';
+	        tooltipEl.style.width = '200px';
         },
         mode: 'index',
         intersect: false
@@ -343,18 +329,25 @@
 
     if (value == "adSpendArr") {
       chart.data.datasets[0].data = adSpendArr;
-    } else if (value == "ppcSalesArr") {
-      chart.data.datasets[0].data = ppcSalesArr;
+      chart.data.datasets[0].label = "Ad Spend";
     } else if (value == "impressionsArr") {
       chart.data.datasets[0].data = impressionsArr;
+      chart.data.datasets[0].label = "Impressions";
     } else if (value == "unitsSoldArr") {
       chart.data.datasets[0].data = unitsSoldArr;
+      chart.data.datasets[0].label = "Units Sold";
+    } else if (value == "ppcSalesArr") {
+      chart.data.datasets[1].data = ppcSalesArr;
+      chart.data.datasets[1].label = "PPC Sales";
     } else if (value == "clicksArr") {
       chart.data.datasets[1].data = clicksArr;
+      chart.data.datasets[1].label = "Clicks";
     } else if (value == "ctrArr") {
       chart.data.datasets[1].data = ctrArr;
+      chart.data.datasets[1].label = "CTR";
     } else if (value == "avgCpc") {
       chart.data.datasets[1].data = avgCpc;
+      chart.data.datasets[1].label = "Average CPC";
     }
 
 		chart.update();
