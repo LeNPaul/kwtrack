@@ -195,6 +195,7 @@ $dateArr = array_reverse($dateArr);
 					<option selected value="adSpendArr">Ad Spend</option>
 					<option value="impressionsArr">Impressions</option>
 					<option value="unitsSoldArr">Units Sold</option>
+					<option value="avgCpc">Average CPC</option>
 				</select>
 			</div>
 			<div class="col-sm-6">
@@ -202,7 +203,7 @@ $dateArr = array_reverse($dateArr);
 					<option selected value="ppcSalesArr">PPC Sales</option>
 				  <option value="clicksArr">Clicks</option>
 				  <option value="ctrArr">CTR</option>
-				  <option value="avgCpc">Average CPC</option>
+					<option value="acosArr">ACoS</option>
 				</select>
 			</div>
 		</div>

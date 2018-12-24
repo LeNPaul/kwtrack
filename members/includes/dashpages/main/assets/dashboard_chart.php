@@ -34,9 +34,6 @@
   // Dashboard chart object
   var ctx = document.getElementById("lineChart");
 
-  // Other
-  var ppcAcosArr     = <?= json_encode($acosArr); ?>;
-
   // Data for dashboard chart
   var adSpendArr     = <?= json_encode($adSpendArr); ?>;
   var ppcSalesArr    = <?= json_encode($ppcSalesArr); ?>;
@@ -45,6 +42,7 @@
   var clicksArr      = <?= json_encode($clicksArr); ?>;
   var ctrArr         = <?= json_encode($ctrArr); ?>;
   var avgCpc         = <?= json_encode($avgCpc); ?>;
+  var acosArr        = <?= json_encode($acosArr); ?>;
 
   // Date array
   var dateArr = <?= json_encode($dateArr); ?>;
@@ -336,6 +334,12 @@
     } else if (value == "unitsSoldArr") {
       chart.data.datasets[0].data = unitsSoldArr;
       chart.data.datasets[0].label = "Units Sold";
+    } else if (value == "avgCpc") {
+      chart.data.datasets[0].data = avgCpc;
+      chart.data.datasets[0].label = "Average CPC";
+    } else if (value == "acosArr") {
+      chart.data.datasets[1].data = acosArr;
+      chart.data.datasets[1].label = "ACoS";
     } else if (value == "ppcSalesArr") {
       chart.data.datasets[1].data = ppcSalesArr;
       chart.data.datasets[1].label = "PPC Sales";
@@ -345,9 +349,6 @@
     } else if (value == "ctrArr") {
       chart.data.datasets[1].data = ctrArr;
       chart.data.datasets[1].label = "CTR";
-    } else if (value == "avgCpc") {
-      chart.data.datasets[1].data = avgCpc;
-      chart.data.datasets[1].label = "Average CPC";
     }
 
 		chart.update();
