@@ -31,69 +31,55 @@ for ($j = 1; $j < 60; $j++) {
 
 <h2 class="text-center">Campaign Manager</h2>
 
-<!-- Top nav bar for adgroups + keywords -->
-<ul class="nav nav-pills nav-pills-primary nav-pills-icons justify-content-center" id="cmanager_top_nav" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active show" data-toggle="tab" href="#adgroups" role="tablist">
-      <i class="now-ui-icons objects_umbrella-13"></i>Ad Groups
-    </a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#negKeywords" role="tablist">
-      <i class="now-ui-icons shopping_shop"></i> Negative Keywords
-    </a>
-  </li>
-</ul>
-
-<!--  Top nav bar contents for each tab -->
-<div class="tab-content tab-space tab-subcategories">
-  <div class="tab-pane active show" id="adgroups">
-
-		<div>
-			<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
-				<i class="fa fa-calendar"></i>
-				<span></span> <i class="fa fa-caret-down"></i>
-			</div>
-		</div>
-		<br />
-		<div>
-			<nav aria-label="breadcrumb" id="cmanager_breadcrumbs" role="navigation">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="all_link">All Campaigns</a></h6></li>
-				</ol>
-			</nav>
-		</div>
-
-		<div class="row">
-		  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-		    <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
-		  </div>
-		</div>
-
-  </div>
-
-  <div class="tab-pane" id="negKeywords">
-    Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
-    <br>
-    <br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
-  </div>
-
-
+<div>
+	<div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
+		<i class="fa fa-calendar"></i>
+		<span></span> <i class="fa fa-caret-down"></i>
+	</div>
+</div>
+<br />
+<div>
+	<nav aria-label="breadcrumb" id="cmanager_breadcrumbs" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><h6 id="bc"><a href="javascript:void(0)" class="all_link">All Campaigns</a></h6></li>
+		</ol>
+	</nav>
 </div>
 
+<div class="tabset">
+  <!-- Tab 1 -->
+  <input type="radio" name="tabset" id="tab1" aria-controls="cmanager" checked>
+  <label for="tab1">Ad Groups</label>
+  <!-- Tab 2 -- TODO: FIX BUG WHERE ARROW KEY CAN NAVIGATE TO HIDDEN TAB -->
+  <input type="radio" name="tabset" id="tab2" aria-controls="neg_keywords">
+  <label id="neg_keywords_tab" for="tab2" style="visibility:hidden;">Negative Keywords</label>
 
+  <div class="tab-panels">
+    <section id="cmanager" class="tab-panel">
+			<div class="row">
+			  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+			    <table id="campaign_manager" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
+			  </div>
+			</div>
+  	</section>
 
-
-
+    <section id="neg_keywords" class="tab-panel">
+			<div class="row">
+			  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+			    <table id="neg_keyword_table" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
+			  </div>
+			</div>
+		</section>
+  </div>
+</div>
 
 <script>
 // 1 for campaign, 2 for adgroup(need campaign), 3 for keyword(need adgroup maybe)
 var dataTableFlag 	= 1;
+var negKwTableFlag	= 0;
 var currentCampaign = "";
 var adGroupName 		= "";
 var allCampaigns 		= "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
-
 
 var sleep = function (time) {
   return new Promise( function(resolve){ return setTimeout(resolve, time); } );
@@ -535,23 +521,18 @@ $(document).ready( function () {
 
   //breadcrumbs ALL CAMPAIGNS click
   $(".breadcrumb").on("click", ".all_link", function() {
-    dt.destroy();
-	$("#campaign_manager").empty();
+		// Hide negative keywords tab
+		$("#neg_keywords_tab").attr("style", "visibility: hidden");
 
-	dt = $("#campaign_manager").DataTable(campaignOptions);
-	$("#bc").html(allCampaigns);
-  });
-
-  $(".breadcrumb").on("click", ".c_link", function() {
-	dt.destroy();
-	$("#campaign_manager").empty();
-
-	dt = $("#campaign_manager").DataTable(adgrOptions);
-	$("#bc").html(allCampaigns + " <b>></b> " + currentCampaign);
-  });
+		dt.destroy();
+		$("#campaign_manager").empty();
+		dt = $("#campaign_manager").DataTable(campaignOptions);
+		$("#bc").html(allCampaigns);
 
   //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
+		// Show negative keywords tab when user is in an ad group
+		$("#neg_keywords_tab").attr("style", "");
 	  currentCampaign     = $(this).html();
 	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
 	  console.log(campaignDataBack);

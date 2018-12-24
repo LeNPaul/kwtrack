@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Amazon API Test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+      table { width: 100%; text-align: left; }
+    </style>
+  </head>
+
+  <body>
+    <label for="keyword1">Keyword 1</label>
+    <input type="text" name="keyword1" id="keyword1" required />
+    <br />
+
+
+    <label for="keyword2">Keyword 2</label>
+    <input type="text" name="keyword2" id="keyword2" />
+    <br />
+
+    <label for="keyword3">Keyword 3</label>
+    <input type="text" name="keyword3" id="keyword3" />
+    <br />
+
+    <label for="keyword4">Keyword 4</label>
+    <input type="text" name="keyword4" id="keyword4" />
+    <br />
+
+    <button type="button" id="btnSubmit">Get search trends!</button>
+
+    <br />
+    <h3>Results:</h3>
+
+    <div id="results" style="width: 500px"></div>
+
+    <script>
+      $("#btnSubmit").on('click', () => {
+        const keyword1 = $("#keyword1").val();
+        const keyword2 = $("#keyword2").val();
+        const keyword3 = $("#keyword3").val();
+        const keyword4 = $("#keyword4").val();
+
+        $("#btnSubmit").attr("disabled", "disabled");
+
+        //Make a POST request with the keywords
+        $.post('/amz-test.php', { keyword1, keyword2, keyword3, keyword4 }, (results) => {
+          const data = {};
+          let resultText = '<table><thead><tr><th>Keyword</th><th>Exact</th><th>Broad</th></tr></thead><tbody>';
+
+          for (let result of results) {
+            if (data[result.keyword] === undefined) {
+              data[result.keyword] = {};
+            }
+            
+            data[result.keyword][result.matchType] = Math.round(result.impression);
+          }
+
+          for (let keyword of Object.keys(data)) resultText += `<tr><td>${keyword}</td><td>${data[keyword].EXACT}</td><td>${data[keyword].BROAD}</td></tr>`;
+
+          resultText += '</tbody></table>';
+
+          console.log(results);
+          $("#results").html(resultText);
+          $("#btnSubmit").removeAttr("disabled");
+        });
+      });
+      $('input[type=text]').on('keypress', (e) => {
+        if (e.keyCode == 13) $("#btnSubmit").trigger('click');
+      });
+    </script>
+  </body>
+</html>

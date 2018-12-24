@@ -74,6 +74,7 @@ class Client
         $url = "https://{$this->tokenUrl}";
 
         $request = new CurlRequest();
+
         $request->setOption(CURLOPT_URL, $url);
         $request->setOption(CURLOPT_HTTPHEADER, $headers);
         $request->setOption(CURLOPT_USERAGENT, $this->userAgent);
@@ -81,9 +82,7 @@ class Client
         $request->setOption(CURLOPT_POSTFIELDS, rtrim($data, "&"));
         $request->setOption(CURLOPT_VERBOSE, true);
 
-
         $response = $this->_executeRequest($request);
-        echo $request->getError();
 
         $response_array = json_decode($response["response"], true);
 
@@ -548,6 +547,9 @@ class Client
         $response = $request->execute();
         $this->requestId = $request->requestId;
         $response_info = $request->getInfo();
+
+        echo $request->getError();
+
         $request->close();
 
         if ($response_info["http_code"] == 307) {
