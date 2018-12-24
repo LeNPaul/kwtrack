@@ -540,7 +540,6 @@ $(document).ready( function () {
 
 	dt = $("#campaign_manager").DataTable(campaignOptions);
 	$("#bc").html(allCampaigns);
-
   });
 
   $(".breadcrumb").on("click", ".c_link", function() {
@@ -553,7 +552,6 @@ $(document).ready( function () {
 
   //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
-
 	  currentCampaign     = $(this).html();
 	  var campaignDataBack = <?= json_encode($campaignDataBack) ?>;
 	  console.log(campaignDataBack);
@@ -786,7 +784,6 @@ $(document).ready( function () {
   //when user clicks on an adgroup link
   $("#campaign_manager").on("click", ".ag_link",  function() {
     adgroupName     = $(this).text();
-
     // backend adgroup data already stored in adgroupDataBack
     dt.destroy();
     $("#campaign_manager").empty();
@@ -1250,6 +1247,7 @@ $(document).ready( function () {
 	  for (x = 0; x < keywordData.length; x++) {
 		  for (y = endArr; y <= startArr; y++) {
 			  impressionsSum += keywordData[x][5][y];
+			  console.log(impressionsSum);
 			  clicksSum 	 += keywordData[x][6][y];
 			  ctrAvg 		 += keywordData[x][7][y];
 			  adSpendSum 	 += keywordData[x][8][y];
