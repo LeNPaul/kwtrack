@@ -202,8 +202,8 @@ $dateArr = array_reverse($dateArr);
 				<select class="custom-select" onchange="change.call(this, event)">
 					<option selected value="ppcSalesArr">PPC Sales</option>
 				  <option value="clicksArr">Clicks</option>
-				  <option value="ctrArr">CTR</option>
 					<option value="acosArr">ACoS</option>
+				  <option value="ctrArr">CTR</option>
 				</select>
 			</div>
 		</div>
