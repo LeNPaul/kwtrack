@@ -112,7 +112,7 @@
 
       borderWidth: 1.5,
       borderColor: lineColors[1]
-    }, {
+    }/*, {
       label: chartData[2][0],
       yAxisID: 'B',
       data: ppcAcosArr,
@@ -128,7 +128,7 @@
       borderWidth: 1.5,
       borderColor: lineColors[2]
       //borderColor: "#d14785"
-    }]
+    }*/]
   };
 
   var chart = new Chart(ctx, {
@@ -226,7 +226,7 @@
             tooltipEl.style.left = newPos + 'px';
           }
 
-          console.log(position);
+          //console.log(position);
           tooltipEl.style.border = '1px rgba(85, 85, 85, 0.15) solid';
           tooltipEl.style.borderRadius = '5px';
           tooltipEl.style.opacity = 1;
@@ -337,19 +337,29 @@
     myChart.update();
   }
 
+  function change(event) {
 
+    var value = this.options[this.selectedIndex].value;
 
-  function change() {
-
-    chart.data.datasets[0].data = impressionsArr;
-    chart.data.datasets[1].data = unitsSoldArr;
-    chart.data.datasets[2].data = clicksArr;
+    if (value == "adSpendArr") {
+      chart.data.datasets[0].data = adSpendArr;
+    } else if (value == "ppcSalesArr") {
+      chart.data.datasets[0].data = ppcSalesArr;
+    } else if (value == "impressionsArr") {
+      chart.data.datasets[0].data = impressionsArr;
+    } else if (value == "unitsSoldArr") {
+      chart.data.datasets[0].data = unitsSoldArr;
+    } else if (value == "clicksArr") {
+      chart.data.datasets[1].data = clicksArr;
+    } else if (value == "ctrArr") {
+      chart.data.datasets[1].data = ctrArr;
+    } else if (value == "avgCpc") {
+      chart.data.datasets[1].data = avgCpc;
+    }
 
 		chart.update();
 
 	}
-
-
 
   /*$("#lineChart").on("mousemove", function(evt) {
     var element = $("#cursor"),

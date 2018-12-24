@@ -194,6 +194,24 @@ $dateArr = array_reverse($dateArr);
 
     <div class="card-body">
 
+		<div class="row">
+			<div class="col-sm-6">
+				<select class="custom-select" onchange="change.call(this, event)">
+					<option selected value="adSpendArr">Ad Spend</option>
+					<option value="ppcSalesArr">PPC Sales</option>
+					<option value="impressionsArr">Impressions</option>
+					<option value="unitsSoldArr">Units Sold</option>
+				</select>
+			</div>
+			<div class="col-sm-6">
+				<select class="custom-select" onchange="change.call(this, event)">
+				  <option selected value="clicksArr">Clicks</option>
+				  <option value="ctrArr">CTR</option>
+				  <option value="avgCpc">Average CPC</option>
+				</select>
+			</div>
+		</div>
+
 			<div class="chartWrapper" width="1000" height="400">
 				<!--<canvas id="dummy" width="1000" height="400" style="position: absolute"></canvas>
 				<canvas id="cursor" width="1000" height="400" style="top:0; left:0; position: absolute"></canvas>
@@ -206,8 +224,6 @@ $dateArr = array_reverse($dateArr);
 				<i class="fa fa-calendar"></i>
 				<span></span> <i class="fa fa-caret-down"></i>
 			</div>
-
-			<button type="button" class="btn btn-secondary" onclick="change()">Change</button>
 
 	  </div>
 
