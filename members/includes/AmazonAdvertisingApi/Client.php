@@ -84,7 +84,7 @@ class Client
 
         $response = $this->_executeRequest($request);
 
-        $response_array = json_decode($response["response"], true);
+        $response_array = json_decode($response["response"], true, 512, JSON_BIGINT_AS_STRING);
 
         if (array_key_exists("access_token", $response_array)) {
             $this->config["accessToken"] = $response_array["access_token"];
@@ -99,7 +99,7 @@ class Client
     {
       do {
         $report = $this->getReport($this->reportId);
-        $result2 = json_decode($report['response'], true);
+        $result2 = json_decode($report['response'], true, 512, JSON_BIGINT_AS_STRING);
         if (array_key_exists('status', $result2)) {
           $status = $result2['status'];
         } else {
@@ -115,7 +115,7 @@ class Client
     {
       do {
         $report = $this->getSnapshot($this->snapshotId);
-        $result2 = json_decode($report['response'], true);
+        $result2 = json_decode($report['response'], true, 512, JSON_BIGINT_AS_STRING);
         if (array_key_exists('status', $result2)) {
           $status = $result2['status'];
         } else {
@@ -140,7 +140,7 @@ class Client
 
 
       // Get the report id so we can use it to get the report
-      $result         = json_decode($result['response'], true);
+      $result         = json_decode($result['response'], true, 512, JSON_BIGINT_AS_STRING);
       $this->reportId = $result['reportId'];
     }
 
@@ -151,7 +151,7 @@ class Client
         array(
           "stateFilter"  => "enabled,paused,archived",
           "campaignType" => "sponsoredProducts"));
-      $snapshotId = json_decode($kwSnapshot['response'], true);
+      $snapshotId = json_decode($kwSnapshot['response'], true, 512, JSON_BIGINT_AS_STRING);
       $this->snapshotId = $snapshotId['snapshotId'];
     }
 
@@ -443,7 +443,7 @@ class Client
     {
         $req = $this->_operation("snapshots/{$snapshotId}");
         if ($req["success"]) {
-            $json = json_decode($req["response"], true);
+            $json = json_decode($req["response"], true, 512, JSON_BIGINT_AS_STRING);
             if ($json["status"] == "SUCCESS") {
                 return $this->_download($json["location"]);
             }
@@ -460,7 +460,7 @@ class Client
     {
         $req = $this->_operation("reports/{$reportId}");
         if ($req["success"]) {
-            $json = json_decode($req["response"], true);
+            $json = json_decode($req["response"], true, 512, JSON_BIGINT_AS_STRING);
             if ($json["status"] == "SUCCESS") {
                 return $this->_download($json["location"]);
             }
@@ -559,10 +559,10 @@ class Client
 
         if (!preg_match("/^(2|3)\d{2}$/", $response_info["http_code"])) {
             $requestId = 0;
-            $json = json_decode($response, true);
+            $json = json_decode($response, true, 512, JSON_BIGINT_AS_STRING);
             if (!is_null($json)) {
                 if (array_key_exists("requestId", $json)) {
-                    $requestId = json_decode($response, true)["requestId"];
+                    $requestId = json_decode($response, true, 512, JSON_BIGINT_AS_STRING)["requestId"];
                 }
             }
             return array("success" => false,
