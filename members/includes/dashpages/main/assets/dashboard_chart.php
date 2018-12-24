@@ -184,7 +184,7 @@
               var colors = tooltipModel.labelColors[i];
   	          // Split the body into two table elements
 	            var splitBody = body[0].split(": ");
-              innerHtml += '<tbody><tr id="tooltip_row" style="color:' + colors.backgroundColor + '">' + '<td>' + splitBody[0] + '</td><td>$' + splitBody[1] + '</td></tr>';
+              innerHtml += '<tbody><tr id="tooltip_row" style="color:' + colors.backgroundColor + '">' + '<td>' + splitBody[0] + '</td><td>' + splitBody[1] + '</td></tr>';
             });
             // Style for the table is inline for now, will change this to better practice later
             innerHtml += '</tbody></table><style>#tooltip_title{padding-bottom:.5rem}tr#tooltip_row>td{padding-top:1em}</style>';
