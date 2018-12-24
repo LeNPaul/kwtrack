@@ -35,7 +35,7 @@
   var ctx = document.getElementById("lineChart");
 
   // Other
-  var ppcAcosArr     = <?= json_encode($acos); ?>;
+  var ppcAcosArr     = <?= json_encode($acosArr); ?>;
 
   // Data for dashboard chart
   var adSpendArr     = <?= json_encode($adSpendArr); ?>;
