@@ -96,7 +96,7 @@
       pointBackgroundColor: lineColors[0],
       hoverBorderWidth: 3,
 
-      borderWidth: 1.5,
+      borderWidth: 2, // This is the width of the border around the data points, and the width of the data line
       borderColor: lineColors[0]
     }, {
       label: chartData[1][0],
@@ -111,7 +111,7 @@
       pointBackgroundColor: lineColors[1],
       hoverBorderWidth: 3,
 
-      borderWidth: 1.5,
+      borderWidth: 2,
       borderColor: lineColors[1]
     }]
   };
