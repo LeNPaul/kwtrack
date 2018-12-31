@@ -89,12 +89,13 @@
       data: adSpendArr,
       fill: false,
 
-      pointRadius: 0,
+      pointRadius: 0, // This is the radius of the data point when the pointer not hovered over
       hoverRadius: 6,
       pointBorderColor: '#ffffff',
       pointHoverBorderColor: '#ffffff',
       pointBackgroundColor: lineColors[0],
       hoverBorderWidth: 3,
+      pointHoverRadius: 5, // This is the radio of the data point when hovered over
 
       borderWidth: 2, // This is the width of the border around the data points, and the width of the data line
       borderColor: lineColors[0]
@@ -110,6 +111,7 @@
       pointHoverBorderColor: '#ffffff',
       pointBackgroundColor: lineColors[1],
       hoverBorderWidth: 3,
+      pointHoverRadius: 5, // This is the radio of the data point when hovered over
 
       borderWidth: 2,
       borderColor: lineColors[1]
