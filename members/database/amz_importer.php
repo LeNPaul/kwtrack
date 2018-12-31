@@ -1,7 +1,7 @@
 <?php
 namespace AmazonAdvertisingApi;
 require_once '../includes/AmazonAdvertisingApi/Client.php';
-require './pdo.inc.php';
+require_once './pdo.inc.php';
 use PDO;
 use PDOException;
 
@@ -227,28 +227,9 @@ class UserDataImporter {
     
     $ad_groups_lookup = $this->create_lookup($this->amz_ad_groups, 'adGroupId');
     
-    $insert_stmt = $pdo->prepare("
-      INSERT INTO ppc_keyword_metrics
-      (amz_kw_id, `name`, `value`, `date`)
-      VALUES
-      (:amz_kw_id, :name, :value, :date)
-    ");
-    
     $rows_to_insert = array();
     foreach ($metrics as $amz_metric) {
       
-      // Use this helper function to insert the value into the database
-      $record_metric = function($name, $value) use (&$rows_to_insert, $insert_stmt, $date, $amz_metric){
-        // Do not insert empty values into the database.
-        if ($value == 0) return;
-        $rows_to_insert[] = array(
-          'amz_kw_id' => $amz_metric['keywordId'],
-          'date' => $date,
-          'name' => $name,
-          'value' => $value
-        );
-      };
-  
       // Check if the bid is set, otherwise use the ad group default bid
       $bid = null;
       if (isset($amz_metric['bid'])) {
@@ -266,17 +247,19 @@ class UserDataImporter {
       $sales       = $amz_metric['attributedSales7d'];
       $units_sold  = $amz_metric['attributedUnitsOrdered7d'];
   
-      $record_metric('bid', $bid);
-      $record_metric('impressions', $impressions);
-      $record_metric('clicks', $clicks);
-      $record_metric('ad_spend', $ad_spend);
-      $record_metric('units_sold', $units_sold);
-      $record_metric('sales', $sales);
-      $record_metric('ctr', ($impressions == 0) ? 0.0 : round($clicks / $impressions, 2));
-      $record_metric('avg_cpc',  ($clicks == 0) ? 0.0 : round($ad_spend / $clicks, 2));
-      $record_metric('acos', ($sales == 0) ? 0.0 : round($ad_spend / $sales, 2));
-      $record_metric('roas', ($ad_spend == 0) ? 0.0 : round($sales / $ad_spend, 2));
-      
+      $rows_to_insert[] = array(
+        'user_id' => $amz_metric['userId'],
+        'amz_campaign_id' => $amz_metric['campaignId'],
+        'amz_adgroup_id' => $amz_metric['adGroupId'],
+        'amz_kw_id' => $amz_metric['keywordId'],
+        'date' => $date,
+        'bid' => $bid,
+        'impressions' => $impressions,
+        'clicks' => $clicks,
+        'ad_spend' => $ad_spend,
+        'units_sold' => $units_sold,
+        'sales' => $sales
+      );
     }
   
     //Call our custom function.

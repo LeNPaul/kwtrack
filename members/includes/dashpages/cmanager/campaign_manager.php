@@ -10,11 +10,6 @@ $user_id = $_SESSION['user_id'];
 $refresh_token = $_SESSION['refresh_token'];
 
 // Check to see if user has any campaign groups
-$sql = "SELECT * FROM cgroups WHERE user_id={$user_id}";
-$stmt = $pdo->query($sql);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$cGroupsExist = (count($result) == 0) ? 0 : 1;
-
 $result = cmGetCampaignData($pdo, $user_id);
 $campaignDataFront = $result[0];
 $campaignDataBack  = $result[1];
@@ -25,7 +20,7 @@ $dateArr[] = date("M d");
 for ($j = 1; $j < 60; $j++) {
 	$dateArr[] = date("M d", strtotime("-".$j." days"));
 }
-// $dateArr = array_reverse($dateArr);
+$dateArr = array_reverse($dateArr);
 
 ?>
 
@@ -1038,8 +1033,13 @@ $(document).ready( function () {
   var end = moment();
 
   function cb(begin, finish) {
-    cmUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
+    //cmUpdate(begin.format('MMM DD'), finish.format('MMM DD'));
     $('#campaignRange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
+    console.log('what');
+    $.ajax({
+      type: 'POST',
+      data: {start: begin.toJSON(), finish: finish.toJSON() }
+    });
   }
 
   $('#campaignRange').daterangepicker({
@@ -1062,6 +1062,7 @@ $(document).ready( function () {
 
   //TODO: figure out how to import adgroup data from datatable when dataTableFlag == 2
   function cmUpdate(startIndex, endIndex) {
+    return;
 
     var round   = function (value, decimals) {
       return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);

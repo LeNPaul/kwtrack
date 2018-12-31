@@ -1,4 +1,6 @@
 <?php
+require_once './database/MetricsQueryBuilder.php';
+
 /*
  *  CAMPAIGN MANAGER HELPER FILE
  *    - All helper functions used for the campaign manager
@@ -42,10 +44,13 @@ function cmGetCampaignData($pdo, $user_id) {
   $output          = [];
   $campaigns       = [];
   $rawCampaignData = [];
-  $sql             = "SELECT * FROM campaigns WHERE user_id={$user_id}";
-  $stmt            = $pdo->query($sql);
-  $result          = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+  
+  $builder = new MetricsQueryBuilder();
+  $builder->userId = $user_id;
+  $builder->includeCampaigns = true;
+  $result = $builder->execute($pdo);
+  
+  
   for ($i = 0; $i < count($result); $i++) {
 
   	/*if ($result[$i]['status'] == 'enabled') {
@@ -55,34 +60,17 @@ function cmGetCampaignData($pdo, $user_id) {
   	} else {
   		$active = 2;
   	}*/
-
-    $adSpendArray     = unserialize($result[$i]['ad_spend']);
-    $salesArray       = unserialize($result[$i]['sales']);
-    $impressionsArray = unserialize($result[$i]['impressions']);
-    $clicksArray      = unserialize($result[$i]['clicks']);
-    $ctrArray         = unserialize($result[$i]['ctr']);
-    $avgCpcArray      = unserialize($result[$i]['avg_cpc']);
-    $unitsSoldArray   = unserialize($result[$i]['units_sold']);
-
-    $ad_spend    = array_sum($adSpendArray);
-    $sales       = array_sum($salesArray);
-    $impressions = array_sum($impressionsArray);
-    $clicks      = array_sum($clicksArray);
-    $ctr         = round(calculateMetricAvg($ctrArray), 2);
-    $avg_cpc     = ($clicks == 0) ? 0 : round($ad_spend / $clicks, 2);
-    $units_sold  = array_sum($unitsSoldArray);
-
-    // Replace any 0's with "-"
-    $acos        = ($sales == 0) ? "-" : round(($ad_spend / $sales) * 100, 2) . '%';
-    $ad_spend    = ($ad_spend == 0) ? '-' : '$' . round($ad_spend, 2);
-    $sales       = ($sales == 0) ? '-' : '$' . round($sales, 2);
-    $impressions = ($impressions == 0) ? '-' : $impressions;
-    $clicks      = ($clicks == 0) ? '-' : $clicks;
-    $ctr         = ($ctr == 0) ? '-' : $ctr . '%';
-    $avg_cpc     = ($avg_cpc == 0) ? '-' : '$' . $avg_cpc;
-    $units_sold  = ($units_sold == 0) ? '-' : $units_sold;
-	$conversion  = ($clicks == 0) ? '-' : round(($units_sold / $clicks) * 100, 2) . '%';
-
+  	
+    $ad_spend    = $result[$i]['ad_spend_formatted'];
+    $sales       = $result[$i]['sales_formatted'];
+    $impressions = $result[$i]['impressions_formatted'];
+    $clicks      = $result[$i]['clicks_formatted'];
+    $ctr         = $result[$i]['ctr_formatted'];
+    $avg_cpc     = $result[$i]['avg_cpc_formatted'];
+    $units_sold  = $result[$i]['units_sold_formatted'];
+    $conversion  = $result[$i]['cvr_formatted'];
+    $acos        = $result[$i]['acos_formatted'];
+    
     $campaignLink = '<a href="javascript:void(0)" class="name c_link" id="' . $result[$i]['amz_campaign_id'] . '">' . $result[$i]['campaign_name'] . '</a>';
     $budget =  '<div class="input-group cm-input-group">
                   <div class="input-group-prepend">
@@ -106,13 +94,7 @@ function cmGetCampaignData($pdo, $user_id) {
       $result[$i]['status'],
       $budget,
       $result[$i]['targeting_type'],
-      $impressionsArray,
-      $clicksArray,
-      $ctrArray,
-      $adSpendArray,
-      $avgCpcArray,
-      $unitsSoldArray,
-      $salesArray
+      $result
     );
 
     $output[] = array(
