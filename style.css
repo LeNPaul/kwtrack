@@ -895,14 +895,14 @@ a#LoginWithAmazon img {
 #login-btn {
     margin-top: 25px;
     border-radius: 30px;
-    width: 30%;
+    width: 30%;st
     height: 50px !important;
 }
 
 #register-btn {
     margin-top: 25px;
     border-radius: 30px;
-    width: 30%;
+    width: 315px;
     height: 50px !important;
 }
 
