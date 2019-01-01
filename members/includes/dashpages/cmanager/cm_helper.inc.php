@@ -1,5 +1,6 @@
 <?php
-require_once './database/MetricsQueryBuilder.php';
+
+require_once dirname(__FILE__) . '../../../../database/MetricsQueryBuilder.php';
 
 /*
  *  CAMPAIGN MANAGER HELPER FILE
