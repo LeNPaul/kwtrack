@@ -20,6 +20,9 @@ $campaignDataFront = $result[0];
 $campaignDataBack  = $result[1];
 $rawCampaignData = $result[2];
 
+// Set the time zone to Pacific Time Zone (PT)
+date_default_timezone_set('America/Los_Angeles');
+
 $dateArr = [];
 $dateArr[] = date("M d");
 for ($j = 1; $j < 60; $j++) {
