@@ -19,7 +19,7 @@ function createScheduleTable($input) {
 
   for ($i = 0; $i < count($input); $i++) {
     $time = formatTime($i);
-    $row_temp = '<tr><td class="time" id="' . $i . '"><b>' . $time . '</b></td>';
+    $row_temp = '<tr><td class="time" id="' . $i . '" align="center"><b>' . $time . '</b></td>';
 
     for ($j = 0; $j < count($input[$i]); $j++) {
       if ($input[$i][$j] == 0) {
@@ -55,7 +55,7 @@ function createScheduleTable($input) {
   $tableBase = '
   <table class="table table-light table-bordered table-hover table-striped">
     <thead>
-      <tr>
+      <tr align="center">
         <th style="width:12.5%;">Time</th>
         <th class="dayOfWeek" id="0" style="width:12.5%;">Sun</th>
         <th class="dayOfWeek" id="1" style="width:12.5%;">Mon</th>
