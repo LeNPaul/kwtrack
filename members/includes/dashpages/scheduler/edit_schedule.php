@@ -25,9 +25,9 @@ function createScheduleTable($input) {
       if ($input[$i][$j] == 0) {
         $cb_id     = renderCheckboxID($j, $i);
         $row_temp .= '
-        <td>
-          <div class="pretty p-icon p-round p-pulse">
-            <input id="' . $cb_id . '" type="checkbox" />
+        <td align="center">
+          <div class="pretty p-icon p-round p-pulse" style="display:inline-block;">
+            <input id="' . $cb_id . '" type="checkbox">
             <div class="state p-success">
               <i class="icon mdi mdi-check"></i>
               <label></label>
@@ -37,9 +37,9 @@ function createScheduleTable($input) {
       } else {
         $cb_id     = renderCheckboxID($j, $i);
         $row_temp .= '
-        <td>
-          <div class="pretty p-icon p-round p-pulse">
-            <input id="' . $cb_id . '" type="checkbox" value="0" checked />
+        <td align="center">
+          <div class="pretty p-icon p-round p-pulse" style="display:inline-block;">
+            <input id="' . $cb_id . '" type="checkbox" value="0" checked>
             <div class="state p-success">
               <i class="icon mdi mdi-check"></i>
               <label></label>
@@ -114,7 +114,7 @@ function renderCheckboxID($dayInt, $timeInt) {
 
   return $day . strval($timeInt);
  }
- 
+
 $user_id = $_SESSION['user_id'];
 
 $sql = "SELECT schedule FROM campaigns WHERE user_id=?";
