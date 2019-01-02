@@ -19,15 +19,15 @@ function createScheduleTable($input) {
 
   for ($i = 0; $i < count($input); $i++) {
     $time = formatTime($i);
-    $row_temp = '<tr><td class="time" id="' . $i . '"><b>' . $time . '</b></td>';
+    $row_temp = '<tr><td class="time" id="' . $i . '" align="center"><b>' . $time . '</b></td>';
 
     for ($j = 0; $j < count($input[$i]); $j++) {
       if ($input[$i][$j] == 0) {
         $cb_id     = renderCheckboxID($j, $i);
         $row_temp .= '
-        <td>
-          <div class="pretty p-icon p-round p-pulse">
-            <input id="' . $cb_id . '" type="checkbox" />
+        <td align="center">
+          <div class="pretty p-icon p-round p-pulse" style="display:inline-block;">
+            <input id="' . $cb_id . '" type="checkbox">
             <div class="state p-success">
               <i class="icon mdi mdi-check"></i>
               <label></label>
@@ -37,9 +37,9 @@ function createScheduleTable($input) {
       } else {
         $cb_id     = renderCheckboxID($j, $i);
         $row_temp .= '
-        <td>
-          <div class="pretty p-icon p-round p-pulse">
-            <input id="' . $cb_id . '" type="checkbox" value="0" checked />
+        <td align="center">
+          <div class="pretty p-icon p-round p-pulse" style="display:inline-block;">
+            <input id="' . $cb_id . '" type="checkbox" value="0" checked>
             <div class="state p-success">
               <i class="icon mdi mdi-check"></i>
               <label></label>
@@ -53,9 +53,9 @@ function createScheduleTable($input) {
   }
 
   $tableBase = '
-  <table class="table table-light table-bordered table-hover table-striped">
+  <table class="table table-light table-bordered table-hover table-striped" style="max-width: 800px;">
     <thead>
-      <tr>
+      <tr align="center">
         <th style="width:12.5%;">Time</th>
         <th class="dayOfWeek" id="0" style="width:12.5%;">Sun</th>
         <th class="dayOfWeek" id="1" style="width:12.5%;">Mon</th>
@@ -114,7 +114,7 @@ function renderCheckboxID($dayInt, $timeInt) {
 
   return $day . strval($timeInt);
  }
- 
+
 $user_id = $_SESSION['user_id'];
 
 $sql = "SELECT schedule FROM campaigns WHERE user_id=?";
