@@ -63,7 +63,7 @@
 
       var html = allCampaigns;
 
-      for (var i = 0; i < breadcrumbs.length; i++){
+      for (var i = 0; i < breadcrumbs.length; i++) {
         html += " <b>/</b> ";
         var breadcrumb = breadcrumbs[i];
         // Check if this is the last breadcrumb
