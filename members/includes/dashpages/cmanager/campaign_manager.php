@@ -528,7 +528,7 @@ $(document).ready( function () {
 		$("#campaign_manager").empty();
 		dt = $("#campaign_manager").DataTable(campaignOptions);
 		$("#bc").html(allCampaigns);
-
+  });
   //when user clicks on a campaign link
   $("#campaign_manager").on("click", ".c_link", function() {
 		// Show negative keywords tab when user is in an ad group
