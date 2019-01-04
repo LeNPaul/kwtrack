@@ -6,8 +6,8 @@ use PDO;
 use PDOException;
 
 // TODO: Remove testing only
-// $importer = new UserDataImporter();
-// $importer->import(2, 60);
+$importer = new UserDataImporter();
+$importer->import(2, 60);
 
 class UserDataImporter {
   
@@ -125,7 +125,6 @@ class UserDataImporter {
       }
     }
   }
-  
   
   private function import_ad_groups(){
     global $pdo;
@@ -248,7 +247,7 @@ class UserDataImporter {
       $units_sold  = $amz_metric['attributedUnitsOrdered7d'];
   
       $rows_to_insert[] = array(
-        'user_id' => $amz_metric['userId'],
+        'user_id' => $this->user_id,
         'amz_campaign_id' => $amz_metric['campaignId'],
         'amz_adgroup_id' => $amz_metric['adGroupId'],
         'amz_kw_id' => $amz_metric['keywordId'],
@@ -320,8 +319,5 @@ class UserDataImporter {
     return $pdoStatement->execute();
   }
 }
-
-
-
 
 ?>

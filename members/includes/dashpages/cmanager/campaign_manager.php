@@ -84,7 +84,7 @@
     var start = moment().subtract(59, 'days');
     var end = moment();
 
-    var formatDate = function(begin, finish){
+    var formatDate = function(begin, finish) {
       $('#campaignRange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
     };
 

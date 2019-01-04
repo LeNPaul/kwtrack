@@ -97,7 +97,8 @@ class MetricsQueryBuilder {
         ifnull(ctr, 0) as ctr,
         ifnull(avg_cpc, 0) as avg_cpc,
         ifnull(acos, 0) as acos,
-        ifnull(roas, 0) as roas,
+        ifnull(cvr, 0) as roas,
+        
         ifnull(concat('$', round(avg_bid, 2)), '-') as avg_bid_formatted,
         ifnull(round(impressions, 0), '-') as impressions_formatted,
         ifnull(round(clicks, 0), '-') as clicks_formatted,
