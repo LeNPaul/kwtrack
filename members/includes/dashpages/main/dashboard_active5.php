@@ -3,57 +3,38 @@
  *  Final step for dashboard pages
  *  User will see this after all preliminary importing has been completed.
  */
-require_once './includes/dashpages/main/assets/Metric.php';
+require_once './database/MetricsQueryBuilder.php';
 require './includes/dashpages/helper.inc.php';
 
 $user_id = $_SESSION['user_id'];
 
 // Check if user has 59 entries for their metrics
 // If yes, they are on their first day and we need to only retrieve 59 days of data
+$builder = new MetricsQueryBuilder();
+$builder->userId = $user_id;
+$result = $builder->execute($pdo);
+$metrics = $result[0];
 
-$sql = "SELECT impressions FROM campaigns WHERE user_id={$user_id}";
-$stmt = $pdo->query($sql);
-$result = $stmt->fetch(PDO::FETCH_COLUMN);
-$a = unserialize($result);
-
-$adSpend     = new Metric($user_id, 'ad_spend', count($a), $pdo);
-$ppcSales    = new Metric($user_id, 'sales', count($a), $pdo);
-$impressions = new Metric($user_id, 'impressions', count($a), $pdo);
-$unitsSold   = new Metric($user_id, 'units_sold', count($a), $pdo);
-$clicks      = new Metric($user_id, 'clicks', count($a), $pdo);
-$ctr         = new Metric($user_id, 'ctr', count($a), $pdo);
-$avgCpc      = new Metric($user_id, 'avg_cpc', count($a), $pdo);
-$acos 			 = new Metric($user_id, 'acos', count($a), $pdo);
-$roas 			 = new Metric($user_id, 'roas', count($a), $pdo);
-
-$adSpendArr     = $adSpend->getMetricArr();
-$ppcSalesArr    = $ppcSales->getMetricArr();
-$impressionsArr = $impressions->getMetricArr();
-$unitsSoldArr   = $unitsSold->getMetricArr();
-$clicksArr      = $clicks->getMetricArr();
-$ctrArr         = $ctr->getMetricArr();
-$avgCpc         = $avgCpc->getMetricArr();
-$acosArr 				= $acos->getAcosArr();
-
-$acos 			 = [];
-$displayACoS = 0;
-$adSpend 		 = array_sum($adSpendArr);
-$adSales 	 	 = $ppcSales->getMetric();
-
-$displayACoS = ($adSales == 0) ? 0.00 : round((double)($adSpend / $adSales) * 100, 2);
-$displayRoas = ($adSpend == 0) ? 0.00 : round($adSales / $adSpend, 2);
+// Date metrics
+$builder->includeDate = true;
+$builder->orderBy = 'date';
+$builder->orderByDesc = false;
+$result = $builder->execute($pdo);
 
 // Set the time zone to Pacific Time Zone (PT)
 date_default_timezone_set('America/Los_Angeles');
 
+$adSpendArr = [];
+$ppcSalesArr = [];
+$acosArr = [];
 $dateArr = [];
-$dateArr[] = date("M d");
 
-for ($j = 1; $j < 60; $j++) {
-	$dateArr[] = date("M d", strtotime("-".$j." days"));
+foreach ($result as $m){
+  $dateArr[] = date("M d", strtotime($m['date']));
+  $adSpendArr[] = $m['ad_spend'];
+  $ppcSalesArr[] = $m['sales'];
+  $acosArr[] = round($m['acos'] * 100, 2);
 }
-
-$dateArr = array_reverse($dateArr);
 
 ?>
 
@@ -79,27 +60,27 @@ $dateArr = array_reverse($dateArr);
 
             <div style="overflow: hidden;">
               <p class="metric-name">Advertising Sales</p>
-              <p class="metric"><?= '$' . $adSales ?></p>
+              <p class="metric"><?= $metrics['sales_formatted'] ?></p>
             </div>
             <hr style="border-top: dashed 1px rgb(196,194,187);" />
             <div style="overflow: hidden;">
               <p class="metric-name">Advertising Spend</p>
-              <p class="metric"><?= '$' . array_sum($adSpendArr) ?></p>
+              <p class="metric"><?= $metrics['ad_spend_formatted'] ?></p>
             </div>
             <hr style="border-top: dashed 1px rgb(196,194,187);" />
             <div style="overflow: hidden;">
               <p class="metric-name">Conversion Rate</p>
-              <p class="metric"><?= round((count($unitsSoldArr) / array_sum($clicksArr)) * 100, 2) . '%' ?></p>
+              <p class="metric"><?= $metrics['cvr_formatted'] ?></p>
             </div>
             <hr style="border-top: dashed 1px rgb(196,194,187);" />
             <div style="overflow: hidden;">
               <p class="metric-name">ROAS</p>
-              <p class="metric"><?= '$' . $displayRoas ?></p>
+              <p class="metric"><?= $metrics['roas_formatted'] ?></p>
             </div>
             <hr style="border-top: dashed 1px rgb(196,194,187);" />
             <div style="overflow: hidden;">
               <p class="metric-name">ACOS</p>
-              <p class="metric"><?= $displayACoS . "%" ?></p>
+              <p class="metric"><?= $metrics['acos_formatted'] ?></p>
             </div>
 
 					</div>
@@ -135,25 +116,25 @@ $dateArr = array_reverse($dateArr);
 
 						<div style="overflow: hidden;">
 							<p class="metric-name">Impressions</p>
-							<p class="metric"><?= array_sum($impressionsArr) ?></p>
+							<p class="metric"><?= $metrics['impressions_formatted'] ?></p>
 						</div>
 
 						<hr style="border-top: dashed 1px rgb(196,194,187);" />
 						<div style="overflow: hidden;">
 							<p class="metric-name">Clicks</p>
-							<p class="metric"><?= array_sum($clicksArr) ?></p>
+							<p class="metric"><?= $metrics['clicks_formatted'] ?></p>
 						</div>
 
 						<hr style="border-top: dashed 1px rgb(196,194,187);" />
 						<div style="overflow: hidden;">
 							<p class="metric-name">Click-Thru Rate</p>
-							<p class="metric"><?= round((array_sum($ctrArr) / count($ctrArr)) * 100, 2) . '%' ?></p>
+							<p class="metric"><?= $metrics['ctr_formatted'] ?></p>
 						</div>
 
 						<hr style="border-top: dashed 1px rgb(196,194,187);" />
 						<div style="overflow: hidden;">
 							<p class="metric-name">Average CPC</p>
-							<p class="metric"><?= '$' . round((array_sum($avgCpc) / count($avgCpc)), 2) ?></p>
+							<p class="metric"><?= $metrics['avg_cpc_formatted'] ?></p>
 						</div>
 
 					</div>

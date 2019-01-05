@@ -22,7 +22,7 @@
   <!-- Tab 2 -- TODO: FIX BUG WHERE ARROW KEY CAN NAVIGATE TO HIDDEN TAB -->
   <input type="radio" name="tabset" id="tab2" aria-controls="neg_keywords">
   <label id="neg_keywords_tab" for="tab2" style="visibility:hidden;">Negative Keywords</label>
-
+  
   <div class="tab-panels">
     <section id="cmanager" class="tab-panel">
       <div class="row">
@@ -31,7 +31,7 @@
         </div>
       </div>
     </section>
-
+    
     <section id="neg_keywords" class="tab-panel">
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -58,12 +58,12 @@
     var dt = null;
     // Used to keep track of the current breadcrumbs
     var breadcrumbs = [];
-
+    
     var updateBreadcrumbs = function(){
 
       var html = allCampaigns;
-
-      for (var i = 0; i < breadcrumbs.length; i++) {
+      
+      for (var i = 0; i < breadcrumbs.length; i++){
         html += " <b>/</b> ";
         var breadcrumb = breadcrumbs[i];
         // Check if this is the last breadcrumb
@@ -75,19 +75,19 @@
             breadcrumb.linkClass + "\" id=\"" + breadcrumb.id + "\">" + breadcrumb.name + "</a>";
         }
       }
-
+      
       // Update the html
       $("#bc").html(html);
     };
-
+    
     /* START: DATA RANGE PICKER */
     var start = moment().subtract(59, 'days');
     var end = moment();
 
-    var formatDate = function(begin, finish) {
+    var formatDate = function(begin, finish){
       $('#campaignRange span').html(begin.format('MMMM D, YYYY') + ' - ' + finish.format('MMMM D, YYYY'));
     };
-
+    
     var datePicker = $('#campaignRange').daterangepicker({
       maxDate: moment(),
       minDate: moment().subtract(59, 'days'),
@@ -112,7 +112,7 @@
     });
     formatDate(start, end);
     /* END: DATA RANGE PICKER */
-
+    
     var clearTable = function(){
       if (dt) {
         dt.destroy();
@@ -120,7 +120,7 @@
         dt = null;
       }
     };
-
+    
     /* Start: initCampaignsTable */
     var initCampaignsTable = function(){
 
@@ -444,15 +444,15 @@
 
       // Hide negative keywords tab
       $("#neg_keywords_tab").attr("style", "visibility: hidden");
-
+      
       // Clear the breadcrumbs and update them
       breadcrumbs = [];
       updateBreadcrumbs();
     };
-
+    
     // Initialize the table on startup
     initCampaignsTable();
-
+    
     /* End: initCampaignsTable */
 
     /* Start: initAdGroupsTable */
@@ -650,10 +650,10 @@
       dt = $('#campaign_manager').DataTable(adGroupOptions);
       $(".btn-deselect").css("visibility", "hidden");
       $(".btn-bulk-action").css("visibility", "hidden");
-
+      
       // Show negative keywords tab when user is in an ad group
       $("#neg_keywords_tab").attr("style", "");
-
+      
       // Add the campaign to the breadcrumbs
       breadcrumbs = [{
         name: campaignName,
@@ -854,7 +854,7 @@
 
       clearTable();
       dt = $('#campaign_manager').DataTable(kwOptions);
-
+      
       // Add the campaign to the breadcrumbs
       breadcrumbs.push({
         name: adGroupName,
@@ -864,10 +864,10 @@
       updateBreadcrumbs();
     };
     /* End: initKeywordsTable */
-
-
+    
+    
     /* START: Create the campaign data table */
-
+    
     //handle select all and deselect all
     $("body").on("mouseup", function() {
 
@@ -976,7 +976,7 @@
     $(".breadcrumb").on("click", ".all_link", function() {
       initCampaignsTable();
     });
-
+    
     //when user clicks on a campaign link
     $("#campaign_manager, .breadcrumb").on("click", ".c_link", function() {
       initAdGroupsTable($(this).html(), $(this).attr('id'));
@@ -1015,7 +1015,7 @@
         }
       });
     }
-
+    
   }); //document.ready
 
 </script>
