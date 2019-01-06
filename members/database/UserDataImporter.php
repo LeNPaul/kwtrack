@@ -7,7 +7,7 @@ use PDOException;
 
 // TODO: Remove testing only
 $importer = new UserDataImporter();
-$importer->import(2, 60);
+$importer->import(2, 58);
 
 class UserDataImporter {
   
@@ -261,7 +261,7 @@ class UserDataImporter {
       );
     }
   
-    //Call our custom function.
+    // Call our custom function.
     try{
       foreach (array_chunk($rows_to_insert, 100) as $batch) {
         $this->pdoMultiInsert('ppc_keyword_metrics', $batch, $pdo);
