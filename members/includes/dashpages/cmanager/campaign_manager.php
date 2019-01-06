@@ -22,7 +22,7 @@
   <!-- Tab 2 -- TODO: FIX BUG WHERE ARROW KEY CAN NAVIGATE TO HIDDEN TAB -->
   <input type="radio" name="tabset" id="tab2" aria-controls="neg_keywords">
   <label id="neg_keywords_tab" for="tab2" style="visibility:hidden;">Negative Keywords</label>
-  
+
   <div class="tab-panels">
     <section id="cmanager" class="tab-panel">
       <div class="row">
@@ -31,7 +31,7 @@
         </div>
       </div>
     </section>
-    
+
     <section id="neg_keywords" class="tab-panel">
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -126,6 +126,9 @@
 
       var campaignOptions = {
         dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
+        fixedColumns: {
+          leftColumns: 2
+        },
         buttons: [
           {
             extend: 'selectAll',
@@ -374,9 +377,7 @@
           [10, 25, 50, 100, -1],
           [10, 25, 50, 100, "All"]
         ],
-        // fixedColumns: {
-        //   leftColumns: 2
-        // },
+        autowidth: false,
         columns: [
           {title: "Status", "orderDataType": "dom-text-toggle"},
           {title: "Campaign Name"},
@@ -664,6 +665,12 @@
     };
     /* End: initAdGroupsTable */
 
+    /* Start: initCampaignNegKeywordTable */
+    var initCampaignNegKeywordTable = function() {
+
+    };
+    /* End: initCampaignNegKeywordTable */
+
     /* Start: initKeywordsTable */
     var initKeywordsTable = function(adGroupName, adGroupId){
 
@@ -865,6 +872,12 @@
     };
     /* End: initKeywordsTable */
 
+    /* Start: initAdGroupNegKeywordTable */
+    var initAdGroupNegKeywordTable = function() {
+
+    };
+    /* End: initAdGroupNegKeywordTable */
+
 
     /* START: Create the campaign data table */
 
@@ -894,30 +907,30 @@
 
     });
 
-    // Status toggles
+    // Status toggles on campaign level
     $("#campaign_manager").on("click", ".toggle", function() {
-      var campaignName = $(this).parent().next().children(".c_link").text();
+      var campaignName = $(this).parent().next().children().html();
+      var campaignId = $(this).parent().next().children().attr("id");
 
       toggleActive = $(this).hasClass("off");
       (toggleActive) ? $(this).children("input").attr("data-value", 2) : $(this).children("input").attr("data-value", 1);
 
+      console.log(toggleActive);
+
       // Toggle campaign w/ AJAX
       $.ajax({
         type: "POST",
-        url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+        url: "includes/dashpages/cmanager/helpers/toggler",
         data: {
           toggle: toggleActive,
-          campaignName: campaignName,
-          cDataBack: databack,
-          user_id: user_id,
-          refresh_token: refresh_token,
-          profileId: profileId
+          id: parseFloat(campaignId),
+          element_name: campaignName,
+          data_level: 0
         },
-
-        success: function(alertText) {
+        success: function(alert_text) {
           $.notify({
             icon: "nc-icon nc-bell-55",
-            message: alertText
+            message: alert_text
           },{
             type: 'success',
             timer: 2000,
@@ -926,6 +939,8 @@
               align: 'right'
             }
           });
+
+          initCampaignsTable();
         },
         error: function() {
           swal({

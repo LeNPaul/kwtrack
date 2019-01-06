@@ -46,8 +46,8 @@ foreach ($result as $m){
 				<div class="row">
 
 					<div class="col-3 col-md-2">
-						<div class="icon-big text-center icon-danger">
-							<i class="nc-icon nc-tag-content text-danger"></i>
+						<div class="icon-big text-center icon-success">
+							<i class="nc-icon nc-bulb-63 text-success"></i>
 						</div>
 					</div>
 
@@ -102,8 +102,8 @@ foreach ($result as $m){
 				<div class="row">
 
 					<div class="col-3 col-md-2">
-						<div class="icon-big text-center icon-danger">
-							<i class="nc-icon nc-tag-content text-danger"></i>
+						<div class="icon-big text-center icon-primary">
+							<i class="nc-icon nc-tile-56 text-primary"></i>
 						</div>
 					</div>
 
