@@ -18,7 +18,7 @@
 <div class="tabset">
   <!-- Tab 1 -->
   <input type="radio" name="tabset" id="tab1" aria-controls="cmanager" checked>
-  <label for="tab1">Ad Groups</label>
+  <label id="tab1_label" for="tab1">Campaigns</label>
   <!-- Tab 2 -- TODO: FIX BUG WHERE ARROW KEY CAN NAVIGATE TO HIDDEN TAB -->
   <input type="radio" name="tabset" id="tab2" aria-controls="neg_keywords">
   <label id="neg_keywords_tab" for="tab2" style="visibility:hidden;">Negative Keywords</label>
@@ -35,7 +35,7 @@
     <section id="neg_keywords" class="tab-panel">
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-          <table id="neg_keyword_table" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
+          <table id="neg_kw_table" class="table table-light table-hover row-border order-column" cellpadding="0" cellspacing="0" border="0" width="100%"></table>
         </div>
       </div>
     </section>
@@ -44,8 +44,8 @@
 
 <script>
   var negKwTableFlag	= 0;
-  var currentCampaign = "";
-  var adGroupName 		= "";
+  var currentCampaign = {name: null, id: null};
+  var currentAdGroup  = {name: null, id: null};
   var allCampaigns 		= "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
 
   var sleep = function (time) {
@@ -55,7 +55,9 @@
   $(document).ready( function () {
 
     // Holds the data table variable
-    var dt = null;
+    var dt        = null;
+    var dt_neg_kw = null;
+    
     // Used to keep track of the current breadcrumbs
     var breadcrumbs = [];
 
@@ -113,11 +115,17 @@
     formatDate(start, end);
     /* END: DATA RANGE PICKER */
 
-    var clearTable = function(){
-      if (dt) {
+    var clearTable = function(table_selector){
+      if (table_selector == 0 && dt) {
         dt.destroy();
         $("#campaign_manager").empty();
         dt = null;
+      }
+      
+      if (table_selector == 1 && dt_neg_kw) {
+        dt_neg_kw.destroy();
+        $("#neg_kw_table").empty();
+        dt_neg_kw = null;
       }
     };
 
@@ -129,6 +137,7 @@
         fixedColumns: {
           leftColumns: 2
         },
+        stateSave: true,
         buttons: [
           {
             extend: 'selectAll',
@@ -426,7 +435,7 @@
 
         }, //drawCallback
         ajax: {
-          url: 'includes/dashpages/cmanager/helpers/get_data.php',
+          url: 'includes/dashpages/cmanager/helpers/get_data.php?XDEBUG_SESSION_START=PHPSTORM',
           data: function(){
             var drp = datePicker.data('daterangepicker');
             // Get the start and end date
@@ -438,8 +447,9 @@
         }
       }; //campaignOptions
 
-      clearTable();
+      clearTable(0);
       dt = $('#campaign_manager').DataTable(campaignOptions);
+      dt.columns.adjust();
       $(".btn-deselect").css("visibility", "hidden");
       $(".btn-bulk-action").css("visibility", "hidden");
 
@@ -592,6 +602,7 @@
             }
           }
         ],
+        stateSave: true,
         select: {
           style: 'multi'
         },
@@ -618,14 +629,14 @@
         ],
 
         drawCallback: function(settings) {
-          $('.toggle-campaign').bootstrapToggle({
+          $('.toggle-adgroup').bootstrapToggle({
             on: '<i class="fa fa-play"></i>',
             off: '<i class="fa fa-pause"></i>',
             size: "small",
             onstyle: "success",
             offstyle: "primary"
           });
-          $(".toggle-campaign-archive").bootstrapToggle({
+          $(".toggle-adgroup-archive").bootstrapToggle({
             off: '',
             size: "small"
           });
@@ -647,13 +658,11 @@
       }; // adgrOptions
 
 
-      clearTable();
+      clearTable(0);
       dt = $('#campaign_manager').DataTable(adGroupOptions);
+      dt.columns.adjust();
       $(".btn-deselect").css("visibility", "hidden");
       $(".btn-bulk-action").css("visibility", "hidden");
-
-      // Show negative keywords tab when user is in an ad group
-      $("#neg_keywords_tab").attr("style", "");
 
       // Add the campaign to the breadcrumbs
       breadcrumbs = [{
@@ -667,7 +676,59 @@
 
     /* Start: initCampaignNegKeywordTable */
     var initCampaignNegKeywordTable = function() {
+      var campaignNegKeywordTableOptions = {
+        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
+        stateSave: true,
+        buttons: [
+          {
+            extend: 'selectAll',
+            className: 'btn-primary'
+          },
+          {
+            extend: 'selectNone',
+            text: 'Deselect All',
+            className: 'btn-deselect'
+          },
+          {
+            text: 'Archive',
+            className: 'btn-deselect',
 
+            action: function (e, dt, node, config) {
+              // Bulk archive negative keywords
+            }
+          }
+        ],
+        select: {
+          style: 'multi'
+        },
+        language: {
+          emptyTable: "No negative keywords for this campaign."
+        },
+        order: [[1, "asc"]],
+        scrollX: true,
+        paging: true,
+        pagingType: "full_numbers",
+        lengthMenu: [
+          [10, 25, 50, 100, -1],
+          [10, 25, 50, 100, "All"]
+        ],
+        autowidth: false,
+        columns: [
+          {title: "Keyword Keyword"},
+          {title: "Targeting Type"}
+        ],
+        ajax: {
+          type: "POST",
+          url: 'includes/dashpages/cmanager/helpers/get_neg_keywords?XDEBUG_SESSION_START=PHPSTORM',
+          data: {
+            data_level: 0,
+            element_id: currentCampaign.id
+          }
+        }
+      }; //campaignNegKeywordTableOptions
+      
+      clearTable(1);
+      dt_neg_kw = $('#neg_kw_table').DataTable(campaignNegKeywordTableOptions);
     };
     /* End: initCampaignNegKeywordTable */
 
@@ -808,6 +869,7 @@
         select: {
           style: "multi"
         },
+        stateSave: true,
         scrollX: true,
         paging: true,
         pagingType: "full_numbers",
@@ -832,14 +894,14 @@
         ],
 
         drawCallback: function(settings) {
-          $('.toggle-campaign').bootstrapToggle({
+          $('.toggle-keyword').bootstrapToggle({
             on: '<i class="fa fa-play"></i>',
             off: '<i class="fa fa-pause"></i>',
             size: "small",
             onstyle: "success",
             offstyle: "primary"
           });
-          $(".toggle-campaign-archive").bootstrapToggle({
+          $(".toggle-keyword-archive").bootstrapToggle({
             off: '',
             size: "small"
           });
@@ -859,10 +921,14 @@
         }
       }; // kwOptions
 
-      clearTable();
+      clearTable(0);
+      
       dt = $('#campaign_manager').DataTable(kwOptions);
+      dt.columns.adjust();
+      $(".btn-deselect").css("visibility", "hidden");
+      $(".btn-bulk-action").css("visibility", "hidden");
 
-      // Add the campaign to the breadcrumbs
+      // Add the adgroup to the breadcrumbs
       breadcrumbs.push({
         name: adGroupName,
         id: adGroupId,
@@ -874,86 +940,194 @@
 
     /* Start: initAdGroupNegKeywordTable */
     var initAdGroupNegKeywordTable = function() {
+      var adgroupNegKeywordTableOptions = {
+        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
+        stateSave: true,
+        buttons: [
+          {
+            extend: 'selectAll',
+            className: 'btn-primary'
+          },
+          {
+            extend: 'selectNone',
+            text: 'Deselect All',
+            className: 'btn-deselect'
+          },
+          {
+            text: 'Archive',
+            className: 'btn-deselect',
 
+            action: function (e, dt, node, config) {
+              // Bulk archive negative keywords
+            }
+          }
+        ],
+        select: {
+          style: 'multi'
+        },
+        language: {
+          emptyTable: "No negative keywords for this ad group."
+        },
+        order: [[1, "asc"]],
+        scrollX: true,
+        paging: true,
+        pagingType: "full_numbers",
+        lengthMenu: [
+          [10, 25, 50, 100, -1],
+          [10, 25, 50, 100, "All"]
+        ],
+        autowidth: false,
+        columns: [
+          {title: "Keyword Keyword"},
+          {title: "Targeting Type"}
+        ],
+        ajax: {
+          type: "POST",
+          url: 'includes/dashpages/cmanager/helpers/get_neg_keywords?XDEBUG_SESSION_START=PHPSTORM',
+          data: {
+            data_level: 1,
+            element_id: currentCampaign.id
+          }
+        }
+      }; //campaignNegKeywordTableOptions
+
+      clearTable(1);
+      dt_neg_kw = $('#neg_kw_table').DataTable(adgroupNegKeywordTableOptions);
     };
     /* End: initAdGroupNegKeywordTable */
 
 
     /* START: Create the campaign data table */
 
-    //handle select all and deselect all
+    // Handle select all and deselect all
     $("body").on("mouseup", function() {
 
       sleep(50).then(function() {
-        var campaignsSelected = dt.rows( '.selected' );
-        if (dt.rows( '.selected' ).any()) {
-          //$(".btn-scheduler").css("visibility", "visible");
-          $(".btn-deselect").css("visibility", "visible");
-          $(".btn-bulk-action").css("visibility", "visible");
+        if (dt) {
+          var selectedElements = dt.rows( '.selected' );
+          if (selectedElements.rows( '.selected' ).any()) {
+            //$(".btn-scheduler").css("visibility", "visible");
+            $(".btn-deselect").css("visibility", "visible");
+            $(".btn-bulk-action").css("visibility", "visible");
 
-          if (campaignsSelected[0].length === 1) {
-            $("#info_selected").text(campaignsSelected[0].length + " campaign selected");
-          } else {
-            $("#info_selected").text(campaignsSelected[0].length + " campaigns selected");
-          }
-        } else {
-          //$(".btn-scheduler").css("visibility", "hidden");
-          $(".btn-deselect").css("visibility", "hidden");
-          $(".btn-bulk-action").css("visibility", "hidden");
-
-          $("#info_selected").text("");
-        }
-      });
-
-    });
-
-    // Status toggles on campaign level
-    $("#campaign_manager").on("click", ".toggle", function() {
-      var campaignName = $(this).parent().next().children().html();
-      var campaignId = $(this).parent().next().children().attr("id");
-
-      toggleActive = $(this).hasClass("off");
-      (toggleActive) ? $(this).children("input").attr("data-value", 2) : $(this).children("input").attr("data-value", 1);
-
-      console.log(toggleActive);
-
-      // Toggle campaign w/ AJAX
-      $.ajax({
-        type: "POST",
-        url: "includes/dashpages/cmanager/helpers/toggler",
-        data: {
-          toggle: toggleActive,
-          id: parseFloat(campaignId),
-          element_name: campaignName,
-          data_level: 0
-        },
-        success: function(alert_text) {
-          $.notify({
-            icon: "nc-icon nc-bell-55",
-            message: alert_text
-          },{
-            type: 'success',
-            timer: 2000,
-            placement: {
-              from: 'bottom',
-              align: 'right'
+            if (selectedElements[0].length === 1) {
+              $("#info_selected").text(selectedElements[0].length + " element selected");
+            } else {
+              $("#info_selected").text(selectedElements[0].length + " elements selected");
             }
-          });
+          } else {
+            //$(".btn-scheduler").css("visibility", "hidden");
+            $(".btn-deselect").css("visibility", "hidden");
+            $(".btn-bulk-action").css("visibility", "hidden");
 
-          initCampaignsTable();
-        },
-        error: function() {
-          swal({
-            title: "Error",
-            text: "An error has occurred. Please try again in a few moments.",
-            type: "error",
-            confirmButtonText: "Close"
-          });
+            $("#info_selected").text("");
+          }
+        }
+        
+        if (dt_neg_kw) {
+          var selectedElements = dt_neg_kw.rows( '.selected' );
+          if (selectedElements.rows( '.selected' ).any()) {
+            //$(".btn-scheduler").css("visibility", "visible");
+            $(".btn-deselect").css("visibility", "visible");
+            $(".btn-bulk-action").css("visibility", "visible");
+
+            if (selectedElements[0].length === 1) {
+              $("#info_selected").text(selectedElements[0].length + " element selected");
+            } else {
+              $("#info_selected").text(selectedElements[0].length + " elements selected");
+            }
+          } else {
+            //$(".btn-scheduler").css("visibility", "hidden");
+            $(".btn-deselect").css("visibility", "hidden");
+            $(".btn-bulk-action").css("visibility", "hidden");
+
+            $("#info_selected").text("");
+          }
         }
       });
+
     });
 
-    //Handle budget changes when save button is clicked
+    // Handle status toggles for all levels
+    $("#campaign_manager").on("click", ".toggle", function() {
+      var toggleElement = function(toggleActive, elementId, elementName, dataLevel) {
+        /* ?XDEBUG_SESSION_START=PHPSTORM */
+        $.ajax({
+          type: "POST",
+          url: "includes/dashpages/cmanager/helpers/toggler",
+          data: {
+            toggle: toggleActive,
+            element_id: parseFloat(elementId),
+            element_name: elementName,
+            data_level: dataLevel
+          },
+          success: function(alert_text) {
+
+            if (alert_text.includes("error")) {
+              $.notify({
+                icon: "nc-icon nc-bell-55",
+                message: alert_text
+              },{
+                type: 'danger',
+                timer: 2000,
+                placement: {
+                  from: 'bottom',
+                  align: 'right'
+                }
+              });
+            } else {
+              $.notify({
+                icon: "nc-icon nc-bell-55",
+                message: alert_text
+              },{
+                type: 'success',
+                timer: 2000,
+                placement: {
+                  from: 'bottom',
+                  align: 'right'
+                }
+              });
+              if (dataLevel === 0) initCampaignsTable();
+              else if (dataLevel === 1) initAdGroupsTable(currentCampaign.name, currentCampaign.id);
+              else initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
+            }
+          },
+          error: function(er) {
+            swal({
+              title: "Error",
+              text: "An error has occurred. Please try again in a few moments.",
+              type: "error",
+              confirmButtonText: "Close"
+            });
+          }
+        });
+      };
+      
+      var elementName = $(this).parent().next().children().html();
+      var elementId = $(this).parent().next().children().attr("id");
+
+      var toggleActive = $(this).hasClass("off");
+      (toggleActive) ? $(this).children("input").attr("data-value", 2) : $(this).children("input").attr("data-value", 1);
+      
+      // Status toggles on campaign level
+      if ($(this).children()[0].className.includes("campaign")) {
+        
+
+        // Toggle campaign w/ AJAX
+        toggleElement(toggleActive, elementId, elementName, 0);
+      }
+      // Status toggles on adgroup level
+      else if ($(this).children()[0].className.includes("adgroup")) {
+        toggleElement(toggleActive, elementId, elementName, 1);
+      }
+      // Status toggles on keyword level
+      else if ($(this).children()[0].className.includes("keyword")) {
+        toggleElement(toggleActive, elementId, elementName, 2);
+      }
+      
+    });
+
+    // Handle budget changes when save button is clicked
     $(".btn-edit-budget").on("click", function() {
       var budgetVal = $(this).parent().prev().val();
       // Verify input to check if numeric
@@ -987,19 +1161,41 @@
       }
     });
 
-    //breadcrumbs ALL CAMPAIGNS click
+    // Breadcrumbs ALL CAMPAIGNS click
     $(".breadcrumb").on("click", ".all_link", function() {
+      // Change tab to show "Campaigns"
+      $("#tab1_label").html("Campaigns");
+      
+      clearTable(1);
       initCampaignsTable();
     });
 
-    //when user clicks on a campaign link
+    // When user clicks on a campaign link
     $("#campaign_manager, .breadcrumb").on("click", ".c_link", function() {
-      initAdGroupsTable($(this).html(), $(this).attr('id'));
+      currentCampaign.name = $(this).html();
+      currentCampaign.id   = $(this).attr('id');
+      
+      // Change tab to show "Ad Groups"
+      $("#tab1_label").html("Ad Groups");
+      // Show negative keywords tab when user is in an ad group
+      $("#neg_keywords_tab").attr("style", "");
+      
+      initAdGroupsTable(currentCampaign.name, currentCampaign.id);
+      initCampaignNegKeywordTable();
     });
 
-    //when user clicks on an adgroup link
+    // When user clicks on an adgroup link
     $("#campaign_manager").on("click", ".ag_link",  function() {
+      currentAdGroup.name = $(this).html();
+      currentAdGroup.id   = $(this).attr('id');
+
+      // Change tab to show "Keywords"
+      $("#tab1_label").html("Keywords");
+      // Show negative keywords tab when user is in an ad group
+      $("#neg_keywords_tab").attr("style", "");
+      
       initKeywordsTable($(this).html(), $(this).attr('id'));
+      initAdGroupNegKeywordTable();
     });
 
     /* Create an array with the values of all the input boxes in a column. Used for sorting. */
@@ -1007,14 +1203,14 @@
       return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
         return $('input', td).attr('placeholder') * 1;
       } );
-    }
+    };
 
     /* Create an array with the values of all the input boxes in a column. Used for sorting. */
     $.fn.dataTable.ext.order['dom-text-toggle'] = function  ( settings, col ) {
       return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
         return $('input', td).attr('data-value') * 1;
       } );
-    }
+    };
 
     /* NOTIFICATIONS */
     function showNotification(from, align, bootstrapColor, message) {

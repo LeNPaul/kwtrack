@@ -89,7 +89,7 @@ $result = array_map(function($e){
     // Insert new values into array in reverse order
     array_unshift($row, moneyInput('default_bid', number_format($e['default_bid'], 2)));
     array_unshift($row, cmLink('ag_link', $e['amz_adgroup_id'], $e['ad_group_name']));
-    array_unshift($row, cmCheckboxState($e['status'], 'campaign')); // TODO: Change class name for ad_group
+    array_unshift($row, cmCheckboxState($e['status'], 'adgroup'));
   }
   else if ($dataLevel == 'keyword'){
     // Insert new values into array in reverse order
@@ -98,7 +98,7 @@ $result = array_map(function($e){
     array_unshift($row, moneyInput('bid', number_format($e['avg_bid'], 2)));
     array_unshift($row, $e['match_type']);
     array_unshift($row, '<b class="name" id="' . $e['amz_kw_id'] . '">' . $e['keyword_text'] . "</b>");
-    array_unshift($row, cmCheckboxState($e['status'], 'campaign')); // TODO: Change class name for keyword
+    array_unshift($row, cmCheckboxState($e['status'], 'keyword'));
   }
   
   return $row;

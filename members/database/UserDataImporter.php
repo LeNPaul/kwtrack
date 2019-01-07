@@ -7,7 +7,7 @@ use PDOException;
 
 // TODO: Remove testing only
 $importer = new UserDataImporter();
-$importer->import(2, 58);
+$importer->import(2, 56);
 
 class UserDataImporter {
 
