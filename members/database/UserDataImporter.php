@@ -7,7 +7,7 @@ use PDOException;
 
 // TODO: Remove testing only
 $importer = new UserDataImporter();
-$importer->import(2, 60);
+$importer->import(2, 58);
 
 class UserDataImporter {
   
@@ -239,7 +239,7 @@ class UserDataImporter {
           $bid = $ad_group['defaultBid'];
         }
       }
-  
+	  
       $impressions = $amz_metric['impressions'];
       $clicks      = $amz_metric['clicks'];
       $ad_spend    = $amz_metric['cost'];
