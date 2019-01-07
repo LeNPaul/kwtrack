@@ -26,7 +26,7 @@ else if ($data_level == 1) {
   
   foreach ($result as $negKw) {
     $match_type = ($negKw['match_type'] == 'negativePhrase') ? 'Negative Phrase' : 'Negative Exact';
-    $output[] = ["<p id='{$negKw['kw_id']}'>{$negKw['keyword_text']}</p>", $match_type];
+    $output[]   = ["<p id='{$negKw['kw_id']}'>{$negKw['keyword_text']}</p>", $match_type];
   }
 }
 
