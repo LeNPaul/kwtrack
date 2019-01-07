@@ -57,7 +57,7 @@
     // Holds the data table variable
     var dt        = null;
     var dt_neg_kw = null;
-    
+
     // Used to keep track of the current breadcrumbs
     var breadcrumbs = [];
 
@@ -121,7 +121,7 @@
         $("#campaign_manager").empty();
         dt = null;
       }
-      
+
       if (table_selector == 1 && dt_neg_kw) {
         dt_neg_kw.destroy();
         $("#neg_kw_table").empty();
@@ -726,7 +726,7 @@
           }
         }
       }; //campaignNegKeywordTableOptions
-      
+
       clearTable(1);
       dt_neg_kw = $('#neg_kw_table').DataTable(campaignNegKeywordTableOptions);
     };
@@ -922,7 +922,7 @@
       }; // kwOptions
 
       clearTable(0);
-      
+
       dt = $('#campaign_manager').DataTable(kwOptions);
       dt.columns.adjust();
       $(".btn-deselect").css("visibility", "hidden");
@@ -1023,7 +1023,7 @@
             $("#info_selected").text("");
           }
         }
-        
+
         if (dt_neg_kw) {
           var selectedElements = dt_neg_kw.rows( '.selected' );
           if (selectedElements.rows( '.selected' ).any()) {
@@ -1102,16 +1102,16 @@
           }
         });
       };
-      
+
       var elementName = $(this).parent().next().children().html();
       var elementId = $(this).parent().next().children().attr("id");
 
       var toggleActive = $(this).hasClass("off");
       (toggleActive) ? $(this).children("input").attr("data-value", 2) : $(this).children("input").attr("data-value", 1);
-      
+
       // Status toggles on campaign level
       if ($(this).children()[0].className.includes("campaign")) {
-        
+
 
         // Toggle campaign w/ AJAX
         toggleElement(toggleActive, elementId, elementName, 0);
@@ -1124,7 +1124,7 @@
       else if ($(this).children()[0].className.includes("keyword")) {
         toggleElement(toggleActive, elementId, elementName, 2);
       }
-      
+
     });
 
     // Handle budget changes when save button is clicked
@@ -1165,7 +1165,7 @@
     $(".breadcrumb").on("click", ".all_link", function() {
       // Change tab to show "Campaigns"
       $("#tab1_label").html("Campaigns");
-      
+
       clearTable(1);
       initCampaignsTable();
     });
@@ -1174,12 +1174,12 @@
     $("#campaign_manager, .breadcrumb").on("click", ".c_link", function() {
       currentCampaign.name = $(this).html();
       currentCampaign.id   = $(this).attr('id');
-      
+
       // Change tab to show "Ad Groups"
       $("#tab1_label").html("Ad Groups");
       // Show negative keywords tab when user is in an ad group
       $("#neg_keywords_tab").attr("style", "");
-      
+
       initAdGroupsTable(currentCampaign.name, currentCampaign.id);
       initCampaignNegKeywordTable();
     });
@@ -1193,7 +1193,7 @@
       $("#tab1_label").html("Keywords");
       // Show negative keywords tab when user is in an ad group
       $("#neg_keywords_tab").attr("style", "");
-      
+
       initKeywordsTable($(this).html(), $(this).attr('id'));
       initAdGroupNegKeywordTable();
     });

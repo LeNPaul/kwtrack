@@ -245,11 +245,7 @@ class UserDataImporter {
           $bid = $ad_group['defaultBid'];
         }
       }
-<<<<<<< HEAD
-	  
-=======
 
->>>>>>> 2e6538d2c66ba998af354412e0fdc10f930dc179
       $impressions = $amz_metric['impressions'];
       $clicks      = $amz_metric['clicks'];
       $ad_spend    = $amz_metric['cost'];
@@ -270,7 +266,7 @@ class UserDataImporter {
         'sales' => $sales
       );
     }
-    
+
     //Call our custom function.
     try{
       foreach (array_chunk($rows_to_insert, 100) as $batch) {
