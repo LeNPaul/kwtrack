@@ -209,9 +209,9 @@
                           url: "includes/dashpages/cmanager/helpers/toggler.php",
                           data: {
                             toggle: false,
-							element_id: campaignIdArr,
-							element_name: c_list,
-							data_level: 0
+								element_id: campaignIdArr,
+								element_name: c_list,
+								data_level: 0
                           },
 						  success: function(alert_text) {
 
