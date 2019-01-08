@@ -158,23 +158,20 @@
               var campaignIndexes   = dt.rows('.selected').indexes();
               var campaignIdArr     = [];
               var c_list            = [];
-
-              // Populate list of campaign names
+			  
+              // Populate list of campaign ID's and names
               for (i = 0; i < selectedCampaigns.length; i++) {
-                c_list.push(selectedCampaigns[i][1].match(/(?<=\>)(.*)(?=\<)/)[0]);
+                var rx         = selectedCampaigns[i][1].match(/id="\d+/g);
+                var campaignId = rx[0].replace("id=\"", "");
+                campaignIdArr.push(campaignId);
+				c_list.push(selectedCampaigns[i][1].match(/(?<=\>)(.*)(?=\<)/)[0]);
               }
-              console.log(c_list);
+			  console.log(c_list);
 
               console.log("SELECTED CAMPAIGNS:", selectedCampaigns);
 
               console.log(selectedCampaigns[0][0]);
               console.log(selectedCampaigns[0][0].includes('data-value="2"'));
-              // Populate list of campaign ID's
-              for (i = 0; i < selectedCampaigns.length; i++) {
-                var rx         = selectedCampaigns[i][1].match(/id="\d+/g);
-                var campaignId = rx[0].replace("id=\"", "");
-                campaignIdArr.push(campaignId);
-              }
 
               const {value: bulkAction} = swal({
                 title: 'Bulk Actions',
@@ -205,9 +202,9 @@
                       url: "includes/dashpages/cmanager/helpers/toggler.php",
                       data: {
                         toggle: false,
-							element_id: campaignIdArr,
-							element_name: c_list,
-							data_level: 0
+						element_id: campaignIdArr,
+						element_name: c_list,
+						data_level: 0
                       },
 
 					  success: function(alert_text) {
@@ -236,6 +233,8 @@
 								}
 							});
 						}
+						
+						initCampaignsTable();
 					  },
 					  error: function(er) {
 						swal({
@@ -246,8 +245,6 @@
 						});
 					  }
 					});
-						
-					initCampaignsTable();
                   }
 
                   else if (result.value == 'enableCampaign') {
@@ -287,6 +284,8 @@
 								}
 							});
 						}
+						
+						initCampaignsTable();
 					  },
 					  error: function(er) {
 						swal({
@@ -543,12 +542,15 @@
               var selectedAdgroups = dt.rows ( '.selected' ).data();
               var adgroupIndexes = dt.rows('.selected').indexes();
               var adgroupIdArr = [];
-              // Populate list of campaign ID's
+			  var a_list = [];
+			  
+              // Populate list of adgroup ID's and names
               for (i = 0; i < selectedAdgroups.length; i++) {
                 console.log(selectedAdgroups[i][1]);
                 var rx         = selectedAdgroups[i][1].match(/id="\d+/g);
                 var adgroupId = rx[0].replace("id=\"", "");
                 adgroupIdArr.push(adgroupId);
+				a_list.push(selectedAdgroups[i][1].match(/(?<=\>)(.*)(?=\<)/)[0]);
               }
 
               const {value : bulkAction} = swal({
@@ -574,44 +576,105 @@
               })
                 .then(function(result) {
                   if (result.value == 'pauseAdgroup') {
-                    for (j = 0; j < selectedAdgroups.length; j++) {
-                      if (selectedAdgroups[j][0].includes('data-value="2"')) {
-                        var adgroupName = selectedAdgroups[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-                        $.ajax({
-                          type: "POST",
-                          url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
-                          data: {
-                            toggle: false,
-                            element_id: parseFloat(adgroupId),
-							element_name: adgroupName,
-							data_level: 1
-                          },
-                        });
-
-                        $($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
-                        selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="2"', 'data-value="1"');
-                      }
-                    }
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: false,
+                        element_id: adgroupIdArr,
+						element_name: a_list,
+              			data_level: 1
+                      },
+					  
+					  success: function(alert_text) {
+						if (alert_text.includes("error")) {
+							$.notify({
+								icon: "nc-icon nc-bell-55",
+								message: alert_text
+							},{
+								type: 'danger',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						} else {
+							$.notify({
+							icon: "nc-icon nc-bell-55",
+							message: alert_text
+							},{
+								type: 'success',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						}
+						
+						initAdGroupsTable(currentCampaign.name, currentCampaign.id);
+					  },
+					  error: function(er) {
+						swal({
+							title: "Error",
+							text: "An error has occurred. Please try again in a few moments.",
+							type: "error",
+							confirmButtonText: "Close"
+						});
+					  }
+                    });
+					
                   }
                   else if (result.value == 'enableAdgroup') {
-                    for (j = 0; j < selectedAdgroups.length; j++) {
-                      if (selectedAdgroups[j][0].includes('data-value="1"')) {
-                        var adgroupName = selectedAdgroups[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-                        $.ajax({
-                          type: "POST",
-                          url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
-                          data: {
-                            toggle: true,
-                            element_id: parseFloat(adgroupId),
-							element_name: adgroupName,
-							data_level: 1
-                          },
-                        });
-
-                        $($(dt.row(adgroupIndexes[j]).node()).find("div")[0]).click();
-                        selectedAdgroups[j][0] = selectedAdgroups[j][0].replace('data-value="1"', 'data-value="2"');
-                      }
-                    }
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: true,
+                        element_id: adgroupIdArr,
+						element_name: a_list,
+              			data_level: 1
+                      },
+					  
+					  success: function(alert_text) {
+						if (alert_text.includes("error")) {
+							$.notify({
+								icon: "nc-icon nc-bell-55",
+								message: alert_text
+							},{
+								type: 'danger',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						} else {
+							$.notify({
+							icon: "nc-icon nc-bell-55",
+							message: alert_text
+							},{
+								type: 'success',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						}
+						
+						initAdGroupsTable(currentCampaign.name, currentCampaign.id);
+					  },
+					  error: function(er) {
+						swal({
+							title: "Error",
+							text: "An error has occurred. Please try again in a few moments.",
+							type: "error",
+							confirmButtonText: "Close"
+						});
+					  }
+                    });
                   }
                   else if (result.value == 'archiveAdgroup') {
                     swal({
@@ -642,8 +705,7 @@
                               },
                             });
 
-                            //code to make status toggle button greyed out
-                            //add notif to notify user it went through
+                            //TODO: make status toggle button greyed out, and create notif on success/error
                           }
                         }
                       })
@@ -810,12 +872,14 @@
               var selectedKeywords = dt.rows ( '.selected' ).data();
               var keywordIndexes = dt.rows('.selected').indexes();
               var keywordIdArr = [];
-              // Populate list of campaign ID's
+			  var k_list = [];
+			  
+              // Populate list of campaign ID's and names
               for (i = 0; i < selectedKeywords.length; i++) {
-                console.log(selectedKeywords[i][1]);
                 var rx         = selectedKeywords[i][1].match(/id="\d+/g);
                 var keywordId = rx[0].replace("id=\"", "");
                 keywordIdArr.push(keywordId);
+				k_list.push(selectedKeywords[i][1].match(/(?<=\>)(.*)(?=\<)/)[0]);
               }
 
               const {value : bulkAction} = swal({
@@ -839,44 +903,104 @@
               })
                 .then(function(result) {
                   if (result.value == 'pauseKeyword') {
-                    for (j = 0; j < selectedKeywords.length; j++) {
-                      if (selectedKeywords[j][0].includes('data-value="2"')) {
-                        var keywordName = selectedKeywords[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-                        $.ajax({
-                          type: "POST",
-                          url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
-                          data: {
-                            toggle: false,
-                            element_id: parseFloat(keywordId),
-							element_name: keywordName,
-							data_level: 2
-                          },
-                        });
-
-                        $($(dt.row(keywordIndexes[j]).node()).find("div")[0]).click();
-                        selectedKeywords[j][0] = selectedKeywords[j][0].replace('data-value="2"', 'data-value="1"');
-                      }
-                    }
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: false,
+                        element_id: keywordIdArr,
+						element_name: k_list,
+              			data_level: 2
+                      },
+					  
+					  success: function(alert_text) {
+						if (alert_text.includes("error")) {
+							$.notify({
+								icon: "nc-icon nc-bell-55",
+								message: alert_text
+							},{
+								type: 'danger',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						} else {
+							$.notify({
+							icon: "nc-icon nc-bell-55",
+							message: alert_text
+							},{
+								type: 'success',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						}
+						
+						initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
+					  },
+					  error: function(er) {
+						swal({
+							title: "Error",
+							text: "An error has occurred. Please try again in a few moments.",
+							type: "error",
+							confirmButtonText: "Close"
+						});
+					  }
+                    });
                   }
                   else if (result.value == 'enableKeyword') {
-                    for (j = 0; j < selectedKeywords.length; j++) {
-                      if (selectedKeywords[j][0].includes('data-value="1"')) {
-                        var keywordName = selectedKeywords[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-                        $.ajax({
-                          type: "POST",
-                          url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
-                          data: {
-                            toggle: true,
-                            element_id: parseFloat(keywordId),
-							element_name: keywordName,
-							data_level: 2
-                          },
-                        });
-
-                        $($(dt.row(keywordIndexes[j]).node()).find("div")[0]).click();
-                        selectedKeywords[j][0] = selectedKeywords[j][0].replace('data-value="1"', 'data-value="2"');
-                      }
-                    }
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: true,
+                        element_id: keywordIdArr,
+						element_name: k_list,
+              			data_level: 2
+                      },
+					  
+					  success: function(alert_text) {
+						if (alert_text.includes("error")) {
+							$.notify({
+								icon: "nc-icon nc-bell-55",
+								message: alert_text
+							},{
+								type: 'danger',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						} else {
+							$.notify({
+							icon: "nc-icon nc-bell-55",
+							message: alert_text
+							},{
+								type: 'success',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						}
+						
+						initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
+					  },
+					  error: function(er) {
+						swal({
+							title: "Error",
+							text: "An error has occurred. Please try again in a few moments.",
+							type: "error",
+							confirmButtonText: "Close"
+						});
+					  }
+                    });
                   }
                   else if (result.value == 'archiveKeyword') {
                     swal({
