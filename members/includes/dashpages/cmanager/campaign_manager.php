@@ -209,9 +209,9 @@
                           url: "includes/dashpages/cmanager/helpers/toggler.php",
                           data: {
                             toggle: false,
-							element_id: parseFloat(campaignId),
-							element_name: campaignName,
-							data_level: 0
+              							element_id: parseFloat(campaignId),
+              							element_name: campaignName,
+              							data_level: 0
                           }
                         });
 
