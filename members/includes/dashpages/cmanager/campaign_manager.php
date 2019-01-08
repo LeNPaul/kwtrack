@@ -210,7 +210,7 @@
 								element_name: c_list,
 								data_level: 0
                           },
-						  
+
 						  success: function(alert_text) {
 							if (alert_text.includes("error")) {
 								$.notify({
