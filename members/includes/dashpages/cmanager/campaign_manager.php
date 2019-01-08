@@ -200,16 +200,16 @@
               })
                 .then(function (result) {
                   if (result.value == 'pauseCampaign') {
-                    $.ajax({
+					$.ajax({
                       type: "POST",
                       url: "includes/dashpages/cmanager/helpers/toggler.php",
                       data: {
                         toggle: false,
-						element_id: campaignIdArr,
-						element_name: c_list,
-						data_level: 0
+							element_id: campaignIdArr,
+							element_name: c_list,
+							data_level: 0
                       },
-						  
+
 					  success: function(alert_text) {
 						if (alert_text.includes("error")) {
 							$.notify({
@@ -225,10 +225,10 @@
 							});
 						} else {
 							$.notify({
-							icon: "nc-icon nc-bell-55",
-							message: alert_text
+								icon: "nc-icon nc-bell-55",
+								message: alert_text
 							},{
-								type: 'success',
+								type: 'danger',
 								timer: 2000,
 								placement: {
 									from: 'bottom',

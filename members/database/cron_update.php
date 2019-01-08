@@ -1,13 +1,13 @@
 <?php
-//require_once dirname(__FILE__) . "";
-echo dirname(__FILE__) . '/UserDataImporter.php';
+require_once dirname(__FILE__) . '/UserDataImporter.php';
+require_once dirname(__FILE__) . '/pdo.inc.php';
 
-// Get list of user id's
-$user_ids = 0;
+$user_id_list = $pdo
+  ->query("SELECT user_id FROM users WHERE active=5")
+  ->fetchAll(PDO::FETCH_COLUMN);
 
-// Create UserDataImporter for each user id
-
-// Import data from 48 hours ago
-
-
+$importer = new UserDataImporter();
+foreach ($user_id_list as $user_id) {
+  $importer->import($user_id, 1);
+}
 ?>
