@@ -402,7 +402,6 @@
           {title: "CR"},
           {title: "ACoS"}
         ],
-
         drawCallback: function (settings) {
           // Handle and style toggle buttons
           $('.toggle-campaign').bootstrapToggle({
@@ -455,6 +454,15 @@
 
       // Hide negative keywords tab
       $("#neg_keywords_tab").attr("style", "visibility: hidden");
+
+      $('input[type="radio"]').keydown(function(e)
+      {
+          var arrowKeys = [37, 38, 39, 40];
+          if (arrowKeys.indexOf(e.which) !== -1)
+          {
+              return false;
+          }
+      });
 
       // Clear the breadcrumbs and update them
       breadcrumbs = [];
@@ -606,6 +614,11 @@
         select: {
           style: 'multi'
         },
+        language: {
+          select: {
+            rows: ""
+          }
+        },
         scrollX: true,
         paging: true,
         pagingType: "full_numbers",
@@ -677,7 +690,7 @@
     /* Start: initCampaignNegKeywordTable */
     var initCampaignNegKeywordTable = function() {
       var campaignNegKeywordTableOptions = {
-        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
+        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected_negkw">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
         stateSave: true,
         buttons: [
           {
@@ -687,11 +700,11 @@
           {
             extend: 'selectNone',
             text: 'Deselect All',
-            className: 'btn-deselect'
+            className: 'btn-deselect-negkw'
           },
           {
             text: 'Archive',
-            className: 'btn-deselect',
+            className: 'btn-deselect-negkw',
 
             action: function (e, dt, node, config) {
               // Bulk archive negative keywords
@@ -941,7 +954,7 @@
     /* Start: initAdGroupNegKeywordTable */
     var initAdGroupNegKeywordTable = function() {
       var adgroupNegKeywordTableOptions = {
-        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
+        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected_negkw">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
         stateSave: true,
         buttons: [
           {
@@ -951,11 +964,11 @@
           {
             extend: 'selectNone',
             text: 'Deselect All',
-            className: 'btn-deselect'
+            className: 'btn-deselect-negkw'
           },
           {
             text: 'Archive',
-            className: 'btn-deselect',
+            className: 'btn-archive-negkw',
 
             action: function (e, dt, node, config) {
               // Bulk archive negative keywords
@@ -1005,7 +1018,9 @@
       sleep(50).then(function() {
         if (dt) {
           var selectedElements = dt.rows( '.selected' );
+
           if (selectedElements.rows( '.selected' ).any()) {
+
             //$(".btn-scheduler").css("visibility", "visible");
             $(".btn-deselect").css("visibility", "visible");
             $(".btn-bulk-action").css("visibility", "visible");
@@ -1015,7 +1030,9 @@
             } else {
               $("#info_selected").text(selectedElements[0].length + " elements selected");
             }
+
           } else {
+
             //$(".btn-scheduler").css("visibility", "hidden");
             $(".btn-deselect").css("visibility", "hidden");
             $(".btn-bulk-action").css("visibility", "hidden");
@@ -1025,23 +1042,25 @@
         }
 
         if (dt_neg_kw) {
-          var selectedElements = dt_neg_kw.rows( '.selected' );
-          if (selectedElements.rows( '.selected' ).any()) {
-            //$(".btn-scheduler").css("visibility", "visible");
-            $(".btn-deselect").css("visibility", "visible");
-            $(".btn-bulk-action").css("visibility", "visible");
+          var selectedElementsNegKwTable = dt_neg_kw.rows( '.selected' );
 
-            if (selectedElements[0].length === 1) {
-              $("#info_selected").text(selectedElements[0].length + " element selected");
+          if (selectedElementsNegKwTable.rows( '.selected' ).any()) {
+            //$(".btn-scheduler").css("visibility", "visible");
+            $(".btn-deselect-negkw").css("visibility", "visible");
+            $(".btn-archive-negkw").css("visibility", "visible");
+
+            if (selectedElementsNegKwTable[0].length === 1) {
+              $("#info_selected_negkw").text(selectedElementsNegKwTable[0].length + " element selected");
             } else {
-              $("#info_selected").text(selectedElements[0].length + " elements selected");
+              $("#info_selected_negkw").text(selectedElementsNegKwTable[0].length + " elements selected");
             }
+
           } else {
             //$(".btn-scheduler").css("visibility", "hidden");
-            $(".btn-deselect").css("visibility", "hidden");
-            $(".btn-bulk-action").css("visibility", "hidden");
+            $(".btn-deselect-negkw").css("visibility", "hidden");
+            $(".btn-archive-negkw").css("visibility", "hidden");
 
-            $("#info_selected").text("");
+            $("#info_selected_negkw").text("");
           }
         }
       });
@@ -1198,6 +1217,23 @@
       initAdGroupNegKeywordTable();
     });
 
+    // Handle table row hover effect with fixedColumns enabled
+    $(document).on({
+      mouseenter: function () {
+        trIndex = $(this).index()+1;
+
+        $("table").each(function(index) {
+          $(this).find("tr:eq("+trIndex+")").addClass("hover")
+        });
+      },
+      mouseleave: function () {
+        trIndex = $(this).index()+1;
+        $("table").each(function(index) {
+          $(this).find("tr:eq("+trIndex+")").removeClass("hover")
+        });
+      }
+    }, ".dataTables_wrapper tr");
+
     /* Create an array with the values of all the input boxes in a column. Used for sorting. */
     $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col ) {
       return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
@@ -1228,6 +1264,8 @@
     }
 
   }); //document.ready
+
+
 
 </script>
 

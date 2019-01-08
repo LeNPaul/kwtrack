@@ -16,12 +16,12 @@ for ($i = 0; $i < count($campaignList); $i++) {
     $outputList[] = array(
       $campaignList[$i]['campaign_name'],
       $campaignList[$i]['status'],
-      '<span class="circle_off" id="' .  $campaignList[$i]['amz_campaign_id'] . '"></span>');
+      '<span class="circle_off" id="' .  $campaignList[$i]['amz_campaign_id'] . '" data-value="0"></span>');
   } else {
     $outputList[] = array(
       $campaignList[$i]['campaign_name'],
       $campaignList[$i]['status'],
-      '<span class="circle_on" id="' .  $campaignList[$i]['amz_campaign_id'] . '"></span>');
+      '<span class="circle_on" id="' .  $campaignList[$i]['amz_campaign_id'] . '" data-value="1"></span>');
   }
 }
 
