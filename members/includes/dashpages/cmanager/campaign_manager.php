@@ -200,79 +200,103 @@
               })
                 .then(function (result) {
                   if (result.value == 'pauseCampaign') {
-
-                        $.ajax({
-                          type: "POST",
-                          url: "includes/dashpages/cmanager/helpers/toggler.php",
-                          data: {
-                            toggle: false,
-								element_id: campaignIdArr,
-								element_name: c_list,
-								data_level: 0
-                          },
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: false,
+						element_id: campaignIdArr,
+						element_name: c_list,
+						data_level: 0
+                      },
 						  
-						  success: function(alert_text) {
-							if (alert_text.includes("error")) {
-								$.notify({
-									icon: "nc-icon nc-bell-55",
-									message: alert_text
-								},{
-									type: 'danger',
-									timer: 2000,
-									placement: {
-										from: 'bottom',
-										align: 'right'
-									}
-								});
-							} else {
-								$.notify({
+					  success: function(alert_text) {
+						if (alert_text.includes("error")) {
+							$.notify({
 								icon: "nc-icon nc-bell-55",
 								message: alert_text
-								},{
-									type: 'success',
-									timer: 2000,
-									placement: {
-										from: 'bottom',
-										align: 'right'
-									}
-								});
-								if (dataLevel === 0) initCampaignsTable();
-								else if (dataLevel === 1) initAdGroupsTable(currentCampaign.name, currentCampaign.id);
-								else initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
-							}
-						  },
-						  error: function(er) {
-							swal({
-								title: "Error",
-								text: "An error has occurred. Please try again in a few moments.",
-								type: "error",
-								confirmButtonText: "Close"
+							},{
+								type: 'danger',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
 							});
-						  }
+						} else {
+							$.notify({
+							icon: "nc-icon nc-bell-55",
+							message: alert_text
+							},{
+								type: 'success',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						}
+					  },
+					  error: function(er) {
+						swal({
+							title: "Error",
+							text: "An error has occurred. Please try again in a few moments.",
+							type: "error",
+							confirmButtonText: "Close"
 						});
+					  }
+					});
+						
+					initCampaignsTable();
                   }
 
                   else if (result.value == 'enableCampaign') {
-                    for (j = 0; j < selectedCampaigns.length; j++) {
-
-                      if (selectedCampaigns[j][0].includes('data-value="1"')) {
-                        var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-                        $.ajax({
-                          type: "POST",
-                          url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
-                          data: {
-                            toggle: true,
-                            element_id: parseFloat(campaignId),
-              							element_name: campaignName,
-              							data_level: 0
-                          }
-                        });
-
-                        $($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
-                        selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="1"', 'data-value="2"');
-                      }
-
-                    }
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: true,
+                        element_id: campaignIdArr,
+						element_name: c_list,
+              			data_level: 0
+                      },
+					  
+					  success: function(alert_text) {
+						if (alert_text.includes("error")) {
+							$.notify({
+								icon: "nc-icon nc-bell-55",
+								message: alert_text
+							},{
+								type: 'danger',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						} else {
+							$.notify({
+							icon: "nc-icon nc-bell-55",
+							message: alert_text
+							},{
+								type: 'success',
+								timer: 2000,
+								placement: {
+									from: 'bottom',
+									align: 'right'
+								}
+							});
+						}
+					  },
+					  error: function(er) {
+						swal({
+							title: "Error",
+							text: "An error has occurred. Please try again in a few moments.",
+							type: "error",
+							confirmButtonText: "Close"
+						});
+					  }
+                    });
                   }
 
                   else if (result.value == 'addNegKw') {
