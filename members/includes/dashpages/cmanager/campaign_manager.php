@@ -206,14 +206,12 @@
 
                         $.ajax({
                           type: "POST",
-                          url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
+                          url: "includes/dashpages/cmanager/helpers/toggler.php",
                           data: {
                             toggle: false,
-                            campaignName: campaignName,
-                            cDataBack: databack,
-                            user_id: user_id,
-                            refresh_token: refresh_token,
-                            profileId: profileId
+							element_id: parseFloat(campaignId),
+							element_name: campaignName,
+							data_level: 0
                           }
                         });
 
@@ -238,11 +236,9 @@
                           url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
                           data: {
                             toggle: true,
-                            campaignName: campaignName,
-                            cDataBack: databack,
-                            user_id: user_id,
-                            refresh_token: refresh_token,
-                            profileId: profileId
+                            element_id: parseFloat(campaignId),
+							element_name: campaignName,
+							data_level: 0
                           }
                         });
 
@@ -528,11 +524,9 @@
                           url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
                           data: {
                             toggle: false,
-                            adgroupName: adgroupName,
-                            adgroupDataBack: databack,
-                            user_id: user_id,
-                            refresh_token: refresh_token,
-                            profileId: profileId
+                            element_id: parseFloat(adgroupId),
+							element_name: adgroupName,
+							data_level: 1
                           },
                         });
 
@@ -550,11 +544,9 @@
                           url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
                           data: {
                             toggle: true,
-                            adgroupName: adgroupName,
-                            adgroupDataBack: databack,
-                            user_id: user_id,
-                            refresh_token: refresh_token,
-                            profileId: profileId
+                            element_id: parseFloat(adgroupId),
+							element_name: adgroupName,
+							data_level: 1
                           },
                         });
 
@@ -792,11 +784,9 @@
                           url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
                           data: {
                             toggle: false,
-                            keywordName: keywordName,
-                            keywordDataBack: keywordDataBack,
-                            user_id: user_id,
-                            refresh_token: refresh_token,
-                            profileId: profileId
+                            element_id: parseFloat(keywordId),
+							element_name: keywordName,
+							data_level: 2
                           },
                         });
 
@@ -814,11 +804,9 @@
                           url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
                           data: {
                             toggle: true,
-                            keywordName: keywordName,
-                            keywordDataBack: keywordDataBack,
-                            user_id: user_id,
-                            refresh_token: refresh_token,
-                            profileId: profileId
+                            element_id: parseFloat(keywordId),
+							element_name: keywordName,
+							data_level: 2
                           },
                         });
 

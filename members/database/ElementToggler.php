@@ -130,4 +130,5 @@ class ElementToggler
   
     $this->alert_text = ($flag) ? $this->element_name . " has successfully been " . $this->state : "An error has occurred...";
   }
+  
 }
