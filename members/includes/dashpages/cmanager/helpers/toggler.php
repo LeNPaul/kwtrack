@@ -6,6 +6,7 @@ require_once dirname(__FILE__) . '../../../../../database/pdo.inc.php';
 require_once dirname(__FILE__) . '../../../../../database/ElementToggler.php';
 
 use PDO;
+
 for ($i = 0; $i < count($_POST["element_id"]); $i++) {
 	$config = array(
 		"element_id"     => $_POST["element_id"][$i],
