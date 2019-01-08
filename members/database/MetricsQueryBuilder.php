@@ -2,71 +2,71 @@
 
 // TODO: This query builder is not SQL injection proof.
 class MetricsQueryBuilder {
-  
+
   // Base query information
   public $userId;
   public $startDate;
   public $endDate;
-  
+
   // Which to filter on
   public $campaignIds;
   public $keywordIds;
   public $adGroupIds;
-  
+
   // Include aggregates for theses levels
   public $includeCampaigns;
   public $includeAdGroups;
   public $includeKeywords;
   public $includeDate;
-  
+
   // Which column to order by?
   public $orderBy;
   public $orderByDesc;
-  
+
   function __construct(){
     $this->campaignIds = [];
     $this->keywordIds = [];
     $this->adGroupIds = [];
   }
-  
+
   public function getSql(){
     // Construct the group by clause
     $group_by = ['user_id'];
-    
+
     if ($this->includeCampaigns) $group_by[] = 'amz_campaign_id';
     if ($this->includeAdGroups) $group_by[] = 'amz_adgroup_id';
     if ($this->includeKeywords) $group_by[] = 'amz_kw_id';
     if ($this->includeDate) $group_by[] = '`date`';
-    
+
     $group_by = implode(', ', $group_by);
-    
+
     // Construct the where clause
     $where = ["user_id = $this->userId"];
-  
+
     if ($this->startDate != null) $where[] = "`date` >= '$this->startDate'";
     if ($this->endDate != null) $where[] = "`date` <= '$this->endDate'";
-    
+
     // Filter on campaign ids
     if (count($this->campaignIds) > 0){
       $campaign_ids = implode(', ', $this->campaignIds);
       $where[] = "amz_campaign_id in ($campaign_ids)";
     }
-    
+
     // Filter on ad group ids
     if (count($this->adGroupIds) > 0){
       $ad_group_ids = implode(', ', $this->adGroupIds);
       $where[] = "amz_adgroup_id in ($ad_group_ids)";
     }
-    
+
     // Filter on keyword ids
     if (count($this->keywordIds) > 0){
       $keyword_ids = implode(', ', $this->keywordIds);
       $where[] = "amz_kw_id in ($keyword_ids)";
     }
-    
+
     // Combine all filters into one
     $where = implode(' and ', $where);
-    
+
     // Order by clause
     $orderBy = '';
     if ($this->orderBy) {
@@ -76,7 +76,7 @@ class MetricsQueryBuilder {
       else
         $orderBy .= " asc";
     }
-    
+
     // Included data
     $joins = [];
     if ($this->includeCampaigns) {
@@ -90,7 +90,7 @@ class MetricsQueryBuilder {
     }
     $joins = implode("\ninner join ", $joins);
     if (strlen($joins) > 0) $joins = "\ninner join " . $joins;
-    
+
     return "
       select *,
         ifnull(cvr, 0) as cvr,
@@ -98,15 +98,16 @@ class MetricsQueryBuilder {
         ifnull(avg_cpc, 0) as avg_cpc,
         ifnull(acos, 0) as acos,
         ifnull(cvr, 0) as roas,
-        
+
         ifnull(concat('$', round(avg_bid, 2)), '-') as avg_bid_formatted,
-        ifnull(round(impressions, 0), '-') as impressions_formatted,
-        ifnull(round(clicks, 0), '-') as clicks_formatted,
-        ifnull(concat('$', round(ad_spend, 2)), '-') as ad_spend_formatted,
-        ifnull(round(units_sold, 0), '-') as units_sold_formatted,
-        ifnull(concat('$', round(sales, 2)), '-') as sales_formatted,
-        ifnull(concat(round(cvr * 100, 2), '%'), '-') as cvr_formatted,
-        ifnull(concat(round(ctr * 100, 2), '%'), '-') as ctr_formatted,
+        ifnull(nullif(round(impressions, 0), 0), '-') as impressions_formatted,
+        ifnull(nullif(round(clicks, 0), 0), '-') as clicks_formatted,
+        ifnull(nullif(concat('$', round(ad_spend, 2)), '$0.00'), '-') as ad_spend_formatted,
+        ifnull(nullif(round(units_sold, 0), 0), '-') as units_sold_formatted,
+        ifnull(nullif(concat('$', round(sales, 2)), '$0.00'), '-') as sales_formatted,
+        ifnull(nullif(concat(round(cvr * 100, 2), '%'), 0), '-') as cvr_formatted,
+        ifnull(nullif(concat(round(ctr * 100, 2), '%'), 0), '-') as ctr_formatted,
+
         ifnull(concat('$', round(avg_cpc, 2)), '-') as avg_cpc_formatted,
         ifnull(concat(round(acos * 100, 2), '%'), '-') as acos_formatted,
         ifnull(concat('$', round(roas, 2)), '-') as roas_formatted
@@ -137,7 +138,7 @@ class MetricsQueryBuilder {
       $orderBy
     ";
   }
-  
+
   public function execute($pdo){
     $query = $this->getSql();
     $stmt = $pdo->query($query);

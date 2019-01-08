@@ -84,7 +84,7 @@ $(function(){
         columns: [
           { title: "Campaign Name" },
           { title: "Status", width: 100 },
-          { title: "Scheduled", width: 100 }
+          { title: "Scheduled", "orderDataType": "dom-schedule", width: 100 }
         ]
       };
 
@@ -92,6 +92,8 @@ $(function(){
       // Hide topBar buttons when nothing selected
       $(".btn-scheduler").css("visibility", "hidden");
       $(".btn-deselect").css("visibility", "hidden");
+
+
     },
 
     error: function(err) {
@@ -151,5 +153,12 @@ $(function(){
   function eraseCookie(name) {
   	createCookie(name,"",-1);
   }
+
+  /* Create an array with the values of all the span tags in a column. Used for sorting. */
+  $.fn.dataTable.ext.order['dom-schedule'] = function  ( settings, col ) {
+    return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
+      return $('span', td).attr('data-value') * 1;
+    } );
+  };
 
 });

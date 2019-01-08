@@ -57,7 +57,7 @@
     // Holds the data table variable
     var dt        = null;
     var dt_neg_kw = null;
-    
+
     // Used to keep track of the current breadcrumbs
     var breadcrumbs = [];
 
@@ -121,7 +121,7 @@
         $("#campaign_manager").empty();
         dt = null;
       }
-      
+
       if (table_selector == 1 && dt_neg_kw) {
         dt_neg_kw.destroy();
         $("#neg_kw_table").empty();
@@ -398,7 +398,6 @@
           {title: "CR"},
           {title: "ACoS"}
         ],
-
         drawCallback: function (settings) {
           // Handle and style toggle buttons
           $('.toggle-campaign').bootstrapToggle({
@@ -451,6 +450,15 @@
 
       // Hide negative keywords tab
       $("#neg_keywords_tab").attr("style", "visibility: hidden");
+
+      $('input[type="radio"]').keydown(function(e)
+      {
+          var arrowKeys = [37, 38, 39, 40];
+          if (arrowKeys.indexOf(e.which) !== -1)
+          {
+              return false;
+          }
+      });
 
       // Clear the breadcrumbs and update them
       breadcrumbs = [];
@@ -598,6 +606,11 @@
         select: {
           style: 'multi'
         },
+        language: {
+          select: {
+            rows: ""
+          }
+        },
         scrollX: true,
         paging: true,
         pagingType: "full_numbers",
@@ -669,7 +682,7 @@
     /* Start: initCampaignNegKeywordTable */
     var initCampaignNegKeywordTable = function() {
       var campaignNegKeywordTableOptions = {
-        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
+        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected_negkw">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
         stateSave: true,
         buttons: [
           {
@@ -679,11 +692,11 @@
           {
             extend: 'selectNone',
             text: 'Deselect All',
-            className: 'btn-deselect'
+            className: 'btn-deselect-negkw'
           },
           {
             text: 'Archive',
-            className: 'btn-deselect',
+            className: 'btn-deselect-negkw',
 
             action: function (e, dt, node, config) {
               // Bulk archive negative keywords
@@ -718,7 +731,7 @@
           }
         }
       }; //campaignNegKeywordTableOptions
-      
+
       clearTable(1);
       dt_neg_kw = $('#neg_kw_table').DataTable(campaignNegKeywordTableOptions);
     };
@@ -910,7 +923,7 @@
       }; // kwOptions
 
       clearTable(0);
-      
+
       dt = $('#campaign_manager').DataTable(kwOptions);
       dt.columns.adjust();
       $(".btn-deselect").css("visibility", "hidden");
@@ -929,7 +942,7 @@
     /* Start: initAdGroupNegKeywordTable */
     var initAdGroupNegKeywordTable = function() {
       var adgroupNegKeywordTableOptions = {
-        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
+        dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected_negkw">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
         stateSave: true,
         buttons: [
           {
@@ -939,11 +952,11 @@
           {
             extend: 'selectNone',
             text: 'Deselect All',
-            className: 'btn-deselect'
+            className: 'btn-deselect-negkw'
           },
           {
             text: 'Archive',
-            className: 'btn-deselect',
+            className: 'btn-archive-negkw',
 
             action: function (e, dt, node, config) {
               // Bulk archive negative keywords
@@ -993,7 +1006,9 @@
       sleep(50).then(function() {
         if (dt) {
           var selectedElements = dt.rows( '.selected' );
+
           if (selectedElements.rows( '.selected' ).any()) {
+
             //$(".btn-scheduler").css("visibility", "visible");
             $(".btn-deselect").css("visibility", "visible");
             $(".btn-bulk-action").css("visibility", "visible");
@@ -1003,7 +1018,9 @@
             } else {
               $("#info_selected").text(selectedElements[0].length + " elements selected");
             }
+
           } else {
+
             //$(".btn-scheduler").css("visibility", "hidden");
             $(".btn-deselect").css("visibility", "hidden");
             $(".btn-bulk-action").css("visibility", "hidden");
@@ -1011,25 +1028,27 @@
             $("#info_selected").text("");
           }
         }
-        
-        if (dt_neg_kw) {
-          var selectedElements = dt_neg_kw.rows( '.selected' );
-          if (selectedElements.rows( '.selected' ).any()) {
-            //$(".btn-scheduler").css("visibility", "visible");
-            $(".btn-deselect").css("visibility", "visible");
-            $(".btn-bulk-action").css("visibility", "visible");
 
-            if (selectedElements[0].length === 1) {
-              $("#info_selected").text(selectedElements[0].length + " element selected");
+        if (dt_neg_kw) {
+          var selectedElementsNegKwTable = dt_neg_kw.rows( '.selected' );
+
+          if (selectedElementsNegKwTable.rows( '.selected' ).any()) {
+            //$(".btn-scheduler").css("visibility", "visible");
+            $(".btn-deselect-negkw").css("visibility", "visible");
+            $(".btn-archive-negkw").css("visibility", "visible");
+
+            if (selectedElementsNegKwTable[0].length === 1) {
+              $("#info_selected_negkw").text(selectedElementsNegKwTable[0].length + " element selected");
             } else {
-              $("#info_selected").text(selectedElements[0].length + " elements selected");
+              $("#info_selected_negkw").text(selectedElementsNegKwTable[0].length + " elements selected");
             }
+
           } else {
             //$(".btn-scheduler").css("visibility", "hidden");
-            $(".btn-deselect").css("visibility", "hidden");
-            $(".btn-bulk-action").css("visibility", "hidden");
+            $(".btn-deselect-negkw").css("visibility", "hidden");
+            $(".btn-archive-negkw").css("visibility", "hidden");
 
-            $("#info_selected").text("");
+            $("#info_selected_negkw").text("");
           }
         }
       });
@@ -1090,16 +1109,16 @@
           }
         });
       };
-      
+
       var elementName = $(this).parent().next().children().html();
       var elementId = $(this).parent().next().children().attr("id");
 
       var toggleActive = $(this).hasClass("off");
       (toggleActive) ? $(this).children("input").attr("data-value", 2) : $(this).children("input").attr("data-value", 1);
-      
+
       // Status toggles on campaign level
       if ($(this).children()[0].className.includes("campaign")) {
-        
+
 
         // Toggle campaign w/ AJAX
         toggleElement(toggleActive, elementId, elementName, 0);
@@ -1112,7 +1131,7 @@
       else if ($(this).children()[0].className.includes("keyword")) {
         toggleElement(toggleActive, elementId, elementName, 2);
       }
-      
+
     });
 
     // Handle budget changes when save button is clicked
@@ -1153,7 +1172,7 @@
     $(".breadcrumb").on("click", ".all_link", function() {
       // Change tab to show "Campaigns"
       $("#tab1_label").html("Campaigns");
-      
+
       clearTable(1);
       initCampaignsTable();
     });
@@ -1162,12 +1181,12 @@
     $("#campaign_manager, .breadcrumb").on("click", ".c_link", function() {
       currentCampaign.name = $(this).html();
       currentCampaign.id   = $(this).attr('id');
-      
+
       // Change tab to show "Ad Groups"
       $("#tab1_label").html("Ad Groups");
       // Show negative keywords tab when user is in an ad group
       $("#neg_keywords_tab").attr("style", "");
-      
+
       initAdGroupsTable(currentCampaign.name, currentCampaign.id);
       initCampaignNegKeywordTable();
     });
@@ -1181,10 +1200,27 @@
       $("#tab1_label").html("Keywords");
       // Show negative keywords tab when user is in an ad group
       $("#neg_keywords_tab").attr("style", "");
-      
+
       initKeywordsTable($(this).html(), $(this).attr('id'));
       initAdGroupNegKeywordTable();
     });
+
+    // Handle table row hover effect with fixedColumns enabled
+    $(document).on({
+      mouseenter: function () {
+        trIndex = $(this).index()+1;
+
+        $("table").each(function(index) {
+          $(this).find("tr:eq("+trIndex+")").addClass("hover")
+        });
+      },
+      mouseleave: function () {
+        trIndex = $(this).index()+1;
+        $("table").each(function(index) {
+          $(this).find("tr:eq("+trIndex+")").removeClass("hover")
+        });
+      }
+    }, ".dataTables_wrapper tr");
 
     /* Create an array with the values of all the input boxes in a column. Used for sorting. */
     $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col ) {
@@ -1216,6 +1252,8 @@
     }
 
   }); //document.ready
+
+
 
 </script>
 
