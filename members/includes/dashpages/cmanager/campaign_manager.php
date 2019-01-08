@@ -200,30 +200,32 @@
               })
                 .then(function (result) {
                   if (result.value == 'pauseCampaign') {
-                    for (j = 0; j < selectedCampaigns.length; j++) {
-                      if (selectedCampaigns[j][0].includes('data-value="2"')) {
-                        var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
+                    //for (j = 0; j < selectedCampaigns.length; j++) {
+                      //if (selectedCampaigns[j][0].includes('data-value="2"')) {
+                        //var campaignName = selectedCampaigns[j][1].match(/(?<=\>)(.*)(?=\<)/)[0];
 
                         $.ajax({
                           type: "POST",
                           url: "includes/dashpages/cmanager/helpers/toggler.php",
                           data: {
                             toggle: false,
+<<<<<<< HEAD
               							element_id: parseFloat(campaignId),
               							element_name: campaignName,
               							data_level: 0
+=======
+							element_id: campaignIdArr,
+							element_name: c_list,
+							data_level: 0
+>>>>>>> 7bc5a56442729933347ec0bdafbc7971b4b508da
                           }
                         });
-
-                        console.log(selectedCampaigns[j]);
-
-
-                        //$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).toggleClass('off');
-                        console.log($($(dt.row(campaignIndexes[j]).node()).find("div")[0]));
-                        $($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
-                        selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="2"', 'data-value="1"');
-                      }
-                    }
+						
+						initCampaignsTable();
+                        //$($(dt.row(campaignIndexes[j]).node()).find("div")[0]).click();
+                        //selectedCampaigns[j][0] = selectedCampaigns[j][0].replace('data-value="2"', 'data-value="1"');
+                      //}
+                    //}
                   }
 
                   else if (result.value == 'enableCampaign') {
@@ -441,7 +443,7 @@
           }
         }
       }; //campaignOptions
-
+		
       clearTable(0);
       dt = $('#campaign_manager').DataTable(campaignOptions);
       dt.columns.adjust();
@@ -1064,8 +1066,8 @@
           url: "includes/dashpages/cmanager/helpers/toggler",
           data: {
             toggle: toggleActive,
-            element_id: parseFloat(elementId),
-            element_name: elementName,
+            element_id: [parseFloat(elementId)],
+            element_name: [elementName],
             data_level: dataLevel
           },
           success: function(alert_text) {
