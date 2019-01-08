@@ -212,7 +212,46 @@
 							element_id: campaignIdArr,
 							element_name: c_list,
 							data_level: 0
-                          }
+                          },
+						  success: function(alert_text) {
+
+            if (alert_text.includes("error")) {
+              $.notify({
+                icon: "nc-icon nc-bell-55",
+                message: alert_text
+              },{
+                type: 'danger',
+                timer: 2000,
+                placement: {
+                  from: 'bottom',
+                  align: 'right'
+                }
+              });
+            } else {
+              $.notify({
+                icon: "nc-icon nc-bell-55",
+                message: alert_text
+              },{
+                type: 'success',
+                timer: 2000,
+                placement: {
+                  from: 'bottom',
+                  align: 'right'
+                }
+              });
+              if (dataLevel === 0) initCampaignsTable();
+              else if (dataLevel === 1) initAdGroupsTable(currentCampaign.name, currentCampaign.id);
+              else initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
+            }
+          },
+          error: function(er) {
+            swal({
+              title: "Error",
+              text: "An error has occurred. Please try again in a few moments.",
+              type: "error",
+              confirmButtonText: "Close"
+            });
+          }
                         });
 						
 						initCampaignsTable();
