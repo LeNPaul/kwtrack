@@ -206,13 +206,12 @@
                           url: "includes/dashpages/cmanager/helpers/toggler.php",
                           data: {
                             toggle: false,
-            				element_id: campaignIdArr,
-            				element_name: c_list,
-            				data_level: 0
+								element_id: campaignIdArr,
+								element_name: c_list,
+								data_level: 0
                           },
 						  
 						  success: function(alert_text) {
-
 							if (alert_text.includes("error")) {
 								$.notify({
 									icon: "nc-icon nc-bell-55",
@@ -264,8 +263,8 @@
                           data: {
                             toggle: true,
                             element_id: parseFloat(campaignId),
-							element_name: campaignName,
-							data_level: 0
+              							element_name: campaignName,
+              							data_level: 0
                           }
                         });
 
@@ -751,7 +750,7 @@
         ],
         ajax: {
           type: "POST",
-          url: 'includes/dashpages/cmanager/helpers/get_neg_keywords?XDEBUG_SESSION_START=PHPSTORM',
+          url: 'includes/dashpages/cmanager/helpers/get_neg_keywords',
           data: {
             data_level: 0,
             element_id: currentCampaign.id
@@ -1084,6 +1083,7 @@
 
     // Handle status toggles for all levels
     $("#campaign_manager").on("click", ".toggle", function() {
+
       var toggleElement = function(toggleActive, elementId, elementName, dataLevel) {
         /* ?XDEBUG_SESSION_START=PHPSTORM */
         $.ajax({
@@ -1091,6 +1091,8 @@
           url: "includes/dashpages/cmanager/helpers/toggler",
           data: {
             toggle: toggleActive,
+            element_id: [parseFloat(elementId)],
+            element_name: [elementName],
             data_level: dataLevel
           },
           success: function(alert_text) {
