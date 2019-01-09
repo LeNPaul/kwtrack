@@ -37,7 +37,7 @@ class ElementToggler
     $this->data_level   = $config["data_level"];
     $this->state        = ($config["toggle"] == "true") ? "enabled" : (($config["toggle"] == "false") ? "paused" : "archived");
     $this->flag         = false;
-	$this->failed       = [];
+    $this->failed       = [];
     
     $this->client = $this->get_amz_client($config["refresh_token"], $config["profile_id"]);
   }
