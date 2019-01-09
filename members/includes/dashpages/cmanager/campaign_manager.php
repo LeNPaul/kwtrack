@@ -306,7 +306,7 @@ $(document).ready( function () {
 
                 $("#c_addNegKw_submit").on("click", function () {
                   // TODO: Format negKeywordList as specified in bulk_add_neg_keywords.php comments
-                  //    	 from textarea input.
+                  //     from textarea input.
                   var isText = ($("#c_addnegKw_text").val()) ? true : false;
 
                   if (isText) {
@@ -388,25 +388,57 @@ $(document).ready( function () {
                 })
                 .then(function (result) {
                   if (result) {
-                    for (x = 0; x < selectedCampaigns.length; x++) {
-                      var campaignName = selectedCampaigns[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-
-                      $.ajax({
-                        type: "POST",
-                        url: "includes/dashpages/cmanager/helpers/toggle_campaigns.php",
-                        data: {
-                          toggle: 'archive',
-                          campaignName: campaignName,
-                          cDataBack: databack,
-                          user_id: user_id,
-                          refresh_token: refresh_token,
-                          profileId: profileId
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: 'archive',
+                        element_id: campaignIdArr,
+                        element_name: c_list,
+                        data_level: 0
+                      },
+                      
+                      success: function(alert_text) {
+                        if (alert_text.includes("error")) {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        } else {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
                         }
-                      });
 
-                      //code to make the status toggle button greyed out
-                      //add notif to notify user it went through
-                    }
+                        initCampaignsTable();
+                      },
+                      error: function(er) {
+                        swal({
+                          title: "Error",
+                          text: "An error has occurred. Please try again in a few moments.",
+                          type: "error",
+                          confirmButtonText: "Close"
+                        });
+                      }
+                    });
+
+                    //code to make the status toggle button greyed out
+                    //add notif to notify user it went through
                   }
                 })
               }
@@ -696,23 +728,55 @@ $(document).ready( function () {
                 })
                 .then(function(result) {
                   if (result) {
-                    for (x = 0; x < selectedAdgroups.length; x++) {
-                      var adgroupName = selectedAdgroups[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-                      $.ajax({
-                        type: "POST",
-                        url: "includes/dashpages/cmanager/helpers/toggle_adgroups.php",
-                        data: {
-                          toggle: 'archive',
-                          adgroupName: adgroupName,
-                          adgroupDataBack: databack,
-                          user_id: user_id,
-                          refresh_token: refresh_token,
-                          profileId: profileId
-                        },
-                      });
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: 'archive',
+                        element_id: adgroupIdArr,
+                        element_name: a_list,
+                        data_level: 1
+                      },
+                        
+                      success: function(alert_text) {
+                        if (alert_text.includes("error")) {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        } else {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        }
 
-                      //TODO: make status toggle button greyed out, and create notif on success/error
-                    }
+                        initAdGroupsTable(currentCampaign.name, currentCampaign.id);
+                      },
+                      error: function(er) {
+                        swal({
+                          title: "Error",
+                          text: "An error has occurred. Please try again in a few moments.",
+                          type: "error",
+                          confirmButtonText: "Close"
+                        });
+                      }
+                    });
+                    //TODO: make status toggle button greyed out, and create notif on success/error
                   }
                 })
               }
@@ -1022,24 +1086,56 @@ $(document).ready( function () {
                 })
                 .then(function(result) {
                   if (result) {
-                    for (x = 0; x < selectedKeywords.length; x++) {
-                      var keywordName = selectedKeywords[x][1].match(/(?<=\>)(.*)(?=\<)/)[0];
-                      $.ajax({
-                        type: "POST",
-                        url: "includes/dashpages/cmanager/helpers/toggle_keywords.php",
-                        data: {
-                          toggle: 'archive',
-                          keywordName: keywordName,
-                          keywordDataBack: keywordDataBack,
-                          user_id: user_id,
-                          refresh_token: refresh_token,
-                          profileId: profileId
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: 'archive',
+                        element_id: keywordIdArr,
+                        element_name: k_list,
+                        data_level: 2
+                      },
+                      
+                      success: function(alert_text) {
+                        if (alert_text.includes("error")) {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        } else {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
                         }
-                      });
+                        initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
+                      },
+                      error: function(er) {
+                        swal({
+                          title: "Error",
+                          text: "An error has occurred. Please try again in a few moments.",
+                          type: "error",
+                          confirmButtonText: "Close"
+                        });
+                      }
+                    });
 
-                      //code to make status toggle button greyed out
-                      //add notif to notify user it went through
-                    }
+                    //code to make status toggle button greyed out
+                    //add notif to notify user it went through
                   }
                 })
               }

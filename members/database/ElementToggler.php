@@ -14,6 +14,7 @@ ini_set('precision',30);
  *
  * if $config["toggle"] = true, then enable element
  * if $config["toggle"] = false, then pause element
+ * if $config["toggle"] = archive then archive element
  */
 
 class ElementToggler
@@ -32,7 +33,7 @@ class ElementToggler
     $this->element_id   = floatval($config["element_id"]);
     $this->element_name = $config["element_name"];
     $this->data_level   = $config["data_level"];
-    $this->state        = ($config["toggle"] == "true") ? "enabled" : "paused";
+    $this->state        = ($config["toggle"] == "true") ? "enabled" : (($config["toggle"] == "false") ? "paused" : "archived");
     
     $this->client = $this->get_amz_client($config["refresh_token"], $config["profile_id"]);
   }
