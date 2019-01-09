@@ -41,16 +41,13 @@ $user_id = $_SESSION['user_id'];
   <link href="assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   <link href="assets/css/dashboard_active5.css" rel="stylesheet" />
   <link href="assets/css/tabs.css" rel="stylesheet" />
-
-
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <!--  <link href="assets/demo/demo.css" rel="stylesheet" />-->
+  <link href="assets/css/cmanager.css" rel="stylesheet" />
 
   <link href="node_modules/flag-icon-css/assets/docs.css" rel="stylesheet">
   <link href="node_modules/flag-icon-css/css/flag-icon.css" rel="stylesheet">
 
   <!--  Datatables CSS Files -->
- <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.2.5/css/fixedColumns.bootstrap4.min.css" />
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css" /> -->
 

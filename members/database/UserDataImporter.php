@@ -281,38 +281,122 @@ class UserDataImporter {
   private function import_ad_group_neg_keywords() {
     global $pdo;
 
-    $result = $this->safe_json_decode($this->client->listNegativeKeywords(array("stateFilter" => "enabled"))['response']);
+    // Get all existing ad group negative keywords from db and create lookup
+    $db_neg_adgroup_keywords = $pdo
+      ->query("SELECT kw_id, keyword_text FROM adgroup_neg_kw WHERE user_id=" . $this->user_id)
+      ->fetchAll(PDO::FETCH_ASSOC);
+    $db_neg_adgroup_keywords = $this->create_lookup($db_neg_adgroup_keywords, 'kw_id');
 
-    for ($i = 0; $i < count($result); $i++) {
-      $sql = 'INSERT INTO adgroup_neg_kw (kw_id, amz_adgroup_id, keyword_text, state, match_type)
-              VALUES (:kw_id, :amz_adgroup_id, :keyword_text, :state, :match_type)';
-      $stmt = $pdo->prepare($sql);
-      $stmt->execute(array(
-        ':kw_id'          => $result[$i]['keywordId'],
-        ':amz_adgroup_id' => $result[$i]['adGroupId'],
-        ':keyword_text'   => $result[$i]['keywordText'],
-        ':state'          => $result[$i]['state'],
-        ':match_type'     => $result[$i]['matchType']
-      ));
+    // Set up prepared statements
+    $insert_stmt = $pdo->prepare(
+      "INSERT INTO adgroup_neg_kw (kw_id, amz_adgroup_id, keyword_text, state, match_type)
+       VALUES (:kw_id, :amz_adgroup_id, :keyword_text, :state, :match_type)"
+     );
+
+    $update_stmt = $pdo->prepare(
+      "UPDATE adgroup_neg_kw
+       SET state=:state
+       WHERE kw_id=:kw_id"
+    );
+
+    // Get all negative adgroup keywords
+    $amz_neg_adgroup_keywords = $this
+      ->safe_json_decode(
+        $this->client->listNegativeKeywords(array(
+          "stateFilter" => "enabled"
+          )
+        )['response']
+      );
+
+    foreach ($amz_neg_adgroup_keywords as $amz_neg_adgroup_keyword) {
+
+      // Get the db neg adgroup keyword
+      $db_neg_adgroup_keyword =
+        (isset($db_neg_adgroup_keywords[$amz_neg_adgroup_keyword['keywordId']]))
+        ? $db_neg_adgroup_keywords[$amz_neg_adgroup_keyword['keywordId']]
+        : null;
+
+      // Did we find the neg adgroup keyword in the database?
+      if ($db_neg_adgroup_keyword != null) {
+
+        // If the state changed on Amazon's end
+        if (  $db_neg_adgroup_keyword['state'] != $amz_neg_adgroup_keyword['state'] ) {
+          $update_stmt->execute(array(
+            ":state"  => $amz_neg_adgroup_keyword['state'],
+            ":kw_id"  => $amz_neg_adgroup_keyword['keywordId']
+          ));
+        }
+
+      } else {
+        $insert_stmt->execute(array(
+          ":kw_id"          => $amz_neg_adgroup_keyword['keywordId'],
+          ":amz_adgroup_id" => $amz_neg_adgroup_keyword['adGroupId'],
+          ":keyword_text"   => $amz_neg_adgroup_keyword['keywordText'],
+          ":state"          => $amz_neg_adgroup_keyword['state'],
+          ":match_type"     => $amz_neg_adgroup_keyword['matchType']
+        ));
+      }
     }
   }
 
   private function import_campaign_neg_keywords() {
     global $pdo;
 
-    $result = $this->safe_json_decode($this->client->listCampaignNegativeKeywords(array("stateFilter" => "enabled"))['response']);
+    // Get all existing ad group negative keywords from db and create lookup
+    $db_neg_campaign_keywords = $pdo
+      ->query("SELECT kw_id, keyword_text FROM campaign_neg_kw WHERE user_id=" . $this->user_id)
+      ->fetchAll(PDO::FETCH_ASSOC);
+    $db_neg_campaign_keywords = $this->create_lookup($db_neg_campaign_keywords, 'kw_id');
 
-    for ($i = 0; $i < count($result); $i++) {
-      $sql = 'INSERT INTO campaign_neg_kw (kw_id, amz_campaign_id, keyword_text, state, match_type)
-              VALUES (:kw_id, :amz_campaign_id, :keyword_text, :state, :match_type)';
-      $stmt = $pdo->prepare($sql);
-      $stmt->execute(array(
-        ':kw_id'          => $result[$i]['keywordId'],
-        ':amz_campaign_id'=> $result[$i]['campaignId'],
-        ':keyword_text'   => $result[$i]['keywordText'],
-        ':state'          => $result[$i]['state'],
-        ':match_type'     => $result[$i]['matchType']
-      ));
+    // Set up prepared statements
+    $insert_stmt = $pdo->prepare(
+      "INSERT INTO campaign_neg_kw (kw_id, amz_campaign_id, keyword_text, state, match_type)
+       VALUES (:kw_id, :amz_campaign_id, :keyword_text, :state, :match_type)"
+     );
+
+    $update_stmt = $pdo->prepare(
+      "UPDATE campaign_neg_kw
+       SET state=:state
+       WHERE kw_id=:kw_id"
+    );
+
+    // Get all negative campaign keywords
+    $amz_neg_campaign_keywords = $this
+      ->safe_json_decode(
+        $this->client->listCampaignNegativeKeywords(array(
+          "stateFilter" => "enabled"
+          )
+        )['response']
+      );
+
+    foreach ($amz_neg_campaign_keywords as $amz_neg_campaign_keyword) {
+
+      // Get the db neg campaign keyword
+      $db_neg_campaign_keyword =
+        (isset($db_neg_campaign_keywords[$amz_neg_campaign_keyword['keywordId']]))
+        ? $db_neg_campaign_keywords[$amz_neg_campaign_keyword['keywordId']]
+        : null;
+
+      // Did we find the neg campaign keyword in the database?
+      if ($db_neg_campaign_keyword != null) {
+
+        // If the state changed on Amazon's end
+        if (  $db_neg_campaign_keyword['state'] != $amz_neg_campaign_keyword['state'] ) {
+          $update_stmt->execute(array(
+            ":state"  => $amz_neg_campaign_keyword['state'],
+            ":kw_id"  => $amz_neg_campaign_keyword['keywordId']
+          ));
+        }
+
+      } else {
+        $insert_stmt->execute(array(
+          ":kw_id"           => $amz_neg_campaign_keyword['keywordId'],
+          ":amz_campaign_id" => $amz_neg_campaign_keyword['campaignId'],
+          ":keyword_text"    => $amz_neg_campaign_keyword['keywordText'],
+          ":state"           => $amz_neg_campaign_keyword['state'],
+          ":match_type"      => $amz_neg_campaign_keyword['matchType']
+        ));
+      }
     }
   }
 

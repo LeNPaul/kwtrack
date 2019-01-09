@@ -58,3 +58,13 @@ alter table ppc_keywords drop column ad_spend;
 alter table ppc_keywords drop column avg_cpc;
 alter table ppc_keywords drop column units_sold;
 alter table ppc_keywords drop column sales;
+
+-- Add user_id to negative keyword tables
+
+ALTER TABLE adgroup_neg_kw
+  ADD COLUMN user_id INT(11) NOT NULL,
+  ADD FOREIGN KEY fk_user_id(user_id) REFERENCES users(user_id);
+
+ALTER TABLE campaign_neg_kw
+  ADD COLUMN user_id INT(11) NOT NULL,
+  ADD FOREIGN KEY fk_user_id(user_id) REFERENCES users(user_id);

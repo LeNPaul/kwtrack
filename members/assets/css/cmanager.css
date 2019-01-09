@@ -1,0 +1,149 @@
+/*
+ *
+ *  Campaign Manager Styles
+ *
+ */
+
+.dataTables_scrollHeadInner{
+  width:100% !important;
+}
+.dataTables_scrollHeadInner table{
+  width:100% !important;
+}
+
+.card-subtitle {
+  font-weight: bold;
+  font-size: 0.5em;
+  color: #6c6c6c;
+  margin-bottom: 30px;
+}
+
+.card-body .metric-name { float: left; display: inline; font-weight: 500;}
+.card-body .metric { float: right; display: inline; }
+.card-body hr { margin: 5px 0 5px 0; }
+.card-body p { margin: 0; text-align: right; }
+
+#chartjs-tooltip {
+  border-width: 2px !important;
+	background: rgba(255, 255, 255, .5);
+	border-radius: 2px;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+	pointer-events: none;
+	-webkit-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+  padding: 15px;
+}
+
+#tooltip_title {
+   padding-bottom: 0.5rem;
+}
+
+tr#tooltip_row>td {
+  padding-top: 1em;
+}
+
+table.dataTable,
+table.dataTable th,
+table.dataTable td {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.dataTables_scrollHeadInner {
+  width:100% !important;
+  padding: 0 !important;
+}
+
+.dataTables_scrollHead {
+  border-radius: 15px 15px 0px 0px !important;
+}
+.dataTables_info, .dataTables_paginate {
+  padding: 15px !important;
+  background-color: #ffffff !important;
+  border-radius: 0px 0px 20px 20px !important;
+}
+
+#campaignRange {
+  border-radius: 10px !important;
+  /* display: block !important; */
+}
+
+.breadcrumb {
+  border-radius: 15px !important;
+  /* display: block !important; */
+}
+
+#bc {
+  font-weight: bold !important;
+  margin: 5px 0 5px 0;
+}
+
+.dataTables_wrapper .name {
+  font-weight: 600 !important;
+}
+
+.dataTables_wrapper td {
+  font-weight: 400;
+}
+
+.dataTables_wrapper .input-group .form-control {
+  font-size: 11px !important;
+  padding: 1px !important;
+  margin-left: 0px !important;
+}
+
+.dataTables_wrapper span.input-group-text{
+  font-size: 11px !important;
+  padding-left: 17px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-right: 5px !important;
+}
+
+.dataTables_wrapper .input-group-prepend {
+  height: 30px !important;
+  width: 30px !important;
+  background: #eeeeee !important;
+}
+
+.dataTables_wrapper .input-group-append button{
+  line-height: 0.5em !important;
+  padding: 5px !important;
+  font-size: 11px;
+}
+
+.toggle-on.btn-sm, .toggle-off.btn-sm {
+  line-height: 2em !important;
+}
+
+#campaign_manager_length, #campaign_manager_info {
+  float: left !important;
+  display: inline-block;
+}
+
+#campaign_manager_filter, #campaign_manager_paginate {
+  float: right !important;
+  display: inline-block;
+}
+
+.dataTables_wrapper tr.selected, .dataTables_wrapper tr.selected.hover {
+  background-color: rgba(193, 235, 255, 0.4) !important;
+  color: #2c2c2c !important;
+}
+
+.dataTables_wrapper tr.hover, .dataTables_wrapper tr.hover:hover { background-color: rgba(193, 235, 255, 0.1); }
+
+.modal-body label { font-weight: bold !important; }
+textarea.neg_kw {
+  padding: 10px !important;
+  max-height: 400px !important;
+}
+
+/* No overflow for campaign names, adgroup names, or keyword text */
+div.DTFC_LeftBodyLiner, td[data-dt-column="1"] {
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
