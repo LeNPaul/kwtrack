@@ -225,7 +225,7 @@ $(document).ready( function () {
                         icon: "nc-icon nc-bell-55",
                         message: alert_text
                       },{
-                        type: 'danger',
+                        type: 'success',
                         timer: 2000,
                         placement: {
                           from: 'bottom',
@@ -416,7 +416,7 @@ $(document).ready( function () {
                             icon: "nc-icon nc-bell-55",
                             message: alert_text
                           },{
-                            type: 'danger',
+                            type: 'success',
                             timer: 2000,
                             placement: {
                               from: 'bottom',
@@ -756,7 +756,7 @@ $(document).ready( function () {
                             icon: "nc-icon nc-bell-55",
                             message: alert_text
                           },{
-                            type: 'danger',
+                            type: 'success',
                             timer: 2000,
                             placement: {
                               from: 'bottom',
@@ -1114,7 +1114,7 @@ $(document).ready( function () {
                             icon: "nc-icon nc-bell-55",
                             message: alert_text
                           },{
-                            type: 'danger',
+                            type: 'success',
                             timer: 2000,
                             placement: {
                               from: 'bottom',
