@@ -27,6 +27,8 @@ class ElementToggler
   private $state;
   
   private $alert_text;
+  private $flag;
+  private $failed;
   
   public function __construct($config)
   {
@@ -34,6 +36,8 @@ class ElementToggler
     $this->element_name = $config["element_name"];
     $this->data_level   = $config["data_level"];
     $this->state        = ($config["toggle"] == "true") ? "enabled" : (($config["toggle"] == "false") ? "paused" : "archived");
+    $this->flag         = false;
+	$this->failed       = [];
     
     $this->client = $this->get_amz_client($config["refresh_token"], $config["profile_id"]);
   }
@@ -54,14 +58,24 @@ class ElementToggler
   }
   
   public function get_alert_text() {
+    $this->alert_text = ($this->flag) ? $this->element_name . " has been successfully " . $this->state : "An error has occurred...";
     return $this->alert_text;
+  }
+  //TODO: change datalevels to correct word campaigns/adgroups/keywords
+  //also add the correct alert_text for failed campaigns/adgroups/keywords
+  public function get_multi_alert($success) {
+	if (count($this->failed == 0)) {
+      $this->alert_text = $success . " datalevels " . "successfully " . $this->state;
+	} else {
+	  $this->failed = implode("\n", $this->failed);
+	  $this->alert_text = $success . " datalevels " . "successfully " . $this->state . "\nerror: \n" . $this->failed . " unsuccessfully " . $this->state;
+	}
+	return $this->alert_text;
   }
   
   public function single_toggle()
   {
     global $pdo;
-  
-    $flag  = false;
   
     // If data level is on campaign level
     if ($this->data_level == 0) {
@@ -71,7 +85,7 @@ class ElementToggler
       )))['response'], true)[0]["code"];
     
       if ($result == "SUCCESS") {
-        $flag = true;
+        $this->flag = true;
       
         $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:id";
         $stmt = $pdo->prepare($sql);
@@ -79,8 +93,11 @@ class ElementToggler
           ":state"  => $this->state,
           ":id"     => $this->element_id
         ));
+		return 1;
       } else {
-        $flag = false;
+        $this->flag = false;
+		array_push($this->failed, $this->element_name);
+		return 0;
       }
     
     }
@@ -92,7 +109,7 @@ class ElementToggler
       )))['response'], true)[0]["code"];
     
       if ($result == "SUCCESS") {
-        $flag = true;
+        $this->flag = true;
       
         $sql = "UPDATE ad_groups SET status=:state WHERE amz_adgroup_id=:id";
         $stmt = $pdo->prepare($sql);
@@ -100,8 +117,11 @@ class ElementToggler
           ":state"  => $this->state,
           ":id"     => $this->element_id
         ));
+		return 1;
       } else {
-        $flag = false;
+        $this->flag = false;
+		array_push($this->failed, $this->element_name);
+		return 0;
       }
     
     }
@@ -115,7 +135,7 @@ class ElementToggler
       // TODO: Automatic campaign targeting clauses CANNOT be paused
       
       if ($result == "SUCCESS") {
-        $flag = true;
+        $this->flag = true;
       
         $sql = "UPDATE ppc_keywords SET status=:state WHERE amz_kw_id=:id";
         $stmt = $pdo->prepare($sql);
@@ -123,13 +143,15 @@ class ElementToggler
           ":state"  => $this->state,
           ":id"     => $this->element_id
         ));
+		return 1;
       } else {
-        $flag = false;
+        $this->flag = false;
+		array_push($this->failed, $this->element_name);
+		return 0;
       }
     
     }
-  
-    $this->alert_text = ($flag) ? $this->element_name . " has successfully been " . $this->state : "An error has occurred...";
+    
   }
   
 }

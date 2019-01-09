@@ -7,7 +7,10 @@ require_once dirname(__FILE__) . '../../../../../database/ElementToggler.php';
 
 use PDO;
 
-for ($i = 0; $i < count($_POST["element_id"]); $i++) {
+$num = count($_POST["element_id"]);
+$success = 0;
+
+for ($i = 0; $i < $num; $i++) {
 	$config = array(
 		"element_id"     => $_POST["element_id"][$i],
 		"element_name"   => $_POST["element_name"][$i],
@@ -18,8 +21,12 @@ for ($i = 0; $i < count($_POST["element_id"]); $i++) {
 	);
 
 	$toggler = new ElementToggler($config);
-	$toggler->single_toggle();
+	$success += $toggler->single_toggle();
+}
 
+if ($num == 1) {
 	echo $toggler->get_alert_text();
+} else {
+	echo $toggler->get_multi_alert($success);
 }
 ?>
