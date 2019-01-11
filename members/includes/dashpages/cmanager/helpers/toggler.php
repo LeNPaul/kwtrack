@@ -9,6 +9,7 @@ use PDO;
 
 $num = count($_POST["element_id"]);
 $success = 0;
+$datalevel = ($_POST["data_level"] == 0) ? "campaign" : (($_POST["data_level"] == 1) ? "ad group" : "keyword");
 
 for ($i = 0; $i < $num; $i++) {
 	$config = array(
@@ -27,6 +28,6 @@ for ($i = 0; $i < $num; $i++) {
 if ($num == 1) {
 	echo $toggler->get_alert_text();
 } else {
-	echo $toggler->get_multi_alert($success);
+	echo $toggler->get_multi_alert($success, $datalevel);
 }
 ?>
