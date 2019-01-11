@@ -188,8 +188,8 @@ $(document).ready( function () {
               inputPlaceholder: 'Select a bulk action',
               confirmButtonClass: "btn-primary",
               cancelButtonClass: "btn-default",
-              confirmButtonColor: '#51cbce',
-              //cancelButtonColor: '#d33',
+              confirmButtonColor: 'green',
+              cancelButtonColor: '#d33',
               showCancelButton: true,
               allowOutsideClick: false,
               allowEnterKey: false,
@@ -387,7 +387,7 @@ $(document).ready( function () {
                   allowEscapeKey: false,
                 })
                 .then(function (result) {
-                  if (result) {
+                  if (result.value) {
                     $.ajax({
                       type: "POST",
                       url: "includes/dashpages/cmanager/helpers/toggler.php",
@@ -727,7 +727,7 @@ $(document).ready( function () {
                   allowEscapeKey: false,
                 })
                 .then(function(result) {
-                  if (result) {
+                  if (result.value) {
                     $.ajax({
                       type: "POST",
                       url: "includes/dashpages/cmanager/helpers/toggler.php",
@@ -1085,7 +1085,7 @@ $(document).ready( function () {
                   allowEscapeKey: false,
                 })
                 .then(function(result) {
-                  if (result) {
+                  if (result.value) {
                     $.ajax({
                       type: "POST",
                       url: "includes/dashpages/cmanager/helpers/toggler.php",
