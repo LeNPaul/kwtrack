@@ -21,16 +21,26 @@ $config = array(
 $client = new Client($config);
 $client->profileId = "2120126684554622";
 
-$r = $client->bulkGetKeywordBidRecommendations(
-    58323839730501,
-    array(
-        array("keyword" => "bamboo toothbrush",
-              "matchType" => "broad"),
-        array("keyword" => "bamboo toothbrush",
-              "matchType" => "exact")
-    ));
+$a = array(
+	"campaigns" => array(
+		array(
+			"a" => 1,
+			"b"	=> 2,
+			"c" => 3,
+			"d" => 4
+		),
+		array(
+			"e" => 5,
+			"f"	=> 6,
+			"g" => 7,
+			"h" => 8
+		)
+	)
+);
 
-		echo '<pre>';
-		var_dump($r);
-		echo '</pre>';
+foreach ($a["campaigns"] as $letter) {
+	echo '<pre>';
+	var_dump( $letter);
+	echo '</pre>';
+}
 ?>
