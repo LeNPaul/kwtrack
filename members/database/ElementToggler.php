@@ -20,16 +20,16 @@ ini_set('precision',30);
 class ElementToggler
 {
   private $client;
-  
+
   private $element_id;
   private $element_name;
   private $data_level;
   private $state;
-  
+
   private $alert_text;
   private $flag;
   private $failed;
-  
+
   public function __construct($config)
   {
     $this->element_id   = floatval($config["element_id"]);
@@ -38,10 +38,10 @@ class ElementToggler
     $this->state        = ($config["toggle"] == "true") ? "enabled" : (($config["toggle"] == "false") ? "paused" : "archived");
     $this->flag         = false;
     $this->failed       = [];
-    
+
     $this->client = $this->get_amz_client($config["refresh_token"], $config["profile_id"]);
   }
-  
+
   private function get_amz_client($refresh_token, $profile_id, $region = "na")
   {
     $config = array(
@@ -53,10 +53,10 @@ class ElementToggler
     );
     $client = new Client($config);
     $client->profileId = $profile_id;
-    
+
     return $client;
   }
-  
+
   public function get_alert_text() {
     $this->alert_text = ($this->flag) ? $this->element_name . " has been successfully " . $this->state : "An error has occurred...";
     return $this->alert_text;
@@ -72,21 +72,21 @@ class ElementToggler
     }
     return $this->alert_text;
   }
-  
+
   public function single_toggle()
   {
     global $pdo;
-  
+
     // If data level is on campaign level
     if ($this->data_level == 0) {
       $result = json_decode($this->client->updateCampaigns(array(array(
         "campaignId" => $this->element_id,
         "state"      => $this->state
       )))['response'], true)[0]["code"];
-    
+
       if ($result == "SUCCESS") {
         $this->flag = true;
-      
+
         $sql = "UPDATE campaigns SET status=:state WHERE amz_campaign_id=:id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(
@@ -99,7 +99,7 @@ class ElementToggler
         array_push($this->failed, $this->element_name);
         return 0;
       }
-    
+
     }
     // If data level is on adgroup level
     elseif ($this->data_level == 1) {
@@ -107,10 +107,10 @@ class ElementToggler
         "adGroupId" => $this->element_id,
         "state"     => $this->state
       )))['response'], true)[0]["code"];
-    
+
       if ($result == "SUCCESS") {
         $this->flag = true;
-      
+
         $sql = "UPDATE ad_groups SET status=:state WHERE amz_adgroup_id=:id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(
@@ -123,7 +123,7 @@ class ElementToggler
         array_push($this->failed, $this->element_name);
         return 0;
       }
-    
+
     }
     // If data level is on keyword level
     elseif ($this->data_level == 2) {
@@ -131,12 +131,12 @@ class ElementToggler
         "keywordId" => $this->element_id,
         "state"     => $this->state
       )))['response'], true)[0]["code"];
-      
+
       // TODO: Automatic campaign targeting clauses CANNOT be paused
-      
+
       if ($result == "SUCCESS") {
         $this->flag = true;
-      
+
         $sql = "UPDATE ppc_keywords SET status=:state WHERE amz_kw_id=:id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(
@@ -149,9 +149,9 @@ class ElementToggler
         array_push($this->failed, $this->element_name);
         return 0;
       }
-    
+
     }
-    
+
   }
-  
+
 }

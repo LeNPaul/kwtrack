@@ -53,7 +53,6 @@ var sleep = function (time) {
 };
 
 $(document).ready( function () {
-
   // Holds the data table variable
   var dt        = null;
   var dt_neg_kw = null;
@@ -131,7 +130,6 @@ $(document).ready( function () {
 
   /* Start: initCampaignsTable */
   var initCampaignsTable = function(){
-
     var campaignOptions = {
       dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
       fixedColumns: {
@@ -397,7 +395,7 @@ $(document).ready( function () {
                         element_name: c_list,
                         data_level: 0
                       },
-                      
+
                       success: function(alert_text) {
                         if (alert_text.includes("error")) {
                           $.notify({
@@ -737,7 +735,7 @@ $(document).ready( function () {
                         element_name: a_list,
                         data_level: 1
                       },
-                        
+
                       success: function(alert_text) {
                         if (alert_text.includes("error")) {
                           $.notify({
@@ -847,9 +845,9 @@ $(document).ready( function () {
 
     clearTable(0);
     dt = $('#campaign_manager').DataTable(adGroupOptions);
-    dt.columns.adjust();
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
+    dt.columns.adjust();
 
     // Add the campaign to the breadcrumbs
     breadcrumbs = [{
@@ -1095,7 +1093,7 @@ $(document).ready( function () {
                         element_name: k_list,
                         data_level: 2
                       },
-                      
+
                       success: function(alert_text) {
                         if (alert_text.includes("error")) {
                           $.notify({
@@ -1201,9 +1199,9 @@ $(document).ready( function () {
     clearTable(0);
 
     dt = $('#campaign_manager').DataTable(kwOptions);
-    dt.columns.adjust();
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
+    dt.columns.adjust();
 
     // Add the adgroup to the breadcrumbs
     breadcrumbs.push({
