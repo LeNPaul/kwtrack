@@ -21,26 +21,23 @@ $config = array(
 $client = new Client($config);
 $client->profileId = "2120126684554622";
 
-$a = array(
-	"campaigns" => array(
-		array(
-			"a" => 1,
-			"b"	=> 2,
-			"c" => 3,
-			"d" => 4
-		),
-		array(
-			"e" => 5,
-			"f"	=> 6,
-			"g" => 7,
-			"h" => 8
-		)
+$a = $client->createBiddableKeywords(array(
+	array(
+		"campaignId" => 3917622904824,
+    "adGroupId" => 42937286931133,
+    "keywordText" => "test1",
+    "matchType" => "exact",
+    "state" => "enabled"
 	)
-);
+));
 
-foreach ($a["campaigns"] as $letter) {
-	echo '<pre>';
-	var_dump( $letter);
-	echo '</pre>';
-}
+echo '<pre>';
+var_dump($a);
+echo '</pre>';
+
+$m = json_decode($a["response"], true);
+
+echo '<pre>';
+var_dump($m);
+echo '</pre>';
 ?>
