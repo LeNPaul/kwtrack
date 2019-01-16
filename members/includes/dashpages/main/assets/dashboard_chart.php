@@ -31,10 +31,18 @@
 	$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
   });
 
+  // Dashboard chart object
   var ctx = document.getElementById("lineChart");
-  var adSpendArr = <?= json_encode($adSpendArr); ?>;
-  var ppcSalesArr = <?= json_encode($ppcSalesArr); ?>;
-  var ppcAcosArr = <?= json_encode($acosArr); ?>;
+
+  // Other
+  var ppcAcosArr     = <?= json_encode($acosArr); ?>;
+
+  // Data for dashboard chart
+  var adSpendArr     = <?= json_encode($adSpendArr); ?>;
+  var ppcSalesArr    = <?= json_encode($ppcSalesArr); ?>;
+  var acosArr        = <?= json_encode($acosArr); ?>;
+
+  // Date array
   var dateArr = <?= json_encode($dateArr); ?>;
 
   Chart.defaults.LineWithLine = Chart.defaults.line;
@@ -186,14 +194,14 @@
               var colors = tooltipModel.labelColors[i];
   	          // Split the body into two table elements
 	            var splitBody = body[0].split(": ");
-	            
+
 	            var prefix = '$';
 	            var suffix = '';
 	            if (splitBody[0] == 'PPC ACoS'){
 	              prefix = '';
 	              suffix = '%';
               }
-	            
+
               innerHtml += '<tbody><tr id="tooltip_row" style="color:' + colors.backgroundColor + '">' + '<td>' + splitBody[0] + '</td><td>'
               + prefix + splitBody[1] + suffix + '</td></tr>';
             });
