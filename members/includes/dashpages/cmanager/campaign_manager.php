@@ -497,13 +497,15 @@ $(document).ready( function () {
           size: "small"
         });
 
-        // Handle budget changes when textbox is clicked
+        // Show budget Save button when textbox is clicked
         $(".input-group input.form-control").on("focus", function () {
           $(this).next().children().show();
         });
+        // Hide budget Save button when textbox is clicked
         $(".input-group input.form-control").on("blur", function () {
           $(this).next().children().hide(200);
         });
+        // Click Save button when Enter button is pressed
         $('.input-group input.form-control').keypress(function (e) {
           var key = e.which;
 
