@@ -499,22 +499,6 @@ $(document).ready( function () {
           size: "small"
         });
 
-        // Handle budget changes when textbox is clicked
-        $(".input-group input.form-control").on("focus", function () {
-          $(this).next().children().show();
-        });
-        $(".input-group input.form-control").on("blur", function () {
-          $(this).next().children().hide(200);
-        });
-        $('.input-group input.form-control').keypress(function (e) {
-          var key = e.which;
-
-          if (key == 13) {
-            $(this).next().children("button").click();
-            return false;
-          }
-        });
-
       }, //drawCallback
       ajax: {
         url: 'includes/dashpages/cmanager/helpers/get_data.php?XDEBUG_SESSION_START=PHPSTORM',
@@ -1410,9 +1394,25 @@ $(document).ready( function () {
     }
 
   });
+  
+  // Handle budget changes when textbox is clicked
+    $("#campaign_manager").on("focus", ".input-group input.form-control", function () {
+      $(this).next().children().show();
+      });
+    $("#campaign_manager").on("blur", ".input-group input.form-control", function () {
+      $(this).next().children().hide(200);
+    });
+    $('#campaign_manager').on("keypress", ".input-group input.form-control", function (e) {
+      var key = e.which;
+
+      if (key == 13) {
+        $(this).next().children("button").click();
+        return false;
+      }
+    });
 
   // Handle budget changes when save button is clicked
-  $(".btn-edit-budget").on("click", function() {
+  $("#campaign_manager").on("click", ".btn-edit-budget", function() {
     var budgetVal = $(this).parent().prev().val();
     // Verify input to check if numeric
     if (!$.isNumeric(budgetVal) || budgetVal < 1) {
