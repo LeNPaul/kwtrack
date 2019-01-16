@@ -336,26 +336,11 @@
       chart.data.datasets[0].data = acosArr;
       chart.data.datasets[0].label = "% ACoS";
     } else if (value == "adSpendArr") {
-    chart.data.datasets[0].data = adSpendArr;
-    chart.data.datasets[0].label = "$ Ad Spend";
-    } else if (value == "impressionsArr") {
-      chart.data.datasets[0].data = impressionsArr;
-      chart.data.datasets[0].label = "# Impressions";
-    } else if (value == "avgCpc") {
-      chart.data.datasets[0].data = avgCpc;
-      chart.data.datasets[0].label = "$ Average CPC";
+      chart.data.datasets[0].data = adSpendArr;
+      chart.data.datasets[0].label = "$ Ad Spend";
     } else if (value == "ppcSalesArr") {
       chart.data.datasets[1].data = ppcSalesArr;
       chart.data.datasets[1].label = "$ PPC Sales";
-    } else if (value == "clicksArr") {
-      chart.data.datasets[1].data = clicksArr;
-      chart.data.datasets[1].label = "# Clicks";
-    } else if (value == "unitsSoldArr") {
-    chart.data.datasets[1].data = unitsSoldArr;
-    chart.data.datasets[1].label = "# Units Sold";
-    } else if (value == "ctrArr") {
-      chart.data.datasets[1].data = ctrArr;
-      chart.data.datasets[1].label = "% CTR";
     }
 
 		chart.update();
