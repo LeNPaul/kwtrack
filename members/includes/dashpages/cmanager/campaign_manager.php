@@ -497,6 +497,7 @@ $(document).ready( function () {
           size: "small"
         });
 
+<<<<<<< HEAD
         // Show budget Save button when textbox is clicked
         $(".input-group input.form-control").on("focus", function () {
           $(this).next().children().show();
@@ -515,6 +516,8 @@ $(document).ready( function () {
           }
         });
 
+=======
+>>>>>>> f8d9f2f6e42273c39eff22a6a4b86b6a38687482
       }, //drawCallback
       ajax: {
         url: 'includes/dashpages/cmanager/helpers/get_data.php?XDEBUG_SESSION_START=PHPSTORM',
@@ -1410,9 +1413,25 @@ $(document).ready( function () {
     }
 
   });
+  
+  // Handle budget changes when textbox is clicked
+    $("#campaign_manager").on("focus", ".input-group input.form-control", function () {
+      $(this).next().children().show();
+      });
+    $("#campaign_manager").on("blur", ".input-group input.form-control", function () {
+      $(this).next().children().hide(200);
+    });
+    $('#campaign_manager').on("keypress", ".input-group input.form-control", function (e) {
+      var key = e.which;
+
+      if (key == 13) {
+        $(this).next().children("button").click();
+        return false;
+      }
+    });
 
   // Handle budget changes when save button is clicked
-  $(".btn-edit-budget").on("click", function() {
+  $("#campaign_manager").on("click", ".btn-edit-budget", function() {
     var budgetVal = $(this).parent().prev().val();
     // Verify input to check if numeric
     if (!$.isNumeric(budgetVal) || budgetVal < 1) {
