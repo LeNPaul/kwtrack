@@ -71,32 +71,33 @@
   });
 
   // Line colors to be used for the chart line colour
-  var lineColors = ["#df6e21", "#be70c0", "#2096BA"]
+  var lineColors = ["#be70c0", "#2096BA", "#df6e21", "#d14785"]
 
   // Array containing label and corresponding data
-  var chartData = [["Ad Spend", adSpendArr],["PPC Sales", ppcSalesArr],["PPC ACoS", ppcAcosArr]]
+  var chartData = [["% ACoS", acosArr],["$ PPC Sales", ppcSalesArr]]
 
   var lineData = {
     labels: dateArr,
     datasets: [{
       label: chartData[0][0],
       yAxisID: 'A',
-      data: adSpendArr,
+      data: chartData[0][1],
       fill: false,
 
-      pointRadius: 0,
+      pointRadius: 0, // This is the radius of the data point when the pointer not hovered over
       hoverRadius: 6,
       pointBorderColor: '#ffffff',
       pointHoverBorderColor: '#ffffff',
       pointBackgroundColor: lineColors[0],
       hoverBorderWidth: 3,
+      pointHoverRadius: 5, // This is the radio of the data point when hovered over
 
-      borderWidth: 1.5,
+      borderWidth: 2, // This is the width of the border around the data points, and the width of the data line
       borderColor: lineColors[0]
     }, {
       label: chartData[1][0],
-      yAxisID: 'A',
-      data: ppcSalesArr,
+      yAxisID: 'B',
+      data: chartData[1][1],
       fill: false,
 
       pointRadius: 0,
@@ -105,25 +106,10 @@
       pointHoverBorderColor: '#ffffff',
       pointBackgroundColor: lineColors[1],
       hoverBorderWidth: 3,
+      pointHoverRadius: 5, // This is the radio of the data point when hovered over
 
-      borderWidth: 1.5,
+      borderWidth: 2,
       borderColor: lineColors[1]
-    }, {
-      label: chartData[2][0],
-      yAxisID: 'B',
-      data: ppcAcosArr,
-      fill: false,
-
-      pointRadius: 0,
-      hoverRadius: 6,
-      pointBorderColor: '#ffffff',
-      pointHoverBorderColor: '#ffffff',
-      pointBackgroundColor: lineColors[2],
-      hoverBorderWidth: 3,
-
-      borderWidth: 1.5,
-      borderColor: lineColors[2]
-      //borderColor: "#d14785"
     }]
   };
 
@@ -342,6 +328,39 @@
     myChart.update();
   }
 
+  function change(event) {
+
+    var value = this.options[this.selectedIndex].value;
+
+    if (value == "acosArr") {
+      chart.data.datasets[0].data = acosArr;
+      chart.data.datasets[0].label = "% ACoS";
+    } else if (value == "adSpendArr") {
+    chart.data.datasets[0].data = adSpendArr;
+    chart.data.datasets[0].label = "$ Ad Spend";
+    } else if (value == "impressionsArr") {
+      chart.data.datasets[0].data = impressionsArr;
+      chart.data.datasets[0].label = "# Impressions";
+    } else if (value == "avgCpc") {
+      chart.data.datasets[0].data = avgCpc;
+      chart.data.datasets[0].label = "$ Average CPC";
+    } else if (value == "ppcSalesArr") {
+      chart.data.datasets[1].data = ppcSalesArr;
+      chart.data.datasets[1].label = "$ PPC Sales";
+    } else if (value == "clicksArr") {
+      chart.data.datasets[1].data = clicksArr;
+      chart.data.datasets[1].label = "# Clicks";
+    } else if (value == "unitsSoldArr") {
+    chart.data.datasets[1].data = unitsSoldArr;
+    chart.data.datasets[1].label = "# Units Sold";
+    } else if (value == "ctrArr") {
+      chart.data.datasets[1].data = ctrArr;
+      chart.data.datasets[1].label = "% CTR";
+    }
+
+		chart.update();
+
+	}
 
   /*$("#lineChart").on("mousemove", function(evt) {
     var element = $("#cursor"),
