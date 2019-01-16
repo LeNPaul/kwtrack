@@ -175,16 +175,11 @@ foreach ($result as $m){
 				<select class="custom-select" onchange="change.call(this, event)">
 					<option selected value="acosArr">% ACoS</option>
 					<option value="adSpendArr">$ Ad Spend</option>
-					<option value="impressionsArr"># Impressions</option>
-					<option value="avgCpc">$ Average CPC</option>
 				</select>
 			</div>
 			<div class="col-sm-6">
 				<select class="custom-select" onchange="change.call(this, event)">
 					<option selected value="ppcSalesArr">$ PPC Sales</option>
-				  <option value="clicksArr"># Clicks</option>
-					<option value="unitsSoldArr"># Units Sold</option>
-				  <option value="ctrArr">% CTR</option>
 				</select>
 			</div>
 		</div>
