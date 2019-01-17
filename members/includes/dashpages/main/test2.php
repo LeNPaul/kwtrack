@@ -32,10 +32,10 @@ $a = $client->createBiddableKeywords(array(
 ));
 
 echo '<pre>';
-var_dump($a);
-echo '</pre>';
+var_dump(json_encode($a));
+echo '</pre>------------------------------------<br /><br />';
 
-$m = json_decode($a["response"], true);
+$m = json_decode($a, true);
 
 echo '<pre>';
 var_dump($m);

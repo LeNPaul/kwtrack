@@ -497,7 +497,6 @@ $(document).ready( function () {
           size: "small"
         });
 
-<<<<<<< HEAD
         // Show budget Save button when textbox is clicked
         $(".input-group input.form-control").on("focus", function () {
           $(this).next().children().show();
@@ -516,8 +515,6 @@ $(document).ready( function () {
           }
         });
 
-=======
->>>>>>> f8d9f2f6e42273c39eff22a6a4b86b6a38687482
       }, //drawCallback
       ajax: {
         url: 'includes/dashpages/cmanager/helpers/get_data.php?XDEBUG_SESSION_START=PHPSTORM',
@@ -1413,7 +1410,7 @@ $(document).ready( function () {
     }
 
   });
-  
+
   // Handle budget changes when textbox is clicked
     $("#campaign_manager").on("focus", ".input-group input.form-control", function () {
       $(this).next().children().show();
