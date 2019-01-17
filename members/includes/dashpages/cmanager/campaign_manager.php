@@ -440,6 +440,10 @@ $(document).ready( function () {
                   }
                 })
               }
+			  
+			  else if (result.value == 'changeBudget') {
+				
+			  }
             }) //.then
           } //action
         }
