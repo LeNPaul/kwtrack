@@ -1429,29 +1429,29 @@ $(document).ready( function () {
 
   // Handle budget changes when save button is clicked on all data levels
   $("#campaign_manager").on("click", ".btn-save-value", function() {
-    var budgetVal = $(this).parent().prev().val();
+    var budget_val = $(this).parent().prev().val();
     // Verify input to check if numeric
-    if (!$.isNumeric(budgetVal) || budgetVal < 1) {
+    if (!$.isNumeric(budget_val) || budget_val < 1) {
       // Error and clear textbox if not numeric
       showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
       $(this).parent().prev().val('');
     } else {
 
-      var budgetClick = function(budgetVal, elementName, elementId, dataLevel) {
+      var budget_click = function(budget_val, element_name, element_id, data_level) {
         $.ajax({
           type: "POST",
           url: "includes/dashpages/cmanager/helpers/changeHandler.php",
           data: {
-            changeValue: parseFloat(budgetVal).toFixed(2),
-            elementName: [elementName],
-            elementId: [parseFloat(elementId)],
-            dataLevel: dataLevel
+            change_value: parseFloat(budget_val).toFixed(2),
+            element_name: [element_name],
+            element_id: [parseFloat(element_id)],
+            data_level: data_level
           },
-          success: function(alertText) {
-            if (alertText.includes("error")) {
+          success: function(alert_text) {
+            if (alert_text.includes("error")) {
               $.notify({
                 icon: "nc-icon nc-bell-55",
-                message: alertText
+                message: alert_text
               },{
                 type: 'danger',
                 timer: 2000,
@@ -1463,7 +1463,7 @@ $(document).ready( function () {
             } else {
               $.notify({
                 icon: "nc-icon nc-bell-55",
-                message: alertText
+                message: alert_text
               },{
                 type: 'success',
                 timer: 2000,
@@ -1472,8 +1472,8 @@ $(document).ready( function () {
                   align: 'right'
                }
               });
-              if (dataLevel === 0) initCampaignsTable();
-              else if (dataLevel === 1) initAdGroupsTable(currentCampaign.name, currentCampaign.id);
+              if (data_level === 0) initCampaignsTable();
+              else if (data_level === 1) initAdGroupsTable(currentCampaign.name, currentCampaign.id);
               else initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
             }
           },
@@ -1488,20 +1488,21 @@ $(document).ready( function () {
         });
       };
 
-      var elementName = $(this).parent().parent().parent().prev().children().html();
-      var elementId = $(this).parent().parent().parent().prev().children().attr("id");
+      var element_name = $(this).parent().parent().parent().prev().children().html();
+      var element_id = $(this).parent().parent().parent().prev().children().attr("id");
       
       //campaign level budget change
       if($(this)[0].className.includes("budget")) {
-        budgetClick(budgetVal, elementName, elementId, 0);
+        budget_click(budget_val, element_name, element_id, 0);
       } 
       //adgroup level default_bid change
       else if($(this)[0].className.includes("default_bid")) {
-        budgetClick(budgetVal, elementName, elementId, 1);
+        budget_click(budget_val, element_name, element_id, 1);
       }
       //keyword level bid change
       else {
-        budgetClick(budgetVal, elementName, elementId, 2);
+		element_name = $(this).parent().parent().parent().prev().prev().children().html();
+        budget_click(budget_val, element_name, element_id, 2);
       }
     }
   });

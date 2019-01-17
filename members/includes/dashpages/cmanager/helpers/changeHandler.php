@@ -7,16 +7,16 @@ require_once dirname(__FILE__) . '../../../../../database/BudgetChanger.php';
 
 use PDO;
 
-$num = count($_POST["elementId"]);
+$num = count($_POST["element_id"]);
 $success = 0;
-$datalevel = ($_POST["dataLevel"] == 0) ? "campaign budgets" : (($_POST["dataLevel"] == 1) ? "ad group default bids" : "keyword bids");
+$datalevel = ($_POST["data_level"] == 0) ? "campaign budgets" : (($_POST["data_level"] == 1) ? "ad group default bids" : "keyword bids");
 
 for ($i = 0; $i < $num; $i++) {
   $config = array(
-    "element_id"     => $_POST["elementId"][$i],
-    "element_name"   => $_POST["elementName"][$i],
-    "data_level"     => $_POST["dataLevel"],
-    "budget_val"     => $_POST["changeValue"],
+    "element_id"     => $_POST["element_id"][$i],
+    "element_name"   => $_POST["element_name"][$i],
+    "data_level"     => $_POST["data_level"],
+    "budget_val"     => $_POST["change_value"],
     "refresh_token"  => $_SESSION["refresh_token"],
     "profile_id"     => $_SESSION["profileId"]
   );
