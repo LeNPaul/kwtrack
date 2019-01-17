@@ -61,14 +61,13 @@ class ElementToggler
     $this->alert_text = ($this->flag) ? $this->element_name . " has been successfully " . $this->state : "An error has occurred...";
     return $this->alert_text;
   }
-  //TODO: change datalevels to correct word campaigns/adgroups/keywords
-  //also add the correct alert_text for failed campaigns/adgroups/keywords
+  
   public function get_multi_alert($success, $datalevel) {
     if (count($this->failed == 0)) {
       $this->alert_text = $success . " " . $datalevel . "s successfully " . $this->state;
     } else {
       $this->failed = implode("\n", $this->failed);
-      $this->alert_text = $success . " datalevels " . "successfully " . $this->state . "\nerror: \n" . $this->failed . " unsuccessfully " . $this->state;
+      $this->alert_text = $success . " " . $datalevel . "s successfully " . $this->state . "\nerror: \n" . $this->failed . " unsuccessfully " . $this->state;
     }
     return $this->alert_text;
   }

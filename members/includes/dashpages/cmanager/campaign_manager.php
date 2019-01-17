@@ -1119,7 +1119,6 @@ $(document).ready( function () {
                     });
 
                     //code to make status toggle button greyed out
-                    //add notif to notify user it went through
                   }
                 })
               }
@@ -1379,9 +1378,6 @@ $(document).ready( function () {
 
     // Status toggles on campaign level
     if ($(this).children()[0].className.includes("campaign")) {
-
-
-      // Toggle campaign w/ AJAX
       toggleElement(toggleActive, elementId, elementName, 0);
     }
     // Status toggles on adgroup level
@@ -1411,8 +1407,8 @@ $(document).ready( function () {
       }
     });
 
-  // Handle budget changes when save button is clicked
-  $("#campaign_manager").on("click", ".btn-edit-budget", function() {
+  // Handle budget changes when save button is clicked on all data levels
+  $("#campaign_manager").on("click", ".btn-save-value", function() {
     var budgetVal = $(this).parent().prev().val();
     // Verify input to check if numeric
     if (!$.isNumeric(budgetVal) || budgetVal < 1) {
@@ -1420,28 +1416,73 @@ $(document).ready( function () {
       showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
       $(this).parent().prev().val('');
     } else {
-      campaignName = $(this).parent().parent().parent().prev().prev().children(".c_link").text();
-      $.ajax({
-        type: "POST",
-        url: "includes/dashpages/cmanager/helpers/change_budget.php",
-        data: {
-          user_id: user_id,
-          campaignName: campaignName,
-          cDataBack: databack,
-          refresh_token: refresh_token,
-          profileId: profileId,
-          newBudget: budgetVal
-        },
 
-        success: function(alertText) {
-          swal({
-            title: "Success!",
-            text: alertText,
-            type: "success",
-            confirmButtonText: "Close"
-          });
-        }
-      });
+      var budgetClick = function(budgetVal, elementName, elementId, dataLevel) {
+        $.ajax({
+          type: "POST",
+          url: "includes/dashpages/cmanager/helpers/changeHandler.php",
+          data: {
+            changeValue: parseFloat(budgetVal).toFixed(2),
+            elementName: [elementName],
+            elementId: [parseFloat(elementId)],
+            dataLevel: dataLevel
+          },
+          success: function(alertText) {
+            if (alertText.includes("error")) {
+              $.notify({
+                icon: "nc-icon nc-bell-55",
+                message: alertText
+              },{
+                type: 'danger',
+                timer: 2000,
+                placement: {
+                  from: 'bottom',
+                  align: 'right'
+                }
+              });
+            } else {
+              $.notify({
+                icon: "nc-icon nc-bell-55",
+                message: alertText
+              },{
+                type: 'success',
+                timer: 2000,
+                placement: {
+                  from: 'bottom',
+                  align: 'right'
+               }
+              });
+              if (dataLevel === 0) initCampaignsTable();
+              else if (dataLevel === 1) initAdGroupsTable(currentCampaign.name, currentCampaign.id);
+              else initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
+            }
+          },
+          error: function(er) {
+            swal({
+              title: "Error",
+              text: "An error has occurred. Please try again in a few moments.",
+              type: "error",
+              confirmButtonText: "Close"
+            });
+          }
+        });
+      };
+
+      var elementName = $(this).parent().parent().parent().prev().children().html();
+      var elementId = $(this).parent().parent().parent().prev().children().attr("id");
+      
+      //campaign level budget change
+      if($(this)[0].className.includes("budget")) {
+        budgetClick(budgetVal, elementName, elementId, 0);
+      } 
+      //adgroup level default_bid change
+      else if($(this)[0].className.includes("default_bid")) {
+        budgetClick(budgetVal, elementName, elementId, 1);
+      }
+      //keyword level bid change
+      else {
+        budgetClick(budgetVal, elementName, elementId, 2);
+      }
     }
   });
 
