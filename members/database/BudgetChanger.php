@@ -23,6 +23,7 @@ class BudgetChanger {
   private $alertText;
   private $failed;
   private $flag;
+  private $today;
 
   public function __construct($new) {
     $this->elementId = floatval($new['element_id']);
@@ -31,6 +32,9 @@ class BudgetChanger {
     $this->changeValue = $new['budget_val'];
     $this->failed = [];
     $this->flag = false;
+	$this->today = date("Y-m-d 00:00:00");
+	
+	var_dump($this->today);
     
     $this->client = $this->getAmzClient($new['refresh_token'], $new['profile_id']);
   }
@@ -121,11 +125,12 @@ class BudgetChanger {
       if($result == "SUCCESS") {
         $this->flag = true;
 
-        $sql = "UPDATE ppc_keyword_metrics SET bid=:value WHERE amz_kw_id=:id";
+        $sql = "UPDATE ppc_keyword_metrics SET bid=:value WHERE amz_kw_id=:id AND date=:date";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(
           ":value" => $this->changeValue,
-          ":id" => $this->elementId
+          ":id" => $this->elementId,
+		  ":date" => $this->today
         ));
         return 1;
       } else {
