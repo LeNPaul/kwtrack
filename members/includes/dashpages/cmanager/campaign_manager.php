@@ -1392,20 +1392,20 @@ $(document).ready( function () {
   });
   
   // Handle budget changes when textbox is clicked
-    $("#campaign_manager").on("focus", ".input-group input.form-control", function () {
-      $(this).next().children().show();
-      });
-    $("#campaign_manager").on("blur", ".input-group input.form-control", function () {
-      $(this).next().children().hide(200);
-    });
-    $('#campaign_manager').on("keypress", ".input-group input.form-control", function (e) {
-      var key = e.which;
+  $("#campaign_manager").on("focus", ".input-group input.form-control", function () {
+    $(this).next().children().show();
+  });
+  $("#campaign_manager").on("blur", ".input-group input.form-control", function () {
+    $(this).next().children().hide(200);
+  });
+  $('#campaign_manager').on("keypress", ".input-group input.form-control", function (e) {
+    var key = e.which;
 
-      if (key == 13) {
-        $(this).next().children("button").click();
-        return false;
-      }
-    });
+    if (key == 13) {
+      $(this).next().children("button").click();
+      return false;
+    }
+  });
 
   // Handle budget changes when save button is clicked on all data levels
   $("#campaign_manager").on("click", ".btn-save-value", function() {
