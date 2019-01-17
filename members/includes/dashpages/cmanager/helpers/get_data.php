@@ -55,10 +55,10 @@ function moneyInput($className, $value){
         <span class="input-group-text">$</span>
       </div>
 
-      <input type="text" class="form-control edit-'. $className . '" data-color="danger" placeholder=" ' . $value . '" />
+      <input type="text" class="form-control edit-value ' . $className . '" data-color="danger" placeholder=" ' . $value . '" />
 
       <div class="input-group-append">
-        <button class="btn btn-success btn-outline-secondary btn-edit-'. $className .'" type="button" style="display:none">Save</button>
+        <button class="btn btn-success btn-outline-secondary btn-save-value '. $className . '" type="button" style="display:none">Save</button>
       </div>
     </div>';
 }
