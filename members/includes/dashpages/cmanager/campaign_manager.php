@@ -1413,18 +1413,35 @@ $(document).ready( function () {
 
   // Handle budget changes when save button is clicked on all data levels
   $("#campaign_manager").on("click", ".btn-save-value", function() {
+    var flag = true;
     var budget_val = $(this).parent().prev().val();
-    // Verify input to check if numeric
-    if (!$.isNumeric(budget_val) || budget_val < 1) {
-      // Error and clear textbox if not numeric
-      showNotification('bottom', 'left', 'danger', "Please enter a valid budget value.");
-      $(this).parent().prev().val('');
-    } else {
+    // Verify input for campaign level
+    if ($(this).className.includes("budget")/*!$.isNumeric(budget_val) || budget_val < 0*/) {
+      if (!$.isNumeric(budget_val) || budget_val < 1 || budget_val > 1000000) {
+        flag = false;
+	    showNotification('bottom', 'right', 'danger', "Please enter a valid budget value (between 1 and 1000000).");
+        $(this).parent().prev().val('');
+	  }
+    //Verify input for adgroup level
+    } else if ($(this).className.includes("default_bid")) {
+	  if (!$.isNumeric(budget_val) || budget_val < 0.02 || budget_val > 1000) {
+        flag = false;
+		showNotification('bottom', 'right', 'danger', "Please enter a valid budget value (between 1 and 1000000).");
+		$(this).parent().prev().val('');
+	  }
+	//Verify input for keyword level
+	} else if ($(this).className.includes("bid")) {
+      if (!$.isNumeric(budget_val) || budget_val < 0.02 || budget_val > 1000) {
+        flag = false;
+		showNotification('bottom', 'right', 'danger', "Please enter a valid budget value (between 1 and 1000000).");
+		$(this).parent().prev().val('');
+	  }
+	}
 
       var budget_click = function(budget_val, element_name, element_id, data_level) {
         $.ajax({
           type: "POST",
-          url: "includes/dashpages/cmanager/helpers/changeHandler.php",
+          url: "includes/dashpages/cmanager/helpers/change_handler.php",
           data: {
             change_value: parseFloat(budget_val).toFixed(2),
             element_name: [element_name],
@@ -1471,7 +1488,6 @@ $(document).ready( function () {
           }
         });
       };
-
       var element_name = $(this).parent().parent().parent().prev().children().html();
       var element_id = $(this).parent().parent().parent().prev().children().attr("id");
       
@@ -1486,6 +1502,7 @@ $(document).ready( function () {
       //keyword level bid change
       else {
 		element_name = $(this).parent().parent().parent().prev().prev().children().html();
+		element_id = $(this).parent().parent().parent().prev().prev().children().attr("id");
         budget_click(budget_val, element_name, element_id, 2);
       }
     }

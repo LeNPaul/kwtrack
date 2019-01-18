@@ -32,9 +32,7 @@ class BudgetChanger {
     $this->changeValue = $new['budget_val'];
     $this->failed = [];
     $this->flag = false;
-	$this->today = date("Y-m-d 00:00:00");
-	
-	var_dump($this->today);
+    $this->today = date('Y-m-d 00:00:00');
     
     $this->client = $this->getAmzClient($new['refresh_token'], $new['profile_id']);
   }
@@ -121,7 +119,7 @@ class BudgetChanger {
         "keywordId" => $this->elementId,
         "bid" => $this->changeValue
       )))['response'], true)[0]['code'];
-      
+	  
       if($result == "SUCCESS") {
         $this->flag = true;
 
