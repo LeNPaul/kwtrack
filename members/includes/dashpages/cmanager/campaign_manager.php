@@ -173,6 +173,7 @@ $(document).ready( function () {
 
             const {value: bulkAction} = swal({
               title: 'Bulk Actions',
+			  type: 'info',
               input: 'select',
               inputOptions: {
                 'addCampaigns': 'Add To Campaign Group',
@@ -382,7 +383,7 @@ $(document).ready( function () {
                   showCancelButton: true,
                   allowOutsideClick: false,
                   allowEnterKey: false,
-                  allowEscapeKey: false,
+                  allowEscapeKey: false
                 })
                 .then(function (result) {
                   if (result.value) {
@@ -440,14 +441,85 @@ $(document).ready( function () {
                   }
                 })
               }
-			  
-			  else if (result.value == 'changeBudget') {
-				
-			  }
+    
+              else if (result.value == 'changeBudget') {
+                swal({
+                  title: 'Please enter a valid budget amount (between 1 and 1000000):',
+                  type: 'info',
+                  input: 'text',
+                  inputValidator: function (input_val) {
+                    return new Promise(function(resolve) {
+                      if (!$.isNumeric(input_val) || input_val < 1 || input_val > 1000000) {
+                        resolve("Entered budget amount is invalid!")
+                      } else {
+                        resolve()
+                      }
+                    })
+                  },
+                  confirmButtonText: 'Ok',
+                  confirmButtonColor: '#009925',
+                  cancelButtonColor: '#d33',
+                  showCancelButton: true,
+                  allowOutsideClick: false,
+                  allowEnterKey: false,
+                  allowEscapeKey: false
+                })
+                .then(function (result) {
+                  if (result.value) {
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/change_handler.php",
+                      data: {
+                        change_value: result.value,
+                        element_id: campaignIdArr,
+                        element_name: c_list,
+                        data_level: 0
+                      },
+                      success: function(alert_text) {
+                        if (alert_text.includes("error")) {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        } else {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'success',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        }
+
+                        initCampaignsTable();
+                      },
+                      error: function(er) {
+                        swal({
+                          title: "Error",
+                          text: "An error has occurred. Please try again in a few moments.",
+                          type: "error",
+                          confirmButtonText: "Close"
+                        });
+                      }
+                    });
+                  } //if
+                }) //.then
+              }// elseif
             }) //.then
           } //action
         }
-      ],
+      ],//buttons
       //TODO: dont make this multi, use row().select() and trigger when row clicked
       select: {
         style: 'multi'
@@ -599,12 +671,12 @@ $(document).ready( function () {
               title: 'Bulk Actions',
               input: 'select',
               inputOptions: {
-                'changeDefaultBid' : 'Change Default Bid',
                 'addKw' : 'Add Keywords',
                 'addNegKw' : 'Add Negative Keywords',
                 'pauseAdgroup' : 'Pause Adgroup(s)',
                 'enableAdgroup' : 'Enable Adgroups(s)',
-                'archiveAdgroup' : 'Archive Adgroups(s)'
+                'archiveAdgroup' : 'Archive Adgroups(s)',
+				'changeDefaultBid' : 'Change Default Bid'
               },
               inputPlaceholder: 'Select a bulk action',
               confirmButtonClass: "btn-success",
@@ -668,6 +740,7 @@ $(document).ready( function () {
                 });
 
               }
+
               else if (result.value == 'enableAdgroup') {
                 $.ajax({
                   type: "POST",
@@ -718,6 +791,7 @@ $(document).ready( function () {
                   }
                 });
               }
+
               else if (result.value == 'archiveAdgroup') {
                 swal({
                   title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
@@ -780,14 +854,88 @@ $(document).ready( function () {
                         });
                       }
                     });
-                    //TODO: make status toggle button greyed out, and create notif on success/error
                   }
                 })
               }
-            })
-          }
+
+              else if (result.value == "changeDefaultBid") {
+                swal({
+                  title: 'Please enter a valid default bid amount (between 0.02 and 1000):',
+                  type: 'info',
+                  input: 'text',
+                  inputValidator: function (input_val) {
+                    return new Promise(function(resolve) {
+                      if (!$.isNumeric(input_val) || input_val < 0.02 || input_val > 1000) {
+                        resolve("Entered budget amount is invalid!")
+                      } else {
+                        resolve()
+                      }
+                    })
+                  },
+                  confirmButtonText: 'Ok',
+                  confirmButtonColor: '#009925',
+                  cancelButtonColor: '#d33',
+                  showCancelButton: true,
+                  allowOutsideClick: false,
+                  allowEnterKey: false,
+                  allowEscapeKey: false
+                })
+                .then(function (result) {
+                  if (result.value) {
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/change_handler.php",
+                      data: {
+                        change_value: result.value,
+                        element_id: adgroupIdArr,
+                        element_name: a_list,
+                        data_level: 1
+                      },
+                      success: function(alert_text) {
+                        if (alert_text.includes("error")) {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        } else {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'success',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        }
+
+                        initAdGroupsTable(currentCampaign.name, currentCampaign.id);
+                      },
+                      error: function(er) {
+                        swal({
+                          title: "Error",
+                          text: "An error has occurred. Please try again in a few moments.",
+                          type: "error",
+                          confirmButtonText: "Close"
+                        });
+                      }
+                    });
+                  } //if
+                }) //then
+              } //elseif
+            }) //then
+          } //actions
         }
-      ],
+      ], //buttons
       stateSave: true,
       select: {
         style: 'multi'
@@ -960,10 +1108,10 @@ $(document).ready( function () {
               title: 'Bulk Actions',
               input: 'select',
               inputOptions: {
-                'changeBid' : 'Change Bid',
                 'pauseKeyword' : 'Pause Keyword(s)',
                 'enableKeyword' : 'Enable Keyword(s)',
-                'archiveKeyword' : 'Archive Keyword(s)'
+                'archiveKeyword' : 'Archive Keyword(s)',
+                'changeBid' : 'Change Bid',
               },
               inputPlaceholder: 'Select a bulk action',
               confirmButtonClass: "btn-success",
@@ -1026,6 +1174,7 @@ $(document).ready( function () {
                   }
                 });
               }
+              
               else if (result.value == 'enableKeyword') {
                 $.ajax({
                   type: "POST",
@@ -1076,6 +1225,7 @@ $(document).ready( function () {
                   }
                 });
               }
+              
               else if (result.value == 'archiveKeyword') {
                 swal({
                   title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
@@ -1141,11 +1291,86 @@ $(document).ready( function () {
                     //code to make status toggle button greyed out
                   }
                 })
-              }
-            })
-          }
+              } //else if
+			  
+			  else if (result.value == 'changeBid') {
+				swal({
+                  title: 'Please enter a valid bid amount (between 0.02 and 1000):',
+                  type: 'info',
+                  input: 'text',
+                  inputValidator: function (input_val) {
+                    return new Promise(function(resolve) {
+                      if (!$.isNumeric(input_val) || input_val < 0.02 || input_val > 1000) {
+                        resolve("Entered budget amount is invalid!")
+                      } else {
+                        resolve()
+                      }
+                    })
+                  },
+                  confirmButtonText: 'Ok',
+                  confirmButtonColor: '#009925',
+                  cancelButtonColor: '#d33',
+                  showCancelButton: true,
+                  allowOutsideClick: false,
+                  allowEnterKey: false,
+                  allowEscapeKey: false
+                })
+                .then(function (result) {
+                  if (result.value) {
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/change_handler.php",
+                      data: {
+                        change_value: result.value,
+                        element_id: keywordIdArr,
+                        element_name: k_list,
+                        data_level: 2
+                      },
+                      success: function(alert_text) {
+                        if (alert_text.includes("error")) {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        } else {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'success',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        }
+
+                        initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
+                      },
+                      error: function(er) {
+                        swal({
+                          title: "Error",
+                          text: "An error has occurred. Please try again in a few moments.",
+                          type: "error",
+                          confirmButtonText: "Close"
+                        });
+                      }
+                    });
+                  } //if
+                }) //.then
+			  } //else if
+            }) //.then
+          } //actions
         }
-      ],
+      ], //buttons
       select: {
         style: "multi"
       },
@@ -1432,14 +1657,14 @@ $(document).ready( function () {
     var flag = true;
     var budget_val = $(this).parent().prev().val();
     // Verify input for campaign level
-    if ($(this).className.includes("budget")) {
+    if ($(this)[0].className.includes("budget")) {
       if (!$.isNumeric(budget_val) || budget_val < 1 || budget_val > 1000000) {
         flag = false;
 	    showNotification('bottom', 'right', 'danger', "Please enter a valid budget value (between 1 and 1000000).");
         $(this).parent().prev().val('');
 	  }
     //Verify input for adgroup level
-    } else if ($(this).className.includes("default_bid")) {
+    } else if ($(this)[0].className.includes("default_bid")) {
 	  if (!$.isNumeric(budget_val) || budget_val < 0.02 || budget_val > 1000) {
         flag = false;
 		showNotification('bottom', 'right', 'danger', "Please enter a valid default_bid value (between 0.02 and 1000).");

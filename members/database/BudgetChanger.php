@@ -53,16 +53,16 @@ class BudgetChanger {
   }
 
   public function getSingleAlert() {
-    $this->alertText = ($this->flag) ? $this->elementName . "'s budget has been successfully changed!" : "An error has occurred...";
+    $this->alertText = ($this->flag) ? "\"" . $this->elementName . "\" 's budget has been successfully changed!" : "An error has occurred...";
     return $this->alertText;
   }
 
   public function getMultiAlert($success, $dataLevel) {
     if (count($this->failed == 0)) {
-      $this->alertText = $success . " " . $datalevel . " successfully changed!";
+      $this->alertText = $success . " " . $dataLevel . " successfully changed!";
     } else {
       $this->failed = implode("\n", $this->failed);
-      $this->alertText = $success . " " . $datalevel . " successfully changed!" . "\nerror: \n" . $this->failed . " unsuccessfully changed";
+      $this->alertText = $success . " " . $dataLevel . " successfully changed!" . "\nerror: \n" . $this->failed . " unsuccessfully changed";
     }
     return $this->alertText;
   }
