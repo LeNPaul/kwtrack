@@ -32,13 +32,13 @@ class BudgetChanger {
     $this->changeValue = $new['budget_val'];
     $this->failed = [];
     $this->flag = false;
-	$this->today = date("Y-m-d 00:00:00");
-	
+   $this->today = date("Y-m-d 00:00:00");
+
 	var_dump($this->today);
-    
+
     $this->client = $this->getAmzClient($new['refresh_token'], $new['profile_id']);
   }
-  
+
   private function getAmzClient($refreshToken, $profileId, $region = 'na') {
     $config = array(
       "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
@@ -47,18 +47,18 @@ class BudgetChanger {
       "region" => $region,
       "sandbox" => false
     );
-    
+
     $client = new Client($config);
     $client-> profileId = $profileId;
-    
+
     return $client;
   }
-  
+
   public function getSingleAlert() {
     $this->alertText = ($this->flag) ? $this->elementName . "'s budget has been successfully changed!" : "An error has occurred...";
     return $this->alertText;
   }
-  
+
   public function getMultiAlert($success, $dataLevel) {
     if (count($this->failed == 0)) {
       $this->alertText = $success . " " . $datalevel . " successfully changed!";
@@ -68,7 +68,7 @@ class BudgetChanger {
     }
     return $this->alertText;
   }
-  
+
   public function singleChange() {
     global $pdo;
 
@@ -77,7 +77,7 @@ class BudgetChanger {
         "campaignId" => $this->elementId,
         "dailyBudget" => $this->changeValue
       )))['response'], true)[0]['code'];
-      
+
       if($result == "SUCCESS") {
         $this->flag = true;
 
@@ -93,7 +93,7 @@ class BudgetChanger {
         array_push($this->failed, $this->elementName);
         return 0;
       }
-      
+
     } elseif($this->dataLevel == 1) {
       $result = json_decode($this->client->updateAdGroups(array(array(
         "adGroupId" => $this->elementId,
@@ -121,7 +121,7 @@ class BudgetChanger {
         "keywordId" => $this->elementId,
         "bid" => $this->changeValue
       )))['response'], true)[0]['code'];
-      
+
       if($result == "SUCCESS") {
         $this->flag = true;
 

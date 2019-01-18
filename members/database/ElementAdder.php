@@ -107,12 +107,14 @@ class ElementAdder
 
       $this->add_elements("campaign");
       $this->add_elements("ad_group", $this->direct_parent);
+      $this->add_elements("ad"); // TODO: Add the ads to the adgroups using API
       $this->add_elements("keyword", $this->direct_parent);
       $this->add_elements("neg_keyword", $this->direct_parent);
 
     } else if ($this->element_type == "ad_group") {
 
       $this->add_elements("ad_group");
+      $this->add_elements("ad");
       $this->add_elements("keyword", $this->direct_parent);
 
     } else if ($this->element_type == "keyword") {
