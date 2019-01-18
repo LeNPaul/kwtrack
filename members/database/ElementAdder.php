@@ -31,31 +31,37 @@ ini_set('precision', 30);
  *                              "default_bid" => default bid (Float > 0.02))
  *                              ),
  *
+ *    "ads"          => array(
+ *                        array(
+ *                              "campaignId"  => campaign ID (Float)
+ *                              "adGroupId"   => adgroup ID  (Float)
+ *                              "sku"         => ASIN        (String (len == 10))
+ *                              )
+ *
  *    "keywords"     => array(
  *                        array(
- *                [REQUIRED]    "campaignId"     => campaign ID  (Float)
- *                [REQUIRED]    "adGroupId"      => adgroup ID   (Float)
- *                              "keywordText"    => keyword text (String)
- *                              "matchType"      => match type   (String "exact" | "phrase" | "broad")
- *                              "state"          => state        (String "enabled" | "paused" | "archived"))
+ *                [REQUIRED]    "campaignId"   => campaign ID  (Float)
+ *                [REQUIRED]    "adGroupId"    => adgroup ID   (Float)
+ *                              "keywordText"  => keyword text (String)
+ *                              "matchType"    => match type   (String "exact" | "phrase" | "broad")
+ *                              "state"        => state        (String "enabled" | "paused" | "archived"))
  *                              ),
  *
  *    "neg_keywords" => array(
  *                        array(
- *                [OPTIONAL]    "campaign_id"    => campaign ID  (Float)
- *                [OPTIONAL]    "ad_group_id"    => adgroup ID   (Float)
- *                              "keyword_text"   => keyword text (String)
- *                              "match_type"     => match type   (String "negativeExact" | "negativePhrase")
- *                              "state"          => state        (String "enabled" | "paused" | "archived"))
+ *                [OPTIONAL]    "campaignId"   => campaign ID  (Float)
+ *                [OPTIONAL]    "adGroupId"    => adgroup ID   (Float)
+ *                              "keywordText"  => keyword text (String)
+ *                              "matchType"    => match type   (String "negativeExact" | "negativePhrase")
+ *                              "state"        => state        (String "enabled" | "paused" | "archived"))
  *                              )
  *  )
  */
 
 class ElementAdder
 {
-  private $parent_elements; // Array
-  private $child_element_type; // String determined based on $config["child_element_type"]
-  private $kw_match_type; // Only if $element_type = "keyword" or "neg_keyword"
+  private $element_type;   // String determined based on $config["element_type"]
+  private $kw_match_type;  // Only if $element_type = "keyword" or "neg_keyword"
   private $child_elements; // Array that holds the name of all elements to be added
 
   private $direct_parent = array(
@@ -68,7 +74,6 @@ class ElementAdder
   public function __construct($config)
   {
     $this->data_level      = $config["data_level"];
-    $this->parent_elements = $config["parent_elements"];
     $this->child_elements  = $config["child_elements"];
     $this->element_type    = $config["element_type"];
 
@@ -84,13 +89,13 @@ class ElementAdder
   private function get_amz_client($refresh_token, $profile_id, $region = "na")
   {
     $config = array(
-      "clientId" => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
+      "clientId"     => "amzn1.application-oa2-client.4246e0f086e441259742c758f63ca0bf",
       "clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
       "refreshToken" => $refresh_token,
-      "region" => $region,
-      "sandbox" => false,
+      "region"       => $region,
+      "sandbox"      => false,
     );
-    $client = new Client($config);
+    $client            = new Client($config);
     $client->profileId = $profile_id;
 
     return $client;
@@ -107,15 +112,16 @@ class ElementAdder
 
       $this->add_elements("campaign");
       $this->add_elements("ad_group", $this->direct_parent);
-      $this->add_elements("ad"); // TODO: Add the ads to the adgroups using API
+      $this->add_elements("ad", $this->direct_parent);
       $this->add_elements("keyword", $this->direct_parent);
       $this->add_elements("neg_keyword", $this->direct_parent);
 
     } else if ($this->element_type == "ad_group") {
 
       $this->add_elements("ad_group");
-      $this->add_elements("ad");
+      $this->add_elements("ad", $this->direct_parent);
       $this->add_elements("keyword", $this->direct_parent);
+      $this->add_elements("neg_keyword", $this->direct_parent);
 
     } else if ($this->element_type == "keyword") {
 
@@ -123,15 +129,11 @@ class ElementAdder
 
     }
 
-    // Go through list of parent element to add child elements to
-    foreach ($this->parent_elements as $parent_element) {
-
-
-    }
+    // Code won't reach here if an error was thrown
+    // TODO: echo success message after everything is complete
   }
 
   private function add_elements($api_call_type, $direct_parent = null, $campaign_type = "sponsoredProducts") {
-
     if ($api_call_type == "campaign") {
 
       foreach ($this->child_elements["campaign"] as $campaign) {
@@ -159,6 +161,7 @@ class ElementAdder
 
         } catch (Exception $e) {
           echo $e;
+          return;
         }
 
       }
@@ -179,17 +182,45 @@ class ElementAdder
 
             $result_msg = json_decode($result["response"], true);
 
-            if ($result_msg["code"] != "SUCCESS") {
+            if ($result_msg[0]["code"] != "SUCCESS") {
               throw new Exception("ER-CA01: There was an error creating ad group "
               . $ad_group["name"] . ". Please contact support@ppcology.io for help.");
             }
 
+            $this->direct_parent["campaign_id"]  = $result_msg["campaignId"];
             $this->direct_parent["adgroup_id"]   = $result_msg["adGroupId"];
 
           } catch (Exception $e) {
             echo $e;
+            return;
           }
         }
+
+    }
+    else if ($api_call_type == "ad") {
+      // Can only be called if a campaign or ad group is being created
+
+      try {
+        // Populate the ad array campaign and ad group ID's
+        foreach ($this->child_elements["ads"] as &$ad) {
+          $ad["campaignId"] = $direct_parent["campaign_id"];
+          $ad["adGroupId"] = $direct_parent["adgroup_id"];
+        }
+
+        $result = $this
+          ->client
+          ->createProductAds($this->child_elements["ads"]);
+
+        $result_msg = json_decode($result["response"], true)[0]["code"];
+
+        // Check for any errors on Amazon's end
+        if ($result_msg != "SUCCESS") {
+          throw new Exception("ER-CAD01: There was an error creating an ad for your ASIN. Please contact support@ppcology.io for help.");
+        }
+      } catch (Exception $e) {
+        echo $e;
+        return;
+      }
 
     }
     else if ($api_call_type == "keyword") {
@@ -215,40 +246,76 @@ class ElementAdder
             $keyword_array["adGroupId"]  = $direct_parent["adgroup_id"];
           }
 
-          $result = $this->client->createBiddableKeywords(
-            $this->child_elements["keywords"]
-          );
+          $result = $this
+            ->client
+            ->createBiddableKeywords($this->child_elements["keywords"]);
 
-          $result_msg = json_decode($result["response"], true);
+          $result_msg = json_decode($result["response"], true)[0]["code"];
 
           // Check if there were any errors for keywords being created
-          // TODO: Check response of $result to see how we need to parse thru the result
-          //       to detect any errors
+          if ($result_msg != "SUCCESS") {
+            throw new Exception("ER-CK01: There was an error adding your keywords. Please contact support@ppcology.io for help.");
+          }
 
         } else {
           // If user is creating keywords in an existing ad group and campaign
           $result     = $this->client->createBiddableKeywords($this->child_elements["keywords"]);
-          $result_msg = json_decode($result["response"], true);
+          $result_msg = json_decode($result["response"], true)[0]["code"];
 
           // Check if there were any errors for keywords being created
+          if ($result_msg != "SUCCESS") {
+            throw new Exception("ER-CK02: There was an error adding your keywords. Please contact support@ppcology.io for help.");
+          }
         }
 
       } catch (Exception $e) {
         echo $e;
+        return;
       }
 
     }
     else if ($api_call_type == "neg_keyword") {
 
-      if ($direct_parent["campaign_id"] != null) {
-        // If there's no campaign ID, then create adgroup level neg keywords
-        $this->client->createNegativeKeywords();
+      try {
+        if ($direct_parent["adgroup_id"] != null) {
+          // If there's no adgroup ID, then create campaign level neg keywords
+          foreach ($this->child_elements["neg_keywords"] as &$neg_keyword) {
+            $neg_keyword["campaignId"] = $direct_parent["campaign_id"];
+          }
 
-      } else if ($direct_parent["adgroup_id"] != null) {
-        // If there's no adgroup ID, then create campaign level neg keywords
-        $this->client->createCampaignNegativeKeywords();
+          $result = $this
+            ->client
+            ->createCampaignNegativeKeywords($this->child_elements["neg_keywords"]);
 
+          $result_msg = json_decode($result["response"], true);
+
+          if ($result_msg != "SUCCESS") {
+            throw new Exception("ER-CNKW01: There was an error adding your negative keywords. Please contact support@ppcology.io for help.");
+          }
+
+        } else if ($direct_parent["campaign_id"] != null && $direct_parent["adgroup_id"] != null) {
+          // If there's no campaign ID, then create adgroup level neg keywords
+          foreach ($this->child_elements["neg_keywords"] as &$neg_keyword) {
+            $neg_keyword["campaignId"] = $direct_parent["campaign_id"];
+            $neg_keyword["adGroupId"]  = $direct_parent["adGroupId"];
+          }
+
+          $result = $this
+            ->client
+            ->createNegativeKeywords($this->child_elements["neg_keywords"]);
+
+          $result_msg = json_decode($result["response"], true);
+
+          if ($result_msg[0]["code"] != "SUCCESS") {
+            throw new Exception("ER-CNKW02: There was an error adding your negative keywords. Please contact support@ppcology.io for help.");
+          }
+        }
+
+      } catch (Exception $e) {
+        echo $e;
+        return;
       }
+
 
     }
   }

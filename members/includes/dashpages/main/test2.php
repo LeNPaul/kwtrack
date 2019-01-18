@@ -21,12 +21,12 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$a = $client->createBiddableKeywords(
+$a = $client->createNegativeKeywords(
 	array(array(
 		"campaignId" => 3917622904824,
     "adGroupId" => 42937286931133,
     "keywordText" => "test1",
-    "matchType" => "exact",
+    "matchType" => "negativeExact",
     "state" => "enabled"
 	)
 ));

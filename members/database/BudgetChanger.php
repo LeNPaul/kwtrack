@@ -33,11 +33,7 @@ class BudgetChanger {
     $this->failed = [];
     $this->flag = false;
     $this->today = date("Y-m-d 00:00:00");
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> e712ba8f4f423c5076c569260e06d7a59d1a5ca3
     $this->client = $this->getAmzClient($new['refresh_token'], $new['profile_id']);
   }
 
