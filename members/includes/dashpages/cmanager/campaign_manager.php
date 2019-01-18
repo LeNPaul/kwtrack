@@ -1432,7 +1432,7 @@ $(document).ready( function () {
     var flag = true;
     var budget_val = $(this).parent().prev().val();
     // Verify input for campaign level
-    if ($(this).className.includes("budget")/*!$.isNumeric(budget_val) || budget_val < 0*/) {
+    if ($(this).className.includes("budget")) {
       if (!$.isNumeric(budget_val) || budget_val < 1 || budget_val > 1000000) {
         flag = false;
 	    showNotification('bottom', 'right', 'danger', "Please enter a valid budget value (between 1 and 1000000).");
@@ -1442,18 +1442,19 @@ $(document).ready( function () {
     } else if ($(this).className.includes("default_bid")) {
 	  if (!$.isNumeric(budget_val) || budget_val < 0.02 || budget_val > 1000) {
         flag = false;
-		showNotification('bottom', 'right', 'danger', "Please enter a valid budget value (between 1 and 1000000).");
+		showNotification('bottom', 'right', 'danger', "Please enter a valid default_bid value (between 0.02 and 1000).");
 		$(this).parent().prev().val('');
 	  }
 	//Verify input for keyword level
-	} else if ($(this).className.includes("bid")) {
+	} else {
       if (!$.isNumeric(budget_val) || budget_val < 0.02 || budget_val > 1000) {
         flag = false;
-		showNotification('bottom', 'right', 'danger', "Please enter a valid budget value (between 1 and 1000000).");
+		showNotification('bottom', 'right', 'danger', "Please enter a valid bid value (between 0.02 and 1000).");
 		$(this).parent().prev().val('');
 	  }
 	}
-
+    //user input has been checked and is correct, continue to save change in database
+    if (flag == true) {
       var budget_click = function(budget_val, element_name, element_id, data_level) {
         $.ajax({
           type: "POST",
@@ -1504,7 +1505,8 @@ $(document).ready( function () {
           }
         });
       };
-      var element_name = $(this).parent().parent().parent().prev().children().html();
+      
+	  var element_name = $(this).parent().parent().parent().prev().children().html();
       var element_id = $(this).parent().parent().parent().prev().children().attr("id");
       
       //campaign level budget change
@@ -1517,11 +1519,11 @@ $(document).ready( function () {
       }
       //keyword level bid change
       else {
-		element_name = $(this).parent().parent().parent().prev().prev().children().html();
-		element_id = $(this).parent().parent().parent().prev().prev().children().attr("id");
+        element_name = $(this).parent().parent().parent().prev().prev().children().html();
+        element_id = $(this).parent().parent().parent().prev().prev().children().attr("id");
         budget_click(budget_val, element_name, element_id, 2);
       }
-    }
+    };
   });
 
   // Breadcrumbs ALL CAMPAIGNS click
