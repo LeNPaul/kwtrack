@@ -16,21 +16,28 @@ $config = array(
 	"clientSecret" => "9c9e07b214926479e14a0781051ecc3ad9b29686d3cef24e15eb130a47cabeb3",
 	"refreshToken" => $refreshToken,
 	"region" => "na",
-	"sandbox" => true,
+	"sandbox" => false,
 );
 $client = new Client($config);
-$client->profileId = "2120126684554622";
+$client->profileId = $profileId;
 
-$r = $client->bulkGetKeywordBidRecommendations(
-    58323839730501,
-    array(
-        array("keyword" => "bamboo toothbrush",
-              "matchType" => "broad"),
-        array("keyword" => "bamboo toothbrush",
-              "matchType" => "exact")
-    ));
+$a = $client->createBiddableKeywords(
+	array(array(
+		"campaignId" => 3917622904824,
+    "adGroupId" => 42937286931133,
+    "keywordText" => "test1",
+    "matchType" => "exact",
+    "state" => "enabled"
+	)
+));
 
-		echo '<pre>';
-		var_dump($r);
-		echo '</pre>';
+echo '<pre>';
+var_dump($a);
+echo '</pre>------------------------------------<br /><br />';
+
+$m = json_decode($a, true);
+
+echo '<pre>';
+var_dump($m);
+echo '</pre>';
 ?>

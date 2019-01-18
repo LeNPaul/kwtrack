@@ -53,7 +53,6 @@ var sleep = function (time) {
 };
 
 $(document).ready( function () {
-
   // Holds the data table variable
   var dt        = null;
   var dt_neg_kw = null;
@@ -131,7 +130,6 @@ $(document).ready( function () {
 
   /* Start: initCampaignsTable */
   var initCampaignsTable = function(){
-
     var campaignOptions = {
       dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
       fixedColumns: {
@@ -397,7 +395,7 @@ $(document).ready( function () {
                         element_name: c_list,
                         data_level: 0
                       },
-                      
+
                       success: function(alert_text) {
                         if (alert_text.includes("error")) {
                           $.notify({
@@ -501,6 +499,24 @@ $(document).ready( function () {
         $(".toggle-campaign-archive").bootstrapToggle({
           off: '',
           size: "small"
+        });
+
+        // Show budget Save button when textbox is clicked
+        $(".input-group input.form-control").on("focus", function () {
+          $(this).next().children().show();
+        });
+        // Hide budget Save button when textbox is clicked
+        $(".input-group input.form-control").on("blur", function () {
+          $(this).next().children().hide(200);
+        });
+        // Click Save button when Enter button is pressed
+        $('.input-group input.form-control').keypress(function (e) {
+          var key = e.which;
+
+          if (key == 13) {
+            $(this).next().children("button").click();
+            return false;
+          }
         });
 
       }, //drawCallback
@@ -725,7 +741,7 @@ $(document).ready( function () {
                         element_name: a_list,
                         data_level: 1
                       },
-                        
+
                       success: function(alert_text) {
                         if (alert_text.includes("error")) {
                           $.notify({
@@ -835,9 +851,9 @@ $(document).ready( function () {
 
     clearTable(0);
     dt = $('#campaign_manager').DataTable(adGroupOptions);
-    dt.columns.adjust();
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
+    dt.columns.adjust();
 
     // Add the campaign to the breadcrumbs
     breadcrumbs = [{
@@ -1083,7 +1099,7 @@ $(document).ready( function () {
                         element_name: k_list,
                         data_level: 2
                       },
-                      
+
                       success: function(alert_text) {
                         if (alert_text.includes("error")) {
                           $.notify({
@@ -1188,9 +1204,9 @@ $(document).ready( function () {
     clearTable(0);
 
     dt = $('#campaign_manager').DataTable(kwOptions);
-    dt.columns.adjust();
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
+    dt.columns.adjust();
 
     // Add the adgroup to the breadcrumbs
     breadcrumbs.push({
@@ -1394,7 +1410,7 @@ $(document).ready( function () {
     }
 
   });
-  
+
   // Handle budget changes when textbox is clicked
   $("#campaign_manager").on("focus", ".input-group input.form-control", function () {
     $(this).next().children().show();
