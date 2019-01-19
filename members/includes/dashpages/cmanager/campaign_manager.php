@@ -43,10 +43,10 @@
 </div>
 
 <script>
-var negKwTableFlag	= 0;
+var negKwTableFlag  = 0;
 var currentCampaign = {name: null, id: null};
 var currentAdGroup  = {name: null, id: null};
-var allCampaigns 		= "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
+var allCampaigns    = "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
 
 var sleep = function (time) {
   return new Promise( function(resolve){ return setTimeout(resolve, time); } );
@@ -173,7 +173,7 @@ $(document).ready( function () {
 
             const {value: bulkAction} = swal({
               title: 'Bulk Actions',
-			  type: 'info',
+              type: 'info',
               input: 'select',
               inputOptions: {
                 'addCampaigns': 'Add To Campaign Group',
@@ -1292,9 +1292,9 @@ $(document).ready( function () {
                   }
                 })
               } //else if
-			  
-			  else if (result.value == 'changeBid') {
-				swal({
+
+              else if (result.value == 'changeBid') {
+                swal({
                   title: 'Please enter a valid bid amount (between 0.02 and 1000):',
                   type: 'info',
                   input: 'text',
@@ -1366,7 +1366,7 @@ $(document).ready( function () {
                     });
                   } //if
                 }) //.then
-			  } //else if
+              } //else if
             }) //.then
           } //actions
         }
@@ -1434,11 +1434,16 @@ $(document).ready( function () {
     dt.columns.adjust();
 
     // Add the adgroup to the breadcrumbs
-    breadcrumbs.push({
+    breadcrumbs = [{
+      name: currentCampaign.name,
+      id: currentCampaign.id,
+      linkClass: 'c_link'
+    },
+    {
       name: adGroupName,
       id: adGroupId,
       linkClass: 'ag_link'
-    });
+    }];
     updateBreadcrumbs();
   };
   /* End: initKeywordsTable */
@@ -1660,24 +1665,24 @@ $(document).ready( function () {
     if ($(this)[0].className.includes("budget")) {
       if (!$.isNumeric(budget_val) || budget_val < 1 || budget_val > 1000000) {
         flag = false;
-	    showNotification('bottom', 'right', 'danger', "Please enter a valid budget value (between 1 and 1000000).");
+        showNotification('bottom', 'right', 'danger', "Please enter a valid budget value (between 1 and 1000000).");
         $(this).parent().prev().val('');
-	  }
+      }
     //Verify input for adgroup level
     } else if ($(this)[0].className.includes("default_bid")) {
-	  if (!$.isNumeric(budget_val) || budget_val < 0.02 || budget_val > 1000) {
-        flag = false;
-		showNotification('bottom', 'right', 'danger', "Please enter a valid default_bid value (between 0.02 and 1000).");
-		$(this).parent().prev().val('');
-	  }
-	//Verify input for keyword level
-	} else {
       if (!$.isNumeric(budget_val) || budget_val < 0.02 || budget_val > 1000) {
         flag = false;
-		showNotification('bottom', 'right', 'danger', "Please enter a valid bid value (between 0.02 and 1000).");
-		$(this).parent().prev().val('');
-	  }
-	}
+        showNotification('bottom', 'right', 'danger', "Please enter a valid default_bid value (between 0.02 and 1000).");
+        $(this).parent().prev().val('');
+      }
+    //Verify input for keyword level
+    } else {
+      if (!$.isNumeric(budget_val) || budget_val < 0.02 || budget_val > 1000) {
+        flag = false;
+        showNotification('bottom', 'right', 'danger', "Please enter a valid bid value (between 0.02 and 1000).");
+        $(this).parent().prev().val('');
+      }
+    }
     //user input has been checked and is correct, continue to save change in database
     if (flag == true) {
       var budget_click = function(budget_val, element_name, element_id, data_level) {
@@ -1731,7 +1736,7 @@ $(document).ready( function () {
         });
       };
       
-	  var element_name = $(this).parent().parent().parent().prev().children().html();
+      var element_name = $(this).parent().parent().parent().prev().children().html();
       var element_id = $(this).parent().parent().parent().prev().children().attr("id");
       
       //campaign level budget change

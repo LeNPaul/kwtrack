@@ -128,7 +128,7 @@ class BudgetChanger {
         $stmt->execute(array(
           ":value" => $this->changeValue,
           ":id" => $this->elementId,
-		  ":date" => $this->today
+          ":date" => $this->today
         ));
         return 1;
       } else {
