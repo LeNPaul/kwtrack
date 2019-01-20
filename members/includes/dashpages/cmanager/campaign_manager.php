@@ -1,11 +1,18 @@
 <h2 class="text-center">Campaign Manager</h2>
 
-<div>
-  <div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 33%">
-    <i class="fa fa-calendar"></i>
-    <span></span> <i class="fa fa-caret-down"></i>
+<div class="row">
+  <div class="col-sm-6">
+    <button class="btn btn-secondary buttons-select-all btn-primary" type=
+    "button">Create a Campaign</button>
+  </div>
+  <div class="col-sm-6">
+    <div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 315px; float: right">
+      <i class="fa fa-calendar"></i>
+      <span></span> <i class="fa fa-caret-down"></i>
+    </div>
   </div>
 </div>
+
 <br />
 <div>
   <nav aria-label="breadcrumb" id="cmanager_breadcrumbs" role="navigation">
@@ -397,7 +404,7 @@ $(document).ready( function () {
                         element_name: c_list,
                         data_level: 0
                       },
-                      
+
                       success: function(alert_text) {
                         if (alert_text.includes("error")) {
                           $.notify({
@@ -721,7 +728,7 @@ $(document).ready( function () {
                         element_name: a_list,
                         data_level: 1
                       },
-                        
+
                       success: function(alert_text) {
                         if (alert_text.includes("error")) {
                           $.notify({
@@ -1079,7 +1086,7 @@ $(document).ready( function () {
                         element_name: k_list,
                         data_level: 2
                       },
-                      
+
                       success: function(alert_text) {
                         if (alert_text.includes("error")) {
                           $.notify({
@@ -1390,7 +1397,7 @@ $(document).ready( function () {
     }
 
   });
-  
+
   // Handle budget changes when textbox is clicked
   $("#campaign_manager").on("focus", ".input-group input.form-control", function () {
     $(this).next().children().show();
@@ -1470,11 +1477,11 @@ $(document).ready( function () {
 
       var elementName = $(this).parent().parent().parent().prev().children().html();
       var elementId = $(this).parent().parent().parent().prev().children().attr("id");
-      
+
       //campaign level budget change
       if($(this)[0].className.includes("budget")) {
         budgetClick(budgetVal, elementName, elementId, 0);
-      } 
+      }
       //adgroup level default_bid change
       else if($(this)[0].className.includes("default_bid")) {
         budgetClick(budgetVal, elementName, elementId, 1);
