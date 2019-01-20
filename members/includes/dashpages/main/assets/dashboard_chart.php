@@ -183,7 +183,7 @@
 
 	            var prefix = '$';
 	            var suffix = '';
-	            if (splitBody[0] == 'ACoS'){
+	            if (splitBody[0] == '% ACoS'){
 	              prefix = '';
 	              suffix = '%';
               }
