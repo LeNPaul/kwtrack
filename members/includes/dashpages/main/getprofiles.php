@@ -10,13 +10,27 @@ use PDO;
 $profileId = $_POST['selectedProfile'];
 $_SESSION['profileID'] = $profileId;
 //$profileId = $profileId[0];
-$sql = 'UPDATE users SET profileId=:profileId, active=:level WHERE user_id=:user_id';
+
+$sql = 'SELECT COUNT(profileId) FROM users WHERE profileId=:profileId';
 $stmt = $pdo->prepare($sql);
-$stmt->execute(array(
-  ':profileId' => $profileId,
-  ':level'     => 3,
-  ':user_id'   => $_SESSION['user_id']
+$result = $stmt->execute(array(
+  ':profileId' => $profileId
 ));
+
+if ($result == 0) {
+  $sql = 'UPDATE users SET profileId=:profileId, active=:level WHERE user_id=:user_id';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(
+    ':profileId' => $profileId,
+    ':level'     => 3,
+    ':user_id'   => $_SESSION['user_id']
+  ));
+  
+  return 'created';
+} else {
+  return 'exists';
+}
+
 
 /*
 // Get refresh token

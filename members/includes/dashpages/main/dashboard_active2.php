@@ -40,10 +40,10 @@ function displayProfiles($profiles) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <div class="container text-center">
-	<h2>Select Your Profile</h2>
-	<p>Here are the profiles that we detected on your Seller Central account. Please select the profile that you would like to integrate PPCOLOGY with.</p>
+  <h2>Select Your Profile</h2>
+  <p>Here are the profiles that we detected on your Seller Central account. Please select the profile that you would like to integrate PPCOLOGY with.</p>
 
-	<?= displayProfiles($_SESSION['profiles']) ?>
+  <?= displayProfiles($_SESSION['profiles']) ?>
 
 </div>
 
@@ -55,8 +55,17 @@ function displayProfiles($profiles) {
         dataType: 'text',
         data: {"selectedProfile":$(this).val()},
         url: 'includes/dashpages/main/getprofiles.php',
-        success: function() {
-          window.location.reload();
+        success: function(response) {
+          if (response == 'created') {
+            window.location.reload();
+          } else {
+            swal({
+              title: 'Error',
+              text: 'Profile has already been imported. Please choose another profile',
+              type: 'error',
+              confirmButtonText: 'close'
+            });
+          }
         },
         error: function(msg, xhr) {
           alert(msg + ", " + xhr.responseText);
