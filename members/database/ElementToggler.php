@@ -61,7 +61,7 @@ class ElementToggler
     $this->alert_text = ($this->flag) ? $this->element_name . " has been successfully " . $this->state : "An error has occurred...";
     return $this->alert_text;
   }
-  
+
   public function get_multi_alert($success, $datalevel) {
     if (count($this->failed == 0)) {
       $this->alert_text = $success . " " . $datalevel . "s successfully " . $this->state;

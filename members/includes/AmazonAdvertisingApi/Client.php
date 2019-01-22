@@ -55,7 +55,8 @@ class Client
     {
         $headers = array(
             "Content-Type: application/x-www-form-urlencoded;charset=UTF-8",
-            "User-Agent: {$this->userAgent}"
+            "User-Agent: {$this->userAgent}",
+            "Amazon-Advertising-API-ClientId: {$this->config['clientId']}"
         );
 
         $refresh_token = rawurldecode($this->config["refreshToken"]);
@@ -479,6 +480,7 @@ class Client
 
         if (!is_null($this->profileId)) {
             array_push($headers, "Amazon-Advertising-API-Scope: {$this->profileId}");
+            array_push($headers, "Amazon-Advertising-API-ClientId: {$this->config['clientId']}");
         }
 
         $request = new CurlRequest();
@@ -505,6 +507,7 @@ class Client
 
         if (!is_null($this->profileId)) {
             array_push($headers, "Amazon-Advertising-API-Scope: {$this->profileId}");
+            array_push($headers, "Amazon-Advertising-API-ClientId: {$this->config['clientId']}");
         }
 
         $request = new CurlRequest();

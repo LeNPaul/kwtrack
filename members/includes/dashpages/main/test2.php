@@ -21,23 +21,11 @@ $config = array(
 $client = new Client($config);
 $client->profileId = $profileId;
 
-$a = $client->createNegativeKeywords(
-	array(array(
-		"campaignId" => 3917622904824,
-    "adGroupId" => 42937286931133,
-    "keywordText" => "test1",
-    "matchType" => "negativeExact",
-    "state" => "enabled"
-	)
-));
-
-echo '<pre>';
-var_dump($a);
-echo '</pre>------------------------------------<br /><br />';
-
-$m = json_decode($a, true);
-
-echo '<pre>';
-var_dump($m);
-echo '</pre>';
+echo "<pre>";
+var_dump(json_decode($client->getAdGroupKeywordSuggestionsEx(array(
+	"adGroupId" => 275266791834157,
+	"maxNumSuggestions" => 1000,
+	"suggestBids" => "yes"
+))["response"], true, 512, JSON_BIGINT_AS_STRING));
+echo "</pre>";
 ?>
