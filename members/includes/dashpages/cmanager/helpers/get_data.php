@@ -93,9 +93,7 @@ $result = array_map(function($e){
   }
   else if ($dataLevel == 'keyword'){
     // Insert new values into array in reverse order
-    
-    // TODO: Replace the avg_bid with the real bid
-    array_unshift($row, moneyInput('bid', number_format($e['avg_bid'], 2)));
+    array_unshift($row, moneyInput('bid', number_format($e['bid'], 2)));
     array_unshift($row, $e['match_type']);
     array_unshift($row, '<b class="name" id="' . $e['amz_kw_id'] . '">' . $e['keyword_text'] . "</b>");
     array_unshift($row, cmCheckboxState($e['status'], 'keyword'));
