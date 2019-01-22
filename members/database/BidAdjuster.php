@@ -37,7 +37,7 @@ class BidAdjuster
     $this->campaign_target_acos   = 0.15;
     $this->target_acos      = 0.15;
     $this->kw_avg_cpc             = 0.12;
-    $this->$kw_lifetime_acos      = 0.12;
+    $this->kw_lifetime_acos      = 0.12;
     $this->kw_id                  = 123123123213;
   }
 
@@ -53,7 +53,7 @@ class BidAdjuster
 
     $this->bat_dollars = $this->keyword_bid * $this->bat_percent;
 
-    $this->$kw_lifetime_acos    = $config['kw_lifetime_acos'];
+    $this->kw_lifetime_acos    = $config['kw_lifetime_acos'];
     $this->global_target_acos   = $config['global_target_acos'];
     $this->campaign_target_acos = $config['campaign_target_acos'];
 

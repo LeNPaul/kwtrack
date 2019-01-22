@@ -32,10 +32,37 @@ class MetricsQueryBuilder {
   public function getSql(){
     // Construct the group by clause
     $group_by = ['user_id'];
-
+    
+    // By default we do not perform an additional join for latest bid data
+    $get_latest_bid_join = '';
+    // The select for latest bid is therefore the same as the avg_bid
+    $get_latest_bid_select = 'avg_bid as bid';
+    
     if ($this->includeCampaigns) $group_by[] = 'amz_campaign_id';
     if ($this->includeAdGroups) $group_by[] = 'amz_adgroup_id';
-    if ($this->includeKeywords) $group_by[] = 'amz_kw_id';
+    if ($this->includeKeywords) {
+      $group_by[] = 'amz_kw_id';
+      // This join will get the latest bid data only when amz_kw_ids are included
+      // in the aggregate function.
+      $get_latest_bid_join = "
+        inner join
+        (
+          select P.amz_kw_id, P.bid from ppc_keyword_metrics as P
+          inner join
+          (
+            select
+              amz_kw_id,
+              max(`date`) as latest_date
+            from ppc_keyword_metrics
+            group by amz_kw_id
+          ) as latest_date_inner
+          on latest_date_inner.amz_kw_id = P.amz_kw_id and latest_date_inner.latest_date = P.`date`
+        ) as latest_bid
+        on T.amz_kw_id = latest_bid.amz_kw_id
+      ";
+      // The select statement can now be done using the latest bid data
+      $get_latest_bid_select = 'latest_bid.bid as bid';
+    }
     if ($this->includeDate) $group_by[] = '`date`';
 
     $group_by = implode(', ', $group_by);
@@ -98,8 +125,8 @@ class MetricsQueryBuilder {
         ifnull(avg_cpc, 0) as avg_cpc,
         ifnull(acos, 0) as acos,
         ifnull(cvr, 0) as roas,
-
-        ifnull(concat('$', round(avg_bid, 2)), '-') as avg_bid_formatted,
+        
+        ifnull(concat('$', round(bid, 2)), '-') as bid_formatted,
         ifnull(nullif(round(impressions, 0), 0), '-') as impressions_formatted,
         ifnull(nullif(round(clicks, 0), 0), '-') as clicks_formatted,
         ifnull(nullif(concat('$', round(ad_spend, 2)), '$0.00'), '-') as ad_spend_formatted,
@@ -113,12 +140,13 @@ class MetricsQueryBuilder {
         ifnull(concat('$', round(roas, 2)), '-') as roas_formatted
         from
         (
-          select *,
+          select T.*,
           units_sold/clicks as cvr,
           clicks/impressions as ctr,
           ad_spend/clicks as avg_cpc,
           ad_spend/sales as acos,
-          sales/ad_spend as roas
+          sales/ad_spend as roas,
+          $get_latest_bid_select
           from
           (
             select
@@ -133,6 +161,7 @@ class MetricsQueryBuilder {
             WHERE $where
             group by $group_by
           ) as T
+          $get_latest_bid_join
         ) as T2
       $joins
       $orderBy
