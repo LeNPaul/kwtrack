@@ -35,6 +35,14 @@
             <label for="message-text" class="col-form-label">Daily Budget:</label>
             <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
           </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Targeting Type::</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Start Date:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -480,7 +488,7 @@ $(document).ready( function () {
                   }
                 })
               }
-    
+
               else if (result.value == 'changeBudget') {
                 swal({
                   title: 'Please enter a valid budget amount (between 1 and 1000000):',
@@ -1213,7 +1221,7 @@ $(document).ready( function () {
                   }
                 });
               }
-              
+
               else if (result.value == 'enableKeyword') {
                 $.ajax({
                   type: "POST",
@@ -1264,7 +1272,7 @@ $(document).ready( function () {
                   }
                 });
               }
-              
+
               else if (result.value == 'archiveKeyword') {
                 swal({
                   title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
@@ -1774,14 +1782,14 @@ $(document).ready( function () {
           }
         });
       };
-      
+
       var element_name = $(this).parent().parent().parent().prev().children().html();
       var element_id = $(this).parent().parent().parent().prev().children().attr("id");
 
       //campaign level budget change
       if($(this)[0].className.includes("budget")) {
         budget_click(budget_val, element_name, element_id, 0);
-      } 
+      }
 
       //adgroup level default_bid change
       else if($(this)[0].className.includes("default_bid")) {
