@@ -90,6 +90,8 @@ class BidAdjuster
       /* IF YES --> target_acos = campaign_target_acos */
       /* IF NO --> target_acos = global_target_acos */
 
+
+
   }
 }
 ?>

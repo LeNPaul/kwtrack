@@ -43,6 +43,7 @@ $user_id = $_SESSION['user_id'];
   <link href="assets/css/tabs.css" rel="stylesheet" />
   <link href="assets/css/cmanager.css" rel="stylesheet" />
   <link href="assets/css/loader.css" rel="stylesheet" />
+  <link href="assets/css/settings.css" rel="stylesheet" />
 
   <link href="node_modules/flag-icon-css/assets/docs.css" rel="stylesheet">
   <link href="node_modules/flag-icon-css/css/flag-icon.css" rel="stylesheet">
@@ -141,7 +142,7 @@ $user_id = $_SESSION['user_id'];
                     </p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="dashboard?p=s">Settings</a>
                     <a class="dropdown-item" href="logout.php">Logout</a>
                   </div>
                 </li>
@@ -831,8 +832,6 @@ $user_id = $_SESSION['user_id'];
   <script>
     $(window).on("load", (function() {
       $(".loading").fadeOut("slow");
-      console.log("loaded");
-      //$(".loading").css("visibility", "hidden");
     }));
   </script>
 </body>

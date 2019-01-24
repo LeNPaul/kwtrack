@@ -1,0 +1,19 @@
+.settings .form-group {
+  height: 55px;
+  line-height: 55px;
+}
+
+.settings p { text-align: left; }
+
+.settings label.user-settings {
+  font-size: 1.25em !important;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.settings input, .settings span { height: 35px; }
+.settings span.input-group-text {
+  background: #eaeaea !important;
+  font-weight: bold;
+  text-align: right !important;
+}
