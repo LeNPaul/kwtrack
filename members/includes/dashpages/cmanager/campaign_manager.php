@@ -30,7 +30,7 @@
         <br>
 
         <h3>Campaign</h3>
-        <form>
+        <form id="addCampaign">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Campaign Name:</label>
             <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
@@ -42,12 +42,13 @@
 
           <div class="form-group">
             <label for="message-text" class="col-form-label">Targeting Type:</label>
+            <br>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="automatic">
               <label class="form-check-label" for="inlineRadio1">Automatic</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="manual">
               <label class="form-check-label" for="inlineRadio2">Manual</label>
             </div>
           </div>
@@ -123,10 +124,18 @@
 
 <script>
 
+// Function for saving a new campaign when adding a new campaign
 $('#saveCampaign').on('click', function(event) {
   event.preventDefault(); // To prevent following the link (optional)
 
-  console.log('asdf');
+  var x = document.getElementById("addCampaign");
+
+  var formInputs = []
+  for (var i = 0; i < x.length ;i++) {
+    formInputs.push(x.elements[i].value);
+  }
+
+  console.log(formInputs)
 
 });
 
