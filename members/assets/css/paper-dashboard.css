@@ -255,7 +255,7 @@ a span.sidebar-mini-icon {
   width: 22px !important;
   height: 22px;
   margin: 2px -11px;
-  border-radius: 12px;
+  border-radius: 5px;
   position: relative;
   float: left;
   padding: 0;
@@ -2982,7 +2982,7 @@ select.selectpicker {
     margin: 5px 3px 5px 0;
     position: relative;
     padding: 4px 8px 3px .8em;
-    border-radius: 12px;
+    border-radius: 5px;
     color: #FFF;
     font-size: .75em;
     font-weight: 500;
@@ -6342,7 +6342,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif; }
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif; }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 400; }
@@ -6473,7 +6473,7 @@ a.text-gray:focus, a.text-gray:hover {
 body {
   color: #2c2c2c;
   font-size: 14px;
-  font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
@@ -6992,7 +6992,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 .dropdown-menu {
   background-color: #FFFFFF;
   border: 0 none;
-  border-radius: 12px;
+  border-radius: 5px;
   margin-top: 10px;
   padding: 0px; }
   .dropdown-menu .divider {
@@ -9354,7 +9354,7 @@ img {
   margin-top: 5px; }
 
 .card {
-  border-radius: 12px;
+  border-radius: 5px;
   box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
   background-color: #FFFFFF;
   color: #252422;
@@ -9433,7 +9433,7 @@ img {
       padding-left: 5px;
       padding-right: 5px; }
     .card.card-plain img {
-      border-radius: 12px; }
+      border-radius: 5px; }
 
 .card-chart .card-header .card-title {
   margin-top: 10px;
@@ -9475,7 +9475,7 @@ img {
 .card-user .image {
   height: 130px; }
   .card-user .image img {
-    border-radius: 12px; }
+    border-radius: 5px; }
 
 .card-user .author {
   text-align: center;
@@ -9859,7 +9859,7 @@ img {
 .card-testimonial .card-description + .card-title {
   margin-top: 30px; }
   .card-testimonial .card-description + .card-title .card-image .img {
-    border-radius: 12px; }
+    border-radius: 5px; }
   .card-testimonial .card-description + .card-title .card-image .card-title {
     text-align: center; }
 

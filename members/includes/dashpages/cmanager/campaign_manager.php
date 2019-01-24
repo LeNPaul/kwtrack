@@ -17,7 +17,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Create a Campaign</h5>
@@ -26,11 +26,61 @@
         </button>
       </div>
       <div class="modal-body">
-        
+
+        <br>
+
+        <h3>Campaign</h3>
+        <form id="addCampaign">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Campaign Name:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Daily Budget:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+          </div>
+
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Targeting Type:</label>
+            <br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="automatic">
+              <label class="form-check-label" for="inlineRadio1">Automatic</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="manual">
+              <label class="form-check-label" for="inlineRadio2">Manual</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Start Date:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+          </div>
+        </form>
+
+        <br>
+
+        <h3>Ad Group</h3>
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Ad Group Name:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Default Bid:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Asin:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+          </div>
+        </form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;">Save changes</button>
       </div>
     </div>
   </div>
@@ -73,6 +123,23 @@
 </div>
 
 <script>
+
+// Function for saving a new campaign when adding a new campaign
+$('#saveCampaign').on('click', function(event) {
+  event.preventDefault(); // To prevent following the link (optional)
+
+  var x = document.getElementById("addCampaign");
+
+  var formInputs = []
+  for (var i = 0; i < x.length ;i++) {
+    formInputs.push(x.elements[i].value);
+  }
+
+  console.log(formInputs)
+
+});
+
+
 var negKwTableFlag  = 0;
 var currentCampaign = {name: null, id: null};
 var currentAdGroup  = {name: null, id: null};
@@ -471,7 +538,7 @@ $(document).ready( function () {
                   }
                 })
               }
-    
+
               else if (result.value == 'changeBudget') {
                 swal({
                   title: 'Please enter a valid budget amount (between 1 and 1000000):',
@@ -1204,7 +1271,7 @@ $(document).ready( function () {
                   }
                 });
               }
-              
+
               else if (result.value == 'enableKeyword') {
                 $.ajax({
                   type: "POST",
@@ -1255,7 +1322,7 @@ $(document).ready( function () {
                   }
                 });
               }
-              
+
               else if (result.value == 'archiveKeyword') {
                 swal({
                   title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
@@ -1765,14 +1832,14 @@ $(document).ready( function () {
           }
         });
       };
-      
+
       var element_name = $(this).parent().parent().parent().prev().children().html();
       var element_id = $(this).parent().parent().parent().prev().children().attr("id");
 
       //campaign level budget change
       if($(this)[0].className.includes("budget")) {
         budget_click(budget_val, element_name, element_id, 0);
-      } 
+      }
 
       //adgroup level default_bid change
       else if($(this)[0].className.includes("default_bid")) {
