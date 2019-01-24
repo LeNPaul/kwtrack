@@ -80,7 +80,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;">Save changes</button>
+        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
