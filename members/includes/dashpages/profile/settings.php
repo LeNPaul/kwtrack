@@ -27,6 +27,9 @@
                   <li class="nav-item">
                     <a class="nav-link active show" href="#info" role="tab" data-toggle="tab" aria-selected="true">Profile & Info</a>
                   </li>
+				  <li class="nav-item">
+				    <a class="nav-link" href="#general" role="tab" data-toggle="tab" aria-selected="false">General</a>
+				  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#description" role="tab" data-toggle="tab" aria-selected="false">Campaign Management</a>
                   </li>
@@ -52,9 +55,13 @@
                 <p>Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD display.</p>
                 <p>It’s one continuous form where hardware and software function in perfect unison, creating a new generation of phone that’s better by any measure.</p>
               </div>
+			  
+			  <!-- used for general user settings a.k.a password change, view terms of service, billing cycles, etc-->
+			  <div class="tab-pane id="general">
+			    
+			  </div>
 
               <div class="tab-pane" id="description">
-
                 <div class="col-12">
                     <h5>General</h5>
                     <hr />
@@ -89,7 +96,6 @@
                     </div>
 
                 </div>
-
               </div>
 
               <!-- <div class="tab-pane" id="concept">
