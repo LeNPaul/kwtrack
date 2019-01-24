@@ -27,6 +27,8 @@
       </div>
       <div class="modal-body">
 
+        <br>
+
         <h3>Campaign</h3>
         <form>
           <div class="form-group">
@@ -37,15 +39,26 @@
             <label for="message-text" class="col-form-label">Daily Budget:</label>
             <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
           </div>
+
           <div class="form-group">
             <label for="message-text" class="col-form-label">Targeting Type:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+              <label class="form-check-label" for="inlineRadio1">Automatic</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+              <label class="form-check-label" for="inlineRadio2">Manual</label>
+            </div>
           </div>
+
           <div class="form-group">
             <label for="message-text" class="col-form-label">Start Date:</label>
             <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
           </div>
         </form>
+
+        <br>
 
         <h3>Ad Group</h3>
         <form>
@@ -66,7 +79,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" style="margin-right: 10px;">Save changes</button>
+        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;">Save changes</button>
       </div>
     </div>
   </div>
@@ -109,6 +122,15 @@
 </div>
 
 <script>
+
+$('#saveCampaign').on('click', function(event) {
+  event.preventDefault(); // To prevent following the link (optional)
+
+  console.log('asdf');
+
+});
+
+
 var negKwTableFlag  = 0;
 var currentCampaign = {name: null, id: null};
 var currentAdGroup  = {name: null, id: null};
