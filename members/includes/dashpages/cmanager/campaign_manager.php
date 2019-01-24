@@ -26,6 +26,8 @@
         </button>
       </div>
       <div class="modal-body">
+
+        <h3>Campaign</h3>
         <form>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Campaign Name:</label>
@@ -36,7 +38,7 @@
             <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Targeting Type::</label>
+            <label for="message-text" class="col-form-label">Targeting Type:</label>
             <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
           </div>
           <div class="form-group">
@@ -44,6 +46,23 @@
             <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
           </div>
         </form>
+
+        <h3>Ad Group</h3>
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Ad Group Name:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Default Bid:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Asin:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+          </div>
+        </form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
