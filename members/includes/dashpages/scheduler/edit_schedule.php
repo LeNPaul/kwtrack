@@ -123,6 +123,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $schedJSON = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
+//if more than 1 campaign selected or has no schedule, fill with blank array, otherwise load the schedule
 if ((count($schedJSON) > 1) || ($schedJSON[0] == "0")) {
   $schedJSON = array_fill(0, 24, array_fill(0, 7, 0));
 } else {

@@ -64,7 +64,7 @@ for ($i = 0;  $i < count($campaignList); $i++) {
   $uid = $campaignList[$i]['user_id'];
   if ($uid === $old_uid) {
 
-    if ($campaignList[$i]['schedule'][$currentDay][$currentHour] === 0) {
+    if ($campaignList[$i]['schedule'][$currentHour][$currentDay] === 0) {
       toggleCampaign($client, $fp, 'paused', $uid, $campaignList, $currentHour, $currentDay, $i);
     } else {
       toggleCampaign($client, $fp, 'enabled', $uid, $campaignList, $currentHour, $currentDay, $i);
@@ -84,7 +84,7 @@ for ($i = 0;  $i < count($campaignList); $i++) {
       // Instantiate client for advertising API
       newAdClient($client, $rt, $pid);
 
-      if ($campaignList[$i]['schedule'][$currentDay][$currentHour] === 0) {
+      if ($campaignList[$i]['schedule'][$currentHour][$currentDay] === 0) {
         toggleCampaign($client, $fp, 'paused', $uid, $campaignList, $currentHour, $currentDay, $i);
       } else {
         toggleCampaign($client, $fp, 'enabled', $uid, $campaignList, $currentHour, $currentDay, $i);
