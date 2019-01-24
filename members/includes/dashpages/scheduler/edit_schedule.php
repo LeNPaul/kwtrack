@@ -16,7 +16,7 @@ echo '</pre>';
 
 function createScheduleTable($input) {
   $rows = '';
-
+//$input length = 24, $j = 7
   for ($i = 0; $i < count($input); $i++) {
     $time = formatTime($i);
     $row_temp = '<tr><td class="time" id="' . $i . '" align="center"><b>' . $time . '</b></td>';
@@ -105,38 +105,36 @@ function formatTime($input) {
 function renderCheckboxID($dayInt, $timeInt) {
   $day;
   if ($dayInt === 0) $day = '0,';
-  if ($dayInt === 1) $day = '1,';
-  if ($dayInt === 2) $day = '2,';
-  if ($dayInt === 3) $day = '3,';
-  if ($dayInt === 4) $day = '4,';
-  if ($dayInt === 5) $day = '5,';
-  if ($dayInt === 6) $day = '6,';
+  else if ($dayInt === 1) $day = '1,';
+  else if ($dayInt === 2) $day = '2,';
+  else if ($dayInt === 3) $day = '3,';
+  else if ($dayInt === 4) $day = '4,';
+  else if ($dayInt === 5) $day = '5,';
+  else if ($dayInt === 6) $day = '6,';
 
   return $day . strval($timeInt);
- }
+}
 
 $user_id = $_SESSION['user_id'];
+$l_cid = json_decode($_COOKIE['l_cid']);
 
-$sql = "SELECT schedule FROM campaigns WHERE user_id=?";
+$sql = "SELECT schedule FROM campaigns WHERE amz_campaign_id IN " . "(" . implode(',' , $l_cid) . ")";
 $stmt = $pdo->prepare($sql);
-$stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 $stmt->execute();
 $schedJSON = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-// Only use the scheduling from the first campaign grabbed as a reference
-$schedJSON = $schedJSON[0];
-
-if ($schedJSON == 0) {
+if ((count($schedJSON) > 1) || ($schedJSON[0] == "0")) {
   $schedJSON = array_fill(0, 24, array_fill(0, 7, 0));
 } else {
-  $schedJSON = json_decode($schedJSON);
+  $schedJSON = json_decode($schedJSON[0], true);
 }
 ?>
 
 <h1>Edit Ad Schedules</h1>
 
-<?= createScheduleTable($schedJSON) ?>
+
+
+<?= createScheduleTable($schedJSON); ?>
 
 <button type="submit" id="ad_schedule" class="btn btn-lg btn-primary">Save New Schedule</button>
-
 <script src="includes/dashpages/scheduler/assets/js/edit_schedule.js"></script>

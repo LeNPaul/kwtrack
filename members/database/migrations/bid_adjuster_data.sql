@@ -11,11 +11,11 @@ begin
 	create temporary table keywords_to_process
     select
         0 as should_update,
-		campaigns.user_id,
+				campaigns.user_id,
         -- bat should never be equal to 0
         case when bat = 0 then 0.05 else bat end as bat,
         latest_bid.bid as bid,
-		-- TODO: Compute the new bid
+				-- TODO: Compute the new bid
         bid as new_bid,
         -- TODO: Replace with real column later
         0.2 as campaign_target_acos,

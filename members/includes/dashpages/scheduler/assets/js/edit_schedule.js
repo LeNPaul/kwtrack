@@ -1,5 +1,5 @@
 // Functions to handle cookies
-var createCookie = function(name,value,days) {
+function createCookie(name,value,days) {
   if (days) {
     var date = new Date();
     date.setTime(date.getTime()+(days*24*60*60*1000));
@@ -9,7 +9,7 @@ var createCookie = function(name,value,days) {
   document.cookie = name+"="+value+expires+"; path=/";
 };
 
-var readCookie = function(name) {
+function readCookie(name) {
   var nameEQ = name + "=";
   var ca = document.cookie.split(';');
   for(var i=0;i < ca.length;i++) {
@@ -20,7 +20,7 @@ var readCookie = function(name) {
   return null;
 };
 
-var getCookie = function(name) {
+function getCookie(name) {
   var value = "; " + document.cookie;
   var parts = value.split("; " + name + "=");
   if (parts.length == 2) {
@@ -30,7 +30,7 @@ var getCookie = function(name) {
   }
 };
 
-var eraseCookie = function(name) {
+function eraseCookie(name) {
   createCookie(name,"",-1);
 };
 
@@ -78,15 +78,15 @@ $(function() {
   $("#ad_schedule").on("click", function() {
     var selectedCheckboxes = $('input[type=checkbox]:checkbox:checked');
 
-    // Create empty schedule array of size 7 x 24
+    // Create empty schedule array of size 24 x 7
     var scheduleArr = [];
-    for (i = 0; i < 7; i++) { scheduleArr[i] = Array(24).fill().map((e) => 0); }
+    for (i = 0; i < 24; i++) { scheduleArr[i] = Array(7).fill().map((e) => 0); }
 
     // Format schedule array properly based on user input
     for (i = 0; i < selectedCheckboxes.length; i++) {
       var e  = selectedCheckboxes[i];
       var id = e.id.split(',');
-      scheduleArr[parseInt(id[0])][parseInt(id[1])] = 1;
+      scheduleArr[parseInt(id[1])][parseInt(id[0])] = 1;
     }
 
     var o = JSON.stringify(scheduleArr);

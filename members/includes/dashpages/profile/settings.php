@@ -4,13 +4,6 @@
 ?>
 
 <div class="row">
-  
-  <textarea class="form-control" id="keywords" placeholder="Separate your keywords with a new line (200 lines maximum)" rows="6"></textarea>
-  <button id="search-btn">Get Volume</button>
-  
-  <p id="exact_volume"></p>
-  <p id="broad_volume"></p>
-  
   <h1>Settings</h1>
 
   <div class="col-12">
@@ -28,7 +21,7 @@
                     <a class="nav-link active show" href="#info" role="tab" data-toggle="tab" aria-selected="true">Profile & Info</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#description" role="tab" data-toggle="tab" aria-selected="false">Campaign Management</a>
+                    <a class="nav-link" href="#description" role="tab" data-toggle="tab" aria-selected="false">Automation Settings</a>
                   </li>
                   <!-- <li class="nav-item">
                     <a class="nav-link" href="#concept" role="tab" data-toggle="tab" aria-selected="false">Concept</a>
@@ -55,22 +48,43 @@
 
               <div class="tab-pane" id="description">
 
-                <div class="col-12">
-                    <h5>General</h5>
+                <div class="settings col-12">
+                    <h5>Global Automation Settings</h5>
                     <hr />
 
                     <div class="form-group">
-                      <label class="user-settings">Spyder Campaign Structure</label>
-                      <input type="checkbox" class="toggle-spyder-campaigns" checked data-toggle="toggle" data-size="small" />
+                      <div class="row justify-content-between">
+                        <label class="user-settings col-sm-5">Spyder Campaign Structure</label>
+                        <input type="checkbox" class="toggle-spyder-campaigns col-sm-4" checked data-toggle="toggle" data-size="small" />
+                      </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="user-settings">Bid Adjustment Threshold</label>
-                      <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="" aria-label="basic-addon2" aria-describedby="basic-addon2" />
-                        <div class="input-group-append">
-                          <span class="input-group-text" id="basic-addon2">%</span>
+                      <div class="row justify-content-between">
+
+                        <label class="user-settings col-sm-4">Bid Adjustment Threshold</label>
+
+                        <div class="input-group col-sm-2">
+                          <input type="text" class="form-control input-sm" placeholder="" aria-label="basic-addon2" aria-describedby="basic-addon2" />
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">%</span>
+                          </div>
                         </div>
+
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="row justify-content-between">
+
+                        <label class="user-settings col-sm-4">Target ACoS</label>
+                        <div class="input-group col-sm-2">
+                          <input type="text" class="form-control input-sm" placeholder="" aria-label="basic-addon2" aria-describedby="basic-addon2" />
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">%</span>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
 
@@ -79,14 +93,20 @@
                     <p>If a search term has 0 sales and falls under any of these parameters, PPCOLOGY will suggest that you add it as a negative keyword.</p>
 
                     <div class="form-group">
-                      <label class="user-settings">Clicks Greater Than</label>
-                      <input type="text" class="form-control" placeholder="" />
+                      <div class="row justify-content-between">
+                        <label class="user-settings col-sm-4">Clicks Greater Than</label>
+                        <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
+                      </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="user-settings">CTR Less Than</label>
-                      <input type="text" class="form-control" placeholder="" />
+                      <div class="row justify-content-between">
+                        <label class="user-settings col-sm-4">CTR Less Than</label>
+                        <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
+                      </div>
                     </div>
+
+                    
 
                 </div>
 
@@ -118,7 +138,7 @@
 <script>
 
   $(function() {
-    
+
     $("#search-btn").on("click", function() {
 
       e = $("#keywords").val().split(/\n/).map(function(e) {
@@ -126,9 +146,9 @@
       }).filter(function(e) {
         return e.length > 0
       });
-      
+
       console.log(e);
-      
+
       var a = e.flatMap(function(e) {
         return [{
           key: e[1],
@@ -140,7 +160,7 @@
       });
 
       console.log(a);
-      
+
       var kw = $("#keyword").text();
       $.ajax({
         type: "POST",
