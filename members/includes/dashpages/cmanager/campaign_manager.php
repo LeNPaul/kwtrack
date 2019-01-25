@@ -26,9 +26,7 @@
         </button>
       </div>
       <div class="modal-body">
-
         <br>
-
         <h3>Campaign</h3>
         <form id="addCampaign">
           <div class="form-group">
@@ -39,7 +37,6 @@
             <label for="message-text" class="col-form-label">Daily Budget:</label>
             <input type="text" class="form-control" id="daily-budget" placeholder="Daily Budget">
           </div>
-
           <div class="form-group">
             <label for="message-text" class="col-form-label">Targeting Type:</label>
             <br>
@@ -52,15 +49,12 @@
               <label class="form-check-label" for="inlineRadio2">Manual</label>
             </div>
           </div>
-
           <div class="form-group">
             <label for="message-text" class="col-form-label">Start Date:</label>
-            <input type="text" class="form-control" id="form-group" placeholder="Daily Budget">
+            <input type="date" name="bday" class="form-control" id="start-date">
           </div>
         </form>
-
         <br>
-
         <h3>Ad Group</h3>
         <form>
           <div class="form-group">
@@ -76,7 +70,6 @@
             <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
           </div>
         </form>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -128,16 +121,16 @@
 $('#saveCampaign').on('click', function(event) {
   event.preventDefault(); // To prevent following the link (optional)
 
-
-  var campaignName = document.getElementById('campaign-name').value
+  // Extract user input from the modal form
+  var campaignName = document.getElementById('campaign-name').value;
   var targetType = document.querySelector('input[name="targetType"]:checked').value;
-  var dailyBudget = document.getElementById('daily-budget').value
-  var formGroup = document.getElementById('form-group').value
+  var dailyBudget = document.getElementById('daily-budget').value;
+  var startDate = document.getElementById('start-date').value;
 
   console.log(campaignName)
   console.log(targetType);
   console.log(dailyBudget);
-  console.log(formGroup);
+  console.log(startDate);
 
 });
 
