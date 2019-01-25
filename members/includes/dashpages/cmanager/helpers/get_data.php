@@ -45,8 +45,8 @@ function cmCheckboxState($status, $toggleClass) {
   }
 }
 
-function cmLink($className, $id, $name){
-  return '<a href="javascript:void(0)" class="name '. $className. '" id="' . $id . '">' .  $name . '</a>';
+function cmLink($type, $className, $id, $name){
+  return '<a href="javascript:void(0)" class="name '. $className. ' ' . $type . '" id="' . $id . '">' .  $name . '</a>';
 }
 
 function moneyInput($className, $value){
@@ -82,13 +82,13 @@ $result = array_map(function($e){
     // Insert new values into array in reverse order
     array_unshift($row, $e['targeting_type']);
     array_unshift($row, moneyInput('budget', $e['daily_budget']));
-    array_unshift($row, cmLink('c_link', $e['amz_campaign_id'], $e['campaign_name']));
+    array_unshift($row, cmLink($e['targeting_type'], 'c_link', $e['amz_campaign_id'], $e['campaign_name']));
     array_unshift($row, cmCheckboxState($e['status'], 'campaign'));
   }
   else if ($dataLevel == 'ad_group'){
     // Insert new values into array in reverse order
     array_unshift($row, moneyInput('default_bid', number_format($e['default_bid'], 2)));
-    array_unshift($row, cmLink('ag_link', $e['amz_adgroup_id'], $e['ad_group_name']));
+    array_unshift($row, cmLink($e['targeting_type'], 'ag_link', $e['amz_adgroup_id'], $e['ad_group_name']));
     array_unshift($row, cmCheckboxState($e['status'], 'adgroup'));
   }
   else if ($dataLevel == 'keyword'){

@@ -72,7 +72,7 @@ function cmGetCampaignData($pdo, $user_id) {
     $conversion  = $result[$i]['cvr_formatted'];
     $acos        = $result[$i]['acos_formatted'];
     
-    $campaignLink = '<a href="javascript:void(0)" class="name c_link" id="' . $result[$i]['amz_campaign_id'] . '">' . $result[$i]['campaign_name'] . '</a>';
+    $campaignLink = '<a href="javascript:void(0)" class="name c_link ' . $result[$i]['targeting_type'] . '" id="' . $result[$i]['amz_campaign_id'] . '">' . $result[$i]['campaign_name'] . '</a>';
     $budget =  '<div class="input-group cm-input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
