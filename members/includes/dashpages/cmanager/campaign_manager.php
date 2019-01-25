@@ -33,10 +33,17 @@
             <label for="recipient-name" class="col-form-label">Campaign Name:</label>
             <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name">
           </div>
+
           <div class="form-group">
             <label for="message-text" class="col-form-label">Daily Budget:</label>
-            <input type="text" class="form-control" id="daily-budget" placeholder="Daily Budget">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" id="daily-budget" placeholder="1.00">
+            </div>
           </div>
+
           <div class="form-group">
             <label for="message-text" class="col-form-label">Targeting Type:</label>
             <br>
