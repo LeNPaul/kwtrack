@@ -33,29 +33,29 @@
         <form id="addCampaign">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Campaign Name:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
+            <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Daily Budget:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <input type="text" class="form-control" id="daily-budget" placeholder="Daily Budget">
           </div>
 
           <div class="form-group">
             <label for="message-text" class="col-form-label">Targeting Type:</label>
             <br>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="automatic">
+              <input class="form-check-input" type="radio" name="targetType" id="inlineRadio1" value="automatic" checked>
               <label class="form-check-label" for="inlineRadio1">Automatic</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="manual">
+              <input class="form-check-input" type="radio" name="targetType" id="inlineRadio2" value="manual">
               <label class="form-check-label" for="inlineRadio2">Manual</label>
             </div>
           </div>
 
           <div class="form-group">
             <label for="message-text" class="col-form-label">Start Date:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <input type="text" class="form-control" id="form-group" placeholder="Daily Budget">
           </div>
         </form>
 
@@ -128,14 +128,16 @@
 $('#saveCampaign').on('click', function(event) {
   event.preventDefault(); // To prevent following the link (optional)
 
-  var x = document.getElementById("addCampaign");
 
-  var formInputs = []
-  for (var i = 0; i < x.length ;i++) {
-    formInputs.push(x.elements[i].value);
-  }
+  var campaignName = document.getElementById('campaign-name').value
+  var targetType = document.querySelector('input[name="targetType"]:checked').value;
+  var dailyBudget = document.getElementById('daily-budget').value
+  var formGroup = document.getElementById('form-group').value
 
-  console.log(formInputs)
+  console.log(campaignName)
+  console.log(targetType);
+  console.log(dailyBudget);
+  console.log(formGroup);
 
 });
 
