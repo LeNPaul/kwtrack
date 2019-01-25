@@ -51,67 +51,82 @@
 			  
 			  <!-- used for general user settings a.k.a password change, view terms of service, billing cycles, etc-->
 			  <div class="tab-pane" id="general">
-			    
+			    <div class="settings col-12">
+				  <h5><b>User Settings</b></h5>
+				  <hr />
+				  
+				  <div class="form-group">
+				    <div class="row">
+					  <label class="user-settings col-sm-7">Current Marketplace Name: </label>
+					</div>
+					
+				    <div class="row">
+					  <label class="user-settings col-sm-7">Current Billing Plan: -----------------------</label>
+					  <button type="button" class="change-billing btn btn-primary col-sm-2">Change</button>
+					  <button type="button" class="cancel-billing btn btn-primary col-sm-2">Cancel</button>
+					</div>
+				  </div>
+				</div>
 			  </div>
 
               <div class="tab-pane" id="description">
                 <div class="settings col-12">
-                    <h5>Global Automation Settings</h5>
-                    <hr />
+                  <h5><b>Global Automation Settings</b></h5>
+                  <hr />
 
-                    <div class="form-group">
-                      <div class="row justify-content-between">
-                        <label class="user-settings col-sm-6">Spyder Campaign Structure</label>
-                        <input type="checkbox" class="toggle-spyder-campaigns col-sm-4" checked data-toggle="toggle" data-size="small" />
-                      </div>
+                  <div class="form-group">
+                    <div class="row justify-content-between">
+                      <label class="user-settings col-sm-6">Spyder Campaign Structure</label>
+                      <input type="checkbox" class="toggle-spyder-campaigns col-sm-4" checked data-toggle="toggle" data-size="small" />
                     </div>
+                  </div>
 
-                    <div class="form-group">
-                      <div class="row justify-content-between">
+                  <div class="form-group">
+                    <div class="row justify-content-between">
 
-                        <label class="user-settings col-sm-6">Bid Adjustment Threshold</label>
+                      <label class="user-settings col-sm-6">Bid Adjustment Threshold</label>
 
-                        <div class="input-group col-sm-2">
-                          <input type="text" class="form-control input-sm" placeholder="" aria-label="basic-addon2" aria-describedby="basic-addon2" />
-                          <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">%</span>
-                          </div>
+                      <div class="input-group col-sm-2">
+                        <input type="text" class="form-control input-sm" placeholder="" aria-label="basic-addon2" aria-describedby="basic-addon2" />
+                        <div class="input-group-append">
+                          <span class="input-group-text" id="basic-addon2">%</span>
                         </div>
-
                       </div>
+
                     </div>
+                  </div>
 
-                    <div class="form-group">
-                      <div class="row justify-content-between">
+                  <div class="form-group">
+                    <div class="row justify-content-between">
 
-                        <label class="user-settings col-sm-4">Target ACoS</label>
-                        <div class="input-group col-sm-2">
-                          <input type="text" class="form-control input-sm" placeholder="" aria-label="basic-addon2" aria-describedby="basic-addon2" />
-                          <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">%</span>
-                          </div>
+                      <label class="user-settings col-sm-4">Target ACoS</label>
+                      <div class="input-group col-sm-2">
+                        <input type="text" class="form-control input-sm" placeholder="" aria-label="basic-addon2" aria-describedby="basic-addon2" />
+                        <div class="input-group-append">
+                          <span class="input-group-text" id="basic-addon2">%</span>
                         </div>
-
                       </div>
-                    </div>
 
-                    <h5>Negative Keyword Parameters</h5>
-                    <hr />
-                    <p>If a search term has 0 sales and falls under any of these parameters, PPCOLOGY will suggest that you add it as a negative keyword.</p>
-
-                    <div class="form-group">
-                      <div class="row justify-content-between">
-                        <label class="user-settings col-sm-4">Clicks Greater Than</label>
-                        <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
-                      </div>
                     </div>
+                  </div>
 
-                    <div class="form-group">
-                      <div class="row justify-content-between">
-                        <label class="user-settings col-sm-4">CTR Less Than</label>
-                        <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
-                      </div>
+                  <h5><b>Negative Keyword Parameters</b></h5>
+                  <hr />
+                  <p>If a search term has 0 sales and falls under any of these parameters, PPCOLOGY will suggest that you add it as a negative keyword.</p>
+
+                  <div class="form-group">
+                    <div class="row justify-content-between">
+                      <label class="user-settings col-sm-4">Clicks Greater Than</label>
+                      <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
                     </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row justify-content-between">
+                      <label class="user-settings col-sm-4">CTR Less Than</label>
+                      <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
+                    </div>
+                  </div>
 
                     
 
