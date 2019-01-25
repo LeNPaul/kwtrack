@@ -33,7 +33,6 @@
             <label for="recipient-name" class="col-form-label">Campaign Name:</label>
             <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name">
           </div>
-
           <div class="form-group">
             <label for="message-text" class="col-form-label">Daily Budget:</label>
             <div class="input-group mb-3">
@@ -43,7 +42,6 @@
               <input type="text" class="form-control" id="daily-budget" placeholder="1.00">
             </div>
           </div>
-
           <div class="form-group">
             <label for="message-text" class="col-form-label">Targeting Type:</label>
             <br>
@@ -66,14 +64,19 @@
         <form>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Ad Group Name:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
+            <input type="text" class="form-control" id="recipient-name" placeholder="Ad Group Name">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Default Bid:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+            </div>
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Asin:</label>
+            <label for="message-text" class="col-form-label">ASIN:</label>
             <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
           </div>
         </form>
@@ -152,6 +155,12 @@ var sleep = function (time) {
 };
 
 $(document).ready( function () {
+
+  // Clear the modal when closed
+  $(".modal").on("hidden.bs.modal", function(){
+      document.getElementById("#campaign-name").value = ''
+  });
+
   // Holds the data table variable
   var dt        = null;
   var dt_neg_kw = null;
