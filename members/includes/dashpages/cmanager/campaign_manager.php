@@ -26,61 +26,64 @@
         </button>
       </div>
       <div class="modal-body">
-
         <br>
-
         <h3>Campaign</h3>
         <form id="addCampaign">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Campaign Name:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
+            <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Daily Budget:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" id="daily-budget" placeholder="1.00">
+            </div>
           </div>
-
           <div class="form-group">
             <label for="message-text" class="col-form-label">Targeting Type:</label>
             <br>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="automatic">
+              <input class="form-check-input" type="radio" name="targetType" id="inlineRadio1" value="automatic" checked>
               <label class="form-check-label" for="inlineRadio1">Automatic</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="manual">
+              <input class="form-check-input" type="radio" name="targetType" id="inlineRadio2" value="manual">
               <label class="form-check-label" for="inlineRadio2">Manual</label>
             </div>
           </div>
-
           <div class="form-group">
             <label for="message-text" class="col-form-label">Start Date:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <input type="date" name="bday" class="form-control" id="start-date">
           </div>
         </form>
-
         <br>
-
         <h3>Ad Group</h3>
         <form>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Ad Group Name:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
+            <input type="text" class="form-control" id="recipient-name" placeholder="Ad Group Name">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Default Bid:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+            </div>
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Asin:</label>
+            <label for="message-text" class="col-form-label">ASIN:</label>
             <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
           </div>
         </form>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;">Save changes</button>
+        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -128,14 +131,16 @@
 $('#saveCampaign').on('click', function(event) {
   event.preventDefault(); // To prevent following the link (optional)
 
-  var x = document.getElementById("addCampaign");
+  // Extract user input from the modal form
+  var campaignName = document.getElementById('campaign-name').value;
+  var targetType = document.querySelector('input[name="targetType"]:checked').value;
+  var dailyBudget = document.getElementById('daily-budget').value;
+  var startDate = document.getElementById('start-date').value;
 
-  var formInputs = []
-  for (var i = 0; i < x.length ;i++) {
-    formInputs.push(x.elements[i].value);
-  }
-
-  console.log(formInputs)
+  console.log(campaignName)
+  console.log(targetType);
+  console.log(dailyBudget);
+  console.log(startDate);
 
 });
 
@@ -150,6 +155,12 @@ var sleep = function (time) {
 };
 
 $(document).ready( function () {
+
+  // Clear the modal when closed
+  $(".modal").on("hidden.bs.modal", function(){
+      document.getElementById("#campaign-name").value = ''
+  });
+
   // Holds the data table variable
   var dt        = null;
   var dt_neg_kw = null;
