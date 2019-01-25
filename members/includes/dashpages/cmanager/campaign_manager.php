@@ -3,8 +3,12 @@
 <div class="row">
   <div class="col-sm-6">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#campaignModal">
       Create a Campaign
+    </button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#keywordModal">
+      Add Keywords
     </button>
   </div>
   <div class="col-sm-6">
@@ -15,8 +19,8 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Campaign Modal -->
+<div class="modal fade" id="campaignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -77,7 +81,7 @@
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">ASIN:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
           </div>
         </form>
       </div>
@@ -88,6 +92,42 @@
     </div>
   </div>
 </div>
+<!-- End Modal -->
+
+<!-- Keywords Modal -->
+<div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Keywords</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+          <label for="exampleFormControlSelect1">Category:</label>
+            <select class="form-control" id="keyword-category">
+              <option value="broad">Broad</option>
+              <option value="phrase">Phrase</option>
+              <option value="exact">Exact</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Keywords:</label>
+            <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveKeywords" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
 
 <br />
 <div>
@@ -137,13 +177,25 @@ $('#saveCampaign').on('click', function(event) {
   var dailyBudget = document.getElementById('daily-budget').value;
   var startDate = document.getElementById('start-date').value;
 
-  console.log(campaignName)
+  console.log(campaignName);
   console.log(targetType);
   console.log(dailyBudget);
   console.log(startDate);
 
 });
 
+// Function for saving a new campaign when adding a new campaign
+$('#saveKeywords').on('click', function(event) {
+  event.preventDefault(); // To prevent following the link (optional)
+
+  // Extract user input from the modal form
+  var keywords = document.getElementById("keywords-text").value;
+  var category = document.getElementById("keyword-category").value;
+
+  console.log(keywords);
+  console.log(category);
+
+});
 
 var negKwTableFlag  = 0;
 var currentCampaign = {name: null, id: null};
@@ -158,7 +210,7 @@ $(document).ready( function () {
 
   // Clear the modal when closed
   $(".modal").on("hidden.bs.modal", function(){
-      document.getElementById("#campaign-name").value = ''
+      //document.getElementById("#campaign-name").value = ''
   });
 
   // Holds the data table variable
