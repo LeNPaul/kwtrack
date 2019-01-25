@@ -3,8 +3,12 @@
 <div class="row">
   <div class="col-sm-6">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#campaignModal">
       Create a Campaign
+    </button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#keywordModal">
+      Add Keywords
     </button>
   </div>
   <div class="col-sm-6">
@@ -15,9 +19,9 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<!-- Campaign Modal -->
+<div class="modal fade" id="campaignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Create a Campaign</h5>
@@ -26,15 +30,104 @@
         </button>
       </div>
       <div class="modal-body">
-        
+        <br>
+        <h3>Campaign</h3>
+        <form id="addCampaign">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Campaign Name:</label>
+            <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Daily Budget:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" id="daily-budget" placeholder="1.00">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Targeting Type:</label>
+            <br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="targetType" id="inlineRadio1" value="automatic" checked>
+              <label class="form-check-label" for="inlineRadio1">Automatic</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="targetType" id="inlineRadio2" value="manual">
+              <label class="form-check-label" for="inlineRadio2">Manual</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Start Date:</label>
+            <input type="date" name="bday" class="form-control" id="start-date">
+          </div>
+        </form>
+        <br>
+        <h3>Ad Group</h3>
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Ad Group Name:</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="Ad Group Name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Default Bid:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">ASIN:</label>
+            <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
 </div>
+<!-- End Modal -->
+
+<!-- Keywords Modal -->
+<div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Keywords</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+          <label for="exampleFormControlSelect1">Category:</label>
+            <select class="form-control" id="keyword-category">
+              <option value="broad">Broad</option>
+              <option value="phrase">Phrase</option>
+              <option value="exact">Exact</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Keywords:</label>
+            <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveKeywords" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
 
 <br />
 <div>
@@ -73,6 +166,37 @@
 </div>
 
 <script>
+
+// Function for saving a new campaign when adding a new campaign
+$('#saveCampaign').on('click', function(event) {
+  event.preventDefault(); // To prevent following the link (optional)
+
+  // Extract user input from the modal form
+  var campaignName = document.getElementById('campaign-name').value;
+  var targetType = document.querySelector('input[name="targetType"]:checked').value;
+  var dailyBudget = document.getElementById('daily-budget').value;
+  var startDate = document.getElementById('start-date').value;
+
+  console.log(campaignName);
+  console.log(targetType);
+  console.log(dailyBudget);
+  console.log(startDate);
+
+});
+
+// Function for saving a new campaign when adding a new campaign
+$('#saveKeywords').on('click', function(event) {
+  event.preventDefault(); // To prevent following the link (optional)
+
+  // Extract user input from the modal form
+  var keywords = document.getElementById("keywords-text").value;
+  var category = document.getElementById("keyword-category").value;
+
+  console.log(keywords);
+  console.log(category);
+
+});
+
 var negKwTableFlag  = 0;
 var currentCampaign = {name: null, id: null};
 var currentAdGroup  = {name: null, id: null};
@@ -83,6 +207,12 @@ var sleep = function (time) {
 };
 
 $(document).ready( function () {
+
+  // Clear the modal when closed
+  $(".modal").on("hidden.bs.modal", function(){
+      //document.getElementById("#campaign-name").value = ''
+  });
+
   // Holds the data table variable
   var dt        = null;
   var dt_neg_kw = null;
@@ -471,7 +601,7 @@ $(document).ready( function () {
                   }
                 })
               }
-    
+
               else if (result.value == 'changeBudget') {
                 swal({
                   title: 'Please enter a valid budget amount (between 1 and 1000000):',
@@ -1204,7 +1334,7 @@ $(document).ready( function () {
                   }
                 });
               }
-              
+
               else if (result.value == 'enableKeyword') {
                 $.ajax({
                   type: "POST",
@@ -1255,7 +1385,7 @@ $(document).ready( function () {
                   }
                 });
               }
-              
+
               else if (result.value == 'archiveKeyword') {
                 swal({
                   title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
@@ -1765,14 +1895,14 @@ $(document).ready( function () {
           }
         });
       };
-      
+
       var element_name = $(this).parent().parent().parent().prev().children().html();
       var element_id = $(this).parent().parent().parent().prev().children().attr("id");
 
       //campaign level budget change
       if($(this)[0].className.includes("budget")) {
         budget_click(budget_val, element_name, element_id, 0);
-      } 
+      }
 
       //adgroup level default_bid change
       else if($(this)[0].className.includes("default_bid")) {
