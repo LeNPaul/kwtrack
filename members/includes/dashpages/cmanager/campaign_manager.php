@@ -702,7 +702,7 @@ $(document).ready( function () {
       }
     }; //campaignOptions
 
-    clearTable(0);
+    //clearTable(0);
     dt = $('#campaign_manager').DataTable(campaignOptions);
     dt.columns.adjust();
     $(".btn-deselect").css("visibility", "hidden");
