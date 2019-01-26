@@ -1283,7 +1283,7 @@ $(document).ready( function () {
 	  $(".btnCampaign").css("display", "none");
 	  $(".btnAdgroup").css("display", "none");
 	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "inline");
     }
     dt.columns.adjust();
 
@@ -1361,7 +1361,7 @@ $(document).ready( function () {
 	  $(".btnCampaign").css("display", "none");
 	  $(".btnAdgroup").css("display", "none");
 	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "inline");
     }
   };
   /* End: initCampaignNegKeywordTable */
@@ -1735,7 +1735,7 @@ $(document).ready( function () {
 	  $(".btnCampaign").css("display", "none");
 	  $(".btnAdgroup").css("display", "none");
 	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "inline");
     }
     dt.columns.adjust();
 
@@ -1819,7 +1819,7 @@ $(document).ready( function () {
 	  $(".btnCampaign").css("display", "none");
 	  $(".btnAdgroup").css("display", "none");
 	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "inline");
     }
   };
   /* End: initAdGroupNegKeywordTable */
