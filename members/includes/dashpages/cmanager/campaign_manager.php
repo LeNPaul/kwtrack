@@ -3,9 +3,22 @@
 <div class="row">
   <div class="col-sm-6">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Create a Campaign
+    <button type="button" class="btn btn-primary btnCampaign" data-toggle="modal" data-target="#campaignModal">
+      Create New Campaign
     </button>
+	<!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btnAdgroup" data-toggle="modal" data-target="#adgroupModal" style="display:none">
+      Create New Ad Group
+    </button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btnKeyword" data-toggle="modal" data-target="#keywordModal" style="display:none">
+      Add Keywords
+    </button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btnNegKeyword" data-toggle="modal" data-target="#negativeKeywordModal" style="display:none">
+      Add Negative Keywords
+    </button>
+	
   </div>
   <div class="col-sm-6">
     <div id="campaignRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 315px; float: right">
@@ -15,8 +28,8 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Campaign Modal -->
+<div class="modal fade" id="campaignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -26,65 +39,204 @@
         </button>
       </div>
       <div class="modal-body">
-
         <br>
-
         <h3>Campaign</h3>
         <form id="addCampaign">
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Campaign Name:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
+            <label for="campaign-name" class="col-form-label">Campaign Name:</label>
+            <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Daily Budget:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" id="daily-budget" placeholder="1.00">
+            </div>
           </div>
-
           <div class="form-group">
             <label for="message-text" class="col-form-label">Targeting Type:</label>
             <br>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="automatic">
+              <input class="form-check-input" type="radio" name="targetType" id="inlineRadio1" value="automatic" checked>
               <label class="form-check-label" for="inlineRadio1">Automatic</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="manual">
+              <input class="form-check-input" type="radio" name="targetType" id="inlineRadio2" value="manual">
               <label class="form-check-label" for="inlineRadio2">Manual</label>
             </div>
           </div>
-
           <div class="form-group">
             <label for="message-text" class="col-form-label">Start Date:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <input type="date" name="bday" class="form-control" id="start-date">
           </div>
         </form>
-
         <br>
-
         <h3>Ad Group</h3>
         <form>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Ad Group Name:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Campaign Name">
+            <label for="ad-group-name" class="col-form-label">Ad Group Name:</label>
+            <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Default Bid:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+            </div>
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Asin:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Daily Budget">
+            <label for="message-text" class="col-form-label">ASIN:</label>
+            <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
           </div>
         </form>
-
+		<br>
+		<h3>Keyword</h3>
+		<form>
+		  <div class="form-group">
+          <label for="exampleFormControlSelect1">Category:</label>
+            <select class="form-control" id="keyword-category">
+              <option value="broad">Broad</option>
+              <option value="phrase">Phrase</option>
+              <option value="exact">Exact</option>
+            </select>
+          </div>
+		  <div class="form-group">
+            <label for="message-text" class="col-form-label">Keywords:</label>
+            <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
+          </div>
+		</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;">Save changes</button>
+        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
 </div>
+<!-- End Modal -->
+
+<!-- Adgroups Modal -->
+<div class="modal fade" id="adgroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create an Ad Group</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <br>
+        <h3>Campaign</h3>
+        <form id="currentCampaign">
+          <div class="form-group">
+            <label for="campaign-name" class="col-form-label">Current Campaign:</label>
+            <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
+          </div>
+        </form>
+        <br>
+        <h3>Ad Group</h3>
+        <form>
+          <div class="form-group">
+            <label for="ad-group-name" class="col-form-label">Ad Group Name:</label>
+            <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Default Bid:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">ASIN:</label>
+            <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
+          </div>
+        </form>
+		<br>
+		<h3>Keyword</h3>
+		<form>
+		  <div class="form-group">
+          <label for="exampleFormControlSelect1">Category:</label>
+            <select class="form-control" id="keyword-category">
+              <option value="broad">Broad</option>
+              <option value="phrase">Phrase</option>
+              <option value="exact">Exact</option>
+            </select>
+          </div>
+		  <div class="form-group">
+            <label for="message-text" class="col-form-label">Keywords:</label>
+            <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
+          </div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Keywords Modal -->
+<div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Keywords</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <br>
+        <h3>Campaign</h3>
+        <form id="currentCampaign">
+          <div class="form-group">
+            <label for="campaign-name" class="col-form-label">Current Campaign:</label>
+            <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
+          </div>
+        </form>
+        <br>
+        <h3>Ad Group</h3>
+        <form id="currentAdgroup">
+          <div class="form-group">
+            <label for="ad-group-name" class="col-form-label">Current Ad Group:</label>
+            <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" disabled>
+          </div>
+        </form>
+		<br>
+		<h3>Keyword</h3>
+		<form>
+		  <div class="form-group">
+          <label for="exampleFormControlSelect1">Category:</label>
+            <select class="form-control" id="keyword-category">
+              <option value="broad">Broad</option>
+              <option value="phrase">Phrase</option>
+              <option value="exact">Exact</option>
+            </select>
+          </div>
+		  <div class="form-group">
+            <label for="message-text" class="col-form-label">Keywords:</label>
+            <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
+          </div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveKeywords" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
 
 <br />
 <div>
@@ -128,21 +280,35 @@
 $('#saveCampaign').on('click', function(event) {
   event.preventDefault(); // To prevent following the link (optional)
 
-  var x = document.getElementById("addCampaign");
+  // Extract user input from the modal form
+  var campaignName = document.getElementById('campaign-name').value;
+  var targetType = document.querySelector('input[name="targetType"]:checked').value;
+  var dailyBudget = document.getElementById('daily-budget').value;
+  var startDate = document.getElementById('start-date').value;
 
-  var formInputs = []
-  for (var i = 0; i < x.length ;i++) {
-    formInputs.push(x.elements[i].value);
-  }
-
-  console.log(formInputs)
+  console.log(campaignName);
+  console.log(targetType);
+  console.log(dailyBudget);
+  console.log(startDate);
 
 });
 
+// Function for saving a new campaign when adding a new campaign
+$('#saveKeywords').on('click', function(event) {
+  event.preventDefault(); // To prevent following the link (optional)
+
+  // Extract user input from the modal form
+  var keywords = document.getElementById("keywords-text").value;
+  var category = document.getElementById("keyword-category").value;
+
+  console.log(keywords);
+  console.log(category);
+
+});
 
 var negKwTableFlag  = 0;
-var currentCampaign = {name: null, id: null};
-var currentAdGroup  = {name: null, id: null};
+var currentCampaign = {name: null, id: null, type: null};
+var currentAdGroup  = {name: null, id: null, type: null};
 var allCampaigns    = "<a href=\"javascript:void(0)\" class=\"all_link\">All Campaigns</a>";
 
 var sleep = function (time) {
@@ -150,6 +316,12 @@ var sleep = function (time) {
 };
 
 $(document).ready( function () {
+
+  // Clear the modal when closed
+  $(".modal").on("hidden.bs.modal", function(){
+      //document.getElementById("#campaign-name").value = ''
+  });
+
   // Holds the data table variable
   var dt        = null;
   var dt_neg_kw = null;
@@ -707,6 +879,10 @@ $(document).ready( function () {
     dt.columns.adjust();
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
+	$(".btnCampaign").css("display", "inline");
+	$(".btnAdgroup").css("display", "none");
+	$(".btnKeyword").css("display", "none");
+	$(".btnNegKeyword").css("display", "none");
 
     // Hide negative keywords tab
     $("#neg_keywords_tab").attr("style", "visibility: hidden");
@@ -1076,7 +1252,7 @@ $(document).ready( function () {
           off: '',
           size: "small"
         });
-
+        $("#currentCampaign #campaign-name").attr("placeholder", currentCampaign.name);
 
       }, // drawCallback
       ajax: {
@@ -1098,6 +1274,17 @@ $(document).ready( function () {
     dt = $('#campaign_manager').DataTable(adGroupOptions);
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
+	if (currentCampaign.type == "Manual") {
+	  $(".btnCampaign").css("display", "none");
+	  $(".btnAdgroup").css("display", "inline");
+	  $(".btnKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "inline");
+	} else {
+	  $(".btnCampaign").css("display", "none");
+	  $(".btnAdgroup").css("display", "none");
+	  $(".btnKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "none");
+    }
     dt.columns.adjust();
 
     // Add the campaign to the breadcrumbs
@@ -1155,7 +1342,7 @@ $(document).ready( function () {
       ],
       ajax: {
         type: "POST",
-        url: 'includes/dashpages/cmanager/helpers/get_neg_keywords',
+        url: 'includes/dashpages/cmanager/helpers/get_neg_keywords.php',
         data: {
           data_level: 0,
           element_id: currentCampaign.id
@@ -1165,6 +1352,17 @@ $(document).ready( function () {
 
     clearTable(1);
     dt_neg_kw = $('#neg_kw_table').DataTable(campaignNegKeywordTableOptions);
+	if (currentCampaign.type == "Manual") {
+	  $(".btnCampaign").css("display", "none");
+	  $(".btnAdgroup").css("display", "inline");
+	  $(".btnKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "inline");
+	} else {
+	  $(".btnCampaign").css("display", "none");
+	  $(".btnAdgroup").css("display", "none");
+	  $(".btnKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "none");
+    }
   };
   /* End: initCampaignNegKeywordTable */
 
@@ -1507,7 +1705,7 @@ $(document).ready( function () {
           off: '',
           size: "small"
         });
-
+        $("#currentAdgroup #ad-group-name").attr("placeholder", currentAdGroup.name);
       }, // drawCallback (keyword manager)
       ajax: {
         url: 'includes/dashpages/cmanager/helpers/get_data.php',
@@ -1528,13 +1726,24 @@ $(document).ready( function () {
     dt = $('#campaign_manager').DataTable(kwOptions);
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
+	if (currentCampaign.type == "Manual") {
+	  $(".btnCampaign").css("display", "none");
+	  $(".btnAdgroup").css("display", "none");
+	  $(".btnKeyword").css("display", "inline");
+	  $(".btnNegKeyword").css("display", "inline");
+	} else {
+	  $(".btnCampaign").css("display", "none");
+	  $(".btnAdgroup").css("display", "none");
+	  $(".btnKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "none");
+    }
     dt.columns.adjust();
 
     // Add the adgroup to the breadcrumbs
     breadcrumbs = [{
       name: currentCampaign.name,
       id: currentCampaign.id,
-      linkClass: 'c_link'
+      linkClass: 'c_link ' + currentCampaign.type
     },
     {
       name: adGroupName,
@@ -1596,10 +1805,22 @@ $(document).ready( function () {
           element_id: currentCampaign.id
         }
       }
-    }; //campaignNegKeywordTableOptions
+    }; //adGroupNegKeywordTableOptions
 
     clearTable(1);
     dt_neg_kw = $('#neg_kw_table').DataTable(adgroupNegKeywordTableOptions);
+	console.log(currentCampaign.type);
+	if (currentCampaign.type == "Manual") {
+	  $(".btnCampaign").css("display", "none");
+	  $(".btnAdgroup").css("display", "none");
+	  $(".btnKeyword").css("display", "inline");
+	  $(".btnNegKeyword").css("display", "inline");
+	} else {
+	  $(".btnCampaign").css("display", "none");
+	  $(".btnAdgroup").css("display", "none");
+	  $(".btnKeyword").css("display", "none");
+	  $(".btnNegKeyword").css("display", "none");
+    }
   };
   /* End: initAdGroupNegKeywordTable */
 
@@ -1867,6 +2088,11 @@ $(document).ready( function () {
   $("#campaign_manager, .breadcrumb").on("click", ".c_link", function() {
     currentCampaign.name = $(this).html();
     currentCampaign.id   = $(this).attr('id');
+	if ($(this).hasClass("Manual")) {
+	  currentCampaign.type = "Manual";
+	} else {
+	  currentCampaign.type = "Automatic";
+	}
 
     // Change tab to show "Ad Groups"
     $("#tab1_label").html("Ad Groups");
@@ -1881,6 +2107,7 @@ $(document).ready( function () {
   $("#campaign_manager").on("click", ".ag_link",  function() {
     currentAdGroup.name = $(this).html();
     currentAdGroup.id   = $(this).attr('id');
+	currentAdGroup.type = currentCampaign.type;
 
     // Change tab to show "Keywords"
     $("#tab1_label").html("Keywords");
