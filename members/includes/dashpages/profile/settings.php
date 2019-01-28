@@ -57,13 +57,16 @@
 				  
 				  <div class="form-group">
 				    <div class="row">
-					  <label class="user-settings col-sm-7">Current Marketplace Name: </label>
+					  <label class="user-settings col-sm-5">Current Marketplace Name: </label>
+					  <label class="user-settings col-sm-4">Placeholder Name </label>
+					  <button type="button" class="change-marketplace btn btn-primary col-xs-2">Change</button>
 					</div>
 					
 				    <div class="row">
-					  <label class="user-settings col-sm-7">Current Billing Plan: -----------------------</label>
-					  <button type="button" class="change-billing btn btn-primary col-sm-2">Change</button>
-					  <button type="button" class="cancel-billing btn btn-primary col-sm-2">Cancel</button>
+					  <label class="user-settings col-sm-4">Current Billing Plan:</label>
+					  <label class="user-settings col-sm-4">Placeholder Plan</label>
+					  <button type="button" class="change-billing btn btn-primary col-xs-2">Change</button>
+					  <button type="button" class="cancel-billing btn btn-danger col-xs-2">Cancel</button>
 					</div>
 				  </div>
 				</div>
@@ -77,7 +80,7 @@
                   <div class="form-group">
                     <div class="row justify-content-between">
                       <label class="user-settings col-sm-6">Spyder Campaign Structure</label>
-                      <input type="checkbox" class="toggle-spyder-campaigns col-sm-4" checked data-toggle="toggle" data-size="small" />
+                      <input type="checkbox" class="toggle-spyder-campaigns col-sm-4" checked data-toggle="toggle" data-size="medium" />
                     </div>
                   </div>
 
