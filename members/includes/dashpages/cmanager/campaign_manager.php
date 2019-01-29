@@ -42,14 +42,14 @@
 
         <div id="exTab2" class="container">
           <ul class="nav nav-tabs">
-            <li class="active">
-              <a  href="#1" data-toggle="tab">Campaign</a>
+            <li class="active nav-item">
+              <a class="nav-link active" href="#1" data-toggle="tab">Campaign</a>
             </li>
-        		<li>
-              <a href="#2" data-toggle="tab">Ad Group</a>
+        		<li class="nav-item">
+              <a class="nav-link" href="#2" data-toggle="tab">Ad Group</a>
         		</li>
-        		<li>
-              <a href="#3" data-toggle="tab">Keyword</a>
+        		<li class="nav-item">
+              <a class="nav-link" href="#3" data-toggle="tab">Keyword</a>
         		</li>
         	</ul>
           <div class="tab-content ">
