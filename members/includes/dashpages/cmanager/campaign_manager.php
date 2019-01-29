@@ -40,7 +40,7 @@
       </div>
       <div class="modal-body">
 
-        <div id="exTab2" class="container">
+        <div id="campaign-modal-1" class="container">
           <ul class="nav nav-tabs">
             <li class="active nav-item">
               <a class="nav-link active" href="#1" data-toggle="tab">Campaign</a>
@@ -53,7 +53,7 @@
         		</li>
         	</ul>
           <div class="tab-content ">
-            <div class="tab-pane active" id="1">
+            <div class="tab-pane active" id="campaign-1">
 
               <br>
               <h3>Campaign</h3>
@@ -90,7 +90,7 @@
               </form>
 
         		</div>
-        		<div class="tab-pane" id="2">
+        		<div class="tab-pane" id="ad-group-1">
 
               <br>
               <h3>Ad Group</h3>
@@ -115,7 +115,7 @@
               </form>
 
         		</div>
-            <div class="tab-pane" id="3">
+            <div class="tab-pane" id="keyword-1">
 
               <br>
               <h3>Keyword</h3>
@@ -159,51 +159,80 @@
         </button>
       </div>
       <div class="modal-body">
-        <br>
-        <h3>Campaign</h3>
-        <form id="currentCampaign">
-          <div class="form-group">
-            <label for="campaign-name" class="col-form-label">Current Campaign:</label>
-            <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
-          </div>
-        </form>
-        <br>
-        <h3>Ad Group</h3>
-        <form>
-          <div class="form-group">
-            <label for="ad-group-name" class="col-form-label">Ad Group Name:</label>
-            <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Default Bid:</label>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-              </div>
-              <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+
+        <div id="adgroups-modal-1" class="container">
+          <ul class="nav nav-tabs">
+            <li class="active nav-item">
+              <a class="nav-link active" href="#1" data-toggle="tab">Campaign</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#2" data-toggle="tab">Ad Group</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#3" data-toggle="tab">Keyword</a>
+            </li>
+          </ul>
+          <div class="tab-content ">
+            <div class="tab-pane active" id="1">
+
+              <br>
+              <h3>Campaign</h3>
+              <form id="currentCampaign">
+                <div class="form-group">
+                  <label for="campaign-name" class="col-form-label">Current Campaign:</label>
+                  <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
+                </div>
+              </form>
+
+            </div>
+            <div class="tab-pane" id="2">
+
+              <br>
+              <h3>Ad Group</h3>
+              <form>
+                <div class="form-group">
+                  <label for="ad-group-name" class="col-form-label">Ad Group Name:</label>
+                  <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Default Bid:</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">ASIN:</label>
+                  <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
+                </div>
+              </form>
+
+            </div>
+            <div class="tab-pane" id="3">
+
+              <br>
+          		<h3>Keyword</h3>
+          		<form>
+          		  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Category:</label>
+                      <select class="form-control" id="keyword-category">
+                        <option value="broad">Broad</option>
+                        <option value="phrase">Phrase</option>
+                        <option value="exact">Exact</option>
+                      </select>
+                    </div>
+          		  <div class="form-group">
+                      <label for="message-text" class="col-form-label">Keywords:</label>
+                      <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
+                    </div>
+          		</form>
+
             </div>
           </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">ASIN:</label>
-            <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
-          </div>
-        </form>
-		<br>
-		<h3>Keyword</h3>
-		<form>
-		  <div class="form-group">
-          <label for="exampleFormControlSelect1">Category:</label>
-            <select class="form-control" id="keyword-category">
-              <option value="broad">Broad</option>
-              <option value="phrase">Phrase</option>
-              <option value="exact">Exact</option>
-            </select>
-          </div>
-		  <div class="form-group">
-            <label for="message-text" class="col-form-label">Keywords:</label>
-            <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
-          </div>
-		</form>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
