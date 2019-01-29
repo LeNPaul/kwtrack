@@ -69,7 +69,8 @@ ALTER TABLE campaign_neg_kw
   ADD COLUMN user_id INT(11) NOT NULL,
   ADD FOREIGN KEY fk_user_id(user_id) REFERENCES users(user_id);
 
--- Modify DB to accomodate bid adjustments
+-- Modify DB to accommodate bid adjustments
 
 ALTER TABLE `users` CHANGE `bat` `bat` DECIMAL(3, 2) NOT NULL DEFAULT '0.05';
-ALTER TABLE `campaigns` ADD `target_acos` DECIMAL(4, 2) UNSIGNED NOT NULL AFTER `schedule`;
+ALTER TABLE `campaigns` ADD `target_acos` DECIMAL(4, 2) UNSIGNED NULL AFTER `schedule`;
+ALTER TABLE `users` ADD `target_acos` DECIMAL(4, 2) UNSIGNED NOT NULL DEFAULT 0.15;

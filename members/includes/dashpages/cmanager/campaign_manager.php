@@ -33,12 +33,12 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create a Campaign</h5>
+        <h4 class="modal-title" id="exampleModalLabel">Create a Campaign</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <!--<div class="modal-body">
         <br>
         <h3>Campaign</h3>
         <form id="addCampaign">
@@ -109,7 +109,86 @@
             <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
           </div>
 		</form>
+      </div>-->
+      
+      <div class="modal-body">
+        <div class="wizard">
+          <div class="wizard-inner">
+            <div class="connecting-line"></div>
+            <ul class="nav nav-tabs" role="tablist">
+        
+              <li role="presentation" class="active">
+          
+                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-folder-open"></i>
+                            </span>
+          
+                </a>
+        
+              </li>
+        
+              <li role="presentation" class="disabled">
+                <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </span>
+                </a>
+              </li>
+              <li role="presentation" class="disabled">
+                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-picture"></i>
+                            </span>
+                </a>
+              </li>
+        
+              <li role="presentation" class="disabled">
+                <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+    
+          <form role="form">
+            <div class="tab-content">
+              <div class="tab-pane active" role="tabpanel" id="step1">
+                <h3>Step 1</h3>
+                <p>This is step 1</p>
+                <ul class="list-inline pull-right">
+                  <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                </ul>
+              </div>
+              <div class="tab-pane" role="tabpanel" id="step2">
+                <h3>Step 2</h3>
+                <p>This is step 2</p>
+                <ul class="list-inline pull-right">
+                  <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                  <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                </ul>
+              </div>
+              <div class="tab-pane" role="tabpanel" id="step3">
+                <h3>Step 3</h3>
+                <p>This is step 3</p>
+                <ul class="list-inline pull-right">
+                  <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                  <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+                  <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                </ul>
+              </div>
+              <div class="tab-pane" role="tabpanel" id="complete">
+                <h3>Complete</h3>
+                <p>You have successfully completed all steps.</p>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </form>
+        </div>
       </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
@@ -874,21 +953,20 @@ $(document).ready( function () {
       }
     }; //campaignOptions
 
-    //clearTable(0);
+    clearTable(0);
     dt = $('#campaign_manager').DataTable(campaignOptions);
     dt.columns.adjust();
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
-	$(".btnCampaign").css("display", "inline");
-	$(".btnAdgroup").css("display", "none");
-	$(".btnKeyword").css("display", "none");
-	$(".btnNegKeyword").css("display", "none");
+    $(".btnCampaign").css("display", "inline");
+    $(".btnAdgroup").css("display", "none");
+    $(".btnKeyword").css("display", "none");
+    $(".btnNegKeyword").css("display", "none");
 
     // Hide negative keywords tab
     $("#neg_keywords_tab").attr("style", "visibility: hidden");
 
-    $('input[type="radio"]').keydown(function(e)
-    {
+    $('input[type="radio"]').keydown(function(e) {
       var arrowKeys = [37, 38, 39, 40];
       if (arrowKeys.indexOf(e.which) !== -1)
       {
@@ -1274,17 +1352,18 @@ $(document).ready( function () {
     dt = $('#campaign_manager').DataTable(adGroupOptions);
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
-	if (currentCampaign.type == "Manual") {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "inline");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
-	} else {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
-    }
+    
+    if (currentCampaign.type == "Manual") {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "inline");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
+    } else {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
+      }
     dt.columns.adjust();
 
     // Add the campaign to the breadcrumbs

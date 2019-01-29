@@ -159,7 +159,7 @@ class ElementAdder
 
           $this->direct_parent["campaign_id"]   = floatval($result[0]["campaignId"]);
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
           echo $e;
           return;
         }
@@ -190,7 +190,7 @@ class ElementAdder
             $this->direct_parent["campaign_id"]  = $result_msg["campaignId"];
             $this->direct_parent["adgroup_id"]   = $result_msg["adGroupId"];
 
-          } catch (Exception $e) {
+          } catch (\Exception $e) {
             echo $e;
             return;
           }
@@ -217,7 +217,7 @@ class ElementAdder
         if ($result_msg != "SUCCESS") {
           throw new Exception("ER-CAD01: There was an error creating an ad for your ASIN. Please contact support@ppcology.io for help.");
         }
-      } catch (Exception $e) {
+      } catch (\Exception $e) {
         echo $e;
         return;
       }
@@ -268,7 +268,7 @@ class ElementAdder
           }
         }
 
-      } catch (Exception $e) {
+      } catch (\Exception $e) {
         echo $e;
         return;
       }
@@ -311,7 +311,7 @@ class ElementAdder
           }
         }
 
-      } catch (Exception $e) {
+      } catch (\Exception $e) {
         echo $e;
         return;
       }
