@@ -43,13 +43,13 @@
         <div id="campaign-modal-1" class="container">
           <ul class="nav nav-tabs">
             <li class="active nav-item">
-              <a class="nav-link active" href="#1" data-toggle="tab">Campaign</a>
+              <a class="nav-link active" href="#campaign-1" data-toggle="tab">Campaign</a>
             </li>
         		<li class="nav-item">
-              <a class="nav-link" href="#2" data-toggle="tab">Ad Group</a>
+              <a class="nav-link" href="#ad-group-1" data-toggle="tab">Ad Group</a>
         		</li>
         		<li class="nav-item">
-              <a class="nav-link" href="#3" data-toggle="tab">Keyword</a>
+              <a class="nav-link" href="#keyword-1" data-toggle="tab">Keyword</a>
         		</li>
         	</ul>
           <div class="tab-content ">
@@ -254,38 +254,67 @@
         </button>
       </div>
       <div class="modal-body">
-        <br>
-        <h3>Campaign</h3>
-        <form id="currentCampaign">
-          <div class="form-group">
-            <label for="campaign-name" class="col-form-label">Current Campaign:</label>
-            <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
+
+        <div id="campaign-modal-1" class="container">
+          <ul class="nav nav-tabs">
+            <li class="active nav-item">
+              <a class="nav-link active" href="#campaign-3" data-toggle="tab">Campaign</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#ad-group-3" data-toggle="tab">Ad Group</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#keyword-3" data-toggle="tab">Keyword</a>
+            </li>
+          </ul>
+          <div class="tab-content ">
+            <div class="tab-pane active" id="campaign-3">
+
+              <br>
+              <h3>Campaign</h3>
+              <form id="currentCampaign">
+                <div class="form-group">
+                  <label for="campaign-name" class="col-form-label">Current Campaign:</label>
+                  <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
+                </div>
+              </form>
+
+            </div>
+            <div class="tab-pane" id="ad-group-3">
+
+              <br>
+              <h3>Ad Group</h3>
+              <form id="currentAdgroup">
+                <div class="form-group">
+                  <label for="ad-group-name" class="col-form-label">Current Ad Group:</label>
+                  <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" disabled>
+                </div>
+              </form>
+
+            </div>
+            <div class="tab-pane" id="keyword-3">
+
+              <br>
+          		<h3>Keyword</h3>
+          		<form>
+          		  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Category:</label>
+                      <select class="form-control" id="keyword-category">
+                        <option value="broad">Broad</option>
+                        <option value="phrase">Phrase</option>
+                        <option value="exact">Exact</option>
+                      </select>
+                    </div>
+          		  <div class="form-group">
+                      <label for="message-text" class="col-form-label">Keywords:</label>
+                      <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
+                    </div>
+          		</form>
+
+            </div>
           </div>
-        </form>
-        <br>
-        <h3>Ad Group</h3>
-        <form id="currentAdgroup">
-          <div class="form-group">
-            <label for="ad-group-name" class="col-form-label">Current Ad Group:</label>
-            <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" disabled>
-          </div>
-        </form>
-		<br>
-		<h3>Keyword</h3>
-		<form>
-		  <div class="form-group">
-          <label for="exampleFormControlSelect1">Category:</label>
-            <select class="form-control" id="keyword-category">
-              <option value="broad">Broad</option>
-              <option value="phrase">Phrase</option>
-              <option value="exact">Exact</option>
-            </select>
-          </div>
-		  <div class="form-group">
-            <label for="message-text" class="col-form-label">Keywords:</label>
-            <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
-          </div>
-		</form>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
