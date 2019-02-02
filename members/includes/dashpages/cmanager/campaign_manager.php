@@ -45,13 +45,13 @@
             <li class="active nav-item">
               <a class="nav-link active" href="#campaign-1" data-toggle="tab">Campaign</a>
             </li>
-        		<li class="nav-item">
+                <li class="nav-item">
               <a class="nav-link" href="#ad-group-1" data-toggle="tab">Ad Group</a>
-        		</li>
-        		<li class="nav-item">
+                </li>
+                <li class="nav-item">
               <a class="nav-link" href="#keyword-1" data-toggle="tab">Keyword</a>
-        		</li>
-        	</ul>
+                </li>
+            </ul>
           <div class="tab-content ">
             <div class="tab-pane active" id="campaign-1">
 
@@ -89,8 +89,8 @@
                 </div>
               </form>
 
-        		</div>
-        		<div class="tab-pane" id="ad-group-1">
+                </div>
+                <div class="tab-pane" id="ad-group-1">
 
               <br>
               <h3>Ad Group</h3>
@@ -114,7 +114,7 @@
                 </div>
               </form>
 
-        		</div>
+                </div>
             <div class="tab-pane" id="keyword-1">
 
               <br>
@@ -134,8 +134,8 @@
                     </div>
               </form>
 
-        		</div>
-        	</div>
+                </div>
+            </div>
         </div>
 
       </div>
@@ -234,9 +234,9 @@
             <div class="tab-pane" id="3">
 
               <br>
-          		<h3>Keyword</h3>
-          		<form>
-          		  <div class="form-group">
+                <h3>Keyword</h3>
+                <form>
+                  <div class="form-group">
                     <label for="exampleFormControlSelect1">Category:</label>
                       <select class="form-control" id="keyword-category">
                         <option value="broad">Broad</option>
@@ -244,11 +244,11 @@
                         <option value="exact">Exact</option>
                       </select>
                     </div>
-          		  <div class="form-group">
+                  <div class="form-group">
                       <label for="message-text" class="col-form-label">Keywords:</label>
                       <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
                     </div>
-          		</form>
+                </form>
 
             </div>
           </div>
@@ -316,9 +316,9 @@
             <div class="tab-pane" id="keyword-3">
 
               <br>
-          		<h3>Keyword</h3>
-          		<form>
-          		  <div class="form-group">
+                <h3>Keyword</h3>
+                <form>
+                  <div class="form-group">
                     <label for="exampleFormControlSelect1">Category:</label>
                       <select class="form-control" id="keyword-category">
                         <option value="broad">Broad</option>
@@ -326,11 +326,11 @@
                         <option value="exact">Exact</option>
                       </select>
                     </div>
-          		  <div class="form-group">
+                  <div class="form-group">
                       <label for="message-text" class="col-form-label">Keywords:</label>
                       <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
                     </div>
-          		</form>
+                </form>
 
             </div>
           </div>
@@ -987,10 +987,10 @@ $(document).ready( function () {
     dt.columns.adjust();
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
-	$(".btnCampaign").css("display", "inline");
-	$(".btnAdgroup").css("display", "none");
-	$(".btnKeyword").css("display", "none");
-	$(".btnNegKeyword").css("display", "none");
+    $(".btnCampaign").css("display", "inline");
+    $(".btnAdgroup").css("display", "none");
+    $(".btnKeyword").css("display", "none");
+    $(".btnNegKeyword").css("display", "none");
 
     // Hide negative keywords tab
     $("#neg_keywords_tab").attr("style", "visibility: hidden");
@@ -1057,7 +1057,7 @@ $(document).ready( function () {
                 'pauseAdgroup' : 'Pause Adgroup(s)',
                 'enableAdgroup' : 'Enable Adgroups(s)',
                 'archiveAdgroup' : 'Archive Adgroups(s)',
-				'changeDefaultBid' : 'Change Default Bid'
+                'changeDefaultBid' : 'Change Default Bid'
               },
               inputPlaceholder: 'Select a bulk action',
               confirmButtonClass: "btn-success",
@@ -1382,16 +1382,16 @@ $(document).ready( function () {
     dt = $('#campaign_manager').DataTable(adGroupOptions);
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
-	if (currentCampaign.type == "Manual") {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "inline");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
-	} else {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
+    if (currentCampaign.type == "Manual") {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "inline");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
+    } else {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
     }
     dt.columns.adjust();
 
@@ -1460,16 +1460,16 @@ $(document).ready( function () {
 
     clearTable(1);
     dt_neg_kw = $('#neg_kw_table').DataTable(campaignNegKeywordTableOptions);
-	if (currentCampaign.type == "Manual") {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "inline");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
-	} else {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
+    if (currentCampaign.type == "Manual") {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "inline");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
+    } else {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
     }
   };
   /* End: initCampaignNegKeywordTable */
@@ -1834,16 +1834,16 @@ $(document).ready( function () {
     dt = $('#campaign_manager').DataTable(kwOptions);
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
-	if (currentCampaign.type == "Manual") {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "inline");
-	  $(".btnNegKeyword").css("display", "inline");
-	} else {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
+    if (currentCampaign.type == "Manual") {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "inline");
+      $(".btnNegKeyword").css("display", "inline");
+    } else {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
     }
     dt.columns.adjust();
 
@@ -1918,16 +1918,16 @@ $(document).ready( function () {
     clearTable(1);
     dt_neg_kw = $('#neg_kw_table').DataTable(adgroupNegKeywordTableOptions);
 	console.log(currentCampaign.type);
-	if (currentCampaign.type == "Manual") {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "inline");
-	  $(".btnNegKeyword").css("display", "inline");
-	} else {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
+    if (currentCampaign.type == "Manual") {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "inline");
+      $(".btnNegKeyword").css("display", "inline");
+    } else {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
     }
   };
   /* End: initAdGroupNegKeywordTable */
@@ -2196,11 +2196,11 @@ $(document).ready( function () {
   $("#campaign_manager, .breadcrumb").on("click", ".c_link", function() {
     currentCampaign.name = $(this).html();
     currentCampaign.id   = $(this).attr('id');
-	if ($(this).hasClass("Manual")) {
-	  currentCampaign.type = "Manual";
-	} else {
-	  currentCampaign.type = "Automatic";
-	}
+    if ($(this).hasClass("Manual")) {
+      currentCampaign.type = "Manual";
+    } else {
+      currentCampaign.type = "Automatic";
+    }
 
     // Change tab to show "Ad Groups"
     $("#tab1_label").html("Ad Groups");
@@ -2215,7 +2215,7 @@ $(document).ready( function () {
   $("#campaign_manager").on("click", ".ag_link",  function() {
     currentAdGroup.name = $(this).html();
     currentAdGroup.id   = $(this).attr('id');
-	currentAdGroup.type = currentCampaign.type;
+    currentAdGroup.type = currentCampaign.type;
 
     // Change tab to show "Keywords"
     $("#tab1_label").html("Keywords");

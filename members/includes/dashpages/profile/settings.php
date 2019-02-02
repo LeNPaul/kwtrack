@@ -20,9 +20,9 @@
                   <li class="nav-item">
                     <a class="nav-link active show" href="#info" role="tab" data-toggle="tab" aria-selected="true">Profile & Info</a>
                   </li>
-				  <li class="nav-item">
-				    <a class="nav-link" href="#general" role="tab" data-toggle="tab" aria-selected="false">General</a>
-				  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#general" role="tab" data-toggle="tab" aria-selected="false">General</a>
+                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#description" role="tab" data-toggle="tab" aria-selected="false">Automation Settings</a>
                   </li>
@@ -48,29 +48,39 @@
                 <p>Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD display.</p>
                 <p>It’s one continuous form where hardware and software function in perfect unison, creating a new generation of phone that’s better by any measure.</p>
               </div>
-			  
-			  <!-- used for general user settings a.k.a password change, view terms of service, billing cycles, etc-->
-			  <div class="tab-pane" id="general">
-			    <div class="settings col-12">
-				  <h5><b>User Settings</b></h5>
-				  <hr />
-				  
-				  <div class="form-group">
-				    <div class="row">
-					  <label class="user-settings col-sm-5">Current Marketplace Name: </label>
-					  <label class="user-settings col-sm-4">Placeholder Name </label>
-					  <button type="button" class="change-marketplace btn btn-primary col-xs-2">Change</button>
-					</div>
-					
-				    <div class="row">
-					  <label class="user-settings col-sm-4">Current Billing Plan:</label>
-					  <label class="user-settings col-sm-4">Placeholder Plan</label>
-					  <button type="button" class="change-billing btn btn-primary col-xs-2">Change</button>
-					  <button type="button" class="cancel-billing btn btn-danger col-xs-2">Cancel</button>
-					</div>
-				  </div>
-				</div>
-			  </div>
+              
+              <!-- used for general user settings a.k.a password change, view terms of service, billing cycles, etc-->
+              <div class="tab-pane" id="general">
+                <div class="settings col-12">
+                  <h5><b>User Settings</b></h5>
+                  <hr />
+
+                  <div class="form-group">
+                    <div class="row">
+                      <label class="user-settings col-sm-5">Current Marketplace Name: </label>
+                      <label class="user-settings col-sm-4">Placeholder Name </label>
+                      <button type="button" class="change-marketplace btn btn-primary col-xs-2">Change</button>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <label class="user-settings col-sm-5">Current Billing Plan:</label>
+                      <label class="user-settings col-sm-4">Placeholder Plan</label>
+                      <button type="button" class="change-billing btn btn-primary col-xs-2">Change</button>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <div class="row">
+                      <label class="user-settings col-sm-5">Current Email Address:</label>
+                      <label class="user-settings col-sm-4">Placeholder email</label>
+                      <button type="button" class="change-email btn btn-primary col-xs-2">Change</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
 
               <div class="tab-pane" id="description">
                 <div class="settings col-12">
@@ -130,9 +140,7 @@
                       <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
                     </div>
                   </div>
-
-                    
-
+  
                 </div>
               </div>
 
@@ -154,8 +162,22 @@
           </div>
 
         </div>
+      </div> <!-- card body -->
+    </div> <!-- card -->
+    <center><a href="#" data-toggle="modal" data-target="#tosModal">View Terms of Service</a></center>
+
+    <div class="modal fade" id="tosModal" tab-index="-1" role="dialog" aria-labelledby="tosLabel" aria-hidden="hidden">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tosLabel">Terms Of Service</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </div> <!-- tos modal -->
   </div>
 </div>
 
@@ -238,6 +260,8 @@
         }
       });
     });
+
+
 
   });
 
