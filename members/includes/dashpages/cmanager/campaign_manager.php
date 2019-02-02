@@ -54,13 +54,18 @@
         	</ul>
           <div class="tab-content ">
             <div class="tab-pane active" id="campaign-1">
-
               <br>
               <h3>Campaign</h3>
-              <form id="addCampaign">
+              <form id="addCampaign" class="needs-validation" novalidate>
                 <div class="form-group">
                   <label for="campaign-name" class="col-form-label">Campaign Name:</label>
-                  <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name">
+                  <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name" required>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div class="invalid-feedback">
+                    Please choose a campaign name.
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Daily Budget:</label>
@@ -68,7 +73,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
                     </div>
-                    <input type="text" class="form-control" id="daily-budget" placeholder="1.00">
+                    <input type="text" class="form-control" id="daily-budget" placeholder="1.00" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -85,26 +90,12 @@
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Start Date:</label>
-                  <input type="date" name="bday" class="form-control" id="start-date">
+                  <input type="date" name="start-date" class="form-control" id="start-date" required>
                 </div>
+                <button class="btn btn-primary" type="submit">Submit form</button>
               </form>
-
-              <form class="needs-validation" novalidate>
-                <div class="form-row">
-                  <div class="col-md-4 mb-3">
-                    <label for="validationCustom01">First name</label>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" required>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
-                  </div>
-                </div>
-                <button class="btn btn-primary" type="submit" href="#keyword-1">Submit form</button>
-              </form>
-
         		</div>
         		<div class="tab-pane" id="ad-group-1">
-
               <br>
               <h3>Ad Group</h3>
               <form>
@@ -126,10 +117,8 @@
                   <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
                 </div>
               </form>
-
         		</div>
             <div class="tab-pane" id="keyword-1">
-
               <br>
               <h3>Keyword</h3>
               <form>
@@ -146,11 +135,9 @@
                       <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
                     </div>
               </form>
-
         		</div>
         	</div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
