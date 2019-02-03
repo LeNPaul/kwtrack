@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+
 <h2 class="text-center">Campaign Manager</h2>
 
 <div class="row">
@@ -39,9 +41,8 @@
         </button>
       </div>
       <div class="modal-body">
-
-        <div id="campaign-modal-1" class="container">
-          <ul class="nav nav-tabs">
+        <div class="container">
+          <ul id="campaign-modal-1" class="nav nav-tabs">
             <li class="active nav-item">
               <a class="nav-link active" href="#campaign-1" data-toggle="tab">Campaign</a>
             </li>
@@ -54,13 +55,15 @@
             </ul>
           <div class="tab-content ">
             <div class="tab-pane active" id="campaign-1">
-
               <br>
               <h3>Campaign</h3>
-              <form id="addCampaign">
+              <form id="addCampaign" class="needs-validation" novalidate>
                 <div class="form-group">
                   <label for="campaign-name" class="col-form-label">Campaign Name:</label>
-                  <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name">
+                  <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name" required>
+                  <div class="invalid-feedback">
+                    Please choose a campaign name.
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Daily Budget:</label>
@@ -68,7 +71,10 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
                     </div>
-                    <input type="text" class="form-control" id="daily-budget" placeholder="1.00">
+                    <input type="text" class="form-control" id="daily-budget" placeholder="1.00" required>
+                    <div class="invalid-feedback">
+                      Please enter a daily budget.
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -85,19 +91,21 @@
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Start Date:</label>
-                  <input type="date" name="bday" class="form-control" id="start-date">
+                  <input type="date" name="start-date" class="form-control" id="start-date" required>
+                  <div class="invalid-feedback">
+                    Please set a start date.
+                  </div>
                 </div>
+                <button class="btn btn-primary" id="campaign-next">Next</button>
               </form>
-
-                </div>
-                <div class="tab-pane" id="ad-group-1">
-
+        		</div>
+        		<div class="tab-pane" id="ad-group-1">
               <br>
               <h3>Ad Group</h3>
-              <form>
+              <form class="needs-validation" novalidate>
                 <div class="form-group">
                   <label for="ad-group-name" class="col-form-label">Ad Group Name:</label>
-                  <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name">
+                  <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" required>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Default Bid:</label>
@@ -105,21 +113,20 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
                     </div>
-                    <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+                    <input type="text" class="form-control" id="default-bid" placeholder="1.00" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">ASIN:</label>
-                  <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
+                  <textarea class="form-control" rows="3" id="asin" placeholder="ASIN" required></textarea>
                 </div>
+                <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
-
-                </div>
+        		</div>
             <div class="tab-pane" id="keyword-1">
-
               <br>
               <h3>Keyword</h3>
-              <form>
+              <form class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Category:</label>
                       <select class="form-control" id="keyword-category">
@@ -129,15 +136,13 @@
                       </select>
                     </div>
                 <div class="form-group">
-                      <label for="message-text" class="col-form-label">Keywords:</label>
-                      <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
-                    </div>
-              </form>
-
+                  <label for="message-text" class="col-form-label">Keywords:</label>
+                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
                 </div>
-            </div>
+              </form>
+        		</div>
+        	</div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -148,7 +153,8 @@
 </div>
 <!-- End Modal -->
 
-<script>
+<script type="text/javascript">
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
   'use strict';
@@ -157,16 +163,25 @@
     var forms = document.getElementsByClassName('needs-validation');
     // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function(form) {
+
       form.addEventListener('submit', function(event) {
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
         }
         form.classList.add('was-validated');
+        if (form.checkValidity() === true) {
+          event.preventDefault();
+          $('#campaign-next').click(function() {
+            $('a[href="#ad-group-1"]').tab('show');
+          });
+        }
       }, false);
+
     });
   }, false);
 })();
+
 </script>
 
 <!-- Adgroups Modal -->
