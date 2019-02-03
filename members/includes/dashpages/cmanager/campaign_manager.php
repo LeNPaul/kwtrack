@@ -61,9 +61,6 @@
                 <div class="form-group">
                   <label for="campaign-name" class="col-form-label">Campaign Name:</label>
                   <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
                   <div class="invalid-feedback">
                     Please choose a campaign name.
                   </div>
@@ -75,6 +72,9 @@
                       <span class="input-group-text">$</span>
                     </div>
                     <input type="text" class="form-control" id="daily-budget" placeholder="1.00" required>
+                    <div class="invalid-feedback">
+                      Please enter a daily budget.
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -92,6 +92,9 @@
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Start Date:</label>
                   <input type="date" name="start-date" class="form-control" id="start-date" required>
+                  <div class="invalid-feedback">
+                    Please set a start date.
+                  </div>
                 </div>
                 <button class="btn btn-primary" id="campaign-next">Next</button>
               </form>
@@ -161,9 +164,6 @@
     // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function(form) {
 
-      console.log(form);
-      console.log(forms);
-
       form.addEventListener('submit', function(event) {
         if (form.checkValidity() === false) {
           event.preventDefault();
@@ -172,6 +172,9 @@
         form.classList.add('was-validated');
         if (form.checkValidity() === true) {
           event.preventDefault();
+          $('#campaign-next').click(function() {
+            $('a[href="#ad-group-1"]').tab('show');
+          });
         }
       }, false);
 
