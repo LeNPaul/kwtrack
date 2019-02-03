@@ -74,3 +74,7 @@ ALTER TABLE campaign_neg_kw
 ALTER TABLE `users` CHANGE `bat` `bat` DECIMAL(3, 2) NOT NULL DEFAULT '0.05';
 ALTER TABLE `campaigns` ADD `target_acos` DECIMAL(4, 2) UNSIGNED NULL AFTER `schedule`;
 ALTER TABLE `users` ADD `target_acos` DECIMAL(4, 2) UNSIGNED NOT NULL DEFAULT 0.15;
+
+-- Add the bid and suggested bid into the keywords table.
+ALTER TABLE ppc_keywords add `bid` decimal(19,4) null;
+ALTER TABLE ppc_keywords add `suggested_bid` decimal(19,4) null;

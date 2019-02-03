@@ -107,6 +107,10 @@ class Client
           $status = 'DONE';
           $report = $result2;
         }
+        // Give amazon 5 seconds before checking on the status
+        if ($status == 'IN_PROGRESS') {
+          sleep(5);
+        }
       } while ($status == 'IN_PROGRESS');
       $this->reportId = null;
       return $report;
@@ -122,6 +126,10 @@ class Client
         } else {
           $status = 'DONE';
           $report = $result2;
+        }
+        // Give amazon 5 seconds before checking on the status
+        if ($status == 'IN_PROGRESS'){
+          sleep(5);
         }
       } while ($status == 'IN_PROGRESS');
       $this->snapshotId = null;
@@ -145,13 +153,13 @@ class Client
       $this->reportId = $result['reportId'];
     }
 
-    public function completeRequestSnapshot($type)
+    public function completeRequestSnapshot($type, $adType = 'sp')
     {
       $kwSnapshot = $this->requestSnapshot(
         $type,
         array(
-          "stateFilter"  => "enabled,paused,archived",
-          "campaignType" => "sponsoredProducts"));
+          "stateFilter"  => "enabled,paused,archived"),
+        $adType);
       $snapshotId = json_decode($kwSnapshot['response'], true, 512, JSON_BIGINT_AS_STRING);
       $this->snapshotId = $snapshotId['snapshotId'];
     }
@@ -356,39 +364,39 @@ class Client
         return $this->_operation("campaignNegativeKeywords/extended", $data);
     }
 
-    public function getProductAd($productAdId)
+    public function getProductAd($productAdId, $type = 'sp')
     {
-        return $this->_operation("productAds/{$productAdId}");
+        return $this->_operation("{$type}/productAds/{$productAdId}");
     }
 
-    public function getProductAdEx($productAdId)
+    public function getProductAdEx($productAdId, $type = 'sp')
     {
-        return $this->_operation("productAds/extended/{$productAdId}");
+        return $this->_operation("{$type}/productAds/extended/{$productAdId}");
     }
 
-    public function createProductAds($data)
+    public function createProductAds($data, $type = 'sp')
     {
-        return $this->_operation("productAds", $data, "POST");
+        return $this->_operation("{$type}/productAds", $data, "POST");
     }
 
-    public function updateProductAds($data)
+    public function updateProductAds($data, $type = 'sp')
     {
-        return $this->_operation("productAds", $data, "PUT");
+        return $this->_operation("{$type}/productAds", $data, "PUT");
     }
 
-    public function archiveProductAd($productAdId)
+    public function archiveProductAd($productAdId, $type = 'sp')
     {
-        return $this->_operation("productAds/{$productAdId}", null, "DELETE");
+        return $this->_operation("{$type}/productAds/{$productAdId}", null, "DELETE");
     }
 
-    public function listProductAds($data = null)
+    public function listProductAds($data = null, $type = 'sp')
     {
-        return $this->_operation("productAds", $data);
+        return $this->_operation("{$type}/productAds", $data);
     }
 
-    public function listProductAdsEx($data = null)
+    public function listProductAdsEx($data = null, $type = 'sp')
     {
-        return $this->_operation("productAds/extended", $data);
+        return $this->_operation("{$type}/productAds/extended", $data);
     }
 
     public function getAdGroupBidRecommendations($adGroupId)
@@ -435,9 +443,9 @@ class Client
         return $this->_operation("asins/suggested/keywords", $data, "POST");
     }
 
-    public function requestSnapshot($recordType, $data = null)
+    public function requestSnapshot($recordType, $data = null, $adType = 'sp')
     {
-        return $this->_operation("{$recordType}/snapshot", $data, "POST");
+        return $this->_operation("{$adType}/{$recordType}/snapshot", $data, "POST");
     }
 
     public function getSnapshot($snapshotId)

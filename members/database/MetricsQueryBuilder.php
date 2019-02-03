@@ -126,6 +126,7 @@ class MetricsQueryBuilder {
         ifnull(acos, 0) as acos,
         ifnull(cvr, 0) as roas,
         
+        
         ifnull(concat('$', round(bid, 2)), '-') as bid_formatted,
         ifnull(nullif(round(impressions, 0), 0), '-') as impressions_formatted,
         ifnull(nullif(round(clicks, 0), 0), '-') as clicks_formatted,
@@ -134,6 +135,9 @@ class MetricsQueryBuilder {
         ifnull(nullif(concat('$', round(sales, 2)), '$0.00'), '-') as sales_formatted,
         ifnull(nullif(concat(round(cvr * 100, 2), '%'), 0), '-') as cvr_formatted,
         ifnull(nullif(concat(round(ctr * 100, 2), '%'), 0), '-') as ctr_formatted,
+        
+        concat('$', round(ifnull(ad_spend / units_sold, 0), 2)) as cost_per_unit_sold,
+        round(ifnull(clicks / units_sold, 0), 2) as clicks_per_unit_sold,
 
         ifnull(concat('$', round(avg_cpc, 2)), '-') as avg_cpc_formatted,
         ifnull(concat(round(acos * 100, 2), '%'), '-') as acos_formatted,

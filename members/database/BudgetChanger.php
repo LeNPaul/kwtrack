@@ -123,12 +123,11 @@ class BudgetChanger {
       if($result == "SUCCESS") {
         $this->flag = true;
 
-        $sql = "UPDATE ppc_keyword_metrics SET bid=:value WHERE amz_kw_id=:id AND date=:date";
+        $sql = "UPDATE ppc_keywords SET bid=:value WHERE amz_kw_id=:id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(
           ":value" => $this->changeValue,
-          ":id" => $this->elementId,
-          ":date" => $this->today
+          ":id" => $this->elementId
         ));
         return 1;
       } else {

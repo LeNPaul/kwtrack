@@ -6,8 +6,8 @@ use PDO;
 use PDOException;
 
 // TODO: Remove testing only
-// $importer = new UserDataImporter();
-// $importer->import(2, 58);
+$importer = new UserDataImporter();
+$importer->import(2, 1);
 
 class UserDataImporter {
 
@@ -181,7 +181,7 @@ class UserDataImporter {
     // Get all existing keywords from the DB
     $db_keywords = $pdo
       ->query("
-        select ppc_keywords.amz_kw_id, ppc_keywords.status from ppc_keywords
+        select ppc_keywords.amz_kw_id, ppc_keywords.status, ppc_keywords.bid from ppc_keywords
         inner join ad_groups on ad_groups.amz_adgroup_id = ppc_keywords.amz_adgroup_id
         inner join campaigns on campaigns.amz_campaign_id = ad_groups.amz_campaign_id
         WHERE campaigns.user_id = {$this->user_id}
@@ -191,13 +191,13 @@ class UserDataImporter {
 
     $insert_stmt = $pdo->prepare("
       INSERT INTO ppc_keywords
-      (amz_kw_id, amz_adgroup_id, status, keyword_text, match_type)
+      (amz_kw_id, amz_adgroup_id, status, keyword_text, match_type, bid)
       VALUES
-      (:amz_kw_id, :amz_adgroup_id, :status, :keyword_text, :match_type)
+      (:amz_kw_id, :amz_adgroup_id, :status, :keyword_text, :match_type, :bid)
     ");
     $update_stmt = $pdo->prepare("
       UPDATE ppc_keywords
-      SET status=:status
+      SET status=:status, bid=:bid
       WHERE amz_kw_id=:amz_kw_id");
 
     foreach ($this->amz_keywords as $amz_keyword) {
@@ -209,10 +209,13 @@ class UserDataImporter {
 
       // Did we find the keyword in the database?
       if ($db_keyword != null) {
-        if ($db_keyword['status'] != $amz_keyword['state']) {
+        // If either the status or bid differ
+        if ($db_keyword['status'] != $amz_keyword['state']
+            || $db_keyword['bid'] != $amz_keyword['bid']) {
           $update_stmt->execute(array(
             ':amz_kw_id' => $amz_keyword['keywordId'],
-            ':status' => $amz_keyword['state']
+            ':status' => $amz_keyword['state'],
+            ':bid' => $amz_keyword['bid']
           ));
         }
       } else {
@@ -221,7 +224,8 @@ class UserDataImporter {
           ':amz_adgroup_id'		=> $amz_keyword['adGroupId'],
           ':status'	          => $amz_keyword['state'],
           ':keyword_text'     => $amz_keyword['keywordText'],
-          ':match_type'       => $amz_keyword['matchType']
+          ':match_type'       => $amz_keyword['matchType'],
+          ':bid'              => $amz_keyword['bid']
         ));
       }
     }
