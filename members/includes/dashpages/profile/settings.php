@@ -175,6 +175,12 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+		  
+		  <div class="modal-body">
+		    <div class="container">
+			  <center>insert tos text here</center>
+			</div>
+		  </div>
         </div>
       </div>
     </div> <!-- tos modal -->
