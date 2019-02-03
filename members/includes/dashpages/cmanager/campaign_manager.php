@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+
 <h2 class="text-center">Campaign Manager</h2>
 
 <div class="row">
@@ -39,9 +41,8 @@
         </button>
       </div>
       <div class="modal-body">
-
-        <div id="campaign-modal-1" class="container">
-          <ul class="nav nav-tabs">
+        <div class="container">
+          <ul id="campaign-modal-1" class="nav nav-tabs">
             <li class="active nav-item">
               <a class="nav-link active" href="#campaign-1" data-toggle="tab">Campaign</a>
             </li>
@@ -92,16 +93,16 @@
                   <label for="message-text" class="col-form-label">Start Date:</label>
                   <input type="date" name="start-date" class="form-control" id="start-date" required>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit form</button>
+                <button class="btn btn-primary" id="campaign-next">Next</button>
               </form>
         		</div>
         		<div class="tab-pane" id="ad-group-1">
               <br>
               <h3>Ad Group</h3>
-              <form>
+              <form class="needs-validation" novalidate>
                 <div class="form-group">
                   <label for="ad-group-name" class="col-form-label">Ad Group Name:</label>
-                  <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name">
+                  <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" required>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Default Bid:</label>
@@ -109,19 +110,20 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
                     </div>
-                    <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+                    <input type="text" class="form-control" id="default-bid" placeholder="1.00" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">ASIN:</label>
-                  <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
+                  <textarea class="form-control" rows="3" id="asin" placeholder="ASIN" required></textarea>
                 </div>
+                <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
             <div class="tab-pane" id="keyword-1">
               <br>
               <h3>Keyword</h3>
-              <form>
+              <form class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Category:</label>
                       <select class="form-control" id="keyword-category">
@@ -131,9 +133,9 @@
                       </select>
                     </div>
                 <div class="form-group">
-                      <label for="message-text" class="col-form-label">Keywords:</label>
-                      <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
-                    </div>
+                  <label for="message-text" class="col-form-label">Keywords:</label>
+                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
+                </div>
               </form>
         		</div>
         	</div>
@@ -148,7 +150,8 @@
 </div>
 <!-- End Modal -->
 
-<script>
+<script type="text/javascript">
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
   'use strict';
@@ -157,16 +160,25 @@
     var forms = document.getElementsByClassName('needs-validation');
     // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function(form) {
+
+      console.log(form);
+      console.log(forms);
+
       form.addEventListener('submit', function(event) {
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
         }
         form.classList.add('was-validated');
+        if (form.checkValidity() === true) {
+          event.preventDefault();
+        }
       }, false);
+
     });
   }, false);
 })();
+
 </script>
 
 <!-- Adgroups Modal -->
