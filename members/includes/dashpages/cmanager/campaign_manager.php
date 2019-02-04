@@ -142,6 +142,7 @@
                   <label for="message-text" class="col-form-label">Keywords:</label>
                   <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
                 </div>
+                <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
             <div class="tab-pane" id="product-ads-1">
@@ -152,6 +153,7 @@
                   <label for="message-text" class="col-form-label">Product Ads:</label>
                   <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
                 </div>
+                <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
             </div>
         	</div>
