@@ -14,12 +14,52 @@
 		  
       <div class="modal-body">
 		<div class="container">
-		  <center>insert tos text here</center>
+		  <textarea rows="10" class="col-md-12" id="tosText" disabled>Terms of Service text goes here</textarea>
 	    </div>
 	  </div>
     </div>
   </div>
 </div> <!-- tos modal -->
+
+<div class="modal fade" id="billingModal" tab-index="-1" role="dialog" aria-labelledby="billingLabel" aria-hidden="hidden">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="billingLabel">Billing Plan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+	  </div>
+	  
+	  <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-4 card" style="height: 250px">
+            <div class="card-body text-center bg-primary">
+			  <h5 class="card-title">BILLING PLAN 1</h5>
+              <p class="card-text text-center">$XX.XX/MONTH</p>
+			</div>
+		  </div>
+		  
+		  <div class="col-lg-4 card" style="height: 250px">
+            <div class="card-body text-center bg-primary">
+			  <h5 class="card-title">BILLING PLAN 2</h5>
+              <p class="card-text text-center">$XX.XX/MONTH</p>
+			</div>
+		  </div>
+		  
+		  <div class="col-lg-4 card" style="height: 250px">
+            <div class="card-body text-center bg-primary">
+			  <h5 class="card-title">BILLING PLAN 3</h5>
+              <p class="card-text text-center">$XX.XX/MONTH</p>
+			</div>
+		  </div>
+		</div>
+		
+		<center><button type="button" class="btn btn-danger col-xs-2">Cancel Plan</button></center>
+	  </div>
+	</div>
+  </div>
+</div>
 
 
 <div class="row">
@@ -86,7 +126,7 @@
                     <div class="row">
                       <label class="user-settings col-sm-5">Current Billing Plan:</label>
                       <label class="user-settings col-sm-4">Placeholder Plan</label>
-                      <button type="button" class="change-billing btn btn-primary col-xs-2">Change</button>
+                      <button type="button" class="change-billing btn btn-primary col-xs-2" data-toggle="modal" data-target="#billingModal">Change</button>
                     </div>
                   </div>
                   
