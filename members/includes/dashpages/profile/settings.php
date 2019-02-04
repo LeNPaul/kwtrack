@@ -2,6 +2,25 @@
 
 
 ?>
+<div class="modal fade" id="tosModal" tab-index="-1" role="dialog" aria-labelledby="tosLabel" aria-hidden="hidden">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tosLabel">Terms Of Service</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+		  
+      <div class="modal-body">
+		<div class="container">
+		  <center>insert tos text here</center>
+	    </div>
+	  </div>
+    </div>
+  </div>
+</div> <!-- tos modal -->
+
 
 <div class="row">
   <h1>Settings</h1>
@@ -165,25 +184,6 @@
       </div> <!-- card body -->
     </div> <!-- card -->
     <center><a href="#" data-toggle="modal" data-target="#tosModal">View Terms of Service</a></center>
-
-    <div class="modal fade" id="tosModal" tab-index="-1" role="dialog" aria-labelledby="tosLabel" aria-hidden="hidden">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="tosLabel">Terms Of Service</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-		  
-		  <div class="modal-body">
-		    <div class="container">
-			  <center>insert tos text here</center>
-			</div>
-		  </div>
-        </div>
-      </div>
-    </div> <!-- tos modal -->
   </div>
 </div>
 
