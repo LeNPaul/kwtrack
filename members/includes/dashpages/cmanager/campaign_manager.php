@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+
 <h2 class="text-center">Campaign Manager</h2>
 
 <div class="row">
@@ -40,28 +42,32 @@
       </div>
       
       <div class="modal-body">
-
-        <div id="campaign-modal-1" class="container">
-          <ul class="nav nav-tabs">
+        <div class="container">
+          <ul id="campaign-modal-1" class="nav nav-tabs">
             <li class="active nav-item">
               <a class="nav-link active" href="#campaign-1" data-toggle="tab">Campaign</a>
             </li>
-        		<li class="nav-item">
+                <li class="nav-item">
               <a class="nav-link" href="#ad-group-1" data-toggle="tab">Ad Group</a>
-        		</li>
-        		<li class="nav-item">
+                </li>
+                <li class="nav-item">
               <a class="nav-link" href="#keyword-1" data-toggle="tab">Keyword</a>
         		</li>
+            <li class="nav-item">
+              <a class="nav-link" href="#product-ads-1" data-toggle="tab">Product Ads</a>
+            </li>
         	</ul>
           <div class="tab-content ">
             <div class="tab-pane active" id="campaign-1">
-
               <br>
               <h3>Campaign</h3>
-              <form id="addCampaign">
+              <form id="addCampaign" class="needs-validation" novalidate>
                 <div class="form-group">
                   <label for="campaign-name" class="col-form-label">Campaign Name:</label>
-                  <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name">
+                  <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name" required>
+                  <div class="invalid-feedback">
+                    Please choose a campaign name.
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Daily Budget:</label>
@@ -69,7 +75,10 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
                     </div>
-                    <input type="text" class="form-control" id="daily-budget" placeholder="1.00">
+                    <input type="text" class="form-control" id="daily-budget" placeholder="1.00" required>
+                    <div class="invalid-feedback">
+                      Please enter a daily budget.
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -86,19 +95,21 @@
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Start Date:</label>
-                  <input type="date" name="bday" class="form-control" id="start-date">
+                  <input type="date" name="start-date" class="form-control" id="start-date" required>
+                  <div class="invalid-feedback">
+                    Please set a start date.
+                  </div>
                 </div>
+                <button class="btn btn-primary" id="campaign-next">Next</button>
               </form>
-
         		</div>
         		<div class="tab-pane" id="ad-group-1">
-
               <br>
               <h3>Ad Group</h3>
-              <form>
+              <form class="needs-validation" novalidate>
                 <div class="form-group">
                   <label for="ad-group-name" class="col-form-label">Ad Group Name:</label>
-                  <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name">
+                  <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" required>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Default Bid:</label>
@@ -106,21 +117,20 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
                     </div>
-                    <input type="text" class="form-control" id="default-bid" placeholder="1.00">
+                    <input type="text" class="form-control" id="default-bid" placeholder="1.00" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">ASIN:</label>
-                  <textarea class="form-control" rows="3" id="asin" placeholder="ASIN"></textarea>
+                  <textarea class="form-control" rows="3" id="asin" placeholder="ASIN" required></textarea>
                 </div>
+                <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
-
         		</div>
             <div class="tab-pane" id="keyword-1">
-
               <br>
               <h3>Keyword</h3>
-              <form>
+              <form class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Category:</label>
                       <select class="form-control" id="keyword-category">
@@ -130,15 +140,25 @@
                       </select>
                     </div>
                 <div class="form-group">
-                      <label for="message-text" class="col-form-label">Keywords:</label>
-                      <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
-                    </div>
+                  <label for="message-text" class="col-form-label">Keywords:</label>
+                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
+                </div>
+                <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
-
         		</div>
+            <div class="tab-pane" id="product-ads-1">
+              <br>
+              <h3>Product Ads</h3>
+              <form class="needs-validation" novalidate>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Product Ads:</label>
+                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
+                </div>
+                <button class="btn btn-primary" id="ad-group-next">Next</button>
+              </form>
+            </div>
         	</div>
         </div>
-
       </div>
       
       <div class="modal-footer">
@@ -150,7 +170,8 @@
 </div>
 <!-- End Modal -->
 
-<script>
+<script type="text/javascript">
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
   'use strict';
@@ -159,16 +180,25 @@
     var forms = document.getElementsByClassName('needs-validation');
     // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function(form) {
+
       form.addEventListener('submit', function(event) {
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
         }
         form.classList.add('was-validated');
+        if (form.checkValidity() === true) {
+          event.preventDefault();
+          $('#campaign-next').click(function() {
+            $('a[href="#ad-group-1"]').tab('show');
+          });
+        }
       }, false);
+
     });
   }, false);
 })();
+
 </script>
 
 <!-- Adgroups Modal -->
@@ -236,9 +266,9 @@
             <div class="tab-pane" id="3">
 
               <br>
-          		<h3>Keyword</h3>
-          		<form>
-          		  <div class="form-group">
+                <h3>Keyword</h3>
+                <form>
+                  <div class="form-group">
                     <label for="exampleFormControlSelect1">Category:</label>
                       <select class="form-control" id="keyword-category">
                         <option value="broad">Broad</option>
@@ -246,11 +276,11 @@
                         <option value="exact">Exact</option>
                       </select>
                     </div>
-          		  <div class="form-group">
+                  <div class="form-group">
                       <label for="message-text" class="col-form-label">Keywords:</label>
                       <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
                     </div>
-          		</form>
+                </form>
 
             </div>
           </div>
@@ -318,9 +348,9 @@
             <div class="tab-pane" id="keyword-3">
 
               <br>
-          		<h3>Keyword</h3>
-          		<form>
-          		  <div class="form-group">
+                <h3>Keyword</h3>
+                <form>
+                  <div class="form-group">
                     <label for="exampleFormControlSelect1">Category:</label>
                       <select class="form-control" id="keyword-category">
                         <option value="broad">Broad</option>
@@ -328,11 +358,11 @@
                         <option value="exact">Exact</option>
                       </select>
                     </div>
-          		  <div class="form-group">
+                  <div class="form-group">
                       <label for="message-text" class="col-form-label">Keywords:</label>
                       <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords"></textarea>
                     </div>
-          		</form>
+                </form>
 
             </div>
           </div>
@@ -1058,7 +1088,7 @@ $(document).ready( function () {
                 'pauseAdgroup' : 'Pause Adgroup(s)',
                 'enableAdgroup' : 'Enable Adgroups(s)',
                 'archiveAdgroup' : 'Archive Adgroups(s)',
-				'changeDefaultBid' : 'Change Default Bid'
+                'changeDefaultBid' : 'Change Default Bid'
               },
               inputPlaceholder: 'Select a bulk action',
               confirmButtonClass: "btn-success",
@@ -1383,7 +1413,7 @@ $(document).ready( function () {
     dt = $('#campaign_manager').DataTable(adGroupOptions);
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
-    
+
     if (currentCampaign.type == "Manual") {
       $(".btnCampaign").css("display", "none");
       $(".btnAdgroup").css("display", "inline");
@@ -1394,7 +1424,7 @@ $(document).ready( function () {
       $(".btnAdgroup").css("display", "none");
       $(".btnKeyword").css("display", "none");
       $(".btnNegKeyword").css("display", "inline");
-      }
+    }
     dt.columns.adjust();
 
     // Add the campaign to the breadcrumbs
@@ -1403,6 +1433,7 @@ $(document).ready( function () {
       id: campaignId,
       linkClass: 'c_link'
     }];
+    
     updateBreadcrumbs();
   };
   /* End: initAdGroupsTable */
@@ -1462,16 +1493,16 @@ $(document).ready( function () {
 
     clearTable(1);
     dt_neg_kw = $('#neg_kw_table').DataTable(campaignNegKeywordTableOptions);
-	if (currentCampaign.type == "Manual") {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "inline");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
-	} else {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
+    if (currentCampaign.type == "Manual") {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "inline");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
+    } else {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
     }
   };
   /* End: initCampaignNegKeywordTable */
@@ -1836,16 +1867,16 @@ $(document).ready( function () {
     dt = $('#campaign_manager').DataTable(kwOptions);
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
-	if (currentCampaign.type == "Manual") {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "inline");
-	  $(".btnNegKeyword").css("display", "inline");
-	} else {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
+    if (currentCampaign.type == "Manual") {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "inline");
+      $(".btnNegKeyword").css("display", "inline");
+    } else {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
     }
     dt.columns.adjust();
 
@@ -1920,16 +1951,16 @@ $(document).ready( function () {
     clearTable(1);
     dt_neg_kw = $('#neg_kw_table').DataTable(adgroupNegKeywordTableOptions);
 	console.log(currentCampaign.type);
-	if (currentCampaign.type == "Manual") {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "inline");
-	  $(".btnNegKeyword").css("display", "inline");
-	} else {
-	  $(".btnCampaign").css("display", "none");
-	  $(".btnAdgroup").css("display", "none");
-	  $(".btnKeyword").css("display", "none");
-	  $(".btnNegKeyword").css("display", "inline");
+    if (currentCampaign.type == "Manual") {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "inline");
+      $(".btnNegKeyword").css("display", "inline");
+    } else {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "none");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "inline");
     }
   };
   /* End: initAdGroupNegKeywordTable */
@@ -2198,11 +2229,11 @@ $(document).ready( function () {
   $("#campaign_manager, .breadcrumb").on("click", ".c_link", function() {
     currentCampaign.name = $(this).html();
     currentCampaign.id   = $(this).attr('id');
-	if ($(this).hasClass("Manual")) {
-	  currentCampaign.type = "Manual";
-	} else {
-	  currentCampaign.type = "Automatic";
-	}
+    if ($(this).hasClass("Manual")) {
+      currentCampaign.type = "Manual";
+    } else {
+      currentCampaign.type = "Automatic";
+    }
 
     // Change tab to show "Ad Groups"
     $("#tab1_label").html("Ad Groups");
@@ -2217,7 +2248,7 @@ $(document).ready( function () {
   $("#campaign_manager").on("click", ".ag_link",  function() {
     currentAdGroup.name = $(this).html();
     currentAdGroup.id   = $(this).attr('id');
-	currentAdGroup.type = currentCampaign.type;
+    currentAdGroup.type = currentCampaign.type;
 
     // Change tab to show "Keywords"
     $("#tab1_label").html("Keywords");
