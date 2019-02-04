@@ -51,8 +51,11 @@
                 </li>
                 <li class="nav-item">
               <a class="nav-link" href="#keyword-1" data-toggle="tab">Keyword</a>
-                </li>
-            </ul>
+        		</li>
+            <li class="nav-item">
+              <a class="nav-link" href="#product-ads-1" data-toggle="tab">Product Ads</a>
+            </li>
+        	</ul>
           <div class="tab-content ">
             <div class="tab-pane active" id="campaign-1">
               <br>
@@ -139,8 +142,20 @@
                   <label for="message-text" class="col-form-label">Keywords:</label>
                   <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
                 </div>
+                <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
+            <div class="tab-pane" id="product-ads-1">
+              <br>
+              <h3>Product Ads</h3>
+              <form class="needs-validation" novalidate>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Product Ads:</label>
+                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
+                </div>
+                <button class="btn btn-primary" id="ad-group-next">Next</button>
+              </form>
+            </div>
         	</div>
         </div>
       </div>
