@@ -1412,17 +1412,10 @@ $(document).ready( function () {
     $(".btn-deselect").css("visibility", "hidden");
     $(".btn-bulk-action").css("visibility", "hidden");
 
-    if (currentCampaign.type == "Manual") {
-      $(".btnCampaign").css("display", "none");
-      $(".btnAdgroup").css("display", "inline");
-      $(".btnKeyword").css("display", "none");
-      $(".btnNegKeyword").css("display", "inline");
-    } else {
-      $(".btnCampaign").css("display", "none");
-      $(".btnAdgroup").css("display", "none");
-      $(".btnKeyword").css("display", "none");
-      $(".btnNegKeyword").css("display", "inline");
-    }
+    $(".btnCampaign").css("display", "none");
+    $(".btnAdgroup").css("display", "inline");
+    $(".btnKeyword").css("display", "none");
+    $(".btnNegKeyword").css("display", "none");
     dt.columns.adjust();
 
     // Add the campaign to the breadcrumbs
@@ -1491,17 +1484,6 @@ $(document).ready( function () {
 
     clearTable(1);
     dt_neg_kw = $('#neg_kw_table').DataTable(campaignNegKeywordTableOptions);
-    if (currentCampaign.type == "Manual") {
-      $(".btnCampaign").css("display", "none");
-      $(".btnAdgroup").css("display", "inline");
-      $(".btnKeyword").css("display", "none");
-      $(".btnNegKeyword").css("display", "inline");
-    } else {
-      $(".btnCampaign").css("display", "none");
-      $(".btnAdgroup").css("display", "none");
-      $(".btnKeyword").css("display", "none");
-      $(".btnNegKeyword").css("display", "inline");
-    }
   };
   /* End: initCampaignNegKeywordTable */
 
@@ -1869,12 +1851,12 @@ $(document).ready( function () {
       $(".btnCampaign").css("display", "none");
       $(".btnAdgroup").css("display", "none");
       $(".btnKeyword").css("display", "inline");
-      $(".btnNegKeyword").css("display", "inline");
+      $(".btnNegKeyword").css("display", "none");
     } else {
       $(".btnCampaign").css("display", "none");
       $(".btnAdgroup").css("display", "none");
       $(".btnKeyword").css("display", "none");
-      $(".btnNegKeyword").css("display", "inline");
+      $(".btnNegKeyword").css("display", "none");
     }
     dt.columns.adjust();
 
@@ -1948,18 +1930,6 @@ $(document).ready( function () {
 
     clearTable(1);
     dt_neg_kw = $('#neg_kw_table').DataTable(adgroupNegKeywordTableOptions);
-	console.log(currentCampaign.type);
-    if (currentCampaign.type == "Manual") {
-      $(".btnCampaign").css("display", "none");
-      $(".btnAdgroup").css("display", "none");
-      $(".btnKeyword").css("display", "inline");
-      $(".btnNegKeyword").css("display", "inline");
-    } else {
-      $(".btnCampaign").css("display", "none");
-      $(".btnAdgroup").css("display", "none");
-      $(".btnKeyword").css("display", "none");
-      $(".btnNegKeyword").css("display", "inline");
-    }
   };
   /* End: initAdGroupNegKeywordTable */
 
@@ -2021,6 +1991,35 @@ $(document).ready( function () {
 
   });
 
+  //Handle button visiblity for tab clicks
+  $("#neg_keywords_tab").on("click", function() {
+	$(".btnCampaign").css("display", "none");
+    $(".btnAdgroup").css("display", "none");
+    $(".btnKeyword").css("display", "none");
+    $(".btnNegKeyword").css("display", "inline");
+  });
+  
+  $("#tab1_label").on("click", function() {
+    if ($(this).html() == "Ad Groups") {
+      $(".btnCampaign").css("display", "none");
+      $(".btnAdgroup").css("display", "inline");
+      $(".btnKeyword").css("display", "none");
+      $(".btnNegKeyword").css("display", "none");
+	} else { 
+	  if (currentCampaign.type == "Manual") {
+	    $(".btnCampaign").css("display", "none");
+        $(".btnAdgroup").css("display", "none");
+        $(".btnKeyword").css("display", "inline");
+        $(".btnNegKeyword").css("display", "none");
+	  } else {
+		$(".btnCampaign").css("display", "none");
+        $(".btnAdgroup").css("display", "none");
+        $(".btnKeyword").css("display", "none");
+        $(".btnNegKeyword").css("display", "none");
+	  }
+	}
+  });
+  
   // Handle status toggles for all levels
   $("#campaign_manager").on("click", ".toggle", function() {
 
