@@ -72,13 +72,10 @@
       <div class="card-body">
         <div class="row">
 
-          <div class="col-lg-4 col-md-5 col-sm-4 col-6">
+          <div class="col-lg-3 col-md-4 col-sm-3 col-6">
             <div class="nav-tabs-navigation verical-navs">
               <div class="nav-tabs-wrapper">
                 <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active show" href="#info" role="tab" data-toggle="tab" aria-selected="true">Profile & Info</a>
-                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#general" role="tab" data-toggle="tab" aria-selected="false">General</a>
                   </li>
@@ -99,19 +96,14 @@
             </div>
           </div>
 
-          <div class="col-lg-8 col-md-7 col-sm-8 col-6">
+          <div class="col-lg-9 col-md-8 col-sm-9 col-6">
             <!-- Tab panes -->
             <div class="tab-content">
-
-              <div class="tab-pane active show" id="info">
-                <p>Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD display.</p>
-                <p>It’s one continuous form where hardware and software function in perfect unison, creating a new generation of phone that’s better by any measure.</p>
-              </div>
               
               <!-- used for general user settings a.k.a password change, view terms of service, billing cycles, etc-->
-              <div class="tab-pane" id="general">
+              <div class="tab-pane active show" id="general">
                 <div class="settings col-12">
-                  <h5><b>User Settings</b></h5>
+                  <h5><b>Profile Settings</b></h5>
                   <hr />
 
                   <div class="form-group">
@@ -188,7 +180,7 @@
 
                   <div class="form-group">
                     <div class="row justify-content-between">
-                      <label class="user-settings col-sm-4">Clicks Greater Than</label>
+                      <label class="user-settings col-sm-4">Minimum # of Clicks</label>
                       <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
                     </div>
                   </div>
@@ -199,7 +191,32 @@
                       <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
                     </div>
                   </div>
-  
+				  
+				  <h5><b>Keyword Suggestions</b></h5>
+				  <hr />
+				  <p>Explanation</p>
+				  
+				  <div class="form-group">
+				    <div class="row justify-content-between">
+					  <label class="user-settings col-sm-4">Minimum Units</label>
+                      <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
+					</div>
+				  </div>
+				  
+				  <div class="form-group">
+					<div class="row justify-content-between">
+					  <label class="user-settings col-sm-4">Minimum Clicks</label>
+                      <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
+					</div>
+				  </div>
+				  
+				  <div class="form-group">
+					<div class="row justify-content-between">
+					  <label class="user-settings col-sm-4">Minimum Conversion Rate</label>
+                      <input type="text" class="form-control input-sm col-sm-2" placeholder="" />
+					</div>
+				  </div>
+				  
                 </div>
               </div>
 
