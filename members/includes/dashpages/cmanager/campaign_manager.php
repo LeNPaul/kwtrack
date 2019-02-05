@@ -109,6 +109,9 @@
                 <div class="form-group">
                   <label for="ad-group-name" class="col-form-label">Ad Group Name:</label>
                   <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" required>
+                  <div class="invalid-feedback">
+                    Please choose an ad group name.
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Default Bid:</label>
@@ -117,11 +120,17 @@
                       <span class="input-group-text">$</span>
                     </div>
                     <input type="text" class="form-control" id="default-bid" placeholder="1.00" required>
+                    <div class="invalid-feedback">
+                      Please choose a default bid.
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">ASIN:</label>
                   <textarea class="form-control" rows="3" id="asin" placeholder="ASIN" required></textarea>
+                  <div class="invalid-feedback">
+                    Please enter the ASIN.
+                  </div>
                 </div>
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
@@ -141,6 +150,9 @@
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Keywords:</label>
                   <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
+                  <div class="invalid-feedback">
+                    Please enter the keywords.
+                  </div>
                 </div>
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
@@ -151,7 +163,10 @@
               <form class="needs-validation" novalidate>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Product Ads:</label>
-                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
+                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Product Ads" required></textarea>
+                  <div class="invalid-feedback">
+                    Please enter the product ads.
+                  </div>
                 </div>
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
