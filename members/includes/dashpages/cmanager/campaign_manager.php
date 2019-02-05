@@ -1847,7 +1847,7 @@ $(document).ready( function () {
         $("#currentAdgroup #ad-group-name").attr("placeholder", currentAdGroup.name);
       }, // drawCallback (keyword manager)
       ajax: {
-        url: 'includes/dashpages/cmanager/helpers/get_data.php',
+        url: 'includes/dashpages/cmanager/helpers/get_data.php?XDEBUG_SESSION_START=PHPSTORM',
         data: function(){
           var drp = datePicker.data('daterangepicker');
           // Get the start and end date
