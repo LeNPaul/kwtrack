@@ -1000,7 +1000,7 @@ $(document).ready( function () {
 
       }, //drawCallback
       ajax: {
-        url: 'includes/dashpages/cmanager/helpers/get_data.php?XDEBUG_SESSION_START=PHPSTORM',
+        url: 'includes/dashpages/cmanager/helpers/get_data.php',
         data: function(){
           var drp = datePicker.data('daterangepicker');
           // Get the start and end date
@@ -1829,7 +1829,7 @@ $(document).ready( function () {
         $("#currentAdgroup #ad-group-name").attr("placeholder", currentAdGroup.name);
       }, // drawCallback (keyword manager)
       ajax: {
-        url: 'includes/dashpages/cmanager/helpers/get_data.php?XDEBUG_SESSION_START=PHPSTORM',
+        url: 'includes/dashpages/cmanager/helpers/get_data.php',
         data: function(){
           var drp = datePicker.data('daterangepicker');
           // Get the start and end date
@@ -1920,7 +1920,7 @@ $(document).ready( function () {
       ],
       ajax: {
         type: "POST",
-        url: 'includes/dashpages/cmanager/helpers/get_neg_keywords?XDEBUG_SESSION_START=PHPSTORM',
+        url: 'includes/dashpages/cmanager/helpers/get_neg_keywords',
         data: {
           data_level: 1,
           element_id: currentCampaign.id
@@ -2217,7 +2217,8 @@ $(document).ready( function () {
   $(".breadcrumb").on("click", ".all_link", function() {
     // Change tab to show "Campaigns"
     $("#tab1_label").html("Campaigns");
-
+    $("input[id=tab1]").click();
+    
     clearTable(1);
     initCampaignsTable();
   });

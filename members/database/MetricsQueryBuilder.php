@@ -60,9 +60,19 @@ class MetricsQueryBuilder {
         ) as latest_bid
         on T.amz_kw_id = latest_bid.amz_kw_id
       ";
+      
+      $get_latest_bid_join = "
+        inner join
+        (
+          select P.amz_kw_id, P.bid from ppc_keywords as P
+        ) as latest_bid
+        on T.amz_kw_id = latest_bid.amz_kw_id
+      ";
+      
       // The select statement can now be done using the latest bid data
       $get_latest_bid_select = 'latest_bid.bid as bid';
     }
+    
     if ($this->includeDate) $group_by[] = '`date`';
 
     $group_by = implode(', ', $group_by);
