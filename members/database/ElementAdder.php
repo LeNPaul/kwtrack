@@ -180,7 +180,7 @@ class ElementAdder
         } else {
           $insert_stmt->execute(array(
             ":kw_id"            => $result_msg[$i]["keywordId"],
-            ":amz_adgroup_id"  => $direct_parent["adgroup_id"],
+            ":amz_adgroup_id"   => $direct_parent["adgroup_id"],
             ":keyword_text"     => $this->child_elements["neg_keywords"][$i]["keywordText"],
             ":state"            => $this->child_elements["neg_keywords"][$i]["state"],
             ":match_type"       => $this->child_elements["neg_keywords"][$i]["matchType"],
