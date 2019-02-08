@@ -151,6 +151,54 @@ class ElementToggler
 
     }
 
+	//if data level is on campaign negative kw level
+	elseif ($this->$data_level == 3) {
+	  $result = json_decode($this->client->updateCampaignNegativeKeywords(array(array(
+	    "keywordId" => $this->element_id,
+		"state"		=> $this->state
+	  )))['response'], true)[0]["code"];
+	  
+	  if ($result == "SUCCESS") {
+	    $this->flag = true;
+		
+		$sql = "UPDATE campaign_neg_kw SET status=:state WHERE kw_id=:id";
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute(array(
+		  ":state" => $this->state,
+		  ":id"	   => $this->element_id
+		));
+		return 1;
+	  } else {
+		$this->flag = false;
+		array_push($this->failed, $this->element_name);
+		return 0;
+	  }
+	}
+	
+	//if data level is on adgroup negative kw level
+	elseif ($this->$data_level == 4) {
+	  $result = json_decode($this->client->updateNegativeKeywords(array(array(
+	    "keywordId" => $this->element_id,
+		"state"		=> $this->state
+	  )))['response'], true)[0]["code"];
+	  
+	  if ($result == "SUCCESS") {
+	    $this->flag = true;
+		
+		$sql = "UPDATE adgroup_neg_kw SET status=:state WHERE kw_id=:id";
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute(array(
+		  ":state" => $this->state,
+		  ":id"	   => $this->element_id
+		));
+		return 1;
+	  } else {
+		$this->flag = false;
+		array_push($this->failed, $this->element_name);
+		return 0;
+	  }
+	}
+	
   }
 
 }

@@ -9,7 +9,17 @@ use PDO;
 
 $num = count($_POST["element_id"]);
 $success = 0;
-$datalevel = ($_POST["data_level"] == 0) ? "campaign" : (($_POST["data_level"] == 1) ? "ad group" : "keyword");
+if ($_POST["data_level"] == 0) {
+  $datalevel = "campaign";
+} elseif ($_POST["data_level"] == 1) {
+  $datalevel = "ad group";
+} elseif ($_POST["data_level"] == 2) {
+  $datalevel = "keyword";
+} elseif ($_POST["data_level"] == 3) {
+  $datalevel = "campaign negative keyword";
+} elseif ($_POST["data_level"] == 4) {
+  $datalevel = "ad group negative keyword";
+}
 
 for ($i = 0; $i < $num; $i++) {
   $config = array(

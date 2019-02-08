@@ -1461,10 +1461,86 @@ $(document).ready( function () {
         },
         {
           text: 'Archive',
-          className: 'btn-deselect-negkw',
+          className: 'btn-archive-negkw',
 
           action: function (e, dt, node, config) {
             // Bulk archive negative keywords
+			var selectedNegKws = dt.rows ( '.selected' ).data();
+            var negKwIndexes = dt.rows('.selected').indexes();
+            var negKwIdArr = [];
+            var neg_kw_list = [];
+
+            // Populate list of adgroup ID's and names
+            for (i = 0; i < selectedNegKws.length; i++) {
+              var rx         = selectedNegKws[i][0].match(/id='\d+/g);
+              var negKwId = rx[0].replace("id=\"", "");
+              negKwIdArr.push(negKwId);
+              neg_kw_list.push(selectedNegKws[i][0].match(/(?<=\>)(.*)(?=\<)/)[0]);
+            }
+			
+			swal({
+                  title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
+                  type: 'warning',
+                  confirmButtonText: 'Yes!',
+                  confirmButtonColor: '#009925',
+                  cancelButtonColor: '#d33',
+                  showCancelButton: true,
+                  allowOutsideClick: false,
+                  allowEnterKey: false,
+                  allowEscapeKey: false
+                })
+                .then(function (result) {
+                  if (result.value) {
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: 'archive',
+                        element_id: negKwIdArr,
+                        element_name: neg_kw_list,
+                        data_level: 3
+                      },
+
+                      success: function(alert_text) {
+                        if (alert_text.includes("error")) {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        } else {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'success',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        }
+
+                        initCampaignNegKeywordTable();
+                      },
+                      error: function(er) {
+                        swal({
+                          title: "Error",
+                          text: "An error has occurred. Please try again in a few moments.",
+                          type: "error",
+                          confirmButtonText: "Close"
+                        });
+                      }
+                    });
+                  }
+                })
           }
         }
       ],
@@ -1911,6 +1987,82 @@ $(document).ready( function () {
 
           action: function (e, dt, node, config) {
             // Bulk archive negative keywords
+			var selectedNegKws = dt.rows ( '.selected' ).data();
+            var negKwIndexes = dt.rows('.selected').indexes();
+            var negKwIdArr = [];
+            var neg_kw_list = [];
+
+            // Populate list of adgroup ID's and names
+            for (i = 0; i < selectedNegKws.length; i++) {
+              var rx         = selectedNegKws[i][0].match(/id='\d+/g);
+              var negKwId = rx[0].replace("id=\"", "");
+              negKwIdArr.push(negKwId);
+              neg_kw_list.push(selectedNegKws[i][0].match(/(?<=\>)(.*)(?=\<)/)[0]);
+            }
+			
+			swal({
+                  title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
+                  type: 'warning',
+                  confirmButtonText: 'Yes!',
+                  confirmButtonColor: '#009925',
+                  cancelButtonColor: '#d33',
+                  showCancelButton: true,
+                  allowOutsideClick: false,
+                  allowEnterKey: false,
+                  allowEscapeKey: false
+                })
+                .then(function (result) {
+                  if (result.value) {
+                    $.ajax({
+                      type: "POST",
+                      url: "includes/dashpages/cmanager/helpers/toggler.php",
+                      data: {
+                        toggle: 'archive',
+                        element_id: negKwIdArr,
+                        element_name: neg_kw_list,
+                        data_level: 4
+                      },
+
+                      success: function(alert_text) {
+                        if (alert_text.includes("error")) {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'danger',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        } else {
+                          $.notify({
+                            icon: "nc-icon nc-bell-55",
+                            message: alert_text
+                          },{
+                            type: 'success',
+                            timer: 2000,
+                            placement: {
+                              from: 'bottom',
+                              align: 'right'
+                            }
+                          });
+                        }
+
+                        initCampaignNegKeywordTable();
+                      },
+                      error: function(er) {
+                        swal({
+                          title: "Error",
+                          text: "An error has occurred. Please try again in a few moments.",
+                          type: "error",
+                          confirmButtonText: "Close"
+                        });
+                      }
+                    });
+                  }
+                })
           }
         }
       ],
