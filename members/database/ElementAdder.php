@@ -9,8 +9,6 @@ use PDOException;
 ini_set('precision', 30);
 
 /*
- * $data_level glossary:
- *  0 = campaigns, 1 = ad groups, 2 = keywords
  *
  *  $element_type can only be "campaign", "ad_group", "neg_keyword", or "keyword"
  *
@@ -77,10 +75,9 @@ class ElementAdder
 
   public function __construct($config)
   {
-    $this->data_level      = $config["data_level"];
     $this->child_elements  = $config["child_elements"];
     $this->element_type    = $config["element_type"];
-    $this->user_id         = $config["user_id;"];
+    $this->user_id         = $config["user_id"];
 
     $this->kw_match_type =
     ($this->element_type == "keyword" || $this->element_type == "neg_keyword")
@@ -88,7 +85,7 @@ class ElementAdder
     : null;
 
     // Instantiate the client
-    $this->client = get_amz_client($config["refresh_token"], $config["profile_id"]);
+    $this->client = $this->get_amz_client($config["refresh_token"], $config["profile_id"]);
   }
 
   private function get_amz_client($refresh_token, $profile_id, $region = "na")
@@ -180,7 +177,7 @@ class ElementAdder
         } else {
           $insert_stmt->execute(array(
             ":kw_id"            => $result_msg[$i]["keywordId"],
-            ":amz_adgroup_id"  => $direct_parent["adgroup_id"],
+            ":amz_adgroup_id"   => $direct_parent["adgroup_id"],
             ":keyword_text"     => $this->child_elements["neg_keywords"][$i]["keywordText"],
             ":state"            => $this->child_elements["neg_keywords"][$i]["state"],
             ":match_type"       => $this->child_elements["neg_keywords"][$i]["matchType"],
@@ -440,10 +437,12 @@ class ElementAdder
             ->createNegativeKeywords($this->child_elements["neg_keywords"]);
 
           $result_msg = json_decode($result["response"], true, 512, JSON_BIGINT_AS_STRING);
+  
+          $this->safe_add_negkeywords_to_db($result_msg, $direct_parent, 'adgroup');
 
-          if ($result_msg[0]["code"] != "SUCCESS") {
+          /*if ($result_msg[0]["code"] != "SUCCESS") {
             throw new Exception("ER-CNKW02: There was an error adding your negative keywords. Please contact support@ppcology.io for help.");
-          }
+          }*/
         }
 
       } catch (\Exception $e) {

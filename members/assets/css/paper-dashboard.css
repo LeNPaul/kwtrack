@@ -139,6 +139,11 @@ div.sidebar-wrapper.ps-container.ps-theme-default.ps-active-x > ul > li:hover {
   /*background-color: rgba(19, 37, 74, 0.7) !important;*/
 }
 
+.sidebar .nav li > a > p {
+  font-size: 1em;
+  font-weight: 600;
+}
+
 /*
 ███████ ███████ ████████ ████████ ██ ███    ██  ██████  ███████
 ██      ██         ██       ██    ██ ████   ██ ██       ██

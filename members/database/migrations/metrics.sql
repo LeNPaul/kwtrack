@@ -78,3 +78,20 @@ ALTER TABLE `users` ADD `target_acos` DECIMAL(4, 2) UNSIGNED NOT NULL DEFAULT 0.
 -- Add the bid and suggested bid into the keywords table.
 ALTER TABLE ppc_keywords add `bid` decimal(19,4) null;
 ALTER TABLE ppc_keywords add `suggested_bid` decimal(19,4) null;
+
+-- Add user settings table
+
+create table settings (
+	  user_id int(11) not null,
+    spyder_campaigns bool default 1,
+    target_acos decimal(19,4) default null,
+
+    neg_kw_min_clicks int(11) default 15,
+    neg_kw_min_ctr decimal(19,5) default 0.002,
+
+    new_kw_min_units int(11) default 1,
+    new_kw_min_clicks int(11) default 2,
+    new_kw_min_cvr decimal(19,5) default 0.05,
+
+    foreign key fk_user_id(user_id) REFERENCES users(user_id)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

@@ -49,26 +49,27 @@
               <a class="nav-link" href="#ad-group-1" data-toggle="tab">Ad Group</a>
                 </li>
                 <li class="nav-item">
-              <a class="nav-link" href="#keyword-1" data-toggle="tab">Keyword</a>
+              <a class="nav-link" href="#keyword-1" data-toggle="tab">Keywords</a>
         		</li>
             <li class="nav-item">
               <a class="nav-link" href="#product-ads-1" data-toggle="tab">Product Ads</a>
             </li>
         	</ul>
+          
           <div class="tab-content ">
             <div class="tab-pane active" id="campaign-1">
               <br>
               <h3>Campaign</h3>
               <form id="addCampaign" class="needs-validation" novalidate>
                 <div class="form-group">
-                  <label for="campaign-name" class="col-form-label">Campaign Name:</label>
+                  <label for="campaign-name" class="col-form-label">Campaign Name</label>
                   <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name" required>
                   <div class="invalid-feedback">
                     Please choose a campaign name.
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="message-text" class="col-form-label">Daily Budget:</label>
+                  <label for="message-text" class="col-form-label">Daily Budget</label>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
@@ -80,7 +81,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="message-text" class="col-form-label">Targeting Type:</label>
+                  <label for="message-text" class="col-form-label">Targeting Type</label>
                   <br>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="targetType" id="inlineRadio1" value="automatic" checked>
@@ -91,29 +92,24 @@
                     <label class="form-check-label" for="inlineRadio2">Manual</label>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Start Date:</label>
-                  <input type="date" name="start-date" class="form-control" id="start-date" required>
-                  <div class="invalid-feedback">
-                    Please set a start date.
-                  </div>
-                </div>
+                
                 <button class="btn btn-primary" id="campaign-next">Next</button>
               </form>
         		</div>
+          
         		<div class="tab-pane" id="ad-group-1">
               <br>
               <h3>Ad Group</h3>
               <form class="needs-validation" novalidate>
                 <div class="form-group">
-                  <label for="ad-group-name" class="col-form-label">Ad Group Name:</label>
+                  <label for="ad-group-name" class="col-form-label">Ad Group Name</label>
                   <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" required>
                   <div class="invalid-feedback">
                     Please choose an ad group name.
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="message-text" class="col-form-label">Default Bid:</label>
+                  <label for="message-text" class="col-form-label">Default Bid</label>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
@@ -124,22 +120,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">ASIN:</label>
-                  <textarea class="form-control" rows="3" id="asin" placeholder="ASIN" required></textarea>
-                  <div class="invalid-feedback">
-                    Please enter the ASIN.
-                  </div>
-                </div>
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
+            
             <div class="tab-pane" id="keyword-1">
               <br>
-              <h3>Keyword</h3>
+              <h3>Keywords</h3>
               <form class="needs-validation" novalidate>
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Category:</label>
+                    <label for="exampleFormControlSelect1">Match Type</label>
                       <select class="form-control" id="keyword-category">
                         <option value="broad">Broad</option>
                         <option value="phrase">Phrase</option>
@@ -148,23 +138,44 @@
                     </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Keywords:</label>
-                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Keywords" required></textarea>
+                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Enter a list of keywords separated by a new line" required></textarea>
                   <div class="invalid-feedback">
-                    Please enter the keywords.
+                    Enter a list of keywords, separated by a new line.
+                  </div>
+                </div>
+              </form>
+              
+              <hr />
+  
+              <h3>Negative Keywords (Optional)</h3>
+              <form class="needs-validation" novalidate>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Match Type</label>
+                  <select class="form-control" id="neg-kw-category">
+                    <option value="negativeExact">Negative Exact</option>
+                    <option value="negativePhrase">Negative Phrase</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Negative Keywords</label>
+                  <textarea class="form-control" rows="3" id="neg-kw-text" placeholder="Enter a list of negative keywords separated by a new line" required></textarea>
+                  <div class="invalid-feedback">
+                    Enter a list of negative keywords, separated by a new line.
                   </div>
                 </div>
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
+            
             <div class="tab-pane" id="product-ads-1">
               <br>
               <h3>Product Ads</h3>
               <form class="needs-validation" novalidate>
                 <div class="form-group">
-                  <label for="message-text" class="col-form-label">Product Ads:</label>
-                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Product Ads" required></textarea>
+                  <label for="message-text" class="col-form-label">Product Ads</label>
+                  <textarea class="form-control" rows="3" id="asin-list" placeholder="Enter a list of your ASIN's separated by a new line" required></textarea>
                   <div class="invalid-feedback">
-                    Please enter the product ads.
+                    Enter a list of your ASIN's separated by a new line.
                   </div>
                 </div>
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
@@ -429,21 +440,125 @@
 
 <script>
 
+var format_campaign_arr = function(name, targeting_type, budget) {
+  return JSON.stringify([{
+    "campaign_name": name,
+    "targeting_type": targeting_type,
+    "budget": budget
+  }]);
+};
+
+var format_adgroup_arr = function(name, default_bid) {
+  return JSON.stringify([{
+      "name": name,
+      "default_bid": default_bid,
+      "state": "enabled"
+    }]
+  );
+};
+
+var format_ads_arr = function(raw_asin_list) {
+  // Remove duplicates
+  var asin_arr = raw_asin_list.filter(function(e, i, ar) {
+    return i == ar.indexOf(e);
+  });
+
+  return JSON.stringify(
+    asin_arr.map(function(e){
+      return {
+        "sku": e
+      };
+    })
+  )
+};
+
+var format_kw_arr = function(raw_kw_arr, match_type) {
+  // Remove duplicates
+  var kw_arr = raw_kw_arr.filter(function(e, i, ar) {
+    return i == ar.indexOf(e);
+  });
+  
+  return JSON.stringify(
+    kw_arr.map(function(e, i, a) {
+      return {
+        "keywordText": e,
+        "matchType": match_type,
+        "state": "enabled"
+      };
+    })
+  );
+};
+
+var format_negkw_arr = function(raw_negkw_arr, match_type) {
+  // Remove duplicates
+  var negkw_arr = raw_negkw_arr.filter(function(e, i, ar) {
+    return i == ar.indexOf(e);
+  });
+  
+  return JSON.stringify(
+    negkw_arr.map(function(e) {
+      return {
+        "keywordText": e,
+        "matchType": match_type,
+        "state": "enabled"
+      }
+    })
+  );
+};
+
 // Function for saving a new campaign when adding a new campaign
 $('#saveCampaign').on('click', function(event) {
   event.preventDefault(); // To prevent following the link (optional)
 
-  // Extract user input from the modal form
-  var campaignName = document.getElementById('campaign-name').value;
-  var targetType = document.querySelector('input[name="targetType"]:checked').value;
-  var dailyBudget = document.getElementById('daily-budget').value;
-  var startDate = document.getElementById('start-date').value;
+  // Extract user input from campaign form
+  var formatted_campaigns = format_campaign_arr(
+    $('#campaign-name').val(),
+    $('input[name="targetType"]:checked').val(),
+    parseFloat($('#daily-budget').val())
+  );
 
-  console.log(campaignName);
-  console.log(targetType);
-  console.log(dailyBudget);
-  console.log(startDate);
+  // Extract user input from ad group form
+  var formatted_adgroups = format_adgroup_arr(
+    $("#ad-group-name").val(),
+    parseFloat($("#default-bid").val())
+  );
 
+  // Extract user input from keyword form
+  var formatted_keywords = format_kw_arr(
+    $("#keywords-text").val().split("\n"),
+    $("#keyword-category").val());
+
+  // Extract user input from negative keywords form
+  var formatted_neg_kws = format_negkw_arr(
+    $("#neg-kw-text").val().split("\n"),
+    $("#neg-kw-category").val()
+  );
+
+  // Extract user input from product ads form
+  var formatted_asins = format_ads_arr($("#asin-list").val().split("\n"));
+  
+  // TODO: Complete form validation before sending this request out
+  $.ajax({
+    type: "POST",
+    url: "includes/dashpages/cmanager/helpers/element_adder?XDEBUG_SESSION_START=PHPSTORM",
+    data: {
+      "campaign_data": formatted_campaigns,
+      "adgroup_data": formatted_adgroups,
+      "kw_data": formatted_keywords,
+      "negkw_data": formatted_neg_kws,
+      "asin_data": formatted_asins,
+      "element_type": "campaign"
+    },
+    
+    success: function(data) {
+    
+    },
+    
+    error: function(data) {
+    
+    }
+  });
+  
 });
 
 // Function for saving a new campaign when adding a new campaign
@@ -552,6 +667,9 @@ $(document).ready( function () {
 
   /* Start: initCampaignsTable */
   var initCampaignsTable = function(){
+    // Hide negative keywords tab
+    $("#neg_keywords_tab").attr("style", "visibility: hidden");
+    
     var campaignOptions = {
       dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
       fixedColumns: {
@@ -1015,7 +1133,7 @@ $(document).ready( function () {
 
       }, //drawCallback
       ajax: {
-        url: 'includes/dashpages/cmanager/helpers/get_data.php?XDEBUG_SESSION_START=PHPSTORM',
+        url: 'includes/dashpages/cmanager/helpers/get_data.php',
         data: function(){
           var drp = datePicker.data('daterangepicker');
           // Get the start and end date
@@ -1037,8 +1155,7 @@ $(document).ready( function () {
     $(".btnKeyword").css("display", "none");
     $(".btnNegKeyword").css("display", "none");
 
-    // Hide negative keywords tab
-    $("#neg_keywords_tab").attr("style", "visibility: hidden");
+    
 
     $('input[type="radio"]').keydown(function(e) {
       var arrowKeys = [37, 38, 39, 40];
@@ -2087,7 +2204,7 @@ $(document).ready( function () {
       ],
       ajax: {
         type: "POST",
-        url: 'includes/dashpages/cmanager/helpers/get_neg_keywords?XDEBUG_SESSION_START=PHPSTORM',
+        url: 'includes/dashpages/cmanager/helpers/get_neg_keywords',
         data: {
           data_level: 1,
           element_id: currentCampaign.id
@@ -2384,7 +2501,8 @@ $(document).ready( function () {
   $(".breadcrumb").on("click", ".all_link", function() {
     // Change tab to show "Campaigns"
     $("#tab1_label").html("Campaigns");
-
+    $("input[id=tab1]").click();
+    
     clearTable(1);
     initCampaignsTable();
   });
