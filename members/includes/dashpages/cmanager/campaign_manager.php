@@ -123,9 +123,10 @@
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
+            
             <div class="tab-pane" id="keyword-1">
               <br>
-              <h3>Keyword</h3>
+              <h3>Keywords</h3>
               <form class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Match Type</label>
@@ -142,16 +143,37 @@
                     Enter a list of keywords, separated by a new line.
                   </div>
                 </div>
+              </form>
+              
+              <hr />
+  
+              <h3>Negative Keywords (Optional)</h3>
+              <form class="needs-validation" novalidate>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Match Type</label>
+                  <select class="form-control" id="neg-kw-category">
+                    <option value="negativeExact">Negative Exact</option>
+                    <option value="negativePhrase">Negative Phrase</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Negative Keywords</label>
+                  <textarea class="form-control" rows="3" id="neg-kw-text" placeholder="Enter a list of negative keywords separated by a new line" required></textarea>
+                  <div class="invalid-feedback">
+                    Enter a list of negative keywords, separated by a new line.
+                  </div>
+                </div>
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
+            
             <div class="tab-pane" id="product-ads-1">
               <br>
               <h3>Product Ads</h3>
               <form class="needs-validation" novalidate>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Product Ads</label>
-                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Enter a list of your ASIN's separated by a new line" required></textarea>
+                  <textarea class="form-control" rows="3" id="asin-list" placeholder="Enter a list of your ASIN's separated by a new line" required></textarea>
                   <div class="invalid-feedback">
                     Enter a list of your ASIN's separated by a new line.
                   </div>
@@ -418,24 +440,70 @@
 
 <script>
 
-var format_kw_arr = function(raw_kw_arr) {
+var format_campaign_arr = function(name, targeting_type, budget) {
+  return JSON.stringify([{
+    "campaign_name": name,
+    "targeting_type": targeting_type,
+    "budget": budget
+  }]);
+};
+
+var format_adgroup_arr = function(name, default_bid) {
+  return JSON.stringify([{
+      "name": name,
+      "default_bid": default_bid,
+      "state": "enabled"
+    }]
+  );
+};
+
+var format_ads_arr = function(raw_asin_list) {
+  // Remove duplicates
+  var asin_arr = raw_asin_list.filter(function(e, i, ar) {
+    return i == ar.indexOf(e);
+  });
+
+  return JSON.stringify(
+    asin_arr.map(function(e){
+      return {
+        "sku": e
+      };
+    })
+  )
+};
+
+var format_kw_arr = function(raw_kw_arr, match_type) {
   // Remove duplicates
   var kw_arr = raw_kw_arr.filter(function(e, i, ar) {
     return i == ar.indexOf(e);
   });
   
-  var kw_arr_out = [];
-  var temp       = {
-    "keywordText": null,
-    "matchType": null,
-    "state": "enabled"
-  };
+  return JSON.stringify(
+    kw_arr.map(function(e, i, a) {
+      return {
+        "keywordText": e,
+        "matchType": match_type,
+        "state": "enabled"
+      };
+    })
+  );
+};
+
+var format_negkw_arr = function(raw_negkw_arr, match_type) {
+  // Remove duplicates
+  var negkw_arr = raw_negkw_arr.filter(function(e, i, ar) {
+    return i == ar.indexOf(e);
+  });
   
-  for (var i = 0; i < kw_arr.length; i++) {
-    temp.keywordText = kw_arr[i];
-  }
-  
-  return kw_arr_out;
+  return JSON.stringify(
+    negkw_arr.map(function(e) {
+      return {
+        "keywordText": e,
+        "matchType": match_type,
+        "state": "enabled"
+      }
+    })
+  );
 };
 
 // Function for saving a new campaign when adding a new campaign
@@ -443,20 +511,54 @@ $('#saveCampaign').on('click', function(event) {
   event.preventDefault(); // To prevent following the link (optional)
 
   // Extract user input from campaign form
-  var campaign_name  = $('#campaign-name').val();
-  var targeting_type = $('input[name="targetType"]:checked').val();
-  var daily_budget   = parseFloat($('#daily-budget').val());
+  var formatted_campaigns = format_campaign_arr(
+    $('#campaign-name').val(),
+    $('input[name="targetType"]:checked').val(),
+    parseFloat($('#daily-budget').val())
+  );
 
   // Extract user input from ad group form
-  var adgroup_name = $("#ad-group-name").val();
-  var default_bid  = parseFloat($("#default-bid").val());
-  
+  var formatted_adgroups = format_adgroup_arr(
+    $("#ad-group-name").val(),
+    parseFloat($("#default-bid").val())
+  );
+
   // Extract user input from keyword form
-  var match_type   = $("#keyword-category").val();
-  var raw_keywords = $("#keywords-text").val().split("\n");
+  var formatted_keywords = format_kw_arr(
+    $("#keywords-text").val().split("\n"),
+    $("#keyword-category").val());
+
+  // Extract user input from negative keywords form
+  var formatted_neg_kws = format_negkw_arr(
+    $("#neg-kw-text").val().split("\n"),
+    $("#neg-kw-category").val()
+  );
+
+  // Extract user input from product ads form
+  var formatted_asins = format_ads_arr($("#asin-list").val().split("\n"));
   
-  console.log(default_bid, match_type);
-  console.log(raw_keywords);
+  // TODO: Complete form validation before sending this request out
+  $.ajax({
+    type: "POST",
+    url: "includes/dashpages/cmanager/helpers/element_adder?XDEBUG_SESSION_START=PHPSTORM",
+    data: {
+      "campaign_data": formatted_campaigns,
+      "adgroup_data": formatted_adgroups,
+      "kw_data": formatted_keywords,
+      "negkw_data": formatted_neg_kws,
+      "asin_data": formatted_asins,
+      "element_type": "campaign"
+    },
+    
+    success: function(data) {
+    
+    },
+    
+    error: function(data) {
+    
+    }
+  });
+  
 });
 
 // Function for saving a new campaign when adding a new campaign
