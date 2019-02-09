@@ -207,6 +207,9 @@ class UserDataImporter {
         ? $db_keywords[$amz_keyword['keywordId']]
         : null;
 
+	  if (!isset($amz_keyword['bid'])) {
+		$amz_keyword['bid'] = null;
+	  }
       // Did we find the keyword in the database?
       if ($db_keyword != null) {
         // If either the status or bid differ
@@ -287,14 +290,14 @@ class UserDataImporter {
 
     // Get all existing ad group negative keywords from db and create lookup
     $db_neg_adgroup_keywords = $pdo
-      ->query("SELECT kw_id, keyword_text FROM adgroup_neg_kw WHERE user_id=" . $this->user_id)
+      ->query("SELECT kw_id, keyword_text, state FROM adgroup_neg_kw WHERE user_id=" . $this->user_id)
       ->fetchAll(PDO::FETCH_ASSOC);
     $db_neg_adgroup_keywords = $this->create_lookup($db_neg_adgroup_keywords, 'kw_id');
 
     // Set up prepared statements
     $insert_stmt = $pdo->prepare(
-      "INSERT INTO adgroup_neg_kw (kw_id, amz_adgroup_id, keyword_text, state, match_type)
-       VALUES (:kw_id, :amz_adgroup_id, :keyword_text, :state, :match_type)"
+      "INSERT INTO adgroup_neg_kw (kw_id, amz_adgroup_id, keyword_text, state, match_type, user_id)
+       VALUES (:kw_id, :amz_adgroup_id, :keyword_text, :state, :match_type, :user_id)"
      );
 
     $update_stmt = $pdo->prepare(
@@ -337,7 +340,8 @@ class UserDataImporter {
           ":amz_adgroup_id" => $amz_neg_adgroup_keyword['adGroupId'],
           ":keyword_text"   => $amz_neg_adgroup_keyword['keywordText'],
           ":state"          => $amz_neg_adgroup_keyword['state'],
-          ":match_type"     => $amz_neg_adgroup_keyword['matchType']
+          ":match_type"     => $amz_neg_adgroup_keyword['matchType'],
+		  ":user_id"		=> $this->user_id
         ));
       }
     }
@@ -346,16 +350,16 @@ class UserDataImporter {
   private function import_campaign_neg_keywords() {
     global $pdo;
 
-    // Get all existing ad group negative keywords from db and create lookup
+    // Get all existing campaign negative keywords from db and create lookup
     $db_neg_campaign_keywords = $pdo
-      ->query("SELECT kw_id, keyword_text FROM campaign_neg_kw WHERE user_id=" . $this->user_id)
+      ->query("SELECT kw_id, keyword_text, state FROM campaign_neg_kw WHERE user_id=" . $this->user_id)
       ->fetchAll(PDO::FETCH_ASSOC);
     $db_neg_campaign_keywords = $this->create_lookup($db_neg_campaign_keywords, 'kw_id');
 
     // Set up prepared statements
     $insert_stmt = $pdo->prepare(
-      "INSERT INTO campaign_neg_kw (kw_id, amz_campaign_id, keyword_text, state, match_type)
-       VALUES (:kw_id, :amz_campaign_id, :keyword_text, :state, :match_type)"
+      "INSERT INTO campaign_neg_kw (kw_id, amz_campaign_id, keyword_text, state, match_type, user_id)
+       VALUES (:kw_id, :amz_campaign_id, :keyword_text, :state, :match_type, :user_id)"
      );
 
     $update_stmt = $pdo->prepare(
@@ -374,13 +378,14 @@ class UserDataImporter {
       );
 
     foreach ($amz_neg_campaign_keywords as $amz_neg_campaign_keyword) {
-
       // Get the db neg campaign keyword
       $db_neg_campaign_keyword =
         (isset($db_neg_campaign_keywords[$amz_neg_campaign_keyword['keywordId']]))
         ? $db_neg_campaign_keywords[$amz_neg_campaign_keyword['keywordId']]
         : null;
-
+		
+		//var_dump($db_neg_campaign_keyword);
+		//var_dump($amz_neg_campaign_keyword);
       // Did we find the neg campaign keyword in the database?
       if ($db_neg_campaign_keyword != null) {
 
@@ -398,7 +403,8 @@ class UserDataImporter {
           ":amz_campaign_id" => $amz_neg_campaign_keyword['campaignId'],
           ":keyword_text"    => $amz_neg_campaign_keyword['keywordText'],
           ":state"           => $amz_neg_campaign_keyword['state'],
-          ":match_type"      => $amz_neg_campaign_keyword['matchType']
+          ":match_type"      => $amz_neg_campaign_keyword['matchType'],
+		  ":user_id"		 => $this->user_id
         ));
       }
     }
