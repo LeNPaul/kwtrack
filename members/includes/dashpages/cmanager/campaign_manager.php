@@ -29,7 +29,6 @@
 </div>
 
 <!-- Campaign Modal -->
-<!--
 <div class="modal fade" id="campaignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -124,7 +123,7 @@
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
-            
+
             <div class="tab-pane" id="keyword-1">
               <br>
               <h3>Keywords</h3>
@@ -145,9 +144,9 @@
                   </div>
                 </div>
               </form>
-              
+
               <hr />
-  
+
               <h3>Negative Keywords (Optional)</h3>
               <form class="needs-validation" novalidate>
                 <div class="form-group">
@@ -167,7 +166,7 @@
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
-            
+
             <div class="tab-pane" id="product-ads-1">
               <br>
               <h3>Product Ads</h3>
@@ -193,122 +192,7 @@
     </div>
   </div>
 </div>
--->
-<!-- End Modal -->
 
-<!-- Campaign Modal -->
-<div class="modal fade" id="campaignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Create a Campaign</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <div class="container">
-
-              <br>
-              <h3>Campaign</h3>
-              <form id="addCampaign" class="needs-validation" novalidate>
-                <div class="form-group">
-                  <label for="campaign-name" class="col-form-label">Campaign Name</label>
-                  <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name" required>
-                  <div class="invalid-feedback">
-                    Please choose a campaign name.
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Daily Budget</label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                    </div>
-                    <input type="text" class="form-control" id="daily-budget" placeholder="1.00" required>
-                    <div class="invalid-feedback">
-                      Please enter a daily budget.
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Targeting Type</label>
-                  <br>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="targetType" id="inlineRadio1" value="automatic" checked>
-                    <label class="form-check-label" for="inlineRadio1">Automatic</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="targetType" id="inlineRadio2" value="manual">
-                    <label class="form-check-label" for="inlineRadio2">Manual</label>
-                  </div>
-                </div>
-
-              <br>
-              <h3>Ad Group</h3>
-                <div class="form-group">
-                  <label for="ad-group-name" class="col-form-label">Ad Group Name</label>
-                  <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" required>
-                  <div class="invalid-feedback">
-                    Please choose an ad group name.
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Default Bid</label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                    </div>
-                    <input type="text" class="form-control" id="default-bid" placeholder="1.00" required>
-                    <div class="invalid-feedback">
-                      Please choose a default bid.
-                    </div>
-                  </div>
-                </div>
-        		</div>
-            <div class="tab-pane" id="keyword-1">
-              <br>
-              <h3>Keyword</h3>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Match Type</label>
-                      <select class="form-control" id="keyword-category">
-                        <option value="broad">Broad</option>
-                        <option value="phrase">Phrase</option>
-                        <option value="exact">Exact</option>
-                      </select>
-                    </div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Keywords:</label>
-                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Enter a list of keywords separated by a new line" required></textarea>
-                  <div class="invalid-feedback">
-                    Enter a list of keywords, separated by a new line.
-                  </div>
-                </div>
-        		</div>
-            <div class="tab-pane" id="product-ads-1">
-              <br>
-              <h3>Product Ads</h3>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Product Ads</label>
-                  <textarea class="form-control" rows="3" id="keywords-text" placeholder="Enter a list of your ASIN's separated by a new line" required></textarea>
-                  <div class="invalid-feedback">
-                    Enter a list of your ASIN's separated by a new line.
-                  </div>
-                </div>
-              </form>
-            </div>
-        	</div>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- End Modal -->
 
 <script type="text/javascript">
@@ -594,7 +478,7 @@ var format_kw_arr = function(raw_kw_arr, match_type) {
   var kw_arr = raw_kw_arr.filter(function(e, i, ar) {
     return i == ar.indexOf(e);
   });
-  
+
   return JSON.stringify(
     kw_arr.map(function(e, i, a) {
       return {
@@ -611,7 +495,7 @@ var format_negkw_arr = function(raw_negkw_arr, match_type) {
   var negkw_arr = raw_negkw_arr.filter(function(e, i, ar) {
     return i == ar.indexOf(e);
   });
-  
+
   return JSON.stringify(
     negkw_arr.map(function(e) {
       return {
@@ -653,7 +537,7 @@ $('#saveCampaign').on('click', function(event) {
 
   // Extract user input from product ads form
   var formatted_asins = format_ads_arr($("#asin-list").val().split("\n"));
-  
+
   // TODO: Complete form validation before sending this request out
   $.ajax({
     type: "POST",
@@ -666,16 +550,16 @@ $('#saveCampaign').on('click', function(event) {
       "asin_data": formatted_asins,
       "element_type": "campaign"
     },
-    
+
     success: function(data) {
-    
+
     },
-    
+
     error: function(data) {
-    
+
     }
   });
-  
+
 });
 
 // Function for saving a new campaign when adding a new campaign
@@ -1711,7 +1595,7 @@ $(document).ready( function () {
               negKwIdArr.push(negKwId);
               neg_kw_list.push(selectedNegKws[i][0].match(/(?<=\>)(.*)(?=\<)/)[0]);
             }
-			
+
 			swal({
                   title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
                   type: 'warning',
@@ -2233,7 +2117,7 @@ $(document).ready( function () {
               negKwIdArr.push(negKwId);
               neg_kw_list.push(selectedNegKws[i][0].match(/(?<=\>)(.*)(?=\<)/)[0]);
             }
-			
+
 			swal({
                   title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
                   type: 'warning',
