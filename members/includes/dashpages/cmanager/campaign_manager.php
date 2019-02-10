@@ -453,7 +453,7 @@
       <form id="currentCampaign" class="needs-validation" novalidate>
 
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create an Ad Group</h5>
+          <h4 class="modal-title" id="exampleModalLabel">Create an Ad Group</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
