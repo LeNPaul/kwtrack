@@ -209,7 +209,7 @@
         </div>
 
         <div class="modal-body">
-          <div class="container">
+          <div class="container" style="width: 50vw;">
 
             <br>
             <h3>Campaign</h3>
@@ -327,29 +327,6 @@
 </div>
 <!-- End Modal -->
 
-<script type="text/javascript">
-
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-
-</script>
-
 <!-- Adgroups Modal -->
 <!--<div class="modal fade" id="adgroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -460,7 +437,7 @@
         </div>
 
         <div class="modal-body">
-          <div class="container">
+          <div class="container" style="width: 50vw;">
 
             <br>
             <h3>Campaign</h3>
@@ -629,41 +606,43 @@
         </div>
 
         <div class="modal-body">
+          <div class="container" style="width: 50vw;">
 
-          <br>
-          <h3>Campaign</h3>
-          <div class="form-group">
-            <label for="campaign-name" class="col-form-label">Current Campaign:</label>
-            <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
-          </div>
-
-          <br>
-          <h3>Ad Group</h3>
-          <form id="currentAdgroup">
+            <br>
+            <h3>Campaign</h3>
             <div class="form-group">
-              <label for="ad-group-name" class="col-form-label">Current Ad Group:</label>
-              <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" disabled>
+              <label for="campaign-name" class="col-form-label">Current Campaign:</label>
+              <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
             </div>
-          </form>
 
-          <br>
-          <h3>Keywords</h3>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Category:</label>
-            <select class="form-control" id="keyword-category">
-              <option value="broad">Broad</option>
-              <option value="phrase">Phrase</option>
-              <option value="exact">Exact</option>
-            </select>
-          </div>
-          <div class="form-group">
+            <br>
+            <h3>Ad Group</h3>
+            <form id="currentAdgroup">
+              <div class="form-group">
+                <label for="ad-group-name" class="col-form-label">Current Ad Group:</label>
+                <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" disabled>
+              </div>
+            </form>
+
+            <br>
+            <h3>Keywords</h3>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Category:</label>
+              <select class="form-control" id="keyword-category">
+                <option value="broad">Broad</option>
+                <option value="phrase">Phrase</option>
+                <option value="exact">Exact</option>
+              </select>
+            </div>
+            <div class="form-group">
             <label for="message-text" class="col-form-label">Keywords:</label>
             <textarea class="form-control" rows="3" id="keywords-text" placeholder="Enter a list of keywords separated by a new line" required></textarea>
             <div class="invalid-feedback">
               Enter a list of keywords, separated by a new line.
             </div>
           </div>
-
+          
+          </div>
         </div>
 
         <div class="modal-footer">
@@ -716,6 +695,25 @@
 </div>
 
 <script>
+
+// Form validations for all modals in campaign manager pages
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 
 var format_campaign_arr = function(name, targeting_type, budget) {
   return JSON.stringify([{
