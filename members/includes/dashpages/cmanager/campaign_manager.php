@@ -215,9 +215,9 @@
             <h3>Campaign</h3>
             <div class="form-group">
               <label for="campaign-name" class="col-form-label">Campaign Name</label>
-              <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name" maxlength="128" required>
+              <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name" minlength="1" maxlength="128" required>
               <div class="invalid-feedback">
-                Please choose a campaign name.
+                Please choose a campaign name with at least 1 character and less than 128 characters.
               </div>
             </div>
             <div class="form-group">
@@ -226,9 +226,9 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
                 </div>
-                <input type="text" class="form-control" id="daily-budget" placeholder="1.00" required>
+                <input type="number" class="form-control" id="daily-budget" placeholder="1.00" min="1" max="1000000" step="1" required>
                 <div class="invalid-feedback">
-                  Please enter a daily budget.
+                  Please enter a daily budget amount of at least $1 and less than $1,000,000.
                 </div>
               </div>
             </div>
@@ -249,9 +249,9 @@
             <h3>Ad Group</h3>
             <div class="form-group">
               <label for="ad-group-name" class="col-form-label">Ad Group Name</label>
-              <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" required>
+              <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" minlength="1" maxlength="256" required>
               <div class="invalid-feedback">
-                Please choose an ad group name.
+                Please choose an ad group name with at least 1 character and less than 256 characters.
               </div>
             </div>
             <div class="form-group">
@@ -260,9 +260,9 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
                 </div>
-                <input type="text" class="form-control" id="default-bid" placeholder="1.00" required>
+                <input type="number" class="form-control" id="default-bid" placeholder="1.00" min="0.02" max="1000" step="0.01" required>
                 <div class="invalid-feedback">
-                  Please choose a default bid.
+                  Please choose a default bid amount greater than $0.02 and less than $1,000.
                 </div>
               </div>
             </div>
