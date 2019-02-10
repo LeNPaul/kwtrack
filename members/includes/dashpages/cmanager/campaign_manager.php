@@ -29,7 +29,7 @@
 </div>
 
 <!-- Campaign Modal -->
-<div class="modal fade" id="campaignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="campaignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -38,7 +38,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      
+
       <div class="modal-body">
         <div class="container">
           <ul id="campaign-modal-1" class="nav nav-tabs">
@@ -55,7 +55,7 @@
               <a class="nav-link" href="#product-ads-1" data-toggle="tab">Product Ads</a>
             </li>
         	</ul>
-          
+
           <div class="tab-content ">
             <div class="tab-pane active" id="campaign-1">
               <br>
@@ -92,11 +92,11 @@
                     <label class="form-check-label" for="inlineRadio2">Manual</label>
                   </div>
                 </div>
-                
+
                 <button class="btn btn-primary" id="campaign-next">Next</button>
               </form>
         		</div>
-          
+
         		<div class="tab-pane" id="ad-group-1">
               <br>
               <h3>Ad Group</h3>
@@ -123,7 +123,7 @@
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
-            
+
             <div class="tab-pane" id="keyword-1">
               <br>
               <h3>Keywords</h3>
@@ -144,9 +144,9 @@
                   </div>
                 </div>
               </form>
-              
+
               <hr />
-  
+
               <h3>Negative Keywords (Optional)</h3>
               <form class="needs-validation" novalidate>
                 <div class="form-group">
@@ -166,7 +166,7 @@
                 <button class="btn btn-primary" id="ad-group-next">Next</button>
               </form>
         		</div>
-            
+
             <div class="tab-pane" id="product-ads-1">
               <br>
               <h3>Product Ads</h3>
@@ -184,11 +184,144 @@
         	</div>
         </div>
       </div>
-      
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
       </div>
+    </div>
+  </div>
+</div>-->
+<!-- End Modal -->
+
+<!-- Campaign Modal -->
+<div class="modal fade" id="campaignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <form id="addCampaign" class="needs-validation" novalidate>
+
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Create a Campaign</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="container">
+
+            <br>
+            <h3>Campaign</h3>
+            <div class="form-group">
+              <label for="campaign-name" class="col-form-label">Campaign Name</label>
+              <input type="text" class="form-control" id="campaign-name" placeholder="Campaign Name" minlength="1" maxlength="128" required>
+              <div class="invalid-feedback">
+                Please choose a campaign name with at least 1 character and less than 128 characters.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Daily Budget</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="number" class="form-control" id="daily-budget" placeholder="1.00" min="1" max="1000000" step="1" required>
+                <div class="invalid-feedback">
+                  Please enter a daily budget amount of at least $1 and less than $1,000,000.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Targeting Type</label>
+              <br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="targetType" id="inlineRadio1" value="automatic" checked>
+                <label class="form-check-label" for="inlineRadio1">Automatic</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="targetType" id="inlineRadio2" value="manual">
+                <label class="form-check-label" for="inlineRadio2">Manual</label>
+              </div>
+            </div>
+
+            <br>
+            <h3>Ad Group</h3>
+            <div class="form-group">
+              <label for="ad-group-name" class="col-form-label">Ad Group Name</label>
+              <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" minlength="1" maxlength="256" required>
+              <div class="invalid-feedback">
+                Please choose an ad group name with at least 1 character and less than 256 characters.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Default Bid</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="number" class="form-control" id="default-bid" placeholder="1.00" min="0.02" max="1000" step="0.01" required>
+                <div class="invalid-feedback">
+                  Please choose a default bid amount greater than $0.02 and less than $1,000.
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <h3>Keywords</h3>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Match Type</label>
+              <select class="form-control" id="keyword-category">
+                <option value="broad">Broad</option>
+                <option value="phrase">Phrase</option>
+                <option value="exact">Exact</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Keywords:</label>
+              <textarea class="form-control" rows="3" id="keywords-text" placeholder="Enter a list of keywords separated by a new line" required></textarea>
+              <div class="invalid-feedback">
+                Enter a list of keywords, separated by a new line.
+              </div>
+            </div>
+            <hr />
+            <h3>Negative Keywords (Optional)</h3>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Match Type</label>
+              <select class="form-control" id="neg-kw-category">
+                <option value="negativeExact">Negative Exact</option>
+                <option value="negativePhrase">Negative Phrase</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Negative Keywords</label>
+              <textarea class="form-control" rows="3" id="neg-kw-text" placeholder="Enter a list of negative keywords separated by a new line" required></textarea>
+              <div class="invalid-feedback">
+                Enter a list of negative keywords, separated by a new line.
+              </div>
+            </div>
+
+            <br>
+            <h3>Product Ads</h3>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Product Ads</label>
+              <textarea class="form-control" rows="3" id="asin-list" placeholder="Enter a list of your ASIN's separated by a new line" required></textarea>
+              <div class="invalid-feedback">
+                Enter a list of your ASIN's separated by a new line.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Submit</button>
+          <button class="btn btn-primary" type="submit" style="margin-right: 10px;">Submit form</button>
+        </div>
+
+      </form>
+
     </div>
   </div>
 </div>
@@ -204,21 +337,13 @@
     var forms = document.getElementsByClassName('needs-validation');
     // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function(form) {
-
       form.addEventListener('submit', function(event) {
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
         }
         form.classList.add('was-validated');
-        if (form.checkValidity() === true) {
-          event.preventDefault();
-          $('#campaign-next').click(function() {
-            $('a[href="#ad-group-1"]').tab('show');
-          });
-        }
       }, false);
-
     });
   }, false);
 })();
@@ -477,7 +602,7 @@ var format_kw_arr = function(raw_kw_arr, match_type) {
   var kw_arr = raw_kw_arr.filter(function(e, i, ar) {
     return i == ar.indexOf(e);
   });
-  
+
   return JSON.stringify(
     kw_arr.map(function(e, i, a) {
       return {
@@ -494,7 +619,7 @@ var format_negkw_arr = function(raw_negkw_arr, match_type) {
   var negkw_arr = raw_negkw_arr.filter(function(e, i, ar) {
     return i == ar.indexOf(e);
   });
-  
+
   return JSON.stringify(
     negkw_arr.map(function(e) {
       return {
@@ -536,7 +661,7 @@ $('#saveCampaign').on('click', function(event) {
 
   // Extract user input from product ads form
   var formatted_asins = format_ads_arr($("#asin-list").val().split("\n"));
-  
+
   // TODO: Complete form validation before sending this request out
   $.ajax({
     type: "POST",
@@ -549,16 +674,16 @@ $('#saveCampaign').on('click', function(event) {
       "asin_data": formatted_asins,
       "element_type": "campaign"
     },
-    
+
     success: function(data) {
-    
+
     },
-    
+
     error: function(data) {
-    
+
     }
   });
-  
+
 });
 
 // Function for saving a new campaign when adding a new campaign
@@ -669,7 +794,7 @@ $(document).ready( function () {
   var initCampaignsTable = function(){
     // Hide negative keywords tab
     $("#neg_keywords_tab").attr("style", "visibility: hidden");
-    
+
     var campaignOptions = {
       dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>> rt <"row"<"col-md-3"i><"col-md-9"p>>',
       fixedColumns: {
@@ -1155,7 +1280,7 @@ $(document).ready( function () {
     $(".btnKeyword").css("display", "none");
     $(".btnNegKeyword").css("display", "none");
 
-    
+
 
     $('input[type="radio"]').keydown(function(e) {
       var arrowKeys = [37, 38, 39, 40];
@@ -1556,7 +1681,7 @@ $(document).ready( function () {
       id: campaignId,
       linkClass: 'c_link'
     }];
-    
+
     updateBreadcrumbs();
   };
   /* End: initAdGroupsTable */
@@ -1594,7 +1719,7 @@ $(document).ready( function () {
               negKwIdArr.push(negKwId);
               neg_kw_list.push(selectedNegKws[i][0].match(/(?<=\>)(.*)(?=\<)/)[0]);
             }
-			
+
 			swal({
                   title: 'Are you sure you want to <b style="color:red;">REMOVE</b>?',
                   type: 'warning',
@@ -2116,7 +2241,7 @@ $(document).ready( function () {
               negKwIdArr.push(negKwId);
               neg_kw_list.push(selectedNegKws[i][0].match(/(?<=\>)(.*)(?=\<)/)[0]);
             }
-			
+
 			swal({
                   title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
                   type: 'warning',
@@ -2282,14 +2407,14 @@ $(document).ready( function () {
     $(".btnKeyword").css("display", "none");
     $(".btnNegKeyword").css("display", "inline");
   });
-  
+
   $("#tab1_label").on("click", function() {
     if ($(this).html() == "Ad Groups") {
       $(".btnCampaign").css("display", "none");
       $(".btnAdgroup").css("display", "inline");
       $(".btnKeyword").css("display", "none");
       $(".btnNegKeyword").css("display", "none");
-	} else { 
+	} else {
 	  if (currentCampaign.type == "Manual") {
 	    $(".btnCampaign").css("display", "none");
         $(".btnAdgroup").css("display", "none");
@@ -2303,7 +2428,7 @@ $(document).ready( function () {
 	  }
 	}
   });
-  
+
   // Handle status toggles for all levels
   $("#campaign_manager").on("click", ".toggle", function() {
 
@@ -2502,7 +2627,7 @@ $(document).ready( function () {
     // Change tab to show "Campaigns"
     $("#tab1_label").html("Campaigns");
     $("input[id=tab1]").click();
-    
+
     clearTable(1);
     initCampaignsTable();
   });
