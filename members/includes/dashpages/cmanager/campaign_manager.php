@@ -351,7 +351,7 @@
 </script>
 
 <!-- Adgroups Modal -->
-<div class="modal fade" id="adgroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="adgroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -442,8 +442,95 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
+<!-- End Modal -->
 
+<!-- Adgroups Modal -->
+<div class="modal fade" id="adgroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <form id="currentCampaign" class="needs-validation" novalidate>
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create an Ad Group</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="container">
+
+            <br>
+            <h3>Campaign</h3>
+            <div class="form-group">
+              <label for="campaign-name" class="col-form-label">Current Campaign:</label>
+              <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
+            </div>
+
+            <br>
+            <h3>Ad Group</h3>
+            <div class="form-group">
+              <label for="ad-group-name" class="col-form-label">Ad Group Name</label>
+              <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" minlength="1" maxlength="256" required>
+              <div class="invalid-feedback">
+                Please choose an ad group name with at least 1 character and less than 256 characters.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Default Bid</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="number" class="form-control" id="default-bid" placeholder="1.00" min="0.02" max="1000" step="0.01" required>
+                <div class="invalid-feedback">
+                  Please choose a default bid amount greater than $0.02 and less than $1,000.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">ASIN:</label>
+              <textarea class="form-control" rows="3" id="asin" placeholder="Enter a list of ASIN separated by a new line" required></textarea>
+              <div class="invalid-feedback">
+                Enter a list of ASIN, separated by a new line.
+              </div>
+            </div>
+
+            <br>
+            <h3>Keywords</h3>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Category:</label>
+              <select class="form-control" id="keyword-category">
+                <option value="broad">Broad</option>
+                <option value="phrase">Phrase</option>
+                <option value="exact">Exact</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Keywords:</label>
+              <textarea class="form-control" rows="3" id="keywords-text" placeholder="Enter a list of keywords separated by a new line" required></textarea>
+              <div class="invalid-feedback">
+                Enter a list of keywords, separated by a new line.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Submit</button>
+          <button class="btn btn-primary" type="submit" style="margin-right: 10px;">Submit form</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
 
 <!-- Keywords Modal -->
 <div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
