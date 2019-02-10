@@ -2329,7 +2329,7 @@ $(document).ready( function () {
       ],
       ajax: {
         type: "POST",
-        url: 'includes/dashpages/cmanager/helpers/get_neg_keywords',
+        url: 'includes/dashpages/cmanager/helpers/get_neg_keywords.php',
         data: {
           data_level: 1,
           element_id: currentCampaign.id
