@@ -1577,11 +1577,11 @@ $(document).ready( function () {
           className: 'btn-deselect-negkw'
         },
         {
-          text: 'Archive',
+          text: 'Remove',
           className: 'btn-archive-negkw',
 
           action: function (e, dt, node, config) {
-            // Bulk archive negative keywords
+            // Bulk remove negative keywords
 			var selectedNegKws = dt.rows ( '.selected' ).data();
             var negKwIndexes = dt.rows('.selected').indexes();
             var negKwIdArr = [];
@@ -1590,13 +1590,13 @@ $(document).ready( function () {
             // Populate list of adgroup ID's and names
             for (i = 0; i < selectedNegKws.length; i++) {
               var rx         = selectedNegKws[i][0].match(/id='\d+/g);
-              var negKwId = rx[0].replace("id=\"", "");
+              var negKwId = rx[0].replace("id=\'", "");
               negKwIdArr.push(negKwId);
               neg_kw_list.push(selectedNegKws[i][0].match(/(?<=\>)(.*)(?=\<)/)[0]);
             }
 			
 			swal({
-                  title: 'Are you sure you want to <b style="color:red;">ARCHIVE</b>?',
+                  title: 'Are you sure you want to <b style="color:red;">REMOVE</b>?',
                   type: 'warning',
                   confirmButtonText: 'Yes!',
                   confirmButtonColor: '#009925',
