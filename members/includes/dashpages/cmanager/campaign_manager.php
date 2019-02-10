@@ -533,7 +533,7 @@
 <!-- End Modal -->
 
 <!-- Keywords Modal -->
-<div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -609,6 +609,71 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="saveKeywords" style="margin-right: 10px;" data-dismiss="modal">Save changes</button>
       </div>
+    </div>
+  </div>
+</div>-->
+<!-- End Modal -->
+
+<!-- Keywords Modal -->
+<div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <form id="currentCampaign">
+
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Add Keywords</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <br>
+          <h3>Campaign</h3>
+          <div class="form-group">
+            <label for="campaign-name" class="col-form-label">Current Campaign:</label>
+            <input type="text" class="form-control" id="campaign-name" placeholder="Current Campaign" disabled>
+          </div>
+
+          <br>
+          <h3>Ad Group</h3>
+          <form id="currentAdgroup">
+            <div class="form-group">
+              <label for="ad-group-name" class="col-form-label">Current Ad Group:</label>
+              <input type="text" class="form-control" id="ad-group-name" placeholder="Ad Group Name" disabled>
+            </div>
+          </form>
+
+          <br>
+          <h3>Keywords</h3>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Category:</label>
+            <select class="form-control" id="keyword-category">
+              <option value="broad">Broad</option>
+              <option value="phrase">Phrase</option>
+              <option value="exact">Exact</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Keywords:</label>
+            <textarea class="form-control" rows="3" id="keywords-text" placeholder="Enter a list of keywords separated by a new line" required></textarea>
+            <div class="invalid-feedback">
+              Enter a list of keywords, separated by a new line.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Submit</button>
+          <button class="btn btn-primary" type="submit" style="margin-right: 10px;">Submit form</button>
+        </div>
+
+      </form>
+
     </div>
   </div>
 </div>
