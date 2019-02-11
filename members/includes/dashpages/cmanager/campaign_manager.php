@@ -641,7 +641,7 @@
               Enter a list of keywords, separated by a new line.
             </div>
           </div>
-          
+
           </div>
         </div>
 
@@ -714,6 +714,10 @@
     });
   }, false);
 })();
+
+var validate_form = function() {
+  
+};
 
 var format_campaign_arr = function(name, targeting_type, budget) {
   return JSON.stringify([{
