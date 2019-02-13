@@ -317,7 +317,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary" id="saveCampaign" style="margin-right: 10px;" data-dismiss="modal">Submit</button>
-          <button class="btn btn-primary" type="submit" style="margin-right: 10px;">Submit form</button>
+          <!--<button class="btn btn-primary" type="submit" style="margin-right: 10px;">Submit form</button>-->
         </div>
 
       </form>
@@ -716,7 +716,7 @@
 })();
 
 var validate_form = function() {
-  
+
 };
 
 var format_campaign_arr = function(name, targeting_type, budget) {
