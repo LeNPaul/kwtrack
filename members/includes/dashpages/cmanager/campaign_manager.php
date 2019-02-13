@@ -1822,9 +1822,10 @@ $(document).ready( function () {
 
   /* Start: initKeywordsTable */
   var initKeywordsTable = function(adGroupName, adGroupId){
-
+	  
     var kwOptions = {
       dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+	  
       buttons: [
         {
           extend: 'selectAll',
@@ -1910,7 +1911,10 @@ $(document).ready( function () {
                         }
                       });
                     }
-
+					console.log(currentAdGroup.name);
+					console.log(currentAdGroup.id);
+					console.log(adgroupName);
+					console.log(adGroupId);
                     initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
                   },
                   error: function(er) {
