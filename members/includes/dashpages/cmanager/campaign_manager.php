@@ -2391,7 +2391,7 @@ $(document).ready( function () {
             // Populate list of adgroup ID's and names
             for (i = 0; i < selectedNegKws.length; i++) {
               var rx         = selectedNegKws[i][0].match(/id='\d+/g);
-              var negKwId = rx[0].replace("id=\"", "");
+              var negKwId = rx[0].replace("id=\'", "");
               negKwIdArr.push(negKwId);
               neg_kw_list.push(selectedNegKws[i][0].match(/(?<=\>)(.*)(?=\<)/)[0]);
             }
@@ -2446,7 +2446,7 @@ $(document).ready( function () {
                           });
                         }
 
-                        initCampaignNegKeywordTable();
+                        initAdGroupNegKeywordTable();
                       },
                       error: function(er) {
                         swal({
@@ -2486,7 +2486,7 @@ $(document).ready( function () {
         url: 'includes/dashpages/cmanager/helpers/get_neg_keywords.php',
         data: {
           data_level: 1,
-          element_id: currentCampaign.id
+          element_id: currentAdGroup.id
         }
       }
     }; //adGroupNegKeywordTableOptions

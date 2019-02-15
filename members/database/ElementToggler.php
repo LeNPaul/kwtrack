@@ -184,7 +184,7 @@ class ElementToggler
 	  if ($result == "SUCCESS") {
 	    $this->flag = true;
 		
-		$sql = "UPDATE adgroup_neg_kw SET status=:state WHERE kw_id=:id";
+		$sql = "UPDATE adgroup_neg_kw SET state=:state WHERE kw_id=:id";
 		$stmt = $pdo->prepare($sql);
 		$stmt->execute(array(
 		  ":state" => $this->state,
