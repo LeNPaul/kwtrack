@@ -137,7 +137,7 @@ class MetricsQueryBuilder {
         ifnull(cvr, 0) as roas,
         
         
-        ifnull(concat('$', round(bid, 2)), '-') as bid_formatted,
+        ifnull(concat('$', round(T2.bid, 2)), '-') as bid_formatted,
         ifnull(nullif(round(impressions, 0), 0), '-') as impressions_formatted,
         ifnull(nullif(round(clicks, 0), 0), '-') as clicks_formatted,
         ifnull(nullif(concat('$', round(ad_spend, 2)), '$0.00'), '-') as ad_spend_formatted,

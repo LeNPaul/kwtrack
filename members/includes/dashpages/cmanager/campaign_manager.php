@@ -1976,9 +1976,10 @@ $(document).ready( function () {
 
   /* Start: initKeywordsTable */
   var initKeywordsTable = function(adGroupName, adGroupId){
-
+	  
     var kwOptions = {
       dom: '<"#dt_topBar.row"<"col-md-5" B><"col-md-2"<"#info_selected">><"col-md-2" l><"col-md-3" f>>rt<"row"<"col-md-3"i><"col-md-9"p>>',
+	  
       buttons: [
         {
           extend: 'selectAll',
@@ -2064,7 +2065,10 @@ $(document).ready( function () {
                         }
                       });
                     }
-
+					console.log(currentAdGroup.name);
+					console.log(currentAdGroup.id);
+					console.log(adgroupName);
+					console.log(adGroupId);
                     initKeywordsTable(currentAdGroup.name, currentAdGroup.id);
                   },
                   error: function(er) {
@@ -2391,7 +2395,7 @@ $(document).ready( function () {
             // Populate list of adgroup ID's and names
             for (i = 0; i < selectedNegKws.length; i++) {
               var rx         = selectedNegKws[i][0].match(/id='\d+/g);
-              var negKwId = rx[0].replace("id=\"", "");
+              var negKwId = rx[0].replace("id=\'", "");
               negKwIdArr.push(negKwId);
               neg_kw_list.push(selectedNegKws[i][0].match(/(?<=\>)(.*)(?=\<)/)[0]);
             }
@@ -2446,7 +2450,7 @@ $(document).ready( function () {
                           });
                         }
 
-                        initCampaignNegKeywordTable();
+                        initAdGroupNegKeywordTable();
                       },
                       error: function(er) {
                         swal({
@@ -2486,7 +2490,7 @@ $(document).ready( function () {
         url: 'includes/dashpages/cmanager/helpers/get_neg_keywords.php',
         data: {
           data_level: 1,
-          element_id: currentCampaign.id
+          element_id: currentAdGroup.id
         }
       }
     }; //adGroupNegKeywordTableOptions
